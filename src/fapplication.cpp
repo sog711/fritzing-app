@@ -372,6 +372,9 @@ int FApplication::init() {
 
 	m_serviceType = ServiceType::NoService;
 
+	bool useOpenGL = false;
+	bool showFPS = false;
+
 	QList<int> toRemove;
 	for (int i = 0; i < m_arguments.length(); i++) {
 		if ((m_arguments[i].compare("-h", Qt::CaseInsensitive) == 0) ||
@@ -410,6 +413,20 @@ int FApplication::init() {
 			std::shared_ptr<FTesting> fTesting = FTesting::getInstance();
 			fTesting->init();
 			toRemove << i;
+		}
+
+		if (m_arguments[i].compare("--opengl", Qt::CaseInsensitive) == 0) {
+			useOpenGL = true;
+			DebugDialog::debug("OpenGL rendering enabled via --opengl");
+			toRemove << i;
+			continue;
+		}
+
+		if (m_arguments[i].compare("--fps", Qt::CaseInsensitive) == 0) {
+			showFPS = true;
+			DebugDialog::debug("FPS Monitor enabled via --fps");
+			toRemove << i;
+			continue;
 		}
 
 		if (i + 1 >= m_arguments.length()) continue;
@@ -570,6 +587,12 @@ int FApplication::init() {
 	QCoreApplication::setApplicationName("Fritzing");
 
 	qRegisterMetaType<UploadPair>("UploadPair");
+
+	QSettings settings;
+	DebugDialog::debug(QString("OpenGL requested: %1").arg(useOpenGL ? "Yes" : "No"));
+	DebugDialog::debug(QString("FPS Monitor requested: %1").arg(showFPS ? "Yes" : "No"));
+	settings.setValue("Rendering/OpenGL", useOpenGL);
+	settings.setValue("Rendering/FPS", showFPS);
 
 	installEventFilter(this);
 

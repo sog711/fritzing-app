@@ -55,6 +55,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../model/modelpart.h"
 #include "../debugdialog.h"
 #include "sketchwidget.h"
+#include "qopenglcontext.h"
 #include "subpartswapmanager.h"
 #include "../connectors/connectoritem.h"
 #include "../connectors/svgidlayer.h"
@@ -84,6 +85,8 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../utils/ratsnestcolors.h"
 #include "../utils/fmessagebox.h"
 #include "utils/duplicatetracker.h"
+
+#include <QOpenGLWidget>
 
 /////////////////////////////////////////////////////////////////////
 
@@ -147,8 +150,45 @@ SketchWidget::SketchWidget(ViewLayer::ViewID viewID, QWidget *parent, int size, 
 	setDragMode(QGraphicsView::RubberBandDrag);
 	setFrameStyle(QFrame::Sunken | QFrame::StyledPanel);
 	setAcceptDrops(true);
-	m_fpsMonitor = new FPSMonitor(this);
-	setRenderHint(QPainter::Antialiasing, true);
+
+	QSettings settings;
+	m_useOpenGL = settings.value("Rendering/OpenGL", false).toBool();
+	DebugDialog::debug("OSetting " + settings.value("Rendering/OpenGL", false).toString());
+
+	m_showFPS = settings.value("Rendering/FPS", false).toBool();
+	DebugDialog::debug("OSetting " + settings.value("Rendering/FPS", false).toString());
+	if (m_showFPS) {
+		m_fpsMonitor = new FPSMonitor(this);
+		// m_fpsMonitor->start();
+		DebugDialog::debug("FPS Monitor activated for SketchWidget.");
+	}
+
+	if (m_useOpenGL) {
+		QOpenGLContext *context = QOpenGLContext::currentContext();
+		if (context) {
+			DebugDialog::debug("OpenGL context not available." + ViewLayer::viewIDName(viewID));
+			m_useOpenGL = false;
+		} else {
+			QOpenGLWidget *glWidget = new QOpenGLWidget;
+			QSurfaceFormat format;
+			// TODO Customize the OpenGL format
+			setViewport(glWidget);
+			DebugDialog::debug("OpenGL rendering enabled for SketchWidget.");
+		}
+
+	}
+	if (!m_useOpenGL) {
+		// Non-OpenGL rendering settings
+		//setRenderHint(QPainter::Antialiasing, true);
+		DebugDialog::debug("OpenGL rendering not enabled for SketchWidget." + ViewLayer::viewIDName(viewID));
+		setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+	}
+
+
+	// setRenderHint(QPainter::Antialiasing, true);
+
+	//setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+
 
 	//setCacheMode(QGraphicsView::CacheBackground);
 	//setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
@@ -7793,7 +7833,7 @@ void SketchWidget::drawForeground ( QPainter * painter, const QRectF & rect ) {
 		painter->restore();
 	}
 
-	m_fpsMonitor->paint(painter, rect, viewport());
+	if (m_fpsMonitor) m_fpsMonitor->paint(painter, rect, viewport());
 }
 
 void SketchWidget::setSimulatorMessage(QString message) {
@@ -8572,7 +8612,7 @@ void SketchWidget::paintEvent ( QPaintEvent * event ) {
 		((FGraphicsScene *) scene())->setDisplayHandles(true);
 	}
 	QGraphicsView::paintEvent(event);
-	m_fpsMonitor->update();
+	if (m_fpsMonitor) m_fpsMonitor->update();
 }
 
 void SketchWidget::setNoteFocus(QGraphicsItem * item, bool inFocus) {
@@ -9732,11 +9772,10 @@ void SketchWidget::showEvent(QShowEvent * event) {
 	InfoGraphicsView::showEvent(event);
 
 	static bool firstShow = true;
-	if (firstShow) {
+	if (firstShow && m_fpsMonitor) {
 		firstShow = false;
 		QTimer::singleShot(0, m_fpsMonitor, &FPSMonitor::showDiagnostics);
 	}
-
 
 	Q_EMIT showing(this);
 }
