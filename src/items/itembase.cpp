@@ -665,16 +665,15 @@ bool ItemBase::busConnectorItems(ConnectorItem * fromConnectorItem, QList<class 
 	if (bus == nullptr && ! ((m_superpart != nullptr) || m_subparts.count() > 0)) return false;
 
 	if (m_superpart != nullptr || m_subparts.count() > 0) {
-		QList<QPointer<ItemBase>> otherSubOrSuperparts;
+		QList<QPointer<ItemBase>> subOrSuperparts;
 		if (m_superpart != nullptr) {
-			otherSubOrSuperparts = m_superpart->subparts();
-			otherSubOrSuperparts.removeOne(this);
-			otherSubOrSuperparts.append(m_superpart);
+			subOrSuperparts = m_superpart->subparts();
+			subOrSuperparts.append(m_superpart);
 		} else {
-			otherSubOrSuperparts = m_subparts;
+			subOrSuperparts = m_subparts;
 		}
 
-		for (ItemBase * part: otherSubOrSuperparts) {
+		for (ItemBase * part: subOrSuperparts) {
 			for (ConnectorItem * connectorItem: part->cachedConnectorItems()) {
 				if (connectorItem->connectorSharedID() == fromConnectorItem->connectorSharedID()) {
 					items.append(connectorItem);
