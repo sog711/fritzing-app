@@ -662,23 +662,31 @@ QList<Bus *> ItemBase::buses() {
 
 bool ItemBase::busConnectorItems(ConnectorItem * fromConnectorItem, QList<class ConnectorItem *> & items) {
 	auto * bus = fromConnectorItem->bus();
-	if (bus == nullptr) return false;
+	if (bus == nullptr && ! ((m_superpart != nullptr) || m_subparts.count() > 0)) return false;
 
-	Q_FOREACH (Connector * connector, bus->connectors()) {
-		Q_FOREACH (ConnectorItem * connectorItem, connector->viewItems()) {
-			if (connectorItem != nullptr) {
-				//connectorItem->debugInfo(QString("on the bus %1").arg((long) connector, 0, 16));
-				if (connectorItem->attachedTo() == this) {
+	if (m_superpart != nullptr || m_subparts.count() > 0) {
+		QList<QPointer<ItemBase>> otherSubOrSuperparts;
+		if (m_superpart != nullptr) {
+			otherSubOrSuperparts = m_superpart->subparts();
+			otherSubOrSuperparts.removeOne(this);
+			otherSubOrSuperparts.append(m_superpart);
+		} else {
+			otherSubOrSuperparts = m_subparts;
+		}
+
+		for (ItemBase * part: otherSubOrSuperparts) {
+			for (ConnectorItem * connectorItem: part->cachedConnectorItems()) {
+				if (connectorItem->connectorSharedID() == fromConnectorItem->connectorSharedID()) {
 					items.append(connectorItem);
+					break;
 				}
 			}
 		}
 	}
 
-	if ((m_superpart != nullptr) || m_subparts.count() > 0) {
-		Connector * connector = bus->subConnector();
-		if (connector != nullptr) {
-			Q_FOREACH (ConnectorItem * connectorItem, connector->viewItems()) {
+	if (bus) {
+		for (Connector * connector: bus->connectors()) {
+			for (ConnectorItem * connectorItem: connector->viewItems()) {
 				if (connectorItem != nullptr) {
 					//connectorItem->debugInfo(QString("on the bus %1").arg((long) connector, 0, 16));
 					if (connectorItem->attachedToViewID() == m_viewID) {
@@ -688,8 +696,7 @@ bool ItemBase::busConnectorItems(ConnectorItem * fromConnectorItem, QList<class 
 			}
 		}
 	}
-	return true;
-
+	return items.size() > 0;
 
 	/*
 	if (items.count() > 0) {
