@@ -689,7 +689,9 @@ bool ItemBase::busConnectorItems(ConnectorItem * fromConnectorItem, QList<class 
 				if (connectorItem != nullptr) {
 					//connectorItem->debugInfo(QString("on the bus %1").arg((long) connector, 0, 16));
 					if (connectorItem->attachedToViewID() == m_viewID) {
-						items.append(connectorItem);
+						if (!items.contains(connectorItem)) {
+							items.append(connectorItem);
+						}
 					}
 				}
 			}
