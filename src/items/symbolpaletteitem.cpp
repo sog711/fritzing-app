@@ -201,10 +201,11 @@ ConnectorItem* SymbolPaletteItem::newConnectorItem(Connector *connector)
 	return connectorItem;
 }
 
-void SymbolPaletteItem::busConnectorItems(Bus * bus, ConnectorItem * fromConnectorItem, QList<class ConnectorItem *> & items) {
-	if (bus == nullptr) return;
+bool SymbolPaletteItem::busConnectorItems(ConnectorItem * fromConnectorItem, QList<class ConnectorItem *> & items) {
+	auto * bus = fromConnectorItem->bus();
+	if (bus == nullptr) return false;
 
-	PaletteItem::busConnectorItems(bus, fromConnectorItem, items);
+	PaletteItem::busConnectorItems(fromConnectorItem, items);
 
 	//foreach (ConnectorItem * bc, items) {
 	//bc->debugInfo(QString("bc %1").arg(bus->id()));
@@ -228,6 +229,7 @@ void SymbolPaletteItem::busConnectorItems(Bus * bus, ConnectorItem * fromConnect
 			//connectorItem->debugInfo(QString("symbol bus %1").arg(bus->id()));
 		}
 	}
+	return true;
 }
 
 double SymbolPaletteItem::voltage() {

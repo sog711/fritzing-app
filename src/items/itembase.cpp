@@ -660,9 +660,9 @@ QList<Bus *> ItemBase::buses() {
 	return busList;
 }
 
-void ItemBase::busConnectorItems(class Bus * bus, ConnectorItem * /* fromConnectorItem */, QList<class ConnectorItem *> & items) {
-
-	if (bus == nullptr) return;
+bool ItemBase::busConnectorItems(ConnectorItem * fromConnectorItem, QList<class ConnectorItem *> & items) {
+	auto * bus = fromConnectorItem->bus();
+	if (bus == nullptr) return false;
 
 	Q_FOREACH (Connector * connector, bus->connectors()) {
 		Q_FOREACH (ConnectorItem * connectorItem, connector->viewItems()) {
@@ -688,6 +688,7 @@ void ItemBase::busConnectorItems(class Bus * bus, ConnectorItem * /* fromConnect
 			}
 		}
 	}
+	return true;
 
 
 	/*

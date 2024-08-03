@@ -55,7 +55,7 @@ public:
 	~SymbolPaletteItem();
 
 	ConnectorItem* newConnectorItem(class Connector *connector);
-	void busConnectorItems(class Bus * bus, ConnectorItem *, QList<ConnectorItem *> & items);
+	bool busConnectorItems(ConnectorItem *, QList<ConnectorItem *> & items);
 	double voltage();
 	void setProp(const QString & prop, const QString & value);
 	void setVoltage(double);
