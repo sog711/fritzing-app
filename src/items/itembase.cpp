@@ -2271,31 +2271,6 @@ void ItemBase::addSubpart(ItemBase * sub)
 	sub->debugInfo("\t");
 	m_subparts.append(sub);
 	sub->setSuperpart(this);
-	Q_FOREACH (ConnectorItem * connectorItem, sub->cachedConnectorItems()) {
-		Bus * subbus = connectorItem->bus();
-		Connector * subconnector = nullptr;
-		if (subbus == nullptr) {
-			subconnector = connectorItem->connector();
-			if (subconnector != nullptr) {
-				subbus = new Bus(nullptr, nullptr);
-				subconnector->setSubBus(subbus);
-			}
-		}
-
-		Connector * connector = modelPart()->getConnector(connectorItem->connectorSharedID());
-		if (connector != nullptr) {
-			if (subbus != nullptr) subbus->addSubConnector(connector);
-			if (subconnector != nullptr) {
-				Bus * bus = connector->bus();
-				if (bus == nullptr) {
-					bus = new Bus(nullptr, nullptr);
-					connector->setSubBus(bus);
-				}
-
-				bus->addSubConnector(subconnector);
-			}
-		}
-	}
 }
 
 void ItemBase::removeSubpart(ItemBase * sub)
@@ -2304,23 +2279,6 @@ void ItemBase::removeSubpart(ItemBase * sub)
 	sub->debugInfo("\t");
 	m_subparts.removeAll(sub);
 	sub->setSuperpart(nullptr);
-	Q_FOREACH (ConnectorItem * connectorItem, sub->cachedConnectorItems()) {
-		Connector * subconnector = nullptr;
-		subconnector = connectorItem->connector();
-		if (subconnector != nullptr) {
-			subconnector->removeSubBus();
-		}
-
-		auto * mp = modelPart();
-		if (mp != nullptr) {
-			Connector * connector = modelPart()->getConnector(connectorItem->connectorSharedID());
-			if (connector != nullptr) {
-				if (subconnector != nullptr) {
-					connector->removeSubBus();
-				}
-			}
-		}
-	}
 }
 
 void ItemBase::setSuperpart(ItemBase * super) {
