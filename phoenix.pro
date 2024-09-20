@@ -205,3 +205,9 @@ TARGET = Fritzing
 TEMPLATE = app
 
 !build_pass:message("libs $$LIBS")
+
+HEADERS += \
+	src/items/oscilloscope.h
+
+SOURCES += \
+	src/items/oscilloscope.cpp
