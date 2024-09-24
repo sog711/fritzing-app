@@ -273,12 +273,12 @@ void Simulator::simulate() {
 		double startTimePartialSim = m_simStartTime;
 		double endTimePartialSim = m_simEndTime;
 		if(m_showResultsTimer->isActive()) {
-			m_interactionStep = (unsigned long) (m_elapsedSimTotalTimer.elapsed()/ m_showResultsTimerInterval);
+			m_interactionStep = (unsigned long) (m_elapsedSimTotalTimer.elapsed()/ m_showResultsTimerInterval) + 1;
 			if (m_interactionStep > m_simNumberOfSteps)
 				return;
 
 			DebugDialog::stream() << "INTERACTION! interactionStep: " <<m_interactionStep;
-			endTimePartialSim -= m_interactionStep * m_simStepTime;
+			endTimePartialSim -= (m_interactionStep - 1) * m_simStepTime;
 			startTimePartialSim = 0;
 
 			//Wait in case ngspice has not finished calculating that time
@@ -303,7 +303,7 @@ void Simulator::simulate() {
 
 					m_previousVoltages.insert(vec.toLower(), vevAllValues);
 					DebugDialog::stream() << "Storing previous voltages. vevAllValues size: " << vevAllValues.size();
-					double val = vecPartialValues[m_interactionStep];
+					double val = vecPartialValues[m_interactionStep - 1];
 					DebugDialog::stream() << vec << ": " << val;
 					//TODO: DO NOT LOOSE PRECISION
 					QString ic = QString("%1=%2 ").arg(vec).arg(QString::number(val, 'f', 8));
@@ -514,8 +514,8 @@ void Simulator::showSimulationResults() {
 		m_currSimStep = (unsigned int) (m_elapsedSimTotalTimer.elapsed()/ m_showResultsTimerInterval);
 	}
 
-	if ( m_currSimStep > m_interactionStep + timeInfo.size())
-		m_currSimStep = m_interactionStep + timeInfo.size();
+	if ( m_currSimStep > m_interactionStep + timeInfo.size() - 1)
+		m_currSimStep = m_interactionStep + timeInfo.size() - 1;
 	unsigned long localTimeStep = m_currSimStep - m_interactionStep;
 
 	if (m_currSimStep == m_previousRenderedStep )
@@ -523,7 +523,7 @@ void Simulator::showSimulationResults() {
 	m_previousRenderedStep = m_currSimStep;
 
 	DebugDialog::stream() << "showSimulationResults. Time: " <<  m_elapsedSimTotalTimer.elapsed() <<
-		", m_currSimStep: " << m_currSimStep << " simStepsAvailable " << timeInfo.size() << "/" << m_simNumberOfSteps;
+		", m_currSimStep: " << m_currSimStep << " simStepsAvailable " << timeInfo.size() << "/" << (m_simNumberOfSteps + 1);
 
 	QElapsedTimer elapsedTimer;
 	elapsedTimer.start();
