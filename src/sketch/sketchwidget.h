@@ -44,6 +44,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "renderthing.h"
 #include "swapthing.h"
+#include "utils/fpsmonitor.h"
 
 class SubpartSwapManager;
 
@@ -762,6 +763,8 @@ protected:
 	double m_ratsnestOpacity = 0.0;
 	double m_ratsnestWidth = 0.0;
     QString m_simMessage = "";
+
+	FPSMonitor m_fpsMonitor;
 
 public:
 	static ViewLayer::ViewLayerID defaultConnectorLayer(ViewLayer::ViewID viewId);

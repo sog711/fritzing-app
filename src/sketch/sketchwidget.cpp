@@ -7791,6 +7791,8 @@ void SketchWidget::drawForeground ( QPainter * painter, const QRectF & rect ) {
 		painter->drawText(viewTexPos.x(), viewTexPos.y(), m_simMessage);
 		painter->restore();
 	}
+
+	m_fpsMonitor.paint(painter, rect, viewport());
 }
 
 void SketchWidget::setSimulatorMessage(QString message) {
@@ -8569,6 +8571,7 @@ void SketchWidget::paintEvent ( QPaintEvent * event ) {
 		((FGraphicsScene *) scene())->setDisplayHandles(true);
 	}
 	QGraphicsView::paintEvent(event);
+	m_fpsMonitor.update();
 }
 
 void SketchWidget::setNoteFocus(QGraphicsItem * item, bool inFocus) {
