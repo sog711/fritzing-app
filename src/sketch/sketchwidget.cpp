@@ -147,6 +147,7 @@ SketchWidget::SketchWidget(ViewLayer::ViewID viewID, QWidget *parent, int size, 
 	setDragMode(QGraphicsView::RubberBandDrag);
 	setFrameStyle(QFrame::Sunken | QFrame::StyledPanel);
 	setAcceptDrops(true);
+	m_fpsMonitor = new FPSMonitor(this);
 	setRenderHint(QPainter::Antialiasing, true);
 
 	//setCacheMode(QGraphicsView::CacheBackground);
@@ -7792,7 +7793,7 @@ void SketchWidget::drawForeground ( QPainter * painter, const QRectF & rect ) {
 		painter->restore();
 	}
 
-	m_fpsMonitor.paint(painter, rect, viewport());
+	m_fpsMonitor->paint(painter, rect, viewport());
 }
 
 void SketchWidget::setSimulatorMessage(QString message) {
@@ -8571,7 +8572,7 @@ void SketchWidget::paintEvent ( QPaintEvent * event ) {
 		((FGraphicsScene *) scene())->setDisplayHandles(true);
 	}
 	QGraphicsView::paintEvent(event);
-	m_fpsMonitor.update();
+	m_fpsMonitor->update();
 }
 
 void SketchWidget::setNoteFocus(QGraphicsItem * item, bool inFocus) {
@@ -9729,6 +9730,14 @@ void SketchWidget::showUnrouted() {
 
 void SketchWidget::showEvent(QShowEvent * event) {
 	InfoGraphicsView::showEvent(event);
+
+	static bool firstShow = true;
+	if (firstShow) {
+		firstShow = false;
+		QTimer::singleShot(0, m_fpsMonitor, &FPSMonitor::showDiagnostics);
+	}
+
+
 	Q_EMIT showing(this);
 }
 

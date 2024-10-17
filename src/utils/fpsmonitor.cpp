@@ -1,9 +1,16 @@
 #include "fpsmonitor.h"
 #include <QDebug>
+#include <QGuiApplication>
+#include <QOpenGLContext>
+#include <QOpenGLDebugLogger>
+#include <QOpenGLFunctions>
+#include <QScreen>
+#include "utils/fmessagebox.h"
 #include <algorithm>
 
-FPSMonitor::FPSMonitor()
-	: totalFrameCount(0)
+FPSMonitor::FPSMonitor(QObject *parent)
+	: QObject(parent)
+	, totalFrameCount(0)
 	, lastFrameFPS(0)
 	, showFPS(true)
 {
@@ -111,6 +118,60 @@ void FPSMonitor::paint(QPainter* painter, const QRectF& rect, const QWidget* vie
 	painter->restore();
 }
 
+void FPSMonitor::showDiagnostics()
+{
+	QString diagnostics;
+
+	// Get OpenGL info
+	QOpenGLContext *context = QOpenGLContext::currentContext();
+	if (context) {
+		QOpenGLFunctions *f = context->functions();
+		const GLubyte* version = f->glGetString(GL_VERSION);
+		const GLubyte* renderer = f->glGetString(GL_RENDERER);
+		const GLubyte* vendor = f->glGetString(GL_VENDOR);
+
+		diagnostics += QString("OpenGL Version: %1\n").arg(reinterpret_cast<const char*>(version));
+		diagnostics += QString("OpenGL Renderer: %1\n").arg(reinterpret_cast<const char*>(renderer));
+		diagnostics += QString("OpenGL Vendor: %1\n").arg(reinterpret_cast<const char*>(vendor));
+	} else {
+		diagnostics += "OpenGL context not available\n";
+	}
+
+	// Get info for all screens
+	QList<QScreen*> screens = QGuiApplication::screens();
+	diagnostics += QString("\nNumber of screens: %1\n").arg(screens.size());
+
+	for (int i = 0; i < screens.size(); ++i) {
+		QScreen *screen = screens[i];
+		diagnostics += QString("\nScreen %1: %2\n").arg(i + 1).arg(screen->name());
+		diagnostics += QString("Resolution: %1x%2\n")
+						   .arg(screen->size().width())
+						   .arg(screen->size().height());
+		diagnostics += QString("Refresh Rate: %1 Hz\n").arg(screen->refreshRate());
+		diagnostics += QString("Device Pixel Ratio: %1\n").arg(screen->devicePixelRatio());
+		diagnostics += QString("Physical Size: %1x%2 mm\n")
+						   .arg(screen->physicalSize().width())
+						   .arg(screen->physicalSize().height());
+		diagnostics += QString("Virtual Geometry: (%1,%2) %3x%4\n")
+						   .arg(screen->virtualGeometry().x())
+						   .arg(screen->virtualGeometry().y())
+						   .arg(screen->virtualGeometry().width())
+						   .arg(screen->virtualGeometry().height());
+		diagnostics += QString("Primary: %1\n").arg(screen == QGuiApplication::primaryScreen() ? "Yes" : "No");
+	}
+
+	// Display the diagnostics using FMessageBox
+	FMessageBox* msgBox = FMessageBox::createCustom(
+		nullptr,
+		FMessageBox::Information,
+		"Graphics Diagnostics",
+		diagnostics,
+		FMessageBox::Ok
+		);
+	msgBox->enableClipboardButton(true);
+	msgBox->exec();
+	delete msgBox;
+}
 
 void FPSMonitor::setShowFPS(bool show)
 {

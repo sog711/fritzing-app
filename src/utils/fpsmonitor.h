@@ -2,12 +2,14 @@
 #define FPSMONITOR_H
 
 #include <QElapsedTimer>
-#include <QVector>
 #include <QPainter>
+#include <QVector>
+#include <QObject>
 
-class FPSMonitor {
+class FPSMonitor : public QObject {
+	Q_OBJECT
 public:
-	FPSMonitor();
+	explicit FPSMonitor(QObject *parent = nullptr);
 
 	void update();
 	void reset();
@@ -19,6 +21,8 @@ public:
 	void setShowFPS(bool show);
 	bool isShowingFPS() const;
 
+	void showDiagnostics();
+
 private:
 	QElapsedTimer totalTimeTimer;
 	QElapsedTimer frameTimer;
@@ -28,6 +32,7 @@ private:
 	bool showFPS;
 
 	qreal calculateMedianFPS() const;
+
 };
 
 #endif // FPSMONITOR_H

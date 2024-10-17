@@ -764,7 +764,7 @@ protected:
 	double m_ratsnestWidth = 0.0;
     QString m_simMessage = "";
 
-	FPSMonitor m_fpsMonitor;
+	FPSMonitor *m_fpsMonitor;
 
 public:
 	static ViewLayer::ViewLayerID defaultConnectorLayer(ViewLayer::ViewID viewId);
