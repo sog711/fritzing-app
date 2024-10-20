@@ -776,8 +776,11 @@ QString LogoItem::hackSvg(const QString &svg, const QString &logo)
 	QStringList viewBox = root.attribute("viewBox").split(" ", Qt::SkipEmptyParts);
 	if (viewBox.size() == 4) {
 		viewBox[2] = QString::number(totalWidth);
+		viewBox[3] = QString::number(totalHeight);
 		root.setAttribute("viewBox", viewBox.join(" "));
 	}
+	root.setAttribute("width", QString::number(widthInches) + "in");
+	root.setAttribute("height", QString::number(heightInches) + "in");
 
 	QStringList exceptions;
 	exceptions << "none" << "";
@@ -794,15 +797,14 @@ QString LogoItem::hackSvg(const QString &svg, const QString &logo)
 			continue;
 
 		node.setAttribute("x", QString::number(totalWidth / 2.0));
+		node.setAttribute("y", QString::number(fm.ascent()));
 
 		QDomNodeList childList = node.childNodes();
 		for (int j = 0; j < childList.count(); j++) {
 			QDomNode child = childList.item(i);
 			if (child.isText()) {
 				child.setNodeValue(logo);
-
 				modelPart()->setLocalProp("width", widthInches * 25.4);
-				QString h = root.attribute("height");
 				modelPart()->setLocalProp("height", heightInches * 25.4);
 				if (!isBottom())
 					return doc.toString();
