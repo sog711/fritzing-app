@@ -747,7 +747,7 @@ QString LogoItem::hackSvg(const QString &svg, const QString &logo)
 	double textWidth = textSize.width();
 	double textHeight = textSize.height();
 
-	double padding = 0;
+	double padding = 4;
 	// Magic number 0.77, discoverd by bisecting until text alignment works.
 	// Tested with font "OCR-Fritzing-mono", but seems to work with all fonts.
 	// 'Alignment works' means that the text does not move relative to its box when adding or removing characters.
@@ -796,7 +796,13 @@ QString LogoItem::hackSvg(const QString &svg, const QString &logo)
 		if (node.attribute("id").compare("label") != 0)
 			continue;
 
+		// Center the text within the viewBox.
+		// Center, left and right align are equal regarding the box, because the box
+		// is has the minimal width around the text, plus the padding.
 		node.setAttribute("x", QString::number(totalWidth / 2.0));
+
+		// We should substract half the padding, but, at least for the OCR-Fritzing-mono font,
+		// it looks much more balanced to only add all the padding at the bottom.
 		node.setAttribute("y", QString::number(fm.ascent()));
 
 		QDomNodeList childList = node.childNodes();
