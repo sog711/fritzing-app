@@ -6344,9 +6344,12 @@ void SketchWidget::setUpSwapReconnect(SwapThing & swapThing, QString newModuleID
 	Q_FOREACH (ConnectorItem * fromConnectorItem, fromConnectorItems) {
 		//fromConnectorItem->debugInfo("from");
 		Connector * newConnector = found.value(fromConnectorItem, nullptr);
-		if (fromConnectorItem->isGroundFillSeed() && newConnector) {
+		if (fromConnectorItem->isGroundFillSeed()) {
 			auto * command = new GroundFillSeedCommand(this, swapThing.parentCommand);
-			command->addItem(newID, newConnector->connectorSharedID(), true);
+			if (newConnector) {
+				command->addItem(newID, newConnector->connectorSharedID(), true);
+			}
+			command->addItem(fromConnectorItem->attachedToID(), fromConnectorItem->connectorSharedID(), false);
 		}
 		Q_FOREACH (ConnectorItem * toConnectorItem, fromConnectorItem->connectedToItems()) {
 			// delete connection to part being swapped out
