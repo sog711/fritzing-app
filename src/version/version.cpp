@@ -46,7 +46,6 @@ QStringList Version::m_modifiers;
 
 Version * Version::m_singleton = new Version();
 
-QString Version::FirstVersionWithDetachedUserData = "0.3.1b.05.26.3016";
 
 Version::Version() {
 	if (m_modifiers.count() == 0) {
