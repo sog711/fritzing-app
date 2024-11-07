@@ -6323,14 +6323,17 @@ void SketchWidget::setUpSwapReconnect(SwapThing & swapThing, QString newModuleID
 
 			newConnectors.removeOne(newConnector);
 			found.insert(fromConnectorItem, newConnector);
-			fromConnectorItem = fromConnectorItem->getCrossLayerConnectorItem();
-			if (fromConnectorItem) {
-				other.append(fromConnectorItem);
-				found.insert(fromConnectorItem, newConnector);
-			}
 		}
 		else {
 			notFound.append(fromConnectorItem);
+
+		}
+		fromConnectorItem = fromConnectorItem->getCrossLayerConnectorItem();
+		if (fromConnectorItem) {
+			other.append(fromConnectorItem);
+			if (candidates.count() > 0) {
+				found.insert(fromConnectorItem, newConnector);
+			}
 		}
 	}
 
