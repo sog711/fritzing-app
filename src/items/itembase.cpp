@@ -25,6 +25,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../model/modelpart.h"
 #include "../connectors/connectoritem.h"
 #include "../sketch/infographicsview.h"
+#include "sketch/sketchwidget.h"
 #include "../connectors/connector.h"
 #include "../connectors/bus.h"
 #include "partlabel.h"
@@ -1203,15 +1204,28 @@ void ItemBase::ensureUniqueTitle(const QString & title, bool force) {
 
 QVariant ItemBase::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant & value)
 {
-	switch (change) {
-	case QGraphicsItem::ItemSelectedChange:
-		if (m_partLabel != nullptr) {
+	if (change == QGraphicsItem::ItemSelectedChange) {
+		if (m_partLabel) {
 			m_partLabel->ownerSelected(value.toBool());
 		}
+	}
 
-		break;
-	default:
-		break;
+	if (change == QGraphicsItem::ItemSceneChange) {
+		QGraphicsScene* oldScene = scene();
+		QGraphicsScene* newScene = qvariant_cast<QGraphicsScene*>(value);
+
+		if (oldScene != newScene) {
+			if (oldScene) {
+				if (auto *oldSketch = dynamic_cast<SketchWidget *>(oldScene->views().constFirst())) {
+					oldSketch->unregisterItem(this);
+				}
+			}
+			if (newScene) {
+				if (auto *newSketch = dynamic_cast<SketchWidget *>(newScene->views().constFirst())) {
+					newSketch->registerItem(this);
+				}
+			}
+		}
 	}
 
 	return QGraphicsSvgItem::itemChange(change, value);

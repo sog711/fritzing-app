@@ -577,6 +577,9 @@ Q_SIGNALS:
 	void enableUndoRedo();
 	void undoSignal();
 
+public:
+	void registerItem(ItemBase* itemBase);
+	void unregisterItem(ItemBase* itemBase);
 protected Q_SLOTS:
 	void itemAddedSlot(ModelPart *, ItemBase *, ViewLayer::ViewLayerPlacement, const ViewGeometry &, long id, SketchWidget * dropOrigin);
 	void itemDeletedSlot(long id);
@@ -618,6 +621,7 @@ protected Q_SLOTS:
 	void canConnect(Wire * from, ItemBase * to, bool & connect);
 	long swapStart(SwapThing & swapThing, bool master);
 	virtual void getDroppedItemViewLayerPlacement(ModelPart * modelPart, ViewLayer::ViewLayerPlacement &);
+
 
 public Q_SLOTS:
 	void changeWireColor(const QString newColor);
@@ -764,9 +768,15 @@ public:
 	static constexpr int PropChangeDelay = 100;
 	static bool m_blockUI;
 
+
 protected:
 	static constexpr int MoveAutoScrollThreshold = 5;
 	static constexpr int DragAutoScrollThreshold = 10;
+
+private:
+	QHash<long, ItemBase*> m_itemBaseHash;          // direct id lookup
+	QHash<long, ItemBase*> m_baseIdItemBaseHash;    // base id lookup for chief/kin
+
 };
 
 #endif

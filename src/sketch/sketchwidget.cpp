@@ -915,34 +915,59 @@ void SketchWidget::addToScene(ItemBase * item, ViewLayer::ViewLayerID viewLayerI
 	item->setInactive(!layerIsActive(viewLayerID));
 }
 
-ItemBase * SketchWidget::findItem(long id) {
-	// TODO:  this needs to be optimized: could make a hash table
+ItemBase* SketchWidget::findItem(long id) {
+	// Direct lookup first
+	ItemBase* itemBase = m_itemBaseHash.value(id);
+	if (itemBase) return itemBase;
 
-	long baseid = id / ModelPart::indexMultiplier;
+	// Check for chief/kin relationship
+	long baseId = id / ModelPart::indexMultiplier;
+	itemBase = m_baseIdItemBaseHash.value(baseId);
+	if (!itemBase) return nullptr;
 
-	Q_FOREACH (QGraphicsItem * item, this->scene()->items()) {
-		auto* base = dynamic_cast<ItemBase *>(item);
-		if (!base) continue;
+	// Found an item with matching baseId, now check the relationship
+	ItemBase* chief = itemBase->layerKinChief();
+	if (chief->id() == id) return chief;
 
-		if (base->id() == id) {
-			return base;
-		}
-
-		if (base->id() / ModelPart::indexMultiplier == baseid) {
-			// found chief or layerkin
-			ItemBase * chief = base->layerKinChief();
-			if (chief->id() == id) return chief;
-
-			Q_FOREACH (ItemBase * lk, chief->layerKin()) {
-				if (lk->id() == id) return lk;
-			}
-
-			return chief;
-
-		}
+	for (ItemBase* kin : chief->layerKin()) {
+		if (kin->id() == id) return kin;
 	}
 
-	return nullptr;
+	return chief;  // Return chief as fallback, matching original behavior
+}
+
+void SketchWidget::registerItem(ItemBase* itemBase) {
+	if (!itemBase) return;
+
+	m_itemBaseHash[itemBase->id()] = itemBase;
+
+	// Store the base relationship for chief/kin lookup
+	long baseId = itemBase->id() / ModelPart::indexMultiplier;
+	m_baseIdItemBaseHash[baseId] = itemBase;
+}
+
+void SketchWidget::unregisterItem(ItemBase* itemBase) {
+	if (!itemBase) return;
+
+	m_itemBaseHash.remove(itemBase->id());
+
+	long baseId = itemBase->id() / ModelPart::indexMultiplier;
+	// Only remove from baseId hash if no other items share this baseId
+	bool hasOtherItems = false;
+	if (ItemBase* chief = itemBase->layerKinChief()) {
+		if (chief != itemBase && m_itemBaseHash.contains(chief->id())) {
+			hasOtherItems = true;
+		}
+		for (ItemBase* kin : chief->layerKin()) {
+			if (kin != itemBase && m_itemBaseHash.contains(kin->id())) {
+				hasOtherItems = true;
+				break;
+			}
+		}
+	}
+	if (!hasOtherItems) {
+		m_baseIdItemBaseHash.remove(baseId);
+	}
 }
 
 void SketchWidget::deleteItemForCommand(long id, bool deleteModelPart, bool doEmit, bool later) {
