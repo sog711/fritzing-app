@@ -19,7 +19,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 ********************************************************************/
 
 //#include <QNetworkInterface>
-#include <QTextCodec>
+
 #include <QTextDocument>
 #include <QTextStream>
 
@@ -1678,13 +1678,6 @@ bool TextUtils::writeUtf8(const QString & fileName, const QString & text)
 	}
 
 	return false;
-}
-
-bool TextUtils::writeUtf8(const QString & fileName, const QByteArray & data)
-{
-	QByteArray data2 = data;
-	QString text = QTextCodec::codecForMib(106)->toUnicode(data2);
-	return TextUtils::writeUtf8(fileName, text);
 }
 
 int TextUtils::getPinsAndSpacing(const QString & expectedFileName, QString & spacingString)
