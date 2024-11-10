@@ -7,7 +7,7 @@
 
 PlatformArduino::PlatformArduino() : Platform(QString("Arduino"))
 {
-	setReferenceUrl(QUrl(QString("http://arduino.cc/en/Reference/")));
+	setReferenceUrl(QUrl(QString("https://www.arduino.cc/reference/tr/")));
 	setIdeName("Arduino CLI");
 	setDownloadUrl(QUrl("https://github.com/arduino/arduino-cli"));
 	setMinVersion("1.0.0");
