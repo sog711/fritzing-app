@@ -2123,14 +2123,14 @@ QList<ModelPart*> MainWindow::moveToPartsFolder(QDir &unzipDir, MainWindow* mw, 
 	Q_FOREACH(QFileInfo file, partEntryInfoList) { // part files
 		//DebugDialog::debug("unzip part " + file.absoluteFilePath());
 		ModelPart * mp = mw->copyToPartsFolder(file, addToAlien, prefixFolder, destFolder);
-		retval << mp;
-		if (addToBin && (mp != nullptr)) {
-			// should only be here when adding single new part
-			m_binManager->addToMyParts(mp);
+		if (mp) {
+			retval << mp;
+			if (addToBin) {
+				// should only be here when adding single new part
+				mw->m_binManager->addToMyParts(mp);
+			}
 		}
 	}
-
-
 
 	return retval;
 }
