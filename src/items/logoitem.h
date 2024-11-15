@@ -65,6 +65,10 @@ protected Q_SLOTS:
 	void widthEntry();
 	void heightEntry();
 
+private:
+	QString hackSvg2013(const QString &svg, const QString &logo);
+	QString hackSvg2024(const QString &svg, const QString &logo);
+
 protected:
 	virtual QString hackSvg(const QString & svg, const QString & logo);
 	void initImage();
