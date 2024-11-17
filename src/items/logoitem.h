@@ -66,8 +66,17 @@ protected Q_SLOTS:
 	void heightEntry();
 
 private:
-	QString hackSvg2013(const QString &svg, const QString &logo);
-	QString hackSvg2024(const QString &svg, const QString &logo);
+	QString hackSvg_v4(const QString &svg, const QString &logo);
+	QString hackSvg_v5(const QString &svg, const QString &logo);
+	void migrateToVersion5();
+
+	std::pair<double, double> getTextPosition(const QDomElement &root, int index);
+
+	QStringList getViewBox(const QDomElement &root);
+
+	bool parseDOM(QDomDocument &doc, const QString &svg, const QString &context);
+
+	QString removeFlip(const QString &svg);
 
 protected:
 	virtual QString hackSvg(const QString & svg, const QString & logo);

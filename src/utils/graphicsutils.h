@@ -134,6 +134,7 @@ public:
 	static constexpr double StandardFritzingDPI = 1000;
 	static constexpr double SVGDPI = 90;
 	static constexpr double InchesPerMeter = 1000.0 / 25.4;
+	static constexpr double Inch2mm = 25.4;
 	static constexpr double StandardSchematicSeparationMils = 7.5 * 1000.0 / 25.4;
 	static constexpr double StandardSchematicSeparation10thinMils = 100;  // 0.1 inches
 
