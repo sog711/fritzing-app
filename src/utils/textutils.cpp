@@ -1750,6 +1750,32 @@ QString TextUtils::parseForModuleID(const QString & fzpXmlString)
 	return "";
 }
 
+QString TextUtils::parseFileForFritzingVersion(const QString & fzpPath)
+{
+	QString fritzingVersion;
+	QFile file(fzpPath);
+	if (!file.open(QFile::ReadOnly)) return fritzingVersion;
+
+	QXmlStreamReader streamReader(&file);
+	streamReader.setNamespaceProcessing(false);
+
+	while (!streamReader.atEnd()) {
+		switch (streamReader.readNext()) {
+		case QXmlStreamReader::StartElement:
+			if (streamReader.name().toString().compare("module") == 0) {
+				file.close();
+				return streamReader.attributes().value("fritzingVersion").toString();
+			}
+			break;
+		default:
+			break;
+		}
+	}
+
+	file.close();
+	return fritzingVersion;
+}
+
 QMap<QString, QString> TextUtils::parseFileForViewImages(const QString & fzpPath)
 {
 	QMap<QString, QString> map;

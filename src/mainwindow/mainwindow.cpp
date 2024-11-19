@@ -2105,9 +2105,18 @@ QList<ModelPart*> MainWindow::moveToPartsFolder(QDir &unzipDir, MainWindow* mw, 
 	QList<QFileInfo> partEntryInfoList = unzipDir.entryInfoList(namefilters);
 
 	if (importingSinglePart && partEntryInfoList.count() > 0) {
-		QString moduleID = TextUtils::parseFileForModuleID(partEntryInfoList[0].absoluteFilePath());
+		QString fzpPath = partEntryInfoList[0].absoluteFilePath();
+		QString moduleID = TextUtils::parseFileForModuleID(fzpPath);
 		if (!moduleID.isEmpty() && (m_referenceModel->retrieveModelPart(moduleID) != nullptr)) {
 			throw QString("There is already a part with id '%1' loaded into Fritzing.").arg(moduleID);
+		}
+		QString fritzingVersion = TextUtils::parseFileForFritzingVersion(fzpPath);
+		if (fritzingVersion.isEmpty()) {
+			FMessageBox::warning(
+			    mw,
+			    tr("Fritzing"),
+			    tr("Fritzing version in part missing or unreadable.\n\nThe part might not work properly because it might be too new or unfinished. Please make sure that your Fritzing version supports it.\n\nPart file: '%1'").arg(fzpPath)
+			);
 		}
 	}
 
