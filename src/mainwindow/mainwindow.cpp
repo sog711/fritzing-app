@@ -82,6 +82,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "testing/FTesting.h"
 #include "servicelistfetcher.h"
 #include "utils/uploadpair.h"
+#include "version/version.h"
 
 FTabWidget::FTabWidget(QWidget * parent) : QTabWidget(parent)
 {
@@ -2111,15 +2112,29 @@ QList<ModelPart*> MainWindow::moveToPartsFolder(QDir &unzipDir, MainWindow* mw, 
 			throw QString("There is already a part with id '%1' loaded into Fritzing.").arg(moduleID);
 		}
 		QString fritzingVersion = TextUtils::parseFileForFritzingVersion(fzpPath);
-		if (fritzingVersion.isEmpty()) {
+
+		VersionThing versionThingFzp;
+		Version::toVersionThing(fritzingVersion, versionThingFzp);
+
+		if (fritzingVersion.isEmpty() || !versionThingFzp.ok) {
 			FMessageBox::warning(
 			    mw,
 			    tr("Fritzing"),
-			    tr("Fritzing version in part missing or unreadable.\n\nThe part might not work properly because it might be too new or unfinished. Please make sure that your Fritzing version supports it.\n\nPart file: '%1'").arg(fzpPath)
+			    tr("Fritzing version in part is missing, invalid or unreadable.\n\nThe part might not work properly because it might be too new or unfinished. Please make sure that your Fritzing version supports it.\n\nFritzing version found in part: %1\n\nPart file: '%2'").arg(fritzingVersion).arg(fzpPath)
 			);
+		} else {
+			VersionThing currentVersionThing;
+			Version::toVersionThing(Version::versionString(), currentVersionThing);
+
+			if (Version::greaterThan(currentVersionThing, versionThingFzp)) {
+				FMessageBox::warning(
+				    mw,
+				    tr("Fritzing"),
+				    tr("Part was created with a Fritzing version that is newer than the current Fritzing version.\n\nYour Fritzing version might not support the part properly. Please consider updating your Fritzing.\n\nFritzing version found in part: %1\nVersion of this Fritzing: %2\n\nPart file: '%3'").arg(fritzingVersion).arg(Version::versionString()).arg(fzpPath)
+				);
+			}
 		}
 	}
-
 
 	namefilters.clear();
 	namefilters << ZIP_SVG+"*";
