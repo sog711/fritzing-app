@@ -2065,3 +2065,13 @@ QString TextUtils::setOfSetsToString(const QSet<QSet<QString>> & setOfSets) {
 	}
 	return setOfSetsString;
 }
+
+QLocale TextUtils::getLocale() {
+	QLocale locale;
+	QSettings settings;
+	if (settings.value("locale/decimalPoint", ".").toString().compare(',') == 0) {
+		locale = QLocale(QLocale::German);
+		locale.setNumberOptions(QLocale::OmitGroupSeparator);
+	}
+	return locale;
+}

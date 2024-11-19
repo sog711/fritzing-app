@@ -132,6 +132,7 @@ public:
 	}
 	static QString setToString(const QSet<QString> & set);
 	static QString setOfSetsToString(const QSet<QSet<QString>> & setOfSets);
+	static QLocale getLocale();
 
 public:
 	static const QRegularExpression FindWhitespace;

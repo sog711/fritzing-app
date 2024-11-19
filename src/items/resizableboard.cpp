@@ -1062,7 +1062,10 @@ void ResizableBoard::widthEntry() {
 	auto * edit = qobject_cast<QLineEdit *>(sender());
 	if (edit == nullptr) return;
 
-	double w = edit->text().toDouble();
+	QString text = edit->text();
+	text.replace(TextUtils::getLocale().decimalPoint(), QChar('.'));
+
+	double w = text.toDouble();
 	double oldW = m_modelPart->localProp("width").toDouble();
 	if (w == oldW) return;
 
@@ -1078,7 +1081,10 @@ void ResizableBoard::heightEntry() {
 	auto * edit = qobject_cast<QLineEdit *>(sender());
 	if (edit == nullptr) return;
 
-	double h = edit->text().toDouble();
+	QString text = edit->text();
+	text.replace(TextUtils::getLocale().decimalPoint(), QChar('.'));
+
+	double h = text.toDouble();
 	double oldH =  m_modelPart->localProp("height").toDouble();
 	if (h == oldH) return;
 
@@ -1276,6 +1282,9 @@ QFrame * ResizableBoard::setUpDimEntry(bool includeAspectRatio, bool includeReve
 	hboxLayout2->setContentsMargins(0, 0, 0, 0);
 	hboxLayout2->setSpacing(2);
 
+	QLocale locale = TextUtils::getLocale();
+	QString decimalPoint = locale.decimalPoint();
+
 	auto * l1 = new QLabel(tr("width(mm)"));
 	l1->setContentsMargins(0, 0, 0, 0);
 	l1->setObjectName("infoViewLabel");
@@ -1283,11 +1292,11 @@ QFrame * ResizableBoard::setUpDimEntry(bool includeAspectRatio, bool includeReve
 	auto * validator = new QDoubleValidator(e1);
 	validator->setRange(0.1, 999.9, m_decimalsAfter);
 	validator->setNotation(QDoubleValidator::StandardNotation);
-	validator->setLocale(QLocale::C);
+	validator->setLocale(locale);
 	e1->setObjectName("infoViewLineEdit");
 	e1->setValidator(validator);
 	e1->setMaxLength(4 + m_decimalsAfter);
-	e1->setText(QString::number(w));
+	e1->setText(QString::number(w, 'f', m_decimalsAfter).replace('.', decimalPoint));
 
 	auto * l2 = new QLabel(tr("height(mm)"));
 	l2->setContentsMargins(0, 0, 0, 0);
@@ -1296,11 +1305,11 @@ QFrame * ResizableBoard::setUpDimEntry(bool includeAspectRatio, bool includeReve
 	validator = new QDoubleValidator(e1);
 	validator->setRange(0.1, 999.9, m_decimalsAfter);
 	validator->setNotation(QDoubleValidator::StandardNotation);
-	validator->setLocale(QLocale::C);
+	validator->setLocale(locale);
 	e2->setObjectName("infoViewLineEdit");
 	e2->setValidator(validator);
 	e2->setMaxLength(4 + m_decimalsAfter);
-	e2->setText(QString::number(h));
+	e2->setText(QString::number(h, 'f', m_decimalsAfter).replace('.', decimalPoint));
 
 	hboxLayout1->addWidget(l1);
 	hboxLayout1->addWidget(e1);
@@ -1413,11 +1422,13 @@ void ResizableBoard::fixWH() {
 
 void ResizableBoard::setWidthAndHeight(double w, double h)
 {
+	QLocale locale = TextUtils::getLocale();
+
 	if (m_widthEditor != nullptr) {
-		m_widthEditor->setText(QString::number(w));
+		m_widthEditor->setText(locale.toString(w, 'f', m_decimalsAfter));
 	}
 	if (m_heightEditor != nullptr) {
-		m_heightEditor->setText(QString::number(h));
+		m_heightEditor->setText(locale.toString(h, 'f', m_decimalsAfter));
 	}
 	updatePaperSizes(w, h);
 }

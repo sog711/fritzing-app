@@ -589,6 +589,14 @@ int FApplication::init() {
 	qRegisterMetaType<UploadPair>("UploadPair");
 
 	QSettings settings;
+	QString currentDecimalPoint = settings.value("locale/decimalPoint").toString();
+
+	if (!(currentDecimalPoint.compare(".") == 0 || currentDecimalPoint.compare(",") == 0)) {
+		QLocale systemLocale = QLocale::system();
+		settings.setValue("locale/decimalPoint", systemLocale.decimalPoint());
+		DebugDialog::debug(QString("setting decimal point %1").arg(systemLocale.decimalPoint()));
+	}
+
 	DebugDialog::debug(QString("OpenGL requested: %1").arg(useOpenGL ? "Yes" : "No"));
 	DebugDialog::debug(QString("FPS Monitor requested: %1").arg(showFPS ? "Yes" : "No"));
 	settings.setValue("Rendering/OpenGL", useOpenGL);
