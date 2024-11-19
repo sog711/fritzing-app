@@ -154,6 +154,26 @@ bool ModelBase::loadFromFile(const QString & fileName, ModelBase * referenceMode
 			Q_EMIT migratePartLabelOffset(m_fritzingVersion);
 		}
 	}
+	VersionThing versionThingFz;
+	Version::toVersionThing(m_fritzingVersion,versionThingFz);
+	if (m_fritzingVersion.isEmpty() || !versionThingFz.ok) {
+		FMessageBox::warning(
+		    nullptr,
+		    QObject::tr("Fritzing"),
+		    QObject::tr("Fritzing version in sketch is missing or invalid.\n\nFritzing version found in sketch: %1").arg(m_fritzingVersion)
+		);
+	} else {
+		VersionThing currentVersionThing;
+		Version::toVersionThing(Version::versionString(), currentVersionThing);
+
+		if (Version::greaterThan(currentVersionThing, versionThingFz)) {
+			FMessageBox::warning(
+			    nullptr,
+			    QObject::tr("Fritzing"),
+			    QObject::tr("Sketch was created with a Fritzing version that is newer than the current Fritzing version.\n\nYour Fritzing version might not support the sketch properly. Please consider updating your Fritzing.\n\nFritzing version found in sketch: %1\nVersion of this Fritzing: %2").arg(m_fritzingVersion).arg(Version::versionString())
+			);
+		}
+	}
 	ModelPartSharedRoot * modelPartSharedRoot = this->rootModelPartShared();
 
 	Q_EMIT loadedProjectProperties(root.firstChildElement("project_properties"));
