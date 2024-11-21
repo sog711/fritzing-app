@@ -1033,6 +1033,30 @@ protected:
 
 /////////////////////////////////////////////
 
+class ResizeLogoCommand : public BaseCommand
+{
+public:
+	ResizeLogoCommand(SketchWidget* sketchWidget, long itemID,
+					  double oldWidth, double oldHeight,
+					  double newWidth, double newHeight,
+					  const QString& logoProperty,
+					  QUndoCommand* parent = nullptr);
+
+	void undo() override;
+	void redo() override;
+	QString getParamString() const override;
+
+private:
+	long m_itemID;
+	double m_oldWidth;
+	double m_oldHeight;
+	double m_newWidth;
+	double m_newHeight;
+	QString m_logoProperty;
+};
+
+/////////////////////////////////////////////
+
 class ChangeBoardLayersCommand : public BaseCommand
 {
 public:

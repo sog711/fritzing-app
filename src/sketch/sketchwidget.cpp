@@ -5408,16 +5408,20 @@ void SketchWidget::prepDeleteProps(ItemBase * itemBase, long id, const QString &
 		QPointF p;
 		QSizeF sz;
 		logo->getParams(p, sz);
-		new ResizeBoardCommand(this, id, sz.width(), sz.height(), sz.width(), sz.height(), parentCommand);
 		QString logoProp = logo->prop("logo");
 		QString shapeProp = logo->prop("shape");
+
 		if (!logoProp.isEmpty()) {
-			new SetPropCommand(this, id, "logo", logoProp, logoProp, true, parentCommand);
+			new ResizeLogoCommand(this, id, sz.width(), sz.height(),
+								  sz.width(), sz.height(), logoProp, parentCommand);
 		}
 		else if (!shapeProp.isEmpty()) {
 			QString newName = logo->getNewLayerFileName(propsMap.value("layer"));
-			new LoadLogoImageCommand(this, id, shapeProp, logo->modelPart()->localProp("aspectratio").toSizeF(), logo->prop("lastfilename"), newName, false, parentCommand);
+			new LoadLogoImageCommand(this, id, shapeProp,
+									 logo->modelPart()->localProp("aspectratio").toSizeF(),
+									 logo->prop("lastfilename"), newName, false, parentCommand);
 		}
+
 		prepDeleteOtherProps(itemBase, id, newModuleID, propsMap, parentCommand);
 	}
 	return;
@@ -7937,37 +7941,16 @@ ItemBase * SketchWidget::resizeBoard(long itemID, double mmW, double mmH) {
 	if (!itemBase) return nullptr;
 
 	bool resized = false;
-	switch (itemBase->itemType()) {
-	case ModelPart::ResizableBoard:
-		qobject_cast<ResizableBoard *>(itemBase)->resizeMM(mmW, mmH, m_viewLayers);
-		resized = true;
-		break;
 
-	case ModelPart::Logo:
-		qobject_cast<LogoItem *>(itemBase)->resizeMM(mmW, mmH, m_viewLayers);
+	// Handle ResizableBoard and all its derived classes
+	if (auto* resizableBoard = qobject_cast<ResizableBoard *>(itemBase)) {
+		resizableBoard->resizeMM(mmW, mmH, m_viewLayers);
 		resized = true;
-		break;
-
-	case ModelPart::Ruler:
-		qobject_cast<Ruler *>(itemBase)->resizeMM(mmW, mmH, m_viewLayers);
-		resized = true;
-		break;
 	}
-
-	if (!resized) {
-		Pad * pad = qobject_cast<Pad *>(itemBase);
-		if (pad) {
-			pad->resizeMM(mmW, mmH, m_viewLayers);
-			resized = true;
-		}
-	}
-
-	if (!resized) {
-		auto * schematicFrame = qobject_cast<SchematicFrame *>(itemBase);
-		if (schematicFrame) {
-			schematicFrame->resizeMM(mmW, mmH, m_viewLayers);
-			resized = true;
-		}
+	// Handle Ruler separately as it's not a ResizableBoard
+	else if (auto* ruler = qobject_cast<Ruler *>(itemBase)) {
+		ruler->resizeMM(mmW, mmH, m_viewLayers);
+		resized = true;
 	}
 
 	if (resized) {
