@@ -70,6 +70,8 @@ bool ModelBase::loadFromFile(const QString & fileName, ModelBase * referenceMode
 	m_referenceModel = referenceModel;
 
 	QFile file(fileName);
+	QFileInfo fileInfo(file);
+	QString onlyFileName = fileInfo.fileName();
 	if (!file.open(QFile::ReadOnly | QFile::Text)) {
 		FMessageBox::warning(nullptr, QObject::tr("Fritzing"),
 		                     QObject::tr("Cannot read file %1:\n%2.")
@@ -160,7 +162,7 @@ bool ModelBase::loadFromFile(const QString & fileName, ModelBase * referenceMode
 		FMessageBox::warning(
 		    nullptr,
 		    QObject::tr("Fritzing"),
-		    QObject::tr("Fritzing version in sketch is missing or invalid.\n\nFritzing version found in sketch: %1").arg(m_fritzingVersion)
+		    QObject::tr("The loading sketch looks broken.\n\nIts fritzing version parameter is invalid: %1\n\nSketch filename: %2").arg(m_fritzingVersion.isEmpty() ? QObject::tr("empty") : m_fritzingVersion).arg(onlyFileName)
 		);
 	} else {
 		VersionThing currentVersionThing;
@@ -170,7 +172,7 @@ bool ModelBase::loadFromFile(const QString & fileName, ModelBase * referenceMode
 			FMessageBox::warning(
 			    nullptr,
 			    QObject::tr("Fritzing"),
-			    QObject::tr("Sketch was created with a Fritzing version that is newer than the current Fritzing version.\n\nYour Fritzing version might not support the sketch properly. Please consider updating your Fritzing.\n\nFritzing version found in sketch: %1\nVersion of this Fritzing: %2").arg(m_fritzingVersion).arg(Version::versionString())
+			    QObject::tr("The loading sketch was created with a Fritzing version that is newer than your current Fritzing version.\n\nYour current Fritzing version might not support the sketch properly. Please consider updating your Fritzing.\n\nFritzing version found in the sketch: %1\nYour current Fritzing version: %2\n\nSketch filename: %3").arg(m_fritzingVersion).arg(Version::versionString()).arg(onlyFileName)
 			);
 		}
 	}
