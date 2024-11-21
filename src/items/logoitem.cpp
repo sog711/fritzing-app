@@ -552,48 +552,6 @@ bool LogoItem::resizeMM(double mmW, double mmH, const LayerHash & viewLayers)
 		return false;
 	}
 
-	DebugDialog::debug(QString("resize mm %1 %2").arg(mmW).arg(mmH));
-	// Debug implementation
-	{
-		// Create a QImage to render the current state
-		QImage debugImage(500, 500, QImage::Format_ARGB32);
-		debugImage.fill(Qt::white);
-
-		// Create a painter for the debug image
-		QPainter painter(&debugImage);
-		painter.setRenderHint(QPainter::Antialiasing);
-
-		// Draw the current SVG item using the renderer
-		if (renderer()) {
-			renderer()->render(&painter, QRectF(0, 0, 500, 500));
-		}
-
-		// Add debug information text
-		painter.setPen(Qt::black);
-		painter.setFont(QFont("Arial", 10));
-
-		QRectF bounds = this->boundingRect();
-		QString debugText = QString("mmW: %1, mmH: %2\n"
-									"inW: %3, inH: %4\n"
-									"Bounds: %5 x %6 pixels\n"
-									"Transform: %7, %8")
-								.arg(mmW).arg(mmH)
-								.arg(GraphicsUtils::mm2mils(mmW) / 1000)
-								.arg(GraphicsUtils::mm2mils(mmH) / 1000)
-								.arg(bounds.width()).arg(bounds.height())
-								.arg(this->transform().m11())
-								.arg(this->transform().m22());
-
-		painter.drawText(QRect(10, 10, 490, 100), debugText);
-
-		// Save the debug image
-		static int debugImageCounter = 0;
-		QString filename = QString("/tmp/logo_debug_%1.png").arg(debugImageCounter++);
-		debugImage.save(filename);
-
-		DebugDialog::debug(QString("Debug image saved as: %1").arg(filename));
-	}
-
 	QRectF r = this->boundingRect();
 	if (qAbs(GraphicsUtils::pixels2mm(r.width(), GraphicsUtils::SVGDPI) - mmW) < .001 &&
 	        qAbs(GraphicsUtils::pixels2mm(r.height(), GraphicsUtils::SVGDPI) - mmH) < .001)
@@ -601,8 +559,8 @@ bool LogoItem::resizeMM(double mmW, double mmH, const LayerHash & viewLayers)
 		return false;
 	}
 
-	double inW = GraphicsUtils::mm2mils(mmW) / 1000;
-	double inH = GraphicsUtils::mm2mils(mmH) / 1000;
+	double inW = mmW / GraphicsUtils::Inch2mm;
+	double inH = mmH / GraphicsUtils::Inch2mm;
 
 	// TODO: deal with aspect ratio
 
@@ -952,9 +910,7 @@ QString LogoItem::hackSvg_v5(const QString &svg, const QString &logo)
 	// 'Alignment works' means that the text does not move relative to its box when adding or removing characters.
 	// See github issue xy?
 	double totalWidth = textWidth * 0.77 + padding;
-	double widthInches = GraphicsUtils::pixels2ins(totalWidth, fm.fontDpi());
 	double totalHeight = textHeight + padding;
-	double heightInches = GraphicsUtils::pixels2ins(totalHeight, fm.fontDpi());
 
 	QStringList viewBox = getViewBox(root);
 	if (viewBox.size() != 4) {
@@ -1001,8 +957,8 @@ QString LogoItem::hackSvg_v5(const QString &svg, const QString &logo)
 			if (child.isText()) {
 				child.setNodeValue(logo);
 
-				modelPart()->setLocalProp("width", widthInches * GraphicsUtils::Inch2mm);
-				modelPart()->setLocalProp("height", heightInches * GraphicsUtils::Inch2mm);
+				modelPart()->setLocalProp("width", textWidthInches * GraphicsUtils::Inch2mm);
+				modelPart()->setLocalProp("height", textHeightInches * GraphicsUtils::Inch2mm);
 
 				if (!isBottom())
 					return doc.toString();
