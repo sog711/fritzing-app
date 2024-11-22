@@ -67,7 +67,7 @@ public:
 	/**
 		Constructs a message box with the given \a parent.
 	*/
-	explicit FMessageBox(QWidget *parent = nullptr);
+	explicit FMessageBox(QWidget *parent);
 
 	/**
 		\reimp
