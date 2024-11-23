@@ -165,6 +165,7 @@ protected:
 		Stores all logged messages.
 	*/
 	static QList<QPair<QString, QString>> messageLog;
+	static const int MaxLogEntries = 1000;
 
 private:
 	QPushButton *m_copyButton;
