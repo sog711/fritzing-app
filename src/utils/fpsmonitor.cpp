@@ -5,6 +5,7 @@
 #include <QOpenGLDebugLogger>
 #include <QOpenGLFunctions>
 #include <QScreen>
+#include <QOffscreenSurface>
 #include "utils/fmessagebox.h"
 #include <algorithm>
 
@@ -14,8 +15,36 @@ FPSMonitor::FPSMonitor(QObject *parent)
 	, lastFrameFPS(0)
 	, showFPS(true)
 {
+	checkOpenGLAvailability();
 	totalTimeTimer.start();
 	frameTimer.start();
+}
+
+bool FPSMonitor::checkOpenGLAvailability() {
+	QOpenGLContext testContext;
+	bool openGLAvailable = testContext.create();
+
+	if (openGLAvailable) {
+		// We need a surface to make the context current
+		QOffscreenSurface surface;
+		surface.create();
+
+		if (testContext.makeCurrent(&surface)) {
+			QOpenGLFunctions *f = testContext.functions();
+			const GLubyte* version = f->glGetString(GL_VERSION);
+			qDebug() << "OpenGL Version:" << QString::fromLatin1(reinterpret_cast<const char*>(version));
+			testContext.doneCurrent();
+		} else {
+			openGLAvailable = false;
+			qDebug() << "Failed to make OpenGL context current";
+		}
+
+		surface.destroy();
+	} else {
+		qDebug() << "Failed to create OpenGL context";
+	}
+
+	return openGLAvailable;
 }
 
 void FPSMonitor::update()

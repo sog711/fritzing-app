@@ -22,6 +22,7 @@ public:
 	bool isShowingFPS() const;
 
 	void showDiagnostics();
+	static bool checkOpenGLAvailability();
 
 private:
 	QElapsedTimer totalTimeTimer;

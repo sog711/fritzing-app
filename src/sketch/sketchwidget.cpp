@@ -152,11 +152,9 @@ SketchWidget::SketchWidget(ViewLayer::ViewID viewID, QWidget *parent, int size, 
 	setAcceptDrops(true);
 
 	QSettings settings;
-	m_useOpenGL = settings.value("Rendering/OpenGL", false).toBool();
-	DebugDialog::debug("OSetting " + settings.value("Rendering/OpenGL", false).toString());
-
+	m_useOpenGL = settings.value("Rendering/OpenGL", false).toBool() && FPSMonitor::checkOpenGLAvailability();
 	m_showFPS = settings.value("Rendering/FPS", false).toBool();
-	DebugDialog::debug("OSetting " + settings.value("Rendering/FPS", false).toString());
+
 	if (m_showFPS) {
 		m_fpsMonitor = new FPSMonitor(this);
 		// m_fpsMonitor->start();
@@ -164,31 +162,18 @@ SketchWidget::SketchWidget(ViewLayer::ViewID viewID, QWidget *parent, int size, 
 	}
 
 	if (m_useOpenGL) {
-		QOpenGLContext *context = QOpenGLContext::currentContext();
-		if (context) {
-			DebugDialog::debug("OpenGL context not available." + ViewLayer::viewIDName(viewID));
-			m_useOpenGL = false;
-		} else {
-			QOpenGLWidget *glWidget = new QOpenGLWidget;
-			QSurfaceFormat format;
-			// TODO Customize the OpenGL format
-			setViewport(glWidget);
-			DebugDialog::debug("OpenGL rendering enabled for SketchWidget.");
-		}
-
-	}
-	if (!m_useOpenGL) {
+		QOpenGLWidget *glWidget = new QOpenGLWidget;
+		QSurfaceFormat format;
+		format.setSamples(4);
+		format.setSwapBehavior(QSurfaceFormat::DoubleBuffer);
+		glWidget->setFormat(format);
+		setViewport(glWidget);
+		DebugDialog::debug("OpenGL rendering enabled for SketchWidget." + ViewLayer::viewIDName(viewID));
+	} else {
 		// Non-OpenGL rendering settings
-		//setRenderHint(QPainter::Antialiasing, true);
 		DebugDialog::debug("OpenGL rendering not enabled for SketchWidget." + ViewLayer::viewIDName(viewID));
-		setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 	}
-
-
-	// setRenderHint(QPainter::Antialiasing, true);
-
-	//setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
-
+	setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 
 	//setCacheMode(QGraphicsView::CacheBackground);
 	//setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
