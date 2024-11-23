@@ -2130,7 +2130,7 @@ QList<ModelPart*> MainWindow::moveToPartsFolder(QDir &unzipDir, MainWindow* mw, 
 				FMessageBox::warning(
 				    mw,
 				    tr("Fritzing"),
-				    tr("Part was created with a Fritzing version that is newer than the current Fritzing version.\n\nYour Fritzing version might not support the part properly. Please consider updating your Fritzing.\n\nFritzing version found in part: %1\nVersion of this Fritzing: %2\n\nPart file: '%3'").arg(fritzingVersion).arg(Version::versionString()).arg(fzpPath)
+				    tr("Part was created with a Fritzing version that is newer than your current Fritzing version.\n\nYour Fritzing version might not support the part properly. Please consider updating your Fritzing.\n\nFritzing version found in part: %1\nVersion of this Fritzing: %2\n\nPart file: '%3'").arg(fritzingVersion).arg(Version::versionString()).arg(fzpPath)
 				);
 			}
 		}
