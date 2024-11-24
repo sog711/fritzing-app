@@ -27,8 +27,6 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "misc.h"
 #include "../installedfonts.h"
 
-//#include "../debugdialog.h"
-
 #include <QRegularExpression>
 #include <QRegularExpression>
 #include <QBuffer>
@@ -1750,21 +1748,62 @@ QString TextUtils::parseForModuleID(const QString & fzpXmlString)
 	return "";
 }
 
-QString TextUtils::parseFileForFritzingVersion(const QString & fzpPath)
+TextUtils::FzpInfo TextUtils::parseFzpFileForInfo(const QString &fzpPath)
 {
-	QString fritzingVersion;
+	FzpInfo info;
 	QFile file(fzpPath);
-	if (!file.open(QFile::ReadOnly)) return fritzingVersion;
-
+	if (!file.open(QFile::ReadOnly)) {
+		info.error = 3;
+		return info;
+	}
 	QXmlStreamReader streamReader(&file);
+
 	streamReader.setNamespaceProcessing(false);
 
-	while (!streamReader.atEnd()) {
+	// Helper function to check if all required fields are filled
+	auto isComplete = [&info]() {
+		return !info.moduleId.isEmpty() && !info.fritzingVersion.isEmpty() && !info.title.isEmpty();
+		// && !info.label.isEmpty() && !info.author.isEmpty() && !info.date.isEmpty();
+	};
+
+	QString elementName;
+	while (!streamReader.atEnd() && !isComplete()) {
 		switch (streamReader.readNext()) {
 		case QXmlStreamReader::StartElement:
 			if (streamReader.name().toString().compare("module") == 0) {
-				file.close();
-				return streamReader.attributes().value("fritzingVersion").toString();
+				info.moduleId = streamReader.attributes().value("moduleId").toString();
+				info.fritzingVersion = streamReader.attributes().value("fritzingVersion").toString();
+
+				// Look for other elements within module
+				while (!streamReader.atEnd() && !isComplete()) {
+					switch (streamReader.readNext()) {
+					case QXmlStreamReader::StartElement:
+						elementName = streamReader.name().toString();
+						if (elementName == "title") {
+							info.title = streamReader.readElementText();
+						}
+						// else if (elementName == "label") {
+						// 	info.label = streamReader.readElementText();
+						// }
+						// else if (elementName == "author") {
+						// 	info.author = streamReader.readElementText();
+						// }
+						// else if (elementName == "date") {
+						// 	info.date = streamReader.readElementText();
+						// }
+						break;
+					case QXmlStreamReader::EndElement:
+						if (streamReader.name().toString().compare("module") == 0) {
+							// We've reached the end of module element
+							info.error = 2; // incomplete
+							file.close();
+							return info;
+						}
+						break;
+					default:
+						break;
+					}
+				}
 			}
 			break;
 		default:
@@ -1772,8 +1811,12 @@ QString TextUtils::parseFileForFritzingVersion(const QString & fzpPath)
 		}
 	}
 
+	if (streamReader.hasError()) {
+		info.error = 1; // xml error
+	}
+
 	file.close();
-	return fritzingVersion;
+	return info;
 }
 
 QMap<QString, QString> TextUtils::parseFileForViewImages(const QString & fzpPath)
@@ -1813,32 +1856,6 @@ QMap<QString, QString> TextUtils::parseFileForViewImages(const QString & fzpPath
 	return map;
 }
 
-
-QString TextUtils::parseFileForModuleID(const QString & fzpPath)
-{
-	QString moduleId;
-	QFile file(fzpPath);
-	if (!file.open(QFile::ReadOnly)) return moduleId;
-
-	QXmlStreamReader streamReader(&file);
-	streamReader.setNamespaceProcessing(false);
-
-	while (!streamReader.atEnd()) {
-		switch (streamReader.readNext()) {
-		case QXmlStreamReader::StartElement:
-			if (streamReader.name().toString().compare("module") == 0) {
-				file.close();
-				return streamReader.attributes().value("moduleId").toString();
-			}
-			break;
-		default:
-			break;
-		}
-	}
-
-	file.close();
-	return moduleId;
-}
 
 QSizeF TextUtils::parseForWidthAndHeight(const QString & svg, QRectF & viewBox, bool getViewBox)
 {

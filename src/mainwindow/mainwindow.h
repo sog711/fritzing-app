@@ -41,17 +41,18 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QNetworkAccessManager>
 #include <QShortcut>
 
-#include "fritzingwindow.h"
-#include "sketchareawidget.h"
-#include "getspice.h"
-#include "../viewlayer.h"
-#include "../project_properties.h"
-#include "../program/programwindow.h"
-#include "../svg/svg2gerber.h"
-#include "../routingstatus.h"
-#include "../simulation/simulator.h"
 #include "../model/modelpart.h"
 #include "../partseditor/peutils.h"
+#include "../program/programwindow.h"
+#include "../project_properties.h"
+#include "../routingstatus.h"
+#include "../simulation/simulator.h"
+#include "../svg/svg2gerber.h"
+#include "../viewlayer.h"
+#include "fritzingwindow.h"
+#include "getspice.h"
+#include "sketchareawidget.h"
+#include "utils/textutils.h"
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -64,6 +65,7 @@ class ServiceListFetcher;
 class FSizeGrip;
 
 class DebugConnectors;
+
 
 typedef class FDockWidget * (*DockFactory)(const QString & title, QWidget * parent);
 
@@ -999,6 +1001,9 @@ protected:
 	static int CascadeFactorY;
 	static QRegularExpression GuidMatcher;
 	void exportIPC_D_356A_interactive();
+
+private:
+	void validatePartInfo(const TextUtils::FzpInfo &info, const QString &fzpPath, MainWindow *mw);
 };
 
 #endif

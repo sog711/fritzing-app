@@ -84,6 +84,8 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "utils/uploadpair.h"
 #include "version/version.h"
 
+using namespace Qt::Literals::StringLiterals;
+
 FTabWidget::FTabWidget(QWidget * parent) : QTabWidget(parent)
 {
 	QTabBar * tabBar = new FTabBar;
@@ -2093,64 +2095,101 @@ QStringList MainWindow::saveBundledAux(ModelPart *mp, const QDir &destFolder) {
 	return names;
 }
 
-QList<ModelPart*> MainWindow::moveToPartsFolder(QDir &unzipDir, MainWindow* mw, bool addToBin, bool addToAlien, const QString & prefixFolder, const QString &destFolder, bool importingSinglePart) {
-	QStringList namefilters;
-	QList<ModelPart*> retval;
 
+void MainWindow::validatePartInfo(const TextUtils::FzpInfo &info,
+								  const QString &fzpPath,
+								  MainWindow *mw)
+{
+	if (info.error != 0) {
+		QString error = u"Error parsing fzp file '%1'"_s.arg(fzpPath);
+		DebugDialog::DebugStream() << error;
+		throw error;
+	}
+
+	if (!info.moduleId.isEmpty()
+		&& (mw->m_referenceModel->retrieveModelPart(info.moduleId) != nullptr)) {
+		throw u"There is already a part with id '%1' loaded into Fritzing."_s.arg(info.moduleId);
+	}
+
+	if (info.title.isEmpty()) {
+		FMessageBox::warning(
+			mw,
+			MainWindow::tr("Title is missing."),
+			MainWindow::tr("The part '%1' is missing a title.\n\n"
+						   "All parts must have a title tag.")
+				.arg(fzpPath));
+		return;
+	}
+
+	if (info.fritzingVersion.isEmpty()) {
+		FMessageBox::warning(
+			mw,
+			MainWindow::tr("Version is missing"),
+			MainWindow::tr(
+				"The part '%1' is missing a fritzing version.\n\n"
+				"All parts must have a fritzingVersion attribute.")
+				.arg(info.title));
+		return;
+	}
+
+	VersionThing versionThingFzp;
+	Version::toVersionThing(info.fritzingVersion, versionThingFzp);
+
+	if (!versionThingFzp.ok) {
+		FMessageBox::warning(
+			mw,
+			MainWindow::tr("Version is invalid"),
+			MainWindow::tr("The fritzing version '%1' for the part '%1' is invalid.\n\n"
+						   "The part might not work properly because it might be too new or unfinished. "
+						   "Please make sure that your Fritzing version supports it.")
+				.arg(info.fritzingVersion, info.title)
+			);
+		return;
+	}
+
+	VersionThing currentVersionThing;
+	Version::toVersionThing(Version::versionString(), currentVersionThing);
+
+	if (Version::greaterThan(currentVersionThing, versionThingFzp)) {
+		FMessageBox::warning(
+			mw,
+			MainWindow::tr("Fritzing too old"),
+			MainWindow::tr("The part '%1' was created with Fritzing version '%2'.\n\n"
+						   "Your Fritzing version is '%3' and might not support the part properly. "
+						   "Please consider updating your Fritzing.\n\n")
+				.arg(info.title, info.fritzingVersion, Version::versionString())
+			);
+	}
+}
+
+QList<ModelPart*> MainWindow::moveToPartsFolder(QDir &unzipDir, MainWindow* mw, bool addToBin, bool addToAlien, const QString & prefixFolder, const QString &destFolder, bool importingSinglePart) {
 	if (mw == nullptr) {
 		throw "MainWindow::moveToPartsFolder mainwindow missing";
 	}
 
-	namefilters.clear();
+	QStringList namefilters;
+	QList<ModelPart*> retval;
+
 	namefilters << ZIP_PART+"*";
 	QList<QFileInfo> partEntryInfoList = unzipDir.entryInfoList(namefilters);
 
 	if (importingSinglePart && partEntryInfoList.count() > 0) {
 		QString fzpPath = partEntryInfoList[0].absoluteFilePath();
-		QString moduleID = TextUtils::parseFileForModuleID(fzpPath);
-		if (!moduleID.isEmpty() && (m_referenceModel->retrieveModelPart(moduleID) != nullptr)) {
-			throw QString("There is already a part with id '%1' loaded into Fritzing.").arg(moduleID);
-		}
-		QString fritzingVersion = TextUtils::parseFileForFritzingVersion(fzpPath);
-
-		VersionThing versionThingFzp;
-		Version::toVersionThing(fritzingVersion, versionThingFzp);
-
-		if (fritzingVersion.isEmpty() || !versionThingFzp.ok) {
-			FMessageBox::warning(
-			    mw,
-			    tr("Fritzing"),
-			    tr("Fritzing version in part is missing, invalid or unreadable.\n\nThe part might not work properly because it might be too new or unfinished. Please make sure that your Fritzing version supports it.\n\nFritzing version found in part: %1\n\nPart file: '%2'").arg(fritzingVersion).arg(fzpPath)
-			);
-		} else {
-			VersionThing currentVersionThing;
-			Version::toVersionThing(Version::versionString(), currentVersionThing);
-
-			if (Version::greaterThan(currentVersionThing, versionThingFzp)) {
-				FMessageBox::warning(
-				    mw,
-				    tr("Fritzing"),
-				    tr("Part was created with a Fritzing version that is newer than your current Fritzing version.\n\nYour Fritzing version might not support the part properly. Please consider updating your Fritzing.\n\nFritzing version found in part: %1\nVersion of this Fritzing: %2\n\nPart file: '%3'").arg(fritzingVersion).arg(Version::versionString()).arg(fzpPath)
-				);
-			}
-		}
+		TextUtils::FzpInfo info = TextUtils::parseFzpFileForInfo(fzpPath);
+		validatePartInfo(info, fzpPath, mw);
 	}
 
 	namefilters.clear();
 	namefilters << ZIP_SVG+"*";
-	Q_FOREACH(QFileInfo file, unzipDir.entryInfoList(namefilters)) { // svg files
-		//DebugDialog::debug("unzip svg " + file.absoluteFilePath());
+	Q_FOREACH(QFileInfo file, unzipDir.entryInfoList(namefilters)) {
 		mw->copyToSvgFolder(file, addToAlien, prefixFolder, destFolder);
 	}
 
-
-	Q_FOREACH(QFileInfo file, partEntryInfoList) { // part files
-		//DebugDialog::debug("unzip part " + file.absoluteFilePath());
+	Q_FOREACH(QFileInfo file, partEntryInfoList) {
 		ModelPart * mp = mw->copyToPartsFolder(file, addToAlien, prefixFolder, destFolder);
 		if (mp) {
 			retval << mp;
 			if (addToBin) {
-				// should only be here when adding single new part
 				mw->m_binManager->addToMyParts(mp);
 			}
 		}
