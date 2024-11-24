@@ -3682,31 +3682,31 @@ void MainWindow::oldSchematicsSlot(const QString &filename, bool & useOldSchemat
 
 QMessageBox::StandardButton MainWindow::oldSchematicMessage(const QString & filename)
 {
-    QFileInfo info(filename);
-    QString text = tr("There is a new graphics standard for schematic-view part images, beginning with version 0.8.6.\n\n") +
-                   tr("Would you like to convert '%1' to the new standard now or open the file read-only?\n").arg(info.fileName());
+	QFileInfo info(filename);
+	QString text = tr("There is a new graphics standard for schematic-view part images, beginning with version 0.8.6.\n\n") +
+				   tr("Would you like to convert '%1' to the new standard now or open the file read-only?\n").arg(info.fileName());
 
-    QString informativeText = "<ul><li>" +
-                              tr("The conversion process will not modify '%1', until you save the file. ").arg(info.fileName()) +
-                              "</li><li>" +
-                              tr("You will have to rearrange parts and connections in schematic view, as the sizes of most part images will have changed. Consider using the Autorouter to clean up traces. ") +
-                              "</li><li>" +
-                              tr("Note that any custom parts will not be converted. A tool for converting 'rectangular' schematic images is available in the Parts Editor.") +
-                              "</li></ul>";
+	QString informativeText = "<ul><li>" +
+							  tr("The conversion process will not modify '%1', until you save the file. ").arg(info.fileName()) +
+							  "</li><li>" +
+							  tr("You will have to rearrange parts and connections in schematic view, as the sizes of most part images will have changed. Consider using the Autorouter to clean up traces. ") +
+							  "</li><li>" +
+							  tr("Note that any custom parts will not be converted. A tool for converting 'rectangular' schematic images is available in the Parts Editor.") +
+							  "</li></ul>";
 
-    FMessageBox* messageBox = FMessageBox::createCustom(
-        nullptr, QMessageBox::Icon::Question, tr("Schematic view update"), text,
-        QMessageBox::StandardButtons(), QMessageBox::NoButton);
+	QScopedPointer<FMessageBox> messageBox(FMessageBox::createCustom(
+		nullptr, QMessageBox::Icon::Question, tr("Schematic view update"), text,
+		QMessageBox::StandardButtons(), QMessageBox::NoButton));
 
-    messageBox->setInformativeText(informativeText);
-    messageBox->setWindowModality(Qt::WindowModal);
+	messageBox->setInformativeText(informativeText);
+	messageBox->setWindowModality(Qt::WindowModal);
 
-    QPushButton* convertButton = messageBox->addButton(tr("Convert"), QMessageBox::YesRole);
-    QPushButton* readOnlyButton = messageBox->addButton(tr("Read-only"), QMessageBox::NoRole);
+	messageBox->addButton(tr("Convert"), QMessageBox::YesRole);
+	messageBox->addButton(tr("Read-only"), QMessageBox::NoRole);
 
-    return static_cast<QMessageBox::StandardButton>(messageBox->exec());
+	QMessageBox::StandardButton result = static_cast<QMessageBox::StandardButton>(messageBox->exec());
+	return result;
 }
-
 
 void MainWindow::loadedRootSlot(const QString & fname, ModelBase *, QDomElement & root) {
 	if (root.isNull()) return;
