@@ -1060,8 +1060,10 @@ void PaletteItem::updateEditTexts(HoleSettings & holeSettings) {
 	}
 
 	QStringList sizes = newVal.split(",");
-	holeSettings.diameterEdit->setText(sizes.at(0));
-	holeSettings.thicknessEdit->setText(sizes.at(1));
+	QLocale locale = TextUtils::getLocale();
+	constexpr int decimalsAfter = 2;
+	holeSettings.diameterEdit->setText(locale.toString(sizes.at(0).toDouble(), 'f', decimalsAfter));
+	holeSettings.thicknessEdit->setText(locale.toString(sizes.at(1).toDouble(), 'f', decimalsAfter));
 }
 
 void PaletteItem::updateSizes(HoleSettings &  holeSettings) {
