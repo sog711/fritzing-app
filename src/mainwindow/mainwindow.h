@@ -529,7 +529,7 @@ protected:
 	void hideShowProgramMenu();
 	void updatePCBTraceMenu(QGraphicsItem *, TraceMenuThing &);
 
-	QList<ModelPart*> moveToPartsFolder(QDir &unzipDir, MainWindow* mw, bool addToBin, bool addToAlien, const QString & prefixFolder, const QString &destFolder, bool importingSinglePart);
+	QList<ModelPart*> moveToPartsFolder(QDir &unzipDir, bool addToBin, bool addToAlien, const QString & prefixFolder, const QString &destFolder, bool importingSinglePart);
 	QString copyToSvgFolder(const QFileInfo& file, bool addToAlien, const QString & prefixFolder, const QString &destFolder);
 	ModelPart* copyToPartsFolder(const QFileInfo& file, bool addToAlien, const QString & prefixFolder, const QString &destFolder);
 
@@ -1003,7 +1003,7 @@ protected:
 	void exportIPC_D_356A_interactive();
 
 private:
-	void validatePartInfo(const TextUtils::FzpInfo &info, const QString &fzpPath, MainWindow *mw);
+	void validatePartInfo(const TextUtils::FzpInfo &info, const QString &fzpPath);
 };
 
 #endif
