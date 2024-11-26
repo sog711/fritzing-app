@@ -31,23 +31,15 @@ void FzpInfo::addWarning(const QString& message) {
 	addWarning(tr("Warning"), message);
 }
 
-void FzpInfo::addWarning(
-	const QString& title,
-	const QString& message,
-	int line,
-	int column
-	) {
+void FzpInfo::addWarning(const QString& title, const QString& message, int line, int column)
+{
 	auto error = createLoadError(title, message, false, line, column);
 	m_errors.append(error);
 }
 
 QSharedPointer<FLoadError> FzpInfo::createLoadError(
-	const QString& title,
-	const QString& message,
-	bool isBlocker,
-	int line,
-	int column
-	) {
+	const QString& title, const QString& message, bool isBlocker, int line, int column)
+{
 	auto error = QSharedPointer<FLoadError>::create(m_path);
 	error->setMessage(title);
 	error->setDescription(message);
@@ -62,7 +54,6 @@ QSharedPointer<FLoadError> FzpInfo::createLoadError(
 
 	return error;
 }
-
 
 void FzpInfo::parse()
 {
