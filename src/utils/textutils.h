@@ -35,17 +35,6 @@ class TextUtils
 {
 
 public:
-	struct FzpInfo
-	{
-		QString moduleId;
-		QString fritzingVersion;
-		QString title;
-		// QString label;
-		// QString author;
-		// QString date;
-		int error;
-	};
-
 	static QSet<QString> getRegexpCaptures(const QString &pattern, const QString &textToSearchIn);
 	static QDomElement findElementWithAttribute(QDomElement element, const QString & attributeName, const QString & attributeValue);
 	static void findElementsWithAttribute(QDomElement & element, const QString & att, QList<QDomElement> & elements);
@@ -126,7 +115,6 @@ public:
 	static bool fixFonts(QString & svg, const QString & destFont, bool & reallyFixed);
 	static void fixStyleAttribute(QDomElement & element);
 	static QString parseForModuleID(const QString & fzpXmlString);
-	static QString parseFileForFritzingVersion(const QString & fzpPath);
 	static QString getRandText();
 	static bool ensureViewBox(QDomDocument doc, double dpi, QRectF & rect, bool toInches, double & w, double & h, bool getwh);
 	static QString findAnchor(const QDomElement & text);
@@ -163,8 +151,6 @@ public:
 	static const QString AdobeIllustratorIdentifier;
 
 	static QMap<QString, QString> parseFileForViewImages(const QString &fzpPath);
-	static FzpInfo parseFzpFileForInfo(const QString &fzpXmlString);
-
 
 protected:
 	static bool pxToInches(QDomElement &elem, const QString &attrName, bool isIllustrator);

@@ -1003,7 +1003,7 @@ protected:
 	void exportIPC_D_356A_interactive();
 
 private:
-	void validatePartInfo(const TextUtils::FzpInfo &info, const QString &fzpPath);
+	void validatePartInfo(const QString &fzpPath);
 };
 
 #endif

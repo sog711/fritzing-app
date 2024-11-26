@@ -77,6 +77,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../mainwindow/FProbeDropByModuleID.h"
 #include "../mainwindow/FProbeKeyPressEvents.h"
 #include "../mainwindow/fprobefocuswidget.h"
+#include "model/fzpinfo.h"
 #include "connectors/debugconnectors.h"
 #include "connectors/debugconnectorsprobe.h"
 #include "testing/FTesting.h"
@@ -2095,69 +2096,52 @@ QStringList MainWindow::saveBundledAux(ModelPart *mp, const QDir &destFolder) {
 	return names;
 }
 
-
-void MainWindow::validatePartInfo(const TextUtils::FzpInfo &info,
-								  const QString &fzpPath)
+void MainWindow::validatePartInfo(const QString &fzpPath)
 {
-	if (info.error != 0) {
-		QString error = u"Error parsing fzp file '%1'"_s.arg(fzpPath);
-		DebugDialog::DebugStream() << error;
-		throw error;
-	}
+	FzpInfo info(fzpPath);
 
-	if (!info.moduleId.isEmpty()
-		&& (m_referenceModel->retrieveModelPart(info.moduleId) != nullptr)) {
-		throw u"There is already a part with id '%1' loaded into Fritzing."_s.arg(info.moduleId);
+	try {
+		info.parse();
+		info.validate();
+		QString moduleId = info.moduleId();
+		if (!moduleId.isEmpty()
+			&& (m_referenceModel->retrieveModelPart(moduleId) != nullptr)) {
+			// TODO: This is an error, we can't load this part.
+			info.addWarning(
+				tr("Duplicate Part"),
+				tr("There is already a part with id '%1' loaded into Fritzing.").arg(moduleId)
+				);
+		}
 	}
-
-	if (info.title.isEmpty()) {
-		FMessageBox::warning(
+	catch (const std::exception& e) {
+		FMessageBox::critical(
 			this,
-			MainWindow::tr("Title is missing."),
-			MainWindow::tr("The part '%1' is missing a title.\n\n"
-						   "All parts must have a title tag.")
-				.arg(fzpPath));
-		return;
-	}
-
-	if (info.fritzingVersion.isEmpty()) {
-		FMessageBox::warning(
-			this,
-			MainWindow::tr("Version is missing"),
-			MainWindow::tr(
-				"The part '%1' is missing a fritzing version.\n\n"
-				"All parts must have a fritzingVersion attribute.")
-				.arg(info.title));
-		return;
-	}
-
-	VersionThing versionThingFzp;
-	Version::toVersionThing(info.fritzingVersion, versionThingFzp);
-
-	if (!versionThingFzp.ok) {
-		FMessageBox::warning(
-			this,
-			MainWindow::tr("Version is invalid"),
-			MainWindow::tr("The fritzing version '%1' for the part '%1' is invalid.\n\n"
-						   "The part might not work properly because it might be too new or unfinished. "
-						   "Please make sure that your Fritzing version supports it.")
-				.arg(info.fritzingVersion, info.title)
+			tr("Error"),
+			tr("Failed to process part file: %1").arg(e.what())
 			);
 		return;
 	}
 
-	VersionThing currentVersionThing;
-	Version::toVersionThing(Version::versionString(), currentVersionThing);
-
-	if (Version::greaterThan(currentVersionThing, versionThingFzp)) {
-		FMessageBox::warning(
+	if (info.hasBlockingErrors()) {
+		auto msgBox = FMessageBox::createCustom(
 			this,
-			MainWindow::tr("Fritzing too old"),
-			MainWindow::tr("The part '%1' was created with Fritzing version '%2'.\n\n"
-						   "Your Fritzing version is '%3' and might not support the part properly. "
-						   "Please consider updating your Fritzing.\n\n")
-				.arg(info.title, info.fritzingVersion, Version::versionString())
-			);
+			FMessageBox::Critical,
+			tr("Critical Issues"),
+			tr("Part '%1' has critical issues that prevent loading:\n\n%2")
+				.arg(info.title().isEmpty() ? info.path() : info.title(), info.getSummaryText()));
+		msgBox->setDetailedText(info.getDetailsText());
+		msgBox->enableClipboardButton(true);
+		msgBox->exec();
+	} else if (info.hasAnyErrors()) {
+		auto msgBox = FMessageBox::createCustom(this,
+												FMessageBox::Warning,
+												tr("Warning"),
+												tr("Part '%1' loaded with warnings:\n\n%2")
+													.arg(info.title(), info.getSummaryText()),
+												FMessageBox::Ok);
+		msgBox->setDetailedText(info.getDetailsText());
+		msgBox->enableClipboardButton(true);
+		msgBox->exec();
 	}
 }
 
@@ -2171,8 +2155,7 @@ QList<ModelPart*> MainWindow::moveToPartsFolder(QDir &unzipDir, bool addToBin, b
 
 	if (importingSinglePart && partEntryInfoList.count() > 0) {
 		QString fzpPath = partEntryInfoList[0].absoluteFilePath();
-		TextUtils::FzpInfo info = TextUtils::parseFzpFileForInfo(fzpPath);
-		validatePartInfo(info, fzpPath);
+		validatePartInfo(fzpPath);
 	}
 
 	namefilters.clear();
