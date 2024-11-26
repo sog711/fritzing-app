@@ -607,14 +607,14 @@ void ModelPartShared::flipSMDAnd() {
 	copyPins(ViewLayer::Copper1, ViewLayer::Copper0);
 }
 
-bool ModelPartShared::hasViewFor(ViewLayer::ViewID viewID) {
+bool ModelPartShared::hasViewFor(ViewLayer::ViewID viewID) const {
 	ViewImage * viewImage = m_viewImages.value(viewID, NULL);
 	if (viewImage == nullptr) return false;
 
 	return viewImage->layers != 0;
 }
 
-bool ModelPartShared::hasViewFor(ViewLayer::ViewID viewID, ViewLayer::ViewLayerID viewLayerID) {
+bool ModelPartShared::hasViewFor(ViewLayer::ViewID viewID, ViewLayer::ViewLayerID viewLayerID) const {
 	ViewImage * viewImage = m_viewImages.value(viewID, NULL);
 	if (viewImage == nullptr) return false;
 
@@ -721,15 +721,15 @@ qulonglong flipped(ViewImage * viewImage) {
 	return viewImage->flipped;
 }
 
-LayerList ModelPartShared::viewLayersFlipped(ViewLayer::ViewID viewID) {
+LayerList ModelPartShared::viewLayersFlipped(ViewLayer::ViewID viewID) const {
 	return viewLayersAux(viewID, flipped);
 }
 
-LayerList ModelPartShared::viewLayers(ViewLayer::ViewID viewID) {
+LayerList ModelPartShared::viewLayers(ViewLayer::ViewID viewID) const {
 	return viewLayersAux(viewID, layers);
 }
 
-LayerList ModelPartShared::viewLayersAux(ViewLayer::ViewID viewID, qulonglong (*accessor)(ViewImage *)) {
+LayerList ModelPartShared::viewLayersAux(ViewLayer::ViewID viewID, qulonglong (*accessor)(ViewImage *)) const {
 
 	static QHash<qulonglong, ViewLayer::ViewLayerID> ToLayerIDs;
 
