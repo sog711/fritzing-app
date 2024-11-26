@@ -2181,15 +2181,18 @@ QList<ModelPart*> MainWindow::moveToPartsFolder(QDir &unzipDir, MainWindow* mw, 
 
 	namefilters.clear();
 	namefilters << ZIP_SVG+"*";
-	Q_FOREACH(QFileInfo file, unzipDir.entryInfoList(namefilters)) {
+	Q_FOREACH(QFileInfo file, unzipDir.entryInfoList(namefilters)) { // svg files
+		//DebugDialog::debug("unzip svg " + file.absoluteFilePath());
 		mw->copyToSvgFolder(file, addToAlien, prefixFolder, destFolder);
 	}
 
-	Q_FOREACH(QFileInfo file, partEntryInfoList) {
+	Q_FOREACH(QFileInfo file, partEntryInfoList) { // part files
+		//DebugDialog::debug("unzip part " + file.absoluteFilePath());
 		ModelPart * mp = mw->copyToPartsFolder(file, addToAlien, prefixFolder, destFolder);
 		if (mp) {
 			retval << mp;
 			if (addToBin) {
+				// should only be here when adding single new part
 				mw->m_binManager->addToMyParts(mp);
 			}
 		}
