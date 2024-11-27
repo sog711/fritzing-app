@@ -586,21 +586,41 @@ int FApplication::init() {
 	QCoreApplication::setOrganizationDomain("fritzing.org");
 	QCoreApplication::setApplicationName("Fritzing");
 
+	qRegisterMetaType<QLocale>();
 	qRegisterMetaType<UploadPair>("UploadPair");
 
 	QSettings settings;
-	QString currentDecimalPoint = settings.value("locale/decimalPoint").toString();
 
-	if (!(currentDecimalPoint.compare(".") == 0 || currentDecimalPoint.compare(",") == 0)) {
-		QLocale systemLocale = QLocale::system();
-		settings.setValue("locale/decimalPoint", systemLocale.decimalPoint());
-		DebugDialog::debug(QString("setting decimal point %1").arg(systemLocale.decimalPoint()));
+	if (!settings.contains("locale") || !settings.value("locale").canConvert<QLocale>()) {
+		QLocale locale = QLocale::system();
+		QLocale localeFromSystemName(locale.name());
+		if (localeFromSystemName.decimalPoint() != locale.decimalPoint()) {
+			if (locale.decimalPoint() == QChar(',')) {
+				DebugDialog::debug(QString("Locale decimal points differ: from system locale name alone: %1 from system locale: %2. Writing German locale to settings to fit with decimal point ','.").arg(localeFromSystemName.decimalPoint()).arg(locale.decimalPoint()));
+				locale = QLocale(QLocale::German);
+			}
+			else {
+				DebugDialog::debug(QString("Locale decimal points differ: from system locale name alone: %1 from system locale: %2. Writing English locale to settings because decimal point is not ','.").arg(localeFromSystemName.decimalPoint()).arg(locale.decimalPoint()));
+				locale = QLocale(QLocale::English);
+			}
+		}
+
+		settings.setValue("locale", QVariant::fromValue(locale));
+
+		DebugDialog::debug(QString("Initializing locale setting with locale: %1 (numberOptions: %2) language: %3 script: %4 territory: %5 decimal point: %6")
+				   .arg(locale.name())
+				   .arg(static_cast<int>(locale.numberOptions()))
+				   .arg(QLocale::languageToString(locale.language()))
+				   .arg(QLocale::scriptToString(locale.script()))
+				   .arg(QLocale::territoryToString(locale.territory()))
+				   .arg(locale.decimalPoint()));
 	}
 
 	DebugDialog::debug(QString("OpenGL requested: %1").arg(useOpenGL ? "Yes" : "No"));
 	DebugDialog::debug(QString("FPS Monitor requested: %1").arg(showFPS ? "Yes" : "No"));
 	settings.setValue("Rendering/OpenGL", useOpenGL);
 	settings.setValue("Rendering/FPS", showFPS);
+	settings.sync();
 
 	installEventFilter(this);
 
