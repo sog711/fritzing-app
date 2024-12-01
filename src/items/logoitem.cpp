@@ -978,7 +978,9 @@ void LogoItem::widthEntry() {
 	auto * edit = qobject_cast<QLineEdit *>(sender());
 	if (edit == nullptr) return;
 
-	double w = edit->text().toDouble();
+	QString text = edit->text();
+	text.replace(TextUtils::getLocale().decimalPoint(), QChar('.'));
+	double w = text.toDouble();
 	double oldW = m_modelPart->localProp("width").toDouble();
 	if (qFuzzyIsNull(w - oldW)) return;
 
@@ -999,7 +1001,9 @@ void LogoItem::heightEntry() {
 	auto * edit = qobject_cast<QLineEdit *>(sender());
 	if (edit == nullptr) return;
 
-	double h = edit->text().toDouble();
+	QString text = edit->text();
+	text.replace(TextUtils::getLocale().decimalPoint(), QChar('.'));
+	double h = text.toDouble();
 	double oldH =  m_modelPart->localProp("height").toDouble();
 	if (qFuzzyIsNull(h - oldH)) return;
 
