@@ -7802,7 +7802,6 @@ void SketchWidget::drawForeground ( QPainter * painter, const QRectF & rect ) {
 		font.setPointSizeF(baseFontSize);
 		painter->setFont(font);
 
-		int margin = 0; // Margin from the top and right edges
 		QFontMetrics metrics = painter->fontMetrics();
 		int textWidth = metrics.horizontalAdvance(m_simMessage);
 
