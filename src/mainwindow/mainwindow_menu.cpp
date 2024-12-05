@@ -1584,8 +1584,6 @@ void MainWindow::createTraceMenus()
 
 	groundFillMenu->addAction(m_copperFillAct);
 	groundFillMenu->addAction(m_groundFillAct);
-	groundFillMenu->addAction(m_copperFillOldAct);
-	groundFillMenu->addAction(m_groundFillOldAct);
 	groundFillMenu->addAction(m_removeGroundFillAct);
 	groundFillMenu->addAction(m_setGroundFillSeedsAct);
 	groundFillMenu->addAction(m_clearGroundFillSeedsAct);
@@ -2210,13 +2208,6 @@ void MainWindow::updateTraceMenu() {
 	m_copperFillAct->setEnabled(traceMenuThing.boardCount >= 1);
 	m_copperFillAct->setText(copperFillString);
 
-	QString groundFillOldString = tr("Old Ground Fill (%1)").arg(sides);
-	QString copperFillOldString = tr("Old Copper Fill (%1)").arg(sides);
-
-	m_groundFillOldAct->setEnabled(traceMenuThing.boardCount >= 1);
-	m_groundFillOldAct->setText(groundFillOldString);
-	m_copperFillOldAct->setEnabled(traceMenuThing.boardCount >= 1);
-	m_copperFillOldAct->setText(copperFillOldString);
 	m_removeGroundFillAct->setEnabled(traceMenuThing.gfrEnabled && traceMenuThing.boardCount >= 1);
 
 	// TODO: set and clear enabler logic
@@ -2858,17 +2849,9 @@ void MainWindow::createTraceMenuActions() {
 	m_groundFillAct->setStatusTip(tr("Fill empty regions of the copper layer--fill will include all traces connected to a GROUND"));
 	connect(m_groundFillAct, SIGNAL(triggered()), this, SLOT(groundFill()));
 
-	m_groundFillOldAct = new QAction(tr("Old Ground Fill"), this);
-	m_groundFillOldAct->setStatusTip(tr("Fill empty regions of the copper layer--fill will include all traces connected to a GROUND"));
-	connect(m_groundFillOldAct, SIGNAL(triggered()), this, SLOT(groundFillOld()));
-
 	m_copperFillAct = new QAction(tr("Copper Fill"), this);
 	m_copperFillAct->setStatusTip(tr("Fill empty regions of the copper layer--not including traces connected to a GROUND"));
 	connect(m_copperFillAct, SIGNAL(triggered()), this, SLOT(copperFill()));
-
-	m_copperFillOldAct = new QAction(tr("Old Copper Fill"), this);
-	m_copperFillOldAct->setStatusTip(tr("Fill empty regions of the copper layer--not including traces connected to a GROUND"));
-	connect(m_copperFillOldAct, SIGNAL(triggered()), this, SLOT(copperFillOld()));
 
 	m_removeGroundFillAct = new QAction(tr("Remove Copper Fill"), this);
 	m_removeGroundFillAct->setStatusTip(tr("Remove the copper fill"));
@@ -3269,37 +3252,28 @@ void MainWindow::tidyWires()
 }
 
 void MainWindow::copperFill() {
-	groundFillAux2(false, false);
+	groundFillAux2(false);
 }
 
 void MainWindow::groundFill()
 {
-	groundFillAux2(true, false);
+	groundFillAux2(true);
 }
 
-void MainWindow::copperFillOld() {
-	groundFillAux2(false, true);
-}
-
-void MainWindow::groundFillOld()
-{
-	groundFillAux2(true, true);
-}
-
-void MainWindow::groundFillAux2(bool fillGroundTraces, bool useOldVersion) {
+void MainWindow::groundFillAux2(bool fillGroundTraces) {
 
 	if (m_pcbGraphicsView->layerIsActive(ViewLayer::Copper0) && m_pcbGraphicsView->layerIsActive(ViewLayer::Copper1)) {
-		groundFillAux(fillGroundTraces, ViewLayer::UnknownLayer, useOldVersion);
+		groundFillAux(fillGroundTraces, ViewLayer::UnknownLayer);
 	}
 	else if (m_pcbGraphicsView->layerIsActive(ViewLayer::Copper0)) {
-		groundFillAux(fillGroundTraces, ViewLayer::GroundPlane0, useOldVersion);
+		groundFillAux(fillGroundTraces, ViewLayer::GroundPlane0);
 	}
 	else {
-		groundFillAux(fillGroundTraces, ViewLayer::GroundPlane1, useOldVersion);
+		groundFillAux(fillGroundTraces, ViewLayer::GroundPlane1);
 	}
 }
 
-void MainWindow::groundFillAux(bool fillGroundTraces, ViewLayer::ViewLayerID viewLayerID, bool useOldVersion)
+void MainWindow::groundFillAux(bool fillGroundTraces, ViewLayer::ViewLayerID viewLayerID)
 {
 	// TODO:
 	//		what about leftover temp files from crashes?
@@ -3328,12 +3302,8 @@ void MainWindow::groundFillAux(bool fillGroundTraces, ViewLayer::ViewLayerID vie
 	auto * parentCommand = new QUndoCommand(fillGroundTraces ? tr("Ground Fill") : tr("Copper Fill"));
 	m_pcbGraphicsView->blockUI(true);
 	removeGroundFill(viewLayerID, parentCommand);
-	bool success = false;
-	if (useOldVersion) {
-		success = m_pcbGraphicsView->groundFillOld(fillGroundTraces, viewLayerID, parentCommand);
-	} else {
-		success = m_pcbGraphicsView->groundFill(fillGroundTraces, viewLayerID, parentCommand);
-	}
+	bool success = m_pcbGraphicsView->groundFill(fillGroundTraces, viewLayerID, parentCommand);
+
 	if (success) {
 		m_undoStack->push(parentCommand);
 	}
