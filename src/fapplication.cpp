@@ -595,14 +595,13 @@ int FApplication::init() {
 		QLocale locale = QLocale::system();
 		QLocale localeFromSystemName(locale.name());
 		if (localeFromSystemName.decimalPoint() != locale.decimalPoint()) {
-			if (locale.decimalPoint() == QChar(',')) {
-				DebugDialog::debug(QString("Locale decimal points differ: from system locale name alone: %1 from system locale: %2. Writing German locale to settings to fit with decimal point ','.").arg(localeFromSystemName.decimalPoint()).arg(locale.decimalPoint()));
-				locale = QLocale(QLocale::German);
-			}
-			else {
-				DebugDialog::debug(QString("Locale decimal points differ: from system locale name alone: %1 from system locale: %2. Writing English locale to settings because decimal point is not ','.").arg(localeFromSystemName.decimalPoint()).arg(locale.decimalPoint()));
-				locale = QLocale(QLocale::English);
-			}
+			const bool isCommaDecimal = (locale.decimalPoint() == QChar(','));
+			DebugDialog::debug(QString("Locale decimal points differ: 1. derived from system locale name alone: '%1' 2. from whole system locale: '%2'. Writing %3 locale to settings %4.")
+			    .arg(localeFromSystemName.decimalPoint())
+			    .arg(locale.decimalPoint())
+			    .arg(isCommaDecimal ? "German" : "English")
+			    .arg(isCommaDecimal ? "to fit with decimal point ','" : "because decimal point is not ','"));
+			locale = QLocale(isCommaDecimal ? QLocale::German : QLocale::English);
 		}
 
 		settings.setValue("locale", QVariant::fromValue(locale));
