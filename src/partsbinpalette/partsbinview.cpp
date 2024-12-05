@@ -191,7 +191,7 @@ void PartsBinView::dropEventAux(QDropEvent* event, bool justAppend) {
 		toIndex = -1;
 		trustResult = true;
 	} else {
-		toIndex = itemIndexAt(event->pos(), trustResult);
+		toIndex = itemIndexAt(event->position().toPoint(), trustResult);
 	}
 
 	if(!trustResult) return;
