@@ -1386,7 +1386,6 @@ FSvgRenderer * ItemBase::setUpImage(ModelPart * modelPart, LayerAttributes & lay
 		break;
 	}
 
-	auto * newRenderer = new FSvgRenderer();
 	QDomDocument flipDoc;
 	getFlipDoc(modelPart, filename, layerAttributes.viewLayerID, layerAttributes.viewLayerPlacement, flipDoc, layerAttributes.orientation);
 	QByteArray bytesToLoad;
@@ -1428,6 +1427,7 @@ FSvgRenderer * ItemBase::setUpImage(ModelPart * modelPart, LayerAttributes & lay
 		}
 	}
 
+	auto * newRenderer = new FSvgRenderer();
 	QByteArray resultBytes;
 	if (!bytesToLoad.isEmpty()) {
 		if (makeLocalModifications(bytesToLoad, filename)) {
