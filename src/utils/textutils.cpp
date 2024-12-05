@@ -2071,23 +2071,7 @@ QLocale TextUtils::getLocale() {
 	QVariant stored = settings.value("locale");
 
 	if (settings.contains("locale") && stored.canConvert<QLocale>()) {
-		qDebug() << "Using locale from settings:" << stored.value<QLocale>().name()
-			 << "(numberOptions:" << static_cast<int>(stored.value<QLocale>().numberOptions()) << ")"
-			 << "language:" << QLocale::languageToString(stored.value<QLocale>().language())
-			 << "script:" << QLocale::scriptToString(stored.value<QLocale>().script())
-			 << "territory:" << QLocale::territoryToString(stored.value<QLocale>().territory())
-			 << "decimal point:" << stored.value<QLocale>().decimalPoint()
-			 << "group separator:" << stored.value<QLocale>().groupSeparator();
 		return stored.value<QLocale>();
 	}
-
-	QLocale systemLocale = QLocale::system();
-	qDebug() << "Failed to load locale from settings, using system locale:" << systemLocale.name()
-		 << "(numberOptions:" << static_cast<int>(systemLocale.numberOptions()) << ")"
-		 << "language:" << QLocale::languageToString(systemLocale.language())
-		 << "script:" << QLocale::scriptToString(systemLocale.script())
-		 << "territory:" << QLocale::territoryToString(systemLocale.territory())
-		 << "decimal point:" << systemLocale.decimalPoint()
-		 << "group separator:" << systemLocale.groupSeparator();
-	return systemLocale;
+	return QLocale();
 }
