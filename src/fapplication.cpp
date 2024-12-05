@@ -620,7 +620,6 @@ int FApplication::init() {
 	DebugDialog::debug(QString("FPS Monitor requested: %1").arg(showFPS ? "Yes" : "No"));
 	settings.setValue("Rendering/OpenGL", useOpenGL);
 	settings.setValue("Rendering/FPS", showFPS);
-	settings.sync();
 
 	installEventFilter(this);
 
