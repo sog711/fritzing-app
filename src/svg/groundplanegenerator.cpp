@@ -64,7 +64,7 @@ public:
 			& ~QPaintEngine::PorterDuff)), clipperPaths() {
 	}
 
-	virtual bool begin(QPaintDevice *pdev) {
+	virtual bool begin(QPaintDevice */*pdev*/) {
 		return true;
 	}
 
@@ -72,11 +72,11 @@ public:
 		return true;
 	}
 
-	virtual void updateState(const QPaintEngineState &state) {
+	virtual void updateState(const QPaintEngineState &/*state*/) {
 
 	}
 
-	virtual void drawPixmap(const QRectF &r, const QPixmap &pm, const QRectF &sr) {
+	virtual void drawPixmap(const QRectF &/*r*/, const QPixmap &/*pm*/, const QRectF &/*sr*/) {
 
 	}
 
