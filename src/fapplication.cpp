@@ -1345,21 +1345,32 @@ int FApplication::startup()
 		QSettings settings;
 		prevVersion = settings.value("version").toString();
 		QString currVersion = Version::versionString();
+
 		if (prevVersion != currVersion) {
-			QVariant pid = settings.value("pid");
-			QVariant language = settings.value("language");
-			settings.clear();
-			if (!pid.isNull()) {
-				settings.setValue("pid", pid);
+			// Settings to preserve during clear
+			const QStringList preserveKeys = {"pid", "language", "locale", "fps", "opengl"};
+
+			// Store values we want to keep
+			QMap<QString, QVariant> preserveValues;
+			for (const QString& key : preserveKeys) {
+				QVariant value = settings.value(key);
+				if (!value.isNull()) {
+					preserveValues[key] = value;
+				}
 			}
-			if (!language.isNull()) {
-				settings.setValue("language", language);
+
+			settings.clear();
+
+			// Restore preserved values
+			for (auto it = preserveValues.constBegin(); it != preserveValues.constEnd(); ++it) {
+				settings.setValue(it.key(), it.value());
 			}
 		}
 	}
 
 	//bool fabEnabled = settings.value(ORDERFABENABLED, QVariant(false)).toBool();
 	//if (!fabEnabled) {
+
 	auto * manager = new QNetworkAccessManager(this);
 	connect(manager, SIGNAL(finished(QNetworkReply *)), this, SLOT(gotOrderFab(QNetworkReply *)));
 	manager->get(QNetworkRequest(QUrl(QString("http%2://fab.fritzing.org/launched%1")
