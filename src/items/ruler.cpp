@@ -155,7 +155,7 @@ QString Ruler::makeSvg(double inches) {
 				       .arg(y)
 				       .arg(QString::number(counter++));
 				if (counter == 1) {
-					svg += QString("<text x='%1' y='%2'>cm</text>").arg(x + 103).arg(y);
+					svg += QString("<text text-anchor='start' x='%1' y='%2'>cm</text>").arg(x + 50).arg(y);
 				}
 			}
 			else if (i % 5 == 0) {
@@ -194,7 +194,8 @@ QString Ruler::makeSvg(double inches) {
 				       .arg(y)
 				       .arg(QString::number(counter++));
 				if (counter == 1) {
-					svg += QString("<text x='%1' y='%2'>in</text>").arg(x + 103).arg(y);
+					svg += QString("<text text-anchor='start' x='%1' y='%2'>%3</text>")
+					.arg(x + 50).arg(y).arg(tr("inch"));
 				}
 			}
 			else if (i % 8 == 0) {
