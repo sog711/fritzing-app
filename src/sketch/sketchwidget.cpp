@@ -5568,8 +5568,8 @@ void SketchWidget::prepDeleteOtherPropsNumbers(const QString & propertyName, Ite
 	QString value = itemBase->modelPart()->localProp(propertyName).toString();
 	if (value.isEmpty()) return;
 
-	if (newModuleID.isEmpty() || itemBase->moduleID() == newModuleID) {
-		// Preserve property if the new moduleID is unchanged or empty.
+	if (itemBase->moduleID() == newModuleID) {
+		// Preserve manufacturer/part number if the part is deleted during a swap and the moduleID is unchanged.
 		new SetPropCommand(this, id, propertyName, value, value, true, parentCommand);
 		return;
 	}
