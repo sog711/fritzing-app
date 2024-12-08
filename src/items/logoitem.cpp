@@ -909,7 +909,12 @@ QString LogoItem::hackSvg_v5(const QString &svg, const QString &logo)
 	// Tested with font "OCR-Fritzing-mono", but seems to work with all fonts.
 	// 'Alignment works' means that the text does not move relative to its box when adding or removing characters.
 	// See github issue xy?
-	double totalWidth = textWidth * 0.77 + padding;
+#ifdef Q_OS_MAC
+    const double TextScalingFactor = 1.0; // macOS doesn't need this correction?
+#else
+    const double TextScalingFactor = 0.77;
+#endif
+    double totalWidth = textWidth * TextScalingFactor + padding;
 	double totalHeight = textHeight + padding;
 
 	QStringList viewBox = getViewBox(root);
@@ -949,8 +954,13 @@ QString LogoItem::hackSvg_v5(const QString &svg, const QString &logo)
 
 		// We should subtract half the padding, but, at least for the OCR-Fritzing-mono font,
 		// it looks much more balanced to only add all the padding at the bottom.
-		node.setAttribute("y", QString::number(fm.ascent()));
-
+        // Fixme: There is sill a tiny offset from linux to mac. Maybe instead of ommitting the
+        // padding, we need to apply a 0.77? factor to the ascent on linux.
+#ifdef Q_OS_MAC
+        node.setAttribute("y", QString::number(fm.ascent() + padding / 2.0));
+#else
+        node.setAttribute("y", QString::number(fm.ascent()));
+#endif
 		QDomNodeList childList = node.childNodes();
 		for (int j = 0; j < childList.count(); j++) {
 			QDomNode child = childList.item(j);
