@@ -572,7 +572,12 @@ QString NetLabel::makeSvg(ViewLayer::ViewLayerID viewLayerID)
 	QFont font("Droid Sans", labelFontSize, QFont::Normal);
 	QFontMetricsF fm(font);
 
-	double textWidth = fm.horizontalAdvance(getLabel());
+#ifdef Q_OS_MAC
+	static const double TextWidthScalingFactor = 1.0;
+#else
+	static const double TextWidthScalingFactor = 0.77;
+#endif
+	double textWidth = fm.horizontalAdvance(getLabel()) * TextWidthScalingFactor;
 	double totalWidth = textWidth + arrowWidth + labelOffset;
 
 	QString header("<?xml version='1.0' encoding='UTF-8' standalone='no'?>\n"
