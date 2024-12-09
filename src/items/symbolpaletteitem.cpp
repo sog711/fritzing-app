@@ -532,7 +532,7 @@ NetLabel::NetLabel( ModelPart * modelPart, ViewLayer::ViewID viewID, const ViewG
 	: SymbolPaletteItem(modelPart, viewID, viewGeometry, id, itemMenu, doLabel)
 {
 	QString label = getLabel();
-	if (label.isEmpty()) {
+    if (label.isEmpty()) {
 		label = modelPart->properties().value("label");
 		if (label.isEmpty()) {
 			label = tr("net label");
@@ -556,63 +556,70 @@ NetLabel::NetLabel( ModelPart * modelPart, ViewLayer::ViewID viewID, const ViewG
 NetLabel::~NetLabel() {
 }
 
-QString NetLabel::makeSvg(ViewLayer::ViewLayerID viewLayerID) {
-
+QString NetLabel::makeSvg(ViewLayer::ViewLayerID viewLayerID)
+{
 	DebugDialog::debug("moduleid " + this->moduleID());
 	double divisor = moduleID().contains(PartFactory::OldSchematicPrefix) ? 1 : 3;
 
-	double labelFontSize = 200 /divisor;
+	double labelFontSize = 200 / divisor;
 	double totalHeight = 300 / divisor;
 	double arrowWidth = totalHeight / 2;
 	double strokeWidth = 10 / divisor;
 	double halfStrokeWidth = strokeWidth / 2;
-	double labelOffset = 20 / divisor;
+	double labelOffset = 100 / divisor;
 	double labelBaseLine = 220 / divisor;
 
-	QFont font("Droid Sans", labelFontSize * 72 / GraphicsUtils::StandardFritzingDPI, QFont::Normal);
+	QFont font("Droid Sans", labelFontSize, QFont::Normal);
 	QFontMetricsF fm(font);
-	double textWidth = fm.horizontalAdvance(getLabel()) * GraphicsUtils::StandardFritzingDPI / 72;
+
+	double textWidth = fm.horizontalAdvance(getLabel());
 	double totalWidth = textWidth + arrowWidth + labelOffset;
 
 	QString header("<?xml version='1.0' encoding='UTF-8' standalone='no'?>\n"
-	               "<svg xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' version='1.2' baseProfile='tiny' \n"
-	               "width='%1in' height='%2in' viewBox='0 0 %3 %4' >\n"
-	               "<g id='%5' >\n"
-	              );
+				   "<svg xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' "
+				   "version='1.2' baseProfile='tiny' \n"
+				   "width='%1in' height='%2in' viewBox='0 0 %3 %4' >\n"
+				   "<g id='%5' >\n");
 
-	bool goLeft = (getDirection() == "left");  // direction is now obsolete; this is left over from 0.7.12 and earlier
+	bool goLeft = (getDirection() == "left");
 	double offset = goLeft ? arrowWidth : 0;
 
 	QString svg = header.arg(totalWidth / 1000)
-	              .arg(totalHeight / 1000)
-	              .arg(totalWidth)
-	              .arg(totalHeight)
-	              .arg(ViewLayer::viewLayerXmlNameFromID(viewLayerID))
-	              ;
+				  .arg(totalHeight / 1000)
+				  .arg(totalWidth)
+				  .arg(totalHeight)
+				  .arg(ViewLayer::viewLayerXmlNameFromID(viewLayerID));
 
 	if (viewLayerID == ViewLayer::SchematicText) {
-		svg += QString("<text id='label' x='%1' y='%2' fill='#000000' font-family='Droid Sans' font-size='%3'>%4</text>\n")
-		       .arg(labelOffset + offset)
-		       .arg(labelBaseLine)
-		       .arg(labelFontSize)
-		       .arg(getLabel());
-	}
-	else {
-		QString pin = QString("<rect id='connector0pin' x='%1' y='%2' width='%3' height='%4' fill='none' stroke='none' stroke-width='0' />\n");
-		QString terminal = QString("<rect id='connector0terminal' x='%1' y='%2' width='0.1' height='0.1' fill='none' stroke='none' stroke-width='0' />\n");
+		svg += QString("<text id='label' x='%1' y='%2' fill='#000000' font-family='Droid Sans' "
+					   "font-size='%3'>%4</text>\n")
+			   .arg(labelOffset / 2 + offset)
+			   .arg(labelBaseLine)
+			   .arg(labelFontSize)
+			   .arg(getLabel());
+	} else {
+		QString pin = QString("<rect id='connector0pin' x='%1' y='%2' width='%3' height='%4' "
+							  "fill='none' stroke='none' stroke-width='0' />\n");
+		QString terminal = QString("<rect id='connector0terminal' x='%1' y='%2' width='0.1' "
+								   "height='0.1' fill='none' stroke='none' stroke-width='0' />\n");
 
 		QString points = QString("%1,%2 %3,%4 %5,%4 %5,%6 %3,%6");
 		if (goLeft) {
-			points = points.arg(halfStrokeWidth).arg(totalHeight / 2)
-			         .arg(arrowWidth).arg(halfStrokeWidth)
-			         .arg(totalWidth - halfStrokeWidth).arg(totalHeight - halfStrokeWidth);
+			points = points.arg(halfStrokeWidth)
+					 .arg(totalHeight / 2)
+					 .arg(arrowWidth)
+					 .arg(halfStrokeWidth)
+					 .arg(totalWidth - halfStrokeWidth)
+					 .arg(totalHeight - halfStrokeWidth);
 			terminal = terminal.arg(0).arg(totalHeight / 2);
 			pin = pin.arg(0).arg(0).arg(arrowWidth).arg(totalHeight);
-		}
-		else {
-			points = points.arg(totalWidth - halfStrokeWidth).arg(totalHeight / 2)
-			         .arg(totalWidth - arrowWidth).arg(halfStrokeWidth)
-			         .arg(halfStrokeWidth).arg(totalHeight - halfStrokeWidth);
+		} else {
+			points = points.arg(totalWidth - halfStrokeWidth)
+					 .arg(totalHeight / 2)
+					 .arg(totalWidth - arrowWidth)
+					 .arg(halfStrokeWidth)
+					 .arg(halfStrokeWidth)
+					 .arg(totalHeight - halfStrokeWidth);
 			terminal = terminal.arg(totalWidth).arg(totalHeight / 2);
 			pin = pin.arg(totalWidth - arrowWidth - 0.1).arg(0).arg(arrowWidth).arg(totalHeight);
 		}
@@ -620,8 +627,8 @@ QString NetLabel::makeSvg(ViewLayer::ViewLayerID viewLayerID) {
 		svg += pin;
 		svg += terminal;
 		svg += QString("<polygon fill='white' stroke='#000000' stroke-width='%1' points='%2' />\n")
-		       .arg(strokeWidth)
-		       .arg(points);
+			   .arg(strokeWidth)
+			   .arg(points);
 	}
 
 	svg += "</g>\n</svg>\n";
