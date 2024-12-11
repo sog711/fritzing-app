@@ -86,6 +86,22 @@ public:
 			return *this;
 		}
 
+		DebugStream& operator<<(const QSizeF& size) {
+			m_buffer += QString(" size: w=%1 h=%2")
+			.arg(size.width())
+				.arg(size.height());
+			return *this;
+		}
+
+		DebugStream& operator<<(const QRectF& rect) {
+			m_buffer += QString(" rect: x=%1 y=%2 w=%3 h=%4")
+			.arg(rect.x())
+				.arg(rect.y())
+				.arg(rect.width())
+				.arg(rect.height());
+			return *this;
+		}
+
 	private:
 		QString m_buffer;
 		DebugDialog::DebugLevel m_level;
