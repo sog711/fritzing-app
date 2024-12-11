@@ -918,11 +918,17 @@ QString LogoItem::hackSvg_v5(const QString &svg, const QString &logo)
 	// 'Alignment works' means that the text does not move relative to its box when adding or removing characters.
 	// See github issue xy?
 #ifdef Q_OS_MAC
-    const double TextScalingFactor = 1.0; // macOS doesn't need this correction?
+	const double TextScalingFactor = 1.0; // macOS doesn't need this correction?
+#elif defined(Q_OS_WIN)
+	// This factor works fine for OCR-Fritzing. But on windows,
+	// it seems to depend on the fond (what font setting exactly?) Also,
+	// there are slight errors when using OpenSans, that seeem
+	// to be related to variable width fonts.
+	const double TextScalingFactor = 0.74;
 #else
-    const double TextScalingFactor = 0.77;
+	const double TextScalingFactor = 0.77;
 #endif
-    double totalWidth = textWidth * TextScalingFactor + padding;
+	double totalWidth = textWidth * TextScalingFactor + padding;
 	double totalHeight = textHeight + padding;
 
 	QStringList viewBox = getViewBox(root);
@@ -962,12 +968,12 @@ QString LogoItem::hackSvg_v5(const QString &svg, const QString &logo)
 
 		// We should subtract half the padding, but, at least for the OCR-Fritzing-mono font,
 		// it looks much more balanced to only add all the padding at the bottom.
-        // Fixme: There is sill a tiny offset from linux to mac. Maybe instead of ommitting the
-        // padding, we need to apply a 0.77? factor to the ascent on linux.
+		// Fixme: There is sill a tiny offset from linux to mac. Maybe instead of ommitting the
+		// padding, we need to apply a 0.77? factor to the ascent on linux.
 #ifdef Q_OS_MAC
-        node.setAttribute("y", QString::number(fm.ascent() + padding / 2.0));
+		node.setAttribute("y", QString::number(fm.ascent() + padding / 2.0));
 #else
-        node.setAttribute("y", QString::number(fm.ascent()));
+		node.setAttribute("y", QString::number(fm.ascent()));
 #endif
 		QDomNodeList childList = node.childNodes();
 		for (int j = 0; j < childList.count(); j++) {
