@@ -715,32 +715,41 @@ SVG пользовательской платы обычно имеет один
         <translation>&lt;b&gt;Пользовательская форма была загружена, и вы увидите новую плату в ближайшее время.&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="437"/>
-        <source>Before actual PCB production we recommend that you test your custom shape by using the &apos;File &gt; Export for Production &gt; Extended Gerber&apos; option. </source>
-        <translation>Перед фактическим производством печатной платы рекомендуется воспользоваться опцией «Файл &gt; Экспорт для производства &gt; Расширенный Gerber» для проверки вашей изготовляемой на заказ формы. </translation>
+        <location filename="../src/items/resizableboard.cpp" line="438"/>
+        <source>Before ordering PCB manufacturing, we recommend validating your design by exporting it as Gerber files (File → Export for Production → Extended Gerber).</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="438"/>
+        <location filename="../src/items/resizableboard.cpp" line="460"/>
+        <source>&lt;br/&gt;&lt;br/&gt;If you intended your custom shape to have cutouts and you did not get the expected result, it is likely because Fritzing requires that you make cutouts using a shape &apos;subtraction&apos; or &apos;difference&apos; operation in your vector graphics editor.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Before actual PCB production we recommend that you test your custom shape by using the &apos;File &gt; Export for Production &gt; Extended Gerber&apos; option. </source>
+        <translation type="vanished">Перед фактическим производством печатной платы рекомендуется воспользоваться опцией «Файл &gt; Экспорт для производства &gt; Расширенный Gerber» для проверки вашей изготовляемой на заказ формы. </translation>
+    </message>
+    <message>
+        <location filename="../src/items/resizableboard.cpp" line="442"/>
         <source>Check the resulting contour file with a Gerber-viewer application to make sure the shape came out as expected.&lt;br/&gt;&lt;br/&gt;</source>
         <translation>Проверьте полученный файл контура с помощью приложения-просмотрщика Gerber, чтобы убедиться, что форма получилась как ожидалось. &lt;br/&gt; &lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="440"/>
+        <location filename="../src/items/resizableboard.cpp" line="446"/>
         <source>The rest of this message concerns &apos;cutouts&apos;. </source>
         <translation>Остальная часть этого сообщения касается вырезов. </translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="441"/>
+        <location filename="../src/items/resizableboard.cpp" line="447"/>
         <source>These are circular or irregularly-shaped holes that you can optionally incorporate into a custom PCB shape.&lt;br/&gt;&lt;br/&gt;</source>
         <translation>Вырезы — это круговые отверстия и отверстия неправильной формы, которые вы можете дополнительно включить в пользовательскую форму ПП. &lt;br/&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="443"/>
+        <location filename="../src/items/resizableboard.cpp" line="452"/>
         <source>&lt;b&gt;The custom shape has no cutouts.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Пользовательская форма не имеет вырезов&lt;/b&gt;</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/items/resizableboard.cpp" line="446"/>
+        <location filename="../src/items/resizableboard.cpp" line="455"/>
         <source>&lt;b&gt;The custom shape has %n cutouts.&lt;/b&gt;</source>
         <translation>
             <numerusform>&lt;b&gt;Пользовательская форма имеет %n вырез&lt;/b&gt;</numerusform>
@@ -749,37 +758,35 @@ SVG пользовательской платы обычно имеет один
         </translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="448"/>
+        <location filename="../src/items/resizableboard.cpp" line="457"/>
         <source>&lt;br/&gt;However, the cutouts may not be formatted correctly.</source>
         <translation>&lt;br/&gt;Однако вырезы могут быть отформатированы неправильно.</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="451"/>
         <source>&lt;br/&gt;&lt;br/&gt;If you intended your custom shape to have cutouts and you did not get the expected result, </source>
-        <translation>&lt;br/&gt;&lt;br/&gt;Если вы предполагали, что ваша пользовательская форма будет иметь вырезы, и не получили ожидаемого результата, </translation>
+        <translation type="vanished">&lt;br/&gt;&lt;br/&gt;Если вы предполагали, что ваша пользовательская форма будет иметь вырезы, и не получили ожидаемого результата, </translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="452"/>
         <source>it is because Fritzing requires that you make cutouts using a shape &apos;subtraction&apos; or &apos;difference&apos; operation in your vector graphics editor.</source>
-        <translation>это потому, что Fritzing необходимо, чтобы вы сделали вырезы, используя операцию «вычитание» или «разница» в вашем векторном графическом редакторе.</translation>
+        <translation type="vanished">это потому, что Fritzing необходимо, чтобы вы сделали вырезы, используя операцию «вычитание» или «разница» в вашем векторном графическом редакторе.</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="520"/>
+        <location filename="../src/items/resizableboard.cpp" line="530"/>
         <source>Unable to load</source>
         <translation>Не удалось загрузить</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="521"/>
+        <location filename="../src/items/resizableboard.cpp" line="531"/>
         <source>Unable to load image from %1 %2</source>
         <translation>Не удалось загрузить изображение из %1 %2</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="528"/>
+        <location filename="../src/items/resizableboard.cpp" line="538"/>
         <source>Can load, but</source>
         <translation>Можно загрузить, но</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="529"/>
+        <location filename="../src/items/resizableboard.cpp" line="539"/>
         <source>The image from %1 can be loaded, but %2
 Use the file?</source>
         <translation>Изображение из %1 может быть загружено, но %2.
@@ -2026,7 +2033,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
 <context>
     <name>MainWindow</name>
     <message numerus="yes">
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2296"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2297"/>
         <source>%1 of %2 nets routed - %n connector(s) still to be routed</source>
         <translation>
             <numerusform>%1 из %2 цепей трассировано — %n соединение ещё должно быть трассировано</numerusform>
@@ -2069,7 +2076,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>Указать имя файла</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2995"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2996"/>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="886"/>
         <source>Fritzing (*%1)</source>
         <translation>Fritzing (*%1)</translation>
@@ -2090,7 +2097,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/mainwindow/mainwindow.cpp" line="1989"/>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1999"/>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2064"/>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2683"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2684"/>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="164"/>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="169"/>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="607"/>
@@ -2300,11 +2307,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>Не удалось открыть разделяемый компонент «%1»: %2</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2111"/>
-        <source>Duplicate Part</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2112"/>
         <source>There is already a part with id &apos;%1&apos; loaded into Fritzing.</source>
         <translation type="unfinished"></translation>
@@ -2325,36 +2327,22 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2130"/>
-        <source>Part &apos;%1&apos; has critical issues that prevent loading:
-
-%2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2138"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2139"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2139"/>
-        <source>Part &apos;%1&apos; loaded with warnings:
-
-%2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2287"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2288"/>
         <source>No connections to route</source>
         <translation>Нет соединений для трассировки</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2290"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2291"/>
         <source>Routing completed</source>
         <translation>Трассировка завершена</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2293"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2294"/>
         <source>Routing completed using %n jumper part(s)</source>
         <translation>
             <numerusform>Трассировка завершена с использованием %n перемычки</numerusform>
@@ -2363,67 +2351,67 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2553"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2554"/>
         <source>Change to single layer pcb</source>
         <translation>Преобразовать в однослойную ПП</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2553"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2554"/>
         <source>Change to two layer pcb</source>
         <translation>Преобразовать в двухслойную ПП</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2619"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2620"/>
         <source>Change image to %2</source>
         <translation>Изменить изображение на %2</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2789"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2790"/>
         <source>Schematic conversion</source>
         <translation>Преобразование схемы</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2790"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2791"/>
         <source>Saving this sketch will convert it to the new schematic graphics standard. Go ahead and convert?</source>
         <translation>Сохранение этого эскиза преобразует его в новый стандарт графики для схемотехники. Продолжить и конвертировать?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2996"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2997"/>
         <source>Fritzing uncompressed (*%1)</source>
         <translation>Fritzing несжатый (*%1)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="3051"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="3052"/>
         <source>Unrouted connections</source>
         <translation>Неразведённые соединения</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="3052"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="3053"/>
         <source>There are no unrouted connections in this view.</source>
         <translation>В этом представлении нет неразведённых соединений.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="3107"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="3108"/>
         <source>(x,y)=(%1, %2) %3</source>
         <translation>(x,y)=(%1, %2) %3</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="3112"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="3113"/>
         <source>(x, y)=(%1, %2)	(width, height)=(%3, %4) %5</source>
         <translation>(x, y)=(%1, %2)	(ширина, высота)=(%3, %4) %5</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="3398"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="3399"/>
         <source>Code</source>
         <translation>Код</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="3474"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="3475"/>
         <source>Welcome</source>
         <translation>Добро пожаловать</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2317"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2318"/>
         <source>%1 - [%2]</source>
         <translation>%1 — [%2]</translation>
     </message>
@@ -2439,42 +2427,61 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>Не удалось загрузить компонент из «%1»</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2424"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2111"/>
+        <source>Part module ID must be unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2130"/>
+        <source>Part &apos;%1&apos; has critical issues that prevent it from loading:
+
+%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2140"/>
+        <source>Part &apos;%1&apos; was loaded with warnings:
+
+%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2425"/>
         <source>No copper top layer</source>
         <translation>Отсутствует верхний слой меди</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2425"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2426"/>
         <source>The copper top (copper 1) layer is not available on a one-sided board.  Please switch the board to double-sided or choose the copper bottom (copper 0) layer.</source>
         <translation>Верхний слой меди (медь 1) не доступен на односторонней печатной плате. Пожалуйста, переключитесь на двухстороннюю плату или выберите нижний слой меди (медь 0).</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2516"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2517"/>
         <source>No exactly matching part found; Fritzing chose the closest match.</source>
         <translation>Не найден точно совпадающий компонент. Программа Fritzing выбрала ближайшее совпадение.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2684"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2685"/>
         <source>Svg %1 is missing a &apos;%2&apos; layer. For more information on how to create a custom board shape, see the tutorial at &lt;a href=&apos;http://fritzing.org/learning/tutorials/designing-pcb/pcb-custom-shape/&apos;&gt;http://fritzing.org/learning/tutorials/designing-pcb/pcb-custom-shape/&lt;/a&gt;.</source>
         <translation>Слой «%2» отсутствует в SVG %1. Для получения дополнительной информации о том, как создавать пользовательские формы плат, см. инструкции по адресу &lt;a href=&apos;http://fritzing.org/learning/tutorials/designing-pcb/pcb-custom-shape/&apos;&gt;http://fritzing.org/learning/tutorials/designing-pcb/pcb-custom-shape/&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2722"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2723"/>
         <source>loading %1</source>
         <translation>загружается %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2731"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2732"/>
         <source>Loading...</source>
         <translation>Загрузка...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2737"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2738"/>
         <source>new sketch</source>
         <translation>новый эскиз</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2900"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2901"/>
         <source>Backing up &apos;%1&apos;</source>
         <translation>Резервное копирование «%1»</translation>
     </message>
@@ -4794,19 +4801,19 @@ Please check all views for potential side-effects.</source>
         <translation>Это позволит экспортировать ваш Fritzing-эскиз в макет EAGLE. Если вы хотели бы получить возможность экспорта в другие программы компьютерного моделирования, пожалуйста, дайте нам знать или поучаствуйте в разработке программы.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2503"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2504"/>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4017"/>
         <source>Sorry!</source>
         <translation>Извините!</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2504"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2505"/>
         <source>No part with those characteristics.
 We&apos;re working to avoid this message, and only let you choose between properties that do exist</source>
         <translation>Нет компонента с такими характеристиками. Вы можете выбирать только между существующими характеристиками</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2586"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2587"/>
         <source>Swapped %1 with module %2</source>
         <translation>Поменять %1 с модулем %2</translation>
     </message>
@@ -4961,7 +4968,7 @@ We&apos;re working to avoid this message, and only let you choose between proper
 <context>
     <name>ModelBase</name>
     <message numerus="yes">
-        <location filename="../src/model/modelbase.cpp" line="409"/>
+        <location filename="../src/model/modelbase.cpp" line="418"/>
         <source>Unable to find the following %n part(s):</source>
         <translation>
             <numerusform>Не удалось найти следующий %n компонент:</numerusform>
@@ -4970,17 +4977,17 @@ We&apos;re working to avoid this message, and only let you choose between proper
         </translation>
     </message>
     <message>
-        <location filename="../src/model/modelbase.cpp" line="412"/>
+        <location filename="../src/model/modelbase.cpp" line="421"/>
         <source>at</source>
         <translation>при</translation>
     </message>
     <message>
-        <location filename="../src/model/modelbase.cpp" line="496"/>
+        <location filename="../src/model/modelbase.cpp" line="505"/>
         <source>File save failed!</source>
         <translation>Ошибка сохранения файла!</translation>
     </message>
     <message>
-        <location filename="../src/model/modelbase.cpp" line="497"/>
+        <location filename="../src/model/modelbase.cpp" line="506"/>
         <source>Couldn&apos;t overwrite file &apos;%1&apos;.
 Reason: %2 (errcode %3)</source>
         <translation>Не удалось перезаписать файл «%1».
@@ -7335,12 +7342,10 @@ We recommend enabling this. Only to avoid surprises with processes that are opti
         <location filename="../src/model/modelbase.cpp" line="89"/>
         <location filename="../src/model/modelbase.cpp" line="99"/>
         <location filename="../src/model/modelbase.cpp" line="106"/>
-        <location filename="../src/model/modelbase.cpp" line="164"/>
-        <location filename="../src/model/modelbase.cpp" line="174"/>
-        <location filename="../src/model/modelbase.cpp" line="213"/>
-        <location filename="../src/model/modelbase.cpp" line="415"/>
-        <location filename="../src/model/modelbase.cpp" line="468"/>
-        <location filename="../src/model/modelbase.cpp" line="481"/>
+        <location filename="../src/model/modelbase.cpp" line="222"/>
+        <location filename="../src/model/modelbase.cpp" line="424"/>
+        <location filename="../src/model/modelbase.cpp" line="477"/>
+        <location filename="../src/model/modelbase.cpp" line="490"/>
         <location filename="../src/model/palettemodel.cpp" line="84"/>
         <location filename="../src/model/palettemodel.cpp" line="191"/>
         <location filename="../src/model/palettemodel.cpp" line="210"/>
@@ -7432,38 +7437,51 @@ We recommend enabling this. Only to avoid surprises with processes that are opti
         <translation>Файл %1 не является файлом Fritzing (2).</translation>
     </message>
     <message>
-        <location filename="../src/model/modelbase.cpp" line="165"/>
-        <source>The loading sketch looks broken.
-
-Its fritzing version parameter is invalid: %1
-
-Sketch filename: %2</source>
+        <location filename="../src/model/modelbase.cpp" line="164"/>
+        <source>Missing Version Attribute</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="165"/>
-        <source>empty</source>
+        <source>The loaded sketch is missing its &apos;fritzingVersion&apos; attribute.
+
+File: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/modelbase.cpp" line="175"/>
-        <source>The loading sketch was created with a Fritzing version that is newer than your current Fritzing version.
-
-Your current Fritzing version might not support the sketch properly. Please consider updating your Fritzing.
-
-Fritzing version found in the sketch: %1
-Your current Fritzing version: %2
-
-Sketch filename: %3</source>
+        <location filename="../src/model/modelbase.cpp" line="171"/>
+        <source>Invalid Version Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/modelbase.cpp" line="213"/>
+        <location filename="../src/model/modelbase.cpp" line="172"/>
+        <source>The loaded sketch&apos;s &apos;fritzingVersion&apos; attribute &apos;%1&apos; is not formatted correctly.
+
+File: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/modelbase.cpp" line="182"/>
+        <source>Version Mismatch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/modelbase.cpp" line="183"/>
+        <source>This sketch was created in a newer version of Fritzing (%1).
+Your current version is %2.
+
+Please update Fritzing to ensure proper functionality.
+
+File: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/modelbase.cpp" line="222"/>
         <source>The file %1 is not a Fritzing file (3).</source>
         <translation>Файл %1 не является файлом Fritzing (3).</translation>
     </message>
     <message>
-        <location filename="../src/model/modelbase.cpp" line="469"/>
+        <location filename="../src/model/modelbase.cpp" line="478"/>
         <source>Cannot write temp file. Save aborted. 
 
 error: %1
@@ -7474,7 +7492,7 @@ target file: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/modelbase.cpp" line="482"/>
+        <location filename="../src/model/modelbase.cpp" line="491"/>
         <source>Error while writing temp file. Save aborted. 
 
 error: %1
@@ -8541,103 +8559,103 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 <context>
     <name>ResizableBoard</name>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1003"/>
+        <location filename="../src/items/resizableboard.cpp" line="1013"/>
         <source>shape</source>
         <translation>форма</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1018"/>
+        <location filename="../src/items/resizableboard.cpp" line="1028"/>
         <source>width: %1mm</source>
         <translation>ширина: %1 мм</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1022"/>
+        <location filename="../src/items/resizableboard.cpp" line="1032"/>
         <source>height: %1mm</source>
         <translation>высота: %1 мм</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1288"/>
+        <location filename="../src/items/resizableboard.cpp" line="1298"/>
         <source>width(mm)</source>
         <translation>ширина (мм)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1301"/>
+        <location filename="../src/items/resizableboard.cpp" line="1311"/>
         <source>height(mm)</source>
         <translation>высота (мм)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1340"/>
+        <location filename="../src/items/resizableboard.cpp" line="1350"/>
         <source>keep aspect ratio</source>
         <translation>сохранять пропорции</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1354"/>
+        <location filename="../src/items/resizableboard.cpp" line="1364"/>
         <source>Revert</source>
         <translation>Отменить изменения</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1368"/>
+        <location filename="../src/items/resizableboard.cpp" line="1378"/>
         <source>size</source>
         <translation>размер</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1376"/>
-        <location filename="../src/items/resizableboard.cpp" line="1489"/>
+        <location filename="../src/items/resizableboard.cpp" line="1386"/>
+        <location filename="../src/items/resizableboard.cpp" line="1499"/>
         <source>custom</source>
         <translation>пользовательский</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1499"/>
+        <location filename="../src/items/resizableboard.cpp" line="1509"/>
         <source>A0 (1030x1456)</source>
         <translation>A0 (1030x1456)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1499"/>
+        <location filename="../src/items/resizableboard.cpp" line="1509"/>
         <source>A1 (728x1030)</source>
         <translation>A1 (728x1030)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1499"/>
+        <location filename="../src/items/resizableboard.cpp" line="1509"/>
         <source>A2 (515x728)</source>
         <translation>A2 (515x728)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1499"/>
+        <location filename="../src/items/resizableboard.cpp" line="1509"/>
         <source>A3 (364x515)</source>
         <translation>A3 (364x515)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1499"/>
+        <location filename="../src/items/resizableboard.cpp" line="1509"/>
         <source>A4 (257x364)</source>
         <translation>A4 (257x364)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1499"/>
+        <location filename="../src/items/resizableboard.cpp" line="1509"/>
         <source>A5 (182x257)</source>
         <translation>A5 (182x257)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1499"/>
+        <location filename="../src/items/resizableboard.cpp" line="1509"/>
         <source>A6 (128x182)</source>
         <translation>A6 (128x182)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1500"/>
+        <location filename="../src/items/resizableboard.cpp" line="1510"/>
         <source>Letter (8.5x11)</source>
         <translation>Письмо (8,5x11)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1500"/>
+        <location filename="../src/items/resizableboard.cpp" line="1510"/>
         <source>Legal (8.5x14)</source>
         <translation>Legal (8,5x14)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1500"/>
+        <location filename="../src/items/resizableboard.cpp" line="1510"/>
         <source>Ledger (17x11)</source>
         <translation>Бухгалтерия (17x11)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1500"/>
+        <location filename="../src/items/resizableboard.cpp" line="1510"/>
         <source>Tabloid (11x17)</source>
         <translation>Газета (11x17)</translation>
     </message>
@@ -9472,52 +9490,67 @@ Note: you can also trigger this display by mousing down on the routing status te
         <translation>Чтобы увидеть все разъёмы, подключённые к конкретному разъёму, наведите на него указатель мыши и удерживайте нажатой кнопку мыши — все соединения будут выделены.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="140"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="135"/>
+        <source>A virtual wire between connections in one view means that those connections are somehow connected in another view.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="136"/>
+        <source>They are displayed as dotted lines. When no wires are routed yet, and all connections are still virtual, the sketch looks quite chaotic.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="137"/>
+        <source>Therefore, virtual wires are sometimes also called &apos;Ratsnest lines&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="143"/>
         <source>Check out Parts Editor Help under the &lt;b&gt;Help&lt;/b&gt; Menu.</source>
         <translation>Ознакомьтесь со справкой по редактору компонентов в разделе меню &lt;b&gt;Справка&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="141"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="144"/>
         <source>Before using the Parts Editor, see whether a Generic IC, Mystery Part, or Pin Header will do the job. Once you drop one of these into your sketch, you can change the number of pins, pin spacing, and other properties.</source>
         <translation>Прежде чем использовать редактор компонентов, проверьте, поможет ли использование Generic IC, Mystery Part или Pin Header. Как только вы перетащите один из этих объектов в свой эскиз, вы сможете изменить количество выводов, расстояние между выводами и другие свойства.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="142"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="145"/>
         <source>In the Parts Editor, to select a graphic underneath another graphic, use the mouse wheel while holding down the shift key.</source>
         <translation>В редакторе компонентов, чтобы выбрать изображение под другим изображением, прокручивайте колесо мыши, удерживая клавишу Shift.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="143"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="146"/>
         <source>You can use the Parts Editor to find the SVG file for a part&apos;s image for a given view. In the Parts Editor, click on the tab for that view, then use &lt;b&gt;Show in Folder&lt;/b&gt; under the &lt;b&gt;File&lt;/b&gt; Menu</source>
         <translation>Вы можете использовать редактор компонентов, чтобы найти SVG-файл для изображения компонента для данного представления. Щёлкните в редакторе компонентов по вкладке данного представления, затем выберите в меню &lt;b&gt;Файл&lt;/b&gt; пункт &lt;b&gt;Показать в папке&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="145"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="148"/>
         <source>Do not store your custom part files in the Fritzing installation folder. If you upgrade Fritzing, these files will probably be deleted. Also, files in the Fritzing installation folder will not be saved in sketch (.fzz) files, so you won&apos;t be able to share them.</source>
         <translation>Не храните свои файлы пользовательских компонентов в папке установки Fritzing. Если вы обновите Fritzing, эти файлы, вероятно, будут удалены. Кроме того, файлы в папке установки Fritzing не будут сохранены в файлах эскиза (.fzz), поэтому вы не сможете ими поделиться (сделать общедоступными).</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="165"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="168"/>
         <source>Have your PCB quickly and easily produced with Fritzing Fab. Hover over the &apos;Fabricate&apos; button to get a quote.</source>
         <translation>Изготовьте свою печатную плату легко и быстро с помощью Fritzing Fab. Наведите указатель мыши на кнопку «Производство», чтобы получить ценовое предложение.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="170"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="173"/>
         <source>notes</source>
         <translation>примечания</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="171"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="174"/>
         <source>To insert a clickable URL into a note, select some text in the note and type ctrl-l (Mac: command-l). (That&apos;s &apos;l&apos; as in the first letter of &apos;link&apos;.) To modify an existing link select the linked text and use ctrl-l (command-l) again.</source>
         <translation>Чтобы вставить доступный для щелчка URL-адрес в заметку, выберите текст в примечании и нажмите Ctrl+l (Mac: Command+l). (Это «l», как в первой букве «link».) Чтобы изменить существующую ссылку, выберите связанный текст и снова используйте Ctrl+l (Command+l).</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="175"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="178"/>
         <source>local file storage</source>
         <translation>локальное хранилище файлов</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="149"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="152"/>
         <source>pcb layout</source>
         <translation>компоновка печатной платы</translation>
     </message>
@@ -9562,77 +9595,76 @@ Note: you can also trigger this display by mousing down on the routing status te
         <translation>Чтобы отобразить различные свойства в метке детали, повернуть ее или изменить шрифт, щелкните метку правой кнопкой мыши.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="150"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="153"/>
         <source>Always lead a trace straight out of a pin. This helps to prevent short circuits.</source>
         <translation>Всегда ведите дорожку прямо из вывода. Это помогает предотвратить короткое замыкание.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="151"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="154"/>
         <source>Through-hole parts can be traced from either side of a PCB.</source>
         <translation>Компоненты со сквозными отверстиями можно трассировать с любой из сторон печатной платы.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="152"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="155"/>
         <source>It makes life easier to route traces horizontally on one side of a PCB and vertically on the other side.</source>
         <translation>Дорожки удобно трассировать горизонтально на одной стороне печатной платы и вертикально на другой стороне.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="153"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="156"/>
         <source>Route traces in 45-degree angles to reduce noise.</source>
         <translation>Выполняйте трассировку дорожек с 45-градусными углами для уменьшения шума.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="154"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="157"/>
         <source>If Fritzing is missing a particular part and you don&apos;t want to build one yourself, then use pin headers as connectors and the grid to align them.</source>
         <translation>Если Fritzing не хватает вашего специального компонента и вы не хотите его строить самостоятельно, тогда используйте в качестве разъёмов штыревые соединители (pinheaders) и сетку, чтобы выровнять их.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="155"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="158"/>
         <source>You can put your own Logo in the silkscreen of your PCB. Just use the Logo part of the core library and select your own file. SVG is the best format.</source>
         <translation>Вы можете поместить свой собственный логотип в шелкографию вашей печатной платы. Просто используйте компонент логотипа из основной библиотеки и выберите свой собственный файл. SVG — лучший формат.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="158"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="161"/>
         <source>To create a custom shape for your PCB, import an SVG file.</source>
         <translation>Чтобы создать пользовательскую форму для вашей печатной платы, импортируйте SVG-файл.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="159"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="162"/>
         <source>To make a stylish Arduino shield in no time, switch the shape of the PCB from a rectangle to the Arduino</source>
         <translation>Чтобы сделать стильный щит Arduino в мгновение ока, переключите форму печатной платы с прямоугольника на Arduino</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="163"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="166"/>
         <source>pcb production</source>
         <translation>производство печатных плат</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="164"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="167"/>
         <source>Smaller PCBs are more affortable than larger ones. Save space and money.</source>
         <translation>Маленькие печатные платы являются более доступными, чем более крупные. Экономия места и денег.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="166"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="169"/>
         <source>When using the Fritzing Fab Service, if there are empty areas of the PCB that you do not want filled with copper, use the copper-blocker part. This resizable part will mask out copper fill in the rectangle it covers.</source>
         <translation>При использовании сервиса Fritzing Fab, если есть пустые области печатной платы, которые не следует заполнять медью, используйте компонент медного блокатора. Этот компонент с изменяемым размером замаскирует заполнение медью в прямоугольник, который он покрывает.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="156"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="159"/>
         <source>Use copper-blocker parts to mask out areas that you want free of copper fill.</source>
         <translation>Используйте компоненты медного блокатора, чтобы замаскировать области, которые не следует заполнять медью.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="135"/>
         <source>A ratsnest line (very thin &apos;wire&apos;) between connections in one view means that those connections are somehow connected in another view.</source>
-        <translation>Исключённая линия (очень тонкий «провод») между соединениями в одном представлении означает, что эти соединения каким-то образом соединены в другом представлении.</translation>
+        <translation type="vanished">Исключённая линия (очень тонкий «провод») между соединениями в одном представлении означает, что эти соединения каким-то образом соединены в другом представлении.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="157"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="160"/>
         <source>To change trace width, select a trace then use the &lt;b&gt;width&lt;/b&gt; combo box in the Inspector. You can use the drop-down or just type in a number (from 8 to 128).</source>
         <translation>Чтобы изменить ширину дорожки, выберите дорожку, затем используйте поле с раскрывающимся списком вариантов &lt;b&gt;ширины&lt;/b&gt; в инспекторе. Вы можете использовать один из вариантов в списке или просто ввести число (от 8 до 128).</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="139"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="142"/>
         <source>parts editor</source>
         <translation>редактор компонентов</translation>
     </message>

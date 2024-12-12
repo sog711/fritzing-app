@@ -713,69 +713,76 @@ Một tùy chỉnh svg của board thường có một hoặc hai lớp silkscre
         <translation>&lt;b&gt;Hình dạng tùy chỉnh đã được tải, và bạn sẽ thấy board mới ngay bây giờ.&lt;/b&gt; &lt;br/&gt; &lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="437"/>
-        <source>Before actual PCB production we recommend that you test your custom shape by using the &apos;File &gt; Export for Production &gt; Extended Gerber&apos; option. </source>
-        <translation>Trước khi sản xuất PCB thực tế, chúng tôi đề nghị bạn kiểm tra hình dạng tùy chỉnh của bạn bằng cách sử dụng tùy chọn&apos; File&gt; Xuất để sản xuất &gt; Mở rộng Gerber&apos;.</translation>
+        <location filename="../src/items/resizableboard.cpp" line="438"/>
+        <source>Before ordering PCB manufacturing, we recommend validating your design by exporting it as Gerber files (File → Export for Production → Extended Gerber).</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="438"/>
+        <location filename="../src/items/resizableboard.cpp" line="460"/>
+        <source>&lt;br/&gt;&lt;br/&gt;If you intended your custom shape to have cutouts and you did not get the expected result, it is likely because Fritzing requires that you make cutouts using a shape &apos;subtraction&apos; or &apos;difference&apos; operation in your vector graphics editor.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Before actual PCB production we recommend that you test your custom shape by using the &apos;File &gt; Export for Production &gt; Extended Gerber&apos; option. </source>
+        <translation type="vanished">Trước khi sản xuất PCB thực tế, chúng tôi đề nghị bạn kiểm tra hình dạng tùy chỉnh của bạn bằng cách sử dụng tùy chọn&apos; File&gt; Xuất để sản xuất &gt; Mở rộng Gerber&apos;.</translation>
+    </message>
+    <message>
+        <location filename="../src/items/resizableboard.cpp" line="442"/>
         <source>Check the resulting contour file with a Gerber-viewer application to make sure the shape came out as expected.&lt;br/&gt;&lt;br/&gt;</source>
         <translation>Kiểm tra kết quả tệp đường viền với một ứng dụng Gerber-viewer để đảm bảo rằng hình dạng sẽ ra như mong đợi. &lt;br/&gt; &lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="440"/>
+        <location filename="../src/items/resizableboard.cpp" line="446"/>
         <source>The rest of this message concerns &apos;cutouts&apos;. </source>
         <translation>Phần còn lại của thông điệp này liên quan đến &apos;cutouts&apos;.</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="441"/>
+        <location filename="../src/items/resizableboard.cpp" line="447"/>
         <source>These are circular or irregularly-shaped holes that you can optionally incorporate into a custom PCB shape.&lt;br/&gt;&lt;br/&gt;</source>
         <translation>Đây là lỗ tròn hoặc có hình dạng bất thường bạn có thể tùy chọn kết hợp thành một hình dạng  PCB tùy chỉnh.&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="443"/>
+        <location filename="../src/items/resizableboard.cpp" line="452"/>
         <source>&lt;b&gt;The custom shape has no cutouts.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Hình dạng tùy chỉnh không có miệng khuyết.&lt;/b&gt;</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/items/resizableboard.cpp" line="446"/>
+        <location filename="../src/items/resizableboard.cpp" line="455"/>
         <source>&lt;b&gt;The custom shape has %n cutouts.&lt;/b&gt;</source>
         <translation>
             <numerusform>&lt;b&gt;Hình dạng tùy chỉnh có %n miệng khuyết.&lt;/b&gt;</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="448"/>
+        <location filename="../src/items/resizableboard.cpp" line="457"/>
         <source>&lt;br/&gt;However, the cutouts may not be formatted correctly.</source>
         <translation>&lt;br/&gt;Tuy nhiên, các miệng khuyết này có thể không được định dạng đúng.</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="451"/>
         <source>&lt;br/&gt;&lt;br/&gt;If you intended your custom shape to have cutouts and you did not get the expected result, </source>
-        <translation>&lt;br/&gt;&lt;br/&gt;Nếu bạn dự định hình dạng tùy chỉnh của bạn để có miệng khuyết và bạn đã không nhận được kết quả như  mong đợi,</translation>
+        <translation type="vanished">&lt;br/&gt;&lt;br/&gt;Nếu bạn dự định hình dạng tùy chỉnh của bạn để có miệng khuyết và bạn đã không nhận được kết quả như  mong đợi,</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="452"/>
         <source>it is because Fritzing requires that you make cutouts using a shape &apos;subtraction&apos; or &apos;difference&apos; operation in your vector graphics editor.</source>
-        <translation>đó là bởi vì Fritzing yêu cầu bạn làm cho miệng khuyết bằng cách sử dụng một toán tử hình dạng &apos;trừ&apos; hoặc &apos;khác nhau&apos; trong trình biên tập đồ họa véc tơ của bạn.</translation>
+        <translation type="vanished">đó là bởi vì Fritzing yêu cầu bạn làm cho miệng khuyết bằng cách sử dụng một toán tử hình dạng &apos;trừ&apos; hoặc &apos;khác nhau&apos; trong trình biên tập đồ họa véc tơ của bạn.</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="520"/>
+        <location filename="../src/items/resizableboard.cpp" line="530"/>
         <source>Unable to load</source>
         <translation>Không thể tải</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="521"/>
+        <location filename="../src/items/resizableboard.cpp" line="531"/>
         <source>Unable to load image from %1 %2</source>
         <translation>Không thể tải hình ảnh từ %1 %2</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="528"/>
+        <location filename="../src/items/resizableboard.cpp" line="538"/>
         <source>Can load, but</source>
         <translation>Có thể tải nhưng</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="529"/>
+        <location filename="../src/items/resizableboard.cpp" line="539"/>
         <source>The image from %1 can be loaded, but %2
 Use the file?</source>
         <translation>hình ảnh từ %1 có thể được tải, nhưng %2
@@ -2017,7 +2024,7 @@ Cũng có thể chọn một kết nối như là một đổ mát bằng cách 
 <context>
     <name>MainWindow</name>
     <message numerus="yes">
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2296"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2297"/>
         <source>%1 of %2 nets routed - %n connector(s) still to be routed</source>
         <translation>
             <numerusform>%1 of %2 nets routed - %n connection still to be routed</numerusform>
@@ -2058,7 +2065,7 @@ Cũng có thể chọn một kết nối như là một đổ mát bằng cách 
         <translation>Xác định một tên file</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2995"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2996"/>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="886"/>
         <source>Fritzing (*%1)</source>
         <translation>Fritzing (*%1)</translation>
@@ -2079,7 +2086,7 @@ Cũng có thể chọn một kết nối như là một đổ mát bằng cách 
         <location filename="../src/mainwindow/mainwindow.cpp" line="1989"/>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1999"/>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2064"/>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2683"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2684"/>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="164"/>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="169"/>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="607"/>
@@ -2296,11 +2303,6 @@ Cũng có thể chọn một kết nối như là một đổ mát bằng cách 
         <translation>Không thể mở linh kiện có thể chia sẽ được &apos;%1&apos;: %2</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2111"/>
-        <source>Duplicate Part</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2112"/>
         <source>There is already a part with id &apos;%1&apos; loaded into Fritzing.</source>
         <translation type="unfinished"></translation>
@@ -2321,103 +2323,89 @@ Cũng có thể chọn một kết nối như là một đổ mát bằng cách 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2130"/>
-        <source>Part &apos;%1&apos; has critical issues that prevent loading:
-
-%2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2138"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2139"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2139"/>
-        <source>Part &apos;%1&apos; loaded with warnings:
-
-%2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2287"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2288"/>
         <source>No connections to route</source>
         <translation>Không có kết nối nào để đi dây</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2290"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2291"/>
         <source>Routing completed</source>
         <translation>Đã hoàn thành đi dây</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2293"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2294"/>
         <source>Routing completed using %n jumper part(s)</source>
         <translation>
             <numerusform>Đi dây  hoàn thành bằng cách sử dụng %n jumper</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2553"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2554"/>
         <source>Change to single layer pcb</source>
         <translation>Chuyển sang mạch in đơn lớp</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2553"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2554"/>
         <source>Change to two layer pcb</source>
         <translation>Đổi sang mạch in 2 lớp</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2619"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2620"/>
         <source>Change image to %2</source>
         <translation>Thay đổi hình ảnh sang %2</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2789"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2790"/>
         <source>Schematic conversion</source>
         <translation>Chuyển đổi sơ đồ nguyên lý</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2790"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2791"/>
         <source>Saving this sketch will convert it to the new schematic graphics standard. Go ahead and convert?</source>
         <translation>Lưu bản phác thảo này sẽ chuyển đổi nó sang tiêu chuẩn đồ họa giản đồ mới. Tiếp tục và chuyển đổi?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2996"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2997"/>
         <source>Fritzing uncompressed (*%1)</source>
         <translation>Fritzing không nén (*% 1)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="3051"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="3052"/>
         <source>Unrouted connections</source>
         <translation>Kết nối chưa được định tuyến</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="3052"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="3053"/>
         <source>There are no unrouted connections in this view.</source>
         <translation>Không có kết nối nào chưa được định tuyến trong chế độ xem này.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="3107"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="3108"/>
         <source>(x,y)=(%1, %2) %3</source>
         <translation>(x,y)=(%1, %2) %3</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="3112"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="3113"/>
         <source>(x, y)=(%1, %2)	(width, height)=(%3, %4) %5</source>
         <translation>(x, y)=(%1, %2)	(rộng, cao)=(%3, %4) %5</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="3398"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="3399"/>
         <source>Code</source>
         <translation>Code</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="3474"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="3475"/>
         <source>Welcome</source>
         <translation>Chào mừng</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2317"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2318"/>
         <source>%1 - [%2]</source>
         <translation>%1 - [%2]</translation>
     </message>
@@ -2433,42 +2421,61 @@ Cũng có thể chọn một kết nối như là một đổ mát bằng cách 
         <translation>Không thể tải linh kiện từ %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2424"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2111"/>
+        <source>Part module ID must be unique.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2130"/>
+        <source>Part &apos;%1&apos; has critical issues that prevent it from loading:
+
+%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2140"/>
+        <source>Part &apos;%1&apos; was loaded with warnings:
+
+%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2425"/>
         <source>No copper top layer</source>
         <translation>Không có lớp đồng trên cùng</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2425"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2426"/>
         <source>The copper top (copper 1) layer is not available on a one-sided board.  Please switch the board to double-sided or choose the copper bottom (copper 0) layer.</source>
         <translation>Lớp đồng trên cùng (đồng 1) không có trên bảng một mặt. Vui lòng chuyển bảng sang hai mặt hoặc chọn lớp đồng đáy (đồng 0).</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2516"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2517"/>
         <source>No exactly matching part found; Fritzing chose the closest match.</source>
         <translation>Không tìm thấy phần phù hợp chính xác; Fritzing đã chọn trận đấu gần nhất.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2684"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2685"/>
         <source>Svg %1 is missing a &apos;%2&apos; layer. For more information on how to create a custom board shape, see the tutorial at &lt;a href=&apos;http://fritzing.org/learning/tutorials/designing-pcb/pcb-custom-shape/&apos;&gt;http://fritzing.org/learning/tutorials/designing-pcb/pcb-custom-shape/&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2722"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2723"/>
         <source>loading %1</source>
         <translation>đang tải %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2731"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2732"/>
         <source>Loading...</source>
         <translation>Đang tải...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2737"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2738"/>
         <source>new sketch</source>
         <translation>Sketch mới</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2900"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2901"/>
         <source>Backing up &apos;%1&apos;</source>
         <translation>Đang sao lưu &apos;%1&apos;</translation>
     </message>
@@ -4787,20 +4794,20 @@ Hãy kiểm tra tất cả các kiểu xem để kiểm tra các tác dụng ph�
         <translation>Điều này sẽ sớm cung cấp một bản xuất của sketch Fritzing của bạn sang phần mềm layout EAGLE. Nếu bạn muốn có thêm các bản xuất tới công cụ thiết kế vi mạch yêu thích của bạn, xin vui lòng cho chúng tôi biết, hoặc có thể đóng góp cùng chúng tôi.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2503"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2504"/>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4017"/>
         <source>Sorry!</source>
         <translation>Xin lỗi!</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2504"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2505"/>
         <source>No part with those characteristics.
 We&apos;re working to avoid this message, and only let you choose between properties that do exist</source>
         <translation>Không có linh kiện nào có những đặc điểm.
 Chúng tôi đang nỗ lực để tránh thông báo này, và chỉ cho phép bạn lựa chọn giữa các thuộc tính đã tồn tại</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2586"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2587"/>
         <source>Swapped %1 with module %2</source>
         <translation>Đổi chỗ %1 với mô-đun %2</translation>
     </message>
@@ -4953,24 +4960,24 @@ Chúng tôi đang nỗ lực để tránh thông báo này, và chỉ cho phép 
 <context>
     <name>ModelBase</name>
     <message numerus="yes">
-        <location filename="../src/model/modelbase.cpp" line="409"/>
+        <location filename="../src/model/modelbase.cpp" line="418"/>
         <source>Unable to find the following %n part(s):</source>
         <translation>
             <numerusform>Không thể tìm thấy %n linh kiện sau:</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../src/model/modelbase.cpp" line="412"/>
+        <location filename="../src/model/modelbase.cpp" line="421"/>
         <source>at</source>
         <translation>tại</translation>
     </message>
     <message>
-        <location filename="../src/model/modelbase.cpp" line="496"/>
+        <location filename="../src/model/modelbase.cpp" line="505"/>
         <source>File save failed!</source>
         <translation>Lưu file thất bại!</translation>
     </message>
     <message>
-        <location filename="../src/model/modelbase.cpp" line="497"/>
+        <location filename="../src/model/modelbase.cpp" line="506"/>
         <source>Couldn&apos;t overwrite file &apos;%1&apos;.
 Reason: %2 (errcode %3)</source>
         <translation>Không thể ghi đè file %1.
@@ -7317,12 +7324,10 @@ We recommend enabling this. Only to avoid surprises with processes that are opti
         <location filename="../src/model/modelbase.cpp" line="89"/>
         <location filename="../src/model/modelbase.cpp" line="99"/>
         <location filename="../src/model/modelbase.cpp" line="106"/>
-        <location filename="../src/model/modelbase.cpp" line="164"/>
-        <location filename="../src/model/modelbase.cpp" line="174"/>
-        <location filename="../src/model/modelbase.cpp" line="213"/>
-        <location filename="../src/model/modelbase.cpp" line="415"/>
-        <location filename="../src/model/modelbase.cpp" line="468"/>
-        <location filename="../src/model/modelbase.cpp" line="481"/>
+        <location filename="../src/model/modelbase.cpp" line="222"/>
+        <location filename="../src/model/modelbase.cpp" line="424"/>
+        <location filename="../src/model/modelbase.cpp" line="477"/>
+        <location filename="../src/model/modelbase.cpp" line="490"/>
         <location filename="../src/model/palettemodel.cpp" line="84"/>
         <location filename="../src/model/palettemodel.cpp" line="191"/>
         <location filename="../src/model/palettemodel.cpp" line="210"/>
@@ -7414,38 +7419,51 @@ We recommend enabling this. Only to avoid surprises with processes that are opti
         <translation>Tập tin% 1 không phải là một tập tin Fritzing (2).</translation>
     </message>
     <message>
-        <location filename="../src/model/modelbase.cpp" line="165"/>
-        <source>The loading sketch looks broken.
-
-Its fritzing version parameter is invalid: %1
-
-Sketch filename: %2</source>
+        <location filename="../src/model/modelbase.cpp" line="164"/>
+        <source>Missing Version Attribute</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="165"/>
-        <source>empty</source>
+        <source>The loaded sketch is missing its &apos;fritzingVersion&apos; attribute.
+
+File: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/modelbase.cpp" line="175"/>
-        <source>The loading sketch was created with a Fritzing version that is newer than your current Fritzing version.
-
-Your current Fritzing version might not support the sketch properly. Please consider updating your Fritzing.
-
-Fritzing version found in the sketch: %1
-Your current Fritzing version: %2
-
-Sketch filename: %3</source>
+        <location filename="../src/model/modelbase.cpp" line="171"/>
+        <source>Invalid Version Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/modelbase.cpp" line="213"/>
+        <location filename="../src/model/modelbase.cpp" line="172"/>
+        <source>The loaded sketch&apos;s &apos;fritzingVersion&apos; attribute &apos;%1&apos; is not formatted correctly.
+
+File: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/modelbase.cpp" line="182"/>
+        <source>Version Mismatch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/modelbase.cpp" line="183"/>
+        <source>This sketch was created in a newer version of Fritzing (%1).
+Your current version is %2.
+
+Please update Fritzing to ensure proper functionality.
+
+File: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/modelbase.cpp" line="222"/>
         <source>The file %1 is not a Fritzing file (3).</source>
         <translation>Tập tin% 1 không phải là một tập tin Fritzing (3).</translation>
     </message>
     <message>
-        <location filename="../src/model/modelbase.cpp" line="469"/>
+        <location filename="../src/model/modelbase.cpp" line="478"/>
         <source>Cannot write temp file. Save aborted. 
 
 error: %1
@@ -7456,7 +7474,7 @@ target file: %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/model/modelbase.cpp" line="482"/>
+        <location filename="../src/model/modelbase.cpp" line="491"/>
         <source>Error while writing temp file. Save aborted. 
 
 error: %1
@@ -8523,103 +8541,103 @@ Nền: Màu xanh lá cây = ok, Màu đỏ = giá trị không chính xác, Màu
 <context>
     <name>ResizableBoard</name>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1003"/>
+        <location filename="../src/items/resizableboard.cpp" line="1013"/>
         <source>shape</source>
         <translation>hình khối</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1018"/>
+        <location filename="../src/items/resizableboard.cpp" line="1028"/>
         <source>width: %1mm</source>
         <translation>chiều rộng: %1mm</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1022"/>
+        <location filename="../src/items/resizableboard.cpp" line="1032"/>
         <source>height: %1mm</source>
         <translation>chiều cao: %1mm</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1288"/>
+        <location filename="../src/items/resizableboard.cpp" line="1298"/>
         <source>width(mm)</source>
         <translation>rộng (mm)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1301"/>
+        <location filename="../src/items/resizableboard.cpp" line="1311"/>
         <source>height(mm)</source>
         <translation>chiều cao (mm)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1340"/>
+        <location filename="../src/items/resizableboard.cpp" line="1350"/>
         <source>keep aspect ratio</source>
         <translation>giữ nguyên tỉ lệ</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1354"/>
+        <location filename="../src/items/resizableboard.cpp" line="1364"/>
         <source>Revert</source>
         <translation>Trở lại</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1368"/>
+        <location filename="../src/items/resizableboard.cpp" line="1378"/>
         <source>size</source>
         <translation>kích thước</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1376"/>
-        <location filename="../src/items/resizableboard.cpp" line="1489"/>
+        <location filename="../src/items/resizableboard.cpp" line="1386"/>
+        <location filename="../src/items/resizableboard.cpp" line="1499"/>
         <source>custom</source>
         <translation>tùy chỉnh</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1499"/>
+        <location filename="../src/items/resizableboard.cpp" line="1509"/>
         <source>A0 (1030x1456)</source>
         <translation>A0 (1030x1456)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1499"/>
+        <location filename="../src/items/resizableboard.cpp" line="1509"/>
         <source>A1 (728x1030)</source>
         <translation>A1 (728x1030)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1499"/>
+        <location filename="../src/items/resizableboard.cpp" line="1509"/>
         <source>A2 (515x728)</source>
         <translation>A2 (515x728)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1499"/>
+        <location filename="../src/items/resizableboard.cpp" line="1509"/>
         <source>A3 (364x515)</source>
         <translation>A3 (364x515)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1499"/>
+        <location filename="../src/items/resizableboard.cpp" line="1509"/>
         <source>A4 (257x364)</source>
         <translation>A4 (257x364)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1499"/>
+        <location filename="../src/items/resizableboard.cpp" line="1509"/>
         <source>A5 (182x257)</source>
         <translation>A5 (182x257)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1499"/>
+        <location filename="../src/items/resizableboard.cpp" line="1509"/>
         <source>A6 (128x182)</source>
         <translation>A6 (128x182)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1500"/>
+        <location filename="../src/items/resizableboard.cpp" line="1510"/>
         <source>Letter (8.5x11)</source>
         <translation>Letter (8.5x11)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1500"/>
+        <location filename="../src/items/resizableboard.cpp" line="1510"/>
         <source>Legal (8.5x14)</source>
         <translation>Legal (8.5x14)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1500"/>
+        <location filename="../src/items/resizableboard.cpp" line="1510"/>
         <source>Ledger (17x11)</source>
         <translation>Sổ kế toán (17 x 11)</translation>
     </message>
     <message>
-        <location filename="../src/items/resizableboard.cpp" line="1500"/>
+        <location filename="../src/items/resizableboard.cpp" line="1510"/>
         <source>Tabloid (11x17)</source>
         <translation>Cỡ tờ báo (11 x 17)</translation>
     </message>
@@ -9448,52 +9466,67 @@ Lưu ý: bạn cũng có thể kích hoạt màn hình này bằng cách kéo ch
         <translation>Để xem tất cả các kết nối được kết nối với một kết nối nhất định, nhấp giữ chuột trên kết nối đó -- tất cả các kết nối sẽ được tô sáng.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="140"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="135"/>
+        <source>A virtual wire between connections in one view means that those connections are somehow connected in another view.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="136"/>
+        <source>They are displayed as dotted lines. When no wires are routed yet, and all connections are still virtual, the sketch looks quite chaotic.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="137"/>
+        <source>Therefore, virtual wires are sometimes also called &apos;Ratsnest lines&apos;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="143"/>
         <source>Check out Parts Editor Help under the &lt;b&gt;Help&lt;/b&gt; Menu.</source>
         <translation>Kiểm tra trong phần Trợ giúp Trình chỉnh sửa Linh kiện trong Menu &lt;b&gt;Trợ giúp&lt;/b&gt;.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="141"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="144"/>
         <source>Before using the Parts Editor, see whether a Generic IC, Mystery Part, or Pin Header will do the job. Once you drop one of these into your sketch, you can change the number of pins, pin spacing, and other properties.</source>
         <translation>Trước khi sử dụng Trình biên tập Linh kiện, xem hoặc là một IC Chung, Linh kiện bí ẩn hoặc Pin Header sẽ thực hiện việc này. Một khi bạn thả một trong những thứ này vào sketch của bạn, bạn có thể thay đổi số lượng chân, khoảng cách giữa các chân, và các thuộc tính khác.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="142"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="145"/>
         <source>In the Parts Editor, to select a graphic underneath another graphic, use the mouse wheel while holding down the shift key.</source>
         <translation>Trong Trình chỉnh sửa Linh kiện, chọn một hình ảnh bên dưới một hình vẽ khác, sử dụng bánh xe con chuột trong khi giữ phím Shift.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="143"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="146"/>
         <source>You can use the Parts Editor to find the SVG file for a part&apos;s image for a given view. In the Parts Editor, click on the tab for that view, then use &lt;b&gt;Show in Folder&lt;/b&gt; under the &lt;b&gt;File&lt;/b&gt; Menu</source>
         <translation>Bạn có thể sử dụng Trình biên tập Linh kiện để tìm tập tin SVG cho một hình ảnh của linh kiện để xem trước. Trong Trình soạn thảo Linh kiện, bấm vào tab cho giao diện đó, sau đó sử dụng &lt;b&gt;Hiển thị trong thư mục&lt;/b&gt; trong Menu &lt;b&gt;Tập tin&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="145"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="148"/>
         <source>Do not store your custom part files in the Fritzing installation folder. If you upgrade Fritzing, these files will probably be deleted. Also, files in the Fritzing installation folder will not be saved in sketch (.fzz) files, so you won&apos;t be able to share them.</source>
         <translation>Không lưu trữ tập tin linh kiện tùy chỉnh của bạn trong thư mục cài đặt Fritzing. Nếu bạn nâng cấp Fritzing, những tập tin này có thể sẽ bị xóa. Ngoài ra, các tập tin trong thư mục cài đặt  Fritzing sẽ không được lưu trong các tập tin sketch (.fzz), do đó bạn sẽ không thể chia sẻ chúng.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="165"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="168"/>
         <source>Have your PCB quickly and easily produced with Fritzing Fab. Hover over the &apos;Fabricate&apos; button to get a quote.</source>
         <translation>Mạch in PCB của bạn sẽ được sản xuất một cách nhanh chóng và dễ dàng với Fritzing Fab. Di chuột qua nút &apos;Fabricate&apos; để có được bảng báo giá.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="170"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="173"/>
         <source>notes</source>
         <translation>ghi chú</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="171"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="174"/>
         <source>To insert a clickable URL into a note, select some text in the note and type ctrl-l (Mac: command-l). (That&apos;s &apos;l&apos; as in the first letter of &apos;link&apos;.) To modify an existing link select the linked text and use ctrl-l (command-l) again.</source>
         <translation>Để chèn một URL có thể nhấp vào được vào một ghi chú, hãy chọn một số chữ trong ghi chúvà gõ ctrl-l (Mac: command-l). (&apos;l&apos; là chữ cái đầu của từ &apos;liên kết&apos;.) Để sửa đổi một liên kết sẵn có chọn chữ liên kết và sử dụng ctrl-l (command-l) một lần nữa.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="175"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="178"/>
         <source>local file storage</source>
         <translation>vị trí lưu trữ tập tin</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="149"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="152"/>
         <source>pcb layout</source>
         <translation>pcb layout</translation>
     </message>
@@ -9538,77 +9571,76 @@ Lưu ý: bạn cũng có thể kích hoạt màn hình này bằng cách kéo ch
         <translation>Để hiển thị các thuộc tính khác nhau trong một nhãn linh kiện, cũng như xoay nó, hoặc thay đổi phông chữ, bấm chuột phải vào nhãn.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="150"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="153"/>
         <source>Always lead a trace straight out of a pin. This helps to prevent short circuits.</source>
         <translation>Luôn luôn dẫn một dấu vết đi thẳng ra khỏi một chân. Điều này giúp ngăn ngừa ngắn mạch.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="151"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="154"/>
         <source>Through-hole parts can be traced from either side of a PCB.</source>
         <translation>Các linh kiện khoan-lỗ có thể được theo vết từ hai bên một PCB.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="152"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="155"/>
         <source>It makes life easier to route traces horizontally on one side of a PCB and vertically on the other side.</source>
         <translation>Sẽ dễ dàng hơn khi lần theo dấu vết đường theo chiều ngang trên một mặt của một PCB và theo chiều dọc ở mặt bên kia.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="153"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="156"/>
         <source>Route traces in 45-degree angles to reduce noise.</source>
         <translation>Đi dân lần theo góc45 độ để giảm nhiễu.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="154"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="157"/>
         <source>If Fritzing is missing a particular part and you don&apos;t want to build one yourself, then use pin headers as connectors and the grid to align them.</source>
         <translation>Nếu Fritzing thiếu một linh kiện đặc biệt của bạn và bạn không muốn tự mình xây dựng linh kiện đó, thì hãy sử dụng pinheaders như các kết nối và bật lưới để sắp xếp chúng.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="155"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="158"/>
         <source>You can put your own Logo in the silkscreen of your PCB. Just use the Logo part of the core library and select your own file. SVG is the best format.</source>
         <translation>Bạn có thể đặt Logo riêng của bạn trong silkscreen mạch in của bạn. Chỉ cần sử dụng phần biểu tượng của thư viện lõi và chọn tập tin của riêng bạn. SVG là định dạng tốt nhất.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="158"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="161"/>
         <source>To create a custom shape for your PCB, import an SVG file.</source>
         <translation>Để tạo ra một hình dạng tùy chỉnh cho PCB của bạn, hãy nhập một tập tin SVG.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="159"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="162"/>
         <source>To make a stylish Arduino shield in no time, switch the shape of the PCB from a rectangle to the Arduino</source>
         <translation>Để thực hiện một shield Arduino đầy phong cách mà không cần tốn thời gian, hãy chuyển đổi hình dạng của PCB từ một hình chữ nhật sang Arduino</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="163"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="166"/>
         <source>pcb production</source>
         <translation>PCB sản xuất</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="164"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="167"/>
         <source>Smaller PCBs are more affortable than larger ones. Save space and money.</source>
         <translation>PCB càng nhỏ càng tốt. Tiết kiệm không gian và tiền bạc.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="166"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="169"/>
         <source>When using the Fritzing Fab Service, if there are empty areas of the PCB that you do not want filled with copper, use the copper-blocker part. This resizable part will mask out copper fill in the rectangle it covers.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="156"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="159"/>
         <source>Use copper-blocker parts to mask out areas that you want free of copper fill.</source>
         <translation>Sử dụng các phần chặn-đồng để phủ lên các khu vực mà bạn không muốn đổ đồng.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="135"/>
         <source>A ratsnest line (very thin &apos;wire&apos;) between connections in one view means that those connections are somehow connected in another view.</source>
-        <translation>Một dây ratsnest (dây rất mỏng) giữa các kết nối trong một giao diện có nghĩa là những kết nối này bằng cách nào đó đã được kết nối tại một giao diện khác.</translation>
+        <translation type="vanished">Một dây ratsnest (dây rất mỏng) giữa các kết nối trong một giao diện có nghĩa là những kết nối này bằng cách nào đó đã được kết nối tại một giao diện khác.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="157"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="160"/>
         <source>To change trace width, select a trace then use the &lt;b&gt;width&lt;/b&gt; combo box in the Inspector. You can use the drop-down or just type in a number (from 8 to 128).</source>
         <translation>Để thay đổi dấu vết chiều rộng, chọn một dấu vết rồi sử dụng hộp combo &lt;b&gt;chiều rộng&lt;/b&gt; trong Kiểm tra. Bạn có thể sử dụng trình thả xuống hoặc chỉ cần gõ vào một số (từ 8 đến 128).</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="139"/>
+        <location filename="../src/help/tipsandtricks.cpp" line="142"/>
         <source>parts editor</source>
         <translation>chỉnh sửa linh kiện</translation>
     </message>
