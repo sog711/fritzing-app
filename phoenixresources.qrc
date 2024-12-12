@@ -253,10 +253,12 @@
         <file>resources/styles/win-fritzing.qss</file>
         <file>resources/styles/mac-fritzing.qss</file>
         <file>resources/styles/updatedialog.css</file>
-        <file>resources/fonts/DroidSans.ttf</file>
-        <file>resources/fonts/DroidSansMono.ttf</file>
-        <file>resources/fonts/DroidSans-Bold.ttf</file>
-        <file>resources/fonts/NOTICE</file>
+        <file>resources/fonts/DroidSans/DroidSans.ttf</file>
+        <file>resources/fonts/DroidSans/DroidSansMono.ttf</file>
+        <file>resources/fonts/DroidSans/DroidSans-Bold.ttf</file>
+        <file>resources/fonts/DroidSans/NOTICE</file>
+        <file>resources/fonts/NotoSans/NotoSans-Regular.ttf</file>
+        <file>resources/fonts/NotoSans/OFL.txt</file>
         <file>resources/fonts/OCRA.ttf</file>
         <file>resources/fonts/OCR-Fritzing-mono.otf</file>
         <file>resources/bins/my_parts.fzb</file>

@@ -849,12 +849,13 @@ bool FApplication::findTranslator(const QString & translationsPath) {
 }
 
 void FApplication::registerFonts() {
-	registerFont(":/resources/fonts/DroidSans.ttf", true);
-	registerFont(":/resources/fonts/DroidSans-Bold.ttf", false);
-	registerFont(":/resources/fonts/DroidSansMono.ttf", false);
+	registerFont(":/resources/fonts/DroidSans/DroidSans.ttf", true);
+	registerFont(":/resources/fonts/DroidSans/DroidSans-Bold.ttf", false);
+	registerFont(":/resources/fonts/DroidSans/DroidSansMono.ttf", false);
 	registerFont(":/resources/fonts/OCRA.ttf", true);
 	registerFont(":/resources/fonts/Segment16/Segment16C Bold.ttf", true);
 	registerFont(":/resources/fonts/OCR-Fritzing-mono.otf", true);
+	registerFont(":/resources/fonts/NotoSans/NotoSans-Regular.ttf", true);
 
 	// "Droid Sans"
 	// "Droid Sans Mono"
