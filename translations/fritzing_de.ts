@@ -2333,22 +2333,22 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2112"/>
         <source>There is already a part with id &apos;%1&apos; loaded into Fritzing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es gibt bereits ein Bauteil mit der ID &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2119"/>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2120"/>
         <source>Failed to process part file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fehler beim Verarbeiten der Teildatei: %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2129"/>
         <source>Critical Issues</source>
-        <translation type="unfinished"></translation>
+        <translation>Kritische Probleme</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2130"/>
@@ -2360,14 +2360,16 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2138"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Warnung</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2139"/>
         <source>Part &apos;%1&apos; loaded with warnings:
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Bauteil &apos;%1&apos; mit Warnungen geladen:
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2424"/>
@@ -3509,19 +3511,21 @@ Hinweis: Wenn Du die Aktualisierung später durchführen möchtest, gibt es im &
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4443"/>
         <source>Don&apos;t show this again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht mehr anzeigen.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4446"/>
         <source>Missing copper fill</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehlende Kupferfüllung</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4447"/>
         <source>It is recommended to add copper/ground fill to your circuit to reduce acid usage during production.
 
 Continue upload?</source>
-        <translation type="unfinished"></translation>
+        <translation>Es wird empfohlen, Ihrem Schaltkreis eine Kupfer-/Massefüllung hinzuzufügen, um den Säureverbrauch während der Produktion zu reduzieren.
+
+Upload fortsetzen?</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4581"/>
@@ -5199,7 +5203,7 @@ Ursache: %2 (Fehlercode %3)</translation>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2816"/>
         <source>You need to select one board if you have multiple PCB boards.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn Sie mehrere Platinen haben, müssen Sie eine auswählen.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2827"/>
@@ -5340,7 +5344,9 @@ Ursache: %2 (Fehlercode %3)</translation>
         <source>This part cannot be saved as-is:
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Teil kann nicht in der vorliegenden Form gespeichert werden:
+
+</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="475"/>
@@ -6773,32 +6779,32 @@ Hinweis: Diese Warnung wird nur einmal angezeigt.</translation>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="471"/>
         <source>Project properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Projekteigenschaften</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="476"/>
         <source>Here you can set some settings that will be saved with the project</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier können Sie einige Einstellungen vornehmen, die mit dem Projekt gespeichert werden</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="482"/>
         <source>Select the way to define the time step: (1) Number of points (max simulation time divided by the number of points) or (2) fixed time step.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie die Methode zur Definition des Zeitschritts: (1) Anzahl der Punkte (maximale Simulationszeit geteilt durch die Anzahl der Punkte) oder (2) fester Zeitschritt.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="492"/>
         <source>Number of points: </source>
-        <translation type="unfinished"></translation>
+        <translation>Anzahl der Punkte: </translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="507"/>
         <source>Time Step (s):</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitschritt (s):</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="518"/>
         <source>Animation time for the transitory simulation (s): </source>
-        <translation type="unfinished"></translation>
+        <translation>Animationszeit für die Übergangssimulation (s): </translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="625"/>
