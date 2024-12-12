@@ -158,22 +158,31 @@ bool ModelBase::loadFromFile(const QString & fileName, ModelBase * referenceMode
 	}
 	VersionThing versionThingFz;
 	Version::toVersionThing(m_fritzingVersion,versionThingFz);
-	if (m_fritzingVersion.isEmpty() || !versionThingFz.ok) {
+	if (m_fritzingVersion.isEmpty()) {
 		FMessageBox::warning(
-		    nullptr,
-		    QObject::tr("Fritzing"),
-		    QObject::tr("The loading sketch looks broken.\n\nIts fritzing version parameter is invalid: %1\n\nSketch filename: %2").arg(m_fritzingVersion.isEmpty() ? QObject::tr("empty") : m_fritzingVersion).arg(onlyFileName)
-		);
+			nullptr,
+			QObject::tr("Missing Version Attribute"),
+			QObject::tr("The loaded sketch is missing its 'fritzingVersion' attribute.\n\nFile: %1")
+				.arg(onlyFileName)
+			);
+	} else if (!versionThingFz.ok) {
+		FMessageBox::warning(
+			nullptr,
+			QObject::tr("Invalid Version Format"),
+			QObject::tr("The loaded sketch's 'fritzingVersion' attribute '%1' is not formatted correctly.\n\nFile: %2")
+				.arg(m_fritzingVersion, onlyFileName)
+			);
 	} else {
 		VersionThing currentVersionThing;
 		Version::toVersionThing(Version::versionString(), currentVersionThing);
 
 		if (Version::greaterThan(currentVersionThing, versionThingFz)) {
 			FMessageBox::warning(
-			    nullptr,
-			    QObject::tr("Fritzing"),
-			    QObject::tr("The loading sketch was created with a Fritzing version that is newer than your current Fritzing version.\n\nYour current Fritzing version might not support the sketch properly. Please consider updating your Fritzing.\n\nFritzing version found in the sketch: %1\nYour current Fritzing version: %2\n\nSketch filename: %3").arg(m_fritzingVersion).arg(Version::versionString()).arg(onlyFileName)
-			);
+				nullptr,
+				QObject::tr("Version Mismatch"),
+				QObject::tr("This sketch was created in a newer version of Fritzing (%1).\nYour current version is %2.\n\nPlease update Fritzing to ensure proper functionality.\n\nFile: %3")
+					.arg(m_fritzingVersion, Version::versionString(), onlyFileName)
+				);
 		}
 	}
 	ModelPartSharedRoot * modelPartSharedRoot = this->rootModelPartShared();

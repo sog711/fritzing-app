@@ -2108,7 +2108,7 @@ void MainWindow::validatePartInfo(const QString &fzpPath)
 			&& (m_referenceModel->retrieveModelPart(moduleId) != nullptr)) {
 			// TODO: This is an error, we can't load this part.
 			info.addWarning(
-				tr("Duplicate Part"),
+				tr("Part module ID must be unique."),
 				tr("There is already a part with id '%1' loaded into Fritzing.").arg(moduleId)
 				);
 		}
@@ -2127,18 +2127,19 @@ void MainWindow::validatePartInfo(const QString &fzpPath)
 			this,
 			FMessageBox::Critical,
 			tr("Critical Issues"),
-			tr("Part '%1' has critical issues that prevent loading:\n\n%2")
+			tr("Part '%1' has critical issues that prevent it from loading:\n\n%2")
 				.arg(info.title().isEmpty() ? info.path() : info.title(), info.getSummaryText()));
 		msgBox->setDetailedText(info.getDetailsText());
 		msgBox->enableClipboardButton(true);
 		msgBox->exec();
 	} else if (info.hasAnyErrors()) {
-		auto msgBox = FMessageBox::createCustom(this,
-												FMessageBox::Warning,
-												tr("Warning"),
-												tr("Part '%1' loaded with warnings:\n\n%2")
-													.arg(info.title(), info.getSummaryText()),
-												FMessageBox::Ok);
+		auto msgBox = FMessageBox::createCustom(
+			this,
+			FMessageBox::Warning,
+			tr("Warning"),
+			tr("Part '%1' was loaded with warnings:\n\n%2")
+				.arg(info.title(), info.getSummaryText()),
+			FMessageBox::Ok);
 		msgBox->setDetailedText(info.getDetailsText());
 		msgBox->enableClipboardButton(true);
 		msgBox->exec();

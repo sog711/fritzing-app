@@ -434,11 +434,20 @@ void Board::moreCheckImage(const QString & filename) {
 	}
 
 	QString msg = tr("<b>The custom shape has been loaded, and you will see the new board shortly.</b><br/><br/>");
-	msg += tr("Before actual PCB production we recommend that you test your custom shape by using the 'File > Export for Production > Extended Gerber' option. ");
-	msg += tr("Check the resulting contour file with a Gerber-viewer application to make sure the shape came out as expected.<br/><br/>");
+	msg
+		+= tr(
+			"Before ordering PCB manufacturing, we recommend validating your design by exporting "
+			"it as Gerber files (File → Export for Production → Extended Gerber)."
+			);
+	msg += tr("Check the resulting contour file with a Gerber-viewer application to make sure the "
+			  "shape came out as expected.<br/><br/>"
+			  );
 
 	msg += tr("The rest of this message concerns 'cutouts'. ");
-	msg += tr("These are circular or irregularly-shaped holes that you can optionally incorporate into a custom PCB shape.<br/><br/>");
+	msg += tr("These are circular or irregularly-shaped holes that you can optionally incorporate "
+			  "into a custom PCB shape.<br/><br/>"
+			  );
+
 	if (subpaths == 1) {
 		msg += tr("<b>The custom shape has no cutouts.</b>");
 	}
@@ -448,8 +457,9 @@ void Board::moreCheckImage(const QString & filename) {
 			msg += tr("<br/>However, the cutouts may not be formatted correctly.");
 		}
 	}
-	msg +=  tr("<br/><br/>If you intended your custom shape to have cutouts and you did not get the expected result, ");
-	msg += tr("it is because Fritzing requires that you make cutouts using a shape 'subtraction' or 'difference' operation in your vector graphics editor.");
+	msg +=  tr("<br/><br/>If you intended your custom shape to have cutouts and you did not get the expected result, "
+			  "it is likely because Fritzing requires that you make cutouts using a shape 'subtraction' or 'difference' "
+			  "operation in your vector graphics editor.");
 	QMessageBox::information(nullptr, "Custom Shape", msg);
 }
 
