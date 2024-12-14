@@ -366,6 +366,14 @@ int FApplication::init() {
 	setlocale(LC_NUMERIC, "C");
 	QLocale::setDefault(QLocale::C);
 
+// Conditionally disable the SVG size limit for Qt 6.5.
+// This fixes text elements being skipped during gerber export and copper fills.
+// Qt 6.7 already handles this differntly, we will have to revisit then.
+#if (QT_VERSION_MAJOR == 6) && (QT_VERSION_MINOR == 5)
+	// Set the environment variable to disable SVG size limits
+	qputenv("QT_SVG_DISABLE_SIZE_LIMIT", "1");
+#endif
+
 	//foreach (QString argument, m_arguments) {
 	//DebugDialog::debug(QString("argument %1").arg(argument));
 	//}
