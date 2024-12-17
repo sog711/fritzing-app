@@ -2106,8 +2106,7 @@ void MainWindow::validatePartInfo(const QString &fzpPath)
 		QString moduleId = info.moduleId();
 		if (!moduleId.isEmpty()
 			&& (m_referenceModel->retrieveModelPart(moduleId) != nullptr)) {
-			// TODO: This is an error, we can't load this part.
-			info.addWarning(
+			info.addError(
 				tr("Part module ID must be unique."),
 				tr("There is already a part with id '%1' loaded into Fritzing.").arg(moduleId)
 				);
@@ -2132,6 +2131,7 @@ void MainWindow::validatePartInfo(const QString &fzpPath)
 		msgBox->setDetailedText(info.getDetailsText());
 		msgBox->enableClipboardButton(true);
 		msgBox->exec();
+		throw QString("Part load error");
 	} else if (info.hasAnyErrors()) {
 		auto msgBox = FMessageBox::createCustom(
 			this,
