@@ -241,6 +241,9 @@ QStringList LogoItem::collectValues(const QString & family, const QString & prop
 
 bool LogoItem::collectExtraInfo(QWidget * parent, const QString & family, const QString & prop, const QString & value, bool swappingEnabled, QString & returnProp, QString & returnValue, QWidget * & returnWidget, bool & hide)
 {
+	if (prop.compare("type", Qt::CaseInsensitive) == 0) {
+		return false; // Skip collecting type property
+	}
 	if (m_hasLogo) {
 		if (prop.compare("logo", Qt::CaseInsensitive) == 0) {
 			returnProp = tr("text");
