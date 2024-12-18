@@ -2400,6 +2400,6 @@ QPrintDialog QPushButton:pressed {
 }
 
 QMessageBox QTextEdit {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #ececec;
+    color: #333333;
 }
