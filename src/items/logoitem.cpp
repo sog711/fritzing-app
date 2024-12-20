@@ -236,6 +236,13 @@ QStringList LogoItem::collectValues(const QString & family, const QString & prop
 		return newValues;
 	}
 
+	if (prop.compare("type", Qt::CaseInsensitive) == 0) {
+		QString type = modelPart()->properties().value("type");
+		if (!type.isEmpty()) {
+			newValues << type;
+		}
+		return newValues;
+	}
 	return values;
 }
 
