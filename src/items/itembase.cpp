@@ -1665,6 +1665,7 @@ bool ItemBase::collectExtraInfo(QWidget * parent, const QString & family, const 
 		// Original method. Only look at the property text. This does not work well
 		// with translations, and often requires difficult (buggy) reverse lookups
 		// to identify the part with that property.
+		// Note: tempValue is being modified by some instances such as LogoItem::collectValues.
 		QStringList values = collectValues(family, prop, tempValue);
 		for (const QString &value : values) {
 			collection.append(qMakePair(QString(), value));
@@ -1699,12 +1700,18 @@ bool ItemBase::collectExtraInfo(QWidget * parent, const QString & family, const 
 		// Fixme: Does this still work when using item data? tempValue will be a moduleID then.
 		// Also, swapEntry will overwrite prop (see ~ 30 lines below) , probably before it ever gets used.
 		// Remove ?
+		// See comment below about MainWindow::swapSelectedMap
 		m_propsMap.insert(prop, tempValue);
 		FProbeSwitchProperty::insertIf(prop,
 									   comboBox,
 									   "Package, Type, Bands, Layer, Variant, Pins, Form, Position, Row, Stepper type, Chip label"
 									   );
 		return true;
+	} else if (collection.count() == 1) {
+		// Note: the following lines in MainWindow::swapSelectedMap depend on m_propsMap:
+		// m_referenceModel->recordProperty(key, value);
+		// m_referenceModel->retrieveModuleIdWith(family, prop, true);
+		m_propsMap.insert(prop, tempValue);
 	}
 	return true;
 }
