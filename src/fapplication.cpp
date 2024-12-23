@@ -984,7 +984,7 @@ void FApplication::runGerberService()
 QString FApplication::runServiceAux(ExportFunction exportFunc, int mainWindowArg) {
 	QDir dir(m_outputFolder);
 	QStringList filters;
-	filters << "*" + FritzingBundleExtension;
+	filters << "*" + FritzingBundleExtension << "*" + FritzingSketchExtension;
 	QStringList filenames = dir.entryList(filters, QDir::Files);
 	bool fail = false;
 	QStringList failedFiles;
@@ -1062,21 +1062,31 @@ void FApplication::runExportAllServiceAux() {
 }
 
 QString FApplication::runExportAllPlusSvgServiceAux() {
-	return runServiceAux([](MainWindow* mainWindow, const QString& filepath, const QDir& dir) {
+	return runServiceAux([](MainWindow *mainWindow, const QString &filepath, const QDir &dir) {
 		QFileInfo info(filepath);
-		GerberGenerator::exportToGerber(info.completeBaseName(), dir.absolutePath(), nullptr, mainWindow->pcbView(), false);
+		QString baseName = info.completeBaseName();
 
-		QString filepathCsv = filepath;
-		TextUtils::writeUtf8(filepathCsv.replace(".fzz", "_bom.csv"), mainWindow->getExportBOM_CSV());
+		// Export Gerber files
+		GerberGenerator::exportToGerber(baseName, dir.absolutePath(), nullptr, mainWindow->pcbView(), false);
 
-		QString filepathIPC = filepath;
-		TextUtils::writeUtf8(filepathIPC.replace(".fzz", ".ipc"), mainWindow->exportIPC_D_356A());
+		// Export BOM as CSV
+		QString filepathCsv = dir.absoluteFilePath(baseName + "_bom.csv");
+		if (!TextUtils::writeUtf8(filepathCsv, mainWindow->getExportBOM_CSV())) {
+			DebugDialog::debug(QString("Failed to write BOM CSV to %1").arg(filepathCsv));
+		}
 
+		// Export IPC
+		QString filepathIPC = dir.absoluteFilePath(baseName + ".ipc");
+		if (!TextUtils::writeUtf8(filepathIPC, mainWindow->exportIPC_D_356A())) {
+			DebugDialog::debug(QString("Failed to write IPC file to %1").arg(filepathIPC));
+		}
+
+		// Export SVGs for different views
 		QList<ViewLayer::ViewID> ids;
 		ids << ViewLayer::BreadboardView << ViewLayer::SchematicView << ViewLayer::PCBView;
 		Q_FOREACH (ViewLayer::ViewID id, ids) {
-			QString fn = QString("%1_%2.svg").arg(info.completeBaseName()).arg(ViewLayer::viewIDNaturalName(id));
-			QString svgPath = dir.absoluteFilePath(fn);
+			QString svgFileName = QString("%1_%2.svg").arg(baseName, ViewLayer::viewIDNaturalName(id));
+			QString svgPath = dir.absoluteFilePath(svgFileName);
 			mainWindow->setCurrentView(id);
 			mainWindow->exportSvg(GraphicsUtils::StandardFritzingDPI, false, false, svgPath);
 		}
@@ -1086,7 +1096,7 @@ QString FApplication::runExportAllPlusSvgServiceAux() {
 void FApplication::runExportAllService()
 {
 	initService();
-	runExportAllServiceAux();
+	runExportAllPlusSvgServiceAux();
 }
 
 void FApplication::initService()
