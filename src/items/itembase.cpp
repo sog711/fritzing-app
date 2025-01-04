@@ -2504,3 +2504,7 @@ void ItemBase::removeSimulationGraphicsItem() {
 		m_simItem = nullptr;
 	}
 }
+
+void ItemBase::migrate()
+{
+}

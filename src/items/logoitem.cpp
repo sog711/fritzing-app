@@ -834,6 +834,12 @@ QString LogoItem::removeFlip(const QString &svg)
 	return doc.toString();
 }
 
+void LogoItem::migrate() {
+	if (m_hasLogo) {
+		setLogo(m_logo, true);
+	}
+}
+
 void LogoItem::migrateToVersion5()
 {
 	QString logo = prop("logo");

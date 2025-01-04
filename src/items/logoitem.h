@@ -59,6 +59,7 @@ public:
 	QString getNewLayerFileName(const QString & newLayer);
 	QString getInspectorTitle();
 	void setInspectorTitle(const QString & oldText, const QString & newText);
+	void migrate();
 
 protected Q_SLOTS:
 	void logoEntry();
