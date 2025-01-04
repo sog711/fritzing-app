@@ -67,10 +67,10 @@ std::shared_ptr<NgSpiceSimulator> NgSpiceSimulator::getInstance() {
 NgSpiceSimulator::~NgSpiceSimulator() {
 }
 
-void NgSpiceSimulator::init()
+bool NgSpiceSimulator::init()
 {
 	if (m_isInitialized)
-		return;
+		return m_isInitialized;
 
 	QString ngspiceDir("invalid");
 	if (!m_library.isLoaded()) {
@@ -151,6 +151,7 @@ void NgSpiceSimulator::init()
 		DebugDialog::stream() << "Warning: analog.cm not found at " << analogCmPath;
 	}
 
+	return m_isInitialized;
 }
 
 /* Callback. Set the input voltages for the external voltage sources. */
