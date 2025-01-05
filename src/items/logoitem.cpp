@@ -877,7 +877,7 @@ void LogoItem::migrateToVersion5()
 	QPointF d(m_size.width() / boxWidth * (x4 - x5), m_size.height() / boxHeight * (y4 - y5));
 	QPointF rotated_d = transform.map(d) - transform.map(QPointF(0, 0));
 	pos += rotated_d;
-	setPos(pos);
+	setLocation(pos);
 
 	// Set the version to indicate migration is complete
 	m_modelPart->setLocalProp("version", 5);
