@@ -255,7 +255,6 @@ public:
 	virtual void setInspectorTitle(const QString & oldText, const QString & newText);
 	void addSimulationGraphicsItem(QGraphicsObject *);
 	void removeSimulationGraphicsItem();
-	virtual void migrate();
 
 public:
 	virtual void getConnectedColor(ConnectorItem *, QBrush &, QPen &, double & opacity, double & negativePenWidth, bool & negativeOffsetRect);

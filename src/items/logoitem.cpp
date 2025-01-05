@@ -32,6 +32,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../svg/clipperhelpers.h"
 #include "utils/misc.h"
 #include "utils/folderutils.h"
+#include "utils/familypropertycombobox.h"
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -834,12 +835,6 @@ QString LogoItem::removeFlip(const QString &svg)
 	return doc.toString();
 }
 
-void LogoItem::migrate() {
-	if (m_hasLogo) {
-		setLogo(m_logo, true);
-	}
-}
-
 void LogoItem::migrateToVersion5()
 {
 	QString logo = prop("logo");
@@ -1167,6 +1162,16 @@ void LogoItem::setInspectorTitle(const QString & oldText, const QString & newTex
 	if (!hasLogo()) return ResizableBoard::setInspectorTitle(oldText, newText);
 
 	logoEntryAux(newText);
+}
+
+void LogoItem::swapEntry(int index) {
+	auto * comboBox = qobject_cast<FamilyPropertyComboBox *>(sender());
+	if (comboBox == nullptr) return;
+	if (m_hasLogo) {
+		// Trigger migration to version 5 on swaps
+		setLogo(m_logo, true);
+	}
+	ItemBase::swapEntry(index);
 }
 
 ///////////////////////////////////////////////////////////////////////
