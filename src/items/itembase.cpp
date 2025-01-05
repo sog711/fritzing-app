@@ -1719,6 +1719,7 @@ bool ItemBase::collectExtraInfo(QWidget * parent, const QString & family, const 
 void ItemBase::swapEntry(int index) {
 	auto * comboBox = qobject_cast<FamilyPropertyComboBox *>(sender());
 	if (comboBox == nullptr) return;
+	migrate();
 
 	QVariant data = comboBox->itemData(index);
 	if (data.isValid() && data.typeId() == QMetaType::QString) {
