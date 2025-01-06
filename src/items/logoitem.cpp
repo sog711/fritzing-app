@@ -642,7 +642,7 @@ void LogoItem::setLogo(QString logo, bool force) {
 	m_logo = logo;
 	modelPart()->setLocalProp("logo", logo);
 	modelPart()->setLocalProp("shape", svg);
-	if (ok && !force) {
+	if (ok) {
 		// set the new text to the same height as the original
 		QSizeF newSvgSize = fsvgRenderer()->viewBoxF().size();
 		QSizeF newSize(newSvgSize.width() * oldSize.width() / oldSvgSize.width(), newSvgSize.height() * oldSize.height() / oldSvgSize.height());
