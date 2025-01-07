@@ -437,7 +437,7 @@ void Board::moreCheckImage(const QString & filename) {
 	msg
 		+= tr(
 			"Before ordering PCB manufacturing, we recommend validating your design by exporting "
-			"it as Gerber files (File → Export for Production → Extended Gerber)."
+			"it as Gerber files (File → Export → for Production → Extended Gerber)."
 			);
 	msg += tr("Check the resulting contour file with a Gerber-viewer application to make sure the "
 			  "shape came out as expected.<br/><br/>"

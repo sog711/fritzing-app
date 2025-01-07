@@ -218,19 +218,19 @@ void ItemBase::initNames() {
 	}
 
 	if (TranslatedPropertyNames.count() == 0) {
-		TranslatedPropertyNames.insert("family", tr("family"));
+		TranslatedPropertyNames.insert("family", tr("family", "component family, interchangebable"));
 		TranslatedPropertyNames.insert("type", tr("type"));
 		TranslatedPropertyNames.insert("model", tr("model"));
 		TranslatedPropertyNames.insert("size", tr("size"));
 		TranslatedPropertyNames.insert("color", tr("color"));
-		TranslatedPropertyNames.insert("resistance", tr("resistance"));
+		TranslatedPropertyNames.insert("resistance", tr("resistance", "electrical resistance of a component"));
 		TranslatedPropertyNames.insert("capacitance", tr("capacitance"));
 		TranslatedPropertyNames.insert("inductance", tr("inductance"));
 		TranslatedPropertyNames.insert("voltage", tr("voltage"));
 		TranslatedPropertyNames.insert("current", tr("current"));
 		TranslatedPropertyNames.insert("power", tr("power"));
 		TranslatedPropertyNames.insert("pin spacing", tr("pin spacing"));
-		TranslatedPropertyNames.insert("rated power", tr("rated power"));
+		TranslatedPropertyNames.insert("rated power", tr("rated power", "maximum power rating"));
 		TranslatedPropertyNames.insert("rated voltage", tr("rated voltage"));
 		TranslatedPropertyNames.insert("rated current", tr("rated current"));
 		TranslatedPropertyNames.insert("version", tr("version"));
@@ -241,7 +241,7 @@ void ItemBase::initNames() {
 		TranslatedPropertyNames.insert("maximum resistance", tr("maximum resistance"));
 		TranslatedPropertyNames.insert("pins", tr("pins"));
 		TranslatedPropertyNames.insert("spacing", tr("spacing"));
-		TranslatedPropertyNames.insert("pin spacing", tr("pin spacing"));
+		TranslatedPropertyNames.insert("pin spacing", tr("pin spacing", "distance between pins"));
 		TranslatedPropertyNames.insert("frequency", tr("frequency"));
 		TranslatedPropertyNames.insert("processor", tr("processor"));
 		TranslatedPropertyNames.insert("variant", tr("variant"));
@@ -254,21 +254,21 @@ void ItemBase::initNames() {
 		TranslatedPropertyNames.insert("rev", tr("rev"));
 		TranslatedPropertyNames.insert("sheet", tr("sheet"));
 		TranslatedPropertyNames.insert("project", tr("project"));
-		TranslatedPropertyNames.insert("banded", tr("banded"));
-		TranslatedPropertyNames.insert("top", tr("top"));
-		TranslatedPropertyNames.insert("bottom", tr("bottom"));
-		TranslatedPropertyNames.insert("copper bottom", tr("copper bottom"));
-		TranslatedPropertyNames.insert("copper top", tr("copper top"));
+		TranslatedPropertyNames.insert("banded", tr("banded", "wire color bands, for example red/white or green/white"));
+		TranslatedPropertyNames.insert("top", tr("top", "placed on the top side of the board"));
+		TranslatedPropertyNames.insert("bottom", tr("bottom", "placed on the bottom side of the board"));
+		TranslatedPropertyNames.insert("copper bottom", tr("copper bottom", "bottom copper PCB layer"));
+		TranslatedPropertyNames.insert("copper top", tr("copper top", "top copper PCB layer"));
 		TranslatedPropertyNames.insert("silkscreen bottom", tr("silkscreen bottom"));
 		TranslatedPropertyNames.insert("silkscreen top", tr("silkscreen top"));
-		TranslatedPropertyNames.insert("mn", tr("mn"));
-		TranslatedPropertyNames.insert("mpn", tr("mpn"));
+		TranslatedPropertyNames.insert("mn", tr("mn", "Manufacturer Number"));
+		TranslatedPropertyNames.insert("mpn", tr("mpn", "Manufacturer Parts Number"));
 
 		// TODO: translate more known property names from fzp files and resource xml files
 
 	}
 
-	PartInstanceDefaultTitle = tr("Part");
+	PartInstanceDefaultTitle = tr("Part", "electronic component");
 
 	QSettings settings;
 	QString colorName = settings.value("ConnectedColor").toString();
