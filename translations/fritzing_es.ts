@@ -9385,12 +9385,12 @@ Nota: también puedes ver las conexiones faltantes en la barra de estado.</trans
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="77"/>
         <source>Get a jump start by looking at the example circuits under File &gt; Examples.</source>
-        <translation type="unfinished">Conseguir un inicio de salto por mirar en los circuitos de ejemplo debajo Archivo &gt; Ejemplos.</translation>
+        <translation>Para empezar, consulta los circuitos de ejemplo en Archivo &gt; Ejemplos.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="81"/>
         <source>parts</source>
-        <translation type="unfinished">Componentes</translation>
+        <translation>Componentes</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="82"/>
