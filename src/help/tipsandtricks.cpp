@@ -81,7 +81,7 @@ void TipsAndTricks::initTipSets() {
 	ts->heading = tr("parts");
 	ts->tips << tr("Can't find your part? Search for it by clicking the magnifier icon in the Parts Bin and type in some keywords.");
 	ts->tips << tr("If you can't find a part in the Parts Bin, the Generic IC is your friend.  Drag it onto your sketch, then use the widgets in the Inspector to: choose from among 25 different through-hole and SMD packages; change the pin label; and--for DIPs and SIPs--change the number of pins.  You can also change the pin names with the Pin Label editor.");
-	ts->tips << tr("An icon in the parts bin may actually represent multiple related parts.  So when you drag an icon from the parts bin into a sketch, make sure you look at the inspector.  The inspector will display the range of choices available for you to modify a part, or swap it for a related part. The parts bin icon will also be a little 'stack' and not just a flat icon.");
+	ts->tips << tr("An icon in the parts bin may actually represent multiple related parts.  So when you drag an icon from the parts bin into a sketch, make sure you look at the inspector.  The inspector will display the range of choices available for you to modify a part, or swap it for a related part.");
 	ts->tips << tr("The Inspector Window--which lets you change the properties of parts--is only enabled for parts that are in a sketch (not for parts still in a Parts Bin).");
 	TipSets.append(ts);
 
