@@ -79,8 +79,8 @@ void TipsAndTricks::initTipSets() {
 
 	ts = new TipSet;
 	ts->heading = tr("parts");
-	ts->tips << tr("Can't find your part? Search for it by clicking the magnifier icon in the Parts Bin and type in some keywords");
-	ts->tips << tr("If you can't find a part in the Parts Bin, the Generic IC is your friend.  Drag it onto your sketch, then use the widgets in the Inspector to: choose from among 25 different through-hole and SMD packages; change the pin label; and--for DIPs and SIPs--change the number of pins.  You can also change the pin names with the Pin Label editor");
+	ts->tips << tr("Can't find your part? Search for it by clicking the magnifier icon in the Parts Bin and type in some keywords.");
+	ts->tips << tr("If you can't find a part in the Parts Bin, the Generic IC is your friend.  Drag it onto your sketch, then use the widgets in the Inspector to: choose from among 25 different through-hole and SMD packages; change the pin label; and--for DIPs and SIPs--change the number of pins.  You can also change the pin names with the Pin Label editor.");
 	ts->tips << tr("An icon in the parts bin may actually represent multiple related parts.  So when you drag an icon from the parts bin into a sketch, make sure you look at the inspector.  The inspector will display the range of choices available for you to modify a part, or swap it for a related part. The parts bin icon will also be a little 'stack' and not just a flat icon.");
 	ts->tips << tr("The Inspector Window--which lets you change the properties of parts--is only enabled for parts that are in a sketch (not for parts still in a Parts Bin).");
 	TipSets.append(ts);
@@ -133,7 +133,7 @@ void TipsAndTricks::initTipSets() {
 	ts->heading = tr("connections");
 	ts->tips << tr("To see all the connectors connected to a given connector, hold the mouse down on the connector--all the connections will be highlighted.");
 	ts->tips << tr("A virtual wire between connections in one view means that those connections are somehow connected in another view.");
-	ts->tips << tr("They are displayed as dotted lines. When no wires are routed yet, and all connections are still virtual, the sketch looks quite chaotic.");
+	ts->tips << tr("They are displayed as dotted lines. When wires haven't been routed yet and all connections are virtual, the sketch can look quite chaotic.");
 	ts->tips << tr("Therefore, virtual wires are sometimes also called 'Ratsnest lines'.");
 
 	TipSets.append(ts);
@@ -143,7 +143,7 @@ void TipsAndTricks::initTipSets() {
 	ts->tips << tr("Check out Parts Editor Help under the <b>Help</b> Menu.");
 	ts->tips << tr("Before using the Parts Editor, see whether a Generic IC, Mystery Part, or Pin Header will do the job. Once you drop one of these into your sketch, you can change the number of pins, pin spacing, and other properties.");
 	ts->tips << tr("In the Parts Editor, to select a graphic underneath another graphic, use the mouse wheel while holding down the shift key.");
-	ts->tips << tr("You can use the Parts Editor to find the SVG file for a part's image for a given view. In the Parts Editor, click on the tab for that view, then use <b>Show in Folder</b> under the <b>File</b> Menu");
+	ts->tips << tr("You can use the Parts Editor to find the SVG file for a part's image for a given view. In the Parts Editor, click on the tab for that view, then use <b>Show in Folder</b> under the <b>File</b> Menu.");
 	ts->tips << localStorage;
 	ts->tips << tr("Do not store your custom part files in the Fritzing installation folder. If you upgrade Fritzing, these files will probably be deleted. Also, files in the Fritzing installation folder will not be saved in sketch (.fzz) files, so you won't be able to share them.");
 	TipSets.append(ts);
@@ -153,18 +153,18 @@ void TipsAndTricks::initTipSets() {
 	ts->tips << tr("Always lead a trace straight out of a pin. This helps to prevent short circuits.");
 	ts->tips << tr("Through-hole parts can be traced from either side of a PCB.");
 	ts->tips << tr("It makes life easier to route traces horizontally on one side of a PCB and vertically on the other side.");
-	ts->tips << tr("Route traces in 45-degree angles to reduce noise.");
+	ts->tips << tr("Route traces in 45-degree angles instead of 90-degrees to reduce noise.");
 	ts->tips << tr("If Fritzing is missing a particular part and you don't want to build one yourself, then use pin headers as connectors and the grid to align them.");
 	ts->tips << tr("You can put your own Logo in the silkscreen of your PCB. Just use the Logo part of the core library and select your own file. SVG is the best format.");
 	ts->tips << tr("Use copper-blocker parts to mask out areas that you want free of copper fill.");
 	ts->tips << tr("To change trace width, select a trace then use the <b>width</b> combo box in the Inspector. You can use the drop-down or just type in a number (from 8 to 128).");
 	ts->tips << tr("To create a custom shape for your PCB, import an SVG file.");
-	ts->tips << tr("To make a stylish Arduino shield in no time, switch the shape of the PCB from a rectangle to the Arduino");
+	ts->tips << tr("To make a stylish Arduino shield in no time, switch the shape of the PCB from a rectangle to the Arduino.");
 	TipSets.append(ts);
 
 	ts = new TipSet;
 	ts->heading = tr("pcb production");
-	ts->tips << tr("Smaller PCBs are more affortable than larger ones. Save space and money.");
+	ts->tips << tr("Smaller PCBs are more affordable than larger ones. Save space and money.");
 	ts->tips << tr("Have your PCB quickly and easily produced with Fritzing Fab. Hover over the 'Fabricate' button to get a quote.");
 	ts->tips << tr("When using the Fritzing Fab Service, if there are empty areas of the PCB that you do not want filled with copper, use the copper-blocker part. This resizable part will mask out copper fill in the rectangle it covers.");
 	TipSets.append(ts);
