@@ -716,7 +716,7 @@ Bir özel kart svg dosyası genellikle iki serigrafi ve bir kart katmanından ol
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="438"/>
-        <source>Before ordering PCB manufacturing, we recommend validating your design by exporting it as Gerber files (File → Export for Production → Extended Gerber).</source>
+        <source>Before ordering PCB manufacturing, we recommend validating your design by exporting it as Gerber files (File → Export → for Production → Extended Gerber).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -794,7 +794,7 @@ Dosya kullanılsın mı?</translation>
 <context>
     <name>BoardLogoItem</name>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="1392"/>
+        <location filename="../src/items/logoitem.cpp" line="1420"/>
         <source>shape</source>
         <translation>Tasarım</translation>
     </message>
@@ -802,18 +802,18 @@ Dosya kullanılsın mı?</translation>
 <context>
     <name>BreadboardLogoItem</name>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="1202"/>
-        <location filename="../src/items/logoitem.cpp" line="1225"/>
+        <location filename="../src/items/logoitem.cpp" line="1230"/>
+        <location filename="../src/items/logoitem.cpp" line="1253"/>
         <source>color</source>
         <translation>Renk</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="1205"/>
+        <location filename="../src/items/logoitem.cpp" line="1233"/>
         <source>Set text color</source>
         <translation>Yazı karakter rengini ayarla</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="1219"/>
+        <location filename="../src/items/logoitem.cpp" line="1247"/>
         <source>Select text color</source>
         <translation>Yazı karakter rengini seç</translation>
     </message>
@@ -1249,67 +1249,67 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 <context>
     <name>FApplication</name>
     <message>
-        <location filename="../src/fapplication.cpp" line="1768"/>
-        <location filename="../src/fapplication.cpp" line="1776"/>
-        <location filename="../src/fapplication.cpp" line="1779"/>
+        <location filename="../src/fapplication.cpp" line="1787"/>
+        <location filename="../src/fapplication.cpp" line="1795"/>
+        <location filename="../src/fapplication.cpp" line="1798"/>
         <source>Fritzing failure</source>
         <translation>Fritzing hatası</translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="1769"/>
+        <location filename="../src/fapplication.cpp" line="1788"/>
         <source>Fritzing caught an exception %1 from %2 in event %3</source>
         <translation>Fritzing %3&apos;de %2&apos;den %1 bir istisna yakaladı</translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="1776"/>
+        <location filename="../src/fapplication.cpp" line="1795"/>
         <source>Fritzing caught an exception from %1 in event %2: %3</source>
         <translation>Fritzing %2 olayında %1 ile bir istisna yakaladı: %3</translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="1779"/>
+        <location filename="../src/fapplication.cpp" line="1798"/>
         <source>Fritzing caught an exception from %1 in event %2</source>
         <translation>Fritzing %2 olayında %1 ile bir istisna yakaladı</translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="1907"/>
+        <location filename="../src/fapplication.cpp" line="1926"/>
         <source>Please specify an .fzz file name to save to (cancel will delete the backup)</source>
         <translation>Lütfen kaydetmek için bir .fzz dosyası belirtin (iptal etmek yedeklen veriyi silecektir)</translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="1907"/>
+        <location filename="../src/fapplication.cpp" line="1926"/>
         <source>Fritzing (*%1)</source>
         <translation>Fritzing (*%1)</translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="2184"/>
+        <location filename="../src/fapplication.cpp" line="2203"/>
         <source>Regenerate parts database?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="2185"/>
+        <location filename="../src/fapplication.cpp" line="2204"/>
         <source>Regenerating the parts database will take some minutes and you will have to restart Fritzing
 
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="2186"/>
+        <location filename="../src/fapplication.cpp" line="2205"/>
         <source>Would you like to regenerate the parts database?
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="2188"/>
+        <location filename="../src/fapplication.cpp" line="2207"/>
         <source>This option is usefull if you modify the parts database on your own. If you want to recover from an error, you may be better off downloading the latest Fritzing release.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="2194"/>
+        <location filename="../src/fapplication.cpp" line="2213"/>
         <source>Regenerate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="2203"/>
+        <location filename="../src/fapplication.cpp" line="2222"/>
         <source>Regenerating parts database...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1549,6 +1549,18 @@ Ayrıca konnektör üzerine sağ tıklanarak &apos;Ayarla Toprak Dolgu Tanecik&a
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/infoview/htmlinfoview.cpp" line="426"/>
+        <source>Ratsnest line</source>
+        <comment>A virtual wire, a planned connection that does not yet have a layout.</comment>
+        <translation type="unfinished">Kablo Yumağı</translation>
+    </message>
+    <message>
+        <location filename="../src/infoview/htmlinfoview.cpp" line="429"/>
+        <source>Trace wire %1</source>
+        <comment>A wire routed on a PCB</comment>
+        <translation type="unfinished">Hat kablosu %1</translation>
+    </message>
+    <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="699"/>
         <source>No SPICE information. This part will not be simulated.</source>
         <translation type="unfinished"></translation>
@@ -1631,14 +1643,12 @@ Ayrıca konnektör üzerine sağ tıklanarak &apos;Ayarla Toprak Dolgu Tanecik&a
         <translation>Kablo</translation>
     </message>
     <message>
-        <location filename="../src/infoview/htmlinfoview.cpp" line="426"/>
         <source>Ratsnest line</source>
-        <translation>Kablo Yumağı</translation>
+        <translation type="vanished">Kablo Yumağı</translation>
     </message>
     <message>
-        <location filename="../src/infoview/htmlinfoview.cpp" line="429"/>
         <source>Trace wire %1</source>
-        <translation>Hat kablosu %1</translation>
+        <translation type="vanished">Hat kablosu %1</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="745"/>
@@ -1669,9 +1679,8 @@ Ayrıca konnektör üzerine sağ tıklanarak &apos;Ayarla Toprak Dolgu Tanecik&a
 <context>
     <name>ItemBase</name>
     <message>
-        <location filename="../src/items/itembase.cpp" line="221"/>
         <source>family</source>
-        <translation>aile</translation>
+        <translation type="vanished">aile</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="222"/>
@@ -1694,9 +1703,8 @@ Ayrıca konnektör üzerine sağ tıklanarak &apos;Ayarla Toprak Dolgu Tanecik&a
         <translation>renk</translation>
     </message>
     <message>
-        <location filename="../src/items/itembase.cpp" line="226"/>
         <source>resistance</source>
-        <translation>direnç</translation>
+        <translation type="vanished">direnç</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="227"/>
@@ -1725,14 +1733,30 @@ Ayrıca konnektör üzerine sağ tıklanarak &apos;Ayarla Toprak Dolgu Tanecik&a
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="232"/>
-        <location filename="../src/items/itembase.cpp" line="244"/>
         <source>pin spacing</source>
         <translation>pin aralıklandırma</translation>
     </message>
     <message>
+        <source>rated power</source>
+        <translation type="vanished">nominal güç</translation>
+    </message>
+    <message>
+        <location filename="../src/items/itembase.cpp" line="221"/>
+        <source>family</source>
+        <comment>component family, interchangebable</comment>
+        <translation type="unfinished">aile</translation>
+    </message>
+    <message>
+        <location filename="../src/items/itembase.cpp" line="226"/>
+        <source>resistance</source>
+        <comment>electrical resistance of a component</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/items/itembase.cpp" line="233"/>
         <source>rated power</source>
-        <translation>nominal güç</translation>
+        <comment>maximum power rating</comment>
+        <translation type="unfinished">nominal güç</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="234"/>
@@ -1783,6 +1807,12 @@ Ayrıca konnektör üzerine sağ tıklanarak &apos;Ayarla Toprak Dolgu Tanecik&a
         <location filename="../src/items/itembase.cpp" line="243"/>
         <source>spacing</source>
         <translation>aralama</translation>
+    </message>
+    <message>
+        <location filename="../src/items/itembase.cpp" line="244"/>
+        <source>pin spacing</source>
+        <comment>distance between pins</comment>
+        <translation type="unfinished">pin aralıklandırma</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="245"/>
@@ -1847,27 +1877,70 @@ Ayrıca konnektör üzerine sağ tıklanarak &apos;Ayarla Toprak Dolgu Tanecik&a
     <message>
         <location filename="../src/items/itembase.cpp" line="257"/>
         <source>banded</source>
-        <translation>bantlı</translation>
+        <comment>wire color bands, for example red/white or green/white</comment>
+        <translation type="unfinished">bantlı</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="258"/>
         <source>top</source>
-        <translation>üst</translation>
+        <comment>placed on the top side of the board</comment>
+        <translation type="unfinished">üst</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="259"/>
         <source>bottom</source>
-        <translation>taban</translation>
+        <comment>placed on the bottom side of the board</comment>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="260"/>
         <source>copper bottom</source>
-        <translation>bakır taban</translation>
+        <comment>bottom copper PCB layer</comment>
+        <translation type="unfinished">bakır taban</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="261"/>
         <source>copper top</source>
-        <translation>bakır üst</translation>
+        <comment>top copper PCB layer</comment>
+        <translation type="unfinished">bakır üst</translation>
+    </message>
+    <message>
+        <location filename="../src/items/itembase.cpp" line="264"/>
+        <source>mn</source>
+        <comment>Manufacturer Number</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/items/itembase.cpp" line="265"/>
+        <source>mpn</source>
+        <comment>Manufacturer Parts Number</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/items/itembase.cpp" line="271"/>
+        <source>Part</source>
+        <comment>electronic component</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>banded</source>
+        <translation type="vanished">bantlı</translation>
+    </message>
+    <message>
+        <source>top</source>
+        <translation type="vanished">üst</translation>
+    </message>
+    <message>
+        <source>bottom</source>
+        <translation type="vanished">taban</translation>
+    </message>
+    <message>
+        <source>copper bottom</source>
+        <translation type="vanished">bakır taban</translation>
+    </message>
+    <message>
+        <source>copper top</source>
+        <translation type="vanished">bakır üst</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="262"/>
@@ -1880,19 +1953,8 @@ Ayrıca konnektör üzerine sağ tıklanarak &apos;Ayarla Toprak Dolgu Tanecik&a
         <translation>serigrafi üst</translation>
     </message>
     <message>
-        <location filename="../src/items/itembase.cpp" line="264"/>
-        <source>mn</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/items/itembase.cpp" line="265"/>
-        <source>mpn</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/items/itembase.cpp" line="271"/>
         <source>Part</source>
-        <translation>Parça</translation>
+        <translation type="vanished">Parça</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="1329"/>
@@ -1970,53 +2032,53 @@ Ayrıca konnektör üzerine sağ tıklanarak &apos;Ayarla Toprak Dolgu Tanecik&a
 <context>
     <name>LogoItem</name>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="246"/>
-        <location filename="../src/items/logoitem.cpp" line="696"/>
+        <location filename="../src/items/logoitem.cpp" line="254"/>
+        <location filename="../src/items/logoitem.cpp" line="704"/>
         <source>text</source>
         <translation>metin</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="270"/>
+        <location filename="../src/items/logoitem.cpp" line="278"/>
         <source>shape</source>
         <translation>şekil</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="348"/>
+        <location filename="../src/items/logoitem.cpp" line="356"/>
         <source>due to a rendering error</source>
         <translation>bir model işleme hatasından dolayı</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="382"/>
+        <location filename="../src/items/logoitem.cpp" line="390"/>
         <source>because the svg is empty</source>
         <translation>svg boş olduğundan dolayı</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="387"/>
+        <location filename="../src/items/logoitem.cpp" line="395"/>
         <source>because this appears to be a SVG file exported from CorelDRAW without choosing the &apos;presentation attributes&apos; setting</source>
         <translation>bu ilgili SVG dosyasının CorelDRAW&apos;dan dışa aktarılırken herhangi bir &apos;sunum özelliği&apos;ayarı yapılmadığından dolayı görülmektedir</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="401"/>
+        <location filename="../src/items/logoitem.cpp" line="409"/>
         <source>due to an xml problem: %1 line:%2 column:%3</source>
         <translation>bir xml probleminden dolayı:%1 satır :%2 sütun:%3</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="407"/>
+        <location filename="../src/items/logoitem.cpp" line="415"/>
         <source>because the file has no root element</source>
         <translation>çünkü dosyanın kaynak kısmı yok</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="412"/>
+        <location filename="../src/items/logoitem.cpp" line="420"/>
         <source>because the file has no &lt;svg&gt; element</source>
         <translation>çünkü dosyanın &lt;svg&gt; kısmı yok</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="449"/>
+        <location filename="../src/items/logoitem.cpp" line="457"/>
         <source>for unknown reasons--possibly the image file is corrupted</source>
         <translation>bilinmeyen nedenler için--büyük olasılıkla resim(img) dosyası bozuk</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="467"/>
+        <location filename="../src/items/logoitem.cpp" line="475"/>
         <source>failed to convert image format</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2214,12 +2276,12 @@ Ayrıca konnektör üzerine sağ tıklanarak &apos;Ayarla Toprak Dolgu Tanecik&a
         <translation>Bir dosya adı belirtin</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2111"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2110"/>
         <source>Part module ID must be unique.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2130"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2129"/>
         <source>Part &apos;%1&apos; has critical issues that prevent it from loading:
 
 %2</source>
@@ -2337,22 +2399,22 @@ Ayrıca konnektör üzerine sağ tıklanarak &apos;Ayarla Toprak Dolgu Tanecik&a
         <translation>İçe aktarılmış elemanları saklamak istiyor musunuz?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2112"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2111"/>
         <source>There is already a part with id &apos;%1&apos; loaded into Fritzing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2119"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2118"/>
         <source>Error</source>
         <translation type="unfinished">Hata</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2120"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2119"/>
         <source>Failed to process part file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2129"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2128"/>
         <source>Critical Issues</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7296,7 +7358,7 @@ We recommend enabling this. Only to avoid surprises with processes that are opti
         <location filename="../src/autoroute/mazerouter/mazerouter.cpp" line="606"/>
         <location filename="../src/autoroute/mazerouter/mazerouter.cpp" line="649"/>
         <location filename="../src/autoroute/mazerouter/mazerouter.cpp" line="719"/>
-        <location filename="../src/fapplication.cpp" line="1181"/>
+        <location filename="../src/fapplication.cpp" line="1200"/>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="141"/>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="251"/>
         <location filename="../src/model/modelbase.cpp" line="76"/>
@@ -7332,7 +7394,7 @@ We recommend enabling this. Only to avoid surprises with processes that are opti
         <translation>Yönlendirmek için bağlantı yok.</translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="2236"/>
+        <location filename="../src/fapplication.cpp" line="2255"/>
         <source>Regenerate database failed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7684,38 +7746,38 @@ Fritzing hala çalışıyor ancak elemanın özelliklerini değiştiremeyeceksin
         <translation>Öne Çıkar</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="5746"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="5749"/>
         <source>Split Wire</source>
         <translation>Kabloyu Böl</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="5858"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="5861"/>
         <source>Join Wire</source>
         <translation>Kabloları Birleştir</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8196"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8199"/>
         <source>Trace wires</source>
         <translation>Hat kablolar</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8199"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8202"/>
         <source>Ratsnest lines</source>
         <translation>Yumak kablolar</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2345"/>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8201"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8204"/>
         <source>Select all %1</source>
         <translation>Tüm %1 seçilsin</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8473"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8476"/>
         <source>Select outdated parts</source>
         <translation>Zamanı geçmiş elemanları seç</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8488"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8491"/>
         <source>Select locked parts</source>
         <translation>Kilitli parçaları seç</translation>
     </message>
@@ -8080,34 +8142,49 @@ Fritzing hala çalışıyor ancak elemanın özelliklerini değiştiremeyeceksin
         <source>outline is empty</source>
         <translation>çerçeve boş</translation>
     </message>
-    <message>
+    <message numerus="yes">
+        <location filename="../src/svg/gerbergenerator.cpp" line="152"/>
+        <source>%n path(s) in board outline layer</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="153"/>
-        <source>the board outline layer, </source>
-        <translation type="unfinished"></translation>
+        <source>%n path(s) in silkscreen layers</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="154"/>
-        <source>silkscreen layer(s), </source>
-        <translation type="unfinished"></translation>
+        <source>%n path(s) in copper layers</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="155"/>
-        <source>copper layer(s), </source>
-        <translation type="unfinished"></translation>
+        <source>%n path(s) in mask layers</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
-    <message>
+    <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="156"/>
-        <source>mask layer(s), </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/svg/gerbergenerator.cpp" line="157"/>
-        <source>paste mask layer(s), </source>
-        <translation type="unfinished"></translation>
+        <source>%n path(s) in paste mask layers</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="159"/>
-        <source>Unable to translate svg curves in %1</source>
+        <source>, </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/svg/gerbergenerator.cpp" line="160"/>
+        <source>Some SVG paths could not be transformed into Gerber format: %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8212,7 +8289,7 @@ Fritzing hala çalışıyor ancak elemanın özelliklerini değiştiremeyeceksin
         <translation>Toprak Dolgu Tane Düzenleyici</translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="1181"/>
+        <location filename="../src/fapplication.cpp" line="1200"/>
         <source>%1 wires moved from their saved position in %2.</source>
         <translation>%1 kablo kaydedilmiş %2 yerlerinden hareket ettirildi.</translation>
     </message>
@@ -8936,13 +9013,13 @@ If the parts are from the simulation bin, report the bug in GitHub.</source>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="3566"/>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9860"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9863"/>
         <source>Select %1</source>
         <translation>%1 ögesini seç</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="3569"/>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9862"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9865"/>
         <source>Select %1 items</source>
         <translation>%1 ögeyi seç</translation>
     </message>
@@ -8980,22 +9057,22 @@ If the parts are from the simulation bin, report the bug in GitHub.</source>
         <translation>%2 ögesini döndür (%1)</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="6074"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="6077"/>
         <source>Note text change</source>
         <translation>Not metni değişimi</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="7448"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="7451"/>
         <source>Rotate</source>
         <translation>Dödür</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="7448"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="7451"/>
         <source>Flip</source>
         <translation>Çevir</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="5946"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="5949"/>
         <source>Double-click</source>
         <translation>Çift-tık</translation>
     </message>
@@ -9056,156 +9133,156 @@ If the parts are from the simulation bin, report the bug in GitHub.</source>
         <translation>%2 döndürülsün (%1)</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="5946"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="5949"/>
         <source>Drag or double-click</source>
         <translation>Sürükle ya da çift-tıkla</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="5947"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="5950"/>
         <source>or alt-drag to move the segment</source>
         <translation>ya da parçayı sürüklemek için alt-sürükle</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="6012"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="6015"/>
         <source>Double-click to delete this bend point</source>
         <translation>Bu esnetme noktasını silmek için çift tıkla</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="6100"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="6103"/>
         <source>Change %1 label to &apos;%2&apos;</source>
         <translation>%1 etiketini &apos;%2&apos; olarak değiştir</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="6733"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="6736"/>
         <source>Change %1 color from %2 to %3</source>
         <translation>%1 ögesinin rengini %2 yerine %3 yap</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="6739"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="6742"/>
         <source>Change color of %1 wires to %2</source>
         <translation>%1 kablonun rengini %2 olarak değiştir</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="6787"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="6790"/>
         <source>Change %1 width from %2 to %3</source>
         <translation>%1 genişliğini %2 yerine %3 yap</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="6793"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="6796"/>
         <source>Change width of %1 wires to %2</source>
         <translation>%1 kablonun genişliğini %2 olarak değiştir</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="7441"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="7444"/>
         <source>Move label &apos;%1&apos;</source>
         <translation>&apos;%1&apos; etiketini taşı</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="7448"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="7451"/>
         <source>%1 label &apos;%2&apos;</source>
         <translation>%1 etiketi &apos;%2&apos;</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/sketch/sketchwidget.cpp" line="7483"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="7486"/>
         <source>show %n part label(s)</source>
         <translation>
             <numerusform>%n eleman etiket(ler)ini göster</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/sketch/sketchwidget.cpp" line="7486"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="7489"/>
         <source>hide %n part label(s)</source>
         <translation>
             <numerusform>%n eleman etiket(ler)ini gizle</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8012"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8015"/>
         <source>Resize ruler to %1 %2</source>
         <translation>Cetveli %1 %2 tekrar ölçeklendir</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9078"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9081"/>
         <source>Part Movement Notice</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9079"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9082"/>
         <source>To delete this connection, some parts need to be moved from their current positions.
 The parts will be moved automatically. To see changes clearly use undo then redo.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="10400"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="10403"/>
         <source>test connectors</source>
         <translation>bağlayıcıları test et</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="7500"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="7503"/>
         <source>Resize Note</source>
         <translation>Notu Tekrar Ölçeklendir</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="7902"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="7905"/>
         <source>Change Resistance from %1 to %2</source>
         <translation>Direnç değerini %1 yerine %2 yap</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="404"/>
-        <location filename="../src/sketch/sketchwidget.cpp" line="7926"/>
-        <location filename="../src/sketch/sketchwidget.cpp" line="7935"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="7929"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="7938"/>
         <source>Change %1 from %2 to %3</source>
         <translation>%1 değerini %2 yerine %3 yap</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8035"/>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8936"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8038"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8939"/>
         <source>Resize board to %1 %2</source>
         <translation>Kartı %1 %2 yeniden ölçeklendir</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8092"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8095"/>
         <source>Create wire from Ratsnest</source>
         <translation>Yumaktan kablo oluştur</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8287"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8290"/>
         <source>Disconnect all wires from %1</source>
         <translation>Tüm kabloların %1 bağlantılarını kes</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8290"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8293"/>
         <source>Disconnect all wires from %1 items</source>
         <translation>%1 ögelerinden tüm kablo bağlantılarını kes</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8568"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8571"/>
         <source>Change image from %1 to %2</source>
         <translation>Görüntüyü %1 yerine %2 yap</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9394"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9397"/>
         <source>change pin labels</source>
         <translation>pin etiketlerini değiştir</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9735"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9738"/>
         <source>Unrouted connections are highlighted in yellow.</source>
         <translation>Yönlendirilmemiş bağlantılar sarı ile vurgulanmıştır.</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9736"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9739"/>
         <source>There are no unrouted connections</source>
         <translation>Yönlendirilmemiş bağlantı yok</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9737"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9740"/>
         <source>Unrouted connections</source>
         <translation>Yönlendirilmemiş bağlantılar</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9738"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9741"/>
         <source>%1
 
 Note: you can also trigger this display by mousing down on the routing status text in the status bar.</source>
@@ -9214,17 +9291,17 @@ Note: you can also trigger this display by mousing down on the routing status te
 Not: Bu görüntüyü fareyi durum çubuğundaki yönlendirme durumu metni üzerinde aşağı kaydırarak da tetikleyebilirsiniz.</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9792"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9795"/>
         <source>Part &apos;%1&apos; not found in sketch</source>
         <translation>&apos;%1&apos; elemanı çizimde bulunamadı</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9804"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9807"/>
         <source>Add %1 parts</source>
         <translation>%1 parça ekle</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9858"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9861"/>
         <source>Deselect all</source>
         <translation>Tümünü seçmeyi bırak</translation>
     </message>
@@ -9348,19 +9425,16 @@ Not: Bu görüntüyü fareyi durum çubuğundaki yönlendirme durumu metni üzer
         <translation>parçalar</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="82"/>
         <source>Can&apos;t find your part? Search for it by clicking the magnifier icon in the Parts Bin and type in some keywords</source>
-        <translation>Parçanızı bulamadınız mı? Parça Kovasında büyüteç simgesine tıklayın ve bazı anahtar kelimeleri yazarak arayın</translation>
+        <translation type="vanished">Parçanızı bulamadınız mı? Parça Kovasında büyüteç simgesine tıklayın ve bazı anahtar kelimeleri yazarak arayın</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="83"/>
         <source>If you can&apos;t find a part in the Parts Bin, the Generic IC is your friend.  Drag it onto your sketch, then use the widgets in the Inspector to: choose from among 25 different through-hole and SMD packages; change the pin label; and--for DIPs and SIPs--change the number of pins.  You can also change the pin names with the Pin Label editor</source>
-        <translation>Eğer parçanızı Parça Kovasında bulamazsanız Genel IC size yardımcı olacaktır.  Onu çiziminize sürükleyin ve Denetçideki araçları kullanın: 25 farklı delikten ve SMD paketinden birini seçin; pin etiketini değiştirin ve --DIP ve SIP&apos;ler için-- pin sayısını değiştirin.  İsterseniz Pin Etiketi düzenleyicisi ile pin isimlerini de değiştirebilirsiniz</translation>
+        <translation type="vanished">Eğer parçanızı Parça Kovasında bulamazsanız Genel IC size yardımcı olacaktır.  Onu çiziminize sürükleyin ve Denetçideki araçları kullanın: 25 farklı delikten ve SMD paketinden birini seçin; pin etiketini değiştirin ve --DIP ve SIP&apos;ler için-- pin sayısını değiştirin.  İsterseniz Pin Etiketi düzenleyicisi ile pin isimlerini de değiştirebilirsiniz</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="84"/>
         <source>An icon in the parts bin may actually represent multiple related parts.  So when you drag an icon from the parts bin into a sketch, make sure you look at the inspector.  The inspector will display the range of choices available for you to modify a part, or swap it for a related part. The parts bin icon will also be a little &apos;stack&apos; and not just a flat icon.</source>
-        <translation>Parça kovasındaki bir simge birden çok ilişkili parçayı temsil ediyor olabilir.  Bu nedenle parça kovasından bir simgeyi sürüklediğinizde denetçiye baktığınızdan emin olun.  Denetçi bir parçayı düzenlemeniz veya ilişkili parçayı kaydırmanız için kullanılabilir tercih aralığını gösterecektir. Parça kovası simgesi düz bir simge yerine küçük bir &apos;yığın&apos; olabilir.</translation>
+        <translation type="vanished">Parça kovasındaki bir simge birden çok ilişkili parçayı temsil ediyor olabilir.  Bu nedenle parça kovasından bir simgeyi sürüklediğinizde denetçiye baktığınızdan emin olun.  Denetçi bir parçayı düzenlemeniz veya ilişkili parçayı kaydırmanız için kullanılabilir tercih aralığını gösterecektir. Parça kovası simgesi düz bir simge yerine küçük bir &apos;yığın&apos; olabilir.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="85"/>
@@ -9478,11 +9552,6 @@ Not: Bu görüntüyü fareyi durum çubuğundaki yönlendirme durumu metni üzer
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="136"/>
-        <source>They are displayed as dotted lines. When no wires are routed yet, and all connections are still virtual, the sketch looks quite chaotic.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/help/tipsandtricks.cpp" line="137"/>
         <source>Therefore, virtual wires are sometimes also called &apos;Ratsnest lines&apos;.</source>
         <translation type="unfinished"></translation>
@@ -9503,14 +9572,28 @@ Not: Bu görüntüyü fareyi durum çubuğundaki yönlendirme durumu metni üzer
         <translation>Parça Düzenleyicide bir grafiğin altındaki grafiği seçmek için Shift tuşunu basılı tutarak farenin tekerleğini kullanın.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="146"/>
         <source>You can use the Parts Editor to find the SVG file for a part&apos;s image for a given view. In the Parts Editor, click on the tab for that view, then use &lt;b&gt;Show in Folder&lt;/b&gt; under the &lt;b&gt;File&lt;/b&gt; Menu</source>
-        <translation>Bir parça görüntüsünün verilen bir görünümü için SVG dosyasını Parça Düzenleyicisini kullanarak bulabilirsiniz. Parça Düzenleyicide bu görünüm sekmesine tıklayın ve &lt;b&gt;Dosya&lt;/b&gt; Menüsü altında &lt;b&gt;Klasörde Göster&lt;/b&gt; seçeneğini seçin</translation>
+        <translation type="vanished">Bir parça görüntüsünün verilen bir görünümü için SVG dosyasını Parça Düzenleyicisini kullanarak bulabilirsiniz. Parça Düzenleyicide bu görünüm sekmesine tıklayın ve &lt;b&gt;Dosya&lt;/b&gt; Menüsü altında &lt;b&gt;Klasörde Göster&lt;/b&gt; seçeneğini seçin</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="148"/>
         <source>Do not store your custom part files in the Fritzing installation folder. If you upgrade Fritzing, these files will probably be deleted. Also, files in the Fritzing installation folder will not be saved in sketch (.fzz) files, so you won&apos;t be able to share them.</source>
         <translation>Özel parça dosyalarınızı Fritzing kurulum klasöründe saklamayın. Fritzing güncellemesinde bu dosyalar silinebilirler. Ayrıca kurulum dizinindeki dosyalar çizim (.fzz) biçiminde saklanmadıklarından onları paylaşamazsınız.</translation>
+    </message>
+    <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="156"/>
+        <source>Route traces in 45-degree angles instead of 90-degrees to reduce noise.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="162"/>
+        <source>To make a stylish Arduino shield in no time, switch the shape of the PCB from a rectangle to the Arduino.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="167"/>
+        <source>Smaller PCBs are more affordable than larger ones. Save space and money.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="168"/>
@@ -9540,6 +9623,21 @@ Not: Bu görüntüyü fareyi durum çubuğundaki yönlendirme durumu metni üzer
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="68"/>
         <source>The local storage folder is used for storing data that is specific to Fritzing, such as custom parts and settings, as well as temporary and long-term files that are created during the use of the software. On Linux systems, the default location for the Fritzing storage folder is usually ~/.config/Fritzing/. On Windows 11, the default location is typically C:\Users[user name]\AppData\Roaming\Fritzing, and on macOS Mojave or later, the default location is usually ~/Library/Application Support/Fritzing/.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="82"/>
+        <source>Can&apos;t find your part? Search for it by clicking the magnifier icon in the Parts Bin and type in some keywords.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="83"/>
+        <source>If you can&apos;t find a part in the Parts Bin, the Generic IC is your friend.  Drag it onto your sketch, then use the widgets in the Inspector to: choose from among 25 different through-hole and SMD packages; change the pin label; and--for DIPs and SIPs--change the number of pins.  You can also change the pin names with the Pin Label editor.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="84"/>
+        <source>An icon in the parts bin may actually represent multiple related parts.  So when you drag an icon from the parts bin into a sketch, make sure you look at the inspector.  The inspector will display the range of choices available for you to modify a part, or swap it for a related part.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9578,6 +9676,16 @@ Not: Bu görüntüyü fareyi durum çubuğundaki yönlendirme durumu metni üzer
         <translation>Bir parça etiketinde çeşitli özellikleri görüntülemek, döndürmek veya yazı tipini değiştirmek için etikete sağ tıklayın.</translation>
     </message>
     <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="136"/>
+        <source>They are displayed as dotted lines. When wires haven&apos;t been routed yet and all connections are virtual, the sketch can look quite chaotic.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="146"/>
+        <source>You can use the Parts Editor to find the SVG file for a part&apos;s image for a given view. In the Parts Editor, click on the tab for that view, then use &lt;b&gt;Show in Folder&lt;/b&gt; under the &lt;b&gt;File&lt;/b&gt; Menu.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/help/tipsandtricks.cpp" line="153"/>
         <source>Always lead a trace straight out of a pin. This helps to prevent short circuits.</source>
         <translation>Bir izi her zaman pinden dışarı düz oluşturun. Bu kısa devreleri önlemeye yardımcı olacaktır.</translation>
@@ -9593,9 +9701,8 @@ Not: Bu görüntüyü fareyi durum çubuğundaki yönlendirme durumu metni üzer
         <translation>İzleri bir baskılı devrenin bir tarafından yatay, diğer tarafından dikey yönlendirmek hayatı kolaylaştırır.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="156"/>
         <source>Route traces in 45-degree angles to reduce noise.</source>
-        <translation>Karmaşayı azaltmak için izleri 45 derece ile yönlendirin.</translation>
+        <translation type="vanished">Karmaşayı azaltmak için izleri 45 derece ile yönlendirin.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="157"/>
@@ -9613,9 +9720,8 @@ Not: Bu görüntüyü fareyi durum çubuğundaki yönlendirme durumu metni üzer
         <translation>Baskılı devreniz için özel bir şekil oluşturmak isterseniz bir SVG dosyasını içe aktarın.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="162"/>
         <source>To make a stylish Arduino shield in no time, switch the shape of the PCB from a rectangle to the Arduino</source>
-        <translation>Vakit harcamadan şık bir Arduino kalkanı üretmek için baskılı devrenin şeklini dikdörtgenden Arduino&apos;ya değiştirin</translation>
+        <translation type="vanished">Vakit harcamadan şık bir Arduino kalkanı üretmek için baskılı devrenin şeklini dikdörtgenden Arduino&apos;ya değiştirin</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="166"/>
@@ -9623,9 +9729,8 @@ Not: Bu görüntüyü fareyi durum çubuğundaki yönlendirme durumu metni üzer
         <translation>baskılı devre üretimi</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="167"/>
         <source>Smaller PCBs are more affortable than larger ones. Save space and money.</source>
-        <translation>Daha küçük baskılı devreler daha ekonomiktir. Alandan ve paranızdan tasarruf edin.</translation>
+        <translation type="vanished">Daha küçük baskılı devreler daha ekonomiktir. Alandan ve paranızdan tasarruf edin.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="169"/>

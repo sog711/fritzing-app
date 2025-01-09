@@ -696,7 +696,7 @@
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="438"/>
-        <source>Before ordering PCB manufacturing, we recommend validating your design by exporting it as Gerber files (File → Export for Production → Extended Gerber).</source>
+        <source>Before ordering PCB manufacturing, we recommend validating your design by exporting it as Gerber files (File → Export → for Production → Extended Gerber).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -795,7 +795,7 @@ svgのカスタムボード一般的に1～2枚のシルクスクリーンレイ
 <context>
     <name>BoardLogoItem</name>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="1392"/>
+        <location filename="../src/items/logoitem.cpp" line="1420"/>
         <source>shape</source>
         <translation>形状</translation>
     </message>
@@ -803,18 +803,18 @@ svgのカスタムボード一般的に1～2枚のシルクスクリーンレイ
 <context>
     <name>BreadboardLogoItem</name>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="1202"/>
-        <location filename="../src/items/logoitem.cpp" line="1225"/>
+        <location filename="../src/items/logoitem.cpp" line="1230"/>
+        <location filename="../src/items/logoitem.cpp" line="1253"/>
         <source>color</source>
         <translation>色</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="1205"/>
+        <location filename="../src/items/logoitem.cpp" line="1233"/>
         <source>Set text color</source>
         <translation>文字色の設定</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="1219"/>
+        <location filename="../src/items/logoitem.cpp" line="1247"/>
         <source>Select text color</source>
         <translation>文字色を選択</translation>
     </message>
@@ -1250,44 +1250,44 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 <context>
     <name>FApplication</name>
     <message>
-        <location filename="../src/fapplication.cpp" line="1768"/>
-        <location filename="../src/fapplication.cpp" line="1776"/>
-        <location filename="../src/fapplication.cpp" line="1779"/>
+        <location filename="../src/fapplication.cpp" line="1787"/>
+        <location filename="../src/fapplication.cpp" line="1795"/>
+        <location filename="../src/fapplication.cpp" line="1798"/>
         <source>Fritzing failure</source>
         <translation>Fritzing 失敗</translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="1779"/>
+        <location filename="../src/fapplication.cpp" line="1798"/>
         <source>Fritzing caught an exception from %1 in event %2</source>
         <translation>Fritzing はイベント %2 で %1 の例外を検出しました</translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="1769"/>
+        <location filename="../src/fapplication.cpp" line="1788"/>
         <source>Fritzing caught an exception %1 from %2 in event %3</source>
         <translation>Fritzing はイベント %3 で %2 からの例外 %1 を検出しました</translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="1907"/>
+        <location filename="../src/fapplication.cpp" line="1926"/>
         <source>Please specify an .fzz file name to save to (cancel will delete the backup)</source>
         <translation>保存先の.fzzファイル名を指定してください（キャンセルするとバックアップが削除されます）</translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="1907"/>
+        <location filename="../src/fapplication.cpp" line="1926"/>
         <source>Fritzing (*%1)</source>
         <translation>Fritzing (*%1)</translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="1776"/>
+        <location filename="../src/fapplication.cpp" line="1795"/>
         <source>Fritzing caught an exception from %1 in event %2: %3</source>
         <translation>Fritzing はイベント %2: %3 で %1 の例外を検出しました</translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="2184"/>
+        <location filename="../src/fapplication.cpp" line="2203"/>
         <source>Regenerate parts database?</source>
         <translation>パーツのデータベースを再生？</translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="2185"/>
+        <location filename="../src/fapplication.cpp" line="2204"/>
         <source>Regenerating the parts database will take some minutes and you will have to restart Fritzing
 
 </source>
@@ -1296,24 +1296,24 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="2186"/>
+        <location filename="../src/fapplication.cpp" line="2205"/>
         <source>Would you like to regenerate the parts database?
 </source>
         <translation>パーツデータベースを再生してみませんか？
 </translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="2194"/>
+        <location filename="../src/fapplication.cpp" line="2213"/>
         <source>Regenerate</source>
         <translation>再生</translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="2203"/>
+        <location filename="../src/fapplication.cpp" line="2222"/>
         <source>Regenerating parts database...</source>
         <translation>パーツのデータベースを再生...</translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="2188"/>
+        <location filename="../src/fapplication.cpp" line="2207"/>
         <source>This option is usefull if you modify the parts database on your own. If you want to recover from an error, you may be better off downloading the latest Fritzing release.</source>
         <translation>このオプションはパーツデータベースをご自身で変更する場合には便利です。エラーから回復したい場合は、Fritzingの最新版をダウンロードした方が良いでしょう。</translation>
     </message>
@@ -1575,9 +1575,8 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>ワイヤー</translation>
     </message>
     <message>
-        <location filename="../src/infoview/htmlinfoview.cpp" line="429"/>
         <source>Trace wire %1</source>
-        <translation>ワイヤーを配線する %1</translation>
+        <translation type="vanished">ワイヤーを配線する %1</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="213"/>
@@ -1605,9 +1604,8 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>ロックされました</translation>
     </message>
     <message>
-        <location filename="../src/infoview/htmlinfoview.cpp" line="426"/>
         <source>Ratsnest line</source>
-        <translation>ラッツネストワイヤー</translation>
+        <translation type="vanished">ラッツネストワイヤー</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="979"/>
@@ -1645,6 +1643,18 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>PCB層</translation>
     </message>
     <message>
+        <location filename="../src/infoview/htmlinfoview.cpp" line="426"/>
+        <source>Ratsnest line</source>
+        <comment>A virtual wire, a planned connection that does not yet have a layout.</comment>
+        <translation type="unfinished">ラッツネストワイヤー</translation>
+    </message>
+    <message>
+        <location filename="../src/infoview/htmlinfoview.cpp" line="429"/>
+        <source>Trace wire %1</source>
+        <comment>A wire routed on a PCB</comment>
+        <translation type="unfinished">ワイヤーを配線する %1</translation>
+    </message>
+    <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="997"/>
         <source>location</source>
         <translation>位置</translation>
@@ -1673,14 +1683,12 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
 <context>
     <name>ItemBase</name>
     <message>
-        <location filename="../src/items/itembase.cpp" line="271"/>
         <source>Part</source>
-        <translation>パーツ</translation>
+        <translation type="vanished">パーツ</translation>
     </message>
     <message>
-        <location filename="../src/items/itembase.cpp" line="221"/>
         <source>family</source>
-        <translation>ファミリー</translation>
+        <translation type="vanished">ファミリー</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="225"/>
@@ -1688,9 +1696,8 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>カラー</translation>
     </message>
     <message>
-        <location filename="../src/items/itembase.cpp" line="226"/>
         <source>resistance</source>
-        <translation>抵抗</translation>
+        <translation type="vanished">抵抗</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="229"/>
@@ -1699,14 +1706,12 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="232"/>
-        <location filename="../src/items/itembase.cpp" line="244"/>
         <source>pin spacing</source>
         <translation>ピン間隔</translation>
     </message>
     <message>
-        <location filename="../src/items/itembase.cpp" line="233"/>
         <source>rated power</source>
-        <translation>定格電力</translation>
+        <translation type="vanished">定格電力</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="234"/>
@@ -1784,9 +1789,27 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>タイプ</translation>
     </message>
     <message>
+        <location filename="../src/items/itembase.cpp" line="221"/>
+        <source>family</source>
+        <comment>component family, interchangebable</comment>
+        <translation type="unfinished">ファミリー</translation>
+    </message>
+    <message>
         <location filename="../src/items/itembase.cpp" line="223"/>
         <source>model</source>
         <translation>モデル</translation>
+    </message>
+    <message>
+        <location filename="../src/items/itembase.cpp" line="226"/>
+        <source>resistance</source>
+        <comment>electrical resistance of a component</comment>
+        <translation type="unfinished">抵抗</translation>
+    </message>
+    <message>
+        <location filename="../src/items/itembase.cpp" line="233"/>
+        <source>rated power</source>
+        <comment>maximum power rating</comment>
+        <translation type="unfinished">定格電力</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="242"/>
@@ -1797,6 +1820,12 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="243"/>
         <source>spacing</source>
         <translation>間隔</translation>
+    </message>
+    <message>
+        <location filename="../src/items/itembase.cpp" line="244"/>
+        <source>pin spacing</source>
+        <comment>distance between pins</comment>
+        <translation type="unfinished">ピン間隔</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="245"/>
@@ -1859,6 +1888,54 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>プロジェクト</translation>
     </message>
     <message>
+        <location filename="../src/items/itembase.cpp" line="257"/>
+        <source>banded</source>
+        <comment>wire color bands, for example red/white or green/white</comment>
+        <translation type="unfinished">縞模様</translation>
+    </message>
+    <message>
+        <location filename="../src/items/itembase.cpp" line="258"/>
+        <source>top</source>
+        <comment>placed on the top side of the board</comment>
+        <translation type="unfinished">トップ</translation>
+    </message>
+    <message>
+        <location filename="../src/items/itembase.cpp" line="259"/>
+        <source>bottom</source>
+        <comment>placed on the bottom side of the board</comment>
+        <translation type="unfinished">ボトム</translation>
+    </message>
+    <message>
+        <location filename="../src/items/itembase.cpp" line="260"/>
+        <source>copper bottom</source>
+        <comment>bottom copper PCB layer</comment>
+        <translation type="unfinished">底銅</translation>
+    </message>
+    <message>
+        <location filename="../src/items/itembase.cpp" line="261"/>
+        <source>copper top</source>
+        <comment>top copper PCB layer</comment>
+        <translation type="unfinished">上銅</translation>
+    </message>
+    <message>
+        <location filename="../src/items/itembase.cpp" line="264"/>
+        <source>mn</source>
+        <comment>Manufacturer Number</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/items/itembase.cpp" line="265"/>
+        <source>mpn</source>
+        <comment>Manufacturer Parts Number</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/items/itembase.cpp" line="271"/>
+        <source>Part</source>
+        <comment>electronic component</comment>
+        <translation type="unfinished">パーツ</translation>
+    </message>
+    <message>
         <location filename="../src/items/itembase.cpp" line="1352"/>
         <source>file &apos;%1&apos; for title:&apos;%2&apos; and moduleID:&apos;%3&apos; not found</source>
         <translation type="unfinished"></translation>
@@ -1869,29 +1946,24 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>svg %1のレンダリング作成できません</translation>
     </message>
     <message>
-        <location filename="../src/items/itembase.cpp" line="257"/>
         <source>banded</source>
-        <translation>縞模様</translation>
+        <translation type="vanished">縞模様</translation>
     </message>
     <message>
-        <location filename="../src/items/itembase.cpp" line="258"/>
         <source>top</source>
-        <translation>トップ</translation>
+        <translation type="vanished">トップ</translation>
     </message>
     <message>
-        <location filename="../src/items/itembase.cpp" line="259"/>
         <source>bottom</source>
-        <translation>ボトム</translation>
+        <translation type="vanished">ボトム</translation>
     </message>
     <message>
-        <location filename="../src/items/itembase.cpp" line="260"/>
         <source>copper bottom</source>
-        <translation>底銅</translation>
+        <translation type="vanished">底銅</translation>
     </message>
     <message>
-        <location filename="../src/items/itembase.cpp" line="261"/>
         <source>copper top</source>
-        <translation>上銅</translation>
+        <translation type="vanished">上銅</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="262"/>
@@ -1902,16 +1974,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="263"/>
         <source>silkscreen top</source>
         <translation>上シルクスクリーン</translation>
-    </message>
-    <message>
-        <location filename="../src/items/itembase.cpp" line="264"/>
-        <source>mn</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/items/itembase.cpp" line="265"/>
-        <source>mpn</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1974,53 +2036,53 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
 <context>
     <name>LogoItem</name>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="270"/>
+        <location filename="../src/items/logoitem.cpp" line="278"/>
         <source>shape</source>
         <translation>形状</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="348"/>
+        <location filename="../src/items/logoitem.cpp" line="356"/>
         <source>due to a rendering error</source>
         <translation>レンダリングエラーでによる</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="382"/>
+        <location filename="../src/items/logoitem.cpp" line="390"/>
         <source>because the svg is empty</source>
         <translation>svgが空ので</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="401"/>
+        <location filename="../src/items/logoitem.cpp" line="409"/>
         <source>due to an xml problem: %1 line:%2 column:%3</source>
         <translation>xml の問題により: %1 line:%2 column:%3</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="407"/>
+        <location filename="../src/items/logoitem.cpp" line="415"/>
         <source>because the file has no root element</source>
         <translation>ファイルがルート要素がないため、</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="412"/>
+        <location filename="../src/items/logoitem.cpp" line="420"/>
         <source>because the file has no &lt;svg&gt; element</source>
         <translation>ファイルが&lt;svg&gt; 要素がないため、</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="449"/>
+        <location filename="../src/items/logoitem.cpp" line="457"/>
         <source>for unknown reasons--possibly the image file is corrupted</source>
         <translation>原因不明--画像ファイルが壊れているのかもしれない</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="467"/>
+        <location filename="../src/items/logoitem.cpp" line="475"/>
         <source>failed to convert image format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="387"/>
+        <location filename="../src/items/logoitem.cpp" line="395"/>
         <source>because this appears to be a SVG file exported from CorelDRAW without choosing the &apos;presentation attributes&apos; setting</source>
         <translation>これは、CorelDRAWから「プレゼンテーション属性」を選択せずのエクスポートされたSVG ファイルのようです</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="246"/>
-        <location filename="../src/items/logoitem.cpp" line="696"/>
+        <location filename="../src/items/logoitem.cpp" line="254"/>
+        <location filename="../src/items/logoitem.cpp" line="704"/>
         <source>text</source>
         <translation>テキスト</translation>
     </message>
@@ -2093,22 +2155,22 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>ファイル名を指定してください</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2112"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2111"/>
         <source>There is already a part with id &apos;%1&apos; loaded into Fritzing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2119"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2118"/>
         <source>Error</source>
         <translation type="unfinished">エラー</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2120"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2119"/>
         <source>Failed to process part file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2129"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2128"/>
         <source>Critical Issues</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2187,12 +2249,12 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>Fritzing 部品 (*%1)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2111"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2110"/>
         <source>Part module ID must be unique.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2130"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2129"/>
         <source>Part &apos;%1&apos; has critical issues that prevent it from loading:
 
 %2</source>
@@ -7258,7 +7320,7 @@ We recommend enabling this. Only to avoid surprises with processes that are opti
         <location filename="../src/autoroute/mazerouter/mazerouter.cpp" line="606"/>
         <location filename="../src/autoroute/mazerouter/mazerouter.cpp" line="649"/>
         <location filename="../src/autoroute/mazerouter/mazerouter.cpp" line="719"/>
-        <location filename="../src/fapplication.cpp" line="1181"/>
+        <location filename="../src/fapplication.cpp" line="1200"/>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="141"/>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="251"/>
         <location filename="../src/model/modelbase.cpp" line="76"/>
@@ -7441,18 +7503,18 @@ target file: %3.</source>
         <translation>基板表示</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8196"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8199"/>
         <source>Trace wires</source>
         <translation>トレースワイヤー</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8199"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8202"/>
         <source>Ratsnest lines</source>
         <translation>ラッツネストワイヤー</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2345"/>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8201"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8204"/>
         <source>Select all %1</source>
         <translation>すべて選択 %1</translation>
     </message>
@@ -7513,12 +7575,12 @@ Fritzingはまだ作業中のためパーツのプロパティを変更するこ
         <translation>最前面へ</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="5746"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="5749"/>
         <source>Split Wire</source>
         <translation>ワイヤーを分割</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="5858"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="5861"/>
         <source>Join Wire</source>
         <translation>ワイヤーを結合</translation>
     </message>
@@ -7622,7 +7684,7 @@ is already there, we won&apos;t add it again, right?</source>
         <translation>ファイルの状況 ...</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8473"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8476"/>
         <source>Select outdated parts</source>
         <translation>旧式パーツを選択</translation>
     </message>
@@ -7889,7 +7951,7 @@ is already there, we won&apos;t add it again, right?</source>
         <translation>ファイル%1: %2 の読み取りでエラー。</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8488"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8491"/>
         <source>Select locked parts</source>
         <translation>ロックされたパーツを選択</translation>
     </message>
@@ -8081,7 +8143,7 @@ is already there, we won&apos;t add it again, right?</source>
         <translation>ビアはベンドポイントに変換</translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="1181"/>
+        <location filename="../src/fapplication.cpp" line="1200"/>
         <source>%1 wires moved from their saved position in %2.</source>
         <translation>%1 ワイヤは%2 で保存された位置から移動しました。</translation>
     </message>
@@ -8172,7 +8234,7 @@ is already there, we won&apos;t add it again, right?</source>
         <translation>N/A</translation>
     </message>
     <message>
-        <location filename="../src/fapplication.cpp" line="2236"/>
+        <location filename="../src/fapplication.cpp" line="2255"/>
         <source>Regenerate database failed</source>
         <translation>データベースの再生成が失敗</translation>
     </message>
@@ -8245,34 +8307,73 @@ is already there, we won&apos;t add it again, right?</source>
 </translation>
     </message>
     <message>
-        <location filename="../src/svg/gerbergenerator.cpp" line="153"/>
         <source>the board outline layer, </source>
-        <translation>ボードの概形層、 </translation>
+        <translation type="vanished">ボードの概形層、 </translation>
     </message>
     <message>
-        <location filename="../src/svg/gerbergenerator.cpp" line="154"/>
         <source>silkscreen layer(s), </source>
-        <translation>シルクスクリーン層、 </translation>
+        <translation type="vanished">シルクスクリーン層、 </translation>
     </message>
     <message>
-        <location filename="../src/svg/gerbergenerator.cpp" line="155"/>
         <source>copper layer(s), </source>
-        <translation>銅層、 </translation>
+        <translation type="vanished">銅層、 </translation>
     </message>
     <message>
-        <location filename="../src/svg/gerbergenerator.cpp" line="156"/>
         <source>mask layer(s), </source>
-        <translation>マスク層、 </translation>
+        <translation type="vanished">マスク層、 </translation>
     </message>
     <message>
-        <location filename="../src/svg/gerbergenerator.cpp" line="157"/>
         <source>paste mask layer(s), </source>
-        <translation>ペーストマスク層、 </translation>
+        <translation type="vanished">ペーストマスク層、 </translation>
+    </message>
+    <message>
+        <source>Unable to translate svg curves in %1</source>
+        <translation type="vanished">％1のSVG曲線は移動できません</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/svg/gerbergenerator.cpp" line="152"/>
+        <source>%n path(s) in board outline layer</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/svg/gerbergenerator.cpp" line="153"/>
+        <source>%n path(s) in silkscreen layers</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/svg/gerbergenerator.cpp" line="154"/>
+        <source>%n path(s) in copper layers</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/svg/gerbergenerator.cpp" line="155"/>
+        <source>%n path(s) in mask layers</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/svg/gerbergenerator.cpp" line="156"/>
+        <source>%n path(s) in paste mask layers</source>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="159"/>
-        <source>Unable to translate svg curves in %1</source>
-        <translation>％1のSVG曲線は移動できません</translation>
+        <source>, </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/svg/gerbergenerator.cpp" line="160"/>
+        <source>Some SVG paths could not be transformed into Gerber format: %1.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="169"/>
@@ -8929,13 +9030,13 @@ If the parts are from the simulation bin, report the bug in GitHub.</source>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="3566"/>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9860"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9863"/>
         <source>Select %1</source>
         <translation>%1を選択</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="3569"/>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9862"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9865"/>
         <source>Select %1 items</source>
         <translation>%1 アイテムを選択</translation>
     </message>
@@ -8968,52 +9069,52 @@ If the parts are from the simulation bin, report the bug in GitHub.</source>
         <translation>結合ワイヤーを作成</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="7448"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="7451"/>
         <source>Rotate</source>
         <translation>回転</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="7448"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="7451"/>
         <source>Flip</source>
         <translation>反転</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="6100"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="6103"/>
         <source>Change %1 label to &apos;%2&apos;</source>
         <translation>%1 ラベルを &apos;%2&apos; に変更</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="6733"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="6736"/>
         <source>Change %1 color from %2 to %3</source>
         <translation>背景色を%3にするために、%1から%2にします</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="6739"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="6742"/>
         <source>Change color of %1 wires to %2</source>
         <translation>%1 のワイヤの色を %2 にする</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="6787"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="6790"/>
         <source>Change %1 width from %2 to %3</source>
         <translation>%1 の幅を %2 から %3 に変更</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="6793"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="6796"/>
         <source>Change width of %1 wires to %2</source>
         <translation>ワイヤの幅を %1 から %2 に変更</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="7441"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="7444"/>
         <source>Move label &apos;%1&apos;</source>
         <translation>ラベル &apos;%1&apos; を移動</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="7448"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="7451"/>
         <source>%1 label &apos;%2&apos;</source>
         <translation>%1 ラベル &apos;%2&apos;</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="7500"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="7503"/>
         <source>Resize Note</source>
         <translation>ノートをリサイズ</translation>
     </message>
@@ -9023,49 +9124,49 @@ If the parts are from the simulation bin, report the bug in GitHub.</source>
         <translation>回転 %2 (%1)</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="6012"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="6015"/>
         <source>Double-click to delete this bend point</source>
         <translation>ダブルクリックしてベンドポイントを削除します</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="5946"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="5949"/>
         <source>Double-click</source>
         <translation>ダブルクリック</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="5946"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="5949"/>
         <source>Drag or double-click</source>
         <translation>ドラッグまたはダブルクリック</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="5947"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="5950"/>
         <source>or alt-drag to move the segment</source>
         <translation>またはAltキーを押しながらセグメントをドラッグします</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8287"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8290"/>
         <source>Disconnect all wires from %1</source>
         <translation>すべてのワイヤを %1 から切断する</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8290"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8293"/>
         <source>Disconnect all wires from %1 items</source>
         <translation>すべてのワイヤを %1 から切断する</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="7902"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="7905"/>
         <source>Change Resistance from %1 to %2</source>
         <translation>抵抗値を %1 から %2 へ変更</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8568"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8571"/>
         <source>Change image from %1 to %2</source>
         <translation>画像を %1 から %2 に変更</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="404"/>
-        <location filename="../src/sketch/sketchwidget.cpp" line="7926"/>
-        <location filename="../src/sketch/sketchwidget.cpp" line="7935"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="7929"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="7938"/>
         <source>Change %1 from %2 to %3</source>
         <translation>1 を %2 から %3 に変更</translation>
     </message>
@@ -9095,7 +9196,7 @@ If the parts are from the simulation bin, report the bug in GitHub.</source>
         <translation>%1 の端子のベンドポイントを変更します。</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9394"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9397"/>
         <source>change pin labels</source>
         <translation>ピンラベルを変更</translation>
     </message>
@@ -9130,44 +9231,44 @@ If the parts are from the simulation bin, report the bug in GitHub.</source>
         <translation>トレース</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8092"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8095"/>
         <source>Create wire from Ratsnest</source>
         <translation>ラッツネストからワイヤーを作成</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="6074"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="6077"/>
         <source>Note text change</source>
         <translation>ノートテキスト変更</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9078"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9081"/>
         <source>Part Movement Notice</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9079"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9082"/>
         <source>To delete this connection, some parts need to be moved from their current positions.
 The parts will be moved automatically. To see changes clearly use undo then redo.
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9735"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9738"/>
         <source>Unrouted connections are highlighted in yellow.</source>
         <translation>ルートされていない接続は黄色で強調されます。</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9736"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9739"/>
         <source>There are no unrouted connections</source>
         <translation>ルートされていない接続はありません</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9737"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9740"/>
         <source>Unrouted connections</source>
         <translation>ルートされてない接続</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9738"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9741"/>
         <source>%1
 
 Note: you can also trigger this display by mousing down on the routing status text in the status bar.</source>
@@ -9176,47 +9277,47 @@ Note: you can also trigger this display by mousing down on the routing status te
 注意：この表示は、ステータスバーのルーティングステータスのテキストをマウス押したまま行うこともできます。</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9858"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9861"/>
         <source>Deselect all</source>
         <translation>すべての選択解除</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9792"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9795"/>
         <source>Part &apos;%1&apos; not found in sketch</source>
         <translation>パーツ&apos;%1&apos; がスケッチで見つかりません</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8035"/>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8936"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8038"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8939"/>
         <source>Resize board to %1 %2</source>
         <translation>ボードのサイズを %1 %2 に変更</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/sketch/sketchwidget.cpp" line="7483"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="7486"/>
         <source>show %n part label(s)</source>
         <translation>
             <numerusform>%nパーツラベルを表示</numerusform>
         </translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/sketch/sketchwidget.cpp" line="7486"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="7489"/>
         <source>hide %n part label(s)</source>
         <translation>
             <numerusform>%n パーツラベルを非表示</numerusform>
         </translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="8012"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="8015"/>
         <source>Resize ruler to %1 %2</source>
         <translation>ルーラーのサイズを %1 %2 に変更</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9804"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9807"/>
         <source>Add %1 parts</source>
         <translation>%1パーツを追加</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="10400"/>
+        <location filename="../src/sketch/sketchwidget.cpp" line="10403"/>
         <source>test connectors</source>
         <translation>コネクタをテスト</translation>
     </message>
@@ -9335,14 +9436,12 @@ Note: you can also trigger this display by mousing down on the routing status te
         <translation>パーツ</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="83"/>
         <source>If you can&apos;t find a part in the Parts Bin, the Generic IC is your friend.  Drag it onto your sketch, then use the widgets in the Inspector to: choose from among 25 different through-hole and SMD packages; change the pin label; and--for DIPs and SIPs--change the number of pins.  You can also change the pin names with the Pin Label editor</source>
-        <translation>パーツビンに部品が見つからない場合は、ジェネリック ICが便利です。  スケッチにドラッグし、インスペクタのウィジェットを使用し：25種類のスルーホールおよびSMDパッケージからの選択；ピンラベルの変更；--DIPとSIPの場合はピン数の変更。  ピンラベルエディターでピンの名前を変更することもできます</translation>
+        <translation type="vanished">パーツビンに部品が見つからない場合は、ジェネリック ICが便利です。  スケッチにドラッグし、インスペクタのウィジェットを使用し：25種類のスルーホールおよびSMDパッケージからの選択；ピンラベルの変更；--DIPとSIPの場合はピン数の変更。  ピンラベルエディターでピンの名前を変更することもできます</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="84"/>
         <source>An icon in the parts bin may actually represent multiple related parts.  So when you drag an icon from the parts bin into a sketch, make sure you look at the inspector.  The inspector will display the range of choices available for you to modify a part, or swap it for a related part. The parts bin icon will also be a little &apos;stack&apos; and not just a flat icon.</source>
-        <translation>パーツビンのアイコンは、実際には複数の関連パーツを表しています。  アイコンをパーツビンからスケッチにドラッグする時には、必ずインスペクタを確かめてください。  インスペクタではパーツを修正したり、関連するパーツと交換等の選択肢を表示しいます。パーツビンのアイコンは、1つだけのパーツの示していないが、「スタック」のように複数のパーツを示します。</translation>
+        <translation type="vanished">パーツビンのアイコンは、実際には複数の関連パーツを表しています。  アイコンをパーツビンからスケッチにドラッグする時には、必ずインスペクタを確かめてください。  インスペクタではパーツを修正したり、関連するパーツと交換等の選択肢を表示しいます。パーツビンのアイコンは、1つだけのパーツの示していないが、「スタック」のように複数のパーツを示します。</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="85"/>
@@ -9460,13 +9559,13 @@ Note: you can also trigger this display by mousing down on the routing status te
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="136"/>
-        <source>They are displayed as dotted lines. When no wires are routed yet, and all connections are still virtual, the sketch looks quite chaotic.</source>
+        <location filename="../src/help/tipsandtricks.cpp" line="137"/>
+        <source>Therefore, virtual wires are sometimes also called &apos;Ratsnest lines&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="137"/>
-        <source>Therefore, virtual wires are sometimes also called &apos;Ratsnest lines&apos;.</source>
+        <location filename="../src/help/tipsandtricks.cpp" line="146"/>
+        <source>You can use the Parts Editor to find the SVG file for a part&apos;s image for a given view. In the Parts Editor, click on the tab for that view, then use &lt;b&gt;Show in Folder&lt;/b&gt; under the &lt;b&gt;File&lt;/b&gt; Menu.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9490,9 +9589,8 @@ Note: you can also trigger this display by mousing down on the routing status te
         <translation>PCBの片側には水平に、反対側には垂直にトレースを引くのがもっと簡単です。</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="156"/>
         <source>Route traces in 45-degree angles to reduce noise.</source>
-        <translation>乱雑さを減らすためにトレースを45度の角度で配線してください。</translation>
+        <translation type="vanished">乱雑さを減らすためにトレースを45度の角度で配線してください。</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="157"/>
@@ -9505,9 +9603,8 @@ Note: you can also trigger this display by mousing down on the routing status te
         <translation>PCBでシルクスクリーンに自作のロゴを入れることができます。コアライブラリのロゴパーツを使用し、自作のファイルを選択するだけです。SVG形式が最適です。</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="167"/>
         <source>Smaller PCBs are more affortable than larger ones. Save space and money.</source>
-        <translation>小さいPCBは大きいの方より安い。スペースを小さくして、お金を節約できます。</translation>
+        <translation type="vanished">小さいPCBは大きいの方より安い。スペースを小さくして、お金を節約できます。</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="159"/>
@@ -9535,9 +9632,8 @@ Note: you can also trigger this display by mousing down on the routing status te
         <translation>まず、「ファイル」→「例」にあるサンプル回路を見てみましょう。</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="82"/>
         <source>Can&apos;t find your part? Search for it by clicking the magnifier icon in the Parts Bin and type in some keywords</source>
-        <translation>検索するのパーツが見つかりませんか？パーツビンの拡大鏡アイコンをクリックし、キーワードを入力して検索してください</translation>
+        <translation type="vanished">検索するのパーツが見つかりませんか？パーツビンの拡大鏡アイコンをクリックし、キーワードを入力して検索してください</translation>
     </message>
     <message>
         <source>A ratsnest line (very thin &apos;wire&apos;) between connections in one view means that those connections are somehow connected in another view.</source>
@@ -9549,9 +9645,8 @@ Note: you can also trigger this display by mousing down on the routing status te
         <translation>カスタム形状PCBを作成するには、SVGファイルをインポートしてください。</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="162"/>
         <source>To make a stylish Arduino shield in no time, switch the shape of the PCB from a rectangle to the Arduino</source>
-        <translation>スタイリッシュなArduinoシールドをすぐに作成するには、PCBの形状を長方形からArduinoに切り替えてください</translation>
+        <translation type="vanished">スタイリッシュなArduinoシールドをすぐに作成するには、PCBの形状を長方形からArduinoに切り替えてください</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="166"/>
@@ -9569,6 +9664,11 @@ Note: you can also trigger this display by mousing down on the routing status te
         <translation>&lt;b&gt;ヘルプ&lt;/b&gt; メニューでパーツエディターヘルプをご覧ください。</translation>
     </message>
     <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="136"/>
+        <source>They are displayed as dotted lines. When wires haven&apos;t been routed yet and all connections are virtual, the sketch can look quite chaotic.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/help/tipsandtricks.cpp" line="144"/>
         <source>Before using the Parts Editor, see whether a Generic IC, Mystery Part, or Pin Header will do the job. Once you drop one of these into your sketch, you can change the number of pins, pin spacing, and other properties.</source>
         <translation>パーツエディターを使用する前に、タスクがジェネリックICや、ミステリーパーツや、又はピンヘッダーで適ているのか確認してください。これらをスケッチにドロップすると、ピン数やピン間隔等のプロパティを変更することができます。</translation>
@@ -9579,14 +9679,28 @@ Note: you can also trigger this display by mousing down on the routing status te
         <translation>パーツエディターで、重ねっているグラフィックの下に居るグラフィックを選択するには、シフトキーを押しながらマウスホイールを使います。</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="146"/>
         <source>You can use the Parts Editor to find the SVG file for a part&apos;s image for a given view. In the Parts Editor, click on the tab for that view, then use &lt;b&gt;Show in Folder&lt;/b&gt; under the &lt;b&gt;File&lt;/b&gt; Menu</source>
-        <translation>パーツエディターを使って、このビューでパーツ画像のSVGファイルを探すことができます。パーツエディターで、そのビューのタブをクリックし、&lt;b&gt;ファイル&lt;/b&gt;のメニューで&lt;b&gt;フォルダーで表示&lt;/b&gt;を使ってください</translation>
+        <translation type="vanished">パーツエディターを使って、このビューでパーツ画像のSVGファイルを探すことができます。パーツエディターで、そのビューのタブをクリックし、&lt;b&gt;ファイル&lt;/b&gt;のメニューで&lt;b&gt;フォルダーで表示&lt;/b&gt;を使ってください</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="148"/>
         <source>Do not store your custom part files in the Fritzing installation folder. If you upgrade Fritzing, these files will probably be deleted. Also, files in the Fritzing installation folder will not be saved in sketch (.fzz) files, so you won&apos;t be able to share them.</source>
         <translation>カスタムパーツファイルをFritzingのインストールフォルダに保存しないでください。そのファイルをFritzingをアップグレードする時に削除される可能性があります。また、Fritzingインストールフォルダ内のファイルはスケッチ(.fzz)ファイルに保存されませんので、共有することはできません。</translation>
+    </message>
+    <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="156"/>
+        <source>Route traces in 45-degree angles instead of 90-degrees to reduce noise.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="162"/>
+        <source>To make a stylish Arduino shield in no time, switch the shape of the PCB from a rectangle to the Arduino.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="167"/>
+        <source>Smaller PCBs are more affordable than larger ones. Save space and money.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="169"/>
@@ -9612,6 +9726,21 @@ Note: you can also trigger this display by mousing down on the routing status te
         <location filename="../src/help/tipsandtricks.cpp" line="97"/>
         <source>curves and bendable legs</source>
         <translation>カーブ又は曲げられる端子</translation>
+    </message>
+    <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="82"/>
+        <source>Can&apos;t find your part? Search for it by clicking the magnifier icon in the Parts Bin and type in some keywords.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="83"/>
+        <source>If you can&apos;t find a part in the Parts Bin, the Generic IC is your friend.  Drag it onto your sketch, then use the widgets in the Inspector to: choose from among 25 different through-hole and SMD packages; change the pin label; and--for DIPs and SIPs--change the number of pins.  You can also change the pin names with the Pin Label editor.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="84"/>
+        <source>An icon in the parts bin may actually represent multiple related parts.  So when you drag an icon from the parts bin into a sketch, make sure you look at the inspector.  The inspector will display the range of choices available for you to modify a part, or swap it for a related part.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="98"/>
