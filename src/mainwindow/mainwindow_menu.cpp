@@ -2003,8 +2003,7 @@ void MainWindow::updatePartMenu() {
 	m_convertToBendpointAct->setVisible(ctbpVisible);
 	m_convertToBendpointSeparator->setVisible(ctbpVisible);
 
-	// TODO: only enable if there is an obsolete part in the sketch
-	m_selectAllObsoleteAct->setEnabled(true);
+	m_selectAllObsoleteAct->setEnabled(itemCount.obsoleteCount > 0);
 	m_swapObsoleteAct->setEnabled(itemCount.obsoleteCount > 0);
 
 	m_findPartInSketchAct->setEnabled(m_currentGraphicsView);
