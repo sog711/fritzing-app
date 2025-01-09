@@ -1597,13 +1597,13 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <location filename="../src/infoview/htmlinfoview.cpp" line="426"/>
         <source>Ratsnest line</source>
         <comment>A virtual wire, a planned connection that does not yet have a layout.</comment>
-        <translation type="unfinished">Luftlinie</translation>
+        <translation>logische Verbindung</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="429"/>
         <source>Trace wire %1</source>
         <comment>A wire routed on a PCB</comment>
-        <translation type="unfinished">Leiterbahn %1</translation>
+        <translation>Leiterbahn %1</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="977"/>
@@ -1751,19 +1751,19 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <location filename="../src/items/itembase.cpp" line="221"/>
         <source>family</source>
         <comment>component family, interchangebable</comment>
-        <translation type="unfinished">Familie</translation>
+        <translation>Familie</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="226"/>
         <source>resistance</source>
         <comment>electrical resistance of a component</comment>
-        <translation type="unfinished">Widerstand</translation>
+        <translation>Widerstand</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="233"/>
         <source>rated power</source>
         <comment>maximum power rating</comment>
-        <translation type="unfinished">Max. Leistung</translation>
+        <translation>Nennleistung</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="234"/>
@@ -1819,7 +1819,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <location filename="../src/items/itembase.cpp" line="244"/>
         <source>pin spacing</source>
         <comment>distance between pins</comment>
-        <translation type="unfinished">Beinchenabstand</translation>
+        <translation>Pin-Abstand</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="245"/>
@@ -1885,49 +1885,49 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <location filename="../src/items/itembase.cpp" line="257"/>
         <source>banded</source>
         <comment>wire color bands, for example red/white or green/white</comment>
-        <translation type="unfinished">beringt</translation>
+        <translation>Gestreift</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="258"/>
         <source>top</source>
         <comment>placed on the top side of the board</comment>
-        <translation type="unfinished"></translation>
+        <translation>oben</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="259"/>
         <source>bottom</source>
         <comment>placed on the bottom side of the board</comment>
-        <translation type="unfinished"></translation>
+        <translation>unten</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="260"/>
         <source>copper bottom</source>
         <comment>bottom copper PCB layer</comment>
-        <translation type="unfinished">Kupfer unten</translation>
+        <translation>Kupferunterseite</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="261"/>
         <source>copper top</source>
         <comment>top copper PCB layer</comment>
-        <translation type="unfinished">Kupfer oben</translation>
+        <translation>Kupferoberseite</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="264"/>
         <source>mn</source>
         <comment>Manufacturer Number</comment>
-        <translation type="unfinished">mn</translation>
+        <translation>MN.</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="265"/>
         <source>mpn</source>
         <comment>Manufacturer Parts Number</comment>
-        <translation type="unfinished">mpn</translation>
+        <translation>MPN.</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="271"/>
         <source>Part</source>
         <comment>electronic component</comment>
-        <translation type="unfinished">Bauteil</translation>
+        <translation>Bauteil</translation>
     </message>
     <message>
         <source>banded</source>
@@ -2167,21 +2167,25 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2110"/>
         <source>Part module ID must be unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die moduleId des Bauteils muss eindeutig sein.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2129"/>
         <source>Part &apos;%1&apos; has critical issues that prevent it from loading:
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Bauteil &apos;%1&apos; hat kritische Probleme, die das Laden verhindern:
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2140"/>
         <source>Part &apos;%1&apos; was loaded with warnings:
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Bauteil &apos;%1&apos; wurde mit Warnungen geladen:
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2996"/>
@@ -2434,7 +2438,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2119"/>
         <source>Failed to process part file: %1</source>
-        <translation type="unfinished">Fehler beim Verarbeiten der Teildatei: %1</translation>
+        <translation>Fehler beim Verarbeiten der Bauteildatei: %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2128"/>
@@ -7519,31 +7523,35 @@ enthält einen Fehler (1) bei Zeile %1, Spalte %2:
     <message>
         <location filename="../src/model/modelbase.cpp" line="164"/>
         <source>Missing Version Attribute</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehlendes Versionsattribut</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="165"/>
         <source>The loaded sketch is missing its &apos;fritzingVersion&apos; attribute.
 
 File: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Der geladenen Skizze fehlt das Attribut &quot;fritzingVersion&quot;.
+
+Datei: %1</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="171"/>
         <source>Invalid Version Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Ungültiges Versionsformat</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="172"/>
         <source>The loaded sketch&apos;s &apos;fritzingVersion&apos; attribute &apos;%1&apos; is not formatted correctly.
 
 File: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Attribut &apos;fritzingVersion&apos; des geladenen Sketches &apos;%1&apos; ist nicht korrekt formatiert.
+
+Datei: %2</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="182"/>
         <source>Version Mismatch</source>
-        <translation type="unfinished"></translation>
+        <translation>Versionskonflikt</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="183"/>
@@ -7553,7 +7561,12 @@ Your current version is %2.
 Please update Fritzing to ensure proper functionality.
 
 File: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Sketch wurde mit einer neueren Version von Fritzing (%1) erstellt.
+Ihre aktuelle Version ist %2.
+
+Bitte aktualisieren Sie Fritzing, um die korrekte Funktionalität zu gewährleisten.
+
+Datei: %3</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="222"/>
@@ -7569,7 +7582,13 @@ error: %1
 temp file: %2
 
 target file: %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>Temporäre Datei kann nicht geschrieben werden. Speichern abgebrochen. 
+
+Fehler: %1
+
+temporäre Datei: %2
+
+Zieldatei: %3.</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="491"/>
@@ -7580,7 +7599,13 @@ error: %1
 temp file: %2
 
 target file: %3.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Schreiben der temporären Datei. Speichern abgebrochen. 
+
+Fehler: %1
+
+temporäre Datei: %2
+
+Zieldatei: %3.</translation>
     </message>
     <message>
         <location filename="../src/model/palettemodel.cpp" line="85"/>
@@ -8201,17 +8226,17 @@ im Sortiment. Nicht erneut hinzufügen?</translation>
     <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="152"/>
         <source>%n path(s) in board outline layer</source>
-        <translation type="unfinished">
+        <translation>
             <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n &quot;path&quot; Elemente in der Kontur</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="153"/>
         <source>%n path(s) in silkscreen layers</source>
-        <translation type="unfinished">
+        <translation>
             <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n Pfade in Siebdruckebenen</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -8241,12 +8266,12 @@ im Sortiment. Nicht erneut hinzufügen?</translation>
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="159"/>
         <source>, </source>
-        <translation type="unfinished"></translation>
+        <translation>, </translation>
     </message>
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="160"/>
         <source>Some SVG paths could not be transformed into Gerber format: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Einige SVG-Pfade konnten nicht in das Gerber-Format umgewandelt werden: %1.</translation>
     </message>
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="169"/>
@@ -8579,7 +8604,7 @@ im Sortiment. Nicht erneut hinzufügen?</translation>
     <message>
         <location filename="../src/dialogs/quotedialog.cpp" line="273"/>
         <source>The dimensions of the selected PCB (title: %1) are %2 cm x %3 cm (%4 in x %5 in).&lt;br /&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Abmessungen der ausgewählten Leiterplatte (Titel: %1) betragen %2 cm x %3 cm (%4 Zoll x %5 Zoll). &lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="../src/dialogs/quotedialog.cpp" line="171"/>
@@ -8793,12 +8818,12 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
     <message>
         <location filename="../src/items/ruler.cpp" line="198"/>
         <source>inch</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoll</translation>
     </message>
     <message>
         <location filename="../src/items/ruler.cpp" line="257"/>
         <source>length</source>
-        <translation type="unfinished"></translation>
+        <translation>Länge</translation>
     </message>
     <message>
         <location filename="../src/items/ruler.cpp" line="280"/>
@@ -8850,17 +8875,17 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
     <message>
         <location filename="../src/infoview/scalediconframe.cpp" line="61"/>
         <source>Part breadboard view image</source>
-        <translation type="unfinished">Steckplatinenansicht des Bauteils</translation>
+        <translation>Steckplatinenansicht des Bauteils</translation>
     </message>
     <message>
         <location filename="../src/infoview/scalediconframe.cpp" line="62"/>
         <source>Part schematic view image</source>
-        <translation type="unfinished">Schaltplanansicht des Bauteils</translation>
+        <translation>Schaltplanansicht des Bauteils</translation>
     </message>
     <message>
         <location filename="../src/infoview/scalediconframe.cpp" line="63"/>
         <source>Part pcb view image</source>
-        <translation type="unfinished">Leiterplattenansicht des Bauteils</translation>
+        <translation>Leiterplattenansicht des Bauteils</translation>
     </message>
 </context>
 <context>
@@ -8994,18 +9019,20 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
         <location filename="../src/simulation/simulator.cpp" line="285"/>
         <source>The simulator gave an error when loading the netlist. Probably some SPICE field is wrong, please, check them.
 If the parts are from the simulation bin, report the bug in GitHub.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Simulator gab beim Laden der Netzliste einen Fehler aus. Wahrscheinlich sind einige SPICE-Felder falsch, bitte überprüfen Sie diese.
+Wenn die Teile aus dem Simulations-Bin stammen, melden Sie den Fehler in GitHub.</translation>
     </message>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="370"/>
         <source>The simulator gave an error when trying to simulate this circuit. Please, check the wiring and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Beim Versuch, diesen Schaltkreis zu simulieren, hat der Simulator einen Fehler ausgegeben. Bitte überprüfen Sie die Verkabelung und versuchen Sie es erneut.</translation>
     </message>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="409"/>
         <source>Errors:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler:
+</translation>
     </message>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="358"/>
@@ -9396,7 +9423,7 @@ Beachte: Du kannst diese Anzeige auch aufrufen, indem Du den Routing-Status in d
     <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="1058"/>
         <source>part &apos;%1&apos; with id &apos;%2&apos; error &apos;%3&apos;; possibly because it has no &apos;family&apos; property.</source>
-        <translation type="unfinished"></translation>
+        <translation>Baueil „%1“ mit ID „%2“, Fehler „%3“; möglicherweise fehlt die „family“-Eigenschaft.</translation>
     </message>
 </context>
 <context>
@@ -9610,12 +9637,12 @@ Beachte: Du kannst diese Anzeige auch aufrufen, indem Du den Routing-Status in d
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="135"/>
         <source>A virtual wire between connections in one view means that those connections are somehow connected in another view.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein virtueller Draht zwischen Verbindungen in einer Ansicht zeigt, dass es bereits eine entsprechende Verbindung in einer anderen Ansicht gibt.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="137"/>
         <source>Therefore, virtual wires are sometimes also called &apos;Ratsnest lines&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Daher werden virtuelle Drähte manchmal auch als &quot;Ratsnest-Linien&quot; bezeichnet.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="143"/>
@@ -9644,17 +9671,17 @@ Beachte: Du kannst diese Anzeige auch aufrufen, indem Du den Routing-Status in d
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="156"/>
         <source>Route traces in 45-degree angles instead of 90-degrees to reduce noise.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verlegen Sie Leiterbahnen in 45-Grad-Winkeln statt in 90-Grad-Winkeln, um Störungen zu reduzieren.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="162"/>
         <source>To make a stylish Arduino shield in no time, switch the shape of the PCB from a rectangle to the Arduino.</source>
-        <translation type="unfinished"></translation>
+        <translation>Um im Handumdrehen ein schickes Arduino-Schild zu bauen, ändern Sie die Form der Platine von einem Rechteck zum Arduino.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="167"/>
         <source>Smaller PCBs are more affordable than larger ones. Save space and money.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleinere Leiterplatten sind günstiger als größere. Sparen Sie Platz und Geld.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="168"/>
@@ -9694,7 +9721,7 @@ Beachte: Du kannst diese Anzeige auch aufrufen, indem Du den Routing-Status in d
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="82"/>
         <source>Can&apos;t find your part? Search for it by clicking the magnifier icon in the Parts Bin and type in some keywords.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kannst du das gesuchte Teil nicht finden? Klick auf das Lupensymbol unter &apos;Bauteile&apos; und gib ein paar Stichwörter ein, um es schnell zu finden.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="83"/>
@@ -9704,7 +9731,7 @@ Beachte: Du kannst diese Anzeige auch aufrufen, indem Du den Routing-Status in d
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="84"/>
         <source>An icon in the parts bin may actually represent multiple related parts.  So when you drag an icon from the parts bin into a sketch, make sure you look at the inspector.  The inspector will display the range of choices available for you to modify a part, or swap it for a related part.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein Symbol im Bauteil-Bin kann tatsächlich mehrere verwandte Bauteile darstellen. Wenn du ein Symbol aus dem Bauteil-Bin in eine Skizze ziehst, schau dir unbedingt den Inspektor an. Der Inspektor zeigt dir die Auswahlmöglichkeiten, um ein Bauteil zu ändern oder es gegen ein verwandtes Bauteil auszutauschen.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="93"/>
@@ -9744,12 +9771,12 @@ Beachte: Du kannst diese Anzeige auch aufrufen, indem Du den Routing-Status in d
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="136"/>
         <source>They are displayed as dotted lines. When wires haven&apos;t been routed yet and all connections are virtual, the sketch can look quite chaotic.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie werden als gepunktete Linien dargestellt. Wenn die Drähte noch nicht verlegt wurden und alle Verbindungen virtuell sind, kann die Skizze ziemlich chaotisch aussehen.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="146"/>
         <source>You can use the Parts Editor to find the SVG file for a part&apos;s image for a given view. In the Parts Editor, click on the tab for that view, then use &lt;b&gt;Show in Folder&lt;/b&gt; under the &lt;b&gt;File&lt;/b&gt; Menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>You can use the Parts Editor to find the SVG file for a part&apos;s image for a given view. In the Parts Editor, click on the tab for that view, then use &lt;b&gt;Show in Folder&lt;/b&gt; under the &lt;b&gt;File&lt;/b&gt; Menu</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="153"/>
