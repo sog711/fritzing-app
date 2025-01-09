@@ -132,7 +132,7 @@ void TipsAndTricks::initTipSets() {
 	ts = new TipSet;
 	ts->heading = tr("connections");
 	ts->tips << tr("To see all the connectors connected to a given connector, hold the mouse down on the connector--all the connections will be highlighted.");
-	ts->tips << tr("A virtual wire between connections in one view means that those connections are somehow connected in another view.");
+	ts->tips << tr("A virtual wire between connections in one view indicates that there is already a corresponding connection in another view.");
 	ts->tips << tr("They are displayed as dotted lines. When wires haven't been routed yet and all connections are virtual, the sketch can look quite chaotic.");
 	ts->tips << tr("Therefore, virtual wires are sometimes also called 'Ratsnest lines'.");
 
