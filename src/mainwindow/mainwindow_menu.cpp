@@ -4526,7 +4526,7 @@ void MainWindow::setOneGroundFillSeed() {
 	if (connectorItem == nullptr) return;
 
 	auto * command = new GroundFillSeedCommand(m_pcbGraphicsView, nullptr);
-	command->addItem(connectorItem->attachedToID(), connectorItem->connectorSharedID(), action->isChecked());
+	command->setSeedState(connectorItem->attachedToID(), connectorItem->connectorSharedID(), action->isChecked());
 
 	m_undoStack->push(command);
 }

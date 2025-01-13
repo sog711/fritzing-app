@@ -2187,7 +2187,7 @@ void PCBSketchWidget::clearGroundFillSeeds()
 	auto * command = new GroundFillSeedCommand(this, nullptr);
 	command->setText(tr("Clear ground fill seeds"));
 	Q_FOREACH (ConnectorItem * connectorItem, trueSeeds) {
-		command->addItem(connectorItem->attachedToID(), connectorItem->connectorSharedID(), false);
+		command->removeSeed(connectorItem->attachedToID(), connectorItem->connectorSharedID());
 	}
 
 	m_undoStack->waitPush(command, PropChangeDelay);
@@ -2218,7 +2218,7 @@ void PCBSketchWidget::setGroundFillSeeds(const QString & intro)
 				if (command == nullptr) {
 					command = new GroundFillSeedCommand(this, nullptr);
 				}
-				command->addItem(ci->attachedToID(), ci->connectorSharedID(), isSeed);
+				command->setSeedState(ci->attachedToID(), ci->connectorSharedID(), isSeed);
 			}
 		}
 		if (command != nullptr) {

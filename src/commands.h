@@ -1121,7 +1121,9 @@ public:
 	GroundFillSeedCommand(class SketchWidget *sketchWidget, QUndoCommand *parent);
 	void undo();
 	void redo();
-	void addItem(long id, const QString & connectorID, bool seed);
+	void setSeedState(long id, const QString & connectorID, bool seed);
+	void addSeed(long id, const QString & connectorID);
+	void removeSeed(long id, const QString & connectorID);
 
 protected:
 	QString getParamString() const;

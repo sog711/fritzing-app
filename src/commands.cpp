@@ -2195,13 +2195,22 @@ void GroundFillSeedCommand::redo()
 	BaseCommand::redo();
 }
 
-void GroundFillSeedCommand::addItem(long id, const QString & connectorID, bool seed)
+void GroundFillSeedCommand::setSeedState(long id, const QString & connectorID, bool setSeed)
 {
 	GFSThing gfsThing;
 	gfsThing.id = id;
 	gfsThing.connectorID = connectorID;
-	gfsThing.seed = seed;
+	gfsThing.seed = setSeed;
 	m_items.append(gfsThing);
+}
+
+// Convenience wrappers for more explicit intent
+void GroundFillSeedCommand::addSeed(long id, const QString & connectorID) {
+	setSeedState(id, connectorID, true);
+}
+
+void GroundFillSeedCommand::removeSeed(long id, const QString & connectorID) {
+	setSeedState(id, connectorID, false);
 }
 
 QString GroundFillSeedCommand::getParamString() const {
