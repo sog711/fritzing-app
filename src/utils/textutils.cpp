@@ -954,27 +954,25 @@ struct Context
 };
 
 QTransform TextUtils::transformStringToTransform(const QString & transform) {
-	Context context;
-	// std::string s(transform.toStdString());
-	// svgpp::value_parser<svgpp::tag::type::transform_list>::parse(
-	// 		svgpp::tag::attribute::transform(),
-	// 		context,
-	// 		s,
-	// 		svgpp::tag::source::attribute()
-	// 	);
+	try {
+		Context context;
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-copy"
 
-	svgpp::value_parser<svgpp::tag::type::transform_list>::parse(
-		svgpp::tag::attribute::transform(),
-		context,
-		std::move(transform.toStdString()),
-		svgpp::tag::source::attribute()
-		);
- #pragma GCC diagnostic pop
+		svgpp::value_parser<svgpp::tag::type::transform_list>::parse(
+			svgpp::tag::attribute::transform(),
+			context,
+			std::move(transform.toStdString()),
+			svgpp::tag::source::attribute()
+			);
 
-	return context.m_transform;
+#pragma GCC diagnostic pop
+
+		return context.m_transform;
+	} catch (...) {
+		return QTransform();
+	}
 }
 
 QList<double> TextUtils::getTransformFloats(QDomElement & element) {
