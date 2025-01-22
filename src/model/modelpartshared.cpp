@@ -224,7 +224,7 @@ void ModelPartShared::populateProperties(QDomElement parent, QHash<QString,QStri
 		QString value = prop.text();
 		hash.insert(name.toLower().trimmed(),value);
 		if (prop.attribute("showInLabel", "").compare("yes", Qt::CaseInsensitive) == 0) {
-			displayKeys.append(name);
+			displayKeys.append(name.toLower().trimmed());
 		}
 		prop = prop.nextSiblingElement("property");
 	}
