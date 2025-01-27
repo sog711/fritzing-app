@@ -66,6 +66,14 @@ void FzpInfo::parse()
 		return;
 	}
 
+	if (file.size() == 0) {
+		addError(
+			tr("File Error"),
+			tr("File '%1' is empty.").arg(m_path)
+			);
+		return;
+	}
+
 	QXmlStreamReader streamReader(&file);
 
 	streamReader.setNamespaceProcessing(false);
