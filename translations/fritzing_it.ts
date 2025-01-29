@@ -696,12 +696,12 @@
     <message>
         <location filename="../src/items/resizableboard.cpp" line="438"/>
         <source>Before ordering PCB manufacturing, we recommend validating your design by exporting it as Gerber files (File → Export → for Production → Extended Gerber).</source>
-        <translation type="unfinished"></translation>
+        <translation>Prima di ordinare la produzione di PCB, si consiglia di convalidare il progetto esportandolo come file Gerber (File → Esportazione → per la produzione → Gerber esteso).</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="460"/>
         <source>&lt;br/&gt;&lt;br/&gt;If you intended your custom shape to have cutouts and you did not get the expected result, it is likely because Fritzing requires that you make cutouts using a shape &apos;subtraction&apos; or &apos;difference&apos; operation in your vector graphics editor.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br/&gt;&lt;br/&gt;Se si intendeva che la forma personalizzata avesse dei ritagli e non si è ottenuto il risultato atteso, è probabile che Fritzing richieda che i ritagli vengano eseguiti utilizzando un&apos;operazione di &apos;sottrazione&apos; o &apos;differenza&apos; della forma nell&apos;editor di grafica vettoriale.</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="530"/>
@@ -1343,7 +1343,7 @@ Sfondo: Verde=ok, Rosso=valore errato, Grigio=valore corrente</translation>
     <message>
         <location filename="../src/dialogs/fabuploaddialog.ui" line="105"/>
         <source>Upload your design now to see a preview. Review it, and once satisfied, proceed to order for manufacturing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Caricate subito il vostro progetto per vederne un&apos;anteprima. Esaminatelo e, una volta soddisfatti, procedete all&apos;ordine per la produzione.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/fabuploaddialog.ui" line="146"/>
@@ -1389,7 +1389,7 @@ Sfondo: Verde=ok, Rosso=valore errato, Grigio=valore corrente</translation>
     <message>
         <location filename="../src/dialogs/fabuploaddialog.cpp" line="161"/>
         <source>Error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Errore: </translation>
     </message>
 </context>
 <context>
@@ -1405,12 +1405,12 @@ Sfondo: Verde=ok, Rosso=valore errato, Grigio=valore corrente</translation>
     <message>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="182"/>
         <source>Could not connect to Fritzing fab.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile connettersi a Fritzing fab.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="221"/>
         <source>Error processing the project. The factory says: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore nell&apos;elaborazione del progetto. La fabbrica dice: %1</translation>
     </message>
 </context>
 <context>
@@ -1740,7 +1740,7 @@ E&apos; anche possibile scegliere un connettore come seme per il piano massa con
     <message>
         <location filename="../src/items/itembase.cpp" line="241"/>
         <source>maximum resistance</source>
-        <translation type="unfinished"></translation>
+        <translation>resistenza massima</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="224"/>
@@ -1786,13 +1786,13 @@ E&apos; anche possibile scegliere un connettore come seme per il piano massa con
         <location filename="../src/items/itembase.cpp" line="264"/>
         <source>mn</source>
         <comment>Manufacturer Number</comment>
-        <translation type="unfinished"></translation>
+        <translation>mn</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="265"/>
         <source>mpn</source>
         <comment>Manufacturer Parts Number</comment>
-        <translation type="unfinished"></translation>
+        <translation>mpn</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="271"/>
@@ -7441,7 +7441,7 @@ target file: %3.</source>
         <source>Parse error (2) at line %1, column %2:
 %3
 %4</source>
-        <translation>Errore sintassi (1) alla linea %1, colonna %2:
+        <translation>Errore sintassi (2) alla linea %1, colonna %2:
 %3
 %4</translation>
     </message>
