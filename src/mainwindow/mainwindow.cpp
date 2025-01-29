@@ -2102,14 +2102,15 @@ void MainWindow::validatePartInfo(const QString &fzpPath)
 
 	try {
 		info.parse();
-		info.validate();
-		QString moduleId = info.moduleId();
-		if (!moduleId.isEmpty()
-			&& (m_referenceModel->retrieveModelPart(moduleId) != nullptr)) {
-			info.addError(
-				tr("Part module ID must be unique."),
-				tr("There is already a part with id '%1' loaded into Fritzing.").arg(moduleId)
-				);
+		// Skip validation if there was already a parser error.
+		if (not info.hasAnyErrors()) {
+			info.validate();
+			QString moduleId = info.moduleId();
+			if (!moduleId.isEmpty() && (m_referenceModel->retrieveModelPart(moduleId) != nullptr)) {
+				info.addError(tr("Part module ID must be unique."),
+							  tr("There is already a part with id '%1' loaded into Fritzing.")
+								  .arg(moduleId));
+			}
 		}
 	}
 	catch (const std::exception& e) {
