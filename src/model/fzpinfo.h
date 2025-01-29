@@ -71,7 +71,6 @@ public:
 	// Processing
 	void parse();
 	void validate();
-	bool isValid() const { return m_errors.isEmpty(); }
 
 private:
 	void validateTitle();
