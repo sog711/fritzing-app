@@ -60,7 +60,7 @@ void FzpInfo::parse()
 	QFile file(m_path);
 	if (!file.open(QFile::ReadOnly)) {
 		addError(
-			tr("File Error"),
+			tr("Cannot open file"),
 			tr("Cannot open file '%1'.").arg(m_path)
 			);
 		return;
@@ -68,7 +68,7 @@ void FzpInfo::parse()
 
 	if (file.size() == 0) {
 		addError(
-			tr("File Error"),
+			tr("File is empty"),
 			tr("File '%1' is empty.").arg(m_path)
 			);
 		return;
