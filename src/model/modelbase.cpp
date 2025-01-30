@@ -534,12 +534,12 @@ bool ModelBase::paste(ModelBase * referenceModel, QByteArray & data, QList<Model
 	bool result = domDocument.setContent(data, &errorStr, &errorLine, &errorColumn);
 	if (!result) return false;
 
-	QDomElement module = domDocument.documentElement();
-	if (module.isNull()) {
+	QDomElement el = domDocument.documentElement();
+	if (el.isNull()) {
 		return false;
 	}
 
-	QDomElement boundingRectsElement = module.firstChildElement("boundingRects");
+	QDomElement boundingRectsElement = el.firstChildElement("boundingRects");
 	if (!boundingRectsElement.isNull()) {
 		QDomElement boundingRect = boundingRectsElement.firstChildElement("boundingRect");
 		while (!boundingRect.isNull()) {
@@ -558,7 +558,7 @@ bool ModelBase::paste(ModelBase * referenceModel, QByteArray & data, QList<Model
 		}
 	}
 
-	QDomElement instances = module.firstChildElement("instances");
+	QDomElement instances = el.firstChildElement("instances");
 	if (instances.isNull()) {
 		return false;
 	}
@@ -574,11 +574,6 @@ bool ModelBase::paste(ModelBase * referenceModel, QByteArray & data, QList<Model
 		}
 		renewModelIndexes(instances, "instance", oldToNew);
 	}
-
-	//QFile file("test.xml");
-	//file.open(QFile::WriteOnly);
-	//file.write(domDocument.toByteArray());
-	//file.close();
 
 	return loadInstances(domDocument, instances, modelParts, true);
 }
