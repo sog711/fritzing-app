@@ -791,3 +791,84 @@ QString FolderUtils::addToBasename(const QString &filePath, const QString &addit
 
 	return QString("%1/%2%3.%4").arg(path, baseName, addition, suffix);
 }
+
+bool FolderUtils::checkFileLoadability(QWidget* parent, const QString& filePath) {
+	QString fileType;
+	static const QMap<QString, QString> fileTypes {
+		{FritzingSketchExtension, QObject::tr("Fritzing sketch", "file type in error message")},
+		{FritzingBundleExtension, QObject::tr("Fritzing bundle", "file type in error message")},
+		{FritzingBinExtension, QObject::tr("Fritzing bin", "file type in error message")},
+		{FritzingBundledBinExtension, QObject::tr("Fritzing bundled bin", "file type in error message")},
+		{FritzingPartExtension, QObject::tr("Fritzing part", "file type in error message")},
+		{FritzingBundledPartExtension, QObject::tr("Fritzing bundled part", "file type in error message")}
+	};
+	for (auto it = fileTypes.begin(); it != fileTypes.end(); ++it) {
+		if (filePath.endsWith(it.key())) {
+			fileType = it.value();
+			break;
+		}
+	}
+
+	if (!QFileInfo::exists(filePath)) {
+		QFileInfo fileInfo(filePath);
+		QStringList errorDetails;
+
+		if (fileInfo.isSymLink()) {
+			errorDetails << QObject::tr("A symbolic link exists but points to missing file: %1")
+						.arg(fileInfo.symLinkTarget());
+		}
+
+		QString parentPath = fileInfo.path();
+		if (!QFileInfo(parentPath).exists()) {
+			errorDetails << QObject::tr("The parent directory does not exist: %1").arg(parentPath);
+		}
+
+		// Check for case sensitivity issues
+		QDir dir(fileInfo.path());
+		QStringList entries = dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
+		for (const QString& entry : entries) {
+			if (entry.compare(fileInfo.fileName(), Qt::CaseInsensitive) == 0 &&
+				entry != fileInfo.fileName()) {
+				errorDetails << QObject::tr("Found similar filename with different case: %1")
+							.arg(entry);
+			}
+		}
+
+		QString errorDetail = errorDetails.isEmpty() ?
+			"" : "\n\nPossible issues:\n• " + errorDetails.join("\n• ");
+
+		FMessageBox::warning(
+			parent,
+			QObject::tr("Fritzing"),
+			QObject::tr("Cannot find file '%1'.\n\nFile type: %2\n\nPlease check if the file exists.")
+				.arg(filePath)
+				.arg(fileType) + errorDetail
+		);
+		return false;
+	}
+
+	QFile file(filePath);
+	if (!file.open(QFile::ReadOnly)) {
+		FMessageBox::warning(
+					parent,
+					QObject::tr("Fritzing"),
+					QObject::tr("Cannot read file '%1'.\n\nFile type: %2\n\nPlease ensure you have permission to read the file.")
+					.arg(filePath)
+					.arg(fileType)
+					);
+		return false;
+	}
+	file.close();
+
+	if (QFileInfo(filePath).size() == 0) {
+		FMessageBox::warning(
+					parent,
+					QObject::tr("Fritzing"),
+					QObject::tr("File '%1' is empty.\n\nFile type: %2\n\nThis could be due to a cloud storage or network drive issue. Please ensure the file has been properly synchronized and saved.")
+					.arg(filePath)
+					.arg(fileType)
+					);
+		return false;
+	}
+	return true;
+}
