@@ -503,7 +503,7 @@ protected:
 	void exportToEagle();
 	void exportToGerber();
 	void exportBOM();
-	void exportBOM_CSV();	
+	void exportBOM_CSV();
 	void exportNetlist();
 	void exportSpiceNetlist();
 	void exportSvg(double res, bool selectedItems, bool flatten);
