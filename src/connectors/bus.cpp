@@ -23,7 +23,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "src/utils/misc.h"
 #include "../model/modelpart.h"
 
-Bus::Bus(BusShared * busShared, ModelPart * modelPart) 
+Bus::Bus(BusShared * busShared, ModelPart * modelPart)
 	: QObject(),
 	m_connectors(),
 	m_busShared(busShared),

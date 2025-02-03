@@ -388,7 +388,7 @@ bool MainWindow::mainLoad(const QString & fileName, const QString & displayName,
 	connect(m_sketchModel, SIGNAL(obsoleteSMDOrientationSignal()),
 	        this, SLOT(obsoleteSMDOrientationSlot()), Qt::DirectConnection);
 	connect(m_sketchModel, SIGNAL(oldSchematicsSignal(const QString &, bool &)),
-	        this, SLOT(oldSchematicsSlot(const QString &, bool &)), Qt::DirectConnection);	
+	        this, SLOT(oldSchematicsSlot(const QString &, bool &)), Qt::DirectConnection);
 	connect(m_sketchModel, &SketchModel::loadedProjectProperties,
 			this, &MainWindow::loadedProjectPropertiesSlot, Qt::DirectConnection);
 

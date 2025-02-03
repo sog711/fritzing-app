@@ -367,7 +367,7 @@ QImage applyThreshold(const QImage& image, int threshold)
 
 	for (int y = 0; y < image.height(); ++y) {
 		for (int x = 0; x < image.width(); ++x) {
-			QColor color = image.pixelColor(x, y);			
+			QColor color = image.pixelColor(x, y);		
 			int alpha = color.alpha();
 			int intensity = qGray(color.rgba()) * alpha / 255.0;
 			int value = intensity > threshold ? 1 : 0;

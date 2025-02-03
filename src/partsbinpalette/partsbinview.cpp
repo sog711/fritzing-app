@@ -33,7 +33,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 QHash<QString, QString> PartsBinView::TranslatedCategoryNames;
 QHash<QString, ItemBase *> PartsBinView::ItemBaseHash;
 
-PartsBinView::PartsBinView(ReferenceModel *referenceModel, PartsBinPaletteWidget *parent) 
+PartsBinView::PartsBinView(ReferenceModel *referenceModel, PartsBinPaletteWidget *parent)
 	: m_referenceModel(referenceModel),
 	m_parent(parent)
 {

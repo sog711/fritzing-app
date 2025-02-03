@@ -610,7 +610,7 @@ void ItemBase::hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) {
 	}
 }
 
-void ItemBase::updateConnections(bool /* includeRatsnest */, QList<ConnectorItem *> & /* already */) { } 
+void ItemBase::updateConnections(bool /* includeRatsnest */, QList<ConnectorItem *> & /* already */) { }
 
 void ItemBase::updateConnections(ConnectorItem * connectorItem, bool includeRatsnest, QList<ConnectorItem *> & already) {
 	if (!already.contains(connectorItem)) {
@@ -1299,7 +1299,7 @@ void ItemBase::transformItem2(const QTransform & matrix) {
 	transformItem(transform, false);
 }
 
-void ItemBase::collectWireConnectees(QSet<Wire *> & /* wires */) { } 
+void ItemBase::collectWireConnectees(QSet<Wire *> & /* wires */) { }
 
 bool ItemBase::collectFemaleConnectees(QSet<ItemBase *> & /* items */) {
 	return false;			// means no male connectors
