@@ -182,6 +182,12 @@ void MainWindow::mainLoad() {
 
 	if (fileName.isEmpty()) return;
 
+	if (fileName.endsWith(FritzingSketchExtension) || fileName.endsWith(FritzingBundleExtension)) {
+		if (!FolderUtils::checkFileLoadability(this, fileName)) {
+			return;
+		}
+	}
+
 	if (fileName.endsWith(FritzingBundledPartExtension)) {
 		m_binManager->importPartToMineBin(fileName);
 		return;
