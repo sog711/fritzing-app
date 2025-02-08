@@ -1631,36 +1631,47 @@ QString TextUtils::expandAndFill(const QString & svg, const QString & color, dou
 	return domDocument.toString();
 }
 
-void TextUtils::expandAndFillAux(QDomElement & element, const QString & color, double expandBy)
-{
-	bool gotChildren = false;
-	QDomElement child = element.firstChildElement();
-	while (!child.isNull()) {
-		gotChildren = true;
-		expandAndFillAux(child, color, expandBy);
-		child = child.nextSiblingElement();
-	}
-
-	if (gotChildren) return;
-
+void TextUtils::expandAndFillAux(QDomElement & element, const QString & color, double expandBy) {
+	QString strokeWidth = element.attribute("stroke-width");
 	QString fill = element.attribute("fill");
 	QString stroke = element.attribute("stroke");
-	QString strokeWidth = element.attribute("stroke-width");
-	if (stroke.isEmpty() && fill.isEmpty()) {
+
+	QDomElement child = element.firstChildElement();
+	bool hasChildren = !child.isNull();
+
+	if (hasChildren) {
+		// If this element has style attributes, propagate them to children
+		// that don't already have those attributes set
+		while (!child.isNull()) {
+			if (child.attribute("stroke").isEmpty() && !stroke.isEmpty()) {
+				child.setAttribute("stroke", stroke);
+			}
+			if (child.attribute("fill").isEmpty() && !fill.isEmpty()) {
+				child.setAttribute("fill", fill);
+			}
+			if (child.attribute("stroke-width").isEmpty() && !strokeWidth.isEmpty()) {
+				child.setAttribute("stroke-width", strokeWidth);
+			}
+
+			expandAndFillAux(child, color, expandBy);
+			child = child.nextSiblingElement();
+		}
 		return;
 	}
 
-	element.setAttribute("fill", color);
-	element.setAttribute("stroke", color);
+	// If this is a leaf element with stroke or fill, apply the color and expansion
+	if (!stroke.isEmpty() || !fill.isEmpty()) {
+		element.setAttribute("fill", color);
+		element.setAttribute("stroke", color);
 
-	if (strokeWidth.isEmpty()) {
-		strokeWidth = "0";
+		if (strokeWidth.isEmpty()) {
+			strokeWidth = "0";
+		}
+
+		double sw = strokeWidth.toDouble();
+		sw += expandBy;
+		element.setAttribute("stroke-width", QString::number(sw));
 	}
-
-	double sw = strokeWidth.toDouble();
-	sw += expandBy;
-	element.setAttribute("stroke-width", QString::number(sw));
-
 }
 
 bool TextUtils::writeUtf8(const QString & fileName, const QString & text)
