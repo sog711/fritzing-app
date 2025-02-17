@@ -1639,7 +1639,7 @@ void TextUtils::expandAndFillAux(QDomElement & element, const QString & color, d
 	if (!transformAttr.isEmpty()) {
 		QTransform t = transformStringToTransform(transformAttr);
 		// Use average of absolute horizontal (m11) and vertical (m22) scales to ensure positive expansion.
-		if (!t.isIdentity())
+		if (!t.isIdentity() && !qFuzzyIsNull(t.m11()) && !qFuzzyIsNull(t.m22()))
 			currentScale *= (qFabs(t.m11()) + qFabs(t.m22())) / 2.0;
 	}
 
