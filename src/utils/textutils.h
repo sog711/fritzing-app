@@ -100,7 +100,7 @@ public:
 	static QString removeSVGHeader(QString & string);
 	//static QString getMacAddress();
 	static QString expandAndFill(const QString & svg, const QString & color, double expandBy);
-	static void expandAndFillAux(QDomElement &, const QString & color, double expandBy);
+	static void expandAndFillAux(QDomElement &, const QString & color, double expandBy, double effectiveScale);
 	static bool writeUtf8(const QString & fileName, const QString & text);
 	static int getPinsAndSpacing(const QString & expectedFileName, QString & spacingString);
 	static bool extractViewBox(QString viewBoxString, QRectF & viewBox);

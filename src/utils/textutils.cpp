@@ -1626,12 +1626,23 @@ QString TextUtils::expandAndFill(const QString & svg, const QString & color, dou
 	}
 
 	QDomElement root = domDocument.documentElement();
-	expandAndFillAux(root, color, expandBy);
+	expandAndFillAux(root, color, expandBy, 1.0);
 
 	return domDocument.toString();
 }
 
-void TextUtils::expandAndFillAux(QDomElement & element, const QString & color, double expandBy) {
+void TextUtils::expandAndFillAux(QDomElement & element, const QString & color, double expandBy, double effectiveScale)
+{
+	// Update effective scale if this element has a transform that might affect stroke-width.
+	double currentScale = effectiveScale;
+	QString transformAttr = element.attribute("transform");
+	if (!transformAttr.isEmpty()) {
+		QTransform t = transformStringToTransform(transformAttr);
+		// Use average of absolute horizontal (m11) and vertical (m22) scales to ensure positive expansion.
+		if (!t.isIdentity())
+			currentScale *= (qFabs(t.m11()) + qFabs(t.m22())) / 2.0;
+	}
+
 	QString strokeWidth = element.attribute("stroke-width");
 	QString fill = element.attribute("fill");
 	QString stroke = element.attribute("stroke");
@@ -1641,7 +1652,7 @@ void TextUtils::expandAndFillAux(QDomElement & element, const QString & color, d
 
 	if (hasChildren) {
 		// If this element has style attributes, propagate them to children
-		// that don't already have those attributes set
+		// that don't already have those attributes set.
 		while (!child.isNull()) {
 			if (child.attribute("stroke").isEmpty() && !stroke.isEmpty()) {
 				child.setAttribute("stroke", stroke);
@@ -1653,13 +1664,13 @@ void TextUtils::expandAndFillAux(QDomElement & element, const QString & color, d
 				child.setAttribute("stroke-width", strokeWidth);
 			}
 
-			expandAndFillAux(child, color, expandBy);
+			expandAndFillAux(child, color, expandBy, currentScale);
 			child = child.nextSiblingElement();
 		}
 		return;
 	}
 
-	// If this is a leaf element with stroke or fill, apply the color and expansion
+	// If this is a leaf element with stroke or fill, apply the color and expansion.
 	if (!stroke.isEmpty() || !fill.isEmpty()) {
 		element.setAttribute("fill", color);
 		element.setAttribute("stroke", color);
@@ -1669,7 +1680,8 @@ void TextUtils::expandAndFillAux(QDomElement & element, const QString & color, d
 		}
 
 		double sw = strokeWidth.toDouble();
-		sw += expandBy;
+		if (currentScale != 0.0)
+			sw += expandBy / currentScale;
 		element.setAttribute("stroke-width", QString::number(sw));
 	}
 }
