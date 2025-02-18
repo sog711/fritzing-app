@@ -1626,25 +1626,19 @@ QString TextUtils::expandAndFill(const QString & svg, const QString & color, dou
 	}
 
 	QDomElement root = domDocument.documentElement();
-	expandAndFillAux(root, color, expandBy, 1.0);
+	expandAndFillAux(root, color, expandBy, QTransform());
 
 	return domDocument.toString();
 }
 
-void TextUtils::expandAndFillAux(QDomElement & element, const QString & color, double expandBy, double effectiveScale)
+void TextUtils::expandAndFillAux(QDomElement & element, const QString & color, double expandBy, const QTransform & parentTransform)
 {
-	// Update effective scale if this element has a transform that might affect stroke-width.
-	double currentScale = effectiveScale;
+	// Combine the current element’s transform with the inherited transform.
+	QTransform currentTransform = parentTransform;
 	QString transformAttr = element.attribute("transform");
 	if (!transformAttr.isEmpty()) {
 		QTransform t = transformStringToTransform(transformAttr);
-		if (!t.isIdentity()) {
-			// Compute the scaling factor from the transformation matrix using a unit-length line.
-			QLineF unitLine(0, 0, 1, 0);
-			QLineF transformedLine = t.map(unitLine);
-			if (transformedLine.length() != 0)
-				currentScale *= transformedLine.length();
-		}
+		currentTransform = currentTransform * t;
 	}
 
 	QString strokeWidth = element.attribute("stroke-width");
@@ -1652,40 +1646,38 @@ void TextUtils::expandAndFillAux(QDomElement & element, const QString & color, d
 	QString stroke = element.attribute("stroke");
 
 	QDomElement child = element.firstChildElement();
-	bool hasChildren = !child.isNull();
-
-	if (hasChildren) {
-		// If this element has style attributes, propagate them to children
-		// that don't already have those attributes set.
+	if (!child.isNull()) {
+		// Propagate current style attributes to child elements that lack them.
 		while (!child.isNull()) {
-			if (child.attribute("stroke").isEmpty() && !stroke.isEmpty()) {
+			if (child.attribute("stroke").isEmpty() && !stroke.isEmpty())
 				child.setAttribute("stroke", stroke);
-			}
-			if (child.attribute("fill").isEmpty() && !fill.isEmpty()) {
+			if (child.attribute("fill").isEmpty() && !fill.isEmpty())
 				child.setAttribute("fill", fill);
-			}
-			if (child.attribute("stroke-width").isEmpty() && !strokeWidth.isEmpty()) {
+			if (child.attribute("stroke-width").isEmpty() && !strokeWidth.isEmpty())
 				child.setAttribute("stroke-width", strokeWidth);
-			}
 
-			expandAndFillAux(child, color, expandBy, currentScale);
+			expandAndFillAux(child, color, expandBy, currentTransform);
 			child = child.nextSiblingElement();
 		}
 		return;
 	}
 
-	// If this is a leaf element with stroke or fill, apply the color and expansion.
+	// For leaf elements with stroke or fill, update the attributes.
 	if (!stroke.isEmpty() || !fill.isEmpty()) {
 		element.setAttribute("fill", color);
 		element.setAttribute("stroke", color);
 
-		if (strokeWidth.isEmpty()) {
+		if (strokeWidth.isEmpty())
 			strokeWidth = "0";
-		}
-
 		double sw = strokeWidth.toDouble();
-		if (currentScale != 0.0)
-			sw += expandBy / currentScale;
+
+		// Get the combined scaling factor from the accumulated transform.
+		QLineF unitLine(0, 0, 1, 0);
+		QLineF combinedLine = currentTransform.map(unitLine);
+		double combinedScale = combinedLine.length();
+
+		if (!qFuzzyIsNull(combinedScale))
+			sw += expandBy / combinedScale;
 		element.setAttribute("stroke-width", QString::number(sw));
 	}
 }
