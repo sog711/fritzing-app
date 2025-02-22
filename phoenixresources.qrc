@@ -384,5 +384,7 @@
         <file>resources/images/icons/smalToolarrowFab-inactive.svg</file>
         <file>resources/images/icons/smalToolarrowFab-pressed.svg</file>
         <file>resources/images/icons/smalToolarrowFab-normal.svg</file>
+        <file>resources/parts/core/netlabel_v5.fzp</file>
+        <file>resources/parts/svg/core/schematic/netlabel_v5.svg</file>
     </qresource>
 </RCC>
