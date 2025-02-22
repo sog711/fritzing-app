@@ -532,7 +532,7 @@ NetLabel::NetLabel( ModelPart * modelPart, ViewLayer::ViewID viewID, const ViewG
 	: SymbolPaletteItem(modelPart, viewID, viewGeometry, id, itemMenu, doLabel)
 {
 	QString label = getLabel();
-    if (label.isEmpty()) {
+	if (label.isEmpty()) {
 		label = modelPart->properties().value("label");
 		if (label.isEmpty()) {
 			label = tr("net label");
@@ -556,48 +556,48 @@ NetLabel::NetLabel( ModelPart * modelPart, ViewLayer::ViewID viewID, const ViewG
 NetLabel::~NetLabel() {
 }
 
+QString NetLabel::getVersion()
+{
+	return modelPart()->modelPartShared()->version();
+}
+
 QString NetLabel::makeSvg(ViewLayer::ViewLayerID viewLayerID)
 {
-	DebugDialog::debug("moduleid " + this->moduleID());
-	double divisor = moduleID().contains(PartFactory::OldSchematicPrefix) ? 1 : 3;
+	bool useOldVersion = this->getVersion().toInt() <= 4;  // v4 is used in Fritzing 1.0.4 and earlier
+	double divisor = moduleID().contains(PartFactory::OldSchematicPrefix) ? 1 : 3;  // Fritzing before ~0.7.0
 
 	double labelFontSize = 200 / divisor;
 	double totalHeight = 300 / divisor;
 	double arrowWidth = totalHeight / 2;
 	double strokeWidth = 10 / divisor;
 	double halfStrokeWidth = strokeWidth / 2;
-	double labelPadding = 50 / divisor;
 	double labelBaseLine = 220 / divisor;
-	// Round up to the nearest multiple of widthStep, so netlabels are less jumpy when changing text.
-	// 50 corresponds to half the default grid size in schematic view.
-	// This is important for keeping netlables more stable when rendering with differnt font engines.
-	// TODO: This could be fixed more thouroughly by using the netlables terminal point, not a corner,
-	// for storing its position, but that needs a migration for existing Fritzing sketches.
-	double widthStep = 50;
 
-	QFont font("Droid Sans", labelFontSize, QFont::Normal);
+	QString fontName = useOldVersion ? "Droid Sans" : "Noto Sans";
+	QFont font(fontName, labelFontSize, QFont::Normal);
 	QFontMetricsF fm(font);
 
 #ifdef Q_OS_MAC
 	static const double TextWidthScalingFactor = 1.0;
 #elif defined(Q_OS_WIN)
-	// This factor works for "logo" , but horziontalAdvance doesn't
-	// yet seem to work reliable on windows. Without widthSteps,
-	// we would get jumpy resluts. But we need to compensate for showing
-	// the sketchin in different OSes with different font renderers anyhow.
-	const double TextWidthScalingFactor = 0.755;
+	const double TextWidthScalingFactor = useOldVersion ? 0.77 : 0.755;
 #else
 	static const double TextWidthScalingFactor = 0.77;
 #endif
+
 	double textWidth = fm.horizontalAdvance(getLabel()) * TextWidthScalingFactor;
-	// substract the padding before rounding up
-	// this can result in a rounded up width smaller than the actual text width.
-	// That means, if we are near the multiple of widthStep, that we allow the
-	// text to bleed into the padding a bit, resulting in more even netLabel width,
-	// while avoiding whitespaces to become too wide.
-	double adjustedWidth = textWidth - labelPadding;
-	double roundedWidth = ceil(adjustedWidth / widthStep) * widthStep;
-	double totalWidth = roundedWidth + arrowWidth + labelPadding * 2;
+	double totalWidth;
+
+	if (useOldVersion) {
+		double labelOffset = 20 / divisor;
+		totalWidth = textWidth + arrowWidth + labelOffset;
+	} else {
+		double labelPadding = 50 / divisor;
+		double widthStep = 50;
+		double adjustedWidth = textWidth - labelPadding;
+		double roundedWidth = ceil(adjustedWidth / widthStep) * widthStep;
+		totalWidth = roundedWidth + arrowWidth + labelPadding * 2;
+	}
 
 	QString header("<?xml version='1.0' encoding='UTF-8' standalone='no'?>\n"
 				   "<svg xmlns:svg='http://www.w3.org/2000/svg' xmlns='http://www.w3.org/2000/svg' "
@@ -609,18 +609,28 @@ QString NetLabel::makeSvg(ViewLayer::ViewLayerID viewLayerID)
 	double offset = goLeft ? arrowWidth : 0;
 
 	QString svg = header.arg(totalWidth / 1000)
-				  .arg(totalHeight / 1000)
-				  .arg(totalWidth)
-				  .arg(totalHeight)
-				  .arg(ViewLayer::viewLayerXmlNameFromID(viewLayerID));
+					  .arg(totalHeight / 1000)
+					  .arg(totalWidth)
+					  .arg(totalHeight)
+					  .arg(ViewLayer::viewLayerXmlNameFromID(viewLayerID));
 
 	if (viewLayerID == ViewLayer::SchematicText) {
-		svg += QString("<text id='label' x='%1' y='%2' fill='#000000' font-family='Droid Sans' "
+		double xPosition;
+		if (useOldVersion) {
+			double labelOffset = 20 / divisor;
+			xPosition = labelOffset + offset;
+		} else {
+			double labelPadding = 50 / divisor;
+			xPosition = labelPadding + offset;
+		}
+
+		svg += QString("<text id='label' x='%1' y='%2' fill='#000000' font-family='%5' "
 					   "font-size='%3'>%4</text>\n")
-			   .arg(labelPadding + offset)
-			   .arg(labelBaseLine)
-			   .arg(labelFontSize)
-			   .arg(getLabel());
+				   .arg(xPosition)
+				   .arg(labelBaseLine)
+				   .arg(labelFontSize)
+				   .arg(getLabel())
+				   .arg(fontName);
 	} else {
 		QString pin = QString("<rect id='connector0pin' x='%1' y='%2' width='%3' height='%4' "
 							  "fill='none' stroke='none' stroke-width='0' />\n");
@@ -630,20 +640,20 @@ QString NetLabel::makeSvg(ViewLayer::ViewLayerID viewLayerID)
 		QString points = QString("%1,%2 %3,%4 %5,%4 %5,%6 %3,%6");
 		if (goLeft) {
 			points = points.arg(halfStrokeWidth)
-					 .arg(totalHeight / 2)
-					 .arg(arrowWidth)
-					 .arg(halfStrokeWidth)
-					 .arg(totalWidth - halfStrokeWidth)
-					 .arg(totalHeight - halfStrokeWidth);
+			.arg(totalHeight / 2)
+				.arg(arrowWidth)
+				.arg(halfStrokeWidth)
+				.arg(totalWidth - halfStrokeWidth)
+				.arg(totalHeight - halfStrokeWidth);
 			terminal = terminal.arg(0).arg(totalHeight / 2);
 			pin = pin.arg(0).arg(0).arg(arrowWidth).arg(totalHeight);
 		} else {
 			points = points.arg(totalWidth - halfStrokeWidth)
-					 .arg(totalHeight / 2)
-					 .arg(totalWidth - arrowWidth)
-					 .arg(halfStrokeWidth)
-					 .arg(halfStrokeWidth)
-					 .arg(totalHeight - halfStrokeWidth);
+			.arg(totalHeight / 2)
+				.arg(totalWidth - arrowWidth)
+				.arg(halfStrokeWidth)
+				.arg(halfStrokeWidth)
+				.arg(totalHeight - halfStrokeWidth);
 			terminal = terminal.arg(totalWidth).arg(totalHeight / 2);
 			pin = pin.arg(totalWidth - arrowWidth - 0.1).arg(0).arg(arrowWidth).arg(totalHeight);
 		}
@@ -651,8 +661,8 @@ QString NetLabel::makeSvg(ViewLayer::ViewLayerID viewLayerID)
 		svg += pin;
 		svg += terminal;
 		svg += QString("<polygon fill='white' stroke='#000000' stroke-width='%1' points='%2' />\n")
-			   .arg(strokeWidth)
-			   .arg(points);
+				   .arg(strokeWidth)
+				   .arg(points);
 	}
 
 	svg += "</g>\n</svg>\n";

@@ -114,6 +114,7 @@ public:
 	bool isOnlyNetLabel();
 	QString getInspectorTitle();
 	void setInspectorTitle(const QString & oldText, const QString & newText);
+	QString getVersion(); // Only used in NetLabel currenty, but a candiate for PartBase or similar, to support future migrations
 
 protected:
 	QString makeSvg(ViewLayer::ViewLayerID);
