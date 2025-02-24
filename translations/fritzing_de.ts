@@ -717,12 +717,12 @@ Ein eigenes Platinen-SVG hat üblicherweise eine oder zwei Siebdruckebenen (&quo
     <message>
         <location filename="../src/items/resizableboard.cpp" line="438"/>
         <source>Before ordering PCB manufacturing, we recommend validating your design by exporting it as Gerber files (File → Export → for Production → Extended Gerber).</source>
-        <translation type="unfinished"></translation>
+        <translation>Bevor du die PCB-Herstellung bestellst, empfehlen wir, dein Design zu validieren, indem du es als Gerber-Dateien exportierst (Datei → Exportieren → für die Produktion → Erweiterte Gerber).</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="460"/>
         <source>&lt;br/&gt;&lt;br/&gt;If you intended your custom shape to have cutouts and you did not get the expected result, it is likely because Fritzing requires that you make cutouts using a shape &apos;subtraction&apos; or &apos;difference&apos; operation in your vector graphics editor.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br/&gt;&lt;br/&gt;Wenn du beabsichtigt hast, dass deine benutzerdefinierte Form Öffnungen hat und du nicht das erwartete Ergebnis erhalten hast, liegt es wahrscheinlich daran, dass Fritzing erfordert, dass du Ausschnitte mit einer &apos;Subtraktions&apos;- oder &apos;Differenz&apos;-Operation in deinem Vektorgrafik-Editor erstellst.</translation>
     </message>
     <message>
         <source>Before actual PCB production we recommend that you test your custom shape by using the &apos;File &gt; Export for Production &gt; Extended Gerber&apos; option. </source>
@@ -8251,17 +8251,17 @@ im Sortiment. Nicht erneut hinzufügen?</translation>
     <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="154"/>
         <source>%n path(s) in copper layers</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n Pfad in Kupferschichten</numerusform>
+            <numerusform>%n Pfade in Kupferschichten</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="155"/>
         <source>%n path(s) in mask layers</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n Pfad in Maskenebenen</numerusform>
+            <numerusform>%n Pfade in Maskenebenen</numerusform>
         </translation>
     </message>
     <message numerus="yes">
