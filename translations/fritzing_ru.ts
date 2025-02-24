@@ -796,7 +796,7 @@ Use the file?</source>
 <context>
     <name>BoardLogoItem</name>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="1420"/>
+        <location filename="../src/items/logoitem.cpp" line="1426"/>
         <source>shape</source>
         <translation>форма</translation>
     </message>
@@ -804,18 +804,18 @@ Use the file?</source>
 <context>
     <name>BreadboardLogoItem</name>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="1230"/>
-        <location filename="../src/items/logoitem.cpp" line="1253"/>
+        <location filename="../src/items/logoitem.cpp" line="1236"/>
+        <location filename="../src/items/logoitem.cpp" line="1259"/>
         <source>color</source>
         <translation>цвет</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="1233"/>
+        <location filename="../src/items/logoitem.cpp" line="1239"/>
         <source>Set text color</source>
         <translation>Установить цвет текста</translation>
     </message>
     <message>
-        <location filename="../src/items/logoitem.cpp" line="1247"/>
+        <location filename="../src/items/logoitem.cpp" line="1253"/>
         <source>Select text color</source>
         <translation>Выбрать цвет текста</translation>
     </message>
@@ -2103,7 +2103,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
 <context>
     <name>MainWindow</name>
     <message numerus="yes">
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2297"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2298"/>
         <source>%1 of %2 nets routed - %n connector(s) still to be routed</source>
         <translation>
             <numerusform>%1 из %2 цепей трассировано — %n соединение ещё должно быть трассировано</numerusform>
@@ -2146,7 +2146,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>Указать имя файла</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2996"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2997"/>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="886"/>
         <source>Fritzing (*%1)</source>
         <translation>Fritzing (*%1)</translation>
@@ -2167,7 +2167,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/mainwindow/mainwindow.cpp" line="1989"/>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1999"/>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2064"/>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2684"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2685"/>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="164"/>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="169"/>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="607"/>
@@ -2175,12 +2175,12 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="777"/>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="786"/>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="970"/>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1087"/>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1375"/>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1647"/>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1652"/>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1800"/>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1805"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1088"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1376"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1648"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1653"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1801"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1806"/>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="238"/>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="249"/>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="309"/>
@@ -2382,37 +2382,37 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2118"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2119"/>
         <source>Error</source>
         <translation type="unfinished">Ошибка</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2119"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2120"/>
         <source>Failed to process part file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2128"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2129"/>
         <source>Critical Issues</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2139"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2140"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2288"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2289"/>
         <source>No connections to route</source>
         <translation>Нет соединений для трассировки</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2291"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2292"/>
         <source>Routing completed</source>
         <translation>Трассировка завершена</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2294"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2295"/>
         <source>Routing completed using %n jumper part(s)</source>
         <translation>
             <numerusform>Трассировка завершена с использованием %n перемычки</numerusform>
@@ -2421,67 +2421,67 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         </translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2554"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2555"/>
         <source>Change to single layer pcb</source>
         <translation>Преобразовать в однослойную ПП</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2554"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2555"/>
         <source>Change to two layer pcb</source>
         <translation>Преобразовать в двухслойную ПП</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2620"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2621"/>
         <source>Change image to %2</source>
         <translation>Изменить изображение на %2</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2790"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2791"/>
         <source>Schematic conversion</source>
         <translation>Преобразование схемы</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2791"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2792"/>
         <source>Saving this sketch will convert it to the new schematic graphics standard. Go ahead and convert?</source>
         <translation>Сохранение этого эскиза преобразует его в новый стандарт графики для схемотехники. Продолжить и конвертировать?</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2997"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2998"/>
         <source>Fritzing uncompressed (*%1)</source>
         <translation>Fritzing несжатый (*%1)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="3052"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="3053"/>
         <source>Unrouted connections</source>
         <translation>Неразведённые соединения</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="3053"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="3054"/>
         <source>There are no unrouted connections in this view.</source>
         <translation>В этом представлении нет неразведённых соединений.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="3108"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="3109"/>
         <source>(x,y)=(%1, %2) %3</source>
         <translation>(x,y)=(%1, %2) %3</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="3113"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="3114"/>
         <source>(x, y)=(%1, %2)	(width, height)=(%3, %4) %5</source>
         <translation>(x, y)=(%1, %2)	(ширина, высота)=(%3, %4) %5</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="3399"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="3400"/>
         <source>Code</source>
         <translation>Код</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="3475"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="3476"/>
         <source>Welcome</source>
         <translation>Добро пожаловать</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2318"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2319"/>
         <source>%1 - [%2]</source>
         <translation>%1 — [%2]</translation>
     </message>
@@ -2502,56 +2502,56 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2129"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2130"/>
         <source>Part &apos;%1&apos; has critical issues that prevent it from loading:
 
 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2140"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2141"/>
         <source>Part &apos;%1&apos; was loaded with warnings:
 
 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2425"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2426"/>
         <source>No copper top layer</source>
         <translation>Отсутствует верхний слой меди</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2426"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2427"/>
         <source>The copper top (copper 1) layer is not available on a one-sided board.  Please switch the board to double-sided or choose the copper bottom (copper 0) layer.</source>
         <translation>Верхний слой меди (медь 1) не доступен на односторонней печатной плате. Пожалуйста, переключитесь на двухстороннюю плату или выберите нижний слой меди (медь 0).</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2517"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2518"/>
         <source>No exactly matching part found; Fritzing chose the closest match.</source>
         <translation>Не найден точно совпадающий компонент. Программа Fritzing выбрала ближайшее совпадение.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2685"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2686"/>
         <source>Svg %1 is missing a &apos;%2&apos; layer. For more information on how to create a custom board shape, see the tutorial at &lt;a href=&apos;http://fritzing.org/learning/tutorials/designing-pcb/pcb-custom-shape/&apos;&gt;http://fritzing.org/learning/tutorials/designing-pcb/pcb-custom-shape/&lt;/a&gt;.</source>
         <translation>Слой «%2» отсутствует в SVG %1. Для получения дополнительной информации о том, как создавать пользовательские формы плат, см. инструкции по адресу &lt;a href=&apos;http://fritzing.org/learning/tutorials/designing-pcb/pcb-custom-shape/&apos;&gt;http://fritzing.org/learning/tutorials/designing-pcb/pcb-custom-shape/&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2723"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2724"/>
         <source>loading %1</source>
         <translation>загружается %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2732"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2733"/>
         <source>Loading...</source>
         <translation>Загрузка...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2738"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2739"/>
         <source>new sketch</source>
         <translation>новый эскиз</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2901"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2902"/>
         <source>Backing up &apos;%1&apos;</source>
         <translation>Резервное копирование «%1»</translation>
     </message>
@@ -2697,27 +2697,27 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1000"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1001"/>
         <source>Export the visible area of the current sketch as a JPG image</source>
         <translation>Экспорт видимой области текущего эскиза в изображение JPG</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1005"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1006"/>
         <source>Export the visible area of the current sketch as a PNG image</source>
         <translation>Экспорт видимой области текущего эскиза в изображение PNG</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1010"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1011"/>
         <source>Export the visible area of the current sketch as a PDF image</source>
         <translation>Экспорт видимой области текущего эскиза в изображение PDF</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1015"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1016"/>
         <source>Export the current sketch as an SVG image</source>
         <translation>Экспорт текущего эскиза в изображение SVG</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1025"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1026"/>
         <source>Save a Bill of Materials (BoM)/Shopping List as text</source>
         <translation>Сохранить как текст список материалов (BoM)/список покупок</translation>
     </message>
@@ -2759,174 +2759,184 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="984"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="971"/>
+        <source>Unable to export %1 as shareable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="972"/>
+        <source>Saving failed. Please check if home and destionation directory are writeable and not full.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="985"/>
         <source>&amp;Save</source>
         <translation>&amp;Сохранить</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="985"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="986"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="986"/>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="991"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="987"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="992"/>
         <source>Save the current sketch</source>
         <translation>Сохранить текущий эскиз</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="989"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="990"/>
         <source>&amp;Save As...</source>
         <translation>Сохранить &amp;как...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="990"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="991"/>
         <source>Shift+Ctrl+S</source>
         <translation>Shift+Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="994"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="995"/>
         <source>Share online...</source>
         <translation>Поделиться онлайн...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="995"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="996"/>
         <source>Post a project to the Fritzing website</source>
         <translation>Загрузить проект на сайт Fritzing</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1018"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1019"/>
         <source>List of parts (&amp;Bill of Materials)...</source>
         <translation>Список компонентов (&amp;Список материалов)...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1020"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1021"/>
         <source>Save a Bill of Materials (BoM)/Shopping List as html</source>
         <translation>Сохранить ведомость материалов (ВМ)/список покупок в формате html</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1023"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1024"/>
         <source>List of parts (&amp;Bill of Materials) as CSV</source>
         <translation>Список компонентов (&amp;Список материалов) в формате CSV</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1028"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1029"/>
         <source>IPC-D-356A netlist</source>
         <translation>Список соединений IPC-D-356A</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1030"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1031"/>
         <source>Save a netlist in IPC-D-356A format</source>
         <translation>Сохранение списка соединений в формате IPC-D-356A</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1033"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1034"/>
         <source>XML Netlist...</source>
         <translation>Список соединений XML...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1035"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1036"/>
         <source>Save a netlist in XML format</source>
         <translation>Сохранить список соединений в формате XML</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1038"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1039"/>
         <source>SPICE Netlist...</source>
         <translation>Список соединений SPICE...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1040"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1041"/>
         <source>Save a netlist in SPICE format</source>
         <translation>Сохранить список соединений в формате SPICE</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1045"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1046"/>
         <source>Export the current sketch to Eagle CAD</source>
         <translation>Экспорт текущего эскиза в Eagle CAD</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1048"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1049"/>
         <source>Extended Gerber (RS-274X)...</source>
         <translation>Расширенный Gerber (RS-274X)...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1050"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1051"/>
         <source>Export the current sketch to Extended Gerber format (RS-274X) for professional PCB production</source>
         <translation>Экспорт текущего эскиза в расширенный формат Gerber (RS-274X) для профессионального производства ПП</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1054"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1055"/>
         <source>Export the current sketch to PDF for DIY PCB production (photoresist)</source>
         <translation>Экспорт текущего эскиза в PDF для самостоятельного производства ПП (фоторезист)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1059"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1060"/>
         <source>Export the current sketch to SVG for DIY PCB production (photoresist)</source>
         <translation>Экспорт текущего эскиза в SVG для самостоятельного производства ПП (фоторезист)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1068"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1069"/>
         <source>&amp;Print...</source>
         <translation>П&amp;ечать...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1069"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1070"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1070"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1071"/>
         <source>Print the current view</source>
         <translation>Печать текущего представления</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1259"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1260"/>
         <source>Export Bill of Materials (BoM) as CSV</source>
         <translation>Экспорт списка материалов (BoM) в формате CSV</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1405"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1406"/>
         <source>Export SPICE Netlist...</source>
         <translation>Экспорт списка соединений SPICE...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1648"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1649"/>
         <source>Your sketch does not have a board yet!  Please add a PCB in order to export to IPC netlist.</source>
         <translation>В вашем скетче еще нет платы! Пожалуйста, добавьте плату для экспорта в список соединений IPC.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1653"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1654"/>
         <source>IPC netlist export can only handle one board at a time--please select the board you want to export.</source>
         <translation>Экспорт списка соединений IPC может обрабатывать только одну плату за раз — пожалуйста, выберите плату, которую вы хотите экспортировать.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1661"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1662"/>
         <source>Export IPC-D-356...</source>
         <translation>Экспорт IPC-D-356...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1663"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1664"/>
         <source>Unable to save IPC file.</source>
         <translation>Не удалось сохранить файл IPC.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1663"/>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1746"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1664"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1747"/>
         <source>But the content was copied to the clipboard.</source>
         <translation>Но содержимое было скопировано в буфер обмена.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1746"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1747"/>
         <source>Unable to save netlist file.</source>
         <translation>Не удалось сохранить файл списка соединений.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1806"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1807"/>
         <source>Gerber export can only handle one board at a time--please select the board you want to export.</source>
         <translation>Экспорт в формат Gerber может обрабатывать только одну плату за раз — пожалуйста, выберите плату, которую следует экспортировать.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1828"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1829"/>
         <source>Sketch exported to Gerber</source>
         <translation>Эскиз экспортирован в формат Gerber</translation>
     </message>
@@ -4588,34 +4598,29 @@ Please check all views for potential side-effects.</source>
         <translation>&amp;Экспорт</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1801"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1802"/>
         <source>Your sketch does not have a board yet!  Please add a PCB in order to export to Gerber.</source>
         <translation>У вашего эскиза ещё нет платы! Пожалуйста, добавьте печатную плату для экспорта в Gerber.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="199"/>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1810"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1811"/>
         <source>Choose a folder for exporting</source>
         <translation>Выберите папку для экспорта</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="971"/>
-        <source>Unable to export %1 as shareable. Save failed. Please check if home and save dir are writeable and not full. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1143"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1144"/>
         <source>Export SVG...</source>
         <translation>Экспорт SVG...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1260"/>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1341"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1261"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1342"/>
         <source>Unable to save BOM file, but the text is on the clipboard.</source>
         <translation>Не удалось сохранить файл списка материалов (BOM), но текст находится в буфере обмена.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1744"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1745"/>
         <source>Export Netlist...</source>
         <translation>Экспорт списка соединений...</translation>
     </message>
@@ -4667,37 +4672,37 @@ Please check all views for potential side-effects.</source>
         <translation>&amp;Правка</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="998"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="999"/>
         <source>JPG...</source>
         <translation>JPG...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1003"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1004"/>
         <source>PNG...</source>
         <translation>PNG...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1008"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1009"/>
         <source>PDF...</source>
         <translation>PDF...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1013"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1014"/>
         <source>SVG...</source>
         <translation>SVG...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1043"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1044"/>
         <source>Eagle...</source>
         <translation>Eagle...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1053"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1054"/>
         <source>Etchable (PDF)...</source>
         <translation>Рисунок травления (PDF)...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1058"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1059"/>
         <source>Etchable (SVG)...</source>
         <translation>Рисунок травления (SVG)...</translation>
     </message>
@@ -4803,7 +4808,7 @@ Please check all views for potential side-effects.</source>
         <translation>&amp;Показать метки компонентов</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1340"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1341"/>
         <source>Export Bill of Materials (BoM)...</source>
         <translation>Экспорт списка материалов (BoM)...</translation>
     </message>
@@ -4866,24 +4871,24 @@ Please check all views for potential side-effects.</source>
         <translation>Сообщить об ошибке в программе Fritzing</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1078"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1079"/>
         <source>This will soon provide an export of your Fritzing sketch to the EAGLE layout software. If you&apos;d like to have more exports to your favourite EDA tool, please let us know, or contribute.</source>
         <translation>Это позволит экспортировать ваш Fritzing-эскиз в макет EAGLE. Если вы хотели бы получить возможность экспорта в другие программы компьютерного моделирования, пожалуйста, дайте нам знать или поучаствуйте в разработке программы.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2504"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2505"/>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4017"/>
         <source>Sorry!</source>
         <translation>Извините!</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2505"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2506"/>
         <source>No part with those characteristics.
 We&apos;re working to avoid this message, and only let you choose between properties that do exist</source>
         <translation>Нет компонента с такими характеристиками. Вы можете выбирать только между существующими характеристиками</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2587"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2588"/>
         <source>Swapped %1 with module %2</source>
         <translation>Поменять %1 с модулем %2</translation>
     </message>
@@ -9206,18 +9211,6 @@ If the parts are from the simulation bin, report the bug in GitHub.</source>
         <translation>Изменить размер линейки на %1 %2</translation>
     </message>
     <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9081"/>
-        <source>Part Movement Notice</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/sketch/sketchwidget.cpp" line="9082"/>
-        <source>To delete this connection, some parts need to be moved from their current positions.
-The parts will be moved automatically. To see changes clearly use undo then redo.
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="10403"/>
         <source>test connectors</source>
         <translation>проверка разъёмов</translation>
@@ -9259,6 +9252,18 @@ The parts will be moved automatically. To see changes clearly use undo then redo
         <location filename="../src/sketch/sketchwidget.cpp" line="8571"/>
         <source>Change image from %1 to %2</source>
         <translation>Изменить изображение с %1 на %2</translation>
+    </message>
+    <message>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9081"/>
+        <source>We need to move these parts.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/sketch/sketchwidget.cpp" line="9082"/>
+        <source>To delete this connection, some parts need to be moved from their current positions.
+The parts will be moved automatically. You can use the Undo History to review these changes.
+</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="9397"/>
@@ -9606,11 +9611,6 @@ Note: you can also trigger this display by mousing down on the routing status te
         <translation>Чтобы увидеть все разъёмы, подключённые к конкретному разъёму, наведите на него указатель мыши и удерживайте нажатой кнопку мыши — все соединения будут выделены.</translation>
     </message>
     <message>
-        <location filename="../src/help/tipsandtricks.cpp" line="135"/>
-        <source>A virtual wire between connections in one view means that those connections are somehow connected in another view.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../src/help/tipsandtricks.cpp" line="137"/>
         <source>Therefore, virtual wires are sometimes also called &apos;Ratsnest lines&apos;.</source>
         <translation type="unfinished"></translation>
@@ -9733,6 +9733,11 @@ Note: you can also trigger this display by mousing down on the routing status te
         <location filename="../src/help/tipsandtricks.cpp" line="119"/>
         <source>To display different properties in a part label, rotate it, or change the font, right-click the label.</source>
         <translation>Чтобы отобразить различные свойства в метке детали, повернуть ее или изменить шрифт, щелкните метку правой кнопкой мыши.</translation>
+    </message>
+    <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="135"/>
+        <source>A virtual wire between connections in one view indicates that there is already a corresponding connection in another view.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="136"/>
