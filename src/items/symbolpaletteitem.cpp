@@ -571,10 +571,12 @@ QString NetLabel::makeSvg(ViewLayer::ViewLayerID viewLayerID)
 	double arrowWidth = totalHeight / 2;
 	double strokeWidth = 10 / divisor;
 	double halfStrokeWidth = strokeWidth / 2;
-	double labelBaseLine = 228 / divisor;
+	double labelBaseLine = (useOldVersion ? 220 : 228) / divisor;
 
 	QString fontName = useOldVersion ? "Droid Sans" : "Noto Sans";
-	QFont font(fontName, labelFontSize, QFont::Normal);
+	QFont font(useOldVersion ?
+				   QFont("Droid Sans", labelFontSize * 72 / GraphicsUtils::StandardFritzingDPI, QFont::Normal) :
+				   QFont("Noto Sans", labelFontSize, QFont::Normal));
 	QFontMetricsF fm(font);
 
 #ifdef Q_OS_MAC
@@ -585,12 +587,25 @@ QString NetLabel::makeSvg(ViewLayer::ViewLayerID viewLayerID)
 	static const double TextWidthScalingFactor = 0.77;
 #endif
 
-	double textWidth = fm.horizontalAdvance(getLabel()) * TextWidthScalingFactor;
+	double textWidth;
+#ifdef Q_OS_MAC
+	// On macOS, always use the new calculation approach with scaling factor. The past one was bugged.
+	textWidth = fm.horizontalAdvance(getLabel()) * TextWidthScalingFactor;
+#else
+	// On other platforms, use version-dependent approach
+	if (useOldVersion) {
+		textWidth = fm.horizontalAdvance(getLabel()) * GraphicsUtils::StandardFritzingDPI / 72;
+	} else {
+		textWidth = fm.horizontalAdvance(getLabel()) * TextWidthScalingFactor;
+	}
+#endif
+
 	double totalWidth;
 
 	if (useOldVersion) {
 		double labelOffset = 20 / divisor;
 		totalWidth = textWidth + arrowWidth + labelOffset;
+
 	} else {
 		double labelPadding = 50 / divisor;
 		double widthStep = 50;
@@ -629,8 +644,8 @@ QString NetLabel::makeSvg(ViewLayer::ViewLayerID viewLayerID)
 				   .arg(xPosition)
 				   .arg(labelBaseLine)
 				   .arg(labelFontSize)
-				   .arg(getLabel())
-				   .arg(fontName);
+				   .arg(getLabel(),
+						fontName);
 	} else {
 		QString pin = QString("<rect id='connector0pin' x='%1' y='%2' width='%3' height='%4' "
 							  "fill='none' stroke='none' stroke-width='0' />\n");
