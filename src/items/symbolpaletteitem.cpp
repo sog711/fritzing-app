@@ -571,7 +571,7 @@ QString NetLabel::makeSvg(ViewLayer::ViewLayerID viewLayerID)
 	double arrowWidth = totalHeight / 2;
 	double strokeWidth = 10 / divisor;
 	double halfStrokeWidth = strokeWidth / 2;
-	double labelBaseLine = 220 / divisor;
+	double labelBaseLine = 228 / divisor;
 
 	QString fontName = useOldVersion ? "Droid Sans" : "Noto Sans";
 	QFont font(fontName, labelFontSize, QFont::Normal);
