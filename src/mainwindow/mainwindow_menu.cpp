@@ -4076,7 +4076,7 @@ void MainWindow::swapObsolete(bool displayFeedback, QList<ItemBase *> & items) {
 	}
 
 	if (displayFeedback) {
-		QMessageBox::information(this, tr("Fritzing"), tr("Successfully updated %1 part(s).\n"
+		FMessageBox::information(this, tr("Fritzing"), tr("Successfully updated %1 part(s).\n"
 		                         "Please check all views for potential side-effects.").arg(count) );
 	}
 	DebugDialog::debug(QString("updated %1 obsolete in %2").arg(count).arg(m_fwFilename));
