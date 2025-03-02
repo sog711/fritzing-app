@@ -138,6 +138,7 @@ bool ModelPartShared::setDomDocument(QDomDocument & domDocument) {
 	loadTagText(root, "author", m_author);
 	loadTagText(root, "description", m_description);
 	loadTagText(root, "url", m_url);
+	m_url = m_url.trimmed();
 	loadTagText(root, "taxonomy", m_taxonomy);
 	loadTagText(root, "date", m_date);
 	QDomElement version = root.firstChildElement("version");
