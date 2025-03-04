@@ -169,6 +169,7 @@ public:
 	static void setEnabled(bool);
 	static bool enabled();
 	static void setColoringEnabled(bool enabled);
+	static void setLogFilename(const QString &filename);
 
 	static QString createKeyTag(const QKeyEvent *event);
 protected:

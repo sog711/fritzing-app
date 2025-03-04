@@ -413,6 +413,14 @@ int FApplication::init() {
 		        (m_arguments[i].compare("--debug", Qt::CaseInsensitive) == 0)) {
 			DebugDialog::setEnabled(true);
 			toRemove << i;
+			
+			// Check if the next argument is a filename for debug output
+			if (i + 1 < m_arguments.length() && !m_arguments[i + 1].startsWith("-")) {
+				m_debugLogFilename = m_arguments[i + 1];
+				DebugDialog::setLogFilename(m_debugLogFilename);
+				toRemove << i + 1;
+				i++; // Skip the filename parameter
+			}
 		}
 
 		if ((m_arguments[i].compare("-ftesting", Qt::CaseInsensitive) == 0) ||
