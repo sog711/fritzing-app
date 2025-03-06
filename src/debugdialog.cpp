@@ -21,7 +21,6 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 
 #include "debugdialog.h"
-#include "utils/folderutils.h"
 #include "qevent.h"
 #include <QCoreApplication>
 #include <QFile>
@@ -29,6 +28,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDir>
 #include <QtDebug>
 #include <QIcon>
+#include <QStandardPaths>
 
 const QMap<QString, QString> DebugDialog::colorMap = {
 	{ "<RESET>", "\033[0m" },
@@ -252,8 +252,7 @@ void DebugDialog::debug(QString message, DebugLevel debugLevel, QObject * ancest
 	}
 
 	if (m_file.fileName().isEmpty()) {
-		QString path;
-		path = FolderUtils::getTopLevelUserDataStorePath();
+		QString path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 		// path += "/debug.txt";
 		m_file.setFileName(path);
 	}
