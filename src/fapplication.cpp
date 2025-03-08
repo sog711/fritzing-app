@@ -862,7 +862,8 @@ void FApplication::registerFonts() {
 	registerFont(":/resources/fonts/DroidSans/DroidSansMono.ttf", false);
 	registerFont(":/resources/fonts/OCRA.ttf", true);
 	registerFont(":/resources/fonts/Segment16/Segment16C Bold.ttf", true);
-	registerFont(":/resources/fonts/OCR-Fritzing-mono.otf", true);
+	// registerFont(":/resources/fonts/OCR-Fritzing-mono.otf", true);
+	registerFont(":/resources/fonts/OCR-Fritzing-mono.ttf", true);
 	registerFont(":/resources/fonts/NotoSans/NotoSans-Regular.ttf", true);
 
 	// "Droid Sans"
