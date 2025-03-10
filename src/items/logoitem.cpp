@@ -917,18 +917,24 @@ QString LogoItem::hackSvg_v5(const QString &svg, const QString &logo)
 	// Tested with font "OCR-Fritzing-mono", but seems to work with all fonts.
 	// 'Alignment works' means that the text does not move relative to its box when adding or removing characters.
 	// See github issue xy?
+	double textScalingFactor = 0.77; // Default scaling factor
+
+	// Determine text scaling factor based on both platform and font type
 #ifdef Q_OS_MAC
-	const double TextScalingFactor = 1.0; // macOS doesn't need this correction?
+	textScalingFactor = 1.0; // macOS doesn't need correction
 #elif defined(Q_OS_WIN)
-	// This factor works fine for OCR-Fritzing. But on windows,
+	// The factor 0.8 works fine for OCR-Fritzing. But on windows,
 	// it seems to depend on the fond (what font setting exactly?) Also,
 	// there are slight errors when using OpenSans, that seeem
 	// to be related to variable width fonts.
-	const double TextScalingFactor = 0.74;
-#else
-	const double TextScalingFactor = 0.77;
+	if (fontFamily.contains("OCR", Qt::CaseInsensitive) ||
+		fontFamily.contains("OCR-Fritzing", Qt::CaseInsensitive)) {
+		textScalingFactor = 0.8;
+	}
+	// Otherwise, use default 0.77 for other fonts on Windows
 #endif
-	double totalWidth = textWidth * TextScalingFactor + padding;
+
+	double totalWidth = textWidth * textScalingFactor + padding;
 	double totalHeight = textHeight + padding;
 
 	QStringList viewBox = getViewBox(root);
