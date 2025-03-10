@@ -387,5 +387,9 @@
         <file>resources/parts/core/netlabel_v5.fzp</file>
         <file>resources/parts/svg/core/schematic/netlabel_v5.svg</file>
         <file>resources/fonts/OCR-Fritzing-mono.ttf</file>
+        <file>resources/parts/core/schematiclogotext_v6.fzp</file>
+        <file>resources/parts/svg/core/schematic/schematiclogo_v6.svg</file>
+        <file>resources/parts/svg/core/icon/schematic_text_noto.svg</file>
+        <file>resources/parts/svg/core/icon/schematic_text_droid.svg</file>
     </qresource>
 </RCC>
