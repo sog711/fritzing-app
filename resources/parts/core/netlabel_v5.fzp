@@ -6,13 +6,14 @@
  <history date='2025-02-22' author='Kjell Morgenstern'> v5, fix alignment, use Noto Sans </history>
  <label></label>
  <tags>
-   <tag>net label</tag>
+   <tag>net label</tag>   
    <tag>symbol</tag>
    <tag>fritzing core</tag>
  </tags>
  <properties>
    <property name="family">net label</property>
    <property name="label"></property>
+   <property name="Font" >Noto Sans</property>
  </properties>
  <description>A net label for schematic view will be connected to any other net label with the same name.</description>
  <views>
