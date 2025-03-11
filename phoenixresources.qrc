@@ -391,5 +391,7 @@
         <file>resources/parts/svg/core/schematic/schematiclogo_v6.svg</file>
         <file>resources/parts/svg/core/icon/schematic_text_noto.svg</file>
         <file>resources/parts/svg/core/icon/schematic_text_droid.svg</file>
+        <file>resources/parts/core/notobreadboardlogotext.fzp</file>
+        <file>resources/parts/svg/core/breadboard/breadboardlogo_noto.svg</file>
     </qresource>
 </RCC>
