@@ -639,7 +639,7 @@ QString NetLabel::makeSvg(ViewLayer::ViewLayerID viewLayerID)
 			xPosition = labelPadding + offset;
 		}
 
-		svg += QString("<text id='label' x='%1' y='%2' fill='#000000' font-family='%5' "
+		svg += QString("<text id='label' x='%1' y='%2' fill='#000000' font-family='%5' font-weight='400' "
 					   "font-size='%3'>%4</text>\n")
 				   .arg(xPosition)
 				   .arg(labelBaseLine)
