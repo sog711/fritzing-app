@@ -14,7 +14,7 @@
  <properties>
    <property name="family" >Logo</property>
    <property name="logo" >logo</property>
-   <property name="Font" >Droid Sans</property>
+   <property name="font" >Droid Sans</property>
    <property name="shape" ></property>
    <property name="type" >text</property>
  </properties>

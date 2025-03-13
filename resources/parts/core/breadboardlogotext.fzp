@@ -17,7 +17,7 @@
    <property name="shape" ></property>
    <property name="type" >text</property>
    <property name="color" ></property>
-   <property name="Font" >Droid Sans</property>   
+   <property name="font" >Droid Sans</property>
  </properties>
  <taxonomy>discreteParts.breadboard.logo</taxonomy>
  <description>For adding text to the breadboard view</description>
