@@ -924,7 +924,7 @@ QString LogoItem::hackSvg_v5(const QString &svg, const QString &logo)
 	textScalingFactor = 1.0; // macOS doesn't need correction
 #elif defined(Q_OS_WIN)
 	// The factor 0.8 works fine for OCR-Fritzing. But on windows,
-	// it seems to depend on the fond (what font setting exactly?) Also,
+	// it seems to depend on the font (what font setting exactly?) Also,
 	// there are slight errors when using OpenSans, that seeem
 	// to be related to variable width fonts.
 	if (fontFamily.contains("OCR", Qt::CaseInsensitive) ||
