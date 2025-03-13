@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<module moduleId="v6SchematicLogoTextModuleID" >
+<module moduleId="NotoSchematicLogoTextModuleID" >
  <version>6</version>
  <author>Kjell Morgenstern</author>
  <title>Schematic Text</title>
@@ -32,7 +32,7 @@
    </layers>
   </breadboardView>
   <schematicView>
-   <layers image="schematic/schematiclogo_v6.svg" >
+   <layers image="schematic/schematiclogo_noto.svg" >
     <layer layerId="schematicText" />
    </layers>
   </schematicView>
