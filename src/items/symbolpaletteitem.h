@@ -81,6 +81,7 @@ public:
 public Q_SLOTS:
 	void voltageEntry(int index);
 	void labelEntry();
+	void swapEntry(int index);
 
 protected:
 	void removeMeFromBus(double voltage);

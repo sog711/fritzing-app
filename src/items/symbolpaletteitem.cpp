@@ -173,6 +173,16 @@ void SymbolPaletteItem::removeMeFromBus(double v) {
 	LocalGrounds.removeOne(QPointer<ConnectorItem>(nullptr));  // keep cleaning these out
 }
 
+void SymbolPaletteItem::swapEntry(int index)
+{
+	// Before swapping the item, remove it from the bus,
+	// so item-to-be-deleted (this one) doesn't count against
+	// connections when calling restoreColor on the replacement
+	removeMeFromBus(0);
+	ItemBase::swapEntry(index);
+}
+
+
 ConnectorItem* SymbolPaletteItem::newConnectorItem(Connector *connector)
 {
 	ConnectorItem * connectorItem = PaletteItemBase::newConnectorItem(connector);
