@@ -2261,7 +2261,11 @@ bool PCBSketchWidget::collectGroundFillSeeds(QList<ConnectorItem *> & seeds, boo
 		cis.append(ci);
 		ConnectorItem::collectEqualPotential(cis, true, ViewGeometry::NoFlag);
 		Q_FOREACH (ConnectorItem * eq, cis) {
-			if (eq != ci) trueSeeds.removeAll(eq);
+			if (eq != ci) {
+				if (ci->getCrossLayerConnectorItem() == eq) {
+					trueSeeds.removeAll(eq);
+				}
+			}
 			potentialSeeds.removeAll(eq);
 		}
 	}
@@ -2272,7 +2276,11 @@ bool PCBSketchWidget::collectGroundFillSeeds(QList<ConnectorItem *> & seeds, boo
 		cis.append(ci);
 		ConnectorItem::collectEqualPotential(cis, true, ViewGeometry::NoFlag);
 		Q_FOREACH (ConnectorItem * eq, cis) {
-			if (eq != ci) potentialSeeds.removeAll(eq);
+			if (eq != ci) {
+				if (ci->getCrossLayerConnectorItem() == eq) {
+					potentialSeeds.removeAll(eq);
+				}
+			}
 		}
 	}
 
