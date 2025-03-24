@@ -1024,21 +1024,14 @@ void GerberGenerator::exportPickAndPlace(const QString & prefix, const QString &
 
 	QTextStream stream(&out);
 	stream << "# Pick And Place List\n"
-		   << "# Company=\n"
-		   << "# Author=\n"
-	       //*Tel=
-	       //*Fax=
 		   << "# eMail=\n"
 		   << "#\n"
 		   << QString("# Project=%1\n").arg(prefix)
 	       // *Variant=<alle Bauteile>
 		   << QString("# Date=%1\n").arg(QTime::currentTime().toString())
 		   << QString("# CreatedBy=Fritzing %1\n").arg(Version::versionString())
-		   << "#\n"
 		   << "#\n# Coordinates in mils, always center of component\n"
-		   << "# Origin 0/0=Lower left corner of PCB\n"
-		   << "# Rotation in degree (0-360, math. pos.)\n"
-		   << "#\n"
+		   << "# Origin 0/0=Lower left corner of PCB. Rotation in degree (0-360, math. pos.)\n"
 		   << "RefDes,Description,Package,X,Y,Rotation,Side,Mount\n"
 		   << "Description: ";
 
