@@ -1198,6 +1198,24 @@ double TextUtils::getStrokeWidth(QDomElement & element, double defaultValue)
 	//}
 }
 
+QString TextUtils::getStrokeColor(QDomElement & element, const QString & defaultColor)
+{
+	QString stroke = element.attribute("stroke");
+	if (!stroke.isEmpty()) return stroke;
+
+	QDomElement parent = element.parentNode().toElement();
+	while (!parent.isNull()) {
+		stroke = parent.attribute("stroke");
+		if (!stroke.isEmpty()) return stroke;
+
+		parent = parent.parentNode().toElement();
+	}
+
+	// default if there is no value to inherit
+	element.setAttribute("stroke", defaultColor);
+	return defaultColor;
+}
+
 bool TextUtils::fixStrokeWidth(QDomDocument & svgDoc) {
 	bool result = false;
 

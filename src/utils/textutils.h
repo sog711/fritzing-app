@@ -119,6 +119,7 @@ public:
 	static bool ensureViewBox(QDomDocument doc, double dpi, QRectF & rect, bool toInches, double & w, double & h, bool getwh);
 	static QString findAnchor(const QDomElement & text);
 	static double getStrokeWidth(QDomElement &, double defaultValue);
+	static QString getStrokeColor(QDomElement &, const QString & defaultColor);
 	static void resplit(QStringList & names, const QString & split);
 	static QString elementToString(const QDomElement &);
 	template<typename T> static std::optional<double> optToDouble(const T & param)
