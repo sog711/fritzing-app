@@ -1,5 +1,4 @@
 #include "fpsmonitor.h"
-#include <QDebug>
 #include <QGuiApplication>
 #include <QOpenGLContext>
 #include <QOpenGLDebugLogger>
@@ -7,6 +6,7 @@
 #include <QScreen>
 #include <QOffscreenSurface>
 #include "utils/fmessagebox.h"
+#include "debugdialog.h"
 #include <algorithm>
 
 FPSMonitor::FPSMonitor(QObject *parent)
@@ -32,16 +32,16 @@ bool FPSMonitor::checkOpenGLAvailability() {
 		if (testContext.makeCurrent(&surface)) {
 			QOpenGLFunctions *f = testContext.functions();
 			const GLubyte* version = f->glGetString(GL_VERSION);
-			qDebug() << "OpenGL Version:" << QString::fromLatin1(reinterpret_cast<const char*>(version));
+			DebugDialog::stream() << "OpenGL Version:" << QString::fromLatin1(reinterpret_cast<const char*>(version));
 			testContext.doneCurrent();
 		} else {
 			openGLAvailable = false;
-			qDebug() << "Failed to make OpenGL context current";
+			DebugDialog::stream(DebugDialog::Warning) << "Failed to make OpenGL context current";
 		}
 
 		surface.destroy();
 	} else {
-		qDebug() << "Failed to create OpenGL context";
+		DebugDialog::stream(DebugDialog::Warning) << "Failed to create OpenGL context";
 	}
 
 	return openGLAvailable;
@@ -99,7 +99,7 @@ qreal FPSMonitor::calculateMedianFPS() const
 void FPSMonitor::printTotalFrameStatistics() const
 {
 	qint64 totalTimeElapsed = totalTimeTimer.elapsed();
-	qDebug() << "Total frames:" << totalFrameCount
+	DebugDialog::stream() << "Total frames:" << totalFrameCount
 			 << "Total time:" << QString::number(totalTimeElapsed / 1000.0, 'f', 2) << "s"
 			 << "Overall FPS:"
 			 << QString::number(totalFrameCount * 1000.0 / totalTimeElapsed, 'f', 2) << "fps";

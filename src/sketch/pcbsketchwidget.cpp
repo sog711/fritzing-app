@@ -2879,7 +2879,7 @@ void PCBSketchWidget::requestQuote() {
 	QSettings settings;
 	QString fabName = settings.value("service", "").toString();
 	if (fabName != "Aisler") {
-		qDebug() << fabName;
+		DebugDialog::stream() << fabName;
 		return;
 	}
 
