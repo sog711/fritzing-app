@@ -1348,9 +1348,15 @@ void ConnectorItem::collectEqualPotential(
 		ViewGeometry::WireFlags skipFlags,
 		bool skipBuses)
 {
-	// take a local (temporary working) copy of the supplied list, and wipe the original
+	// Take a local (temporary working) copy of the supplied list, and wipe the original
 	QList<ConnectorItem *> tempItems = connectorItems;
 	connectorItems.clear();
+	
+	// Create a QSet for O(1) lookups instead of O(n) with QList::contains
+	QSet<ConnectorItem *> tempItemsSet;
+	for (ConnectorItem *item : tempItems) {
+		tempItemsSet.insert(item);
+	}
 
 	for (int i = 0; i < tempItems.count(); i++) {
 		ConnectorItem *connectorItem = tempItems[i];
@@ -1367,8 +1373,9 @@ void ConnectorItem::collectEqualPotential(
 			if (crossLayers) {
 				ConnectorItem *crossConnectorItem = connectorItem->getCrossLayerConnectorItem();
 				if (crossConnectorItem) {
-					if (!tempItems.contains(crossConnectorItem)) {
+					if (!tempItemsSet.contains(crossConnectorItem)) {
 						tempItems.append(crossConnectorItem);
+						tempItemsSet.insert(crossConnectorItem);
 					}
 				}
 			}
@@ -1378,7 +1385,7 @@ void ConnectorItem::collectEqualPotential(
 		connectorItems.append(connectorItem);
 
 		Q_FOREACH (ConnectorItem *cto, connectorItem->connectedToItems()) {
-			if (tempItems.contains(cto)) {
+			if (tempItemsSet.contains(cto)) {
 				continue;
 			}
 
@@ -1391,6 +1398,7 @@ void ConnectorItem::collectEqualPotential(
 
 			// add `approved` connected items to the list being processed
 			tempItems.append(cto);
+			tempItemsSet.insert(cto);
 		} // end foreach (ConnectorItem *cto, connectorItem->connectedToItems())
 
 		// When the kept connector item is part of a bus, include all of the other
@@ -1406,8 +1414,9 @@ void ConnectorItem::collectEqualPotential(
 				}
 #endif
 				Q_FOREACH (ConnectorItem *busConnectedItem, busConnectedItems) {
-					if (!tempItems.contains(busConnectedItem)) {
+					if (!tempItemsSet.contains(busConnectedItem)) {
 						tempItems.append(busConnectedItem);
+						tempItemsSet.insert(busConnectedItem);
 					}
 				}
 			}
