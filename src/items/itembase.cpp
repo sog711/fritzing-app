@@ -685,13 +685,22 @@ bool ItemBase::busConnectorItems(ConnectorItem * fromConnectorItem, QList<class 
 	}
 
 	if (bus) {
-		for (Connector * connector: bus->connectors()) {
-			for (ConnectorItem * connectorItem: connector->viewItems()) {
+		// Use a temporary hash for O(1) lookups instead of O(n) with QList::contains
+		QSet<ConnectorItem*> itemsSet;
+		for (ConnectorItem* item : items) {
+			itemsSet.insert(item);
+		}
+		
+		for (Connector * connector : bus->connectors()) {
+			// Use viewItemsHash() directly to avoid converting hash to list
+			const QHash<int, QPointer<ConnectorItem>> &connectorItems = connector->viewItemsHash();
+			for (ConnectorItem * connectorItem : connectorItems) {
 				if (connectorItem != nullptr) {
 					//connectorItem->debugInfo(QString("on the bus %1").arg((long) connector, 0, 16));
 					if (connectorItem->attachedToViewID() == m_viewID) {
-						if (!items.contains(connectorItem)) {
+						if (!itemsSet.contains(connectorItem)) {
 							items.append(connectorItem);
+							itemsSet.insert(connectorItem);
 						}
 					}
 				}

@@ -271,6 +271,10 @@ QList< QPointer<ConnectorItem> > Connector::viewItems() {
 	return m_connectorItems.values();
 }
 
+const QHash< int, QPointer<ConnectorItem> > & Connector::viewItemsHash() const {
+	return m_connectorItems;
+}
+
 const QString & Connector::legID(ViewLayer::ViewID viewID, ViewLayer::ViewLayerID viewLayerID) {
 	if (m_connectorShared != nullptr) return m_connectorShared->legID(viewID, viewLayerID);
 
