@@ -510,6 +510,7 @@ protected:
 	void cleanupRatsnests(QList< QPointer<ConnectorItem> > & connectorItems, bool connect);
 	void rotateWire(Wire *, QTransform & rotation, QPointF center, bool undoOnly, QUndoCommand * parentCommand);
 	QList<QGraphicsItem *> getVisibleItemsAndLabels(RenderThing & renderThing, const LayerList & layers);
+	void processTextElementsInSVG(QString &svg, ItemBase *itemBase, RenderThing & renderThing);
 	QString renderToSVG(RenderThing &, QList<QGraphicsItem *> & itemsAndLabels, bool applyViewFromBelow = false);
 	QList<ItemBase *> collectSuperSubs(ItemBase *);
 	void squashShapes(QPointF scenePos);

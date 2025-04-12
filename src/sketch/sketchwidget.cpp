@@ -7571,6 +7571,79 @@ QList<QGraphicsItem *> SketchWidget::getVisibleItemsAndLabels(RenderThing & rend
 	return itemsAndLabels;
 }
 
+void SketchWidget::processTextElementsInSVG(QString &svg, ItemBase *itemBase, RenderThing & renderThing) {
+	if (m_viewID != ViewLayer::SchematicView) {
+		return;
+	}
+
+	QDomDocument doc;
+	QString errorStr;
+	int errorLine;
+	int errorColumn;
+
+	if (!doc.setContent(svg, &errorStr, &errorLine, &errorColumn)) {
+		return;
+	}
+
+	QDomElement root = doc.documentElement();
+	QDomNodeList textNodes = root.elementsByTagName("text");
+
+	if (textNodes.count() == 0) {
+		return;
+	}
+
+	QTransform itemTransform = itemBase->transform();
+	double rotation = 0;
+	bool isFlipped = GraphicsUtils::isFlipped(itemTransform, rotation);
+
+	if (!isFlipped && !(rotation >= 135 && rotation <= 225)) {
+		return;
+	}
+
+	// Get bounding boxes first.
+	QList<QRectF> boundingBoxes;
+	QString svgForBoundaryBox = TextUtils::makeSVGHeader(renderThing.printerScale, renderThing.dpi, renderThing.imageRect.width(), renderThing.imageRect.height());
+	svgForBoundaryBox += svg + "</svg>";
+	QDomDocument tempDoc;
+	tempDoc.setContent(svgForBoundaryBox);
+	QDomNodeList tempTextNodes = tempDoc.elementsByTagName("text");
+	for (int i = 0; i < tempTextNodes.count(); i++) {
+		tempTextNodes.at(i).toElement().setAttribute("id", QString("text%1").arg(i));
+	}
+	QSvgRenderer renderer(tempDoc.toByteArray());
+	for (int i = 0; i < tempTextNodes.count(); i++) {
+		boundingBoxes.append(renderer.boundsOnElement(QString("text%1").arg(i)));
+	}
+
+	// Now do the actual transformations.
+	for (int i = 0; i < textNodes.count(); i++) {
+		QDomElement textElement = textNodes.at(i).toElement();
+		QRectF boundingBox = boundingBoxes.at(i);
+
+		QTransform transform;
+		if (isFlipped) {
+			transform.translate(boundingBox.center().x(), 0);
+			transform.scale(-1, 1);
+			transform.translate(-boundingBox.center().x(), 0);
+		}
+
+		if (rotation >= 135 && rotation <= 225) {
+			transform.translate(boundingBox.center().x(), boundingBox.center().y());
+			transform.rotate(180);
+			transform.translate(-boundingBox.center().x(), -boundingBox.center().y());
+		}
+
+		if (!transform.isIdentity()) {
+			QDomElement gElement = doc.createElement("g");
+			textElement.parentNode().insertBefore(gElement, textElement);
+			gElement.appendChild(textElement);
+			TextUtils::setSVGTransform(gElement, transform);
+		}
+	}
+
+	svg = doc.toString();
+}
+
 QString translateSVG(QString & svg, QPointF loc, double dpi, double printerScale) {
 	loc.setX(loc.x() * dpi / printerScale);
 	loc.setY(loc.y() * dpi / printerScale);
@@ -7633,6 +7706,11 @@ QString SketchWidget::renderToSVG(RenderThing & renderThing, QList<QGraphicsItem
 			if (itemSvg.isEmpty()) continue;
 
 			TextUtils::fixMuch(itemSvg, false);
+
+			// Process text elements for proper rotation/flipping when exporting SVG
+			if (applyViewFromBelow) {
+				processTextElementsInSVG(itemSvg, itemBase, renderThing);
+			}
 
 			QString legSvg;
 			QDomDocument doc;
