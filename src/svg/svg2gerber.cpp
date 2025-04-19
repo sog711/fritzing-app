@@ -77,7 +77,7 @@ QString SVG2gerber::getGerber() {
 }
 
 int SVG2gerber::renderGerber(bool doubleSided, const QString & mainLayerName, ForWhy forWhy) {
-	bool gerberExportImprovementsEnabled = QSettings().value("gerberExportImprovementsEnabled").toBool();
+	bool gerberExportImprovementsEnabled = QSettings().value("gerberExportImprovementsEnabled", true).toBool();
 	if (forWhy != ForDrill) {
 		// human readable description comments
 		m_gerber_header = "G04 MADE WITH FRITZING*\n";

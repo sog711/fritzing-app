@@ -445,8 +445,8 @@ QWidget * PrefsDialog::createGerberBetaFeaturesForm() {
 
 	QLabel * label2 = new QLabel(tr("The gerber file generator will use six decimals precision instead of three.\n"
 									"Some deprecated gerber commands are removed or replaced.\n"
-									"We recommend enabling this. Only to avoid surprises with processes that are "
-									"optimized for earlier Fritzing versions, this is currently off by default."
+									"This feature is enabled by default. If you need to maintain compatibility with older "
+									"processes designed for earlier Fritzing versions, you can disable this feature."
 									));
 	label2->setWordWrap(true);
 	layout->addWidget(label2);
@@ -454,7 +454,7 @@ QWidget * PrefsDialog::createGerberBetaFeaturesForm() {
 
 	QCheckBox * box = new QCheckBox(tr("Enable gerber export improvements"));
 	box->setFixedWidth(FORMLABELWIDTH * 2);
-	box->setChecked(settings.value("gerberExportImprovementsEnabled", false).toBool()); // Initialize the value of box2 using m_settings
+	box->setChecked(settings.value("gerberExportImprovementsEnabled", true).toBool());
 	layout->addWidget(box);
 
 
