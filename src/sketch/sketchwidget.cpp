@@ -1999,7 +1999,8 @@ void SketchWidget::dragMoveHighlightConnector(QPointF eventPos) {
 	checkAutoscroll(m_globalPos);
 
 	QPointF loc = this->mapToScene(eventPos.toPoint()) - m_droppingOffset;
-	if (m_alignToGrid && (m_alignmentItem)) {
+	
+	if ((m_alignmentItem) && shouldAlignToGrid()) {
 		QPointF l =  m_alignmentItem->getViewGeometry().loc();
 		alignLoc(loc, m_alignmentStartPoint, loc, l);
 
@@ -2253,8 +2254,8 @@ bool SketchWidget::moveByArrow(double dx, double dy, QKeyEvent * event, bool isR
 		dx *= 10;
 		dy *= 10;
 	}
-
-	if (m_alignToGrid) {
+	
+	if (shouldAlignToGrid()) {
 		dx *= gridSizeInches() * GraphicsUtils::SVGDPI;
 		dy *= gridSizeInches() * GraphicsUtils::SVGDPI;
 	}
@@ -2275,6 +2276,11 @@ bool SketchWidget::spaceBarIsPressed() noexcept {
 	// this should be const and constexpr but causes the compiler to optimize incorrectly
 	// and prevents middle clicking to scroll from working correctly
 	return m_spaceBarIsPressed || m_middleMouseIsPressed;
+}
+
+bool SketchWidget::shouldAlignToGrid() const {
+	// Align to grid only if it's enabled globally AND Ctrl key is not pressed
+	return m_alignToGrid && !(QApplication::keyboardModifiers() & Qt::ControlModifier);
 }
 
 void SketchWidget::mousePressEvent(QMouseEvent *event)
@@ -3176,7 +3182,7 @@ void SketchWidget::moveItemsAux(QPointF scenePos, QPointF globalPos, bool checkA
 		if (!result) return;
 	}
 
-	if (m_alignToGrid && (m_alignmentItem)) {
+	if ((m_alignmentItem) && shouldAlignToGrid()) {
 		QPointF currentParentPos = m_alignmentItem->mapToParent(m_alignmentItem->mapFromScene(scenePos));
 		QPointF buttonDownParentPos = m_alignmentItem->mapToParent(m_alignmentItem->mapFromScene(m_mousePressScenePos));
 		alignLoc(scenePos, m_alignmentStartPoint, currentParentPos, buttonDownParentPos);
@@ -3525,7 +3531,8 @@ ItemBase * SketchWidget::placePartDroppedInOtherView(ModelPart * modelPart, View
 	ViewGeometry vg(viewGeometry);
 	vg.setLoc(to + dp);
 	ItemBase * itemBase = addItemAux(modelPart, viewLayerPlacement, vg, id, true, m_viewID, false);
-	if (m_alignToGrid && (itemBase)) {
+	
+	if ((itemBase) && shouldAlignToGrid()) {
 		alignOneToGrid(itemBase);
 	}
 
@@ -5753,7 +5760,7 @@ void SketchWidget::wireSplitSlot(Wire* wire, QPointF newPos, QPointF oldPos, con
 
 	long fromID = wire->id();
 
-	if (m_alignToGrid) {
+	if (shouldAlignToGrid()) {
 		alignLoc(newPos, newPos, QPointF(0,0), QPointF(0,0));
 	} else {
 		//We need to place the bendpoint on the original wire
@@ -9145,7 +9152,7 @@ bool SketchWidget::acceptsTrace(const ViewGeometry &) {
 }
 
 QPointF SketchWidget::alignOneToGrid(ItemBase * itemBase) {
-	if (m_alignToGrid) {
+	if (shouldAlignToGrid()) {
 		QHash<long, ItemBase *> savedItems;
 		QHash<Wire *, ConnectorItem *> savedWires;
 		findAlignmentAnchor(itemBase, savedItems, savedWires);

@@ -215,6 +215,7 @@ public:
 	QString renderToSVGForSVGExport(RenderThing &, QGraphicsItem * board, const LayerList &);
 
 	bool spaceBarIsPressed() noexcept;
+	bool shouldAlignToGrid() const;
 	virtual long setUpSwap(SwapThing &, bool master);
 	void setUpSwapMiddle(SwapThing &, QString newModuleID, ItemBase * itemBase, long newID, bool master);
 	void setUpSwapFinal(SwapThing &, QString newModuleID, ItemBase * itemBase, long newID, bool master);
