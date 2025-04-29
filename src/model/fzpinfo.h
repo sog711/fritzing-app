@@ -91,6 +91,7 @@ private:
 	// QString author;
 	// QString date;
 	QString m_path;
+	int m_moduleLineNumber = -1;  // Track line number of the module tag
 
 	QList<QSharedPointer<FLoadError>> m_errors;
 

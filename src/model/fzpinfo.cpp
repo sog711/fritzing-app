@@ -85,6 +85,7 @@ void FzpInfo::parse()
 			if (streamReader.name().toString().compare("module") == 0) {
 				m_moduleId = streamReader.attributes().value("moduleId").toString();
 				m_fritzingVersion = streamReader.attributes().value("fritzingVersion").toString();
+				m_moduleLineNumber = streamReader.lineNumber(); // Store module tag line number
 
 				// Look for other elements within module
 				while (!streamReader.atEnd() ) {
@@ -154,8 +155,9 @@ void FzpInfo::validateVersion()
 	if (m_fritzingVersion.isEmpty()) {
 		addWarning(
 			tr("Version number missing."),
-			tr("The part is missing a fritzing version.\n"
-			   "All parts must have a fritzingVersion attribute: <version>x.y.z</version>.")
+			tr("The part is missing a fritzing version.\n") +
+			tr("All parts must have a fritzingVersion attribute: fritzingVersion=\"x.y.z\"."),
+			m_moduleLineNumber
 			);
 		return;
 	}
@@ -167,7 +169,8 @@ void FzpInfo::validateVersion()
 		addWarning(
 			tr("Invalid Version"),
 			tr("The fritzing version '%1' is invalid.\n"
-			   "The part might not work properly.").arg(m_fritzingVersion)
+			   "The part might not work properly.").arg(m_fritzingVersion),
+			m_moduleLineNumber
 			);
 		return;
 	}
@@ -181,7 +184,8 @@ void FzpInfo::validateVersion()
 			tr("This part was created with Fritzing version '%1'.\n"
 			   "Current version is '%2' which might not support it properly."
 			   "Please consider updating your Fritzing.\n\n")
-				.arg(m_fritzingVersion, Version::versionString())
+				.arg(m_fritzingVersion, Version::versionString()),
+			m_moduleLineNumber
 			);
 	}
 }
