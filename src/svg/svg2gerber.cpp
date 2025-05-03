@@ -168,7 +168,7 @@ int SVG2gerber::renderGerber(bool doubleSided, const QString & mainLayerName, Fo
 	else {
 		if (gerberExportImprovementsEnabled) {
 			// label our layers
-			m_gerber_header += QString("%G04%1*%\n").arg(mainLayerName.toUpper());
+			m_gerber_header += QString("G04 %1*\n").arg(mainLayerName.toUpper());
 
 			// Not sure why we configure this at the end of the job again.
 			// Assuming the old "just to be safe" comment was intended to leave a
