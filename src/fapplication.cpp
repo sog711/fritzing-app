@@ -1374,7 +1374,7 @@ int FApplication::startup()
 
 		if (prevVersion != currVersion) {
 			// Settings to preserve during clear
-			const QStringList preserveKeys = {"pid", "language", "locale", "fps", "opengl"};
+			const QStringList preserveKeys = {"pid", "language", "locale", "fps", "opengl", "gerberExportImprovementsEnabled"};
 
 			// Store values we want to keep
 			QMap<QString, QVariant> preserveValues;
