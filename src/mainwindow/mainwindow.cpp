@@ -1994,11 +1994,19 @@ QList<ModelPart*> MainWindow::loadBundledPart(const QString &fileName, bool addT
 
 	if (mps.count() < 1) {
 		// if this fails, that means that the bundled was wrong
-		FMessageBox::warning(
-		    this,
-		    tr("Fritzing"),
-		    tr("Unable to load part from '%1'").arg(fileName)
-		);
+		if (unzipDir.entryInfoList(QStringList() << ZIP_PART+"*").length() == 0) {
+			FMessageBox::warning(
+				this,
+				tr("Fritzing"),
+				tr("No part files with the required prefix '%1' where found inside in the shareable part '%2'").arg(ZIP_PART).arg(fileName)
+			);
+		} else {
+			FMessageBox::warning(
+			    this,
+			    tr("Fritzing"),
+			    tr("Unable to load part from '%1'").arg(fileName)
+			);
+		}
 		return QList<ModelPart*>();
 	}
 
