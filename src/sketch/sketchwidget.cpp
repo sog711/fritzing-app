@@ -3345,19 +3345,18 @@ void SketchWidget::mouseReleaseEvent(QMouseEvent *event) {
 	// make sure this is cleared
 	m_bendpointWire = nullptr;
 
-	if (m_moveEventCount == 0) {
-		if (this->m_holdingSelectItemCommand) {
-			if (m_holdingSelectItemCommand->updated()) {
-				SelectItemCommand* tempCommand = m_holdingSelectItemCommand;
-				m_holdingSelectItemCommand = nullptr;
-				//DebugDialog::debug(QString("scene changed push select %1").arg(scene()->selectedItems().count()));
-				m_undoStack->push(tempCommand);
-			}
-			else {
-				clearHoldingSelectItem();
-			}
+	if (this->m_holdingSelectItemCommand) {
+		if (m_holdingSelectItemCommand->updated()) {
+			SelectItemCommand* tempCommand = m_holdingSelectItemCommand;
+			m_holdingSelectItemCommand = nullptr;
+			//DebugDialog::debug(QString("scene changed push select %1").arg(scene()->selectedItems().count()));
+			m_undoStack->push(tempCommand);
+		}
+		else {
+			clearHoldingSelectItem();
 		}
 	}
+
 	m_savedItems.clear();
 	m_savedWires.clear();
 }
@@ -3577,6 +3576,13 @@ void SketchWidget::selectionChangedSlot() {
 		}
 		m_holdingSelectItemCommand->setText(selString);
 		m_holdingSelectItemCommand->setUpdated(true);
+
+		// Show in inspector here if selected via rectangle.
+		// For mouse clicks this was done in MousePressEvent.
+		if (saveBase && m_moveEventCount > 0) {
+			viewItemInfo(saveBase);
+			setLastPaletteItemSelectedIf(saveBase);
+		}
 	}
 }
 
