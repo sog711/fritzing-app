@@ -526,7 +526,7 @@ public:
 	void undo();
 	void redo();
 	void addUndo(long id);
-	void addRedo(long id);
+	size_t addRedo(long id);
 	void clearRedo();
 	int id() const;
 	bool mergeWith(const QUndoCommand *other);

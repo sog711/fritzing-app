@@ -1081,10 +1081,14 @@ void SelectItemCommand::addUndo(long id) {
 	m_undoIDs.append(id);
 }
 
-void SelectItemCommand::addRedo(long id) {
-	if(m_type == NormalSelect) {
-		m_redoIDs.append(id);
+size_t SelectItemCommand::addRedo(long id)
+{
+	if (m_type == NormalSelect) {
+		if (!m_redoIDs.contains(id)) {
+			m_redoIDs.append(id);
+		}
 	}
+	return m_redoIDs.count();
 }
 
 QString SelectItemCommand::getParamString() const {

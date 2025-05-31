@@ -3565,8 +3565,7 @@ void SketchWidget::selectionChangedSlot() {
 			if (!base) continue;
 
 			saveBase = base;
-			m_holdingSelectItemCommand->addRedo(base->layerKinChief()->id());
-			selCount++;
+			selCount = m_holdingSelectItemCommand->addRedo(base->layerKinChief()->id());
 		}
 		if (selCount == 1) {
 			selString = tr("Select %1").arg(saveBase->title());
