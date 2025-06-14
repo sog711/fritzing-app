@@ -6136,8 +6136,6 @@ void SketchWidget::updateInfoViewSlot() {
 		viewItemInfo(chief);
 		return;
 	}
-
-	viewItemInfo(m_lastPaletteItemSelected);
 }
 
 long SketchWidget::setUpSwap(SwapThing & swapThing, bool master)
