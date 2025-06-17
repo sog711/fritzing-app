@@ -509,26 +509,21 @@ void GroundPlaneGenerator::makeCopperFillFromPolygons(QList<Paths> &sortedPolygo
 			Paths openedForConnector;
 			co2.AddPaths(fragment, jtRound, etClosedPolygon);
 			co2.Execute(openedForConnector, -targetDiameterAnd / 2);
-			pSvg << QString("<g id='%1'>").arg(ConnectorName);
 			if (openedForConnector.size()) {
+				pSvg << QString("<g id='%1'>").arg(ConnectorName);
 				IntPoint pt = findTopLeftMostPoint(openedForConnector);
 				pSvg << QString("<circle cx='%1' cy='%2' r='%3' fill='%4' stroke='none'/>")
 						.arg(pt.X - minX)
 						.arg(pt.Y - minY)
 						.arg(targetRadius)
 						.arg(colorString);
-			} else {
-				QString polyString = QString("<path fill='%1' stroke='none' stroke-width='0' d='").arg(colorString);
-				if (fragment.size())
-					for (size_t j = 0; j < fragment[0].size(); j++) {
-						IntPoint pt = fragment[0][j];
-						polyString += j == 0 ? "M" : "L";
-						polyString += QString("%1,%2 ").arg(pt.X - minX).arg(pt.Y - minY);
-					}
-				polyString += "Z'/>\n";
-				pSvg << polyString;
-			}
-			pSvg << QString("</g>\n");
+				pSvg << QString("</g>\n");
+			} // Else case: Previous versions of Fritzing turned the complete
+			// fragment into a connector if there was no space for a distinct
+			// circular connector. This caused a bug (https://github.com/fritzing/fritzing-app/issues/4254)
+			// in case the fragment contained real connectors from other parts.
+			// I could not find a use case or documentation for ground fill fragments behaving as connectors,
+			// so it was probably save to remove the code.
 		}
 		pSvg << "</g>\n</svg>\n";
 		m_newSVGs.append(pSvg.join(""));
