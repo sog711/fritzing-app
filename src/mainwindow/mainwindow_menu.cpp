@@ -3301,7 +3301,9 @@ void MainWindow::groundFillAux(bool fillGroundTraces, ViewLayer::ViewLayerID vie
 	auto * parentCommand = new QUndoCommand(fillGroundTraces ? tr("Ground Fill") : tr("Copper Fill"));
 	m_pcbGraphicsView->blockUI(true);
 	removeGroundFill(viewLayerID, parentCommand);
-	bool success = m_pcbGraphicsView->groundFill(fillGroundTraces, viewLayerID, parentCommand);
+	QPair<bool, FMessageBox*> result = m_pcbGraphicsView->groundFill(fillGroundTraces, viewLayerID, parentCommand);
+	bool success = result.first;
+	FMessageBox* msgBox = result.second;
 
 	if (success) {
 		m_undoStack->push(parentCommand);
@@ -3310,6 +3312,12 @@ void MainWindow::groundFillAux(bool fillGroundTraces, ViewLayer::ViewLayerID vie
 		delete parentCommand;
 	}
 	m_pcbGraphicsView->blockUI(false);
+
+	// Show message after rendering is complete
+	if (msgBox != nullptr) {
+		msgBox->exec();
+		delete msgBox;
+	}
 }
 
 void MainWindow::removeGroundFill() {

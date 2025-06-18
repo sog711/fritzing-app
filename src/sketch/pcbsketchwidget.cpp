@@ -46,6 +46,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "items/FProbeR1PosPCB.h"
 #include "items/FProbeRPartLabel.h"
 #include "installedfonts.h"
+#include "utils/fmessagebox.h"
 
 #include <QApplication>
 #include <QScrollBar>
@@ -1407,21 +1408,21 @@ double PCBSketchWidget::getSmallerTraceWidth(double minDim) {
 	return GraphicsUtils::mils2pixels(mils, GraphicsUtils::SVGDPI);
 }
 
-bool PCBSketchWidget::groundFill(bool fillGroundTraces, ViewLayer::ViewLayerID viewLayerID, QUndoCommand * parentCommand)
+QPair<bool, FMessageBox*> PCBSketchWidget::groundFill(bool fillGroundTraces, ViewLayer::ViewLayerID viewLayerID, QUndoCommand * parentCommand)
 {
 	m_groundFillSeeds = nullptr;
 	int boardCount;
 	ItemBase * board = findSelectedBoard(boardCount);
 	// barf an error if there's no board
 	if (boardCount == 0) {
-		QMessageBox::critical(this, tr("Fritzing"),
+		FMessageBox* msgBox = FMessageBox::createCustom(this, FMessageBox::Critical, tr("Fritzing"),
 		                      tr("Your sketch does not have a board yet!  Please add a PCB in order to use copper fill."));
-		return false;
+		return qMakePair(false, msgBox);
 	}
 	if (board == nullptr) {
-		QMessageBox::critical(this, tr("Fritzing"),
+		FMessageBox* msgBox = FMessageBox::createCustom(this, FMessageBox::Critical, tr("Fritzing"),
 		                      tr("%1 Fill: please select the board you want to apply fill to.").arg(fillGroundTraces ? tr("Ground") : tr("Copper")));
-		return false;
+		return qMakePair(false, msgBox);
 	}
 
 
@@ -1434,7 +1435,9 @@ bool PCBSketchWidget::groundFill(bool fillGroundTraces, ViewLayer::ViewLayerID v
 		if (!gotTrueSeeds && (seeds.count() != 1)) {
 			QString message =  tr("Please designate one or more ground fill seeds before doing a ground fill.\n\n");
 			setGroundFillSeeds(message);
-			return false;
+			// The setGroundFillSeeds dialog handles the user interaction
+			// Return false without additional message since dialog was shown
+			return qMakePair(false, nullptr);
 		}
 
 		ConnectorItem::collectEqualPotential(seeds, true, ViewGeometry::NoFlag);
@@ -1472,8 +1475,9 @@ bool PCBSketchWidget::groundFill(bool fillGroundTraces, ViewLayer::ViewLayerID v
 	renderThing.selectedItems = renderThing.renderBlocker = false;
 	QString boardSvg = renderToSVG(renderThing, board, viewLayerIDs);
 	if (boardSvg.isEmpty()) {
-		QMessageBox::critical(this, tr("Fritzing"), tr("Fritzing error: unable to render board svg (1)."));
-		return false;
+		FMessageBox* msgBox = FMessageBox::createCustom(this, FMessageBox::Critical, tr("Fritzing"),
+		                      tr("Fritzing error: unable to render board svg (1)."));
+		return qMakePair(false, msgBox);
 	}
 
 	boardImageRect = renderThing.imageRect;
@@ -1490,8 +1494,8 @@ bool PCBSketchWidget::groundFill(bool fillGroundTraces, ViewLayer::ViewLayerID v
 		svg0 = renderToSVG(renderThing, board, viewLayerIDs);
 		if (fillGroundTraces) showGroundTraces(seeds, true);
 		if (svg0.isEmpty()) {
-			QMessageBox::critical(this, tr("Fritzing"), tr("Fritzing error: unable to render copper svg (1)."));
-			return false;
+			FMessageBox* msgBox = FMessageBox::createCustom(this, FMessageBox::Critical, tr("Fritzing"), tr("Fritzing error: unable to render copper svg (1)."));
+			return qMakePair(false, msgBox);
 		}
 		copperImageRect = renderThing.imageRect;
 	}
@@ -1505,8 +1509,8 @@ bool PCBSketchWidget::groundFill(bool fillGroundTraces, ViewLayer::ViewLayerID v
 		svg1 = renderToSVG(renderThing, board, viewLayerIDs);
 		if (fillGroundTraces) showGroundTraces(seeds, true);
 		if (svg1.isEmpty()) {
-			QMessageBox::critical(this, tr("Fritzing"), tr("Fritzing error: unable to render copper svg (1)."));
-			return false;
+			FMessageBox* msgBox = FMessageBox::createCustom(this, FMessageBox::Critical, tr("Fritzing"), tr("Fritzing error: unable to render copper svg (2)."));
+			return qMakePair(false, msgBox);
 		}
 		copperImageRect = renderThing.imageRect;
 	}
@@ -1514,6 +1518,8 @@ bool PCBSketchWidget::groundFill(bool fillGroundTraces, ViewLayer::ViewLayerID v
 	QStringList exceptions;
 	exceptions << "none" << "" << background().name();    // the color of holes in the board
 
+	size_t numPaths0 = 0;
+	size_t numPaths1 = 0;
 	GroundPlaneGenerator gpg0;
 	if (!svg0.isEmpty()) {
 		gpg0.setLayerName("groundplane");
@@ -1523,9 +1529,10 @@ bool PCBSketchWidget::groundFill(bool fillGroundTraces, ViewLayer::ViewLayerID v
 											   GraphicsUtils::StandardFritzingDPI * 30,
 												ViewLayer::Copper0Color, getKeepoutMils(), groundSeedsCopper0);
 		if (result == false) {
-			QMessageBox::critical(this, tr("Fritzing"), tr("Fritzing error: unable to write copper fill (1)."));
-			return false;
+			FMessageBox* msgBox = FMessageBox::createCustom(this, FMessageBox::Critical, tr("Fritzing"), tr("Fritzing error: unable to write copper fill (1)."));
+			return qMakePair(false, msgBox);
 		}
+		numPaths0 = gpg0.newSVGs().size();
 	}
 
 	GroundPlaneGenerator gpg1;
@@ -1537,11 +1544,11 @@ bool PCBSketchWidget::groundFill(bool fillGroundTraces, ViewLayer::ViewLayerID v
 											   GraphicsUtils::StandardFritzingDPI * 30,
 											   ViewLayer::Copper1Color, getKeepoutMils(), groundSeedsCopper1);
 		if (result == false) {
-			QMessageBox::critical(this, tr("Fritzing"), tr("Fritzing error: unable to write copper fill (2)."));
-			return false;
+			FMessageBox* msgBox = FMessageBox::createCustom(this, FMessageBox::Critical, tr("Fritzing"), tr("Fritzing error: unable to write copper fill (2)."));
+			return qMakePair(false, msgBox);
 		}
+		numPaths1 = gpg1.newSVGs().size();
 	}
-
 
 	QString fillType = (fillGroundTraces) ? GroundPlane::fillTypeGround : GroundPlane::fillTypePlain;
 	QRectF bsbr = board->sceneBoundingRect();
@@ -1566,7 +1573,20 @@ bool PCBSketchWidget::groundFill(bool fillGroundTraces, ViewLayer::ViewLayerID v
 		new SetPropCommand(this, newID, "fillType", fillType, fillType, false, parentCommand);
 	}
 
-	return true;
+	FMessageBox* msgBox = nullptr;
+	if (fillGroundTraces && (numPaths0 > 1 || numPaths1 > 1)) {
+		QString message;
+		if (numPaths0 > 1) {
+			message += tr("The bottom ground fill is split into %1 sections. ").arg(numPaths0);
+		}
+		if (numPaths1 > 1) {
+			message += tr("The top ground fill is split into %1 sections. ").arg(numPaths1);
+		}
+		message += tr("Please manually ensure connectivity, especially for ground seeds.");
+		msgBox = FMessageBox::createCustom(this, FMessageBox::Information, tr("Ground Fill"), message);
+	}
+
+	return qMakePair(true, msgBox);
 
 }
 

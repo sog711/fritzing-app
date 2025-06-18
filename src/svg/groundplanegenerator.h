@@ -80,7 +80,6 @@ protected:
 protected:
 	QStringList m_newSVGs;
 	QList<QPointF> m_newOffsets;
-	double m_blurBy;
 	QString m_layerName;
 	double m_strokeWidthIncrement;
 	int m_minRunSize;

@@ -23,6 +23,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "sketchwidget.h"
 #include "../dialogs/quotedialog.h"
+#include "utils/fmessagebox.h"
 #include <QVector>
 #include <QNetworkReply>
 #include <QDialog>
@@ -89,7 +90,7 @@ public:
 	virtual double getAutorouterTraceWidth();
 	void getBendpointWidths(class Wire *, double w, double & w1, double & w2, bool & negativeOffsetRect);
 	double getSmallerTraceWidth(double minDim);
-	bool groundFill(bool fillGroundTraces, ViewLayer::ViewLayerID, QUndoCommand * parentCommand);
+	QPair<bool, FMessageBox*> groundFill(bool fillGroundTraces, ViewLayer::ViewLayerID, QUndoCommand * parentCommand);
 	bool groundFillOld(bool fillGroundTraces, ViewLayer::ViewLayerID, QUndoCommand * parentCommand);
 	void setGroundFillSeeds();
 	void clearGroundFillSeeds();
