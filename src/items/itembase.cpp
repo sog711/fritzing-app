@@ -1024,7 +1024,7 @@ void ItemBase::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 		return;
 	}
 
-	if (m_hidden || m_inactive || m_layerHidden) {
+	if (m_hidden || m_layerHidden) {
 		event->ignore();
 		return;
 	}
