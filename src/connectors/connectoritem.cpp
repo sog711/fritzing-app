@@ -823,6 +823,11 @@ void ConnectorItem::mousePressEvent(QGraphicsSceneMouseEvent *event) {
 		return;
 	}
 
+	if (event->modifiers() & Qt::ControlModifier) {
+		QGraphicsRectItem::mousePressEvent(event);
+		return;
+	}
+
 	if (m_attachedTo->filterMousePressConnectorEvent(this, event)) {
 		event->ignore();
 		return;
