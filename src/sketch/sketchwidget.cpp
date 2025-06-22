@@ -2336,6 +2336,12 @@ void SketchWidget::mousePressEvent(QMouseEvent *event)
 	if (item != wasItem) {
 		// if the item was deleted during mousePressEvent
 		// for example, by shift-clicking a connectorItem
+		auto * connectorItem = dynamic_cast<ConnectorItem *>(wasItem);
+		if (connectorItem) {
+			viewItemInfo(connectorItem->attachedTo());
+			setLastPaletteItemSelectedIf(connectorItem->attachedTo());
+			connectorItem->attachedTo()->setSelected(true);
+		}
 		return;
 	}
 
