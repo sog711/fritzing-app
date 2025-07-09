@@ -795,12 +795,12 @@ QString FolderUtils::addToBasename(const QString &filePath, const QString &addit
 bool FolderUtils::checkFileLoadability(QWidget* parent, const QString& filePath) {
 	QString fileType;
 	static const QMap<QString, QString> fileTypes {
-		{FritzingSketchExtension, QObject::tr("Fritzing sketch", "file type in error message")},
-		{FritzingBundleExtension, QObject::tr("Fritzing bundle", "file type in error message")},
-		{FritzingBinExtension, QObject::tr("Fritzing bin", "file type in error message")},
-		{FritzingBundledBinExtension, QObject::tr("Fritzing bundled bin", "file type in error message")},
-		{FritzingPartExtension, QObject::tr("Fritzing part", "file type in error message")},
-		{FritzingBundledPartExtension, QObject::tr("Fritzing bundled part", "file type in error message")}
+		{FritzingSketchExtension, QObject::tr("Fritzing sketch", "This is a file type used for an error message.")},
+		{FritzingBundleExtension, QObject::tr("Fritzing bundle", "This is a file type used for an error message.")},
+		{FritzingBinExtension, QObject::tr("Fritzing bin", "This is a file type used for an error message.")},
+		{FritzingBundledBinExtension, QObject::tr("Fritzing bundled bin", "This is a file type used for an error message.")},
+		{FritzingPartExtension, QObject::tr("Fritzing part", "This is a file type used for an error message.")},
+		{FritzingBundledPartExtension, QObject::tr("Fritzing bundled part", "This is a file type used for an error message.")}
 	};
 	for (auto it = fileTypes.begin(); it != fileTypes.end(); ++it) {
 		if (filePath.endsWith(it.key())) {
