@@ -687,12 +687,12 @@
     <message>
         <location filename="../src/items/resizableboard.cpp" line="438"/>
         <source>Before ordering PCB manufacturing, we recommend validating your design by exporting it as Gerber files (File → Export → for Production → Extended Gerber).</source>
-        <translation type="unfinished"></translation>
+        <translation>Antes de comprar um PCB fabricado, nós recomendamos validar o seu design ao exportar como ficheiros Gerber(Ficheiro → Exportar → para Produção → Gerber Extenso).</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="460"/>
         <source>&lt;br/&gt;&lt;br/&gt;If you intended your custom shape to have cutouts and you did not get the expected result, it is likely because Fritzing requires that you make cutouts using a shape &apos;subtraction&apos; or &apos;difference&apos; operation in your vector graphics editor.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br/&gt;&lt;br/&gt;Se pretendia que a sua forma personalizada tivesse recortes e não obteve o resultado esperado, é provável que o Fritzing exija que faça recortes utilizando uma operação de &apos;subtração&apos; ou &apos;diferença&apos; de forma no seu editor de gráficos vectoriais.</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="530"/>
@@ -1649,13 +1649,13 @@ Também é possível escolher um conector como uma semente de aterramento clican
         <location filename="../src/infoview/htmlinfoview.cpp" line="426"/>
         <source>Ratsnest line</source>
         <comment>A virtual wire, a planned connection that does not yet have a layout.</comment>
-        <translation type="unfinished">Fio ninho-de-ratos</translation>
+        <translation>Linha Ratsnest</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="429"/>
         <source>Trace wire %1</source>
         <comment>A wire routed on a PCB</comment>
-        <translation type="unfinished">Traçar fio %1</translation>
+        <translation>Fio de rasto %1</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="997"/>
@@ -1795,7 +1795,7 @@ Também é possível escolher um conector como uma semente de aterramento clican
         <location filename="../src/items/itembase.cpp" line="221"/>
         <source>family</source>
         <comment>component family, interchangebable</comment>
-        <translation type="unfinished">família</translation>
+        <translation>família</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="223"/>
@@ -1806,13 +1806,13 @@ Também é possível escolher um conector como uma semente de aterramento clican
         <location filename="../src/items/itembase.cpp" line="226"/>
         <source>resistance</source>
         <comment>electrical resistance of a component</comment>
-        <translation type="unfinished">resistência</translation>
+        <translation>resistência</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="233"/>
         <source>rated power</source>
         <comment>maximum power rating</comment>
-        <translation type="unfinished">potência nominal</translation>
+        <translation>potência nominal</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="242"/>
@@ -1828,7 +1828,7 @@ Também é possível escolher um conector como uma semente de aterramento clican
         <location filename="../src/items/itembase.cpp" line="244"/>
         <source>pin spacing</source>
         <comment>distance between pins</comment>
-        <translation type="unfinished">Espaço entre pinos</translation>
+        <translation>Espaçamento de pinos</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="245"/>
@@ -1894,49 +1894,49 @@ Também é possível escolher um conector como uma semente de aterramento clican
         <location filename="../src/items/itembase.cpp" line="257"/>
         <source>banded</source>
         <comment>wire color bands, for example red/white or green/white</comment>
-        <translation type="unfinished">unido</translation>
+        <translation>em faixas</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="258"/>
         <source>top</source>
         <comment>placed on the top side of the board</comment>
-        <translation type="unfinished">superior</translation>
+        <translation>topo</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="259"/>
         <source>bottom</source>
         <comment>placed on the bottom side of the board</comment>
-        <translation type="unfinished">inferior</translation>
+        <translation>fundo</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="260"/>
         <source>copper bottom</source>
         <comment>bottom copper PCB layer</comment>
-        <translation type="unfinished">cobre inferior</translation>
+        <translation>fundo de cobre</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="261"/>
         <source>copper top</source>
         <comment>top copper PCB layer</comment>
-        <translation type="unfinished">cobre superior</translation>
+        <translation>topo de cobre</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="264"/>
         <source>mn</source>
         <comment>Manufacturer Number</comment>
-        <translation type="unfinished">mn</translation>
+        <translation>mn</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="265"/>
         <source>mpn</source>
         <comment>Manufacturer Parts Number</comment>
-        <translation type="unfinished">mpn</translation>
+        <translation>mpn</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="271"/>
         <source>Part</source>
         <comment>electronic component</comment>
-        <translation type="unfinished">Componente</translation>
+        <translation>Componente</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="1352"/>
@@ -2168,27 +2168,27 @@ Também é possível escolher um conector como uma semente de aterramento clican
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2111"/>
         <source>There is already a part with id &apos;%1&apos; loaded into Fritzing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Já há um componente com o id &apos;%1&apos; carregado no Fritzing.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2119"/>
         <source>Error</source>
-        <translation type="unfinished">Erro</translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2120"/>
         <source>Failed to process part file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Falhou ao processar ficheiro de componente: %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2129"/>
         <source>Critical Issues</source>
-        <translation type="unfinished"></translation>
+        <translation>Problemas críticos</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2140"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviso</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2997"/>
@@ -4821,21 +4821,25 @@ Nota: se você deseja atualizar mais tarde, existem opções no menu &apos;Compo
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2110"/>
         <source>Part module ID must be unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>O ID do módulo de componente deve ser único.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2130"/>
         <source>Part &apos;%1&apos; has critical issues that prevent it from loading:
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Componente &apos;%1&apos; tem problemas críticos que previnem de o carregar:
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2141"/>
         <source>Part &apos;%1&apos; was loaded with warnings:
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Componente &apos;%1&apos; foi carregado com avisos:
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2998"/>
@@ -7449,19 +7453,21 @@ Nós recomendamos ativar esta opção. Apenas para evitar surpresas com processo
     <message>
         <location filename="../src/model/modelbase.cpp" line="164"/>
         <source>Missing Version Attribute</source>
-        <translation type="unfinished"></translation>
+        <translation>Atributo de Versão em Falta</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="165"/>
         <source>The loaded sketch is missing its &apos;fritzingVersion&apos; attribute.
 
 File: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>O esboço carregado tem em falta o seu atributo &apos;fritzingVersion&apos;.
+
+Ficheiro: %1</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="171"/>
         <source>Invalid Version Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato de Versão Inválido</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="172"/>
