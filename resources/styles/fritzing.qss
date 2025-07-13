@@ -475,31 +475,27 @@ QMenu::item:disabled:selected {
 
 }
 
-/*############## indicator:non-exclusive is a  ###########*/
-QCheckBox::indicator:checked,
-QMenu::indicator:non-exclusive:checked {
+/* Menu-specific styling - custom background and border only for menus */
+.QMenu::indicator:non-exclusive:checked {
 	image: url(:/resources/images/icons/check.png);
 	background-color:transparent;
 	border:none;
 }
 
-QCheckBox::indicator:checked:selected,
-QMenu::indicator:non-exclusive:checked:selected {
+.QMenu::indicator:non-exclusive:checked:selected {
 	image: url(:/resources/images/icons/checkhover.png);
 	background-color:transparent;
 	border:none;
 }
 
-QCheckBox::indicator:unchecked,
-QMenu::indicator:non-exclusive:unchecked {  /*the checkbox for the mainmenu */
+.QMenu::indicator:non-exclusive:unchecked {  /*the checkbox for the mainmenu */
 	image: url(:/resources/images/icons/nocheck.png);
 	background-color:transparent;
 	border:transparent;
 
 }
 
-QCheckBox::indicator:unchecked:selected,
-QMenu::indicator:non-exclusive:unchecked:selected {
+.QMenu::indicator:non-exclusive:unchecked:selected {
 	image: url(:/resources/images/icons/check.png);
 	background-color:transparent;
 	border:none;
