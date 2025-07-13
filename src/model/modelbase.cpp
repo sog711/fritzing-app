@@ -414,14 +414,28 @@ bool ModelBase::loadInstances(QDomDocument & domDocument, QDomElement & instance
 	}
 
 	if (m_reportMissingModules && missingModules.count() > 0) {
-		QString unableToFind = QString("<html><body><b>%1</b><br/><table style='border-spacing: 0px 12px;'>")
-		                       .arg(tr("Unable to find the following %n part(s):", "", missingModules.count()));
-		Q_FOREACH (QString key, missingModules.keys()) {
-			unableToFind += QString("<tr><td>'%1'</td><td><b>%2</b></td><td>'%3'</td></tr>")
-			                .arg(key).arg(tr("at")).arg(missingModules.value(key, ""));
+		QString mainMessage = tr("Unable to find %n part(s). Click 'Show Details' for a list of missing parts.", "", missingModules.count());
+
+		QString detailedInfo;
+		for (auto it = missingModules.constBegin(); it != missingModules.constEnd(); ++it) {
+			if (!detailedInfo.isEmpty()) {
+				detailedInfo += "\n";
+			}
+			const QString& key = it.key();
+			const QString& path = it.value();
+			if (path.isEmpty()) {
+				detailedInfo += QString("Part ID: %1").arg(key);
+			} else {
+				detailedInfo += QString("Part ID: %1 (from %2)").arg(key, path);
+			}
 		}
-		unableToFind += "</table></body></html>";
-		FMessageBox::warning(nullptr, QObject::tr("Fritzing"), unableToFind);
+
+		FMessageBox* msgBox = FMessageBox::createCustom(nullptr, QMessageBox::Warning,
+		                                                QObject::tr("Fritzing"), mainMessage);
+		msgBox->setDetailedText(detailedInfo);
+		msgBox->enableClipboardButton(true);
+		msgBox->exec();
+		delete msgBox;
 	}
 
 
