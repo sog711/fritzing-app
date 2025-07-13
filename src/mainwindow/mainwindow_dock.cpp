@@ -24,6 +24,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "mainwindow.h"
 #include "fdockwidget.h"
+#include "debugdialog.h"
 
 #include "dock/layerpalette.h"
 #include "infoview/htmlinfoview.h"
@@ -60,12 +61,12 @@ void MainWindow::createDockWindows()
 
 	makeDock(BinManager::Title, m_binManager, PartsBinMinHeight, PartsBinHeightDefault/*, Qt::LeftDockWidgetArea*/);
 
-	makeDock(tr("Inspector"), m_infoView, InfoViewMinHeight, InfoViewHeightDefault);
+	makeDock(tr("Inspector", "dock widget title"), m_infoView, InfoViewMinHeight, InfoViewHeightDefault);
 
-	makeDock(tr("Undo History"), m_undoView, UndoHistoryMinHeight, UndoHistoryDefaultHeight)->hide();
+	makeDock(tr("Undo History", "dock widget title"), m_undoView, UndoHistoryMinHeight, UndoHistoryDefaultHeight)->hide();
 	m_undoView->setMinimumSize(DockMinWidth, UndoHistoryMinHeight);
 
-	makeDock(tr("Layers"), m_layerPalette, DockMinWidth, DockMinHeight)->hide();
+	makeDock(tr("Layers", "dock widget title"), m_layerPalette, DockMinWidth, DockMinHeight)->hide();
 	m_layerPalette->setMinimumSize(DockMinWidth, DockMinHeight);
 	m_layerPalette->setShowAllLayersAction(m_showAllLayersAct);
 	m_layerPalette->setHideAllLayersAction(m_hideAllLayersAct);
@@ -101,7 +102,92 @@ FDockWidget *MainWindow::dockIt(FDockWidget* dock, int dockMinHeight, int dockDe
 	dock->setAllowedAreas(area);
 	addDockWidget(area, dock);
 	if (m_windowMenu != nullptr) {
-		m_windowMenu->addAction(dock->toggleViewAction());
+		QString title = dock->windowTitle();
+		if (title.isEmpty()) {
+			title = "Dock Widget";  // Fallback title
+		}
+
+		QAction *tristateAction = new QAction(title, this);
+		tristateAction->setCheckable(true);
+		tristateAction->setProperty("dockTristate", true);
+		
+		// Track tristate in action data: 0=unchecked, 1=partial, 2=checked
+		int initialState = 0;
+		if (dock->isVisible()) {
+			initialState = dock->isFloating() ? 2 : 1;
+		}
+		tristateAction->setData(initialState);
+		tristateAction->setChecked(initialState > 0);
+		
+		// Helper function to update action visual state and status tip
+		auto updateActionState = [tristateAction, title](int state) {
+			tristateAction->setData(state);
+			
+			// Create status tip with current state first in the cycling sequence
+			QString sequence;
+			switch (state) {
+			case 0: // Unchecked - invisible (no icon, unchecked)
+				tristateAction->setChecked(false);
+				tristateAction->setIcon(QIcon());
+				sequence = tr("Hidden → Docked → Floating", "dock widget state cycle sequence starting from hidden");
+				break;
+			case 1: // Partial - visible and docked (no icon, checked - uses default checkbox)
+				tristateAction->setChecked(true);
+				tristateAction->setIcon(QIcon());
+				sequence = tr("Docked → Floating → Hidden", "dock widget state cycle sequence starting from docked");
+				break;
+			case 2: // Checked - visible and floating (float icon)
+				tristateAction->setChecked(true);
+				tristateAction->setIcon(QIcon(":/resources/images/icons/dockWidgetFloatNormal_icon.png"));
+				sequence = tr("Floating → Hidden → Docked", "dock widget state cycle sequence starting from floating");
+				break;
+			}
+			
+			QString statusTip = tr("%1 - Click to cycle: %2", "dock widget status tip: %1=dock name, %2=cycle sequence")
+									.arg(title)
+									.arg(sequence);
+			tristateAction->setStatusTip(statusTip);
+		};
+		
+		updateActionState(initialState);
+
+		// Handle tristate cycling on click
+		connect(tristateAction, &QAction::triggered, [dock, updateActionState, tristateAction]() {
+			int currentState = tristateAction->data().toInt();
+			int nextState = (currentState + 1) % 3;  // Cycle 0->1->2->0
+			
+			switch (nextState) {
+			case 0: // Unchecked - invisible
+				dock->setVisible(false);
+				break;
+			case 1: // Partial - visible and docked
+				dock->setVisible(true);
+				dock->setFloating(false);
+				break;
+			case 2: // Checked - visible and floating
+				dock->setVisible(true);
+				dock->setFloating(true);
+				break;
+			}
+			
+			updateActionState(nextState);
+		});
+		
+		// Update action when dock state changes externally
+		connect(dock, &QDockWidget::visibilityChanged, [updateActionState, dock](bool visible) {
+			int newState = 0;
+			if (visible) {
+				newState = dock->isFloating() ? 2 : 1;
+			}
+			updateActionState(newState);
+		});
+		
+		connect(dock, &QDockWidget::topLevelChanged, [updateActionState](bool floating) {
+			int newState = floating ? 2 : 1;
+			updateActionState(newState);
+		});
+		
+		m_windowMenu->addAction(tristateAction);
 	}
 
 	dock->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -193,7 +279,7 @@ void MainWindow::dockMarginAux(FDockWidget* dock, const QString &name, const QSt
 		dock->widget()->setStyleSheet(style);
 		dock->setStyleSheet(dock->styleSheet());
 	} else {
-		qWarning() << tr("Couldn't get the dock widget");
+		DebugDialog::debug("Couldn't get the dock widget", DebugDialog::Warning);
 	}
 
 }
