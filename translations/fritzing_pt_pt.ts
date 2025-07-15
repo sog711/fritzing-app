@@ -7474,12 +7474,14 @@ Ficheiro: %1</translation>
         <source>The loaded sketch&apos;s &apos;fritzingVersion&apos; attribute &apos;%1&apos; is not formatted correctly.
 
 File: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>O esboço carregado &apos;fritzingVersion&apos; com atributo &apos;%1&apos; não está formatado corretamente.
+
+Ficheiro: %2</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="182"/>
         <source>Version Mismatch</source>
-        <translation type="unfinished"></translation>
+        <translation>Incompatibilidade de Versão</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="183"/>
@@ -7489,7 +7491,12 @@ Your current version is %2.
 Please update Fritzing to ensure proper functionality.
 
 File: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Este esboço foi criado numa nova versão do Fritzing (%1).
+A sua versão atual é %2.
+
+Por favor atualize o Fritzing para uma funcionalidade adequada.
+
+Ficheiro: %3</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="222"/>
@@ -8344,52 +8351,52 @@ já se encontrava lá, não vai adicionar outra vez, certo?</translation>
     <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="152"/>
         <source>%n path(s) in board outline layer</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n caminho na camada de contorno da board</numerusform>
+            <numerusform>%n caminhos na camada de contorno da board</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="153"/>
         <source>%n path(s) in silkscreen layers</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n caminho em camadas de serigrafia</numerusform>
+            <numerusform>%n caminhos em camadas de serigrafia</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="154"/>
         <source>%n path(s) in copper layers</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n caminho em camadas de cobre</numerusform>
+            <numerusform>%n caminhos em camadas de cobre</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="155"/>
         <source>%n path(s) in mask layers</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n caminho em camadas de máscara</numerusform>
+            <numerusform>%n caminhos em camadas de máscara</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="156"/>
         <source>%n path(s) in paste mask layers</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n caminho em camadas de máscara de colagem</numerusform>
+            <numerusform>%n caminhos em camadas de máscara de colagem</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="159"/>
         <source>, </source>
-        <translation type="unfinished"></translation>
+        <translation>, </translation>
     </message>
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="160"/>
         <source>Some SVG paths could not be transformed into Gerber format: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alguns caminhos SVG não podem ser transformados no formato Gerber: %1.</translation>
     </message>
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="169"/>
@@ -8821,12 +8828,12 @@ Fundo: Verde = ok, Vermelho = valor incorreto, Cinzento = valor atual</translati
     <message>
         <location filename="../src/items/ruler.cpp" line="198"/>
         <source>inch</source>
-        <translation type="unfinished"></translation>
+        <translation>polegada</translation>
     </message>
     <message>
         <location filename="../src/items/ruler.cpp" line="257"/>
         <source>length</source>
-        <translation type="unfinished"></translation>
+        <translation>comprimento</translation>
     </message>
     <message>
         <location filename="../src/items/ruler.cpp" line="280"/>
@@ -9641,9 +9648,14 @@ The parts will be moved automatically. You can use the Undo History to review th
         <translation>Para ver todos os conectores ligados a um determinado conector, mantenha o rato pressionado no conector - todas as ligações serão destacadas.</translation>
     </message>
     <message>
+        <location filename="../src/help/tipsandtricks.cpp" line="135"/>
+        <source>A virtual wire between connections in one view means that those connections are somehow connected in another view.</source>
+        <translation>Um fio virtual entre ligações numa vista significa que essas ligações estão de algum modo ligadas noutra vista.</translation>
+    </message>
+    <message>
         <location filename="../src/help/tipsandtricks.cpp" line="137"/>
         <source>Therefore, virtual wires are sometimes also called &apos;Ratsnest lines&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Por isso, fios virtuais são às vezes também chamados &apos;linhas Ratsnest&apos;.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="146"/>
