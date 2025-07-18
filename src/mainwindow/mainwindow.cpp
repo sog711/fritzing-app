@@ -38,6 +38,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QStyle>
 #include <QFontMetrics>
 #include <QApplication>
+#include <QStyleFactory>
 
 
 #include "mainwindow.h"
@@ -3247,7 +3248,6 @@ void MainWindow::dropEvent(QDropEvent *event)
 	const QMimeData* mimeData = event->mimeData();
 
 	if (mimeData->hasUrls()) {
-		QStringList pathList;
 		QList<QUrl> urlList = mimeData->urls();
 
 		// extract the local paths of the files
@@ -3265,6 +3265,14 @@ bool MainWindow::hasAnyAlien() {
 
 void MainWindow::initStyleSheet()
 {
+	QStringList availableStyles = QStyleFactory::keys();
+	DebugDialog::DebugStream() << "Available styles:" << availableStyles.join(",");
+
+#ifdef Q_OS_WIN
+	// TODO: Replace this with windows11 style in Qt6.7? Also check qpa_platform setting in main.cpp (Qt < 6.5 setting)
+	// QApplication::setStyle("windowsvista");
+#endif
+
 	QString suffix = getStyleSheetSuffix();
 	QFile styleSheet(QString(":/resources/styles/%1.qss").arg(suffix));
 	if (!styleSheet.open(QIODevice::ReadOnly)) {

@@ -88,6 +88,10 @@ int main(int argc, char *argv[])
 #endif
 #endif
 
+#ifdef Q_OS_WIN
+	qputenv("QT_QPA_PLATFORM", "windows:darkmode=0");
+#endif
+
 	int result = 0;
 	try {
 		//QApplication::setGraphicsSystem("raster");
