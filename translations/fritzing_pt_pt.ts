@@ -9660,7 +9660,7 @@ The parts will be moved automatically. You can use the Undo History to review th
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="146"/>
         <source>You can use the Parts Editor to find the SVG file for a part&apos;s image for a given view. In the Parts Editor, click on the tab for that view, then use &lt;b&gt;Show in Folder&lt;/b&gt; under the &lt;b&gt;File&lt;/b&gt; Menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Você pode utilizar o Editor de Componentes para encontrar o ficheiro SVG para uma imagem de componente de uma dada vista. No Editor de Componentes, clique no separador para essa vista, depois utilize &lt;b&gt;Mostrar na Pasta&lt;/b&gt; sob o Menu &lt;b&gt;Ficheiro&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="152"/>
@@ -9765,7 +9765,7 @@ The parts will be moved automatically. You can use the Undo History to review th
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="136"/>
         <source>They are displayed as dotted lines. When wires haven&apos;t been routed yet and all connections are virtual, the sketch can look quite chaotic.</source>
-        <translation type="unfinished"></translation>
+        <translation>São apresentadas como linhas pontilhadas. Quando os fios ainda não foram encaminhados e todas as ligações são virtuais, o esboço pode parecer bastante caótico.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="144"/>
@@ -9789,17 +9789,17 @@ The parts will be moved automatically. You can use the Undo History to review th
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="156"/>
         <source>Route traces in 45-degree angles instead of 90-degrees to reduce noise.</source>
-        <translation type="unfinished"></translation>
+        <translation>Trace percursos em ângulos de 45-graus em vez de 90-graus para reduzir o ruído.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="162"/>
         <source>To make a stylish Arduino shield in no time, switch the shape of the PCB from a rectangle to the Arduino.</source>
-        <translation type="unfinished"></translation>
+        <translation>Para criar um shield Arduino com estilo rapidamente, troque o formato do PCB de retângulo para o Arduino.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="167"/>
         <source>Smaller PCBs are more affordable than larger ones. Save space and money.</source>
-        <translation type="unfinished"></translation>
+        <translation>Os PCB mais pequenos são mais acessíveis do que os maiores. Poupe espaço e dinheiro.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="169"/>
@@ -9829,17 +9829,17 @@ The parts will be moved automatically. You can use the Undo History to review th
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="82"/>
         <source>Can&apos;t find your part? Search for it by clicking the magnifier icon in the Parts Bin and type in some keywords.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não consegue encontrar o seu componente? Procure por ele clicando no ícone lupa na Caixa de Componentes e escreva algumas palavras-chave.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="83"/>
         <source>If you can&apos;t find a part in the Parts Bin, the Generic IC is your friend.  Drag it onto your sketch, then use the widgets in the Inspector to: choose from among 25 different through-hole and SMD packages; change the pin label; and--for DIPs and SIPs--change the number of pins.  You can also change the pin names with the Pin Label editor.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se não encontrar uma peça na Caixa de Componentes, o IC Genérico é seu amigo.  Arraste-o para o seu esboço e utilize os widgets no Inspetor para: escolher entre 25 encapsulamentos diferentes de furo passante e SMD; alterar o rótulo dos pinos; e — para DIPs e SIPs — alterar o número de pinos.  Também pode alterar os nomes dos pinos com o editor de Rótulos de Pinos.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="84"/>
         <source>An icon in the parts bin may actually represent multiple related parts.  So when you drag an icon from the parts bin into a sketch, make sure you look at the inspector.  The inspector will display the range of choices available for you to modify a part, or swap it for a related part.</source>
-        <translation type="unfinished"></translation>
+        <translation>Um ícone na caixa de componentes pode, na realidade, representar vários componentes relacionados. Por isso, ao arrastar um ícone da caixa de componentes para um esboço, certifique-se de que olha para o inspetor. O inspetor irá apresentar as opções disponíveis para que possa modificar um componente ou trocá-lo por um componente selecionado.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="98"/>
