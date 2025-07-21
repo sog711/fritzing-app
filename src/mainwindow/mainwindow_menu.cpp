@@ -4469,16 +4469,12 @@ void MainWindow::orderFab()
 
 			// If the checkbox is checked, don't show the message box
 			if (!notAgain->isChecked()) {
-				QObject::connect(notAgain, &QCheckBox::stateChanged, [&cancelButton](int state){
-				    cancelButton->setEnabled(state == Qt::Unchecked);
-				});
-
 				int ret = box.exec();
 
-				// Save the setting
-				settings.setValue(notShowAgain, notAgain->isChecked());
-
-				if (ret != QMessageBox::Ok) {
+				// Only save the setting if OK was pressed, not Cancel
+				if (ret == QMessageBox::Ok) {
+					settings.setValue(notShowAgain, notAgain->isChecked());
+				} else {
 				    return;
 				}
 			}
