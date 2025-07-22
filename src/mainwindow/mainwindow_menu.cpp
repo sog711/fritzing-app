@@ -3509,6 +3509,7 @@ QMenu *MainWindow::schematicWireMenu() {
 	menu->addAction(m_deleteWireMinusAct);
 	menu->addSeparator();
 	menu->addAction(m_addBendpointAct);
+	menu->addAction(m_flattenCurveAct);
 #ifndef QT_NO_DEBUG
 	menu->addSeparator();
 	menu->addAction(m_infoViewOnHoverAction);
