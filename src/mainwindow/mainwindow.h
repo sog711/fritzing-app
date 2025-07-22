@@ -317,6 +317,7 @@ protected Q_SLOTS:
 	void togglePartLibrary(bool toggle);
 	void toggleInfo(bool toggle);
 	void toggleUndoHistory(bool toggle);
+	void showUndoHistory();
 	void toggleDebuggerOutput(bool toggle);
 	void openHelp();
 	void openExamples();

@@ -672,6 +672,10 @@ void MainWindow::connectPairs() {
 	connect(m_breadboardGraphicsView, &SketchWidget::undoSignal, m_undoAct, &QAction::trigger);
 	connect(m_schematicGraphicsView, &SketchWidget::undoSignal, m_undoAct, &QAction::trigger);
 	connect(m_pcbGraphicsView, &SketchWidget::undoSignal, m_undoAct, &QAction::trigger);
+	
+	connect(m_breadboardGraphicsView, &SketchWidget::showUndoHistorySignal, this, &MainWindow::showUndoHistory);
+	connect(m_schematicGraphicsView, &SketchWidget::showUndoHistorySignal, this, &MainWindow::showUndoHistory);
+	connect(m_pcbGraphicsView, &SketchWidget::showUndoHistorySignal, this, &MainWindow::showUndoHistory);
 
 	connect(m_breadboardGraphicsView, &SketchWidget::disableUndoRedo, this, &MainWindow::disableUndoAction);
 	connect(m_breadboardGraphicsView, &SketchWidget::enableUndoRedo, this, &MainWindow::enableUndoAction);

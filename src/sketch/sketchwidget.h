@@ -47,6 +47,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "utils/fpsmonitor.h"
 
 class SubpartSwapManager;
+class OutlierHandler;
 
 struct ItemCount {
 	int selCount;
@@ -124,6 +125,10 @@ public:
 	double fitInWindow();
 	QRectF calculateVisibleItemsBoundingRect();
 	void adjustSceneRect(const QRectF &itemsRect, qreal viewMarginFactor);
+	
+public:
+	void showUndoHistoryWidget();
+	void updateZoomFromCurrentTransform();
 	void rotateX(double degrees, bool rubberBandLegEnabled, ItemBase * originatingItem);
 	void flipX(Qt::Orientations orientation, bool rubberBandLegEnabled);
 	void addBendpoint(ItemBase * lastHoverEnterItem, ConnectorItem * lastHoverEnterConnectorItem, QPointF lastLocation);
@@ -579,6 +584,7 @@ Q_SIGNALS:
 	void disableUndoRedo();
 	void enableUndoRedo();
 	void undoSignal();
+	void showUndoHistorySignal();
 
 public:
 	void registerItem(ItemBase* itemBase);
@@ -660,6 +666,7 @@ protected:
 protected:
 	QPointer<class ReferenceModel> m_referenceModel;
 	QPointer<SketchModel> m_sketchModel;
+	OutlierHandler* m_outlierHandler;
 	ViewLayer::ViewID m_viewID;
 	class WaitPushUndoStack * m_undoStack = nullptr;
 	class SelectItemCommand * m_holdingSelectItemCommand = nullptr;

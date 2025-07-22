@@ -2481,6 +2481,17 @@ void MainWindow::toggleUndoHistory(bool toggle) {
 	}
 }
 
+void MainWindow::showUndoHistory() {
+	if (m_undoView && m_undoView->parent()) {
+		QDockWidget* dockWidget = qobject_cast<QDockWidget*>(m_undoView->parent());
+		if (dockWidget && !dockWidget->isVisible()) {
+			dockWidget->show();
+			dockWidget->raise();
+			DebugDialog::debug("Automatically showed undo history widget");
+		}
+	}
+}
+
 void MainWindow::toggleDebuggerOutput(bool toggle) {
 	if (toggle) {
 		DebugDialog::showDebug();

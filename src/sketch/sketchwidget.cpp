@@ -19,7 +19,6 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 ********************************************************************/
 
 #include <QtCore>
-
 #include <QGraphicsScene>
 #include <QPoint>
 #include <QPair>
@@ -41,6 +40,13 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QScrollBar>
 #include <QStatusBar>
 #include <QOpenGLWidget>
+#include <QMessageBox>
+#include <QDialog>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QPushButton>
+#include <QTimer>
 
 #include <limits>
 
@@ -55,6 +61,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../model/modelpart.h"
 #include "../debugdialog.h"
 #include "sketchwidget.h"
+#include "outlierhandler.h"
 #include "qopenglcontext.h"
 #include "subpartswapmanager.h"
 #include "../connectors/connectoritem.h"
@@ -184,6 +191,9 @@ SketchWidget::SketchWidget(ViewLayer::ViewID viewID, QWidget *parent, int size, 
 	//setTransformationAnchor(QGraphicsView::NoAnchor);
 	auto* scene = new FGraphicsScene(this);
 	this->setScene(scene);
+	
+	// Initialize outlier handler
+	m_outlierHandler = new OutlierHandler(this, this);
 
 	//this->scene()->setSceneRect(0,0, rect().width(), rect().height());
 
@@ -4410,6 +4420,10 @@ double SketchWidget::fitInWindow() {
 					 itemsRect.width() * borderFactor, itemsRect.height() * borderFactor);
 
 
+	// Check if the rectangle is reasonable for fitting
+	if (itemsRect.width() > 1000000 || itemsRect.height() > 1000000) {
+	}
+
 	// Avoid 'jumping' scrollbars by always caclulating as
 	// if they were both visible.
 	auto originalHorizontalPolicy = horizontalScrollBarPolicy();
@@ -4429,28 +4443,15 @@ double SketchWidget::fitInWindow() {
 	double scaleFactor = this->transform().m11();
 	m_scaleValue = scaleFactor * 100; // Convert scale factor to percentage
 
+
 	setUpdatesEnabled(updateState);
 	return m_scaleValue;
 }
 
 QRectF SketchWidget::calculateVisibleItemsBoundingRect() {
-	QRectF itemsRect;
-	for (QGraphicsItem* item : scene()->items()) {
-		if (!item->isVisible()) continue;
-
-		auto * partLabel = dynamic_cast<PartLabel *>(item);
-		if (partLabel && partLabel->initialized()) {
-			itemsRect |= partLabel->sceneBoundingRect();
-			continue;
-		}
-
-		auto * itemBase = dynamic_cast<ItemBase*>(item);
-		if (itemBase && itemBase->isEverVisible()) {
-			itemsRect |= itemBase->sceneBoundingRect();
-		}
-	}
-	return itemsRect;
+	return m_outlierHandler->calculateBoundingRectWithOutlierDetection(true);
 }
+
 
 void SketchWidget::adjustSceneRect(const QRectF &itemsRect, qreal viewMarginFactor) {
 	QRectF viewRectInViewCoord = mapToScene(viewport()->rect()).boundingRect();
@@ -10649,4 +10650,22 @@ void SketchWidget::checkForReversedWires() {
 			wire->update();
 		}
 	}
+}
+
+
+
+void SketchWidget::showUndoHistoryWidget() {
+	// Emit signal to show the undo history widget
+	emit showUndoHistorySignal();
+}
+
+void SketchWidget::updateZoomFromCurrentTransform() {
+	// Update both zoom tracking variables based on current transform
+	double scaleFactor = this->transform().m11();
+	m_scaleValue = scaleFactor * 100; // Convert scale factor to percentage (for ZoomableGraphicsView)
+	m_zoom = scaleFactor * 100; // Also update m_zoom for consistency
+	
+	
+	// Emit the signal to update UI (like ZoomableGraphicsView does)
+	Q_EMIT zoomChanged(m_scaleValue);
 }
