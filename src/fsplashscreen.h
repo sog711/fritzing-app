@@ -23,6 +23,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QSplashScreen>
 #include <QPainter>
 #include <QHash>
+#include <QMouseEvent>
 
 struct MessageThing {
 	QString message;
@@ -48,6 +49,8 @@ public:
 
 protected:
 	void drawContents ( QPainter * painter );
+	void mousePressEvent(QMouseEvent *event) override;
+	void mouseReleaseEvent(QMouseEvent *event) override;
 
 public Q_SLOTS:
 	void displaySlice();

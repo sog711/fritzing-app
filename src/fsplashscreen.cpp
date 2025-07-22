@@ -165,6 +165,20 @@ void FSplashScreen::drawContents ( QPainter * painter )
 	}
 }
 
+void FSplashScreen::mousePressEvent(QMouseEvent *event)
+{
+	// Override to prevent default click-to-dismiss behavior
+	// Do nothing - splash screen should not disappear when clicked
+	Q_UNUSED(event);
+}
+
+void FSplashScreen::mouseReleaseEvent(QMouseEvent *event)
+{
+	// Override to prevent default click-to-dismiss behavior  
+	// Do nothing - splash screen should not disappear when clicked
+	Q_UNUSED(event);
+}
+
 void FSplashScreen::displaySlice()
 {
 	QString fname = ":/resources/images/splash/fab_slice%1.png";
