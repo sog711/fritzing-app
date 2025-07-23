@@ -246,7 +246,7 @@ protected:
 class RotateItemCommand : public SimulationCommand
 {
 public:
-	RotateItemCommand(SketchWidget *sketchWidget, long id, double degrees, QUndoCommand *parent);
+	RotateItemCommand(SketchWidget *sketchWidget, long id, const double* degreesPtr, QUndoCommand *parent);
 	void undo();
 	void redo();
 
@@ -255,7 +255,7 @@ protected:
 
 protected:
 	long m_itemID;
-	double m_degrees;
+	const double* m_degreesPtr;
 };
 
 /////////////////////////////////////////////
@@ -881,14 +881,22 @@ public:
 	RotateFlipLabelCommand(class SketchWidget *sketchWidget, long id, double degrees, Qt::Orientations, QUndoCommand *parent);
 	void undo();
 	void redo();
+	int id() const;
+	bool mergeWith(const QUndoCommand *other);
+	void setRotation(double degrees);
+	void setTextTemplate(const QString& textTemplate);
 
 protected:
 	QString getParamString() const;
+	void updateText();
 
 protected:
 	long m_itemID;
 	double m_degrees;
 	Qt::Orientations m_orientation;
+	QString m_textTemplate;  // stores tr() string with %1, %2 placeholders
+	
+	static int rotateFlipLabelCommandID;
 };
 
 /////////////////////////////////////////////
@@ -1242,6 +1250,84 @@ protected:
 	int m_columns;
 	QList<long> m_ids;
 	bool m_firstTime;
+};
+
+/////////////////////////////////////////////
+
+class DetectConnectionsCommand : public BaseCommand
+{
+public:
+	enum When {
+		Before,    // Disconnect connections before rotation
+		After      // Connect overlapping items after rotation
+	};
+	
+	DetectConnectionsCommand(SketchWidget *sketchWidget, const QList<long> & itemIDs, When when, QUndoCommand *parent);
+	void undo();
+	void redo();
+
+protected:
+	QString getParamString() const;
+	void disconnectMovingItems();
+	void connectOverlappingItems();
+
+protected:
+	QList<long> m_itemIDs;
+	When m_when;
+};
+
+/////////////////////////////////////////////
+
+class RotateCommand : public QUndoCommand
+{
+public:
+	RotateCommand(const QString &itemsText, const QString &viewName, double degrees, const QList<long> &itemIDs, const QPointF &center, QUndoCommand *parent = nullptr);
+	int id() const;
+	bool mergeWith(const QUndoCommand *other);
+	
+	// Accessors for subcommands to reference
+	double degrees() const { return m_degrees; }
+	const double* degreesPtr() const { return &m_degrees; }
+	const QPointF& center() const { return m_center; }
+
+private:
+	void updateText();
+
+protected:
+	double m_degrees; // Current rotation degrees (updated by merging)
+	QList<long> m_itemIDs; // Items being rotated (for merge comparison)
+	QPointF m_center; // Rotation center (stays constant)
+	QString m_itemsText; // Description of items being rotated (constant)
+	QString m_viewName; // View name for the command (constant)
+
+protected:
+	static int rotateCommandID;
+};
+
+/////////////////////////////////////////////
+
+class RotateMoveLabelCommand : public BaseCommand
+{
+public:
+	RotateMoveLabelCommand(SketchWidget *sketchWidget, long itemID, 
+	                       const QPointF & originalPos, const QPointF & originalOffset,
+	                       const QPointF & labelBoundingCenter, const QPointF & rotationCenter, 
+	                       const double* degreesPtr, QUndoCommand *parent);
+	void undo();
+	void redo();
+
+protected:
+	QString getParamString() const;
+
+protected:
+	long m_itemID;
+	QPointF m_originalPos;
+	QPointF m_originalOffset;
+	QPointF m_labelBoundingCenter;
+	QPointF m_rotationCenter;
+	const double* m_degreesPtr;
+	QPointF m_currentPos;
+	QPointF m_currentOffset;
 };
 
 /////////////////////////////////////////////

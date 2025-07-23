@@ -1453,17 +1453,17 @@ void SketchWidget::updateWireForCommand(long id, const QString & connectorID, bo
 }
 
 void SketchWidget::rotateItemForCommand(long id, double degrees) {
-	//DebugDialog::debug(QString("rotating %1 %2").arg(id).arg(degrees) );
-
-	if (!isVisible()) return;
-
 	ItemBase * itemBase = findItem(id);
 	if (itemBase) {
 		itemBase->rotateItem(degrees, false);
 		if (m_infoView) m_infoView->updateRotation(itemBase);
+	} else {
+		DebugDialog::debug(QString("SketchWidget::rotateItemForCommand - item not found! id: %1").arg(id));
+		qDebug() << "SketchWidget::rotateItemForCommand: item not found! " << id;
+		Q_ASSERT(itemBase);
 	}
-
 }
+
 void SketchWidget::transformItemForCommand(long id, const QTransform & matrix) {
 	ItemBase * itemBase = findItem(id);
 	if (itemBase) {
@@ -1473,8 +1473,6 @@ void SketchWidget::transformItemForCommand(long id, const QTransform & matrix) {
 }
 
 void SketchWidget::flipItemForCommand(long id, Qt::Orientations orientation) {
-	//DebugDialog::debug(QString("flipping %1 %2").arg(id).arg(orientation) );
-
 	if (!isVisible()) return;
 
 	ItemBase * itemBase = findItem(id);
@@ -1487,18 +1485,6 @@ void SketchWidget::flipItemForCommand(long id, Qt::Orientations orientation) {
 
 void SketchWidget::changeWireForCommand(long fromID, QLineF line, QPointF pos, bool updateConnections, bool updateRatsnest)
 {
-	/*
-	DebugDialog::debug(QString("change wire %1; %2,%3,%4,%5; %6,%7; %8")
-			.arg(fromID)
-			.arg(line.x1())
-			.arg(line.y1())
-			.arg(line.x2())
-			.arg(line.y2())
-			.arg(pos.x())
-			.arg(pos.y())
-			.arg(updateConnections) );
-	*/
-
 	ItemBase * fromItem = findItem(fromID);
 	if (!fromItem) return;
 
@@ -3380,6 +3366,23 @@ bool SketchWidget::checkMoved(bool wait)
 		return false;
 	}
 
+	// Validate that saved items are still valid and in the scene
+	QList<long> itemsToRemove;
+	Q_FOREACH (long id, m_savedItems.keys()) {
+		ItemBase * item = m_savedItems.value(id);
+		if (!item || !scene()->items().contains(item)) {
+			itemsToRemove.append(id);
+		}
+	}
+	Q_FOREACH (long id, itemsToRemove) {
+		m_savedItems.remove(id);
+	}
+
+	// If no valid items remain after validation, return
+	if (m_savedItems.empty()) {
+		return false;
+	}
+
 	int moveCount = m_savedItems.count();
 	ItemBase * saveBase = m_savedItems.begin().value();
 	clearHoldingSelectItem();
@@ -4710,22 +4713,36 @@ void SketchWidget::rotateX(double degrees, bool rubberBandLegEnabled, ItemBase *
 	QTransform rotation;
 	rotation.rotate(degrees);
 
-	QString string = tr("Rotate %2 (%1)")
-	                 .arg(ViewLayer::viewIDName(m_viewID))
-	                 .arg((m_savedItems.count() == 1) ? m_savedItems.values().at(0)->title() : QString::number(m_savedItems.count() + m_savedWires.count()) + " items" );
-	auto * parentCommand = new QUndoCommand(string);
-
-	//foreach (long id, m_savedItems.keys()) {
-	//m_savedItems.value(id)->debugInfo(QString("save item %1").arg(id));
-	//}
+	// Collect item IDs for merging comparison
+	QList<long> itemIDs;
+	for (auto it = m_savedItems.begin(); it != m_savedItems.end(); ++it) {
+		itemIDs.append(it.key());
+	}
+	for (auto it = m_savedWires.begin(); it != m_savedWires.end(); ++it) {
+		itemIDs.append(it.key()->id());
+	}
+	
+	QString itemsText = (m_savedItems.count() == 1) ? m_savedItems.values().at(0)->title() : QString::number(m_savedItems.count() + m_savedWires.count()) + " items";
+	auto * parentCommand = new RotateCommand(itemsText, ViewLayer::viewIDName(m_viewID), degrees, itemIDs, center);
 
 	new CleanUpWiresCommand(this, CleanUpWiresCommand::UndoOnly, parentCommand);
 	new CleanUpRatsnestsCommand(this, CleanUpWiresCommand::UndoOnly, parentCommand);
 
+	// Disconnect items before rotation (replaces disconnectFromFemale)
+	QList<long> connectionItemIDs;
+	Q_FOREACH (ItemBase * itemBase, m_savedItems) {
+		if (itemBase->itemType() != ModelPart::Wire) {
+			connectionItemIDs.append(itemBase->id());
+		}
+	}
+	if (!connectionItemIDs.isEmpty()) {
+		new DetectConnectionsCommand(this, connectionItemIDs, DetectConnectionsCommand::Before, parentCommand);
+	}
+
 	// change legs after connections have been updated (undo direction)
 	moveLegBendpoints(true, parentCommand);
 
-	rotatePartLabels(degrees, rotation, center, parentCommand);
+	rotatePartLabels(parentCommand->degreesPtr(), center, parentCommand);
 
 	QList<Wire *> wires;
 	Q_FOREACH (ItemBase * itemBase, m_savedItems.values()) {
@@ -4761,11 +4778,10 @@ void SketchWidget::rotateX(double degrees, bool rubberBandLegEnabled, ItemBase *
 			ViewGeometry vg1 = itemBase->getViewGeometry();
 			ViewGeometry vg2(vg1);
 			itemBase->calcRotation(rotation, center, vg2);
-			ConnectorPairHash connectorHash;
-			disconnectFromFemale(itemBase, m_savedItems, connectorHash, true, rubberBandLegEnabled, parentCommand);
 			new MoveItemCommand(this, itemBase->id(), vg1, vg1, true, parentCommand);
-			new RotateItemCommand(this, itemBase->id(), degrees, parentCommand);
+			new RotateItemCommand(this, itemBase->id(), parentCommand->degreesPtr(), parentCommand);
 			new MoveItemCommand(this, itemBase->id(), vg2, vg2, true, parentCommand);
+			
 		}
 		break;
 		}
@@ -4804,11 +4820,83 @@ void SketchWidget::rotateX(double degrees, bool rubberBandLegEnabled, ItemBase *
 			new ChangeWireCommand(this, wire->id(), vg1.line(), QLineF(QPointF(0,0), d0t + center - p1), vg1.loc(), vg1.loc(), true, true, parentCommand);
 		}
 	}
+
+	// Connect items after rotation (detects new overlapping connections)
+	if (!connectionItemIDs.isEmpty()) {
+		new DetectConnectionsCommand(this, connectionItemIDs, DetectConnectionsCommand::After, parentCommand);
+	}
+	
+	// Check for new connections after rotation (extracted from checkMoved logic)
+	Q_FOREACH (ItemBase * item, m_savedItems) {
+		rememberSticky(item, parentCommand);
+	}
+	
+	Q_FOREACH (ItemBase * item, m_savedItems) {
+		new CheckStickyCommand(this, BaseCommand::SingleView, item->id(), false, CheckStickyCommand::RedoOnly, parentCommand);
+	}
+	
+	Q_FOREACH (ItemBase * item, m_savedWires.keys()) {
+		rememberSticky(item, parentCommand);
+	}
+	
+	Q_FOREACH (ItemBase * item, m_savedWires.keys()) {
+		new CheckStickyCommand(this, BaseCommand::SingleView, item->id(), false, CheckStickyCommand::RedoOnly, parentCommand);
+	}
+	
+	
+	QList<ConnectorItem *> restoreConnectorItems;
+	QSet<ConnectorItem *> connectedItems;
+	
+	QList<ItemBase*> saveditemList = m_savedItems.values();
+	std::sort(saveditemList.begin(), saveditemList.end(), [](const ItemBase * a, const ItemBase * b) {
+		return a->zValue() > b->zValue();
+	});
+
+	for (ItemBase * item: saveditemList) {
+		for (ConnectorItem * fromConnectorItem: item->cachedConnectorItems()) {
+			if (item->itemType() == ModelPart::Wire) {
+				if (fromConnectorItem->connectionsCount() > 0) {
+					continue;
+				}
+			}
+			
+			ConnectorItem * toConnectorItem = fromConnectorItem->overConnectorItem();
+			if (toConnectorItem) {
+				toConnectorItem->connectorHover(item, false);
+				fromConnectorItem->setOverConnectorItem(nullptr);   // clean up
+				if (!connectedItems.contains(toConnectorItem)) {
+					extendChangeConnectionCommand(BaseCommand::CrossView, fromConnectorItem, toConnectorItem,
+								      ViewLayer::specFromID(toConnectorItem->attachedToViewLayerID()),
+								      true, parentCommand);
+					connectedItems.insert(toConnectorItem);
+				} else {
+					// debug() << "SketchWidget::rotateX: Skipping duplicate connection to" << toConnectorItem->connectorSharedName();
+				}
+			}
+			restoreConnectorItems.append(fromConnectorItem);
+			fromConnectorItem->clearConnectorHover();
+		}
+		
+		item->clearConnectorHover();
+	}
+	
+	QList<ConnectorItem *> visited;
+	Q_FOREACH (ConnectorItem * connectorItem, restoreConnectorItems) {
+		connectorItem->restoreColor(visited);
+	}
+	
+	clearTemporaries();
+
 	new CleanUpRatsnestsCommand(this, CleanUpWiresCommand::RedoOnly, parentCommand);
 	new CleanUpWiresCommand(this, CleanUpWiresCommand::RedoOnly, parentCommand);
 
 	m_undoStack->push(parentCommand);
+	
+	// Clear saved items as they're no longer needed
+	m_savedItems.clear();
+	m_savedWires.clear();
 }
+
 
 void SketchWidget::rotateWire(Wire * wire, QTransform & rotation, QPointF center, bool undoOnly, QUndoCommand * parentCommand) {
 	//wire->debugInfo("rotating wire");
@@ -4846,10 +4934,10 @@ void SketchWidget::rotateWire(Wire * wire, QTransform & rotation, QPointF center
 
 }
 
-void SketchWidget::rotatePartLabels(double degrees, QTransform &, QPointF center, QUndoCommand * parentCommand)
+void SketchWidget::rotatePartLabels(const double* degreesPtr, QPointF center, QUndoCommand * parentCommand)
 {
 	Q_UNUSED(center);
-	Q_UNUSED(degrees);
+	Q_UNUSED(degreesPtr);
 	Q_UNUSED(parentCommand);
 }
 
@@ -5225,6 +5313,7 @@ void SketchWidget::keyReleaseEvent(QKeyEvent * event) {
 		QGraphicsView::keyReleaseEvent(event);
 	}
 }
+
 
 void SketchWidget::arrowTimerTimeout() {
 	m_movingByArrow = false;
@@ -7455,13 +7544,24 @@ void SketchWidget::partLabelMoved(ItemBase * itemBase, QPointF oldPos, QPointF o
 	m_undoStack->push(command);
 }
 
-
-void SketchWidget::rotateFlipPartLabelForCommand(ItemBase * itemBase, double degrees, Qt::Orientations flipDirection) {
+void SketchWidget::rotateFlipPartLabelForCommand(ItemBase * itemBase, double degrees, Qt::Orientations flipDirection)
+{
 	auto * command = new RotateFlipLabelCommand(this, itemBase->id(), degrees, flipDirection, nullptr);
-	command->setText(tr("%1 label '%2'").arg((degrees != 0) ? tr("Rotate") : tr("Flip")).arg(itemBase->title()));
+	
+	if (degrees != 0) {
+		// For rotation, bake in "Rotate" and include degrees placeholder
+		command->setTextTemplate(tr("Rotate label '%1' (%2°)"));
+	} else {
+		// For flip, bake in "Flip" and specific orientation
+		if (flipDirection == Qt::Horizontal) {
+			command->setTextTemplate(tr("Flip label '%1' (horizontal)"));
+		} else {
+			command->setTextTemplate(tr("Flip label '%1' (vertical)"));
+		}
+	}
+	
 	m_undoStack->push(command);
 }
-
 
 void SketchWidget::rotateFlipPartLabelForCommand(long itemID, double degrees, Qt::Orientations flipDirection) {
 	ItemBase * itemBase = findItem(itemID);
@@ -9423,6 +9523,7 @@ void SketchWidget::setMoveLockForCommand(long id, bool lock)
 void SketchWidget::triggerRotate(ItemBase * itemBase, double degrees)
 {
 	QList<QGraphicsItem *> selectedItems = scene()->selectedItems();
+
 	setIgnoreSelectionChangeEvents(true);
 	this->clearSelection();
 	itemBase->setSelected(true);

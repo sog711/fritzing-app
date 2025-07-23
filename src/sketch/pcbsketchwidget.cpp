@@ -1902,7 +1902,7 @@ void PCBSketchWidget::prereleaseTempWireForDragging(Wire* wire)
 	}
 }
 
-void PCBSketchWidget::rotatePartLabels(double degrees, QTransform & transform, QPointF center, QUndoCommand * parentCommand)
+void PCBSketchWidget::rotatePartLabels(const double* degreesPtr, QPointF center, QUndoCommand * parentCommand)
 {
 	QList<ItemBase *> savedValues = m_savedItems.values();
 	/*
@@ -1929,13 +1929,13 @@ void PCBSketchWidget::rotatePartLabels(double degrees, QTransform & transform, Q
 		//if (!bbr.intersects(partLabel->sceneBoundingRect())) continue;  // if the part is on the board and the label is off the board, this does not rotate
 		if (!savedValues.contains(partLabel->owner()->layerKinChief())) continue;
 
-		QPointF offset = partLabel->pos() - partLabel->owner()->pos();
-		new MoveLabelCommand(this, partLabel->owner()->id(), partLabel->pos(), offset, partLabel->pos(), offset, parentCommand);
-		new RotateFlipLabelCommand(this, partLabel->owner()->id(), degrees, QFlags<Qt::Orientation>(), parentCommand);
-		QPointF p = GraphicsUtils::calcRotation(transform, center, partLabel->pos(), partLabel->boundingRect().center());
-		ViewGeometry vg;
-		partLabel->owner()->calcRotation(transform, center, vg);
-		new MoveLabelCommand(this, partLabel->owner()->id(), p, p - vg.loc(), p, p - vg.loc(), parentCommand);
+		QPointF originalPos = partLabel->pos();
+		QPointF originalOffset = partLabel->pos() - partLabel->owner()->pos();
+		QPointF labelBoundingCenter = partLabel->boundingRect().center();
+		
+		new RotateFlipLabelCommand(this, partLabel->owner()->id(), *degreesPtr, QFlags<Qt::Orientation>(), parentCommand);
+		new RotateMoveLabelCommand(this, partLabel->owner()->id(), originalPos, originalOffset, 
+		                           labelBoundingCenter, center, degreesPtr, parentCommand);
 	}
 }
 

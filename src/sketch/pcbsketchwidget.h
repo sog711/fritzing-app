@@ -169,7 +169,7 @@ protected:
 	ViewLayer::ViewLayerPlacement createWireViewLayerPlacement(ConnectorItem * from, ConnectorItem * to);
 	Wire * createTempWireForDragging(Wire * fromWire, ModelPart * wireModel, ConnectorItem * connectorItem, ViewGeometry & viewGeometry, ViewLayer::ViewLayerPlacement);
 	void prereleaseTempWireForDragging(Wire*);
-	void rotatePartLabels(double degrees, QTransform &, QPointF center, QUndoCommand * parentCommand);
+	void rotatePartLabels(const double* degreesPtr, QPointF center, QUndoCommand * parentCommand);
 	bool hasNeighbor(ConnectorItem * connectorItem, ViewLayer::ViewLayerID viewLayerID, const QRectF & r);
 	bool canConnectSeed(QRectF boardRect,
 					 QImage * copperImage,

@@ -46,6 +46,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../sketch/breadboardsketchwidget.h"
 #include "../sketch/schematicsketchwidget.h"
 #include "../sketch/pcbsketchwidget.h"
+#include "../sketch/sketchwidget.h"
 #include "../partsbinpalette/binmanager/binmanager.h"
 #include "../utils/expandinglabel.h"
 #include "../infoview/htmlinfoview.h"
@@ -2571,31 +2572,26 @@ void MainWindow::rotateIncCCWRubberBand() {
 
 void MainWindow::rotate90cw() {
 	if (m_currentGraphicsView == nullptr) return;
-
 	m_currentGraphicsView->rotateX(90, false, nullptr);
 }
 
 void MainWindow::rotate90ccw() {
 	if (m_currentGraphicsView == nullptr) return;
-
-	m_currentGraphicsView->rotateX(270, false, nullptr);
+	m_currentGraphicsView->rotateX(-90, false, nullptr);
 }
 
 void MainWindow::rotate45ccw() {
 	if (m_currentGraphicsView == nullptr) return;
-
-	m_currentGraphicsView->rotateX(315, false, nullptr);
+	m_currentGraphicsView->rotateX(-45, false, nullptr);
 }
 
 void MainWindow::rotate45cw() {
 	if (m_currentGraphicsView == nullptr) return;
-
 	m_currentGraphicsView->rotateX(45, false, nullptr);
 }
 
 void MainWindow::rotate180() {
 	if (m_currentGraphicsView == nullptr) return;
-
 	m_currentGraphicsView->rotateX(180, false, nullptr);
 }
 

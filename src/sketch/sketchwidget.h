@@ -498,7 +498,7 @@ protected:
 	void changeLegAux(long fromID, const QString & fromConnectorID, const QPolygonF &, bool reset, bool relative, bool active, const QString & why);
 	void moveLegBendpoints(bool undoOnly, QUndoCommand * parentCommand);
 	void moveLegBendpointsAux(ConnectorItem * connectorItem, bool undoOnly, QUndoCommand * parentCommand);
-	virtual void rotatePartLabels(double degrees, QTransform &, QPointF center, QUndoCommand * parentCommand);
+	virtual void rotatePartLabels(const double* degreesPtr, QPointF center, QUndoCommand * parentCommand);
 	bool checkUpdateRatsnest(QList<ConnectorItem *> & connectorItems);
 	void makeRatsnestViewGeometry(ViewGeometry & viewGeometry, ConnectorItem * source, ConnectorItem * dest);
 	virtual double getTraceWidth();

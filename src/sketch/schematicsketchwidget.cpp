@@ -430,7 +430,7 @@ Wire * SchematicSketchWidget::createTempWireForDragging(Wire * fromWire, ModelPa
 	return wire;
 }
 
-void SchematicSketchWidget::rotatePartLabels(double, QTransform &, QPointF, QUndoCommand *)
+void SchematicSketchWidget::rotatePartLabels(const double*, QPointF, QUndoCommand *)
 {
 }
 

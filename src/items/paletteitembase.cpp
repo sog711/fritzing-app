@@ -1,7 +1,7 @@
 /*******************************************************************
 
 Part of the Fritzing project - http://fritzing.org
-Copyright (c) 2007-2019 Fritzing
+Copyright (c) 2007-2019 Fritzing, 2020-2025 Fritzing GmbH
 
 Fritzing is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -47,6 +47,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 static QPointF RotationCenter;
 static QPointF RotationAxis;
 static QTransform OriginalTransform;
+static QTransform OriginalPartLabelTransform;
 
 
 PaletteItemBase::PaletteItemBase(ModelPart * modelPart, ViewLayer::ViewID viewID, const ViewGeometry & viewGeometry, long id, QMenu * itemMenu ) :
@@ -240,6 +241,11 @@ bool PaletteItemBase::mousePressEventK(PaletteItemBase * originalItem, QGraphics
 		RotationCenter = mapToScene(this->boundingRectWithoutLegs().center());
 		RotationAxis = event->scenePos();
 		OriginalTransform = this->transform();
+		ItemBase * chief = layerKinChief();
+		PartLabel * partLabel = chief->partLabel();
+		if (partLabel != nullptr) {
+			OriginalPartLabelTransform = partLabel->transform();
+		}
 		/*
 		DebugDialog::debug(QString("%11:in rotation:%1,%2 a:%3,%4 t:%5,%6,%7,%8 %9,%10")
 			.arg(RotationCenter.x()).arg(RotationCenter.y())
@@ -310,14 +316,24 @@ void PaletteItemBase::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 	}
 
 	ItemBase * chief = layerKinChief();
-	// restore viewGeometry to original angle
+	// restore viewGeometry to original angle	
 	chief->getViewGeometry().setTransform(OriginalTransform);
 	Q_FOREACH (ItemBase * itemBase, chief->layerKin()) {
 		itemBase->getViewGeometry().setTransform(OriginalTransform);
 	}
 
-	//DebugDialog::debug(QString("rotating item %1 da:%2 oa:%3 %4").arg(QTime::currentTime().toString("HH:mm:ss.zzz")).arg(deltaAngle).arg(originalAngle).arg((long) this, 0, 16));
-	chief->rotateItem(deltaAngle, true);
+	chief->rotateItem(deltaAngle, true);	
+	PartLabel *partLabel = chief->partLabel();
+	if (m_viewID == ViewLayer::PCBView && partLabel != nullptr) {
+		partLabel->setTransform(OriginalPartLabelTransform);
+		QPointF center = partLabel->mapFromScene(RotationCenter);
+		QTransform rotationTransform = QTransform()
+										   .translate(center.x(), center.y())
+										   .rotate(deltaAngle)
+										   .translate(-center.x(), -center.y())
+									   * OriginalPartLabelTransform;
+		partLabel->setTransform(rotationTransform);
+	}
 
 	InfoGraphicsView * infoGraphicsView = InfoGraphicsView::getInfoGraphicsView(chief);
 	if (infoGraphicsView != nullptr) infoGraphicsView->updateRotation(chief);
@@ -330,16 +346,27 @@ void PaletteItemBase::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 		return;
 	}
 
-	setInRotation(false);
+	setInRotation(false);	
 	InfoGraphicsView * infoGraphicsView = InfoGraphicsView::getInfoGraphicsView(this);
 	if (infoGraphicsView != nullptr) {
 		// TODO: doesn't account for scaling
 		// see: http://www.gamedev.net/topic/441695-transform-matrix-decomposition/
 		double originalAngle = atan2(OriginalTransform.m12(), OriginalTransform.m11()) * 180 / M_PI;
 		double currentAngle = atan2(transform().m12(), transform().m11()) * 180 / M_PI;
-		this->layerKinChief()->rotateItem(originalAngle - currentAngle, true);		// put it back; undo command will redo it
+		double deltaAngle = currentAngle - originalAngle;
+		ItemBase * chief = layerKinChief();
+		PartLabel *partLabel = chief->partLabel();
+		if (partLabel != nullptr) {
+			partLabel->setTransform(OriginalPartLabelTransform);
+		}
+		chief->getViewGeometry().setTransform(OriginalTransform);
+		Q_FOREACH (ItemBase * itemBase, chief->layerKin()) {
+			itemBase->getViewGeometry().setTransform(OriginalTransform);
+		}
+
+
 		saveGeometry();
-		infoGraphicsView->triggerRotate(this->layerKinChief(), currentAngle - originalAngle);
+		infoGraphicsView->triggerRotate(chief, deltaAngle);
 	}
 }
 

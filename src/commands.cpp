@@ -21,11 +21,15 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "commands.h"
 #include "sketch/sketchwidget.h"
 #include "waitpushundostack.h"
+
+#include <cmath>
 #include "items/wire.h"
 #include "items/logoitem.h"
 #include "connectors/connectoritem.h"
 #include "items/moduleidnames.h"
 #include "utils/bezier.h"
+#include "utils/graphicsutils.h"
+#include "debugdialog.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -46,6 +50,7 @@ void CommandProgress::emitRedo() {
 
 int SelectItemCommand::selectItemCommandID = 3;
 int ChangeNoteTextCommand::changeNoteTextCommandID = 5;
+int RotateFlipLabelCommand::rotateFlipLabelCommandID = 6;
 int BaseCommand::nextIndex = 0;
 CommandProgress BaseCommand::m_commandProgress;
 
@@ -450,22 +455,22 @@ QString MoveItemsCommand::getParamString() const {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-RotateItemCommand::RotateItemCommand(SketchWidget* sketchWidget, long itemID, double degrees, QUndoCommand *parent)
+RotateItemCommand::RotateItemCommand(SketchWidget* sketchWidget, long itemID, const double* degreesPtr, QUndoCommand *parent)
 	: SimulationCommand(BaseCommand::SingleView, sketchWidget, parent),
 	m_itemID(itemID),
-	m_degrees(degrees)
+	m_degreesPtr(degreesPtr)
 {
 }
 
 void RotateItemCommand::undo()
 {
-	m_sketchWidget->rotateItemForCommand(m_itemID, -m_degrees);
+	m_sketchWidget->rotateItemForCommand(m_itemID, -*m_degreesPtr);
 	SimulationCommand::undo();
 }
 
 void RotateItemCommand::redo()
 {
-	m_sketchWidget->rotateItemForCommand(m_itemID, m_degrees);
+	m_sketchWidget->rotateItemForCommand(m_itemID, *m_degreesPtr);
 	SimulationCommand::redo();
 }
 
@@ -474,7 +479,7 @@ QString RotateItemCommand::getParamString() const {
 	       + BaseCommand::getParamString() +
 	       QString(" id:%1 by:%2")
 	       .arg(m_itemID)
-	       .arg(m_degrees);
+	       .arg(*m_degreesPtr);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1744,12 +1749,90 @@ void RotateFlipLabelCommand::redo()
 	BaseCommand::redo();
 }
 
-QString RotateFlipLabelCommand::getParamString() const {
-	return QString("RotateFlipLabelCommand ")
-	       + BaseCommand::getParamString()
-	       + QString(" id:%1 degrees:%2 orientation:%3")
-	       .arg(m_itemID).arg(m_degrees).arg(m_orientation);
+void RotateFlipLabelCommand::setRotation(double degrees) {
+	m_degrees = degrees;
+	updateText();
+}
 
+void RotateFlipLabelCommand::setTextTemplate(const QString& textTemplate) {
+	m_textTemplate = textTemplate;
+	updateText();
+}
+
+int RotateFlipLabelCommand::id() const {
+	return rotateFlipLabelCommandID;
+}
+
+bool RotateFlipLabelCommand::mergeWith(const QUndoCommand *other) {
+	// "this" is earlier; "other" is later
+
+	if (other->id() != id()) {
+		return false;
+	}
+
+	const auto * sother = dynamic_cast<const RotateFlipLabelCommand *>(other);
+	if (sother == nullptr) return false;
+
+	if (sother->m_itemID != m_itemID) {
+		// this is not the same label so don't merge
+		return false;
+	}
+
+	if (sother->m_orientation != m_orientation) {
+		// different operation type (rotation vs flip)
+		return false;
+	}
+
+	// Merge the degrees - add them together for rotation
+	m_degrees += sother->m_degrees;
+	
+	// Update the command text to reflect the new total rotation
+	updateText();
+	
+	return true;
+}
+
+void RotateFlipLabelCommand::updateText() {
+	if (m_textTemplate.isEmpty()) return;
+	
+	ItemBase * itemBase = m_sketchWidget->findItem(m_itemID);
+	if (!itemBase) {
+		qDebug() << "RotateFlipLabelCommand::updateText: item not found!";
+		Q_ASSERT(itemBase);
+	}
+	
+	if (m_degrees != 0) {
+		// For rotation, fill in title and degrees
+		setText(m_textTemplate.arg(itemBase->title()).arg(m_degrees));
+	} else {
+		// For flip, everything is baked in except title
+		setText(m_textTemplate.arg(itemBase->title()));
+	}
+}
+
+QString RotateFlipLabelCommand::getParamString() const {
+	QString result = QString("RotateFlipLabelCommand ") + BaseCommand::getParamString();
+	
+	if (!m_textTemplate.isEmpty()) {
+		ItemBase * itemBase = m_sketchWidget->findItem(m_itemID);
+		if (!itemBase) {
+			qDebug() << "RotateFlipLabelCommand::getParamString: item not found!";
+			Q_ASSERT(itemBase);
+		}
+		
+		QString commandText;
+		if (m_degrees != 0) {
+			commandText = m_textTemplate.arg(itemBase->title()).arg(m_degrees);
+		} else {
+			commandText = m_textTemplate.arg(itemBase->title());
+		}
+		result += QString(" [%1]").arg(commandText);
+	}
+	
+	result += QString(" id:%1 degrees:%2 orientation:%3")
+	          .arg(m_itemID).arg(m_degrees).arg(m_orientation);
+	
+	return result;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2417,4 +2500,281 @@ void TemporaryCommand::redo() {
 	if (m_enabled) {
 		QUndoCommand::redo();
 	}
+}
+
+/////////////////////////////////////////////
+
+DetectConnectionsCommand::DetectConnectionsCommand(SketchWidget *sketchWidget, const QList<long> & itemIDs, When when, QUndoCommand *parent)
+	: BaseCommand(SingleView, sketchWidget, parent), m_itemIDs(itemIDs), m_when(when)
+{
+}
+
+void DetectConnectionsCommand::undo() {
+	// For undo, we reverse the operation:
+	if (m_when == Before) {
+		connectOverlappingItems();
+	} else { // After
+		disconnectMovingItems();
+	}
+}
+
+void DetectConnectionsCommand::redo() {
+	if (m_when == Before) {
+		disconnectMovingItems();
+	} else { // After
+		connectOverlappingItems();
+	}
+}
+
+QString DetectConnectionsCommand::getParamString() const {
+	return QString("items:%1").arg(m_itemIDs.count());
+}
+
+void DetectConnectionsCommand::disconnectMovingItems() {
+	// For each moving item, disconnect it from female connectors only if the female connector is in the current view
+	// This will allow such connectos in other views eventually (not only in breadboard view, like disconnectFromFemale behavior)
+	// In future version, this will allow us to connect to other elements then wires in PCB view, for example
+	// directly connect to copper fill or vias.
+	ViewLayer::ViewID currentViewID = m_sketchWidget->viewID();
+	if (currentViewID != ViewLayer::BreadboardView)
+		return;
+
+	QHash<long, ItemBase *> movingItems;
+	Q_FOREACH (long itemID, m_itemIDs) {
+		ItemBase * itemBase = m_sketchWidget->findItem(itemID);
+		if (itemBase) {
+			movingItems.insert(itemID, itemBase);
+		} else {
+			DebugDialog::debug(QString("ERROR: Cannot find item with ID %1 in %2 widget").arg(itemID).arg(ViewLayer::viewIDName(currentViewID)));
+		}
+	}
+	
+	Q_FOREACH (long itemID, m_itemIDs) {
+		ItemBase * itemBase = m_sketchWidget->findItem(itemID);
+		if (!itemBase || itemBase->itemType() == ModelPart::Wire) continue;
+		
+		Q_FOREACH (ConnectorItem * fromConnectorItem, itemBase->cachedConnectorItems()) {
+			// Only process connectors that belong to the current view
+			if (fromConnectorItem->attachedToViewID() != currentViewID) {
+				continue;
+			}
+			
+			QList<ConnectorItem *> allConnectedItems;
+			allConnectedItems.append(fromConnectorItem);
+						
+			// Skip wire types from other views to focus on the current view's connections
+			ViewGeometry::WireFlags skipFlags = ViewGeometry::RatsnestFlag | ViewGeometry::NormalFlag | ViewGeometry::PCBTraceFlag | ViewGeometry::SchematicTraceFlag;
+			if (currentViewID == ViewLayer::BreadboardView) {
+				skipFlags &= ~ViewGeometry::NormalFlag;
+			}
+			// Currently unreachable:
+			// else if (currentViewID == ViewLayer::PCBView) {
+			// 	skipFlags &= ~ViewGeometry::PCBTraceFlag;
+			// } else if (currentViewID == ViewLayer::SchematicView) {
+			// 	skipFlags &= ~ViewGeometry::SchematicTraceFlag;
+			// }
+			
+
+			ConnectorItem::collectEqualPotential(allConnectedItems, true, skipFlags);
+
+			QList<ConnectorItem *> connectionsToBreak;
+
+			Q_FOREACH (ConnectorItem * connectedItem, allConnectedItems) {
+				if (connectedItem == fromConnectorItem) continue; // Skip self
+
+				bool isFemale = (connectedItem->connectorType() == Connector::Female);
+				if (!isFemale) continue;
+
+				ItemBase * connectedItemBase = connectedItem->attachedTo();
+				if (!connectedItemBase) continue;
+				
+				// Check if the connected item is also moving
+				if (movingItems.contains(connectedItemBase->layerKinChief()->id())) continue;
+
+
+				// // Only disconnect from female connectors
+				// // Female connectors should only exist in breadboard view currently
+				// bool isFemale = (connectedItem->connectorType() == Connector::Female);
+				// if (isFemale) {
+				// 	if (currentViewID != ViewLayer::BreadboardView) {
+				// 		// This is not yet supported by all operations (which still use the breadboard specific disconnectFrom Female method)
+				// 		DebugDialog::debug(QString("WARNING: Female connector found in %1 view: %2:%3 (layer: %4)")
+				// 			.arg(ViewLayer::viewIDName(currentViewID))
+				// 			.arg(connectedItemBase->instanceTitle())
+				// 			.arg(connectedItem->connectorSharedName())
+				// 			.arg(ViewLayer::viewLayerNameFromID(connectedItem->attachedToViewLayerID())));
+				// 	}
+				connectionsToBreak.append(connectedItem);
+			}
+			
+			Q_FOREACH (ConnectorItem * toConnectorItem, connectionsToBreak) {
+				auto disconnectCmd = ChangeConnectionCommand(m_sketchWidget, BaseCommand::CrossView,
+					fromConnectorItem->attachedToID(), fromConnectorItem->connectorSharedID(),
+					toConnectorItem->attachedToID(), toConnectorItem->connectorSharedID(),
+					ViewLayer::specFromID(toConnectorItem->attachedToViewLayerID()),
+					false, nullptr);  // false = disconnect
+				
+				disconnectCmd.redo();
+			}
+		}
+	}
+}
+
+void DetectConnectionsCommand::connectOverlappingItems() {
+	// Find items and detect new connections at current positions
+	ViewLayer::ViewID currentViewID = m_sketchWidget->viewID();
+	if (currentViewID != ViewLayer::BreadboardView) {
+		return;
+	}
+	
+	Q_FOREACH (long itemID, m_itemIDs) {
+		ItemBase * itemBase = m_sketchWidget->findItem(itemID);
+		if (itemBase && itemBase->itemType() != ModelPart::Wire) {
+			itemBase->findConnectorsUnder();
+			
+			// Process overConnectorItem relationships for the current view
+			for (ConnectorItem * fromConnectorItem: itemBase->cachedConnectorItems()) {
+				// Only process connectors that belong to the current view
+				if (fromConnectorItem->attachedToViewID() != currentViewID) {
+					continue;
+				}
+				
+				ConnectorItem * toConnectorItem = fromConnectorItem->overConnectorItem();
+				if (toConnectorItem) {
+					// Execute connection command cross-view (like original rotateX behavior)
+					auto connectionCmd = ChangeConnectionCommand(m_sketchWidget, BaseCommand::CrossView, 
+						fromConnectorItem->attachedToID(), fromConnectorItem->connectorSharedID(),
+						toConnectorItem->attachedToID(), toConnectorItem->connectorSharedID(),
+						ViewLayer::specFromID(toConnectorItem->attachedToViewLayerID()),
+						true, nullptr);
+					
+					connectionCmd.redo();
+					
+					fromConnectorItem->setOverConnectorItem(nullptr);
+				}
+			}
+		}
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+int RotateCommand::rotateCommandID = 6;
+
+RotateCommand::RotateCommand(const QString &itemsText, const QString &viewName, double degrees, const QList<long> &itemIDs, const QPointF &center, QUndoCommand *parent)
+	: QUndoCommand(parent), m_degrees(degrees), m_itemIDs(itemIDs), m_center(center), m_itemsText(itemsText), m_viewName(viewName)
+{
+	updateText();
+}
+
+int RotateCommand::id() const {
+	return rotateCommandID;
+}
+
+void RotateCommand::updateText() {
+	setText(QObject::tr("Rotate %1 %2° (%3)")
+	        .arg(m_itemsText)
+	        .arg(QString::number(m_degrees, 'f', 0))
+	        .arg(m_viewName));
+}
+
+bool RotateCommand::mergeWith(const QUndoCommand *other)
+{
+	// "this" is earlier; "other" is later
+
+	if (other->id() != id()) {
+		return false;
+	}
+
+	const auto * sother = dynamic_cast<const RotateCommand *>(other);
+	if (sother == nullptr) return false;
+
+	// Only merge if the items being rotated are exactly the same
+	if (sother->m_itemIDs != m_itemIDs) {
+		return false;
+	}
+
+	// Only merge if the rotation center is the same
+	if (sother->m_center != m_center) {
+		return false;
+	}
+
+	// Merge the rotation degrees
+	m_degrees += sother->m_degrees;
+	
+	// Wrap angle at 360 degrees
+	m_degrees = fmod(m_degrees, 360.0);
+	if (m_degrees < 0) {
+		m_degrees += 360.0;
+	}
+	
+	// Update any RotateFlipLabelCommand subcommands with the new total degrees
+	for (int i = 0; i < childCount(); i++) {
+		const QUndoCommand * subCmd = child(i);
+		auto * rotateFlipCmd = const_cast<RotateFlipLabelCommand *>(dynamic_cast<const RotateFlipLabelCommand *>(subCmd));
+		if (rotateFlipCmd) {
+			rotateFlipCmd->setRotation(m_degrees);
+		}
+	}
+	
+	// Update the command text to reflect the new total rotation
+	updateText();
+	
+	return true;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+RotateMoveLabelCommand::RotateMoveLabelCommand(SketchWidget *sketchWidget, long itemID, 
+                                               const QPointF & originalPos, const QPointF & originalOffset,
+                                               const QPointF & labelBoundingCenter, const QPointF & rotationCenter, 
+                                               const double* degreesPtr, QUndoCommand *parent)
+	: BaseCommand(SingleView, sketchWidget, parent),
+	m_itemID(itemID),
+	m_originalPos(originalPos),
+	m_originalOffset(originalOffset),
+	m_labelBoundingCenter(labelBoundingCenter),
+	m_rotationCenter(rotationCenter),
+	m_degreesPtr(degreesPtr),
+	m_currentPos(originalPos),
+	m_currentOffset(originalOffset)
+{
+}
+
+void RotateMoveLabelCommand::undo() {
+	// Restore original position
+	m_sketchWidget->movePartLabelForCommand(m_itemID, m_originalPos, m_originalOffset);
+	BaseCommand::undo();
+}
+
+void RotateMoveLabelCommand::redo() {
+	QTransform rotation;
+	rotation.rotate(*m_degreesPtr);
+	
+	// Get the item to calculate its new position after rotation
+	ItemBase * itemBase = m_sketchWidget->findItem(m_itemID);
+	if (!itemBase) {
+		qDebug() << "RotateMoveLabelCommand::redo: item not found!";
+		Q_ASSERT(itemBase);
+	}
+	
+	// Calculate where the item will be after rotation
+	ViewGeometry vg;
+	itemBase->calcRotation(rotation, m_rotationCenter, vg);
+	
+	// Calculate new label position by rotating the original label position around rotation center
+	m_currentPos = GraphicsUtils::calcRotation(rotation, m_rotationCenter, m_originalPos, m_labelBoundingCenter);
+	m_currentOffset = m_currentPos - vg.loc();
+	
+	m_sketchWidget->movePartLabelForCommand(m_itemID, m_currentPos, m_currentOffset);
+	
+	BaseCommand::redo();
+}
+
+QString RotateMoveLabelCommand::getParamString() const {
+	return QString("RotateMoveLabelCommand id:%1 degrees:%2 center:(%3,%4)")
+	       .arg(m_itemID)
+	       .arg(*m_degreesPtr)
+	       .arg(m_rotationCenter.x())
+	       .arg(m_rotationCenter.y());
 }
