@@ -78,6 +78,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../mainwindow/FProbeDropByModuleID.h"
 #include "../mainwindow/FProbeKeyPressEvents.h"
 #include "../mainwindow/fprobefocuswidget.h"
+#include "FProbeCurrentSketchXml.h"
 #include "model/fzpinfo.h"
 #include "connectors/debugconnectors.h"
 #include "connectors/debugconnectorsprobe.h"
@@ -525,6 +526,7 @@ void MainWindow::init(ReferenceModel *referenceModel, bool lockFiles) {
 	connect(fProbe, &FProbeDropByModuleID::putItemByModuleID, this, &MainWindow::putItemByModuleID);
 
 	new FProbeKeyPressEvents();
+	new FProbeCurrentSketchXml(m_sketchModel);
 
 	FProbeFocusWidget *focusWidgetProbe = new FProbeFocusWidget();
 

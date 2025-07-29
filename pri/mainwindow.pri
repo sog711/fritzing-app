@@ -20,6 +20,7 @@ HEADERS += \
     src/mainwindow/sketchareawidget.h \
     src/mainwindow/FProbeDropByModuleID.h \
     src/mainwindow/FProbeKeyPressEvents.h \
+    src/mainwindow/FProbeCurrentSketchXml.h \
     src/mainwindow/getspice.h \
     src/mainwindow/fprobefocuswidget.h \
 
@@ -34,5 +35,6 @@ SOURCES += \
     src/mainwindow/sketchareawidget.cpp \
     src/mainwindow/FProbeDropByModuleID.cpp \
     src/mainwindow/FProbeKeyPressEvents.cpp \
+    src/mainwindow/FProbeCurrentSketchXml.cpp \
     src/mainwindow/getspice.cpp \
     src/mainwindow/fprobefocuswidget.cpp \
