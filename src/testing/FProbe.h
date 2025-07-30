@@ -29,11 +29,13 @@ class FProbe {
 		FProbe(std::string name);
 		~FProbe();
 
-	virtual QVariant read() = 0;
-	virtual void write(QVariant) = 0;
-	virtual std::string name();
-protected:
-	std::string m_name;
+	protected:
+		friend class FTesting;  // Only FTesting may use the probes.
+		virtual QVariant read() = 0;
+		virtual void write(QVariant) = 0;
+		virtual std::string name();
+
+		std::string m_name;
 };
 
 #endif

@@ -423,6 +423,8 @@ int FApplication::init() {
 			}
 		}
 
+		// This enables the FTesting server. Caution: The FTesting server
+		// does not attempt to be secure. Only use this option in an isolated network.
 		if ((m_arguments[i].compare("-ftesting", Qt::CaseInsensitive) == 0) ||
 			(m_arguments[i].compare("--ftesting", Qt::CaseInsensitive) == 0)) {
 			DebugDialog::setEnabled(true);

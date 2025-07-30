@@ -520,6 +520,7 @@ void MainWindow::init(ReferenceModel *referenceModel, bool lockFiles) {
 		m_fileProgressDialog->setValue(98);
 	}
 
+	// Probes are used by the FTesting server, which is disabled by default. See fapplication options to enable it.
 	new FProbeStartSimulator(m_simulator);
 	auto fProbe = new FProbeDropByModuleID();
 
