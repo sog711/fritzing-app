@@ -18,7 +18,6 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 ********************************************************************/
 
-#include <QtCore>
 #include <QGraphicsScene>
 #include <QPoint>
 #include <QPair>
@@ -40,13 +39,8 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QScrollBar>
 #include <QStatusBar>
 #include <QOpenGLWidget>
-#include <QMessageBox>
-#include <QDialog>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QLabel>
-#include <QPushButton>
-#include <QTimer>
+#include <QRandomGenerator>
+#include <QMimeData>
 
 #include <limits>
 
@@ -62,7 +56,6 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../debugdialog.h"
 #include "sketchwidget.h"
 #include "outlierhandler.h"
-#include "qopenglcontext.h"
 #include "subpartswapmanager.h"
 #include "../connectors/connectoritem.h"
 #include "../connectors/svgidlayer.h"
@@ -87,7 +80,6 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../items/moduleidnames.h"
 #include "../items/hole.h"
 #include "../items/capacitor.h"
-#include "../items/schematicframe.h"
 #include "../utils/graphutils.h"
 #include "../utils/ratsnestcolors.h"
 #include "../utils/fmessagebox.h"
