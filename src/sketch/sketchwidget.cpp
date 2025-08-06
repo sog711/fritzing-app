@@ -4423,9 +4423,9 @@ double SketchWidget::fitInWindow() {
 	setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 	setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
-	fitInView(itemsRect, Qt::KeepAspectRatio);
 	qreal viewMarginFactor = 0.6;
 	adjustSceneRect(itemsRect, viewMarginFactor);
+	fitInView(itemsRect, Qt::KeepAspectRatio);
 
 	setHorizontalScrollBarPolicy(originalHorizontalPolicy);
 	setVerticalScrollBarPolicy(originalVerticalPolicy);
