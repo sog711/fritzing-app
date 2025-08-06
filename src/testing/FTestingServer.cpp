@@ -34,6 +34,5 @@ FTestingServer::FTestingServer(QObject *parent)
 
 void FTestingServer::incomingConnection(qintptr socketDescriptor)
 {
-	DebugDialog::debug("FTestingServer incomingConnection called");
 	Q_EMIT newConnection(socketDescriptor);
 }
