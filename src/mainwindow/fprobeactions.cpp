@@ -90,7 +90,6 @@ QVariantList FProbeActions::listActionsInMenu(const QMenu* menu)
 			bool isEnabled = action->isEnabled();
 			actionDetail["name"] = text ;
 			actionDetail["enabled"] = isEnabled;
-			DebugDialog::debug(QString("%1: %2").arg(isEnabled? "enabled":"disabled", text));
 			actionDetails.append(actionDetail);
 		}
 	}
@@ -135,7 +134,7 @@ bool FProbeActions::searchActionsInMenu(const QMenu* menu, const QString& search
 		if ((matchStart && actionText.startsWith(actualSearchText, Qt::CaseInsensitive)) ||
 			(matchEnd && actionText.endsWith(actualSearchText, Qt::CaseInsensitive)) ||
 			(!matchStart && !matchEnd && actionText.contains(actualSearchText, Qt::CaseInsensitive))) {
-			qDebug() << "Triggering action:" << action->text();
+			DebugDialog::DebugStream() << "Triggering action:" << action->text();
 			emit action->triggered();
 			return true; // Match found
 		}

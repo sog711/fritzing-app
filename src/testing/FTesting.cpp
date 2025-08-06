@@ -68,12 +68,14 @@ std::optional<QVariant> FTesting::readProbe(std::string name)
 	return std::nullopt;
 }
 
-void FTesting::writeProbe(std::string name, QVariant param)
+bool FTesting::writeProbe(std::string name, QVariant param)
 {
 	auto it = m_probeMap.find(name);
 	if(it != m_probeMap.end()) {
 		it->second->write(param);
+		return true;
 	}
+	return false;
 }
 
 void FTesting::initServer() {
@@ -175,8 +177,12 @@ void FTestingServerThread::run()
 
 	if (readOrWrite.compare("write") == 0) {
 		DebugDialog::debug(QString("FTesting write command %1 %2").arg(command, param));
-		fTesting->writeProbe(command.toStdString(), QVariant(param));
-		writeResponse(socket, 200, "OK", "text/plain", "");
+		bool success = fTesting->writeProbe(command.toStdString(), QVariant(param));
+		if (success) {
+			writeResponse(socket, 200, "OK", "text/plain", "");
+		} else {
+			writeResponse(socket, 404, "Not Found", "text/plain", "Probe not found");
+		}
 	} else {
 		std::optional<QVariant> probeResult = fTesting->readProbe(command.toStdString());
 

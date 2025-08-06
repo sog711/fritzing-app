@@ -111,7 +111,7 @@ public:
 
 	stdx::optional<QVariant> readProbe(std::string name);
 
-	void writeProbe(std::string name, QVariant param);
+	bool writeProbe(std::string name, QVariant param);
 
 public Q_SLOTS:
 	void newConnection(qintptr socketDescriptor);
