@@ -158,7 +158,7 @@ protected:
 	static bool pxToInches(QDomElement &elem, const QString &attrName, bool isIllustrator);
 	static void squashNotElement(QDomElement & element, const QString & elementName, const QString & attName, const QRegularExpression & matchContent, bool & result);
 	static void initPowerPrefixes();
-	static QDomElement copyText(QDomDocument & svgDom, QDomElement & parent, QDomElement & text, const QString & defaultX, const QString & defaultY, bool copyAttributes);
+	static QDomElement copyText(QDomDocument & svgDom, QDomElement & parent, QDomElement & text, double defaultX, double defaultY, bool copyAttributes);
 	static void gornTreeAux(QDomElement &);
 	static bool noPatternAux(QDomDocument & svgDom, const QString & tag);
 	static bool noUseAux(QDomDocument & svgDom);

@@ -1267,6 +1267,9 @@ bool TextUtils::noPatternAux(QDomDocument & svgDom, const QString & tag)
 
 bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 {
+	// We flatten tspans into groups of text
+	// - tspan text advance and dx are not supported
+	// - tspan nested in tspans are not supported
 	QList<QDomElement> texts;
 	QDomNodeList textNodeList = svgDom.elementsByTagName("text");
 	for (int i = 0; i < textNodeList.count(); i++) {
@@ -1291,12 +1294,48 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 		QString defaultY = g.attribute("y");
 		g.removeAttribute("x");
 		g.removeAttribute("y");
+		
+		// Set transform on the group instead of using x/y coordinates
+		if (!defaultX.isEmpty() && !defaultY.isEmpty()) {
+			g.setAttribute("transform", QString("translate(%1,%2)").arg(defaultX, defaultY));
+		}
 
-		copyText(svgDom, g, text, defaultX, defaultY, false);
+		copyText(svgDom, g, text, 0.0, 0.0, false);
 
+		double currentX = 0.0;
+		double currentY = 0.0;
+		double baseX = defaultX.toDouble();
+		double baseY = defaultY.toDouble();
+		
 		QDomElement tspan = text.firstChildElement("tspan");
-		while (!tspan.isNull()) {
-			copyText(svgDom, g, tspan, defaultX, defaultY, true);
+		while (!tspan.isNull()) {			
+			QString tspanX = tspan.attribute("x");
+			QString tspanY = tspan.attribute("y");
+			if (!tspanX.isEmpty()) {
+				bool ok;
+				double absX = tspanX.toDouble(&ok);
+				if (ok) {
+					currentX = absX - baseX;
+				}
+			}
+			if (!tspanY.isEmpty()) {
+				bool ok;
+				double absY = tspanY.toDouble(&ok);
+				if (ok) {
+					currentY = absY - baseY;
+				}
+			}
+						
+			QString dyValue = tspan.attribute("dy");
+			if (!dyValue.isEmpty()) {
+				bool ok;
+				double dyVal = dyValue.toDouble(&ok);
+				if (ok) {
+					currentY += dyVal;
+				}
+			}
+			
+			copyText(svgDom, g, tspan, currentX, currentY, true);
 			tspan = tspan.nextSiblingElement("tspan");
 		}
 	}
@@ -1351,15 +1390,23 @@ bool TextUtils::noUseAux(QDomDocument & svgDom)
 }
 
 
-QDomElement TextUtils::copyText(QDomDocument & svgDom, QDomElement & parent, QDomElement & text, const QString & defaultX, const QString & defaultY, bool copyAttributes)
+QDomElement TextUtils::copyText(QDomDocument & svgDom, QDomElement & parent, QDomElement & text, double defaultX, double defaultY, bool copyAttributes)
 {
 	QDomNode cnode = text.firstChild();
 	while (!cnode.isNull()) {
 		if (cnode.isText()) {
 			QDomElement newText = svgDom.createElement("text");
 			parent.appendChild(newText);
-			newText.setAttribute("x", defaultX);
-			newText.setAttribute("y", defaultY);
+			
+			// Only set x and y if the default values are not effectively zero (using epsilon comparison)
+			const double epsilon = 1e-9;
+			if (qAbs(defaultX) > epsilon) {
+				newText.setAttribute("x", QString::number(defaultX));
+			}
+			if (qAbs(defaultY) > epsilon) {
+				newText.setAttribute("y", QString::number(defaultY));
+			}
+			
 			QDomNode textValue = svgDom.createTextNode(cnode.nodeValue());
 			newText.appendChild(textValue);
 
@@ -1367,7 +1414,12 @@ QDomElement TextUtils::copyText(QDomDocument & svgDom, QDomElement & parent, QDo
 				QDomNamedNodeMap attributes = text.attributes();
 				for (int i = 0; i < attributes.count(); i++) {
 					QDomNode attribute = attributes.item(i);
-					newText.setAttribute(attribute.nodeName(), attribute.nodeValue());
+					QString attrName = attribute.nodeName();
+					
+					// Do not copy x, y, dx, and dy attributes
+					if (attrName != "x" && attrName != "y" && attrName != "dx" && attrName != "dy") {
+						newText.setAttribute(attrName, attribute.nodeValue());
+					}
 				}
 			}
 
