@@ -1299,124 +1299,157 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 			g.setAttribute(attribute.nodeName(), attribute.nodeValue());
 		}
 		g.setAttribute("data-fritzing-multiline", "");
-		QString defaultX = g.attribute("x");
-		QString defaultY = g.attribute("y");
-		g.removeAttribute("x");
-		g.removeAttribute("y");
+		
+		// Extract base position: if transform exists, base is 0,0; otherwise use x/y
+		double baseX = 0.0;
+		double baseY = 0.0;
+		QString transformAttr = g.attribute("transform");
+		
+		if (transformAttr.isEmpty()) {
+			// No transform, use x/y attributes as base
+			QString xAttr = g.attribute("x");
+			QString yAttr = g.attribute("y");
+			if (!xAttr.isEmpty()) baseX = xAttr.toDouble();
+			if (!yAttr.isEmpty()) baseY = yAttr.toDouble();
+			qDebug() << "No transform, using x/y as base -> baseX:" << baseX << "baseY:" << baseY;
+			
+			// Remove x/y from group since we'll handle positioning with transform
+			g.removeAttribute("x");
+			g.removeAttribute("y");
+		} else {
+			// Transform exists, base is 0,0 (don't remove x/y from original element)
+			qDebug() << "Transform exists, base is 0,0. Transform:" << transformAttr;
+		}
+		
 		g.removeAttribute("text-anchor"); // Remove text-anchor from group, we'll handle it manually
 
-		double mainTextAdvance = appendText(svgDom, g, text, 0.0, 0.0, false);
-
-		double currentX = mainTextAdvance;
-		double currentY = 0.0;
-		double minX = 0.0;  // Start position for main text
-		double maxX = mainTextAdvance;
-		qDebug() << "Main text advance:" << mainTextAdvance << "starting currentX at:" << currentX;
-		double baseX = defaultX.isEmpty() ? 0.0 : defaultX.toDouble();
-		double baseY = defaultY.isEmpty() ? 0.0 : defaultY.toDouble();
-		qDebug() << "baseX:" << baseX << "baseY:" << baseY << "(defaultX empty:" << defaultX.isEmpty() << "defaultY empty:" << defaultY.isEmpty() << ")";
+		// Process all children (text nodes and tspans) in order
+		double currentX = baseX;  // Start from base position
+		double currentY = baseY;
+		double minX = baseX;  // Track min position relative to base
+		double maxX = baseX;  // Track max position relative to base
+		bool trackMinMax = true;
+		qDebug() << "Starting currentX at:" << currentX << "with baseX:" << baseX << "baseY:" << baseY;
 		
-		QDomElement tspan = text.firstChildElement("tspan");
-		while (!tspan.isNull()) {			
-			QString tspanX = tspan.attribute("x");
-			QString tspanY = tspan.attribute("y");
-			if (!tspanX.isEmpty()) {
-				bool ok;
-				double absX = tspanX.toDouble(&ok);
-				if (ok) {
-					currentX = absX - baseX;
+		// Process all children (text nodes and tspan elements) in document order
+		QDomNode child = text.firstChild();
+		while (!child.isNull()) {
+			QDomElement elementToAppend;
+			
+			if (child.isText()) {
+				// Process direct text node using main text element attributes
+				QString textContent = child.nodeValue();
+				if (!textContent.isEmpty()) {
+					qDebug() << "Processing text node:" << textContent << "at currentX:" << currentX << "currentY:" << currentY;
+					
+					// Create a temporary element with main text attributes to use with appendText
+					QDomElement tempText = svgDom.createElement("text");
+					QDomText textNode = svgDom.createTextNode(textContent);
+					tempText.appendChild(textNode);
+					
+					// Copy attributes from main text element
+					QDomNamedNodeMap attributes = text.attributes();
+					for (int i = 0; i < attributes.count(); i++) {
+						QDomNode attribute = attributes.item(i);
+						tempText.setAttribute(attribute.nodeName(), attribute.nodeValue());
+					}
+					
+					elementToAppend = tempText;
 				}
-			}
-			if (!tspanY.isEmpty()) {
-				bool ok;
-				double absY = tspanY.toDouble(&ok);
-				if (ok) {
-					currentY = absY - baseY;
+			} else if (child.isElement() && child.nodeName() == "tspan") {
+				QDomElement tspan = child.toElement();			
+				QString tspanX = tspan.attribute("x");
+				QString tspanY = tspan.attribute("y");
+				
+				// Tspan x overrides current X position, y overrides current Y position
+				if (!tspanX.isEmpty()) {
+					bool ok;
+					double absX = tspanX.toDouble(&ok);
+					if (ok) {
+						currentX = absX;  // Override currentX with tspan's x
+						trackMinMax = false; // text align doesn't follow absolute positions
+						qDebug() << "Tspan x overrides -> currentX:" << currentX;
+					}
 				}
-			}
-						
-			QString dyValue = tspan.attribute("dy");
-			if (!dyValue.isEmpty()) {
-				bool ok;
-				double dyVal = dyValue.toDouble(&ok);
-				if (ok) {
-					currentY += dyVal;
+				if (!tspanY.isEmpty()) {
+					bool ok;
+					double absY = tspanY.toDouble(&ok);
+					if (ok) {
+						currentY = absY;  // Override currentY with tspan's y  
+						qDebug() << "Tspan y overrides -> currentY:" << currentY;
+					}
 				}
-			}
+							
+				QString dyValue = tspan.attribute("dy");
+				if (!dyValue.isEmpty()) {
+					bool ok;
+					double dyVal = dyValue.toDouble(&ok);
+					if (ok) {
+						currentY += dyVal;
+					}
+				}
 
-			QString dxValue = tspan.attribute("dx");
-			if (!dxValue.isEmpty()) {
-				bool ok;
-				double dxVal = dxValue.toDouble(&ok);
-				if (ok) {
-					qDebug() << "Processing dx attribute:" << dxValue << "parsed as:" << dxVal;
-					currentX += dxVal;
+				QString dxValue = tspan.attribute("dx");
+				if (!dxValue.isEmpty()) {
+					bool ok;
+					double dxVal = dxValue.toDouble(&ok);
+					if (ok) {
+						qDebug() << "Processing dx attribute:" << dxValue << "parsed as:" << dxVal;
+						currentX += dxVal;
+					}
 				}
+				
+				qDebug() << "Positioning tspan at currentX:" << currentX << "currentY:" << currentY;
+				elementToAppend = tspan;
 			}
 			
-			qDebug() << "Positioning tspan at currentX:" << currentX << "currentY:" << currentY;
-			double tspanAdvance = appendText(svgDom, g, tspan, currentX, currentY, true);
+			// Process the element if we have one to append
+			double advance = 0.0;
+			if (!elementToAppend.isNull()) {
+				advance = appendText(svgDom, g, elementToAppend, currentX - baseX, currentY - baseY, true);
+			}
 			
-			// Update min/max tracking
-			minX = qMin(minX, currentX);
-			currentX += tspanAdvance;
-			maxX = qMax(maxX, currentX);
-			qDebug() << "Tspan advance:" << tspanAdvance << "new currentX:" << currentX << "minX:" << minX << "maxX:" << maxX;
+			// Update position and tracking for both text and tspan
+			currentX += advance;
+			if (trackMinMax) {
+				minX = qMin(minX, currentX - advance);
+				maxX = qMax(maxX, currentX);
+				qDebug() << "Advance:" << advance << "new currentX:" << currentX << "minX:" << minX << "maxX:" << maxX;
+			} else {
+				qDebug() << "Advance:" << advance << "new currentX:" << currentX << "Not tracking. minX:" << minX << "maxX:" << maxX;
+			}
 			
-			tspan = tspan.nextSiblingElement("tspan");
+			child = child.nextSibling();
 		}
 		
 		// Apply text-anchor positioning
 		double totalWidth = maxX - minX;
 		double anchorOffset = 0.0;
 
-		anchorOffset = -minX;
-		if (textAnchor == "middle" || textAnchor == "center") {
+		anchorOffset = baseX-minX;
+		if (textAnchor == "middle") {
 			anchorOffset += -totalWidth / 2.0;
 		} else if (textAnchor == "end") {
 			anchorOffset += -totalWidth;
+		} else if (textAnchor == "start" || textAnchor.isEmpty()) {
+			// No adjustment needed for start or empty (default is start)
+		} else {
+			qWarning() << "Invalid text-anchor value:" << textAnchor << "- using 'start' as default";
 		}
-		
+
 		qDebug() << "Text-anchor:" << textAnchor << "totalWidth:" << totalWidth << "anchorOffset:" << anchorOffset;
 		
-		// Adjust group transform to account for text-anchor
-		QString currentTransform = g.attribute("transform");
-		qDebug() << "Current transform before anchor adjustment:" << (currentTransform.isEmpty() ? "EMPTY" : currentTransform);
+		// Adjust group transform to account for text-anchor and base position
+		QTransform currentTransform = elementToTransform(g);
+		qDebug() << "Current transform before anchor adjustment:" << (currentTransform.isIdentity() ? "IDENTITY" : svgMatrix(currentTransform));
 		
-		if (qAbs(anchorOffset) > 1e-9) {
-			qDebug() << "Applying anchor offset:" << anchorOffset;
-			if (!currentTransform.isEmpty()) {
-				// Parse existing translate and add anchor offset
-				if (currentTransform.contains("translate(")) {
-					QRegularExpression re("translate\\(([^,)]+),([^)]+)\\)");
-					QRegularExpressionMatch match = re.match(currentTransform);
-					if (match.hasMatch()) {
-						double existingX = match.captured(1).toDouble();
-						double existingY = match.captured(2).toDouble();
-						QString newTransform = QString("translate(%1,%2)").arg(existingX + anchorOffset).arg(existingY);
-						g.setAttribute("transform", newTransform);
-						qDebug() << "Updated existing transform from:" << currentTransform << "to:" << newTransform;
-					}
-				}
-			} else {
-				// Set new transform with anchor offset using pre-calculated baseX/baseY
-				// Apply anchor offset even if base position is 0 (empty or explicit)
-				QString newTransform = QString("translate(%1,%2)").arg(baseX + anchorOffset).arg(baseY);
-				g.setAttribute("transform", newTransform);
-				qDebug() << "Setting new transform:" << newTransform << "(baseX:" << baseX << "baseY:" << baseY << "anchorOffset:" << anchorOffset << ")";
-			}
-		} else {
-			// Even if no anchor offset, we might need to set base position
-			if (!currentTransform.isEmpty()) {
-				qDebug() << "No anchor offset, keeping existing transform:" << currentTransform;
-			} else if (baseX != 0.0 || baseY != 0.0) {
-				QString baseTransform = QString("translate(%1,%2)").arg(baseX).arg(baseY);
-				g.setAttribute("transform", baseTransform);
-				qDebug() << "No anchor offset but setting base position transform:" << baseTransform;
-			} else {
-				qDebug() << "No transform needed (no anchor offset, no base position)";
-			}
-		}
+		// Always create final transform: current + base position + anchor offset
+		QTransform finalTransform = currentTransform;
+		finalTransform.translate(baseX + anchorOffset, baseY);
+		
+		QString finalTransformStr = svgMatrix(finalTransform);
+		g.setAttribute("transform", finalTransformStr);
+		qDebug() << "Setting final transform:" << finalTransformStr << "(baseX:" << baseX << "baseY:" << baseY << "anchorOffset:" << anchorOffset << ")";
 	}
 
 	return true;
