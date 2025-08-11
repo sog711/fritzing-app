@@ -305,14 +305,30 @@ void SchematicTextLayerKinPaletteItem::positionTexts(QList<QDomElement> &texts)
 	for (QDomElement &text : texts) {
 		TextThing textThing;
 
-		QString id = text.attribute("id");
+		// Rotate multiline text around common center.
+		QDomElement elementToRender = text;
+		QDomNode parent = text.parentNode();
+		while (!parent.isNull()) {
+			if (parent.isElement()) {
+				QDomElement parentElement = parent.toElement();
+				if (parentElement.tagName() == "g" &&
+					(parentElement.attribute("id") == "label" || // Abusing the id is a bit hacky, avoid. Using data-fritzing-multiline instead
+					 parentElement.hasAttribute("data-fritzing-multiline"))) {
+					elementToRender = parentElement;
+					break;
+				}
+			}
+			parent = parent.parentNode();
+		}
+
+		QString id = elementToRender.attribute("id");
 		if (id.isEmpty()) {
 			id = "123";
-			text.setAttribute("id", id);
+			elementToRender.setAttribute("id", id);
 		}
 
 		QGraphicsSvgItem tempSvgItem;
-		tempSvgItem.setSharedRenderer(new QSvgRenderer(text.toElement().ownerDocument().toByteArray()));
+		tempSvgItem.setSharedRenderer(new QSvgRenderer(elementToRender.ownerDocument().toByteArray()));
 		QRectF boundingBox = tempSvgItem.renderer()->boundsOnElement(id);
 
 		QTransform flipHorizontal;

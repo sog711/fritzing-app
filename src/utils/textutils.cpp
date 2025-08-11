@@ -1290,6 +1290,7 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 			QDomNode attribute = attributes.item(i);
 			g.setAttribute(attribute.nodeName(), attribute.nodeValue());
 		}
+		g.setAttribute("data-fritzing-multiline", "");
 		QString defaultX = g.attribute("x");
 		QString defaultY = g.attribute("y");
 		g.removeAttribute("x");
