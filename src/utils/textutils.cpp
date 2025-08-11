@@ -28,6 +28,9 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../installedfonts.h"
 
 #include <QRegularExpression>
+#include <QFont>
+#include <QFontMetrics>
+#include <QDebug>
 #include <QRegularExpression>
 #include <QBuffer>
 #include <QFile>
@@ -1268,8 +1271,8 @@ bool TextUtils::noPatternAux(QDomDocument & svgDom, const QString & tag)
 bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 {
 	// We flatten tspans into groups of text
-	// - tspan text advance and dx are not supported
 	// - tspan nested in tspans are not supported
+	qDebug() << "tspanRemoveAux called - processing tspans with dx support";
 	QList<QDomElement> texts;
 	QDomNodeList textNodeList = svgDom.elementsByTagName("text");
 	for (int i = 0; i < textNodeList.count(); i++) {
@@ -1286,6 +1289,11 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 		QDomElement g = svgDom.createElement("g");
 		text.parentNode().replaceChild(g, text);
 		QDomNamedNodeMap attributes = text.attributes();
+		
+		// Detect and store text-anchor before copying attributes
+		QString textAnchor = findAnchor(text);
+		qDebug() << "Found text-anchor:" << textAnchor;
+		
 		for (int i = 0; i < attributes.count(); i++) {
 			QDomNode attribute = attributes.item(i);
 			g.setAttribute(attribute.nodeName(), attribute.nodeValue());
@@ -1295,18 +1303,18 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 		QString defaultY = g.attribute("y");
 		g.removeAttribute("x");
 		g.removeAttribute("y");
-		
-		// Set transform on the group instead of using x/y coordinates
-		if (!defaultX.isEmpty() && !defaultY.isEmpty()) {
-			g.setAttribute("transform", QString("translate(%1,%2)").arg(defaultX, defaultY));
-		}
+		g.removeAttribute("text-anchor"); // Remove text-anchor from group, we'll handle it manually
 
-		copyText(svgDom, g, text, 0.0, 0.0, false);
+		double mainTextAdvance = appendText(svgDom, g, text, 0.0, 0.0, false);
 
-		double currentX = 0.0;
+		double currentX = mainTextAdvance;
 		double currentY = 0.0;
-		double baseX = defaultX.toDouble();
-		double baseY = defaultY.toDouble();
+		double minX = 0.0;  // Start position for main text
+		double maxX = mainTextAdvance;
+		qDebug() << "Main text advance:" << mainTextAdvance << "starting currentX at:" << currentX;
+		double baseX = defaultX.isEmpty() ? 0.0 : defaultX.toDouble();
+		double baseY = defaultY.isEmpty() ? 0.0 : defaultY.toDouble();
+		qDebug() << "baseX:" << baseX << "baseY:" << baseY << "(defaultX empty:" << defaultX.isEmpty() << "defaultY empty:" << defaultY.isEmpty() << ")";
 		
 		QDomElement tspan = text.firstChildElement("tspan");
 		while (!tspan.isNull()) {			
@@ -1335,9 +1343,79 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 					currentY += dyVal;
 				}
 			}
+
+			QString dxValue = tspan.attribute("dx");
+			if (!dxValue.isEmpty()) {
+				bool ok;
+				double dxVal = dxValue.toDouble(&ok);
+				if (ok) {
+					qDebug() << "Processing dx attribute:" << dxValue << "parsed as:" << dxVal;
+					currentX += dxVal;
+				}
+			}
 			
-			copyText(svgDom, g, tspan, currentX, currentY, true);
+			qDebug() << "Positioning tspan at currentX:" << currentX << "currentY:" << currentY;
+			double tspanAdvance = appendText(svgDom, g, tspan, currentX, currentY, true);
+			
+			// Update min/max tracking
+			minX = qMin(minX, currentX);
+			currentX += tspanAdvance;
+			maxX = qMax(maxX, currentX);
+			qDebug() << "Tspan advance:" << tspanAdvance << "new currentX:" << currentX << "minX:" << minX << "maxX:" << maxX;
+			
 			tspan = tspan.nextSiblingElement("tspan");
+		}
+		
+		// Apply text-anchor positioning
+		double totalWidth = maxX - minX;
+		double anchorOffset = 0.0;
+
+		anchorOffset = -minX;
+		if (textAnchor == "middle" || textAnchor == "center") {
+			anchorOffset += -totalWidth / 2.0;
+		} else if (textAnchor == "end") {
+			anchorOffset += -totalWidth;
+		}
+		
+		qDebug() << "Text-anchor:" << textAnchor << "totalWidth:" << totalWidth << "anchorOffset:" << anchorOffset;
+		
+		// Adjust group transform to account for text-anchor
+		QString currentTransform = g.attribute("transform");
+		qDebug() << "Current transform before anchor adjustment:" << (currentTransform.isEmpty() ? "EMPTY" : currentTransform);
+		
+		if (qAbs(anchorOffset) > 1e-9) {
+			qDebug() << "Applying anchor offset:" << anchorOffset;
+			if (!currentTransform.isEmpty()) {
+				// Parse existing translate and add anchor offset
+				if (currentTransform.contains("translate(")) {
+					QRegularExpression re("translate\\(([^,)]+),([^)]+)\\)");
+					QRegularExpressionMatch match = re.match(currentTransform);
+					if (match.hasMatch()) {
+						double existingX = match.captured(1).toDouble();
+						double existingY = match.captured(2).toDouble();
+						QString newTransform = QString("translate(%1,%2)").arg(existingX + anchorOffset).arg(existingY);
+						g.setAttribute("transform", newTransform);
+						qDebug() << "Updated existing transform from:" << currentTransform << "to:" << newTransform;
+					}
+				}
+			} else {
+				// Set new transform with anchor offset using pre-calculated baseX/baseY
+				// Apply anchor offset even if base position is 0 (empty or explicit)
+				QString newTransform = QString("translate(%1,%2)").arg(baseX + anchorOffset).arg(baseY);
+				g.setAttribute("transform", newTransform);
+				qDebug() << "Setting new transform:" << newTransform << "(baseX:" << baseX << "baseY:" << baseY << "anchorOffset:" << anchorOffset << ")";
+			}
+		} else {
+			// Even if no anchor offset, we might need to set base position
+			if (!currentTransform.isEmpty()) {
+				qDebug() << "No anchor offset, keeping existing transform:" << currentTransform;
+			} else if (baseX != 0.0 || baseY != 0.0) {
+				QString baseTransform = QString("translate(%1,%2)").arg(baseX).arg(baseY);
+				g.setAttribute("transform", baseTransform);
+				qDebug() << "No anchor offset but setting base position transform:" << baseTransform;
+			} else {
+				qDebug() << "No transform needed (no anchor offset, no base position)";
+			}
 		}
 	}
 
@@ -1432,6 +1510,38 @@ QDomElement TextUtils::copyText(QDomDocument & svgDom, QDomElement & parent, QDo
 	}
 
 	return ___emptyElement___;
+}
+
+double TextUtils::appendText(QDomDocument & svgDom, QDomElement & parent, QDomElement & text, double defaultX, double defaultY, bool copyAttributes)
+{
+	// Copy the text element
+	QDomElement newText = copyText(svgDom, parent, text, defaultX, defaultY, copyAttributes);
+	
+	// Always set text-anchor to "start" for consistent positioning
+	if (!newText.isNull()) {
+		newText.setAttribute("text-anchor", "start");
+	}
+	
+	// Calculate text advance using font metrics
+	QString textContent;
+	if (findText(text, textContent) && !textContent.isEmpty()) {
+		// Compact all whitespace and newlines to single spaces for advance calculation
+		// Preserve trailing whitespace if it exists
+		bool hasTrailingWhitespace = textContent.length() > 0 && textContent.at(textContent.length() - 1).isSpace();
+		QString compactedText = textContent.simplified(); // This replaces runs of whitespace with single spaces and trims
+		if (hasTrailingWhitespace && !compactedText.isEmpty()) {
+			compactedText += " "; // Add back single trailing space
+		}
+		
+		QFont font = textMetrics(text);
+		QFontMetricsF fm(font);
+		double textWidth = fm.horizontalAdvance(compactedText) * 0.77;
+		qDebug() << "appendText - original:" << textContent.replace('\n', "\\n") << "compacted:" << compactedText << "font:" << font.family() << font.pointSizeF() << "advance:" << textWidth;
+		return textWidth;
+	}
+	
+	qDebug() << "appendText - no text content found, returning 0 advance";
+	return 0.0;
 }
 
 QString TextUtils::slamStrokeAndFill(const QString & svg, const QString & stroke, const QString & strokeWidth, const QString & fill)
@@ -2162,4 +2272,73 @@ QLocale TextUtils::getLocale() {
 		return stored.value<QLocale>();
 	}
 	return QLocale();
+}
+
+QFont TextUtils::textMetrics(const QDomElement & element) {
+	// Default font values
+	QString fontFamily = "Arial";
+	double fontSize = 12.0;
+	int fontWeight = QFont::Normal;
+	QFont::Style fontStyle = QFont::StyleNormal;
+	
+	// Helper lambda to lookup attribute from element hierarchy
+	auto lookupAttribute = [](const QDomElement & elem, const QString & attr) -> QString {
+		QDomElement current = elem;
+		while (!current.isNull()) {
+			QString value = current.attribute(attr);
+			if (!value.isEmpty()) {
+				return value;
+			}
+			// Check parent element
+			QDomNode parent = current.parentNode();
+			if (parent.nodeType() == QDomNode::ElementNode) {
+				current = parent.toElement();
+			} else {
+				break;
+			}
+		}
+		return QString();
+	};
+	
+	// Look up font-family
+	QString family = lookupAttribute(element, "font-family");
+	if (!family.isEmpty()) {
+		fontFamily = family;
+		qDebug() << "Found font-family:" << fontFamily;
+	}
+	
+	// Look up font-size
+	QString size = lookupAttribute(element, "font-size");
+	if (!size.isEmpty()) {
+		bool ok;
+		double sizeValue = size.toDouble(&ok);
+		if (ok && sizeValue > 0) {
+			fontSize = sizeValue;
+			qDebug() << "Found font-size:" << fontSize;
+		}
+	}
+	
+	// Look up font-weight
+	QString weight = lookupAttribute(element, "font-weight");
+	if (!weight.isEmpty()) {
+		if (weight.toLower() == "bold" || weight == "700" || weight == "800" || weight == "900") {
+			fontWeight = QFont::Bold;
+		} else if (weight.toLower() == "normal" || weight == "400") {
+			fontWeight = QFont::Normal;
+		}
+	}
+	
+	// Look up font-style
+	QString style = lookupAttribute(element, "font-style");
+	if (!style.isEmpty()) {
+		if (style.toLower() == "italic") {
+			fontStyle = QFont::StyleItalic;
+		} else if (style.toLower() == "oblique") {
+			fontStyle = QFont::StyleOblique;
+		}
+	}
+	
+	QFont font(fontFamily, (int)fontSize, fontWeight, fontStyle == QFont::StyleItalic);
+	font.setStyle(fontStyle);
+	return font;
 }

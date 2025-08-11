@@ -27,6 +27,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QSet>
 #include <QTransform>
 #include <QXmlStreamReader>
+#include <QFont>
 
 typedef QString (*CopyPinFunction)(int pin, const QString & argString, void * userData);
 typedef QString (*MultiplyPinFunction)(int pin, double increment, double value);
@@ -168,6 +169,8 @@ protected:
 	static bool fixViewBox(QDomElement & root);
 	static void chopNotDigits(QString &);
 	static void collectTransforms(QDomElement & root, QList<QDomElement> & transforms);
+	static QFont textMetrics(const QDomElement & element);
+	static double appendText(QDomDocument & svgDom, QDomElement & parent, QDomElement & text, double defaultX, double defaultY, bool copyAttributes);
 private:
 	static bool removeFontFamilySingleQuotes(QString &fileContent);
 };
