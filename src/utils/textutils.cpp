@@ -151,9 +151,8 @@ bool fixUnavailableFontFamilies(QString &fileContent, const QString & destFont) 
 	definedFFs.unite(getFontFamiliesInsideStyleTag(fileContent));
 
 	FixedFontsHash fixedFonts = fixFontsMapping(definedFFs, destFont);
-	Q_FOREACH(QString oldF, fixedFonts.keys()) {
-		QString newF = fixedFonts[oldF];
-		fileContent.replace(oldF,newF);
+	for (auto it = fixedFonts.begin(); it != fixedFonts.end(); ++it) {
+		fileContent.replace(it.key(), it.value());
 	}
 
 	return !fixedFonts.empty();
@@ -404,10 +403,10 @@ QString TextUtils::replaceTextElements(const QString & svg, const QHash<QString,
 	for (int i = 0; i < domNodeList.count(); i++) {
 		QDomElement node = domNodeList.item(i).toElement();
 		if (node.isNull()) continue;
-		Q_FOREACH (QString id, hash.keys()) {
-			if (node.attribute("id").compare(id) != 0) continue;
+		for (auto it = hash.begin(); it != hash.end(); ++it) {
+			if (node.attribute("id").compare(it.key()) != 0) continue;
 
-			replaceChildText(node, hash.value(id));
+			replaceChildText(node, it.value());
 			changed = true;
 			break;
 		}
