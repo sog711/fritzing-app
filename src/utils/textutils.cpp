@@ -1304,23 +1304,30 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 		double baseX = 0.0;
 		double baseY = 0.0;
 		QString transformAttr = g.attribute("transform");
-		
+
 		if (transformAttr.isEmpty()) {
-			// No transform, use x/y attributes as base
-			QString xAttr = g.attribute("x");
-			QString yAttr = g.attribute("y");
-			if (!xAttr.isEmpty()) baseX = xAttr.toDouble();
-			if (!yAttr.isEmpty()) baseY = yAttr.toDouble();
-			qDebug() << "No transform, using x/y as base -> baseX:" << baseX << "baseY:" << baseY;
-			
-			// Remove x/y from group since we'll handle positioning with transform
-			g.removeAttribute("x");
-			g.removeAttribute("y");
+			qDebug() << "No transform.";
 		} else {
 			// Transform exists, base is 0,0 (don't remove x/y from original element)
 			qDebug() << "Transform exists, base is 0,0. Transform:" << transformAttr;
 		}
-		
+		// use x/y attributes as base
+		QString xAttr = g.attribute("x");
+		QString yAttr = g.attribute("y");
+		if (!xAttr.isEmpty())
+			baseX = xAttr.toDouble();
+		if (!yAttr.isEmpty())
+			baseY = yAttr.toDouble();
+		qDebug() << "Using x/y as base -> baseX:" << baseX << "baseY:" << baseY;
+
+		QString fsAttr = g.attribute("font-size"); // Only used for drawing debug artefacts
+		double dbgfs = 10;
+		if (!fsAttr.isEmpty())
+			dbgfs = fsAttr.toDouble();
+
+		// Remove x/y from group since we'll handle positioning with transform
+		g.removeAttribute("x");
+		g.removeAttribute("y");
 		g.removeAttribute("text-anchor"); // Remove text-anchor from group, we'll handle it manually
 
 		// Process all children (text nodes and tspans) in order
@@ -1447,9 +1454,41 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 		QTransform finalTransform = currentTransform;
 		finalTransform.translate(baseX + anchorOffset, baseY);
 		
+		// Add debug lines to visualize anchor point (apply current transform to base position)
+		QPointF anchorPoint = currentTransform.map(QPointF(baseX, baseY));
+		double anchorX = anchorPoint.x();
+		double anchorY = anchorPoint.y();
+		QDomElement debugGroup = svgDom.createElement("g");
+		debugGroup.setAttribute("fill", "none");
+		debugGroup.setAttribute("stroke", "green");
+		debugGroup.setAttribute("stroke-linecap", "round");
+		debugGroup.setAttribute("stroke-linejoin", "round");
+		QString linewidth = QString::number(dbgfs / 17);
+		double cross_r = dbgfs / 5;
+		debugGroup.setAttribute("stroke-width", linewidth);
+		
+		// Vertical line
+		QDomElement verticalLine = svgDom.createElement("line");
+		verticalLine.setAttribute("x1", QString::number(anchorX));
+		verticalLine.setAttribute("x2", QString::number(anchorX));
+		verticalLine.setAttribute("y1", QString::number(anchorY - cross_r));
+		verticalLine.setAttribute("y2", QString::number(anchorY + cross_r));
+		debugGroup.appendChild(verticalLine);
+		
+		// Horizontal line
+		QDomElement horizontalLine = svgDom.createElement("line");
+		horizontalLine.setAttribute("x1", QString::number(anchorX - cross_r));
+		horizontalLine.setAttribute("x2", QString::number(anchorX + cross_r));
+		horizontalLine.setAttribute("y1", QString::number(anchorY));
+		horizontalLine.setAttribute("y2", QString::number(anchorY));
+		debugGroup.appendChild(horizontalLine);
+		
+		g.parentNode().appendChild(debugGroup);
+		
 		QString finalTransformStr = svgMatrix(finalTransform);
 		g.setAttribute("transform", finalTransformStr);
 		qDebug() << "Setting final transform:" << finalTransformStr << "(baseX:" << baseX << "baseY:" << baseY << "anchorOffset:" << anchorOffset << ")";
+		qDebug() << "Added debug anchor lines at (" << anchorX << "," << anchorY << ")";
 	}
 
 	return true;
@@ -1529,7 +1568,7 @@ QDomElement TextUtils::copyText(QDomDocument & svgDom, QDomElement & parent, QDo
 					QString attrName = attribute.nodeName();
 					
 					// Do not copy x, y, dx, and dy attributes
-					if (attrName != "x" && attrName != "y" && attrName != "dx" && attrName != "dy") {
+					if (attrName != "transform" && attrName != "x" && attrName != "y" && attrName != "dx" && attrName != "dy") {
 						newText.setAttribute(attrName, attribute.nodeValue());
 					}
 				}
