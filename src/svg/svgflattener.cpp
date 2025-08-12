@@ -58,7 +58,8 @@ void SvgFlattener::applyAttributes(QDomElement &element, QTransform transform, c
 		// Expected, sometimes there is no stroke-width
 	}
 
-	for (const QString& attr : {"fill", "stroke"}) {
+	static const QStringList attrs = {"fill", "stroke"};
+	for (const QString& attr : attrs) {
 		try {
 			QString value(attributes.at(attr));
 			if (!value.isEmpty()) {
