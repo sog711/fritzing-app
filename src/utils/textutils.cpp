@@ -1271,7 +1271,11 @@ bool TextUtils::noPatternAux(QDomDocument & svgDom, const QString & tag)
 bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 {
 	// We flatten tspans into groups of text
+	// Known limitations (too lazy, no one needs this) :
 	// - tspan nested in tspans are not supported
+	// - rotate attribute always applies to the complete tspan (standard rotates individual letters)
+	// - rotate attribute is not compatible with data-fritzing-multiline rotation
+	// - no textPath support
 	qDebug() << "tspanRemoveAux called - processing tspans with dx support";
 	QList<QDomElement> texts;
 	QDomNodeList textNodeList = svgDom.elementsByTagName("text");
@@ -1563,13 +1567,38 @@ QDomElement TextUtils::copyText(QDomDocument & svgDom, QDomElement & parent, QDo
 
 			if (copyAttributes) {
 				QDomNamedNodeMap attributes = text.attributes();
+				QString rotateValue;
+				
 				for (int i = 0; i < attributes.count(); i++) {
 					QDomNode attribute = attributes.item(i);
 					QString attrName = attribute.nodeName();
 					
+					// Capture rotate attribute for conversion
+					if (attrName == "rotate") {
+						rotateValue = attribute.nodeValue();
+						continue; // Don't copy rotate attribute directly
+					}
+					
 					// Do not copy x, y, dx, and dy attributes
 					if (attrName != "transform" && attrName != "x" && attrName != "y" && attrName != "dx" && attrName != "dy") {
 						newText.setAttribute(attrName, attribute.nodeValue());
+					}
+				}
+				
+				// Convert rotate attribute to transform matrix if present
+				if (!rotateValue.isEmpty()) {
+					bool ok;
+					double rotateAngle = rotateValue.toDouble(&ok);
+					if (ok) {
+						// Create rotation transform around the text's position (defaultX, defaultY)
+						QTransform rotationTransform;
+						rotationTransform.translate(defaultX, defaultY);
+						rotationTransform.rotate(rotateAngle);
+						rotationTransform.translate(-defaultX, -defaultY);
+						
+						QString transformMatrix = svgMatrix(rotationTransform);
+						newText.setAttribute("transform", transformMatrix);
+						qDebug() << "Converted rotate=" << rotateAngle << " around (" << defaultX << "," << defaultY << ") to transform=" << transformMatrix;
 					}
 				}
 			}
