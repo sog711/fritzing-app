@@ -1130,7 +1130,8 @@ bool TextUtils::fixViewBox(QDomElement & root) {
 	QString viewBox = root.attribute("viewBox");
 	if (viewBox.isEmpty()) return false;
 
-	QStringList coords = viewBox.split(QRegularExpression(" |,"));
+	static const QRegularExpression coordSeparator(" |,");
+	QStringList coords = viewBox.split(coordSeparator);
 	if (coords.length() != 4) return false;
 
 	if (coords[0] == "0" && coords[1] == "0") return false;
@@ -1712,7 +1713,7 @@ QString TextUtils::negIncCopyPinFunction(int pin, const QString & argString, voi
 
 double TextUtils::getViewBoxCoord(const QString & svg, int coord)
 {
-	QRegularExpression re("viewBox=['\\\"]([^'\\\"]+)['\\\"]");
+	static QRegularExpression re("viewBox=['\\\"]([^'\\\"]+)['\\\"]");
 	QRegularExpressionMatch match;
 	int ix = svg.indexOf(re, 0, &match);
 	if (ix < 0) return 0;
@@ -1958,7 +1959,8 @@ int TextUtils::getPinsAndSpacing(const QString & expectedFileName, QString & spa
 
 bool TextUtils::extractViewBox(QString viewBoxString, QRectF & viewBox) {
 	bool gotViewBox = false;
-	QStringList vbs = viewBoxString.split(QRegularExpression(",| "));
+	static const QRegularExpression viewBoxSeparator(",| ");
+	QStringList vbs = viewBoxString.split(viewBoxSeparator);
 	if (vbs.count() == 4) {
 		bool ok = false;
 		double d[4];
@@ -2243,7 +2245,8 @@ bool TextUtils::ensureViewBox(QDomDocument doc, double dpi, QRectF & rect, bool 
 		return true;
 	}
 
-	QStringList coords = viewBox.split(QRegularExpression(" |,"));
+	static const QRegularExpression coordSeparator2(" |,");
+	QStringList coords = viewBox.split(coordSeparator2);
 	if (coords.count() != 4) return false;
 
 	rect.setRect(coords.at(0).toDouble(), coords.at(1).toDouble(), coords.at(2).toDouble(), coords.at(3).toDouble());
