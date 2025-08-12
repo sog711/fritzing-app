@@ -1292,47 +1292,39 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 		text.parentNode().replaceChild(g, text);
 		QDomNamedNodeMap attributes = text.attributes();
 		
-		// Detect and store text-anchor before copying attributes
 		QString textAnchor = findAnchor(text);
-		
+
 		for (int i = 0; i < attributes.count(); i++) {
 			QDomNode attribute = attributes.item(i);
 			g.setAttribute(attribute.nodeName(), attribute.nodeValue());
 		}
 		g.setAttribute("data-fritzing-multiline", "");
-		
-		// Extract base position: if transform exists, base is 0,0; otherwise use x/y
+
 		double baseX = 0.0;
 		double baseY = 0.0;
-		QString transformAttr = g.attribute("transform");
-
-		if (transformAttr.isEmpty()) {
-			} else {
-			// Transform exists, base is 0,0 (don't remove x/y from original element)
-		}
-		// use x/y attributes as base
 		QString xAttr = g.attribute("x");
 		QString yAttr = g.attribute("y");
 		if (!xAttr.isEmpty())
 			baseX = xAttr.toDouble();
 		if (!yAttr.isEmpty())
 			baseY = yAttr.toDouble();
-
-		QString fsAttr = g.attribute("font-size"); // Only used for drawing debug artefacts
-		double dbgfs = 10;
-		if (!fsAttr.isEmpty())
-			dbgfs = fsAttr.toDouble();
-
 		// Remove x/y from group since we'll handle positioning with transform
 		g.removeAttribute("x");
 		g.removeAttribute("y");
 		g.removeAttribute("text-anchor"); // Remove text-anchor from group, we'll handle it manually
 
+#ifdef QT_DEBUG
+		QString fsAttr = g.attribute("font-size"); // Only used for drawing debug artefacts
+		double dbgfs = 10;
+		if (!fsAttr.isEmpty())
+			dbgfs = fsAttr.toDouble();
+#endif
+
 		// Process all children (text nodes and tspans) in order
-		double currentX = baseX;  // Start from base position
+		double currentX = baseX;
 		double currentY = baseY;
-		double minX = baseX;  // Track min position relative to base
-		double maxX = baseX;  // Track max position relative to base
+		double minX = baseX;
+		double maxX = baseX;
 		bool trackMinMax = true;
 		
 		// Process all children (text nodes and tspan elements) in document order
@@ -1362,9 +1354,6 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 			} else if (child.isElement() && child.nodeName() == "tspan") {
 				QDomElement tspan = child.toElement();			
 				QString tspanX = tspan.attribute("x");
-				QString tspanY = tspan.attribute("y");
-				
-				// Tspan x overrides current X position, y overrides current Y position
 				if (!tspanX.isEmpty()) {
 					bool ok;
 					double absX = tspanX.toDouble(&ok);
@@ -1373,6 +1362,7 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 						trackMinMax = false; // text align doesn't follow absolute positions
 					}
 				}
+				QString tspanY = tspan.attribute("y");
 				if (!tspanY.isEmpty()) {
 					bool ok;
 					double absY = tspanY.toDouble(&ok);
@@ -1380,7 +1370,6 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 						currentY = absY;  // Override currentY with tspan's y  
 					}
 				}
-							
 				QString dyValue = tspan.attribute("dy");
 				if (!dyValue.isEmpty()) {
 					bool ok;
@@ -1389,26 +1378,23 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 						currentY += dyVal;
 					}
 				}
-
 				QString dxValue = tspan.attribute("dx");
 				if (!dxValue.isEmpty()) {
 					bool ok;
 					double dxVal = dxValue.toDouble(&ok);
 					if (ok) {
-							currentX += dxVal;
+						currentX += dxVal;
 					}
 				}
 				
-					elementToAppend = tspan;
+				elementToAppend = tspan;
 			}
-			
-			// Process the element if we have one to append
+						
 			double advance = 0.0;
 			if (!elementToAppend.isNull()) {
 				advance = appendText(svgDom, g, elementToAppend, currentX - baseX, currentY - baseY, true);
 			}
-			
-			// Update position and tracking for both text and tspan
+
 			currentX += advance;
 			if (trackMinMax) {
 				minX = qMin(minX, currentX - advance);
@@ -1433,11 +1419,8 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 			qWarning() << "Invalid text-anchor value:" << textAnchor << "- using 'start' as default";
 		}
 
-		
 		// Adjust group transform to account for text-anchor and base position
-		QTransform currentTransform = elementToTransform(g);
-		
-		// Always create final transform: current + base position + anchor offset
+		QTransform currentTransform = elementToTransform(g); // anchor point
 		QTransform finalTransform = currentTransform;
 		finalTransform.translate(baseX + anchorOffset, baseY);
 		
@@ -1535,8 +1518,7 @@ QDomElement TextUtils::copyText(QDomDocument & svgDom, QDomElement & parent, QDo
 		if (cnode.isText()) {
 			QDomElement newText = svgDom.createElement("text");
 			parent.appendChild(newText);
-			
-			// Only set x and y if the default values are not effectively zero (using epsilon comparison)
+
 			const double epsilon = 1e-9;
 			if (qAbs(defaultX) > epsilon) {
 				newText.setAttribute("x", QString::number(defaultX));
@@ -1544,7 +1526,7 @@ QDomElement TextUtils::copyText(QDomDocument & svgDom, QDomElement & parent, QDo
 			if (qAbs(defaultY) > epsilon) {
 				newText.setAttribute("y", QString::number(defaultY));
 			}
-			
+
 			QDomNode textValue = svgDom.createTextNode(cnode.nodeValue());
 			newText.appendChild(textValue);
 
@@ -1556,7 +1538,6 @@ QDomElement TextUtils::copyText(QDomDocument & svgDom, QDomElement & parent, QDo
 					QDomNode attribute = attributes.item(i);
 					QString attrName = attribute.nodeName();
 					
-					// Capture rotate attribute for conversion
 					if (attrName == "rotate") {
 						rotateValue = attribute.nodeValue();
 						continue; // Don't copy rotate attribute directly
@@ -1597,10 +1578,8 @@ QDomElement TextUtils::copyText(QDomDocument & svgDom, QDomElement & parent, QDo
 
 double TextUtils::appendText(QDomDocument & svgDom, QDomElement & parent, QDomElement & text, double defaultX, double defaultY, bool copyAttributes)
 {
-	// Copy the text element
 	QDomElement newText = copyText(svgDom, parent, text, defaultX, defaultY, copyAttributes);
 	
-	// Always set text-anchor to "start" for consistent positioning
 	if (!newText.isNull()) {
 		newText.setAttribute("text-anchor", "start");
 	}
@@ -1611,7 +1590,7 @@ double TextUtils::appendText(QDomDocument & svgDom, QDomElement & parent, QDomEl
 		// Compact all whitespace and newlines to single spaces for advance calculation
 		// Preserve trailing whitespace if it exists
 		bool hasTrailingWhitespace = textContent.length() > 0 && textContent.at(textContent.length() - 1).isSpace();
-		QString compactedText = textContent.simplified(); // This replaces runs of whitespace with single spaces and trims
+		QString compactedText = textContent.simplified();
 		if (hasTrailingWhitespace && !compactedText.isEmpty()) {
 			compactedText += " "; // Add back single trailing space
 		}
