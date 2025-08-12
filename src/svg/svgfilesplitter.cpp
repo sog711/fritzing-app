@@ -456,6 +456,17 @@ void SvgFileSplitter::normalizeChild(QDomElement & element,
 		normalizeAttribute(element, "stroke-width", sNewWidth, vbWidth);
 		normalizeFontSize(element, "font-size", sNewWidth, vbWidth);
 		setStrokeOrFill(element, blackOnly, "black", false);
+		doChildren = true;
+	}
+	else if (nodeName.compare("tspan") == 0) {
+		TextUtils::fixStyleAttribute(element);
+		normalizeAttribute(element, "x", sNewWidth, vbWidth);
+		normalizeAttribute(element, "y", sNewHeight, vbHeight);
+		normalizeAttribute(element, "dx", sNewWidth, vbWidth);
+		normalizeAttribute(element, "dy", sNewHeight, vbHeight);
+		normalizeAttribute(element, "stroke-width", sNewWidth, vbWidth);
+		normalizeFontSize(element, "font-size", sNewWidth, vbWidth);
+		setStrokeOrFill(element, blackOnly, "black", false);
 	}
 	else if (nodeName.compare("linearGradient") == 0) {
 		if (element.attribute("gradientUnits").compare("userSpaceOnUse") == 0) {
