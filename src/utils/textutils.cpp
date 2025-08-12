@@ -982,23 +982,18 @@ QList<double> TextUtils::getTransformFloats(QDomElement & element) {
 
 QList<double> TextUtils::getTransformFloats(const QString & transform) {
 	QList<double> list;
-	int pos = 0;
-
-	QRegularExpressionMatch match;
-	while ((pos = transform.indexOf(TextUtils::floatingPointMatcher, pos, &match)) != -1) {
-		list << transform.mid(pos, match.capturedLength()).toDouble();
-		pos += match.capturedLength();
-		match = QRegularExpressionMatch();
+	
+	// Split on any sequence of non-numeric characters (except +, -, ., e, E)
+	static const QRegularExpression separator("[^-+0-9.eE]+");
+	QStringList parts = transform.split(separator, Qt::SkipEmptyParts);
+	
+	for (const QString &part : std::as_const(parts)) {
+		bool ok;
+		double value = part.toDouble(&ok);
+		if (ok) {
+			list << value;
+		}
 	}
-
-#ifndef QT_NO_DEBUG
-	// QString dbg = "got transform params: \n";
-	//dbg += transform + "\n";
-	//for(int i=0; i < list.size(); i++){
-	//dbg += QString::number(list.at(i)) + " ";
-	// }
-	//DebugDialog::debug(dbg);
-#endif
 
 	return list;
 }
