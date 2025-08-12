@@ -30,7 +30,6 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QRegularExpression>
 #include <QFont>
 #include <QFontMetrics>
-#include <QDebug>
 #include <QRegularExpression>
 #include <QBuffer>
 #include <QFile>
@@ -1276,7 +1275,6 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 	// - rotate attribute always applies to the complete tspan (standard rotates individual letters)
 	// - rotate attribute is not compatible with data-fritzing-multiline rotation
 	// - no textPath support
-	qDebug() << "tspanRemoveAux called - processing tspans with dx support";
 	QList<QDomElement> texts;
 	QDomNodeList textNodeList = svgDom.elementsByTagName("text");
 	for (int i = 0; i < textNodeList.count(); i++) {
@@ -1296,7 +1294,6 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 		
 		// Detect and store text-anchor before copying attributes
 		QString textAnchor = findAnchor(text);
-		qDebug() << "Found text-anchor:" << textAnchor;
 		
 		for (int i = 0; i < attributes.count(); i++) {
 			QDomNode attribute = attributes.item(i);
@@ -1310,10 +1307,8 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 		QString transformAttr = g.attribute("transform");
 
 		if (transformAttr.isEmpty()) {
-			qDebug() << "No transform.";
-		} else {
+			} else {
 			// Transform exists, base is 0,0 (don't remove x/y from original element)
-			qDebug() << "Transform exists, base is 0,0. Transform:" << transformAttr;
 		}
 		// use x/y attributes as base
 		QString xAttr = g.attribute("x");
@@ -1322,7 +1317,6 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 			baseX = xAttr.toDouble();
 		if (!yAttr.isEmpty())
 			baseY = yAttr.toDouble();
-		qDebug() << "Using x/y as base -> baseX:" << baseX << "baseY:" << baseY;
 
 		QString fsAttr = g.attribute("font-size"); // Only used for drawing debug artefacts
 		double dbgfs = 10;
@@ -1340,7 +1334,6 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 		double minX = baseX;  // Track min position relative to base
 		double maxX = baseX;  // Track max position relative to base
 		bool trackMinMax = true;
-		qDebug() << "Starting currentX at:" << currentX << "with baseX:" << baseX << "baseY:" << baseY;
 		
 		// Process all children (text nodes and tspan elements) in document order
 		QDomNode child = text.firstChild();
@@ -1351,8 +1344,7 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 				// Process direct text node using main text element attributes
 				QString textContent = child.nodeValue();
 				if (!textContent.isEmpty()) {
-					qDebug() << "Processing text node:" << textContent << "at currentX:" << currentX << "currentY:" << currentY;
-					
+						
 					// Create a temporary element with main text attributes to use with appendText
 					QDomElement tempText = svgDom.createElement("text");
 					QDomText textNode = svgDom.createTextNode(textContent);
@@ -1379,7 +1371,6 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 					if (ok) {
 						currentX = absX;  // Override currentX with tspan's x
 						trackMinMax = false; // text align doesn't follow absolute positions
-						qDebug() << "Tspan x overrides -> currentX:" << currentX;
 					}
 				}
 				if (!tspanY.isEmpty()) {
@@ -1387,7 +1378,6 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 					double absY = tspanY.toDouble(&ok);
 					if (ok) {
 						currentY = absY;  // Override currentY with tspan's y  
-						qDebug() << "Tspan y overrides -> currentY:" << currentY;
 					}
 				}
 							
@@ -1405,13 +1395,11 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 					bool ok;
 					double dxVal = dxValue.toDouble(&ok);
 					if (ok) {
-						qDebug() << "Processing dx attribute:" << dxValue << "parsed as:" << dxVal;
-						currentX += dxVal;
+							currentX += dxVal;
 					}
 				}
 				
-				qDebug() << "Positioning tspan at currentX:" << currentX << "currentY:" << currentY;
-				elementToAppend = tspan;
+					elementToAppend = tspan;
 			}
 			
 			// Process the element if we have one to append
@@ -1425,9 +1413,6 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 			if (trackMinMax) {
 				minX = qMin(minX, currentX - advance);
 				maxX = qMax(maxX, currentX);
-				qDebug() << "Advance:" << advance << "new currentX:" << currentX << "minX:" << minX << "maxX:" << maxX;
-			} else {
-				qDebug() << "Advance:" << advance << "new currentX:" << currentX << "Not tracking. minX:" << minX << "maxX:" << maxX;
 			}
 			
 			child = child.nextSibling();
@@ -1448,16 +1433,15 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 			qWarning() << "Invalid text-anchor value:" << textAnchor << "- using 'start' as default";
 		}
 
-		qDebug() << "Text-anchor:" << textAnchor << "totalWidth:" << totalWidth << "anchorOffset:" << anchorOffset;
 		
 		// Adjust group transform to account for text-anchor and base position
 		QTransform currentTransform = elementToTransform(g);
-		qDebug() << "Current transform before anchor adjustment:" << (currentTransform.isIdentity() ? "IDENTITY" : svgMatrix(currentTransform));
 		
 		// Always create final transform: current + base position + anchor offset
 		QTransform finalTransform = currentTransform;
 		finalTransform.translate(baseX + anchorOffset, baseY);
 		
+#ifdef QT_DEBUG
 		// Add debug lines to visualize anchor point (apply current transform to base position)
 		QPointF anchorPoint = currentTransform.map(QPointF(baseX, baseY));
 		double anchorX = anchorPoint.x();
@@ -1488,11 +1472,10 @@ bool TextUtils::tspanRemoveAux(QDomDocument & svgDom)
 		debugGroup.appendChild(horizontalLine);
 		
 		g.parentNode().appendChild(debugGroup);
+#endif
 		
 		QString finalTransformStr = svgMatrix(finalTransform);
 		g.setAttribute("transform", finalTransformStr);
-		qDebug() << "Setting final transform:" << finalTransformStr << "(baseX:" << baseX << "baseY:" << baseY << "anchorOffset:" << anchorOffset << ")";
-		qDebug() << "Added debug anchor lines at (" << anchorX << "," << anchorY << ")";
 	}
 
 	return true;
@@ -1598,8 +1581,7 @@ QDomElement TextUtils::copyText(QDomDocument & svgDom, QDomElement & parent, QDo
 						
 						QString transformMatrix = svgMatrix(rotationTransform);
 						newText.setAttribute("transform", transformMatrix);
-						qDebug() << "Converted rotate=" << rotateAngle << " around (" << defaultX << "," << defaultY << ") to transform=" << transformMatrix;
-					}
+						}
 				}
 			}
 
@@ -1637,11 +1619,8 @@ double TextUtils::appendText(QDomDocument & svgDom, QDomElement & parent, QDomEl
 		QFont font = textMetrics(text);
 		QFontMetricsF fm(font);
 		double textWidth = fm.horizontalAdvance(compactedText) * 0.77;
-		qDebug() << "appendText - original:" << textContent.replace('\n', "\\n") << "compacted:" << compactedText << "font:" << font.family() << font.pointSizeF() << "advance:" << textWidth;
 		return textWidth;
 	}
-	
-	qDebug() << "appendText - no text content found, returning 0 advance";
 	return 0.0;
 }
 
@@ -2405,7 +2384,6 @@ QFont TextUtils::textMetrics(const QDomElement & element) {
 	QString family = lookupAttribute(element, "font-family");
 	if (!family.isEmpty()) {
 		fontFamily = family;
-		qDebug() << "Found font-family:" << fontFamily;
 	}
 	
 	// Look up font-size
@@ -2415,7 +2393,6 @@ QFont TextUtils::textMetrics(const QDomElement & element) {
 		double sizeValue = size.toDouble(&ok);
 		if (ok && sizeValue > 0) {
 			fontSize = sizeValue;
-			qDebug() << "Found font-size:" << fontSize;
 		}
 	}
 	
