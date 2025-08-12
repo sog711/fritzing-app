@@ -1007,8 +1007,8 @@ QList<double> TextUtils::getTransformFloats(const QString & transform) {
 void TextUtils::gWrap(QDomDocument & domDocument, const QHash<QString, QString> & attributes)
 {
 	QDomElement g = domDocument.createElement("g");
-	Q_FOREACH (QString key, attributes.keys()) {
-		g.setAttribute(key, attributes.value(key, ""));
+	for (auto it = attributes.begin(); it != attributes.end(); ++it) {
+		g.setAttribute(it.key(), it.value());
 	}
 
 	QDomNodeList nodeList = domDocument.documentElement().childNodes();
@@ -1952,7 +1952,8 @@ int TextUtils::getPinsAndSpacing(const QString & expectedFileName, QString & spa
 
 	spacingString = "100mil";
 	for (++pix; pix < pieces.count(); pix++) {
-		if (pieces.at(pix).indexOf(QRegularExpression("\\d")) == 0) {
+		static const QRegularExpression digitRegex("\\d");
+		if (pieces.at(pix).indexOf(digitRegex) == 0) {
 			spacingString = pieces.at(pix);
 			return pins;
 		}
