@@ -756,7 +756,7 @@ bool PEMainWindow::setInitialItem(PaletteItem * paletteItem)
 		date = m_fzpDocument.createElement("date");
 		fzpRoot.appendChild(date);
 	}
-	TextUtils::replaceChildText(date, QDate::currentDate().toString());
+	TextUtils::replaceChildText(date, QDate::currentDate().toString(Qt::ISODate));
 
 	QDomElement properties = fzpRoot.firstChildElement("properties");
 	if (properties.isNull()) {

@@ -1681,7 +1681,7 @@ void MainWindow::exportNetlist() {
 	QDomElement netlist = doc.createElement("netlist");
 	doc.appendChild(netlist);
 	netlist.setAttribute("sketch", QFileInfo(m_fwFilename).fileName());
-	netlist.setAttribute("date", QDateTime::currentDateTime().toString());
+	netlist.setAttribute("date", QDateTime::currentDateTime().toString(Qt::ISODate));
 
 	// TODO: filter out 'ignore' connectors
 
