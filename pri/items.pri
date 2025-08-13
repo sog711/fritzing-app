@@ -18,6 +18,7 @@ HEADERS += \
     src/items/capacitor.h \
     src/items/clipablewire.h \
     src/items/dip.h \
+    src/items/dipv2.h \
     src/items/groundplane.h \
     src/items/hole.h \
     src/items/itembase.h \
@@ -58,6 +59,7 @@ SOURCES += \
     src/items/capacitor.cpp \
     src/items/clipablewire.cpp \
     src/items/dip.cpp \
+    src/items/dipv2.cpp \
     src/items/groundplane.cpp \
     src/items/hole.cpp \
     src/items/itembase.cpp \

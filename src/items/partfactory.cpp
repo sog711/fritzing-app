@@ -40,6 +40,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "note.h"
 #include "ruler.h"
 #include "dip.h"
+#include "dipv2.h"
 #include "pinheader.h"
 #include "screwterminal.h"
 #include "hole.h"
@@ -212,6 +213,9 @@ ItemBase * PartFactory::createPartAux( ModelPart * modelPart, ViewLayer::ViewID 
 		if (family.compare("generic IC", Qt::CaseInsensitive) == 0) {
 			return new Dip(modelPart, viewID, viewGeometry, id, itemMenu, doLabel);
 		}
+		if (family.compare("generic IC v2", Qt::CaseInsensitive) == 0) {
+			return new DipV2(modelPart, viewID, viewGeometry, id, itemMenu, doLabel);
+		}
 		return new PaletteItem(modelPart, viewID, viewGeometry, id, itemMenu, doLabel);
 
 	}
@@ -359,10 +363,16 @@ QString PartFactory::getSvgFilename(const QString & fileName)
 		return getSvgFilenameAux(fileName, &PinHeader::makePcbSvg);
 	}
 
+	if (osFileName.startsWith("schematic/generic_ic_dip_v2_", Qt::CaseInsensitive)) {
+		return getSvgFilenameAux(fileName, &DipV2::makeSchematicV2Svg);
+	}
 	if (osFileName.startsWith("schematic/generic_ic_dip_", Qt::CaseInsensitive)) {
 		return getSvgFilenameAux(fileName, &Dip::makeSchematicSvg);
 	}
 
+	if (osFileName.startsWith("breadboard/generic_ic_dip_v2_", Qt::CaseInsensitive)) {
+		return getSvgFilenameAux(fileName, &DipV2::makeBreadboardDipV2Svg);
+	}
 	if (osFileName.startsWith("breadboard/generic_ic_dip_", Qt::CaseInsensitive)) {
 		return getSvgFilenameAux(fileName, &Dip::makeBreadboardSvg);
 	}
@@ -491,6 +501,9 @@ QString PartFactory::getFzpFilename(const QString & moduleID)
 		return getFzpFilenameAux(moduleID, &Stripboard::genFZP);
 	}
 
+	if (moduleID.startsWith("generic_ic_dip_v2")) {
+		return getFzpFilenameAux(moduleID, &DipV2::genDipV2FZP);
+	}
 	if (moduleID.startsWith("generic_ic_dip")) {
 		return getFzpFilenameAux(moduleID, &Dip::genDipFZP);
 	}
