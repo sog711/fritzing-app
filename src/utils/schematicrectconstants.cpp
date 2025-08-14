@@ -755,14 +755,8 @@ QString SchematicRectConstants::genSchematicDIPv2(QList<QDomElement> & powers, Q
 		bool bus = contact.attribute("bus", nullptr).compare("1") == 0;
 		if (!contact.isNull() && !bus) {
 			QString signal = getConnectorName(contact);
-			svg += QString("<line fill='none' stroke='%5' stroke-linejoin='round' stroke-linecap='round' stroke-width='%2' x1='%4' y1='%1' x2='%3' y2='%1' />\n")
-			       .arg(ly).arg(SW(pinThickness)).arg(pinLength).arg(halfPinThickness).arg(SchematicRectConstants::PinColor);
-
-
-
-			QString mid = QString("<rect x='0' y='%1' fill='none' width='%3' height='%4' id='connector%2pin' connectorName='%5' stroke-width='0' />\n")
-			              .arg(ly - halfPinThickness).arg(contact.attribute("connectorIndex")).arg(pinLength).arg(pinThickness).arg(signal);
-			svg += mid;
+			svg += QString("<line fill='none' stroke='%5' stroke-linejoin='round' stroke-linecap='round' stroke-width='%2' x1='%4' y1='%1' x2='%3' y2='%1' id='connector%6pin' connectorname='%7' />\n")
+			       .arg(ly).arg(SW(pinThickness)).arg(pinLength).arg(halfPinThickness).arg(SchematicRectConstants::PinColor).arg(contact.attribute("connectorIndex")).arg(signal);
 			svg += schematicPinTextV2(contact.attribute("connectorIndex"), signal, pinLength + pinTextIndent, ly + pinTextVert, bigPinFontSize, "start", false);
 			svg += schematicPinNumberV2(pinLength / 2, ly, smallPinFontSize, contact.attribute("connectorIndex"), false, gotZero, gotOne);
 		}
@@ -775,25 +769,14 @@ QString SchematicRectConstants::genSchematicDIPv2(QList<QDomElement> & powers, Q
 		bool bus = contact.attribute("bus", nullptr).compare("1") == 0;
 		if (!contact.isNull() && !bus) {
 			QString signal = getConnectorName(contact);
-			svg += QString("<line fill='none' stroke='%5' stroke-linejoin='round' stroke-linecap='round' stroke-width='%4' x1='%1' y1='%2' x2='%3' y2='%2' />\n")
+			svg += QString("<line fill='none' stroke='%5' stroke-linejoin='round' stroke-linecap='round' stroke-width='%4' x1='%1' y1='%2' x2='%3' y2='%2' id='connector%6pin' connectorname='%7' />\n")
 			       .arg(width - pinLength - halfPinThickness)
 			       .arg(ly)
 			       .arg(width - halfPinThickness)
-				   .arg(SW(pinThickness)
-				   ,SchematicRectConstants::PinColor)
-			       ;
-
-
-
-
-			QString mid = QString("<rect x='%1' y='%2' fill='none' width='%4' height='%5' id='connector%3pin' connectorname='%6' stroke-width='0' />\n")
-			              .arg(width - pinLength)
-			              .arg(ly - halfPinThickness)
-			              .arg(contact.attribute("connectorIndex"))
-			              .arg(pinLength)
-			              .arg(pinThickness)
-			              .arg(signal);
-			svg += mid;
+				   .arg(SW(pinThickness))
+				   .arg(SchematicRectConstants::PinColor)
+				   .arg(contact.attribute("connectorIndex"))
+				   .arg(signal);
 			svg += schematicPinTextV2(contact.attribute("connectorIndex"), signal, width - pinLength - pinTextIndent, ly + pinTextVert, bigPinFontSize, "end", false);
 			svg += schematicPinNumberV2(width - (pinLength / 2), ly, smallPinFontSize, contact.attribute("connectorIndex"), false, gotZero, gotOne);
 		}
@@ -810,14 +793,8 @@ QString SchematicRectConstants::genSchematicDIPv2(QList<QDomElement> & powers, Q
 		bool bus = contact.attribute("bus", nullptr).compare("1") == 0;
 		if (!contact.isNull() && !bus) {
 			QString signal = getConnectorName(contact);
-			svg += QString("<line fill='none' stroke='%5' stroke-linejoin='round' stroke-linecap='round' stroke-width='%4' x1='%1' y1='%2' x2='%1' y2='%3' />\n")
-				   .arg(lx).arg(halfPinThickness).arg(pinLength).arg(SW(pinThickness), SchematicRectConstants::PinColor);
-
-
-
-			QString mid = QString("<rect x='%1' y='%2' fill='none' width='%4' height='%5' id='connector%3pin' connectorname='%6' stroke-width='0' />\n")
-			              .arg(lx - halfPinThickness).arg(0).arg(contact.attribute("connectorIndex")).arg(pinThickness).arg(pinLength).arg(signal);
-			svg += mid;
+			svg += QString("<line fill='none' stroke='%5' stroke-linejoin='round' stroke-linecap='round' stroke-width='%4' x1='%1' y1='%2' x2='%1' y2='%3' id='connector%6pin' connectorname='%7' />\n")
+				   .arg(lx).arg(halfPinThickness).arg(pinLength).arg(SW(pinThickness)).arg(SchematicRectConstants::PinColor).arg(contact.attribute("connectorIndex")).arg(signal);
 			svg += schematicPinTextV2(contact.attribute("connectorIndex"), signal, lx, pinLength - pinTextVert, bigPinFontSize, "end", true);
 			svg += schematicPinNumberV2(lx, pinLength / 2, smallPinFontSize, contact.attribute("connectorIndex"), true, gotZero, gotOne);
 		}
@@ -834,14 +811,8 @@ QString SchematicRectConstants::genSchematicDIPv2(QList<QDomElement> & powers, Q
 		bool bus = contact.attribute("bus", nullptr).compare("1") == 0;
 		if (!contact.isNull() && !bus) {
 			QString signal = getConnectorName(contact);
-			svg += QString("<line fill='none' stroke='%5' stroke-linejoin='round' stroke-linecap='round' stroke-width='%4' x1='%1' y1='%2' x2='%1' y2='%3' />\n")
-				   .arg(lx).arg(height - pinLength).arg(height - halfPinThickness).arg(SW(pinThickness), SchematicRectConstants::PinColor);
-
-
-
-			QString mid = QString("<rect x='%1' y='%2' fill='none' width='%4' height='%5' id='connector%3pin' connectorname='%6' stroke-width='0' />\n")
-			              .arg(lx - halfPinThickness).arg(height - pinLength).arg(contact.attribute("connectorIndex")).arg(pinThickness).arg(pinLength).arg(signal);
-			svg += mid;
+			svg += QString("<line fill='none' stroke='%5' stroke-linejoin='round' stroke-linecap='round' stroke-width='%4' x1='%1' y1='%2' x2='%1' y2='%3' id='connector%6pin' connectorname='%7' />\n")
+				   .arg(lx).arg(height - pinLength).arg(height - halfPinThickness).arg(SW(pinThickness)).arg(SchematicRectConstants::PinColor).arg(contact.attribute("connectorIndex")).arg(signal);
 
 			svg += schematicPinTextV2(contact.attribute("connectorIndex"), signal, lx, height - (pinLength - pinTextVert), bigPinFontSize, "start", true);
 			svg += schematicPinNumberV2(lx, height - (pinLength / 2), smallPinFontSize, contact.attribute("connectorIndex"), true, gotZero, gotOne);
