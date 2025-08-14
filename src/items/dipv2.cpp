@@ -126,15 +126,7 @@ QString DipV2::makeSchematicV2Svg(const QStringList & labels)
 	QStringList busNames;
 	QString ic("IC");
 	
-	QString svg = SchematicRectConstants::genSchematicDIP(empty, empty, lefts, rights, empty, busNames, ic, false, false, SchematicRectConstants::simpleGetConnectorName);
-	
-	// Replace font with NotoSans and remove connector terminal elements
-	svg.replace("font-family='Droid Sans'", "font-family='NotoSans'");
-	svg.replace("font-family=\"Droid Sans\"", "font-family=\"NotoSans\"");
-	
-	// Remove connector terminal elements
-	QRegularExpression terminalRegex(R"(<rect[^>]*id='connector\d+terminal'[^>]*/>)");
-	svg.replace(terminalRegex, "");
+	QString svg = SchematicRectConstants::genSchematicDIPv2(empty, empty, lefts, rights, empty, busNames, ic, false, false, SchematicRectConstants::simpleGetConnectorName);
 	
 	return svg;
 }
