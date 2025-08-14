@@ -55,7 +55,7 @@ public:
 	                               QList<QDomElement> & rights, QList<QDomElement> & vias, QStringList & busNames,
 	                               QString & boardName, bool usingParam, bool genericSMD, QString (*getConnectorName)(const QDomElement &));
 	static QString genSchematicDIPv2(QList<QDomElement> & powers, QList<QDomElement> & grounds, QList<QDomElement> & lefts,
-									QList<QDomElement> & rights, QList<QDomElement> & vias, QStringList & busNames,
+									QList<QDomElement> & rights, QStringList & busNames,
 	                                QString & boardName, bool usingParam, bool genericSMD, QString (*getConnectorName)(const QDomElement &));
 	static QString simpleGetConnectorName(const QDomElement & element);
 

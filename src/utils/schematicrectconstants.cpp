@@ -751,18 +751,6 @@ QString SchematicRectConstants::genSchematicDIPv2(QList<QDomElement> & powers, Q
 
 	QHash<QString, QString> busMids;
 
-	// do vias first, so they are hidden beneath other connectors
-
-	qreal viaX = 0;
-	qreal viaY = 0;
-	Q_FOREACH (QDomElement contact, vias) {
-		QString signal = getConnectorName(contact);
-		svg += QString("<rect viax='' viay='' fill='none' width='0' height='0' id='connector%1pin' connectorName='%2' stroke-width='0' stroke='none'/>\n")
-			   .arg(contact.attribute("connectorIndex"), signal);
-		svg += QString("<rect viax='' viay='' fill='none' width='0' height='0' id='connector%1terminal' stroke-width='0' stroke='none'/>\n")
-		       .arg(contact.attribute("connectorIndex"));
-	}
-
 	qreal ly = startTitle;
 	Q_FOREACH (QDomElement contact, lefts) {
 		bool bus = contact.attribute("bus", nullptr).compare("1") == 0;
@@ -770,8 +758,8 @@ QString SchematicRectConstants::genSchematicDIPv2(QList<QDomElement> & powers, Q
 			QString signal = getConnectorName(contact);
 			svg += QString("<line fill='none' stroke='%5' stroke-linejoin='round' stroke-linecap='round' stroke-width='%2' x1='%4' y1='%1' x2='%3' y2='%1' />\n")
 			       .arg(ly).arg(SW(pinThickness)).arg(pinLength).arg(halfPinThickness).arg(SchematicRectConstants::PinColor);
-			viaY = ly;
-			viaX = halfPinThickness;
+
+
 
 			QString mid = QString("<rect x='0' y='%1' fill='none' width='%3' height='%4' id='connector%2pin' connectorName='%5' stroke-width='0' />\n")
 			              .arg(ly - halfPinThickness).arg(contact.attribute("connectorIndex")).arg(pinLength).arg(pinThickness).arg(signal);
@@ -799,8 +787,8 @@ QString SchematicRectConstants::genSchematicDIPv2(QList<QDomElement> & powers, Q
 				   ,SchematicRectConstants::PinColor)
 			       ;
 
-			viaY = ly;
-			viaX = width - pinLength - halfPinThickness;
+
+
 
 			QString mid = QString("<rect x='%1' y='%2' fill='none' width='%4' height='%5' id='connector%3pin' connectorname='%6' stroke-width='0' />\n")
 			              .arg(width - pinLength)
@@ -831,8 +819,8 @@ QString SchematicRectConstants::genSchematicDIPv2(QList<QDomElement> & powers, Q
 			QString signal = getConnectorName(contact);
 			svg += QString("<line fill='none' stroke='%5' stroke-linejoin='round' stroke-linecap='round' stroke-width='%4' x1='%1' y1='%2' x2='%1' y2='%3' />\n")
 				   .arg(lx).arg(halfPinThickness).arg(pinLength).arg(SW(pinThickness), SchematicRectConstants::PinColor);
-			viaY = halfPinThickness;
-			viaX = lx;
+
+
 
 			QString mid = QString("<rect x='%1' y='%2' fill='none' width='%4' height='%5' id='connector%3pin' connectorname='%6' stroke-width='0' />\n")
 			              .arg(lx - halfPinThickness).arg(0).arg(contact.attribute("connectorIndex")).arg(pinThickness).arg(pinLength).arg(signal);
@@ -858,8 +846,8 @@ QString SchematicRectConstants::genSchematicDIPv2(QList<QDomElement> & powers, Q
 			QString signal = getConnectorName(contact);
 			svg += QString("<line fill='none' stroke='%5' stroke-linejoin='round' stroke-linecap='round' stroke-width='%4' x1='%1' y1='%2' x2='%1' y2='%3' />\n")
 				   .arg(lx).arg(height - pinLength).arg(height - halfPinThickness).arg(SW(pinThickness), SchematicRectConstants::PinColor);
-			viaY = height - pinLength;
-			viaX = lx;
+
+
 
 			QString mid = QString("<rect x='%1' y='%2' fill='none' width='%4' height='%5' id='connector%3pin' connectorname='%6' stroke-width='0' />\n")
 			              .arg(lx - halfPinThickness).arg(height - pinLength).arg(contact.attribute("connectorIndex")).arg(pinThickness).arg(pinLength).arg(signal);
@@ -874,9 +862,6 @@ QString SchematicRectConstants::genSchematicDIPv2(QList<QDomElement> & powers, Q
 
 		if (!bus) lx += unitLength;
 	}
-
-	svg.replace("viax=''", QString("x='%1'").arg(viaX));
-	svg.replace("viay=''", QString("y='%1'").arg(viaY));
 
 	QRegularExpression pin("connector[\\d]+pin");
 	QRegularExpression terminal("connector[\\d]+terminal");
