@@ -123,10 +123,9 @@ QString DipV2::makeSchematicV2Svg(const QStringList & labels)
 		rights.append(element);
 	}
 	QList<QDomElement> empty;
-	QStringList busNames;
 	QString ic("IC");
 	
-	QString svg = SchematicRectConstants::genSchematicDIPv2(empty, empty, lefts, rights, busNames, ic, false, false, SchematicRectConstants::simpleGetConnectorName);
+	QString svg = SchematicRectConstants::genSchematicDIPv2(empty, empty, lefts, rights, ic, false, false, SchematicRectConstants::simpleGetConnectorName);
 	
 	return svg;
 }

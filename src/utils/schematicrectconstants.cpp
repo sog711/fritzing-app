@@ -567,8 +567,7 @@ QString schematicPinTextV2(const QString & id, const QString & signal, qreal x, 
 }
 
 QString SchematicRectConstants::genSchematicDIPv2(QList<QDomElement> & powers, QList<QDomElement> & grounds, QList<QDomElement> & lefts,
-        QList<QDomElement> & rights, QStringList & busNames,
-        QString & boardName, bool usingParam, bool genericSMD, QString (*getConnectorName)(const QDomElement &))
+        QList<QDomElement> & rights, QString & boardName, bool usingParam, bool genericSMD, QString (*getConnectorName)(const QDomElement &))
 {
 
 	int powersBuses = 0, groundsBuses = 0, leftsBuses = 0, rightsBuses = 0;
@@ -764,9 +763,6 @@ QString SchematicRectConstants::genSchematicDIPv2(QList<QDomElement> & powers, Q
 			QString mid = QString("<rect x='0' y='%1' fill='none' width='%3' height='%4' id='connector%2pin' connectorName='%5' stroke-width='0' />\n")
 			              .arg(ly - halfPinThickness).arg(contact.attribute("connectorIndex")).arg(pinLength).arg(pinThickness).arg(signal);
 			svg += mid;
-			if (busNames.contains(contact.attribute("signal"), Qt::CaseInsensitive)) {
-				busMids.insert(contact.attribute("signal").toLower(), mid);
-			}
 			svg += schematicPinTextV2(contact.attribute("connectorIndex"), signal, pinLength + pinTextIndent, ly + pinTextVert, bigPinFontSize, "start", false);
 			svg += schematicPinNumberV2(pinLength / 2, ly, smallPinFontSize, contact.attribute("connectorIndex"), false, gotZero, gotOne);
 		}
@@ -798,9 +794,6 @@ QString SchematicRectConstants::genSchematicDIPv2(QList<QDomElement> & powers, Q
 			              .arg(pinThickness)
 			              .arg(signal);
 			svg += mid;
-			if (busNames.contains(contact.attribute("signal"), Qt::CaseInsensitive)) {
-				busMids.insert(contact.attribute("signal").toLower(), mid);
-			}
 			svg += schematicPinTextV2(contact.attribute("connectorIndex"), signal, width - pinLength - pinTextIndent, ly + pinTextVert, bigPinFontSize, "end", false);
 			svg += schematicPinNumberV2(width - (pinLength / 2), ly, smallPinFontSize, contact.attribute("connectorIndex"), false, gotZero, gotOne);
 		}
@@ -825,9 +818,6 @@ QString SchematicRectConstants::genSchematicDIPv2(QList<QDomElement> & powers, Q
 			QString mid = QString("<rect x='%1' y='%2' fill='none' width='%4' height='%5' id='connector%3pin' connectorname='%6' stroke-width='0' />\n")
 			              .arg(lx - halfPinThickness).arg(0).arg(contact.attribute("connectorIndex")).arg(pinThickness).arg(pinLength).arg(signal);
 			svg += mid;
-			if (busNames.contains(contact.attribute("signal"), Qt::CaseInsensitive)) {
-				busMids.insert(contact.attribute("signal").toLower(), mid);
-			}
 			svg += schematicPinTextV2(contact.attribute("connectorIndex"), signal, lx, pinLength - pinTextVert, bigPinFontSize, "end", true);
 			svg += schematicPinNumberV2(lx, pinLength / 2, smallPinFontSize, contact.attribute("connectorIndex"), true, gotZero, gotOne);
 		}
@@ -852,9 +842,6 @@ QString SchematicRectConstants::genSchematicDIPv2(QList<QDomElement> & powers, Q
 			QString mid = QString("<rect x='%1' y='%2' fill='none' width='%4' height='%5' id='connector%3pin' connectorname='%6' stroke-width='0' />\n")
 			              .arg(lx - halfPinThickness).arg(height - pinLength).arg(contact.attribute("connectorIndex")).arg(pinThickness).arg(pinLength).arg(signal);
 			svg += mid;
-			if (busNames.contains(contact.attribute("signal"), Qt::CaseInsensitive)) {
-				busMids.insert(contact.attribute("signal").toLower(), mid);
-			}
 
 			svg += schematicPinTextV2(contact.attribute("connectorIndex"), signal, lx, height - (pinLength - pinTextVert), bigPinFontSize, "start", true);
 			svg += schematicPinNumberV2(lx, height - (pinLength / 2), smallPinFontSize, contact.attribute("connectorIndex"), true, gotZero, gotOne);
