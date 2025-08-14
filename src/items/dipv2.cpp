@@ -22,6 +22,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "utils/schematicrectconstants.h"
 #include "utils/textutils.h"
 #include "version/version.h"
+#include "../version/version.h"
 #include "dipv2.h"
 #include "pinheader.h"
 #include "qdir.h"
@@ -71,7 +72,7 @@ QString DipV2::genDipV2FZP(const QString & moduleid)
 		if (i < pins - 1) connectors += "\n";
 	}
 	
-	QString result = templateString.arg(pins).arg(connectors);
+	QString result = templateString.arg(pins).arg(connectors).arg(Version::versionString());
 	result.replace(".percent.", "%");
 	result = result.arg(spacingString);
 	

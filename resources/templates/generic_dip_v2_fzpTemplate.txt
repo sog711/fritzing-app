@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><module moduleId="generic_ic_dip_v2_%1_.percent.1">
+<?xml version="1.0" encoding="UTF-8"?><module moduleId="generic_ic_dip_v2_%1_.percent.1" fritzingVersion="%3">
  <version>4</version>
  <author>Fritzing Part-o-matic</author>
  <title>DIP v2 - %1 pins</title>
