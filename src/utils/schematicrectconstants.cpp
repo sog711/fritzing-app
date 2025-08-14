@@ -514,7 +514,7 @@ QString schematicPinNumberV2(qreal x, qreal y, qreal pinSmallTextHeight, const Q
 		useY = 0;
 	}
 
-	text += QString("<text class='text' font-family=\"'NotoSans'\" stroke='none' stroke-width='%6' fill='%7' font-size='%1' x='%2' y='%3' text-anchor='%4'>%5</text>\n")
+	text += QString("<text class='text' font-family='Noto Sans' stroke='none' stroke-width='%6' fill='%7' font-size='%1' x='%2' y='%3' text-anchor='%4'>%5</text>\n")
 			.arg(pinSmallTextHeight)
 			.arg(useX)
 			.arg(useY)
@@ -549,7 +549,7 @@ QString schematicPinTextV2(const QString & id, const QString & signal, qreal x, 
 		//xOffset = yOffset = 0;
 	}
 
-	text += QString("<text id='label%1' x='%5' y='%2' font-family=\"'NotoSans'\" stroke='none' fill='%6' text-anchor='%8' font-size='%4' >%3</text>\n")
+	text += QString("<text id='label%1' x='%5' y='%2' font-family='Noto Sans' stroke='none' fill='%6' text-anchor='%8' font-size='%4' >%3</text>\n")
 	        .arg(id)
 	        .arg(y)
 		.arg(signal)
@@ -645,14 +645,14 @@ QString SchematicRectConstants::genSchematicDIPv2(QList<QDomElement> & powers, Q
 	qreal rightWidth = 0;
 	qreal topWidth = 0;
 	qreal bottomWidth = 0;
-	QFont bigFont("NotoSans");
+	QFont bigFont("Noto Sans");
 	bigFont.setPointSizeF(bigFontSize * 72 / 1000.0);
 	QFontMetricsF bigFontMetrics(bigFont);
 	Q_FOREACH (QString title, titles) {
 		qreal w = bigFontMetrics.horizontalAdvance(title);
 		if (w > titleWidth) titleWidth = w;
 	}
-	QFont pinTextFont("NotoSans");
+	QFont pinTextFont("Noto Sans");
 	pinTextFont.setPointSizeF(bigPinFontSize * 72 / 1000.0);
 	QFontMetricsF smallFontMetrics(pinTextFont);
 	Q_FOREACH (QDomElement element, lefts) {
@@ -739,7 +739,7 @@ QString SchematicRectConstants::genSchematicDIPv2(QList<QDomElement> & powers, Q
 	y -= bigFontSize * qCeil(titles.count() / 2.0);
 	if (y < startTitle) y = startTitle;
 	Q_FOREACH (QString title, titles) {
-		svg += QString("<text id='label' x='%1' y='%3' font-family=\"'NotoSans'\" stroke='none' fill='#000000' text-anchor='middle' font-size='%4' >%2</text>\n")
+		svg += QString("<text id='label' x='%1' y='%3' font-family='Noto Sans' stroke='none' fill='#000000' text-anchor='middle' font-size='%4' >%2</text>\n")
 		       .arg(rectLeft + (width - rectMinus) / 2)
 		       .arg(TextUtils::escapeAnd(title))
 		       .arg(y)
