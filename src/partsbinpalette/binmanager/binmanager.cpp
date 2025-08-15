@@ -1,7 +1,7 @@
 /*******************************************************************
 
 Part of the Fritzing project - http://fritzing.org
-Copyright (c) 2007-2019 Fritzing
+Copyright (c) 2007-2019,2025 Fritzing
 
 Fritzing is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -32,18 +32,19 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "stacktabwidget.h"
 #include "stacktabbar.h"
 
-#include "../../model/modelpart.h"
-#include "../../mainwindow/mainwindow.h"
-#include "../../model/palettemodel.h"
-#include "../../waitpushundostack.h"
-#include "../../debugdialog.h"
-#include "../../utils/folderutils.h"
-#include "../../utils/textutils.h"
-#include "../../utils/fileprogressdialog.h"
-#include "../../referencemodel/referencemodel.h"
-#include "../../items/partfactory.h"
-#include "../partsbinpalettewidget.h"
-#include "../partsbinview.h"
+#include "model/modelpart.h"
+#include "mainwindow/mainwindow.h"
+#include "model/palettemodel.h"
+#include "waitpushundostack.h"
+#include "debugdialog.h"
+#include "utils/folderutils.h"
+#include "utils/textutils.h"
+#include "utils/fileprogressdialog.h"
+#include "referencemodel/referencemodel.h"
+#include "items/partfactory.h"
+#include "partsbinpalette/partsbinpalettewidget.h"
+#include "partsbinpalette//searchbinpalettewidget.h"
+#include "partsbinpalette/partsbinview.h"
 #include "utils/fmessagebox.h"
 
 ///////////////////////////////////////////////////////////
@@ -114,6 +115,7 @@ BinManager::BinManager(class ReferenceModel *referenceModel, class HtmlInfoView 
 	m_defaultSaveFolder = FolderUtils::getUserBinsPath();
 	m_mainWindow = parent;
 	m_currentBin = nullptr;
+	m_searchBin = nullptr;
 
 	connect(this, SIGNAL(savePartAsBundled(const QString &)), m_mainWindow, SLOT(saveBundledPart(const QString &)));
 
@@ -145,11 +147,25 @@ void BinManager::initStandardBins()
 
 	restoreStateAndGeometry(actualLocations);
 	Q_FOREACH (BinLocation * location, actualLocations) {
-		PartsBinPaletteWidget* bin = newBin();
+		// Check if this is a Search bin location
+		bool isSearchBin = (location->path.contains("search", Qt::CaseInsensitive) && 
+		                   location->path.endsWith(".fzb", Qt::CaseInsensitive)) ||
+		                   location->title.compare("Search", Qt::CaseInsensitive) == 0;
+		
+		
+		PartsBinPaletteWidget* bin = newBin(isSearchBin);
 		bin->load(location->path, m_mainWindow->fileProgressDialog(), true);
+		
+		// Add all bins (including search bins) to the tab widget
 		m_stackTabWidget->addTab(bin, bin->icon(), bin->title());
 		m_stackTabWidget->stackTabBar()->setTabToolTip(m_stackTabWidget->count() - 1, bin->title());
 		registerBin(bin);
+		
+		// Keep reference to search bin for convenience
+		if (isSearchBin) {
+			m_searchBin = qobject_cast<SearchBinPaletteWidget*>(bin);
+		}
+		
 		delete location;
 	}
 	actualLocations.clear();
@@ -158,6 +174,10 @@ void BinManager::initStandardBins()
 	openCoreBinIn();
 
 	//DebugDialog::debug("after core bin");
+	
+	// Ensure Search bin is at position 0 if it exists
+	moveSearchBinToTop();
+
 	currentChanged(m_stackTabWidget->currentIndex());
 
 	connectTabWidget();
@@ -448,7 +468,18 @@ PartsBinPaletteWidget* BinManager::openCoreBinIn() {
 }
 
 PartsBinPaletteWidget* BinManager::newBin() {
-	auto* bin = new PartsBinPaletteWidget(m_referenceModel, m_infoView, m_undoStack,this);
+	return newBin(false);
+}
+
+PartsBinPaletteWidget* BinManager::newBin(bool isSearchBin) {
+	PartsBinPaletteWidget* bin;
+	
+	if (isSearchBin) {
+		bin = new SearchBinPaletteWidget(m_referenceModel, m_infoView, m_undoStack, this);
+	} else {
+		bin = new PartsBinPaletteWidget(m_referenceModel, m_infoView, m_undoStack, this);
+	}
+	
 	connect(
 	    bin, SIGNAL(fileNameUpdated(PartsBinPaletteWidget*, const QString&, const QString&)),
 	    this, SLOT(updateFileName(PartsBinPaletteWidget*, const QString&, const QString&))
@@ -498,31 +529,22 @@ void BinManager::setAsCurrentBin(PartsBinPaletteWidget* bin) {
 
 	if (m_currentBin == bin) return;
 
+	m_currentBin = bin;
+
 	if (bin->fileName().compare(SearchBinLocation) == 0) {
 		bin->focusSearch();
 	}
 
-	/*
-
-	// jrc 3-july-2013 commented out this stylesheet change:
-	//      it causes the tab bar to lose its scroll position
-	//      the stylesheet change is commented out in the qss file, so visually it's a no-op
-
-	QString style = m_mainWindow->styleSheet();
-	if(m_currentBin && m_stackTabWidget) {
-		StackTabBar *currTabBar = m_stackTabWidget->stackTabBar();
-		currTabBar->setProperty("current","false");
-		currTabBar->setStyleSheet("");
-		currTabBar->setStyleSheet(style);
+	// Control tab movability based on whether search bin is active
+	if (m_stackTabWidget && m_stackTabWidget->stackTabBar()) {
+		bool isSearchBin = (bin == m_searchBin);
+		m_stackTabWidget->stackTabBar()->setMovable(!isSearchBin);
 	}
-	if(m_stackTabWidget) {
-		m_currentBin = bin;
-		StackTabBar *currTabBar = m_stackTabWidget->stackTabBar();
-		currTabBar->setProperty("current","true");
-		currTabBar->setStyleSheet("");
-		currTabBar->setStyleSheet(style);
+
+	// Set as current tab in the stack widget
+	if (m_stackTabWidget) {
+		m_stackTabWidget->setCurrentWidget(bin);
 	}
-	*/
 }
 
 void BinManager::closeBinIn(int index) {
@@ -1392,6 +1414,15 @@ void BinManager::reloadPart(const QString & moduleID) {
 		if (bin == nullptr) continue;
 
 		bin->reloadPart(moduleID);
+	}
+}
+
+void BinManager::moveSearchBinToTop() {
+	if (m_searchBin && m_stackTabWidget) {
+		int searchIndex = m_stackTabWidget->indexOf(m_searchBin);
+		if (searchIndex != -1 && searchIndex != 0) {
+			m_stackTabWidget->stackTabBar()->moveTab(searchIndex, 0);
+		}
 	}
 }
 

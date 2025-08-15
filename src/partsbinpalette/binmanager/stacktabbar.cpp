@@ -24,18 +24,14 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QMenu>
 #include <QStylePainter>
 #include <QtGlobal>
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-#include <QStyleOptionTabV2>
-#else
 #include <QStyleOptionTab>
-#endif
 #include <QMimeData>
 
 #include "stacktabbar.h"
 #include "stacktabwidget.h"
-#include "../partsbinpalettewidget.h"
-#include "../partsbinview.h"
-#include "../../debugdialog.h"
+#include "binmanager.h"
+#include "partsbinpalette/partsbinpalettewidget.h"
+#include "partsbinpalette/partsbinview.h"
 
 
 StackTabBar::StackTabBar(StackTabWidget *parent) : QTabBar(parent) {
@@ -45,6 +41,7 @@ StackTabBar::StackTabBar(StackTabWidget *parent) : QTabBar(parent) {
 	//this->setTabsClosable(true);
 	setMovable(true);
 	m_parent = parent;
+	m_tabWasMoved = false;
 	setProperty("current","false");
 	setExpanding(false);
 	setElideMode(Qt::ElideRight);
@@ -52,7 +49,8 @@ StackTabBar::StackTabBar(StackTabWidget *parent) : QTabBar(parent) {
 
 	setContextMenuPolicy(Qt::CustomContextMenu);
 
-	connect(this, SIGNAL(customContextMenuRequested(const QPoint &)), SLOT(showContextMenu(const QPoint &)));
+	connect(this, SIGNAL(customContextMenuRequested(QPoint)), SLOT(showContextMenu(QPoint)));
+	connect(this, SIGNAL(tabMoved(int,int)), this, SLOT(onTabMoved(int,int)));
 
 	m_dragMoveTimer.setSingleShot(true);
 	m_dragMoveTimer.setInterval(250);
@@ -90,7 +88,7 @@ void StackTabBar::dragMoveEvent(QDragMoveEvent* event) {
 			event->acceptProposedAction();
 			m_dragMoveTimer.setProperty("index", index);
 			if (!m_dragMoveTimer.isActive()) {
-				DebugDialog::debug("starting drag move timer");
+				// DebugDialog::debug("starting drag move timer");
 				m_dragMoveTimer.start();
 			}
 			//DebugDialog::debug(QString("setting index %1").arg(index));
@@ -155,3 +153,26 @@ void StackTabBar::setIndex() {
 
 	setCurrentIndex(index);
 }
+
+
+void StackTabBar::onTabMoved(int, int) {
+	m_tabWasMoved = true;
+}
+
+void StackTabBar::mouseReleaseEvent(QMouseEvent* event) {
+	// Call parent implementation first
+	QTabBar::mouseReleaseEvent(event);
+	
+	// Check if we need to correct Search bin position after drag is complete
+	if (m_tabWasMoved) {
+		// Get the BinManager and call the unified method
+		auto* binManager = qobject_cast<BinManager*>(m_parent->parent());
+		if (binManager) {
+			binManager->moveSearchBinToTop();
+		}
+		
+		m_tabWasMoved = false;  // Reset flag at the end
+	}
+}
+
+

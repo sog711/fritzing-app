@@ -1,7 +1,7 @@
 /*******************************************************************
 
 Part of the Fritzing project - http://fritzing.org
-Copyright (c) 2007-2019 Fritzing
+Copyright (c) 2007-2019,2025 Fritzing
 
 Fritzing is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -32,6 +32,7 @@ class ModelPart;
 class PaletteModel;
 class MainWindow;
 class PartsBinPaletteWidget;
+class SearchBinPaletteWidget;
 
 struct BinLocation {
 	enum Location {
@@ -108,6 +109,7 @@ public:
 	void setTempPartsBinLocation(const QString & filename);
 	void hideTabBar();
 	void reloadPart(const QString & moduleID);
+	void moveSearchBinToTop();
 
 Q_SIGNALS:
 	void savePartAsBundled(const QString &moduleId);
@@ -141,6 +143,7 @@ protected Q_SLOTS:
 protected:
 	void createMenu();
 	PartsBinPaletteWidget* newBin();
+	PartsBinPaletteWidget* newBin(bool isSearchBin);
 	void registerBin(PartsBinPaletteWidget* bin);
 	PartsBinPaletteWidget* getBin(int index);
 	PartsBinPaletteWidget* currentBin();
@@ -172,6 +175,7 @@ protected:
 	MainWindow *m_mainWindow;
 	PartsBinPaletteWidget *m_currentBin;
 	class StackTabWidget* m_stackTabWidget;
+	class SearchBinPaletteWidget* m_searchBin;
 
 	QHash<QString /*filename*/,PartsBinPaletteWidget*> m_openedBins;
 	int m_unsavedBinsCount;

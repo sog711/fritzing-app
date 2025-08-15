@@ -36,6 +36,7 @@ protected:
 	void dragMoveEvent(QDragMoveEvent* event);
 	void dropEvent(QDropEvent* event);
 	void paintEvent(QPaintEvent *event);
+	void mouseReleaseEvent(QMouseEvent* event);
 
 	bool mimeIsAction(const class QMimeData* m, const QString& action);
 
@@ -44,10 +45,12 @@ public Q_SLOTS:
 
 protected Q_SLOTS:
 	void showContextMenu(const QPoint &point);
+	void onTabMoved(int from, int to);
 
 protected:
 	class StackTabWidget* m_parent;
 	QTimer m_dragMoveTimer;
+	bool m_tabWasMoved;
 };
 
 #endif /* STACKTABBAR_H_ */

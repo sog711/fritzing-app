@@ -1,7 +1,7 @@
 /*******************************************************************
 
 Part of the Fritzing project - http://fritzing.org
-Copyright (c) 2007-2019,2025 Fritzing
+Copyright (c) 2025 Fritzing
 
 Fritzing is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -18,30 +18,17 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 ********************************************************************/
 
+#ifndef SEARCHBINPALETTEWIDGET_H
+#define SEARCHBINPALETTEWIDGET_H
 
-#ifndef STACKTABWIDGET_H_
-#define STACKTABWIDGET_H_
+#include "partsbinpalettewidget.h"
 
-#include <QTabWidget>
-#include <QTabBar>
-#include <QPushButton>
-#include <QPointer>
-
-// originally extracted from http://wiki.qtcentre.org/index.php?title=Movable_Tabs
-class StackTabWidget : public QTabWidget {
+class SearchBinPaletteWidget : public PartsBinPaletteWidget {
 	Q_OBJECT
+
 public:
-	StackTabWidget(QWidget *parent);
-	class StackTabBar *stackTabBar();
-
-public Q_SLOTS:
-	void informCurrentChanged(int index);
-	void informTabCloseRequested(int index);
-
-Q_SIGNALS:
-	void currentChanged(StackTabWidget *, int index);
-	void tabCloseRequested(StackTabWidget *, int index);
+	SearchBinPaletteWidget(class ReferenceModel *referenceModel, class HtmlInfoView *infoView, WaitPushUndoStack *undoStack, class BinManager* manager);
 
 };
 
-#endif /* STACKTABWIDGET_H_ */
+#endif // SEARCHBINPALETTEWIDGET_H

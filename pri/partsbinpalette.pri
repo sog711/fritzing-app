@@ -14,6 +14,7 @@
 # ********************************************************************/
 HEADERS += \
     src/partsbinpalette/partsbinpalettewidget.h \
+    src/partsbinpalette/searchbinpalettewidget.h \
     src/partsbinpalette/partsbinview.h \
     src/partsbinpalette/partsbinlistview.h \
     src/partsbinpalette/partsbiniconview.h \
@@ -27,6 +28,7 @@ HEADERS += \
 
 SOURCES +=  \
     src/partsbinpalette/partsbinpalettewidget.cpp \
+    src/partsbinpalette/searchbinpalettewidget.cpp \
     src/partsbinpalette/partsbinview.cpp \
     src/partsbinpalette/partsbinlistview.cpp \
     src/partsbinpalette/partsbiniconview.cpp \
