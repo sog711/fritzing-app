@@ -855,7 +855,7 @@ QMenu * PartsBinPaletteWidget::binContextMenu()
 	QMenu * menu = m_manager->binContextMenu(this);
 	if (menu == nullptr) return nullptr;
 
-	auto * newMenu = new QMenu();
+	auto * newMenu = new QMenu(this);
 	Q_FOREACH (QAction * action, menu->actions()) {
 		newMenu->addAction(action);
 	}
