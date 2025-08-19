@@ -922,12 +922,7 @@ PaletteItem* SketchWidget::addPartItem(ModelPart * modelPart, ViewLayer::ViewLay
 		// Error rendering the image. This can also happen
 		// if filename cases do not match on case sensitive file
 		// systems.
-		auto *mb = new QMessageBox(this->parentWidget());
-		mb->setAttribute(Qt::WA_DeleteOnClose, true);
-		mb->setWindowTitle("Fritzing");
-		mb->setText(QObject::tr("Error reading file %1: %2.").arg(modelPart->path(), error));
-		mb->setIcon(QMessageBox::Critical);
-		mb->show();
+		FMessageBox::critical(this->parentWidget(), "Fritzing", QObject::tr("Error reading file %1: %2.").arg(modelPart->path(), error));
 
 		DebugDialog::debug(QString("addPartItem renderImage failed %1 %2").arg(modelPart->moduleID()).arg(error));
 		return paletteItem;
@@ -4055,7 +4050,7 @@ void SketchWidget::dragRatsnestChanged()
 	ViewLayer::ViewLayerPlacement viewLayerPlacement = createWireViewLayerPlacement(ends[0], ends[1]);
 	if (viewLayerPlacement == ViewLayer::UnknownPlacement) {
 		// for now this should not be possible
-		QMessageBox::critical(this, tr("Fritzing"), tr("This seems like an attempt to create a trace across layers. This circumstance should not arise: please contact the developers."));
+		FMessageBox::critical(this, tr("Fritzing"), tr("This seems like an attempt to create a trace across layers. This circumstance should not arise: please contact the developers."));
 		return;
 	}
 
@@ -9926,7 +9921,7 @@ void SketchWidget::showUnrouted() {
 
 	QString message = tr("Unrouted connections are highlighted in yellow.");
 	if (toShow.count() == 0) message = tr("There are no unrouted connections");
-	QMessageBox::information(this, tr("Unrouted connections"),
+	FMessageBox::information(this, tr("Unrouted connections"),
 	                         tr("%1\n\n"
 	                            "Note: you can also trigger this display by mousing down on the routing status text in the status bar.").arg(message));
 
@@ -9981,7 +9976,7 @@ void SketchWidget::selectItemsWithModuleID(ModelPart * modelPart) {
 	}
 
 	if (itemBases.count() == 0) {
-		QMessageBox::information(nullptr, "Not found", tr("Part '%1' not found in sketch").arg(modelPart->title()));
+		FMessageBox::information(nullptr, "Not found", tr("Part '%1' not found in sketch").arg(modelPart->title()));
 		return;
 	}
 
