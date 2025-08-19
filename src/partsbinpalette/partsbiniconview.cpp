@@ -1,7 +1,7 @@
 /*******************************************************************
 
 Part of the Fritzing project - http://fritzing.org
-Copyright (c) 2007-2019 Fritzing
+Copyright (c) 2007-2019,2025 Fritzing
 
 Fritzing is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -29,8 +29,6 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QPoint>
 #include <QSet>
 #include <QtGlobal>
-#include <QtSvgWidgets/QSvgWidget>
-
 
 #define ICON_SPACING 5
 
@@ -56,8 +54,8 @@ PartsBinIconView::PartsBinIconView(ReferenceModel* referenceModel, PartsBinPalet
 
 	setContextMenuPolicy(Qt::CustomContextMenu);
 	connect(
-	    this, SIGNAL(customContextMenuRequested(const QPoint&)),
-	    this, SLOT(showContextMenu(const QPoint&))
+		this, SIGNAL(customContextMenuRequested(QPoint)),
+		this, SLOT(showContextMenu(QPoint))
 	);
 }
 
@@ -458,8 +456,8 @@ ItemBase * PartsBinIconView::loadItemBase(const QString & moduleID, ItemBase::Pl
 	if (plural == ItemBase::NotSure) {
 		QHash<QString,QString> properties = modelPart->properties();
 		QString family = properties.value("family", "").toLower();
-		Q_FOREACH (QString key, properties.keys()) {
-			QStringList values = m_referenceModel->propValues(family, key, true);
+		for (auto it = properties.constBegin(); it != properties.constEnd(); ++it) {
+			QStringList values = m_referenceModel->propValues(family, it.key(), true);
 			if (values.length() > 1) {
 				plural = ItemBase::Plural;
 				break;
