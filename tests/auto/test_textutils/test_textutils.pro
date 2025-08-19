@@ -33,7 +33,9 @@ INCLUDEPATH += $$absolute_path(../../../src)
 #INCLUDEPATH += $$top_srcdir
 
 HEADERS += $$files(../../../src/utils/textutils.h)
+HEADERS += $$files(../../../src/utils/textmetrics.h)
 SOURCES += $$files(../../../src/utils/textutils.cpp)
+SOURCES += $$files(../../../src/utils/textmetrics.cpp)
 INCLUDEPATH += $$absolute_path(../../../src/utils)
 # FLIBS += textutils
 

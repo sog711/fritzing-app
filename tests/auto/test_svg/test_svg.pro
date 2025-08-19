@@ -33,6 +33,7 @@ INCLUDEPATH += $$absolute_path(../../../src)
 HEADERS += $$files(../../../src/svg/svgtext.h)
 HEADERS += $$files(../../../src/svg/svgpathlexer.h)
 HEADERS += $$files(../../../src/utils/textutils.h)
+HEADERS += $$files(../../../src/utils/textmetrics.h)
 HEADERS += $$files(../../../src/svg/svgpathgrammar_p.h)
 HEADERS += $$files(../../../src/svg/svgpathparser.h)
 
@@ -41,5 +42,6 @@ SOURCES += $$files(../../../src/svg/svgpathlexer.cpp)
 SOURCES += $$files(../../../src/svg/svgpathparser.cpp)
 SOURCES += $$files(../../../src/svg/svgpathgrammar.cpp)
 SOURCES += $$files(../../../src/utils/textutils.cpp)
+SOURCES += $$files(../../../src/utils/textmetrics.cpp)
 #INCLUDEPATH += $$top_srcdir
 # unix:QMAKE_POST_LINK = $$PWD/generated/test_svg

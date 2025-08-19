@@ -28,9 +28,11 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QTransform>
 #include <QXmlStreamReader>
 #include <QFont>
+#include <QFontMetricsF>
 
 typedef QString (*CopyPinFunction)(int pin, const QString & argString, void * userData);
 typedef QString (*MultiplyPinFunction)(int pin, double increment, double value);
+
 
 class TextUtils
 {
@@ -152,6 +154,7 @@ public:
 	static const QRegularExpression positiveIntegerMatcher;
 	static const QString RegexFloatDetector;
 	static const QString AdobeIllustratorIdentifier;
+	static constexpr double FontMetricsScaleFactor = 0.77;
 
 	static QMap<QString, QString> parseFileForViewImages(const QString &fzpPath);
 
@@ -160,9 +163,14 @@ protected:
 	static void squashNotElement(QDomElement & element, const QString & elementName, const QString & attName, const QRegularExpression & matchContent, bool & result);
 	static void initPowerPrefixes();
 	static QDomElement copyText(QDomDocument & svgDom, QDomElement & parent, QDomElement & text, double defaultX, double defaultY, bool copyAttributes);
+	static QDomElement createTextElement(QDomDocument & svgDom, QDomElement & parent, const QString & text, double x, double y);
 	static void gornTreeAux(QDomElement &);
 	static bool noPatternAux(QDomDocument & svgDom, const QString & tag);
 	static bool noUseAux(QDomDocument & svgDom);
+	static void applyAnchorTransform(const QList<QDomElement> & anchorElements, const QString & textAnchor, double anchorBaseX, double minX, double maxX);
+#ifdef QT_DEBUG
+	static void addDebugAnchorPoint(QDomDocument & svgDom, QDomElement & parent, double x, double y, double fontSize);
+#endif
 	static bool tspanRemoveAux(QDomDocument & svgDom);
 	static void fixStyleAttribute(QDomElement & element, QString & style, const QString & attributeName);
 	static bool fixStrokeWidth(QDomDocument & svgDoc);
@@ -170,7 +178,6 @@ protected:
 	static void chopNotDigits(QString &);
 	static void collectTransforms(QDomElement & root, QList<QDomElement> & transforms);
 	static QFont textMetrics(const QDomElement & element);
-	static double appendText(QDomDocument & svgDom, QDomElement & parent, QDomElement & text, double defaultX, double defaultY, bool copyAttributes);
 private:
 	static bool removeFontFamilySingleQuotes(QString &fileContent);
 };
