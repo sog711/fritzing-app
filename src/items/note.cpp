@@ -388,7 +388,7 @@ void Note::forceFormat(int position, int charsAdded) {
 	QFont font("Droid Sans", 9, QFont::Normal);
 
 	f.setFont(font);
-	f.setFontFamily("Droid Sans");
+	f.setFontFamilies(QStringList("Droid Sans"));
 	f.setFontPointSize(9);
 
 	int cc = m_graphicsTextItem->document()->characterCount();
