@@ -250,7 +250,8 @@ void ModelPart::saveInstance(QXmlStreamWriter & streamWriter, bool flipAware)
 		moduleIdRef.remove(PartFactory::OldSchematicPrefix);
 		streamWriter.writeAttribute("moduleIdRef", moduleIdRef);
 		streamWriter.writeAttribute("modelIndex", QString::number(m_index));
-		streamWriter.writeAttribute("path", m_modelPartShared->path());
+		QString fullPath = m_modelPartShared->path();
+		streamWriter.writeAttribute("path", QFileInfo(fullPath).fileName());
 		if (m_modelPartShared->flippedSMD()) {
 			streamWriter.writeAttribute("flippedSMD", "true");
 		}
