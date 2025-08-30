@@ -607,20 +607,19 @@ QString MysteryPart::makeBreadboardSipSvg(const QString & expectedFileName)
 }
 
 bool MysteryPart::changePinLabels(bool sip) {
-
 	if (m_viewID != ViewLayer::SchematicView) return true;
 
 	bool hasLocal = false;
 	QStringList labels = getPinLabels(hasLocal);
 	if (labels.count() == 0) return true;
 
-	QTransform  transform = untransform();
+	QTransform transform = untransform();
 
 	QString svg = MysteryPart::makeSchematicSvg(labels, sip);
 
 	QString chipLabel = modelPart()->localProp("chip label").toString();
 	if (!chipLabel.isEmpty()) {
-		svg =TextUtils::replaceTextElement(svg, "label", chipLabel);
+		svg = TextUtils::replaceTextElement(svg, "label", chipLabel);
 	}
 
 	resetLayerKin(svg);

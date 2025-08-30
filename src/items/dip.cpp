@@ -399,21 +399,11 @@ bool Dip::changePinLabels(bool sip) {
 	QStringList labels = getPinLabels(hasLocal);
 	if (labels.count() == 0) return true;
 
-	bool singleRow = isSingleRow(cachedConnectorItems());
+	QTransform transform = untransform();
+
 	QString svg;
-	if (singleRow) {
-		svg = MysteryPart::makeSchematicSvg(labels, sip);
-	}
-	else {
-		svg = Dip::makeSchematicSvg(labels);
-	}
-
-	QString chipLabel = modelPart()->localProp("chip label").toString();
-	if (!chipLabel.isEmpty()) {
-		svg =TextUtils::replaceTextElement(svg, "label", chipLabel);
-	}
-
-	QTransform  transform = untransform();
+	bool normalized = false;
+	svg = retrieveSchematicSvg(svg, normalized);
 
 	resetLayerKin(svg);
 	resetConnectors();

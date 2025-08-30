@@ -36,7 +36,11 @@ public:
 	static QString genModuleIDV2(QMap<QString, QString> & currPropsMap);
 	static QString makeSchematicV2Svg(const QString & expectedFileName);
 	static QString makeSchematicV2Svg(const QStringList & labels);
+	static QString makeSchematicSipV2Svg(const QStringList & labels);
 	static QString makeBreadboardDipV2Svg(const QString & expectedFileName);
+
+public:
+	bool changePinLabels(bool sip) override;
 
 public Q_SLOTS:
 	void swapEntry(const QString & text) override;

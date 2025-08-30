@@ -42,7 +42,6 @@ public:
 	static QString partPath();
 	static bool svgFileExists(const QString & expectedFileName, QString & path);
 	static bool fzpFileExists(const QString & moduleID, QString & path);
-	static QString makeSchematicSipOrDipOr(const QStringList & labels, bool hasLayout, bool sip);
 	static QString getSvgFilename(const QString & filename);
 
 protected:

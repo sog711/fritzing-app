@@ -1517,13 +1517,12 @@ bool PaletteItem::makeLocalModifications(QByteArray & svg, const QString & filen
 	bool modified = false;
 	if (m_viewID == ViewLayer::SchematicView) {
 		QString value = modelPart()->properties().value("editable pin labels", "");
-		auto mysteryPartItem = qobject_cast<MysteryPart *>(this);
-		auto dipItem = qobject_cast<Dip *>(this);
-		if (value.compare("true") == 0 && (mysteryPartItem != nullptr || dipItem != nullptr)) {
-			bool hasLayout, sip;
-			QStringList labels = sipOrDipOrLabels(hasLayout, sip);
-			if (labels.count() > 0) {
-				svg = PartFactory::makeSchematicSipOrDipOr(labels, hasLayout, sip).toUtf8();
+		if (value.compare("true") == 0) {
+			QString svgString = QString::fromUtf8(svg);
+			bool normalized = false;
+			QString newSvg = retrieveSchematicSvg(svgString, normalized);
+			if (!newSvg.isEmpty() && newSvg != svgString) {
+				svg = newSvg.toUtf8();
 				modified = true;
 			}
 		}
@@ -1552,29 +1551,9 @@ bool PaletteItem::makeLocalModifications(QByteArray & svg, const QString & filen
 	return modified;
 }
 
-QStringList PaletteItem::sipOrDipOrLabels(bool & hasLayout, bool & sip) {
-	hasLayout = sip = false;
-	bool hasLocal = false;
-	QStringList labels = getPinLabels(hasLocal);
-	if (labels.count() == 0) return labels;
-
-	// part was formerly a mystery part or generic ic ...
-	QHash<QString, QString> properties = modelPart()->properties();
-	Q_FOREACH (QString key, properties.keys()) {
-		QString value = properties.value(key);
-		if (key.compare("layout", Qt::CaseInsensitive) == 0) {
-			// was a mystery part
-			hasLayout = true;
-			break;
-		}
-
-		if (key.compare("package") == 0) {
-			// was a generic ic
-			sip = value.contains("sip", Qt::CaseInsensitive);
-		}
-	}
-
-	return labels;
+QString PaletteItem::retrieveSchematicSvg(QString & svg, bool & normalized) {
+	normalized = false;
+	return svg;
 }
 
 void PaletteItem::resetLayerKin(const QString & svg) {

@@ -131,6 +131,25 @@ QString DipV2::makeSchematicV2Svg(const QStringList & labels)
 	return svg;
 }
 
+QString DipV2::makeSchematicSipV2Svg(const QStringList & labels)
+{
+	QDomDocument fakeDoc;
+
+	QList<QDomElement> lefts;
+	for (int i = 0; i < labels.count(); i++) {
+		QDomElement element = fakeDoc.createElement("contact");
+		element.setAttribute("connectorIndex", i);
+		element.setAttribute("name", labels.at(i));
+		lefts.append(element);
+	}
+	QList<QDomElement> empty;
+	QString ic("IC");
+	
+	QString svg = SchematicRectConstants::genSchematicDIPv2(empty, empty, lefts, empty, ic, false, false, SchematicRectConstants::simpleGetConnectorName);
+	
+	return svg;
+}
+
 QString DipV2::makeBreadboardDipV2Svg(const QString & expectedFileName)
 {
 	QStringList pieces = expectedFileName.split("_");
@@ -217,7 +236,7 @@ QString DipV2::retrieveSchematicSvg(QString & svg, bool & normalized) {
 		svg = makeSchematicV2Svg(labels);
 	}
 	else {
-		svg = MysteryPart::makeSchematicSvg(labels, true);
+		svg = makeSchematicSipV2Svg(labels);
 	}
 	normalized = false;
 
@@ -245,6 +264,27 @@ QString DipV2::createTspanElements(const QString & text) {
 	}
 	
 	return result;
+}
+
+bool DipV2::changePinLabels(bool sip) {
+	if (m_viewID != ViewLayer::SchematicView) return true;
+
+	bool hasLocal = false;
+	QStringList labels = getPinLabels(hasLocal);
+	if (labels.count() == 0) return true;
+
+	QTransform transform = untransform();
+
+	QString svg;
+	bool normalized = false;
+	svg = retrieveSchematicSvg(svg, normalized);
+
+	resetLayerKin(svg);
+	resetConnectors();
+
+	retransform(transform);
+
+	return true;
 }
 
 void DipV2::swapEntry(const QString & text) {
