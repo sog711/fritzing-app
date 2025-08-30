@@ -620,7 +620,7 @@ QString SchematicRectConstants::genSchematicDIPv2(QList<QDomElement> & powers, Q
 	qreal pinThickness = 1000 * SchematicRectConstants::PinWidth / 25.4;
 	qreal halfPinThickness = pinThickness / 2;
 	qreal unitLength = 1000 * SchematicRectConstants::NewUnit / 25.4;
-	qreal pinLength = 2 * unitLength;
+	qreal pinLength = unitLength; // 100 . v1 connectors pin used 200.
 	qreal pinTextIndent = 1000 * SchematicRectConstants::PinTextIndent / 25.4;
 	qreal pinTextVert = 1000 * SchematicRectConstants::PinTextVert / 25.4;
 	qreal rectThickness = 1000 * SchematicRectConstants::RectStrokeWidth / 25.4;
