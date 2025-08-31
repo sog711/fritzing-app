@@ -77,6 +77,9 @@ void MysteryPart::setChipLabel(QString chipLabel, bool force) {
 
 	if (!force && m_chipLabel.compare(chipLabel) == 0) return;
 
+	chipLabel.replace("&nbsp;", QChar(0x00A0));
+	chipLabel.replace("&nnbsp;", QChar(0x202F));
+
 	m_chipLabel = chipLabel;
 
 	QString svg;
