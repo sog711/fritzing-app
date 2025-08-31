@@ -156,6 +156,22 @@ QString DipV2::makeSchematicSipV2SvgWithLabel(const QStringList & labels, const 
 	return svg;
 }
 
+QString DipV2::makeSvg(const QString & chipLabel, bool replace) {
+	QString svg = MysteryPart::makeSvg(chipLabel, false);
+	if (svg.isEmpty() || !replace) return svg;
+	
+	QStringList words = chipLabel.split(QRegularExpression("\\s+"), Qt::SkipEmptyParts);
+	QHash<QString, QString> replacements;
+	
+	for (int i = 0; i < words.size(); i++) {
+		QString labelId = (i == 0) ? "label" : QString("label%1").arg(i + 1);
+		replacements[labelId] = words[i];
+	}
+	
+	return TextUtils::replaceTextElements(svg, replacements);
+}
+
+
 QString DipV2::makeBreadboardDipV2Svg(const QString & expectedFileName)
 {
 	QStringList pieces = expectedFileName.split("_");
@@ -164,6 +180,22 @@ QString DipV2::makeBreadboardDipV2Svg(const QString & expectedFileName)
 	int pins = pieces.at(4).toInt();
 	int increment = 10;
 	double spacing = TextUtils::convertToInches(pieces.at(5)) * 100;
+	
+	int spacingMils = TextUtils::convertToInches(pieces.at(5)) * 1000;
+	int maxLines = spacingMils / 100 - 1;
+	
+	QString textElements;
+	double baseY = 14.0;
+	double lineSpacing = 10.0;
+	for (int i = 0; i < maxLines; i++) {
+		double y = baseY + (i * lineSpacing);
+		QString labelId = (i == 0) ? "label" : QString("label%1").arg(i + 1);
+		QString labelText = (i == 0) ? "IC" : "";
+		textElements += QString("<text id='%1' x='7' y='%2' fill='#e6e6e6' stroke='none' font-family='OCR-Fritzing-mono' text-anchor='start' font-size='7.5' >%3</text>\n")
+		               .arg(labelId)
+		               .arg(y)
+		               .arg(labelText);
+	}
 
 	QString repeatB("<rect id='connector%1pin' x='{13.5}' y='[28.66]' fill='#8C8C8C' width='3' height='4.34'/>\n"
 	                "<polygon fill='#8C8C8C' points='{11.5},[28.66] {11.5},[29.74] {13.5},[30.66] {16.5},[30.66] {18.5},[29.74] {18.5},[28.66]'/> \n");
@@ -185,8 +217,7 @@ QString DipV2::makeBreadboardDipV2Svg(const QString & expectedFileName)
 	               "<path id='slot' fill='#262626' d='M0.56,{{13.58}}v5.83c1.47-0.17,2.62-1.4,2.62-2.92C3.18,{{14.97}},2.04,{{13.75}},0.56,{{13.58}}z'/>\n"
 	               "<path id='cover' fill='#303030' d='M0.75,5.46V{{11.45}}c2.38,0.45,4.19,2.53,4.19,5.04c0,2.51-1.8,4.6-4.19,5.05V{{21.55}}h5.0V5.46H0.75z'/>\n"
 	               "<circle fill='#212121' cx='6.5' cy='[23.47]' r='2.06'/>\n"
-				   "<text id='label' x='6.5' y='{{16.5}}' fill='#e6e6e6' stroke='none' font-family='Noto Sans' text-anchor='start' font-size='8' >IC</text>\n"
-
+				   "%5\n"
 	               "<rect id='connector0pin' x='3.5' y='[28.66]' fill='#8C8C8C' width='3' height='4.34'/>\n"
 	               "<polygon fill='#8C8C8C' points='3.5,[28.66] 3.5,[30.66] 6.5,[30.66] 8.5,[29.74] 8.5,[28.66] '/>\n"
 
@@ -211,7 +242,8 @@ QString DipV2::makeBreadboardDipV2Svg(const QString & expectedFileName)
 	         .arg(TextUtils::getViewBoxCoord(header, 3) / 100.0)
 	         .arg(pins - 1)
 	         .arg((pins / 2) - 1)
-	         .arg(pins / 2);
+	         .arg(pins / 2)
+	         .arg(textElements);
 	header.replace("{{", "[");
 	header.replace("}}", "]");
 	header = TextUtils::incrementTemplateString(header, 1, (spacing - (increment * 3)) / 2, TextUtils::incMultiplyPinFunction, TextUtils::noCopyPinFunction, nullptr);
@@ -220,6 +252,8 @@ QString DipV2::makeBreadboardDipV2Svg(const QString & expectedFileName)
 	header.replace(".percent.", "%");
 
 	QString svg = TextUtils::incrementTemplateString(header, 1, increment * ((pins - 4) / 2), TextUtils::incMultiplyPinFunction, TextUtils::noCopyPinFunction, nullptr);
+
+	qDebug() << "DipV2 makeBreadboardDipV2Svg intermediate SVG:" << svg;
 
 	repeatB = TextUtils::incrementTemplateString(repeatB, 1, spacing - (increment * 3), TextUtils::incMultiplyPinFunction, TextUtils::noCopyPinFunction, nullptr);
 	repeatB.replace("{", "[");
@@ -231,7 +265,9 @@ QString DipV2::makeBreadboardDipV2Svg(const QString & expectedFileName)
 	QString repeatTs = TextUtils::incrementTemplateString(repeatT, (pins - 4) / 2, increment, TextUtils::standardMultiplyPinFunction, TextUtils::negIncCopyPinFunction, userData);
 	QString repeatBs = TextUtils::incrementTemplateString(repeatB, (pins - 4) / 2, increment, TextUtils::standardMultiplyPinFunction, TextUtils::incCopyPinFunction, nullptr);
 
-	return svg.arg(TextUtils::getViewBoxCoord(svg, 2) / 100.0).arg(repeatTs, repeatBs);
+	QString finalSvg = svg.arg(TextUtils::getViewBoxCoord(svg, 2) / 100.0).arg(repeatTs, repeatBs);
+	qDebug() << "DipV2 makeBreadboardDipV2Svg final SVG:" << finalSvg;
+	return finalSvg;
 }
 
 QString DipV2::retrieveSchematicSvg(const QString & svg) {
@@ -242,7 +278,7 @@ QString DipV2::retrieveSchematicSvg(const QString & svg) {
 	if (chipLabel.contains("\\n")) {
 		chipLabel.replace("\\n", " ");
 	}
-
+	
 	if (this->isDIP()) {
 		return makeSchematicV2SvgWithLabel(labels, chipLabel);
 	}

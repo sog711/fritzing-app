@@ -66,7 +66,7 @@ public:
 	static QString makePcbDipSvg(const QString & expectedFileName);
 
 protected:
-	QString makeSvg(const QString & chipLabel, bool replace);
+	virtual QString makeSvg(const QString & chipLabel, bool replace);
 	QStringList collectValues(const QString & family, const QString & prop, QString & value);
 	virtual bool isDIP();
 	virtual bool otherPropsChange(const QMap<QString, QString> & propsMap);

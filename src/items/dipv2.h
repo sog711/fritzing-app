@@ -48,6 +48,7 @@ public Q_SLOTS:
 
 protected:
 	QString retrieveSchematicSvg(const QString & svg) override;
+	QString makeSvg(const QString & chipLabel, bool replace) override;
 
 private:
 	static QString processTextWithNewlines(const QString & text);
