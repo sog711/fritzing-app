@@ -94,7 +94,13 @@ void MysteryPart::setChipLabel(QString chipLabel, bool force) {
 		bool normalized = false;
 		svg = retrieveSchematicSvg(svg, normalized);
 		resetLayerKin(svg);
+		// changing the chip label might change the size, so we also update the connectors.
+		resetConnectors();
+
 		retransform(transform);
+
+		QList<ConnectorItem *> already;
+		updateConnections(true, already);
 	}
 	break;
 	default:

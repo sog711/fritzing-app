@@ -35,8 +35,9 @@ public:
 	static QString genDipV2FZP(const QString & moduleid);
 	static QString genModuleIDV2(QMap<QString, QString> & currPropsMap);
 	static QString makeSchematicV2Svg(const QString & expectedFileName);
-	static QString makeSchematicV2Svg(const QStringList & labels);
+	static QString makeSchematicV2SvgWithLabel(const QStringList & labels, const QString & chipLabel);
 	static QString makeSchematicSipV2Svg(const QStringList & labels);
+	static QString makeSchematicSipV2SvgWithLabel(const QStringList & labels, const QString & chipLabel);
 	static QString makeBreadboardDipV2Svg(const QString & expectedFileName);
 
 public:
@@ -50,7 +51,6 @@ protected:
 
 private:
 	static QString processTextWithNewlines(const QString & text);
-	static QString createTspanElements(const QString & text);
 };
 
 #endif

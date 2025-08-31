@@ -103,10 +103,10 @@ QString DipV2::makeSchematicV2Svg(const QString & expectedFileName)
 		labels << QString::number(i + 1);
 	}
 
-	return makeSchematicV2Svg(labels);
+	return makeSchematicV2SvgWithLabel(labels, "IC");
 }
 
-QString DipV2::makeSchematicV2Svg(const QStringList & labels)
+QString DipV2::makeSchematicV2SvgWithLabel(const QStringList & labels, const QString & chipLabel)
 {
 	QDomDocument fakeDoc;
 
@@ -124,7 +124,7 @@ QString DipV2::makeSchematicV2Svg(const QStringList & labels)
 		rights.append(element);
 	}
 	QList<QDomElement> empty;
-	QString ic("IC");
+	QString ic = chipLabel;
 	
 	QString svg = SchematicRectConstants::genSchematicDIPv2(empty, empty, lefts, rights, ic, false, false, SchematicRectConstants::simpleGetConnectorName);
 	
@@ -132,6 +132,12 @@ QString DipV2::makeSchematicV2Svg(const QStringList & labels)
 }
 
 QString DipV2::makeSchematicSipV2Svg(const QStringList & labels)
+{
+	QString ic("IC");
+	return makeSchematicSipV2SvgWithLabel(labels, ic);
+}
+
+QString DipV2::makeSchematicSipV2SvgWithLabel(const QStringList & labels, const QString & chipLabel)
 {
 	QDomDocument fakeDoc;
 
@@ -143,7 +149,7 @@ QString DipV2::makeSchematicSipV2Svg(const QStringList & labels)
 		lefts.append(element);
 	}
 	QList<QDomElement> empty;
-	QString ic("IC");
+	QString ic = chipLabel;
 	
 	QString svg = SchematicRectConstants::genSchematicDIPv2(empty, empty, lefts, empty, ic, false, false, SchematicRectConstants::simpleGetConnectorName);
 	
@@ -232,39 +238,22 @@ QString DipV2::retrieveSchematicSvg(QString & svg, bool & normalized) {
 	bool hasLocal = false;
 	QStringList labels = getPinLabels(hasLocal);
 
+	QString chipLabel = m_chipLabel;
+	if (chipLabel.contains("\\n")) {
+		chipLabel.replace("\\n", " ");
+	}
+
 	if (this->isDIP()) {
-		svg = makeSchematicV2Svg(labels);
+		svg = makeSchematicV2SvgWithLabel(labels, chipLabel);
 	}
 	else {
-		svg = makeSchematicSipV2Svg(labels);
+		svg = makeSchematicSipV2SvgWithLabel(labels, chipLabel);
 	}
 	normalized = false;
 
-	QString chipLabel = m_chipLabel;
-	if (chipLabel.contains("\\n")) {
-		chipLabel = createTspanElements(chipLabel);
-		svg = TextUtils::replaceTextElement(svg, "label", chipLabel);
-	} else {
-		svg = TextUtils::replaceTextElement(svg, "label", chipLabel);
-	}
-	
 	return svg;
 }
 
-QString DipV2::createTspanElements(const QString & text) {
-	QStringList lines = text.split("\\n");
-	if (lines.count() <= 1) {
-		return text;
-	}
-	
-	QString result;
-	for (int i = 0; i < lines.count(); i++) {
-		QString dy = (i == 0) ? "0" : "1.2em";
-		result += QString("<tspan x=\"50%\" dy=\"%1\">%2</tspan>").arg(dy, lines.at(i));
-	}
-	
-	return result;
-}
 
 bool DipV2::changePinLabels(bool sip) {
 	if (m_viewID != ViewLayer::SchematicView) return true;
