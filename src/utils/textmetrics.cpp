@@ -290,31 +290,37 @@ double TextMetrics::getFontScalingFactor() const
 #ifdef Q_OS_MAC
 	// macOS doesn't need correction for most fonts
 	scalingFactor = 1.0;
-#elif defined(Q_OS_WIN)
-	// Windows has font-specific scaling requirements
-	if (m_fontFamily.contains("OCR", Qt::CaseInsensitive) ||
-		m_fontFamily.contains("OCR-Fritzing", Qt::CaseInsensitive)) {
-		scalingFactor = 0.8;
-	} else if (m_fontFamily.contains("Droid Sans", Qt::CaseInsensitive)) {
-		scalingFactor = 0.75;  // Droid Sans tends to be slightly wider
-	} else if (m_fontFamily.contains("Noto Sans", Qt::CaseInsensitive)) {
-		scalingFactor = 0.76;  // Noto Sans similar to default but slightly different
-	} else {
-		// Default for other fonts (Arial, OpenSans, etc.)
-		scalingFactor = 0.77;
-	}
-#else
-	// Linux and other platforms
-	if (m_fontFamily.contains("OCR", Qt::CaseInsensitive) ||
-		m_fontFamily.contains("OCR-Fritzing", Qt::CaseInsensitive)) {
-		scalingFactor = 0.77;
-	} else if (m_fontFamily.contains("Droid Sans", Qt::CaseInsensitive)) {
-		scalingFactor = 0.77;
-	} else if (m_fontFamily.contains("Noto Sans", Qt::CaseInsensitive)) {
-		scalingFactor = 0.77;
-	} else {
-		scalingFactor = 0.77;  // Default for Linux
-	}
+
+// The size calculation seems to be correct. With the factor it results in roughly the same
+// x-advance and width as Chrome of Firefox.
+// However, on windows and macOS, QSvg seems to render fonts bigger than firefox or chrome would
+// Until this is fixed, fine tuning size calculation doesn't make sense.
+//
+// #elif defined(Q_OS_WIN)
+// 	// Windows has font-specific scaling requirements
+// 	if (m_fontFamily.contains("OCR", Qt::CaseInsensitive) ||
+// 		m_fontFamily.contains("OCR-Fritzing", Qt::CaseInsensitive)) {
+// 		scalingFactor = 0.77;
+// 	} else if (m_fontFamily.contains("Droid Sans", Qt::CaseInsensitive)) {
+// 		scalingFactor = 0.77;
+// 	} else if (m_fontFamily.contains("Noto Sans", Qt::CaseInsensitive)) {
+// 		scalingFactor = 0.77;
+// 	} else {
+// 		scalingFactor = 0.77;
+// 	}
+// #else
+// 	// Linux and other platforms
+// 	if (m_fontFamily.contains("OCR", Qt::CaseInsensitive) ||
+// 		m_fontFamily.contains("OCR-Fritzing", Qt::CaseInsensitive)) {
+// 		scalingFactor = 0.77;
+// 	} else if (m_fontFamily.contains("Droid Sans", Qt::CaseInsensitive)) {
+// 		scalingFactor = 0.77;
+// 	} else if (m_fontFamily.contains("Noto Sans", Qt::CaseInsensitive)) {
+// 		scalingFactor = 0.77;
+// 	} else {
+// 		scalingFactor = 0.77;  // Default for Linux
+// 	}
+
 #endif
 
 	return scalingFactor;
