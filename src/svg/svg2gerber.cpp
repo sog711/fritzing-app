@@ -261,12 +261,12 @@ void SVG2gerber::convertShapes2paths(QDomNode node) {
 		return;
 	}
 
-	// recurse the children
-	QDomNodeList tagList = node.childNodes();
-
-	//DebugDialog::debug("child nodes: " + QString::number(tagList.length()));
-	for(int i = 0; i < tagList.length(); i++) {
-		convertShapes2paths(tagList.item(i));
+	// recurse the children using iterator to avoid O(n²) performance
+	QDomNode child = node.firstChild();
+	while (!child.isNull()) {
+		QDomNode nextChild = child.nextSibling(); // Get next before recursion since replaceChild modifies DOM
+		convertShapes2paths(child);
+		child = nextChild;
 	}
 }
 
