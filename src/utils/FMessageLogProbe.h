@@ -29,7 +29,7 @@ class FMessageLogProbe : public FProbe {
 public:
 	FMessageLogProbe();
 	QVariant read() override;
-	void write(QVariant) override {}
+	void write(QVariant value) override;
 };
 
 #endif // FMESSAGELOGPROBE_H

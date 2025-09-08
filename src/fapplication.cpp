@@ -2276,6 +2276,8 @@ void FApplication::regenerateDatabaseFinished() {
 	}
 
 	thread->deleteLater();
+
+	FMessageBox::BlockMessages = false;
 }
 
 void FApplication::installNewParts() {

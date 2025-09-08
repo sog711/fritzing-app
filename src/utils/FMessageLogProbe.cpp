@@ -42,3 +42,7 @@ QVariant FMessageLogProbe::read() {
     QString jsonString = doc.toJson(QJsonDocument::Indented);
     return jsonString;
 }
+
+void FMessageLogProbe::write(QVariant value) {
+    FMessageBox::BlockMessages = value.toBool();
+}
