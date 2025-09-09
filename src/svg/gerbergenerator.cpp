@@ -1116,7 +1116,10 @@ void GerberGenerator::exportPickAndPlace(const QString & prefix, const QString &
 		if (a.mount != b.mount) {
 			return a.mount < b.mount;
 		}
-		return (a.x + a.y) < (b.x + b.y);
+		if ((a.x + a.y) != (b.x + b.y)) {
+			return (a.x + a.y) < (b.x + b.y);
+		}
+		return a.instanceTitle < b.instanceTitle;
 	});
 
 	for (const PnPItem &item : pnpItems) {
