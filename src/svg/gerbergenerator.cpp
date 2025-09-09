@@ -1040,6 +1040,33 @@ void GerberGenerator::exportPickAndPlace(const QString & prefix, const QString &
 	}
 	stream << "\n";
 
+	// Structure to hold item data for sorting
+	struct PnPItem {
+		QString instanceTitle;
+		QString description;
+		QString package;
+		double x;
+		double y;
+		double angle;
+		QString side;
+		QString mount;
+		
+		QString toLine() const {
+			return QString("%1,\"%2\",\"%3\",%4,%5,%6,%7,%8\n")
+				.arg(instanceTitle)
+				.arg(description)
+				.arg(package)
+				.arg(QString::number(x))
+				.arg(QString::number(y))
+				.arg(QString::number(angle))
+				.arg(side)
+				.arg(mount);
+		}
+	};
+	
+	QList<PnPItem> pnpItems;
+
+	// Collect items into list
 	Q_FOREACH (ItemBase * itemBase, itemBases) {
 		if (!itemBase->hasConnectors()) {
 			// Skip items like logos, images, ...
@@ -1068,17 +1095,32 @@ void GerberGenerator::exportPickAndPlace(const QString & prefix, const QString &
 		QString package = itemBase->modelPart()->properties().value("package");
 		QString mount = checkMountTechnology(package);
 
-		QString string = QString("%1,\"%2\",\"%3\",%4,%5,%6,%7,%8\n")
-					.arg(itemBase->instanceTitle())
-					.arg(description)
-					.arg(package)
-					.arg(QString::number(GraphicsUtils::pixels2mils(loc.x() - bottomLeft.x(), GraphicsUtils::SVGDPI)))
-					.arg(QString::number(GraphicsUtils::pixels2mils(bottomLeft.y() - loc.y(), GraphicsUtils::SVGDPI)))
-					.arg(QString::number(angle))
-					.arg(itemBase->viewLayerPlacement() == ViewLayer::NewTop ? "Top" : "Bottom")
-					.arg(mount);
-		stream << string;
-		stream.flush();
+		PnPItem item;
+		item.instanceTitle = itemBase->instanceTitle();
+		item.description = description;
+		item.package = package;
+		item.x = GraphicsUtils::pixels2mils(loc.x() - bottomLeft.x(), GraphicsUtils::SVGDPI);
+		item.y = GraphicsUtils::pixels2mils(bottomLeft.y() - loc.y(), GraphicsUtils::SVGDPI);
+		item.angle = angle;
+		item.side = itemBase->viewLayerPlacement() == ViewLayer::NewTop ? "Top" : "Bottom";
+		item.mount = mount;
+
+		pnpItems.append(item);
+	}
+
+	// Sort by side, then mount, then sum of x+y
+	std::sort(pnpItems.begin(), pnpItems.end(), [](const PnPItem &a, const PnPItem &b) {
+		if (a.side != b.side) {
+			return a.side < b.side;
+		}
+		if (a.mount != b.mount) {
+			return a.mount < b.mount;
+		}
+		return (a.x + a.y) < (b.x + b.y);
+	});
+
+	for (const PnPItem &item : pnpItems) {
+		stream << item.toLine();
 	}
 
 	out.close();
