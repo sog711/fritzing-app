@@ -1519,8 +1519,7 @@ bool PaletteItem::makeLocalModifications(QByteArray & svg, const QString & filen
 		QString value = modelPart()->properties().value("editable pin labels", "");
 		if (value.compare("true") == 0) {
 			QString svgString = QString::fromUtf8(svg);
-			bool normalized = false;
-			QString newSvg = retrieveSchematicSvg(svgString, normalized);
+			QString newSvg = retrieveSchematicSvg(svgString);
 			if (!newSvg.isEmpty()) {
 				svg = newSvg.toUtf8();
 				modified = true;
@@ -1551,8 +1550,7 @@ bool PaletteItem::makeLocalModifications(QByteArray & svg, const QString & filen
 	return modified;
 }
 
-QString PaletteItem::retrieveSchematicSvg(QString & svg, bool & normalized) {
-	normalized = false;
+QString PaletteItem::retrieveSchematicSvg(QString & svg) {
 	return svg;
 }
 

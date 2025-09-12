@@ -71,7 +71,7 @@ protected:
 	virtual bool isDIP();
 	virtual bool otherPropsChange(const QMap<QString, QString> & propsMap);
 	virtual const QStringList & spacings();
-	virtual QString retrieveSchematicSvg(QString & svg, bool & normalized);
+	virtual QString retrieveSchematicSvg(QString & svg);
 
 protected:
 	static QString hackFzpHoleSize(const QString & fzp, const QString & moduleid);
