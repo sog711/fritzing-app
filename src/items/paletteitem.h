@@ -113,7 +113,7 @@ public:
 	void resetConnectors(ItemBase * otherLayer, FSvgRenderer * otherLayerRenderer);
 	void resetConnector(ItemBase * itemBase, SvgIdLayer * svgIdLayer);
 	void resetLayerKin(const QString & svg);
-	virtual QString retrieveSchematicSvg(QString & svg);
+	virtual QString retrieveSchematicSvg(const QString & svg);
 	QTransform untransform();
 	void retransform(const QTransform &);
 

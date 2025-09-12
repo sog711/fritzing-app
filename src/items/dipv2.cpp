@@ -234,7 +234,7 @@ QString DipV2::makeBreadboardDipV2Svg(const QString & expectedFileName)
 	return svg.arg(TextUtils::getViewBoxCoord(svg, 2) / 100.0).arg(repeatTs, repeatBs);
 }
 
-QString DipV2::retrieveSchematicSvg(QString & svg) {
+QString DipV2::retrieveSchematicSvg(const QString & svg) {
 	bool hasLocal = false;
 	QStringList labels = getPinLabels(hasLocal);
 
@@ -244,13 +244,11 @@ QString DipV2::retrieveSchematicSvg(QString & svg) {
 	}
 
 	if (this->isDIP()) {
-		svg = makeSchematicV2SvgWithLabel(labels, chipLabel);
+		return makeSchematicV2SvgWithLabel(labels, chipLabel);
 	}
 	else {
-		svg = makeSchematicSipV2SvgWithLabel(labels, chipLabel);
+		return makeSchematicSipV2SvgWithLabel(labels, chipLabel);
 	}
-
-	return svg;
 }
 
 

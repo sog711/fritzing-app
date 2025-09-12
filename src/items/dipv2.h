@@ -47,7 +47,7 @@ public Q_SLOTS:
 	void swapEntry(const QString & text) override;
 
 protected:
-	QString retrieveSchematicSvg(QString & svg) override;
+	QString retrieveSchematicSvg(const QString & svg) override;
 
 private:
 	static QString processTextWithNewlines(const QString & text);

@@ -140,13 +140,13 @@ QString MysteryPart::retrieveSvg(ViewLayer::ViewLayerID viewLayerID, QHash<QStri
 	return svg;
 }
 
-QString MysteryPart::retrieveSchematicSvg(QString & svg) {
+QString MysteryPart::retrieveSchematicSvg(const QString & svg) {
 	bool hasLocal = false;
 	QStringList labels = getPinLabels(hasLocal);
 
-	svg = makeSchematicSvg(labels, false);
+	QString newSvg = makeSchematicSvg(labels, false);
 
-	return TextUtils::replaceTextElement(svg, "label", m_chipLabel);
+	return TextUtils::replaceTextElement(newSvg, "label", m_chipLabel);
 }
 
 

@@ -1550,7 +1550,7 @@ bool PaletteItem::makeLocalModifications(QByteArray & svg, const QString & filen
 	return modified;
 }
 
-QString PaletteItem::retrieveSchematicSvg(QString & svg) {
+QString PaletteItem::retrieveSchematicSvg(const QString & svg) {
 	return svg;
 }
 

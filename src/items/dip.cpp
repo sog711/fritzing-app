@@ -127,19 +127,20 @@ QString Dip::genModuleID(QMap<QString, QString> & currPropsMap)
 	}
 }
 
-QString Dip::retrieveSchematicSvg(QString & svg) {
+QString Dip::retrieveSchematicSvg(const QString & svg) {
 	bool hasLocal = false;
 	QStringList labels = getPinLabels(hasLocal);
 
+	QString newSvg;
 	if (this->isDIP()) {
-		svg = makeSchematicSvg(labels);
-		//DebugDialog::debug("make dip " + svg);
+		newSvg = makeSchematicSvg(labels);
+		//DebugDialog::debug("make dip " + newSvg);
 	}
 	else {
-		svg = MysteryPart::makeSchematicSvg(labels, true);
+		newSvg = MysteryPart::makeSchematicSvg(labels, true);
 	}
 
-	return TextUtils::replaceTextElement(svg, "label", m_chipLabel);
+	return TextUtils::replaceTextElement(newSvg, "label", m_chipLabel);
 }
 
 QString Dip::makeSchematicSvg(const QString & expectedFileName)
