@@ -1521,7 +1521,7 @@ bool PaletteItem::makeLocalModifications(QByteArray & svg, const QString & filen
 			QString svgString = QString::fromUtf8(svg);
 			bool normalized = false;
 			QString newSvg = retrieveSchematicSvg(svgString, normalized);
-			if (!newSvg.isEmpty() && newSvg != svgString) {
+			if (!newSvg.isEmpty()) {
 				svg = newSvg.toUtf8();
 				modified = true;
 			}
