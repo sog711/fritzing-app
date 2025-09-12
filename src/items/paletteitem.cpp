@@ -1551,7 +1551,20 @@ bool PaletteItem::makeLocalModifications(QByteArray & svg, const QString & filen
 }
 
 QString PaletteItem::retrieveSchematicSvg(const QString & svg) {
-	return svg;
+	// Experimental: Replace pin labels for each part, not only
+	// mystery and generic ic
+	bool hasLocal = false;
+	QStringList labels = getPinLabels(hasLocal);
+	if (labels.count() == 0) {
+		return svg;
+	}
+	
+	QHash<QString, QString> labelHash;
+	for (int i = 0; i < labels.count(); i++) {
+		labelHash.insert(QString("label%1").arg(i), labels.at(i));
+	}
+	
+	return TextUtils::replaceTextElements(svg, labelHash);
 }
 
 void PaletteItem::resetLayerKin(const QString & svg) {
