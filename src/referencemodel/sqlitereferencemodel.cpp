@@ -256,10 +256,28 @@ bool SqliteReferenceModel::loadFromDB(QSqlDatabase & keep_db, QSqlDatabase & db)
 			continue;
 		}
 
-		if (!path.startsWith(ResourcePath)) {        // not the resources path
+		bool isCore = false;
+		bool isContrib = false;
+		
+		if (path.startsWith(ResourcePath)) {
+			// :/resources/ parts are core
+			isCore = true;
+		}
+		else {
+			// Check path prefix before converting to absolute path
+			if (path.startsWith("core/") || path.startsWith("obsolete/")) {
+				isCore = true;
+			}
+			else if (path.startsWith("contrib/")) {
+				isContrib = true;
+			}
+			
+			// Convert to absolute path and add to CoreList if appropriate
 			path = partsDir.absoluteFilePath(path);
 			if (QFileInfo::exists(path)) {
-				CoreList << moduleID;
+				if (isCore || (!isContrib)) {  // Add to CoreList if it's core or neither core nor contrib
+					CoreList << moduleID;
+				}
 			}
 		}
 
@@ -284,7 +302,10 @@ bool SqliteReferenceModel::loadFromDB(QSqlDatabase & keep_db, QSqlDatabase & db)
 		modelPartShared->setTaxonomy(query.value(ix++).toString());
 		modelPart->setItemType((ModelPart::ItemType) query.value(ix++).toInt());
 		modelPartShared->setPath(path);
-		modelPart->setCore(true);
+		
+		// Set the flags determined earlier
+		modelPart->setCore(isCore || onCoreList(moduleID));
+		modelPart->setContrib(isContrib);
 
 		modelPartShared->setConnectorsInitialized(true);
 
