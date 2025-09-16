@@ -1797,6 +1797,12 @@ QByteArray SketchWidget::removeOutsideConnections(const QByteArray & itemData, Q
 
 void SketchWidget::dragEnterEvent(QDragEnterEvent *event)
 {
+	if (!event->mimeData()) {
+		DebugDialog::debug("SketchWidget::dragEnterEvent: mimeData() is null");
+		event->ignore();
+		return;
+	}
+	
 	if (dragEnterEventAux(event)) {
 		setupAutoscroll(false);
 		event->acceptProposedAction();
@@ -1851,6 +1857,10 @@ bool SketchWidget::setDroppingItemAndOffset(const QPoint & pos, const QPointF & 
 
 
 bool SketchWidget::dragEnterEventAux(QDragEnterEvent *event) {
+	if (!event->mimeData()) {
+		DebugDialog::debug("SketchWidget::dragEnterEventAux: mimeData() is null");
+		return false;
+	}
 	if (!event->mimeData()->hasFormat("application/x-dnditemdata")) return false;
 
 	scene()->setSceneRect(scene()->sceneRect());	// prevents inadvertent scrolling when dragging in items from the parts bin
@@ -1944,6 +1954,12 @@ void SketchWidget::dragLeaveEvent(QDragLeaveEvent * event) {
 
 void SketchWidget::dragMoveEvent(QDragMoveEvent *event)
 {
+	if (!event->mimeData()) {
+		DebugDialog::debug("SketchWidget::dragMoveEvent: mimeData() is null");
+		event->ignore();
+		return;
+	}
+	
 	if (event->mimeData()->hasFormat("application/x-dnditemdata")) {
 		dragMoveHighlightConnector(event->position().toPoint());
 		event->acceptProposedAction();
@@ -2002,6 +2018,12 @@ void SketchWidget::dragMoveHighlightConnector(QPointF eventPos) {
 
 void SketchWidget::dropEvent(QDropEvent *event)
 {
+	if (!event->mimeData()) {
+		DebugDialog::debug("SketchWidget::dropEvent: mimeData() is null");
+		event->ignore();
+		return;
+	}
+	
 	m_alignmentItem = nullptr;
 
 	turnOffAutoscroll();
