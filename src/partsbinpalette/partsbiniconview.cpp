@@ -189,9 +189,6 @@ int PartsBinIconView::setItemAux(ModelPart * modelPart, int position) {
 
 	Q_EMIT settingItem();
 	QString moduleID = modelPart->moduleID();
-	if (contains(moduleID)) {
-		return position;
-	}
 
 	SvgIconWidget* svgicon = nullptr;
 	if (modelPart->itemType() != ModelPart::Space) {
