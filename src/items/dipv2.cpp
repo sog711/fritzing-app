@@ -48,6 +48,15 @@ QString DipV2::genDipV2FZP(const QString & moduleid)
 		return "";
 	}
 	
+	QString holeSize;
+	int hsix = moduleid.lastIndexOf(HoleSizePrefix);
+	if (hsix >= 0) {
+		QStringList strings = moduleid.mid(hsix).split("_");
+		if (strings.size() >= 4) {
+			holeSize = strings.at(2) + "," + strings.at(3);
+		}
+	}
+	
 	QString templateString;
 	QFile file(":/resources/templates/generic_dip_v2_fzpTemplate.txt");
 	if (file.open(QIODevice::ReadOnly)) {
@@ -72,7 +81,8 @@ QString DipV2::genDipV2FZP(const QString & moduleid)
 		if (i < pins - 1) connectors += "\n";
 	}
 	
-	QString result = templateString.arg(pins).arg(connectors).arg(Version::versionString());
+	// Template parameters: %1=pins, %2=connectors, %3=version, %4=holeSize, %5=moduleId
+	QString result = templateString.arg(pins).arg(connectors).arg(Version::versionString()).arg(holeSize).arg(moduleid);
 	result.replace(".percent.", "%");
 	result = result.arg(spacingString);
 	

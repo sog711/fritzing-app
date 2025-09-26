@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><module moduleId="generic_ic_dip_v2_%1_.percent.1" fritzingVersion="%3">
+<?xml version="1.0" encoding="UTF-8"?><module moduleId="%5" fritzingVersion="%3">
  <version>4</version>
  <author>Fritzing Part-o-matic</author>
  <title>DIP v2 - %1 pins</title>
  <label>IC</label>
- <date>2024-01-01</date>
+ <date>2025-09-01</date>
  <tags>
   <tag>DIP</tag>
   <tag>fritzing core</tag>
@@ -15,7 +15,7 @@
   <property name="pins">%1</property>
   <property name="pin spacing">.percent.1</property>
   <property name="chip label">IC</property>
-  <property name="hole size"></property>
+  <property name="hole size">%4</property>
  <property name='editable pin labels'>true</property>
 </properties>
  <taxonomy>part.dip.v2.%1.pins</taxonomy>
@@ -37,7 +37,7 @@
    </layers>
   </schematicView>
   <pcbView>
-   <layers image="pcb/dip_%1_.percent.1_pcb.svg">
+   <layers image="pcb/%5_pcb.svg">
     <layer layerId="silkscreen"/>
     <layer layerId="copper0"/>
    <layer layerId="copper1"/></layers>
