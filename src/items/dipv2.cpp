@@ -81,10 +81,8 @@ QString DipV2::genDipV2FZP(const QString & moduleid)
 		if (i < pins - 1) connectors += "\n";
 	}
 	
-	// Template parameters: %1=pins, %2=connectors, %3=version, %4=holeSize, %5=moduleId
-	QString result = templateString.arg(pins).arg(connectors).arg(Version::versionString()).arg(holeSize).arg(moduleid);
-	result.replace(".percent.", "%");
-	result = result.arg(spacingString);
+	// Template parameters: %1=pins, %2=connectors, %3=version, %4=holeSize, %5=moduleId, %6=spacing
+	QString result = templateString.arg(pins).arg(connectors).arg(Version::versionString()).arg(holeSize).arg(moduleid).arg(spacingString);
 	
 	return result;
 }
