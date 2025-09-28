@@ -898,6 +898,7 @@ PaletteItem* SketchWidget::addPartItem(ModelPart * modelPart, ViewLayer::ViewLay
 	}
 
 	bool hideSuper = modelPart->hasSubparts() && !temporary && viewID == ViewLayer::SchematicView;
+
 	if (result) {
 		//DebugDialog::debug(QString("addPartItem %1").arg(viewID));
 		addToScene(paletteItem, paletteItem->viewLayerID());
@@ -1797,20 +1798,26 @@ QByteArray SketchWidget::removeOutsideConnections(const QByteArray & itemData, Q
 
 void SketchWidget::dragEnterEvent(QDragEnterEvent *event)
 {
-	if (!event->mimeData()) {
+	const QMimeData* mimeData = event->mimeData();
+
+	if (!mimeData) {
 		DebugDialog::debug("SketchWidget::dragEnterEvent: mimeData() is null");
 		event->ignore();
 		return;
 	}
 	
+	const bool hasSketchData = mimeData->hasFormat("application/x-dndsketchdata");
+	auto * source = event->source();
+	const QPointF position = event->position();
+	
 	if (dragEnterEventAux(event)) {
 		setupAutoscroll(false);
 		event->acceptProposedAction();
 	}
-	else if (event->mimeData()->hasFormat("application/x-dndsketchdata")) {
-		if (event->source() != this) {
+	else if (hasSketchData) {
+		if (source && source != this) {
 			m_movingItem = nullptr;
-			auto * other = dynamic_cast<SketchWidget *>(event->source());
+			auto * other = dynamic_cast<SketchWidget *>(source);
 			if (!other) {
 				throw "drag enter event from unknown source";
 			}
@@ -1821,7 +1828,7 @@ void SketchWidget::dragEnterEvent(QDragEnterEvent *event)
 			m_movingItem = new QGraphicsSvgItem();
 			m_movingItem->setSharedRenderer(other->m_movingSVGRenderer);
 			this->scene()->addItem(m_movingItem);
-			m_movingItem->setPos(mapToScene(event->position().toPoint()) - other->m_movingSVGOffset);
+			m_movingItem->setPos(mapToScene(position.toPoint()) - other->m_movingSVGOffset);
 		}
 		event->acceptProposedAction();
 	}
@@ -1857,18 +1864,21 @@ bool SketchWidget::setDroppingItemAndOffset(const QPoint & pos, const QPointF & 
 
 
 bool SketchWidget::dragEnterEventAux(QDragEnterEvent *event) {
-	if (!event->mimeData()) {
+	const QMimeData* mimeData = event->mimeData();
+	if (!mimeData) {
 		DebugDialog::debug("SketchWidget::dragEnterEventAux: mimeData() is null");
 		return false;
 	}
-	if (!event->mimeData()->hasFormat("application/x-dnditemdata")) return false;
+	
+	if (!mimeData->hasFormat("application/x-dnditemdata")) return false;
+	const QByteArray itemData = mimeData->data("application/x-dnditemdata");
+	const QPointF position = event->position();
 
 	scene()->setSceneRect(scene()->sceneRect());	// prevents inadvertent scrolling when dragging in items from the parts bin
 	m_clearSceneRect = true;
 
 	m_droppingWire = false;
-	QByteArray itemData = event->mimeData()->data("application/x-dnditemdata");
-	QDataStream dataStream(&itemData, QIODevice::ReadOnly);
+	QDataStream dataStream(const_cast<QByteArray*>(&itemData), QIODevice::ReadOnly);
 
 	QString moduleID;
 	QPointF offset;
@@ -1883,9 +1893,8 @@ bool SketchWidget::dragEnterEventAux(QDragEnterEvent *event) {
 	m_droppingWire = (modelPart->itemType() == ModelPart::Wire);
 	if (ItemDrag::cache().contains(this)) {
 		m_droppingItem->setVisible(true);
-	}
-	else {
-		if (!setDroppingItemAndOffset(event->position().toPoint(), offset, modelPart)) {
+	} else {
+		if (!setDroppingItemAndOffset(position.toPoint(), offset, modelPart)) {
 			return false;
 		}
 
