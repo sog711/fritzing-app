@@ -275,7 +275,8 @@ void Note::moveItem(ViewGeometry & viewGeometry) {
 	this->setPos(viewGeometry.loc());
 }
 
-void Note::findConnectorsUnder() {
+void Note::findConnectorsUnder(bool enableHoverFeedback) {
+	Q_UNUSED(enableHoverFeedback);
 }
 
 void Note::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

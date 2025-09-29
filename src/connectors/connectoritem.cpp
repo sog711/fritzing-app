@@ -449,6 +449,18 @@ void ConnectorItem::clearConnectorHover() {
 }
 
 void ConnectorItem::connectorHover(ItemBase * itemBase, bool hovering) {
+	// Debug: track when hover gets enabled with more context
+	if (hovering) {
+		DebugDialog::debug(QString("DEBUG: connectorHover(true) called on connector '%1' of item '%2' (id:%3) - caller itemBase: %4")
+		                   .arg(connectorSharedName())
+		                   .arg(m_attachedTo ? m_attachedTo->instanceTitle() : "null")
+		                   .arg(m_attachedTo ? m_attachedTo->id() : -1)
+		                   .arg(itemBase ? itemBase->instanceTitle() : "null"));
+		
+		// Add a debug breakpoint marker to see call context
+		DebugDialog::debug(QString("DEBUG: HOVER ENABLE STACK TRACE MARKER"));
+	}
+	
 	m_connectorHovering = hovering;
 	if (hovering) {
 		setHoverColor();  // could make this light up buses as well
@@ -572,21 +584,16 @@ void ConnectorItem::restoreColor(QList<ConnectorItem *> & visited)
 	}
 
 
-	/*
-	DebugDialog::debug(QString("restore color dobus:%1 bccount:%2 docross:%3 cid:'%4' '%5' id:%6 '%7' vid:%8 vlid:%9 %10")
-		.arg(doBuses)
-		.arg(busConnectionCount)
-		.arg(doCross)
+
+	DebugDialog::debug(QString("restore color cid:'%1' '%2' id:%3 '%4' vid:%5 vlid:%6")
 		.arg(this->connectorSharedID())
 		.arg(this->connectorSharedName())
 		.arg(this->attachedToID())
 		.arg(this->attachedToInstanceTitle())
 		.arg(this->attachedToViewID())
 		.arg(this->attachedToViewLayerID())
-		.arg(how)
 	);
 
-	*/
 }
 
 void ConnectorItem::setConnectedColor() {
@@ -1983,7 +1990,7 @@ double ConnectorItem::minDimension() {
 	return qMin(r.width(), r.height());
 }
 
-ConnectorItem * ConnectorItem::findConnectorUnder(bool useTerminalPoint, bool allowAlready, const QList<ConnectorItem *> & exclude, bool displayDragTooltip, ConnectorItem * other)
+ConnectorItem * ConnectorItem::findConnectorUnder(bool useTerminalPoint, bool allowAlready, const QList<ConnectorItem *> & exclude, bool displayDragTooltip, ConnectorItem * other, bool enableHoverFeedback)
 {
 	QList<QGraphicsItem *> items = useTerminalPoint
 	                               ? this->scene()->items(this->sceneAdjustedTerminalPoint(nullptr))
@@ -2037,21 +2044,25 @@ ConnectorItem * ConnectorItem::findConnectorUnder(bool useTerminalPoint, bool al
 	}
 
 	if (m_overConnectorItem&& candidate != m_overConnectorItem) {
-		m_overConnectorItem->connectorHover(nullptr, false);
+		if (enableHoverFeedback) {
+			m_overConnectorItem->connectorHover(nullptr, false);
+		}
 	}
 	if (candidate && candidate != m_overConnectorItem) {
-		candidate->connectorHover(nullptr, true);
+		if (enableHoverFeedback) {
+			candidate->connectorHover(nullptr, true);
+		}
 	}
 
 	m_overConnectorItem = candidate;
 
 	if (!candidate) {
-		if (this->connectorHovering()) {
+		if (this->connectorHovering() && enableHoverFeedback) {
 			this->connectorHover(nullptr, false);
 		}
 	}
 	else {
-		if (!this->connectorHovering()) {
+		if (!this->connectorHovering() && enableHoverFeedback) {
 			this->connectorHover(nullptr, true);
 		}
 	}

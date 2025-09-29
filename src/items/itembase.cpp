@@ -386,12 +386,12 @@ void ItemBase::removeLayerKin() {
 }
 
 void ItemBase::hoverEnterConnectorItem(QGraphicsSceneHoverEvent *, ConnectorItem * ) {
-	//DebugDialog::debug(QString("hover enter c %1").arg(instanceTitle()));
+	DebugDialog::debug(QString("hover enter c %1").arg(instanceTitle()));
 	hoverEnterConnectorItem();
 }
 
 void ItemBase::hoverEnterConnectorItem() {
-	//DebugDialog::debug(QString("hover enter c %1").arg(instanceTitle()));
+	DebugDialog::debug(QString("hover enter c %1").arg(instanceTitle()));
 	m_connectorHoverCount++;
 	hoverUpdate();
 }
@@ -404,7 +404,7 @@ void ItemBase::hoverMoveConnectorItem(QGraphicsSceneHoverEvent *, ConnectorItem 
 }
 
 void ItemBase::hoverLeaveConnectorItem() {
-	//DebugDialog::debug(QString("hover leave c %1").arg(instanceTitle()));
+	DebugDialog::debug(QString("hover leave c %1").arg(instanceTitle()));
 	m_connectorHoverCount--;
 	hoverUpdate();
 }
@@ -416,15 +416,20 @@ void ItemBase::clearConnectorHover()
 }
 
 void ItemBase::connectorHover(ConnectorItem *, ItemBase *, bool hovering) {
-	//DebugDialog::debug(QString("hover c %1 %2").arg(hovering).arg(instanceTitle()));
+	DebugDialog::debug(QString("hover c %1 %2").arg(hovering).arg(instanceTitle()));
 
 	if (hovering) {
+		DebugDialog::debug(QString("DEBUG: ItemBase::connectorHover(true) called on item '%1' (id:%2) - incrementing hover count from %3 to %4")
+		                   .arg(instanceTitle())
+		                   .arg(id())
+		                   .arg(m_connectorHoverCount2)
+		                   .arg(m_connectorHoverCount2 + 1));
 		m_connectorHoverCount2++;
 	}
 	else {
 		m_connectorHoverCount2--;
 	}
-	// DebugDialog::debug(QString("m_connectorHoverCount2 %1 %2").arg(instanceTitle()).arg(m_connectorHoverCount2));
+	DebugDialog::debug(QString("m_connectorHoverCount2 %1 %2").arg(instanceTitle()).arg(m_connectorHoverCount2));
 	hoverUpdate();
 }
 

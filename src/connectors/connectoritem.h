@@ -116,7 +116,7 @@ public:
 	bool isHybrid();
 	void setBigDot(bool);
 	bool isBigDot();
-	ConnectorItem * findConnectorUnder(bool useTerminalPoint, bool allowAlready, const QList<ConnectorItem *> & exclude, bool displayDragTooltip, ConnectorItem * other);
+	ConnectorItem * findConnectorUnder(bool useTerminalPoint, bool allowAlready, const QList<ConnectorItem *> & exclude, bool displayDragTooltip, ConnectorItem * other, bool enableHoverFeedback = true);
 	ConnectorItem * releaseDrag();
 
 	// rubberBand leg functions

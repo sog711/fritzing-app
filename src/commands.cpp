@@ -2630,7 +2630,7 @@ void DetectConnectionsCommand::connectOverlappingItems() {
 	Q_FOREACH (long itemID, m_itemIDs) {
 		ItemBase * itemBase = m_sketchWidget->findItem(itemID);
 		if (itemBase && itemBase->itemType() != ModelPart::Wire) {
-			itemBase->findConnectorsUnder();
+			itemBase->findConnectorsUnder(false); // Disable hover feedback during command execution
 			
 			// Process overConnectorItem relationships for the current view
 			for (ConnectorItem * fromConnectorItem: itemBase->cachedConnectorItems()) {

@@ -85,7 +85,7 @@ public:
 	ConnectorItem * connector0();
 	ConnectorItem * connector1();
 	virtual class FSvgRenderer * setUp(ViewLayer::ViewLayerID viewLayerID, const LayerHash & viewLayers, class InfoGraphicsView *);
-	void findConnectorsUnder();
+	void findConnectorsUnder(bool enableHoverFeedback = true);
 	void collectChained(QList<Wire *> &, QList<ConnectorItem *> & ends);
 	void collectWires(QList<Wire *> & wires);
 	virtual bool stickyEnabled();

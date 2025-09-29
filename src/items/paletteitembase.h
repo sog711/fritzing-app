@@ -31,6 +31,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QSet>
 
 #include "../model/modelpart.h"
+
 #include "itembase.h"
 #include "../utils/cursormaster.h"
 
@@ -92,7 +93,7 @@ protected:
 
 protected:
 	void setUpConnectors(FSvgRenderer *, bool ignoreTerminalPoints);
-	void findConnectorsUnder();
+	void findConnectorsUnder(bool enableHoverFeedback = true);
 	virtual bool canFindConnectorsUnder();
 	bool inRotationLocation(QPointF scenePos, Qt::KeyboardModifiers modifiers, QPointF & returnPoint);
 	virtual bool freeRotationAllowed(Qt::KeyboardModifiers modifiers);
