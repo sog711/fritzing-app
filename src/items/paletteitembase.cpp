@@ -355,15 +355,12 @@ void PaletteItemBase::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 		double currentAngle = atan2(transform().m12(), transform().m11()) * 180 / M_PI;
 		double deltaAngle = currentAngle - originalAngle;
 		ItemBase * chief = layerKinChief();
+
+		chief->rotateItem(-deltaAngle, true);
 		PartLabel *partLabel = chief->partLabel();
 		if (partLabel != nullptr) {
 			partLabel->setTransform(OriginalPartLabelTransform);
 		}
-		chief->getViewGeometry().setTransform(OriginalTransform);
-		Q_FOREACH (ItemBase * itemBase, chief->layerKin()) {
-			itemBase->getViewGeometry().setTransform(OriginalTransform);
-		}
-
 
 		saveGeometry();
 		infoGraphicsView->triggerRotate(chief, deltaAngle);
