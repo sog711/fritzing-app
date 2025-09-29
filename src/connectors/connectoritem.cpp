@@ -449,18 +449,6 @@ void ConnectorItem::clearConnectorHover() {
 }
 
 void ConnectorItem::connectorHover(ItemBase * itemBase, bool hovering) {
-	// Debug: track when hover gets enabled with more context
-	if (hovering) {
-		DebugDialog::debug(QString("DEBUG: connectorHover(true) called on connector '%1' of item '%2' (id:%3) - caller itemBase: %4")
-		                   .arg(connectorSharedName())
-		                   .arg(m_attachedTo ? m_attachedTo->instanceTitle() : "null")
-		                   .arg(m_attachedTo ? m_attachedTo->id() : -1)
-		                   .arg(itemBase ? itemBase->instanceTitle() : "null"));
-		
-		// Add a debug breakpoint marker to see call context
-		DebugDialog::debug(QString("DEBUG: HOVER ENABLE STACK TRACE MARKER"));
-	}
-	
 	m_connectorHovering = hovering;
 	if (hovering) {
 		setHoverColor();  // could make this light up buses as well
@@ -583,16 +571,14 @@ void ConnectorItem::restoreColor(QList<ConnectorItem *> & visited)
 		}
 	}
 
-
-
-	DebugDialog::debug(QString("restore color cid:'%1' '%2' id:%3 '%4' vid:%5 vlid:%6")
-		.arg(this->connectorSharedID())
-		.arg(this->connectorSharedName())
-		.arg(this->attachedToID())
-		.arg(this->attachedToInstanceTitle())
-		.arg(this->attachedToViewID())
-		.arg(this->attachedToViewLayerID())
-	);
+	// DebugDialog::debug(QString("restore color cid:'%1' '%2' id:%3 '%4' vid:%5 vlid:%6")
+	// 	.arg(this->connectorSharedID())
+	// 	.arg(this->connectorSharedName())
+	// 	.arg(this->attachedToID())
+	// 	.arg(this->attachedToInstanceTitle())
+	// 	.arg(this->attachedToViewID())
+	// 	.arg(this->attachedToViewLayerID())
+	// );
 
 }
 
