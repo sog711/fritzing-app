@@ -93,7 +93,7 @@ protected:
 
 protected:
 	void setUpConnectors(FSvgRenderer *, bool ignoreTerminalPoints);
-	void findConnectorsUnder(bool enableHoverFeedback = true);
+	void findConnectorsUnder(bool enableHoverFeedback = true, bool allowAlready = false);
 	virtual bool canFindConnectorsUnder();
 	bool inRotationLocation(QPointF scenePos, Qt::KeyboardModifiers modifiers, QPointF & returnPoint);
 	virtual bool freeRotationAllowed(Qt::KeyboardModifiers modifiers);

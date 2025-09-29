@@ -45,7 +45,7 @@ public:
 	bool itemMoved();
 	void saveInstanceLocation(QXmlStreamWriter &);
 	void moveItem(ViewGeometry &);
-	void findConnectorsUnder(bool enableHoverFeedback = true);
+	void findConnectorsUnder(bool enableHoverFeedback = true, bool allowAlready = false);
 	void setText(const QString & text, bool checkSize);
 	QString text();
 	void setSize(const QSizeF & size);

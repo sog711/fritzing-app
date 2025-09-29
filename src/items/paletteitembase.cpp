@@ -336,7 +336,7 @@ void PaletteItemBase::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 	}
 
 	// Update hover states during interactive rotation
-	chief->findConnectorsUnder(true); // Enable hover feedback during drag
+	chief->findConnectorsUnder(true, true); // Enable hover feedback during drag
 
 	InfoGraphicsView * infoGraphicsView = InfoGraphicsView::getInfoGraphicsView(chief);
 	if (infoGraphicsView != nullptr) infoGraphicsView->updateRotation(chief);
@@ -374,7 +374,7 @@ bool PaletteItemBase::canFindConnectorsUnder() {
 	return true;
 }
 
-void PaletteItemBase::findConnectorsUnder(bool enableHoverFeedback) {
+void PaletteItemBase::findConnectorsUnder(bool enableHoverFeedback, bool allowAlready) {
 	if (!canFindConnectorsUnder()) return;
 
 	Q_FOREACH (ConnectorItem * connectorItem, cachedConnectorItems()) {
@@ -386,7 +386,7 @@ void PaletteItemBase::findConnectorsUnder(bool enableHoverFeedback) {
 			break;
 		}
 
-		connectorItem->findConnectorUnder(true, false, ConnectorItem::emptyConnectorItemList, false, nullptr, enableHoverFeedback);
+		connectorItem->findConnectorUnder(true, allowAlready, ConnectorItem::emptyConnectorItemList, false, nullptr, enableHoverFeedback);
 	}
 }
 

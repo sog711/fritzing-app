@@ -4730,6 +4730,15 @@ void SketchWidget::mousePressConnectorEvent(ConnectorItem * connectorItem, QGrap
 
 void SketchWidget::rotateX(double degrees, bool rubberBandLegEnabled, ItemBase * originatingItem)
 {
+	if (originatingItem) {
+		QList<ConnectorItem *> visite;
+		for (auto * connectorItem : originatingItem->cachedConnectorItems()) {
+			connectorItem->clearConnectorHover();
+			connectorItem->restoreColor(visite);
+		}
+		originatingItem->clearConnectorHover();
+	}
+
 	if (qAbs(degrees) < 0.01) return;
 
 	clearHoldingSelectItem();
@@ -4882,8 +4891,6 @@ void SketchWidget::rotateX(double degrees, bool rubberBandLegEnabled, ItemBase *
 		new CheckStickyCommand(this, BaseCommand::SingleView, item->id(), false, CheckStickyCommand::RedoOnly, parentCommand);
 	}
 	
-	
-	QList<ConnectorItem *> restoreConnectorItems;
 	QSet<ConnectorItem *> connectedItems;
 	
 	QList<ItemBase*> saveditemList = m_savedItems.values();
@@ -4912,17 +4919,9 @@ void SketchWidget::rotateX(double degrees, bool rubberBandLegEnabled, ItemBase *
 					// debug() << "SketchWidget::rotateX: Skipping duplicate connection to" << toConnectorItem->connectorSharedName();
 				}
 			}
-			restoreConnectorItems.append(fromConnectorItem);
-			fromConnectorItem->clearConnectorHover();
 		}
-		
-		item->clearConnectorHover();
 	}
-	
-	QList<ConnectorItem *> visited;
-	Q_FOREACH (ConnectorItem * connectorItem, restoreConnectorItems) {
-		connectorItem->restoreColor(visited);
-	}
+
 	
 	clearTemporaries();
 

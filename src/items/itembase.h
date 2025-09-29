@@ -310,7 +310,7 @@ public:
 	virtual void connectedMoved(ConnectorItem * from, ConnectorItem * to, QList<ConnectorItem *> & already);
 	virtual ItemBase * layerKinChief();
 	virtual const QList<ItemBase *> & layerKin();
-	virtual void findConnectorsUnder(bool enableHoverFeedback = true) = 0;
+	virtual void findConnectorsUnder(bool enableHoverFeedback = true, bool allowAlready = false) = 0;
 	virtual ConnectorItem* newConnectorItem(Connector *connector);
 	virtual ConnectorItem* newConnectorItem(ItemBase * layerkin, Connector *connector);
 

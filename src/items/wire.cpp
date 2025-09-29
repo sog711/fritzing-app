@@ -1127,10 +1127,10 @@ ConnectorItem * Wire::connector1() {
 	return m_connector1;
 }
 
-void Wire::findConnectorsUnder(bool enableHoverFeedback) {
+void Wire::findConnectorsUnder(bool enableHoverFeedback, bool allowAlready) {
 	Q_FOREACH (ConnectorItem * connectorItem, cachedConnectorItems()) {
 		if (connectorItem->connectionsCount() > 0) continue;  // only check free ends
-		connectorItem->findConnectorUnder(true, false, ConnectorItem::emptyConnectorItemList, false, nullptr, enableHoverFeedback);
+		connectorItem->findConnectorUnder(true, allowAlready, ConnectorItem::emptyConnectorItemList, false, nullptr, enableHoverFeedback);
 	}
 }
 
