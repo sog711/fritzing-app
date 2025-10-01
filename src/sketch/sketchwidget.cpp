@@ -923,8 +923,21 @@ PaletteItem* SketchWidget::addPartItem(ModelPart * modelPart, ViewLayer::ViewLay
 		// Error rendering the image. This can also happen
 		// if filename cases do not match on case sensitive file
 		// systems.
-		FMessageBox::critical(this->parentWidget(), "Fritzing", QObject::tr("Error reading file %1: %2.").arg(modelPart->path(), error));
+		// Store error message to show after drag operation completes
+		QString errorTitle = "Fritzing";
+		QString errorMessage = QObject::tr("Error reading file %1: %2.").arg(modelPart->path(), error);
 
+		// Quickfix: Show non-modal error dialog to avoid breaking drag/drop operations
+		FMessageBox* errorDialog = FMessageBox::createCustom(
+			this->parentWidget(), 
+			QMessageBox::Critical,
+			errorTitle,
+			errorMessage
+		);
+		errorDialog->setModal(false);
+		errorDialog->setAttribute(Qt::WA_DeleteOnClose);
+		errorDialog->show();
+		
 		DebugDialog::debug(QString("addPartItem renderImage failed %1 %2").arg(modelPart->moduleID()).arg(error));
 		return paletteItem;
 	}
