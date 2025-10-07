@@ -22,7 +22,7 @@
  <description>A DIP stand-in part for whatever IC you want. With %1 pins on a %6 dual inline package (DIP) footprint.</description>
  <views>
   <iconView>
-   <layers image="icon/dip_icon.svg">
+   <layers image="icon/generic_dip_v2_icon.svg">
     <layer layerId="icon"/>
    </layers>
   </iconView>
