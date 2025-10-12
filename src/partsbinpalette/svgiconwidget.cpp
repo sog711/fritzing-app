@@ -27,6 +27,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "fsvgrenderer.h"
 #include "items/moduleidnames.h"
 #include "layerattributes.h"
+#include "referencemodel/referencemodel.h"
 
 #include "partsbinview.h"
 
@@ -80,11 +81,12 @@ void SvgIconPixmapItem::paint(QPainter *painter, const QStyleOptionGraphicsItem 
 
 ////////////////////////////////////////////////////////////
 
-SvgIconWidget::SvgIconWidget(ModelPart * modelPart, ViewLayer::ViewID viewID, ItemBase * itemBase, bool plural)
+SvgIconWidget::SvgIconWidget(ModelPart * modelPart, ViewLayer::ViewID viewID, ItemBase * itemBase, bool plural, ReferenceModel * refModel)
 	: QGraphicsWidget()
 {
 	m_moduleId = modelPart->moduleID();
 	m_itemBase = itemBase;
+	m_referenceModel = refModel;
 
 	if (modelPart->itemType() == ModelPart::Space) {
 		m_moduleId = ModuleIDNames::SpacerModuleIDName;
@@ -196,6 +198,32 @@ void SvgIconWidget::setupImage(bool plural, ViewLayer::ViewID viewID)
 	LayerAttributes layerAttributes;
 	m_itemBase->initLayerAttributes(layerAttributes, viewID, ViewLayer::Icon, ViewLayer::NewTop, false, false);
 	ModelPart * modelPart = m_itemBase->modelPart();
+
+	// Try database first for faster loading
+	if (m_referenceModel != nullptr && modelPart != nullptr) {
+		QString iconKey = modelPart->moduleID() + "_icon";
+		QPixmap dbIcon = m_referenceModel->retrieveIcon(iconKey);
+		if (!dbIcon.isNull() && dbIcon.width() == ICON_SIZE && dbIcon.height() == ICON_SIZE) {
+			QPixmap pixmap(plural ? *PluralImage : *SingularImage);
+			QPainter painter;
+			painter.begin(&pixmap);
+
+			int xOffset = plural ? PLURAL_OFFSET : SINGULAR_OFFSET;
+			int yOffset = plural ? PLURAL_OFFSET : SINGULAR_OFFSET;
+			painter.drawPixmap(xOffset, yOffset, dbIcon);
+			painter.end();
+
+			m_pixmapItem = new SvgIconPixmapItem(pixmap, this, plural);
+
+			if (m_itemBase != nullptr) {
+				m_itemBase->setTooltip();
+				setToolTip(m_itemBase->toolTip());
+			}
+			return;
+		}
+	}
+
+	// Fall back to SVG rendering
 	FSvgRenderer * renderer = nullptr;
 	if (modelPart != nullptr) {
 			renderer = m_itemBase->setUpImage(modelPart, layerAttributes);

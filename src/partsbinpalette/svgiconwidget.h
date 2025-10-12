@@ -33,6 +33,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 class ItemBase;
 class ModelPart;
+class ReferenceModel;
 
 class SvgIconPixmapItem : public QGraphicsPixmapItem {
 
@@ -49,7 +50,7 @@ class SvgIconWidget : public QGraphicsWidget
 {
 	Q_OBJECT
 public:
-	SvgIconWidget(ModelPart *, ViewLayer::ViewID, ItemBase *, bool plural);
+	SvgIconWidget(ModelPart *, ViewLayer::ViewID, ItemBase *, bool plural, ReferenceModel * refModel = nullptr);
 	~SvgIconWidget() = default;
 	ItemBase * itemBase() const noexcept;
 	ModelPart * modelPart() const noexcept;
@@ -67,6 +68,7 @@ protected:
 
 protected:
 	QPointer<ItemBase> m_itemBase;
+	ReferenceModel *m_referenceModel = nullptr;
 	SvgIconPixmapItem * m_pixmapItem = nullptr;
 	QString m_moduleId;
 };

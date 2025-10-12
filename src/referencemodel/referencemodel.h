@@ -24,6 +24,8 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "../model/palettemodel.h"
 
+#include <QPixmap>
+
 class ReferenceModel : public PaletteModel {
 	Q_OBJECT
 public:
@@ -52,6 +54,7 @@ public:
 	virtual void setSha(const QString & sha) = 0;
 	virtual const QString & sha() const = 0;
 	virtual const QString error() const = 0;
+	virtual QPixmap retrieveIcon(const QString &name) = 0;
 };
 
 #endif /* REFERENCEMODEL_H_ */

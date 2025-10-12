@@ -194,10 +194,10 @@ int PartsBinIconView::setItemAux(ModelPart * modelPart, int position) {
 	if (modelPart->itemType() != ModelPart::Space) {
 		ItemBase::PluralType plural;
 		ItemBase * itemBase = loadItemBase(moduleID, plural);
-		svgicon = new SvgIconWidget(modelPart, ViewLayer::IconView, itemBase, plural == ItemBase::Plural);
+		svgicon = new SvgIconWidget(modelPart, ViewLayer::IconView, itemBase, plural == ItemBase::Plural, m_referenceModel);
 	}
 	else {
-		svgicon = new SvgIconWidget(modelPart, ViewLayer::IconView, nullptr, false);
+		svgicon = new SvgIconWidget(modelPart, ViewLayer::IconView, nullptr, false, m_referenceModel);
 	}
 
 
