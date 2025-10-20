@@ -348,11 +348,9 @@ bool TextUtils::squashElement(QDomDocument & doc, const QString & elementName, c
 }
 
 QString TextUtils::replaceTextElement(const QString & svg, const QString & id, const QString & newValue) {
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
 	QDomDocument doc;
-	if (!doc.setContent(svg, &errorStr, &errorLine, &errorColumn)) return svg;
+	QDomDocument::ParseResult parseResult = doc.setContent(svg);
+	if (!parseResult) return svg;
 
 	QDomElement root = doc.documentElement();
 	QDomNodeList domNodeList = root.elementsByTagName("text");
@@ -370,11 +368,9 @@ QString TextUtils::replaceTextElement(const QString & svg, const QString & id, c
 }
 
 QByteArray TextUtils::replaceTextElement(const QByteArray & svg, const QString & id, const QString & newValue) {
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
 	QDomDocument doc;
-	if (!doc.setContent(svg, &errorStr, &errorLine, &errorColumn)) return svg;
+	QDomDocument::ParseResult parseResult = doc.setContent(svg);
+	if (!parseResult) return svg;
 
 	QDomElement root = doc.documentElement();
 	QDomNodeList domNodeList = root.elementsByTagName("text");
@@ -392,11 +388,9 @@ QByteArray TextUtils::replaceTextElement(const QByteArray & svg, const QString &
 }
 
 QString TextUtils::replaceTextElements(const QString & svg, const QHash<QString, QString> & hash) {
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
 	QDomDocument doc;
-	if (!doc.setContent(svg, &errorStr, &errorLine, &errorColumn)) return svg;
+	QDomDocument::ParseResult parseResult = doc.setContent(svg);
+	if (!parseResult) return svg;
 
 	bool changed = false;
 	QDomElement root = doc.documentElement();
@@ -447,15 +441,14 @@ void TextUtils::replaceChildText(QDomNode & node, const QString & text) {
 
 bool TextUtils::mergeSvg(QDomDocument & doc1, const QString & svg, const QString & id)
 {
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
 	if (doc1.isNull()) {
-		return doc1.setContent(svg, &errorStr, &errorLine, &errorColumn);
+		QDomDocument::ParseResult parseResult = doc1.setContent(svg);
+		return parseResult.operator bool();
 	}
 
 	QDomDocument doc2;
-	if (!doc2.setContent(svg, &errorStr, &errorLine, &errorColumn)) return false;
+	QDomDocument::ParseResult parseResult = doc2.setContent(svg);
+	if (!parseResult) return false;
 
 	QDomElement root1 = doc1.documentElement();
 	if (root1.tagName() != "svg") return false;
@@ -614,10 +607,8 @@ bool TextUtils::fixPixelDimensionsIn(QString &fileContent) {
 
 	QDomDocument svgDom;
 
-	QString errorMsg;
-	int errorLine;
-	int errorCol;
-	if(!svgDom.setContent(fileContent, true, &errorMsg, &errorLine, &errorCol)) {
+	QDomDocument::ParseResult parseResult = svgDom.setContent(fileContent, QDomDocument::ParseOption::UseNamespaceProcessing);
+	if(!parseResult) {
 		return false;
 	}
 
@@ -807,13 +798,10 @@ QString TextUtils::stripNonValidXMLCharacters(const QString & str)
 }
 
 bool TextUtils::addCopper1(const QString & filename, QDomDocument & domDocument, const QString & srcAtt, const QString & destAtt) {
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
 	QFile file(filename);
 	file.open(QIODevice::ReadOnly);
-	bool result = domDocument.setContent(&file, &errorStr, &errorLine, &errorColumn);
-	if (!result) {
+	QDomDocument::ParseResult parseResult = domDocument.setContent(&file);
+	if (!parseResult) {
 		domDocument.clear();			// probably redundant
 		return false;
 	}
@@ -833,7 +821,7 @@ bool TextUtils::addCopper1(const QString & filename, QDomDocument & domDocument,
 		}
 	}
 
-	result = false;
+	bool result = false;
 	for (int i = 0; i < elements.count(); i++) {
 		QDomElement node = elements.at(i);
 		if (node.isNull()) continue;
@@ -1088,10 +1076,8 @@ bool TextUtils::fixMuch(QString &svg, bool fixStrokeWidthFlag)
 	result |= fixInternalUnits(svg);
 
 	QDomDocument svgDom;
-	QString errorMsg;
-	int errorLine;
-	int errorCol;
-	if(!svgDom.setContent(svg, true, &errorMsg, &errorLine, &errorCol)) {
+	QDomDocument::ParseResult parseResult = svgDom.setContent(svg, QDomDocument::ParseOption::UseNamespaceProcessing);
+	if(!parseResult) {
 		return result;
 	}
 
@@ -1930,11 +1916,8 @@ QString TextUtils::getMacAddress()
 QString TextUtils::expandAndFill(const QString & svg, const QString & color, double expandBy)
 {
 	QDomDocument domDocument;
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
-	bool result = domDocument.setContent(svg, &errorStr, &errorLine, &errorColumn);
-	if (!result) {
+	QDomDocument::ParseResult parseResult = domDocument.setContent(svg);
+	if (!parseResult) {
 		return "";
 	}
 

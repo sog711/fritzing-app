@@ -51,12 +51,9 @@ int SVG2gerber::convert(const QString & svgStr, bool doubleSided, const QString 
 {
 	m_boardSize = boardSize;
 	m_SVGDom = QDomDocument("svg");
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
-	bool result = m_SVGDom.setContent(svgStr, &errorStr, &errorLine, &errorColumn);
-	if (!result) {
-		DebugDialog::debug(QString("gerber svg failed %2 %3 %4 %1").arg(svgStr).arg(errorStr).arg(errorLine).arg(errorColumn));
+	QDomDocument::ParseResult parseResult = m_SVGDom.setContent(svgStr);
+	if (!parseResult) {
+		DebugDialog::debug(QString("gerber svg failed %2 %3 %4 %1").arg(svgStr).arg(parseResult.errorMessage).arg(parseResult.errorLine).arg(parseResult.errorColumn));
 	}
 
 #ifndef QT_NO_DEBUG

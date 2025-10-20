@@ -99,9 +99,6 @@ QString cleanData(const QString & data) {
 	QDomDocument doc;
 	QStringList listItems;
 	int pos = 0;
-	QString errorMsg;
-	int errorLine;
-	int errorColumn;
 	while (pos < data.size()) {
 		QRegularExpressionMatch match;
 		int ix = data.indexOf(ListItemMatcher, pos, &match);
@@ -109,10 +106,11 @@ QString cleanData(const QString & data) {
 
 		QString listItem = match.captured(0);
 		//DebugDialog::debug("ListItem " + listItem);
-		if (doc.setContent(listItem, &errorMsg, &errorLine, &errorColumn)) {
+		QDomDocument::ParseResult parseResult = doc.setContent(listItem);
+		if (parseResult) {
 			listItems << listItem;
 		} else {
-			DebugDialog::debug(QString("Error reading data %1 %2 %3").arg(errorMsg).arg(errorLine).arg(errorColumn));
+			DebugDialog::debug(QString("Error reading data %1 %2 %3").arg(parseResult.errorMessage).arg(parseResult.errorLine).arg(parseResult.errorColumn));
 		}
 		pos += listItem.size();
 	}
@@ -832,14 +830,12 @@ void WelcomeView::gotBlogSnippet(QNetworkReply * networkReply) {
 
 	auto goodBlog = false;
 	QDomDocument doc;
-	QString errorStr;
-	auto errorLine = 0;
-	auto errorColumn = 0;
 	if (responseCode == 200) {
 		QString data(networkReply->readAll());
 		//DebugDialog::debug("response data " + data);
 		data = "<thing>" + cleanData(data) + "</thing>";		// make it one tree for xml parsing
-		if (doc.setContent(data, &errorStr, &errorLine, &errorColumn)) {
+		QDomDocument::ParseResult parseResult = doc.setContent(data);
+		if (parseResult) {
 			readBlog(doc, true, blog, prefix);
 			goodBlog = true;
 		}
@@ -848,7 +844,8 @@ void WelcomeView::gotBlogSnippet(QNetworkReply * networkReply) {
 	if (!goodBlog) {
 		QString message = (blog) ? tr("Unable to reach blog.fritzing.org") : tr("Unable to reach fritzing.org/projects") ;
 		QString placeHolder = QString("<li><a class='title' href='nop' title='%1'></a></li>").arg(message);
-		if (doc.setContent(placeHolder, &errorStr, &errorLine, &errorColumn)) {
+		QDomDocument::ParseResult parseResult = doc.setContent(placeHolder);
+		if (parseResult) {
 			readBlog(doc, true, blog, "");
 		}
 	}

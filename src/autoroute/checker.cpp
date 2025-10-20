@@ -47,10 +47,8 @@ int Checker::checkText(MainWindow * mainWindow, bool displayMessage) {
 		if (itemSvg.isEmpty()) continue;
 
 		QDomDocument doc;
-		QString errorStr;
-		int errorLine;
-		int errorColumn;
-		if (!doc.setContent(itemSvg, &errorStr, &errorLine, &errorColumn)) {
+		QDomDocument::ParseResult parseResult = doc.setContent(itemSvg);
+		if (!parseResult) {
 			DebugDialog::debug(QString("itembase svg failure %1").arg(itemBase->id()));
 			continue;
 		}

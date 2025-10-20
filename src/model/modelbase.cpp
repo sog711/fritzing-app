@@ -80,17 +80,15 @@ bool ModelBase::loadFromFile(const QString & fileName, ModelBase * referenceMode
 		return false;
 	}
 
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
 	QDomDocument domDocument;
 
-	if (!domDocument.setContent(&file, true, &errorStr, &errorLine, &errorColumn)) {
+	QDomDocument::ParseResult parseResult = domDocument.setContent(&file, QDomDocument::ParseOption::UseNamespaceProcessing);
+	if (!parseResult) {
 		FMessageBox::information(nullptr, QObject::tr("Fritzing"),
 		                         QObject::tr("Parse error (1) at line %1, column %2:\n%3\n%4")
-		                         .arg(errorLine)
-		                         .arg(errorColumn)
-								 .arg(errorStr, fileName));
+		                         .arg(parseResult.errorLine)
+		                         .arg(parseResult.errorColumn)
+								 .arg(parseResult.errorMessage, fileName));
 		return false;
 	}
 
@@ -542,11 +540,8 @@ bool ModelBase::paste(ModelBase * referenceModel, QByteArray & data, QList<Model
 	m_referenceModel = referenceModel;
 
 	QDomDocument domDocument;
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
-	bool result = domDocument.setContent(data, &errorStr, &errorLine, &errorColumn);
-	if (!result) return false;
+	QDomDocument::ParseResult parseResult = domDocument.setContent(data);
+	if (!parseResult) return false;
 
 	QDomElement el = domDocument.documentElement();
 	if (el.isNull()) {

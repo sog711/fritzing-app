@@ -319,11 +319,8 @@ QImage * GroundPlaneGeneratorOld::generateGroundPlaneAux(GPGParamsOld & params, 
 	}
 	*/
 
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
 	QDomDocument doc;
-	doc.setContent(params.svg, &errorStr, &errorLine, &errorColumn);
+	doc.setContent(params.svg);
 	QDomElement root = doc.documentElement();
 	SvgFileSplitter::forceStrokeWidth(root, 2 * params.keepoutMils, "#000000", true, false);
 	QByteArray copperByteArray = doc.toByteArray(0);

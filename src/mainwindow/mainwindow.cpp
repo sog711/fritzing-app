@@ -1631,15 +1631,13 @@ QString MainWindow::loadBundledSketch(const QString &fileName, bool addToRecent,
 		ModelPart * mp = m_referenceModel->retrieveModelPart(moduleID);
 		if (mp == nullptr) {
 			QDomDocument doc;
-			QString errorStr;
-			int errorLine;
-			int errorColumn;
-			if (!doc.setContent(fzp, &errorStr, &errorLine, &errorColumn)) {
-				DebugDialog::debug(QString("unable to parse fzp in %1. line: %2 column: %3 error: %4 fzp: %5").arg(file.fileName()).arg(errorLine).arg(errorColumn).arg(errorStr).arg(fzp));
+			QDomDocument::ParseResult parseResult = doc.setContent(fzp);
+			if (!parseResult) {
+				DebugDialog::debug(QString("unable to parse fzp in %1. line: %2 column: %3 error: %4 fzp: %5").arg(file.fileName()).arg(parseResult.errorLine).arg(parseResult.errorColumn).arg(parseResult.errorMessage).arg(fzp));
 				FMessageBox::warning(
 				    this,
 				    tr("Fritzing"),
-				    tr("unable to parse fzp in %1. line: %2 column: %3 error: %4").arg(file.fileName()).arg(errorLine).arg(errorColumn).arg(errorStr)
+				    tr("unable to parse fzp in %1. line: %2 column: %3 error: %4").arg(file.fileName()).arg(parseResult.errorLine).arg(parseResult.errorColumn).arg(parseResult.errorMessage)
 				);
 				continue;
 			}

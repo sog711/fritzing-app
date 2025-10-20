@@ -49,12 +49,9 @@ void Highlighter::loadStyles(const QString & filename) {
 		DebugDialog::debug(QString("Unable to open :%1").arg(filename));
 	}
 
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
-
 	QDomDocument domDocument;
-	if (!domDocument.setContent(&file, true, &errorStr, &errorLine, &errorColumn)) {
+	QDomDocument::ParseResult parseResult = domDocument.setContent(&file, QDomDocument::ParseOption::UseNamespaceProcessing);
+	if (!parseResult) {
 		return;
 	}
 

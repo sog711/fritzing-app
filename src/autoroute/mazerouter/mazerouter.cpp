@@ -959,10 +959,8 @@ bool MazeRouter::makeMasters(QString & message) {
 		auto * masterDoc = new QDomDocument();
 		m_masterDocs.insert(viewLayerPlacement, masterDoc);
 
-		QString errorStr;
-		int errorLine = 0;
-		int errorColumn = 0;
-		if (!masterDoc->setContent(master, &errorStr, &errorLine, &errorColumn)) {
+		QDomDocument::ParseResult parseResult = masterDoc->setContent(master);
+		if (!parseResult) {
 			message = tr("Unexpected SVG rendering failure--contact fritzing.org");
 			return false;
 		}

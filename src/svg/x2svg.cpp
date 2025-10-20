@@ -60,17 +60,15 @@ void X2Svg::checkYLimit(double y) {
 QString X2Svg::offsetMin(const QString & svg) {
 	if (m_minX == 0 && m_minY == 0) return svg;
 
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
 	QDomDocument domDocument;
-	if (!domDocument.setContent(svg, true, &errorStr, &errorLine, &errorColumn)) {
-		throw QObject::tr("failure in svg conversion 1: %1 %2 %3").arg(errorStr).arg(errorLine).arg(errorColumn);
+	QDomDocument::ParseResult parseResult = domDocument.setContent(svg, QDomDocument::ParseOption::UseNamespaceProcessing);
+	if (!parseResult) {
+		throw QObject::tr("failure in svg conversion 1: %1 %2 %3").arg(parseResult.errorMessage).arg(parseResult.errorLine).arg(parseResult.errorColumn);
 	}
 
 	QDomElement root = domDocument.documentElement();
 	if (root.isNull()) {
-		throw QObject::tr("failure in svg conversion 2: %1 %2 %3").arg(errorStr).arg(errorLine).arg(errorColumn);
+		throw QObject::tr("failure in svg conversion 2");
 	}
 
 	SvgFileSplitter splitter;

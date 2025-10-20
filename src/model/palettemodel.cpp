@@ -202,16 +202,14 @@ ModelPart * PaletteModel::loadPart(const QString & path, bool update) {
 	QString title;
 	QString propertiesText;
 
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
 	QDomDocument domDocument;
-	if (!domDocument.setContent(&file, true, &errorStr, &errorLine, &errorColumn)) {
+	QDomDocument::ParseResult parseResult = domDocument.setContent(&file, QDomDocument::ParseOption::UseNamespaceProcessing);
+	if (!parseResult) {
 		FMessageBox::information(nullptr, QObject::tr("Fritzing"),
 		                         QObject::tr("Parse error (2) at line %1, column %2:\n%3\n%4")
-		                         .arg(errorLine)
-		                         .arg(errorColumn)
-		                         .arg(errorStr)
+		                         .arg(parseResult.errorLine)
+		                         .arg(parseResult.errorColumn)
+		                         .arg(parseResult.errorMessage)
 		                         .arg(path));
 		return nullptr;
 	}

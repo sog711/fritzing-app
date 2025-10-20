@@ -690,13 +690,11 @@ void BinManager::readTheoreticalLocations(QList<BinLocation *> & theoreticalLoca
 	if (!file.open(QIODevice::ReadOnly)) {
 		DebugDialog::debug(QString("Unable to open :%1").arg(":/resources/bins/order.xml"));
 	}
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
 	QDomDocument domDocument;
 
-	if (!domDocument.setContent(&file, true, &errorStr, &errorLine, &errorColumn)) {
-		DebugDialog::debug(QString("unable to parse order.xml: %1 %2 %3").arg(errorStr).arg(errorLine).arg(errorColumn));
+	QDomDocument::ParseResult parseResult = domDocument.setContent(&file, QDomDocument::ParseOption::UseNamespaceProcessing);
+	if (!parseResult) {
+		DebugDialog::debug(QString("unable to parse order.xml: %1 %2 %3").arg(parseResult.errorMessage).arg(parseResult.errorLine).arg(parseResult.errorColumn));
 		return;
 	}
 
@@ -759,16 +757,13 @@ void BinManager::hackLocalContrib(QList<BinLocation *> & locations)
 		locations.append(myParts);
 	}
 
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
-
 	QFile contribFile(localContrib->path);
 	if (!contribFile.open(QIODevice::ReadOnly)) {
 		DebugDialog::debug(QString("Unable to open :%1").arg(localContrib->path));
 	}
 	QDomDocument contribDoc;
-	bool result = contribDoc.setContent(&contribFile, true, &errorStr, &errorLine, &errorColumn);
+	QDomDocument::ParseResult parseResult = contribDoc.setContent(&contribFile, QDomDocument::ParseOption::UseNamespaceProcessing);
+	bool result = parseResult.operator bool();
 	locations.removeOne(localContrib);
 	contribFile.close();
 	bool removed = contribFile.remove();
@@ -783,7 +778,8 @@ void BinManager::hackLocalContrib(QList<BinLocation *> & locations)
 		DebugDialog::debug(QString("Unable to open :%1").arg(myParts->path));
 	}
 	QDomDocument myPartsDoc;
-	if (!myPartsDoc.setContent(&myPartsFile, true, &errorStr, &errorLine, &errorColumn)) {
+	QDomDocument::ParseResult myPartsParseResult = myPartsDoc.setContent(&myPartsFile, QDomDocument::ParseOption::UseNamespaceProcessing);
+	if (!myPartsParseResult) {
 		return;
 	}
 

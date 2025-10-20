@@ -258,13 +258,10 @@ bool S2S::onefzp(QString & fzpFilePath, QString & schematicFilePath) {
 	QFile file(fzpFilePath);
 	file.open(QIODevice::ReadOnly);
 
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
-
 	QDomDocument dom;
-	if (!dom.setContent(&file, true, &errorStr, &errorLine, &errorColumn)) {
-		message(tr("Failed loading '%1', %2 line:%3 col:%4").arg(fzpFilePath, errorStr).arg(errorLine).arg(errorColumn));
+	QDomDocument::ParseResult parseResult = dom.setContent(&file, QDomDocument::ParseOption::UseNamespaceProcessing);
+	if (!parseResult) {
+		message(tr("Failed loading '%1', %2 line:%3 col:%4").arg(fzpFilePath, parseResult.errorMessage).arg(parseResult.errorLine).arg(parseResult.errorColumn));
 		return false;
 	}
 
@@ -793,15 +790,12 @@ bool S2S::ensureTerminalPoints(const QString & fzpFilePath, const QString & svgF
 		return false;
 	}
 
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
-
 	QFile file(svgFilePath);
 	file.open(QIODevice::ReadOnly);
 	QDomDocument dom;
-	if (!dom.setContent(&file, true, &errorStr, &errorLine, &errorColumn)) {
-		message(tr("Failed loading schematic '%1', %2 line:%3 col:%4").arg(svgFilePath).arg(errorStr).arg(errorLine).arg(errorColumn));
+	QDomDocument::ParseResult parseResult = dom.setContent(&file, QDomDocument::ParseOption::UseNamespaceProcessing);
+	if (!parseResult) {
+		message(tr("Failed loading schematic '%1', %2 line:%3 col:%4").arg(svgFilePath).arg(parseResult.errorMessage).arg(parseResult.errorLine).arg(parseResult.errorColumn));
 		return false;
 	}
 

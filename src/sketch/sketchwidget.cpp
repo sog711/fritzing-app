@@ -1750,11 +1750,8 @@ QByteArray SketchWidget::removeOutsideConnections(const QByteArray & itemData, Q
 	// now have to remove each connection that points to a part outside of the set of parts being copied
 
 	QDomDocument domDocument;
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
-	bool result = domDocument.setContent(itemData, &errorStr, &errorLine, &errorColumn);
-	if (!result) return ___emptyByteArray___;
+	QDomDocument::ParseResult parseResult = domDocument.setContent(itemData);
+	if (!parseResult) return ___emptyByteArray___;
 
 	QDomElement root = domDocument.documentElement();
 	if (root.isNull()) {
@@ -7718,11 +7715,9 @@ void SketchWidget::processTextElementsInSVG(QString &svg, ItemBase *itemBase, Re
 	}
 
 	QDomDocument doc;
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
 
-	if (!doc.setContent(svg, &errorStr, &errorLine, &errorColumn)) {
+	QDomDocument::ParseResult parseResult = doc.setContent(svg);
+	if (!parseResult) {
 		return;
 	}
 
@@ -7855,10 +7850,8 @@ QString SketchWidget::renderToSVG(RenderThing & renderThing, QList<QGraphicsItem
 
 			QString legSvg;
 			QDomDocument doc;
-			QString errorStr;
-			int errorLine;
-			int errorColumn;
-			if (doc.setContent(itemSvg, &errorStr, &errorLine, &errorColumn)) {
+			QDomDocument::ParseResult parseResult = doc.setContent(itemSvg);
+			if (parseResult) {
 				bool changed = false;
 				if (renderThing.renderBlocker) {
 					Pad * pad = qobject_cast<Pad *>(itemBase);

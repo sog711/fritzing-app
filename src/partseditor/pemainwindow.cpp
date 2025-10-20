@@ -227,12 +227,10 @@ void removeGornAux(QDomElement & element) {
 QString removeGorn(QString & svg) {
 	QDomDocument doc;
 
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
-	if (!doc.setContent(svg, &errorStr, &errorLine, &errorColumn)) {
+	QDomDocument::ParseResult parseResult = doc.setContent(svg);
+	if (!parseResult) {
 		// shouldn't happen
-		DebugDialog::debug(QString("remove gorn failure: %1 %2 %3 %4").arg(errorStr).arg(errorLine).arg(errorColumn).arg(svg));
+		DebugDialog::debug(QString("remove gorn failure: %1 %2 %3 %4").arg(parseResult.errorMessage).arg(parseResult.errorLine).arg(parseResult.errorColumn).arg(svg));
 		return svg;
 	}
 
@@ -1291,10 +1289,6 @@ void PEMainWindow::changeConnectorElement(QDomElement & connector, ConnectorMeta
 
 void PEMainWindow::initSvgTree(SketchWidget * sketchWidget, ItemBase * itemBase, QDomDocument & svgDocument)
 {
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
-
 	QDomDocument tempSvgDoc;
 	if (itemBase == nullptr) {
 		return;
@@ -1303,8 +1297,9 @@ void PEMainWindow::initSvgTree(SketchWidget * sketchWidget, ItemBase * itemBase,
 	if (!file.open(QIODevice::ReadOnly)) {
 		DebugDialog::debug(QString("Unable to open :%1").arg(itemBase->filename()));
 	}
-	if (!tempSvgDoc.setContent(&file, true, &errorStr, &errorLine, &errorColumn)) {
-		DebugDialog::debug(QString("unable to parse svg: %1 %2 %3").arg(errorStr).arg(errorLine).arg(errorColumn));
+	QDomDocument::ParseResult parseResult = tempSvgDoc.setContent(&file, QDomDocument::ParseOption::UseNamespaceProcessing);
+	if (!parseResult) {
+		DebugDialog::debug(QString("unable to parse svg: %1 %2 %3").arg(parseResult.errorMessage).arg(parseResult.errorLine).arg(parseResult.errorColumn));
 		return;
 	}
 
@@ -1330,8 +1325,9 @@ void PEMainWindow::initSvgTree(SketchWidget * sketchWidget, ItemBase * itemBase,
 	FSvgRenderer tempRenderer;
 	QByteArray rendered = tempRenderer.loadSvg(tempSvgDoc.toByteArray(), "", false);
 	// cleans up the svg
-	if (!svgDocument.setContent(rendered, true, &errorStr, &errorLine, &errorColumn)) {
-		DebugDialog::debug(QString("unable to parse svg (2): %1 %2 %3").arg(errorStr).arg(errorLine).arg(errorColumn));
+	QDomDocument::ParseResult parseResult2 = svgDocument.setContent(rendered, QDomDocument::ParseOption::UseNamespaceProcessing);
+	if (!parseResult2) {
+		DebugDialog::debug(QString("unable to parse svg (2): %1 %2 %3").arg(parseResult2.errorMessage).arg(parseResult2.errorLine).arg(parseResult2.errorColumn));
 		return;
 	}
 
@@ -1587,13 +1583,10 @@ void PEMainWindow::loadImage()
 		return;
 	}
 
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
 	QDomDocument doc;
-	bool result = doc.setContent(svg.toUtf8(), &errorStr, &errorLine, &errorColumn);
-	if (!result) {
-		QMessageBox::warning(nullptr, tr("SVG problem"), tr("Unable to parse '%1': %2 line:%3 column:%4").arg(origPath).arg(errorStr).arg(errorLine).arg(errorColumn));
+	QDomDocument::ParseResult parseResult = doc.setContent(svg.toUtf8());
+	if (!parseResult) {
+		QMessageBox::warning(nullptr, tr("SVG problem"), tr("Unable to parse '%1': %2 line:%3 column:%4").arg(origPath).arg(parseResult.errorMessage).arg(parseResult.errorLine).arg(parseResult.errorColumn));
 		return;
 	}
 
@@ -2260,7 +2253,7 @@ bool PEMainWindow::saveAs(bool overWrite)
 
 			Q_FOREACH (QString svg, svgList) {
 				QDomDocument doc;
-				doc.setContent(svg, true);
+				doc.setContent(svg, QDomDocument::ParseOption::UseNamespaceProcessing);
 				QDomElement root = doc.documentElement();
 				Q_FOREACH (ViewLayer::ViewLayerID vlid, sketchLayers) {
 					removeID(root, ViewLayer::viewLayerXmlNameFromID(vlid));
@@ -2756,11 +2749,8 @@ bool PEMainWindow::loadFzp(const QString & path) {
 	if (!file.open(QIODevice::ReadOnly)) {
 		DebugDialog::debug(QString("Unable to open :%1").arg(path));
 	}
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
-	bool result = m_fzpDocument.setContent(&file, &errorStr, &errorLine, &errorColumn);
-	if (!result) {
+	QDomDocument::ParseResult parseResult = m_fzpDocument.setContent(&file);
+	if (!parseResult) {
 		QMessageBox::critical(nullptr, tr("Parts Editor"), tr("Unable to load fzp from %1").arg(path));
 		return false;
 	}

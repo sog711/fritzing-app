@@ -134,12 +134,10 @@ void RatsnestColors::initNames() {
 	if (!file.open(QIODevice::ReadOnly)) {
 		DebugDialog::debug("Unable to open :/resources/ratsnestcolors.xml");
 	}
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
 	QDomDocument domDocument;
 
-	if (!domDocument.setContent(&file, true, &errorStr, &errorLine, &errorColumn)) {
+	QDomDocument::ParseResult parseResult = domDocument.setContent(&file, QDomDocument::ParseOption::UseNamespaceProcessing);
+	if (!parseResult) {
 		return;
 	}
 
