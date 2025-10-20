@@ -68,7 +68,7 @@ void Highlighter::loadStyles(const QString & filename) {
 		QColor color(Qt::black);
 		QString colorString = style.attribute("color");
 		if (!colorString.isEmpty()) {
-			color.setNamedColor(colorString);
+			color = QColor::fromString(colorString);
 			tcf->setForeground(QBrush(color));
 		}
 		QString italicString = style.attribute("italic");

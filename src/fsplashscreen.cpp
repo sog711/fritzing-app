@@ -68,7 +68,7 @@ FSplashScreen::FSplashScreen(const QPixmap & pixmap, Qt::WindowFlags f ) : QSpla
 				messageThing->color = QColor(0, 0, 0);
 			}
 			else {
-				messageThing->color.setNamedColor(colorName);
+				messageThing->color = QColor::fromString(colorName);
 			}
 			m_items.insert(id, messageThing);
 		}

@@ -1280,8 +1280,7 @@ void Wire::setColorString(QString colorName, double op, bool restore) {
 		colorString = colorName;
 	}
 
-	QColor c;
-	c.setNamedColor(colorString);
+	QColor c = QColor::fromString(colorString);
 	setColor(c, op);
 	m_colorName = colorName;
 
@@ -1290,7 +1289,7 @@ void Wire::setColorString(QString colorName, double op, bool restore) {
 		shadowColorString = colorString;
 	}
 
-	c.setNamedColor(shadowColorString);
+	c = QColor::fromString(shadowColorString);
 	setShadowColor(c, restore);
 }
 

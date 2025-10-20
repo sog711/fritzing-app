@@ -8472,8 +8472,7 @@ void SketchWidget::initBackgroundColor() {
 	QSettings settings;
 	QString colorName = settings.value(QString("%1BackgroundColor").arg(getShortName())).toString();
 	if (!colorName.isEmpty()) {
-		QColor color;
-		color.setNamedColor(colorName);
+		QColor color = QColor::fromString(colorName);
 		setBackground(color);
 	}
 

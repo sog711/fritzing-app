@@ -553,7 +553,7 @@ void PCBSketchWidget::getLabelFont(QFont & font, QColor & color, ItemBase * item
 		if (itemBase->viewLayerPlacement() == ViewLayer::NewBottom) name = ViewLayer::Silkscreen0Color;
 	}
 
-	color.setNamedColor(name);
+	color = QColor::fromString(name);
 
 }
 

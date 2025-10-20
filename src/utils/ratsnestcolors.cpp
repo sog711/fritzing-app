@@ -62,7 +62,7 @@ bool RatsnestColor::m_isTestingEnabled = false;
 RatsnestColor::RatsnestColor(const QDomElement & color) {
 	m_name = color.attribute("name");
 	//DebugDialog::debug("color name " + m_name);
-	m_ratsnest.setNamedColor(color.attribute("ratsnest"));
+	m_ratsnest = QColor::fromString(color.attribute("ratsnest"));
 	m_wire = color.attribute("wire");
 	m_shadow = color.attribute("shadow");
 	QDomElement connector = color.firstChildElement("connector");
@@ -104,7 +104,7 @@ bool RatsnestColor::matchColor(const QString & string) {
 RatsnestColors::RatsnestColors(const QDomElement & view)
 {
 	m_viewID = ViewLayer::idFromXmlName(view.attribute("name"));
-	m_backgroundColor.setNamedColor(view.attribute("background"));
+	m_backgroundColor = QColor::fromString(view.attribute("background"));
 	m_index = 0;
 	QDomElement color = view.firstChildElement("color");
 	while (!color.isNull()) {

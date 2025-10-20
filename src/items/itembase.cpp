@@ -273,15 +273,13 @@ void ItemBase::initNames() {
 	QSettings settings;
 	QString colorName = settings.value("ConnectedColor").toString();
 	if (!colorName.isEmpty()) {
-		QColor color;
-		color.setNamedColor(colorName);
+		QColor color = QColor::fromString(colorName);
 		setConnectedColor(color);
 	}
 
 	colorName = settings.value("UnconnectedColor").toString();
 	if (!colorName.isEmpty()) {
-		QColor color;
-		color.setNamedColor(colorName);
+		QColor color = QColor::fromString(colorName);
 		setUnconnectedColor(color);
 	}
 

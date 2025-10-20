@@ -3790,8 +3790,7 @@ void MainWindow::loadedViewsSlot(ModelBase *, QDomElement & views) {
 			}
 			sketchWidget->setAutorouterSettings(autorouterSettings);
 
-			QColor color;
-			color.setNamedColor(colorName);
+			QColor color = QColor::fromString(colorName);
 
 			bool redraw = false;
 			if (color.isValid()) {
