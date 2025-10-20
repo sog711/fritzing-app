@@ -399,14 +399,11 @@ void LogoItem::loadImage(const QString & fileName, bool addName)
 		TextUtils::fixMuch(svg, true);
 		TextUtils::fixPixelDimensionsIn(svg);
 
-		QString errorStr;
-		int errorLine;
-		int errorColumn;
-
 		QDomDocument domDocument;
 
-		if (!domDocument.setContent(svg, true, &errorStr, &errorLine, &errorColumn)) {
-			unableToLoad(fileName, tr("due to an xml problem: %1 line:%2 column:%3").arg(errorStr).arg(errorLine).arg(errorColumn));
+		QDomDocument::ParseResult parseResult = domDocument.setContent(svg, QDomDocument::ParseOption::UseNamespaceProcessing);
+		if (!parseResult) {
+			unableToLoad(fileName, tr("due to an xml problem: %1 line:%2 column:%3").arg(parseResult.errorMessage).arg(parseResult.errorLine).arg(parseResult.errorColumn));
 			return;
 		}
 
@@ -798,14 +795,11 @@ QStringList LogoItem::getViewBox(const QDomElement &root)
 
 bool LogoItem::parseDOM(QDomDocument &doc, const QString &svg, const QString &context)
 {
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
-
-	if (!doc.setContent(svg, &errorStr, &errorLine, &errorColumn)) {
+	QDomDocument::ParseResult parseResult = doc.setContent(svg);
+	if (!parseResult) {
 		DebugDialog::stream(DebugDialog::Error)
-			<< "Failed to parse " << context << ": " << errorStr << " at line " << errorLine
-			<< ", column " << errorColumn;
+			<< "Failed to parse " << context << ": " << parseResult.errorMessage << " at line " << parseResult.errorLine
+			<< ", column " << parseResult.errorColumn;
 		return false;
 	}
 	return true;

@@ -248,11 +248,9 @@ void SchematicTextLayerKinPaletteItem::initTextThings() {
 	QByteArray textSvg = this->property("textSvg").toByteArray();
 
 	QDomDocument doc;
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
-	if (!doc.setContent(textSvg, &errorStr, &errorLine, &errorColumn)) {
-		DebugDialog::debug(QString("unable to parse schematic text: %1 %2 %3:\n%4").arg(errorStr).arg(errorLine).arg(errorColumn).arg(QString(textSvg)));
+	QDomDocument::ParseResult parseResult = doc.setContent(textSvg);
+	if (!parseResult) {
+		DebugDialog::debug(QString("unable to parse schematic text: %1 %2 %3:\n%4").arg(parseResult.errorMessage).arg(parseResult.errorLine).arg(parseResult.errorColumn).arg(QString(textSvg)));
 		return;
 	}
 
@@ -268,11 +266,9 @@ void SchematicTextLayerKinPaletteItem::initTextThings() {
 
 QString SchematicTextLayerKinPaletteItem::flipTextSvg(const QString & textSvg) {
 	QDomDocument doc;
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
-	if (!doc.setContent(textSvg, &errorStr, &errorLine, &errorColumn)) {
-		DebugDialog::debug(QString("unable to parse schematic text: %1 %2 %3:\n%4").arg(errorStr).arg(errorLine).arg(errorColumn).arg(QString(textSvg)));
+	QDomDocument::ParseResult parseResult = doc.setContent(textSvg);
+	if (!parseResult) {
+		DebugDialog::debug(QString("unable to parse schematic text: %1 %2 %3:\n%4").arg(parseResult.errorMessage).arg(parseResult.errorLine).arg(parseResult.errorColumn).arg(QString(textSvg)));
 		return "";
 	}
 
@@ -350,11 +346,9 @@ QString SchematicTextLayerKinPaletteItem::rotate(const QString & svg, bool isFli
 	Q_UNUSED(isFlipped);
 
 	QDomDocument doc;
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
-	if (!doc.setContent(svg, &errorStr, &errorLine, &errorColumn)) {
-		DebugDialog::debug(QString("unable to parse schematic text: %1 %2 %3:\n%4").arg(errorStr).arg(errorLine).arg(errorColumn).arg(QString(svg)));
+	QDomDocument::ParseResult parseResult = doc.setContent(svg);
+	if (!parseResult) {
+		DebugDialog::debug(QString("unable to parse schematic text: %1 %2 %3:\n%4").arg(parseResult.errorMessage).arg(parseResult.errorLine).arg(parseResult.errorColumn).arg(QString(svg)));
 		return svg;
 	}
 

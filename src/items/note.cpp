@@ -718,12 +718,9 @@ void Note::linkDialog() {
 		QString html = m_graphicsTextItem->toHtml();
 
 		// assumes html is in xml form
-		QString errorStr;
-		int errorLine;
-		int errorColumn;
-
 		QDomDocument domDocument;
-		if (!domDocument.setContent(html, &errorStr, &errorLine, &errorColumn)) {
+		QDomDocument::ParseResult parseResult = domDocument.setContent(html);
+		if (!parseResult) {
 			return;
 		}
 

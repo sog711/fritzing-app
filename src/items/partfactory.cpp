@@ -299,12 +299,10 @@ QString PartFactory::getSvgFilename(ModelPart * modelPart, const QString & baseN
 			if (!file.open(QIODevice::ReadOnly)) {
 				DebugDialog::debug(QString("Unable to open :%1").arg(originalPath));
 			}
-			QString errorStr;
-			int errorLine;
-			int errorColumn;
 			QDomDocument doc;
-			if (!doc.setContent(&file, &errorStr, &errorLine, &errorColumn)) {
-				DebugDialog::debug(QString("xml failure %1 %2 %3").arg(errorStr).arg(errorLine).arg(errorColumn));
+			QDomDocument::ParseResult parseResult = doc.setContent(&file);
+			if (!parseResult) {
+				DebugDialog::debug(QString("xml failure %1 %2 %3").arg(parseResult.errorMessage).arg(parseResult.errorLine).arg(parseResult.errorColumn));
 				continue;
 			}
 

@@ -151,11 +151,9 @@ void LED::resetBrightness() {
  * @param[in] brightness The brightness value, its range is from 0 (off) to 1 (on)
  */
 void LED::setBrightness(double brightness) {
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
 	QDomDocument domDocument;
-	if (!domDocument.setContent( BreadboardSvg.value(m_filename), &errorStr, &errorLine, &errorColumn)) {
+	QDomDocument::ParseResult parseResult = domDocument.setContent(BreadboardSvg.value(m_filename));
+	if (!parseResult) {
 		return;
 	}
 
@@ -223,11 +221,9 @@ void LED::setBrightness(double brightness) {
  * @param[in] brightness The brightness values, its range is from 0 (off) to 1 (on)
  */
 void LED::setBrightnessRGB(double brightnessR, double brightnessG, double brightnessB) {
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
 	QDomDocument domDocument;
-	if (!domDocument.setContent( BreadboardSvg.value(m_filename), &errorStr, &errorLine, &errorColumn)) {
+	QDomDocument::ParseResult parseResult = domDocument.setContent(BreadboardSvg.value(m_filename));
+	if (!parseResult) {
 		return;
 	}
 
@@ -267,11 +263,9 @@ void LED::setBrightnessRGB(double brightnessR, double brightnessG, double bright
 
 QString LED::getColorSVG(const QString & color, ViewLayer::ViewLayerID viewLayerID)
 {
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
 	QDomDocument domDocument;
-	if (!domDocument.setContent(viewLayerID == ViewLayer::Breadboard ? BreadboardSvg.value(m_filename) : IconSvg.value(m_filename), &errorStr, &errorLine, &errorColumn)) {
+	QDomDocument::ParseResult parseResult = domDocument.setContent(viewLayerID == ViewLayer::Breadboard ? BreadboardSvg.value(m_filename) : IconSvg.value(m_filename));
+	if (!parseResult) {
 		return "";
 	}
 

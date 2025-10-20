@@ -2407,11 +2407,9 @@ void ItemBase::createShape(LayerAttributes & layerAttributes) {
 
 	if (!isEverVisible()) return;
 
-	QString errorStr;
-	int errorLine;
-	int errorColumn;
 	QDomDocument doc;
-	if (!doc.setContent(layerAttributes.loaded(), &errorStr, &errorLine, &errorColumn)) {
+	QDomDocument::ParseResult parseResult = doc.setContent(layerAttributes.loaded());
+	if (!parseResult) {
 		return;
 	}
 
