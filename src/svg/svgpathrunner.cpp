@@ -39,7 +39,7 @@ bool SVGPathRunner::runPath(QVector<QVariant> & pathData, void * userData) {
 	QList<double> args;
 
 	Q_FOREACH (QVariant variant, pathData) {
-		if (variant.type() == QVariant::Char) {
+		if (variant.typeId() == QMetaType::QChar) {
 			PathCommand * newCommand = pathCommands.value(variant.toChar(), nullptr);
 			if (newCommand == nullptr) return false;
 
@@ -55,7 +55,7 @@ bool SVGPathRunner::runPath(QVector<QVariant> & pathData, void * userData) {
 			args.clear();
 			currentCommand = newCommand;
 		}
-		else if (variant.type() == QVariant::Double) {
+		else if (variant.typeId() == QMetaType::Double) {
 			if (currentCommand == nullptr) return false;
 			args.append(variant.toDouble());
 		}
