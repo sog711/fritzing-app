@@ -24,6 +24,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QJsonDocument>
 #include <QEventLoop>
 #include <QTimer>
+#include <utility>
 
 FabUploadProgressProbe::FabUploadProgressProbe(FabUploadProgress *fabUploadProgress)
 	: QObject(fabUploadProgress)
@@ -53,7 +54,7 @@ QVariant FabUploadProgressProbe::read() {
 	constexpr int timeoutSeconds = 300;
 	timer.start(timeoutSeconds * 1000);
 	loop->exec();
-	for (auto &connection : qAsConst(connections)) {
+	for (auto &connection : std::as_const(connections)) {
 		QObject::disconnect(connection);
 	}
 	return QVariant(m_reason);
