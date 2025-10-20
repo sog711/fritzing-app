@@ -168,7 +168,7 @@ QVariant TranslatorListModel::data ( const QModelIndex & index, int role) const
 {
 	if (role == Qt::DisplayRole && index.row() >= 0 && index.row() < m_localeList.count()) {
 		QString languageString = QLocale::languageToString(m_localeList.at(index.row())->language());
-		QString countryString = QLocale::countryToString(m_localeList.at(index.row())->country());
+		QString countryString = QLocale::territoryToString(m_localeList.at(index.row())->territory());
 
 		//DebugDialog::debug(QString("language %1 %2").arg(languageString).arg(countryString));
 
