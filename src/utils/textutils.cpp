@@ -71,10 +71,8 @@ static const QString fontFamilyQuotesPattern = R"x(font-family(?:="|:)('[^']*')"
 static const QRegularExpression HexExpr("&#x[0-9a-fA-F];");   // &#x9; &#xa; &#xd;
 static const QRegularExpression Xmlns("xmlns=([\"|'])[^\"']*\\1");
 
-const char16_t TextUtils::MicroSymbolCode = 181;
-const QString TextUtils::MicroSymbol = QString::fromUtf16(&MicroSymbolCode, 1);
-const char16_t TextUtils::AltMicroSymbolCode = 956;
-const QString TextUtils::AltMicroSymbol = QString::fromUtf16(&AltMicroSymbolCode, 1);
+const QString TextUtils::MicroSymbol = QString(QChar(MicroSymbolCode));
+const QString TextUtils::AltMicroSymbol = QString(QChar(AltMicroSymbolCode));
 
 const QString TextUtils::AdobeIllustratorIdentifier = "Generator: Adobe Illustrator";
 
@@ -735,7 +733,7 @@ QString TextUtils::convertExtendedChars(const QString & str)
 			result.append(c);
 		}
 		else {
-			result.append(QString("&#x%1;").arg(c.unicode(), 0, 16));
+			result.append("&#x" + QString::number(c.unicode(), 16) + ";");
 		}
 	}
 

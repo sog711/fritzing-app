@@ -142,9 +142,9 @@ public:
 	static const QRegularExpression FindWhitespace;
 	static const QString SMDFlipSuffix;
 	static const QString MicroSymbol;
-	static const char16_t MicroSymbolCode;
+	static constexpr int MicroSymbolCode = 181;
 	static const QString AltMicroSymbol;
-	static const char16_t AltMicroSymbolCode;
+	static constexpr int AltMicroSymbolCode = 956;
 	static const QString PowerPrefixesString;
 	static const QString CreatedWithFritzingString;
 	static const QString CreatedWithFritzingXmlComment;
