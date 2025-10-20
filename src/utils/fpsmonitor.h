@@ -17,7 +17,7 @@ public:
 	qreal getMedianFPS() const;
 	void printTotalFrameStatistics() const;
 
-	void paint(QPainter* painter, const QRectF& rect, const QWidget* viewport);
+	void paint(QPainter* painter, const QRectF&, const QWidget*);
 	void setShowFPS(bool show);
 	bool isShowingFPS() const;
 

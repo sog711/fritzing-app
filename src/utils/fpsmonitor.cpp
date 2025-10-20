@@ -105,7 +105,7 @@ void FPSMonitor::printTotalFrameStatistics() const
 			 << QString::number(totalFrameCount * 1000.0 / totalTimeElapsed, 'f', 2) << "fps";
 }
 
-void FPSMonitor::paint(QPainter* painter, const QRectF& rect, const QWidget* viewport)
+void FPSMonitor::paint(QPainter* painter, const QRectF&, const QWidget*)
 {
 	if (!showFPS) return;
 
