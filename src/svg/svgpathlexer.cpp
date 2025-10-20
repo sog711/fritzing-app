@@ -77,7 +77,7 @@ int SVGPathLexer::lex()
 			m_source,
 			m_pos - 1,
 			QRegularExpression::NormalMatch,
-			QRegularExpression::AnchoredMatchOption | QRegularExpression::DontCheckSubjectStringMatchOption
+			QRegularExpression::AnchorAtOffsetMatchOption | QRegularExpression::DontCheckSubjectStringMatchOption
 		)
 	);
 	if (match.hasMatch()) {
