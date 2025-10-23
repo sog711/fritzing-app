@@ -24,7 +24,7 @@ QT_MOST=6.10.10
 !versionAtMost(QT_VERSION, $${QT_MOST}):error("Use at most Qt version $${QT_MOST}")
 
 CONFIG += debug_and_release
-CONFIG += c++17
+CONFIG += c++20
 
 unix {
     QMAKE_CXXFLAGS += -O3 -fno-omit-frame-pointer
