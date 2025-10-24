@@ -141,6 +141,9 @@ protected:
 				return 1;
 			case PdmDevicePixelRatioScaled:
 				return 1;
+			case PdmDevicePixelRatioF_EncodedA:
+			case PdmDevicePixelRatioF_EncodedB:
+				return QPaintDevice::encodeMetricF(metric, 1.0);
 			default:
 				qWarning("GroundPlanePaintDevice::metric() - metric %d unknown", metric);
 				return 0;
