@@ -607,6 +607,40 @@ int FApplication::init() {
 	qRegisterMetaType<QLocale>();
 	qRegisterMetaType<UploadPair>("UploadPair");
 
+	// Check version and clear settings if version changed
+	// This must happen BEFORE any settings are read or written
+	{
+		QSettings settings;
+		QString prevVersion = settings.value("version").toString();
+		QString currVersion = Version::versionString();
+
+		if (prevVersion != currVersion) {
+			// Settings to preserve during clear
+			QStringList preserveKeys = {"pid", "language", "locale"};
+			if (FTesting::getInstance()->enabled()) {
+				preserveKeys.append("gerberExportImprovementsEnabled");
+			}
+
+			// Store values we want to keep
+			QMap<QString, QVariant> preserveValues;
+			for (const QString& key : preserveKeys) {
+				QVariant value = settings.value(key);
+				if (!value.isNull()) {
+					preserveValues[key] = value;
+				}
+			}
+
+			settings.clear();
+
+			// Restore preserved values
+			for (auto it = preserveValues.constBegin(); it != preserveValues.constEnd(); ++it) {
+				settings.setValue(it.key(), it.value());
+			}
+
+			DebugDialog::debug(QString("Settings cleared for version change: %1 -> %2").arg(prevVersion, currVersion));
+		}
+	}
+
 	QSettings settings;
 
 	if (!settings.contains("locale") || !settings.value("locale").canConvert<QLocale>()) {
@@ -1367,37 +1401,7 @@ int FApplication::startup()
 
 	ProcessEventBlocker::processEvents();
 
-	QString prevVersion;
-	{
-		// put this in a block so that QSettings is closed
-		QSettings settings;
-		prevVersion = settings.value("version").toString();
-		QString currVersion = Version::versionString();
-
-		if (prevVersion != currVersion) {
-			// Settings to preserve during clear
-			QStringList preserveKeys = {"pid", "language", "locale", "fps", "opengl"};
-			if (FTesting::getInstance()->enabled()) {
-				preserveKeys.append("gerberExportImprovementsEnabled");
-			}
-
-			// Store values we want to keep
-			QMap<QString, QVariant> preserveValues;
-			for (const QString& key : preserveKeys) {
-				QVariant value = settings.value(key);
-				if (!value.isNull()) {
-					preserveValues[key] = value;
-				}
-			}
-
-			settings.clear();
-
-			// Restore preserved values
-			for (auto it = preserveValues.constBegin(); it != preserveValues.constEnd(); ++it) {
-				settings.setValue(it.key(), it.value());
-			}
-		}
-	}
+	// Version check and settings clear now happens in init() before any settings are read/written
 
 	//bool fabEnabled = settings.value(ORDERFABENABLED, QVariant(false)).toBool();
 	//if (!fabEnabled) {
@@ -1416,7 +1420,7 @@ int FApplication::startup()
 	if (m_progressIndex >= 0) splash.showProgress(m_progressIndex, 0.65);
 	ProcessEventBlocker::processEvents();
 
-	loadSomething(prevVersion);
+	loadSomething();
 	m_started = true;
 
 	if (m_progressIndex >= 0) splash.showProgress(m_progressIndex, 0.99);
@@ -1817,7 +1821,7 @@ bool FApplication::notify(QObject *receiver, QEvent *e)
 	return false;
 }
 
-void FApplication::loadSomething(const QString & prevVersion) {
+void FApplication::loadSomething() {
 	// At this point we're trying to determine what sketches to load from one of the following sources:
 	// Only one of these sources will actually provide sketches to load and they're listed in order of priority:
 
@@ -1825,9 +1829,6 @@ void FApplication::loadSomething(const QString & prevVersion) {
 	//		Files were double-clicked
 	//		The last opened sketch (obsolete)
 	//		A new blank sketch
-
-
-	Q_UNUSED(prevVersion);
 
 	initFilesToLoad();   // sets up m_filesToLoad from the command line on PC and Linux; mac uses a FileOpen event instead
 

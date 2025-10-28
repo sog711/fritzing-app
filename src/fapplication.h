@@ -186,7 +186,7 @@ protected:
 	QList<class MainWindow *> recoverBackups();
 	QList<MainWindow *> loadLastOpenSketch();
 	void doLoadPrevious(MainWindow *);
-	void loadSomething(const QString & previousVersion);
+	void loadSomething();
 	void initFilesToLoad();
 	void initBackups();
 	void cleanupBackups();
