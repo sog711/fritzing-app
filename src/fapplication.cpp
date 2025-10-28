@@ -614,7 +614,12 @@ int FApplication::init() {
 		QString prevVersion = settings.value("version").toString();
 		QString currVersion = Version::versionString();
 
-		if (prevVersion != currVersion) {
+		if (prevVersion.isEmpty()) {
+			DebugDialog::debug(QString("First start with Fritzing %1 - creating fresh settings").arg(currVersion));
+		}
+		else if (prevVersion != currVersion) {
+			DebugDialog::debug(QString("Version changed from %1 to %2 - migrating settings").arg(prevVersion, currVersion));
+
 			// Settings to preserve during clear
 			QStringList preserveKeys = {"pid", "language", "locale"};
 			if (FTesting::getInstance()->enabled()) {
@@ -623,10 +628,12 @@ int FApplication::init() {
 
 			// Store values we want to keep
 			QMap<QString, QVariant> preserveValues;
+			int preservedCount = 0;
 			for (const QString& key : preserveKeys) {
 				QVariant value = settings.value(key);
 				if (!value.isNull()) {
 					preserveValues[key] = value;
+					preservedCount++;
 				}
 			}
 
@@ -637,7 +644,10 @@ int FApplication::init() {
 				settings.setValue(it.key(), it.value());
 			}
 
-			DebugDialog::debug(QString("Settings cleared for version change: %1 -> %2").arg(prevVersion, currVersion));
+			DebugDialog::debug(QString("Settings migration complete - preserved %1 setting(s)").arg(preservedCount));
+		}
+		else {
+			DebugDialog::debug(QString("Fritzing %1 - loading existing settings").arg(currVersion));
 		}
 	}
 
