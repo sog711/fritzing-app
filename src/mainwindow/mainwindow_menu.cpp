@@ -1534,8 +1534,10 @@ void MainWindow::createPartMenu() {
 	m_partMenu->addAction(m_dumpAllPartsAction);
 #endif
 
-	m_partMenu->addSeparator();
-	m_partMenu->addAction(m_regeneratePartsDatabaseAct);
+	if (DebugDialog::enabled()) {
+		m_partMenu->addSeparator();
+		m_partMenu->addAction(m_regeneratePartsDatabaseAct);
+	}
 }
 
 void MainWindow::createViewMenu()
@@ -2014,7 +2016,7 @@ void MainWindow::updatePartMenu() {
 	m_swapObsoleteAct->setEnabled(itemCount.obsoleteCount > 0);
 
 	m_findPartInSketchAct->setEnabled(m_currentGraphicsView);
-	m_regeneratePartsDatabaseAct->setEnabled(true);
+	m_regeneratePartsDatabaseAct->setEnabled(DebugDialog::enabled());
 	m_openProgramWindowAct->setEnabled(true);
 }
 
