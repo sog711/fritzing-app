@@ -5673,8 +5673,25 @@ void SketchWidget::prepDeleteOtherProps(ItemBase * itemBase, long id, const QStr
 	if (capacitor) {
 		QHash<QString, QString> properties;
 		capacitor->getProperties(properties);
-		Q_FOREACH(QString prop, properties.keys()) {
-			new SetPropCommand(this, id, prop, properties.value(prop), properties.value(prop), true, parentCommand);
+
+		// If no properties from Capacitor class, try to get them from ModelPart directly
+		// This handles obsolete capacitors that don't have PropertyDef entries
+		if (properties.isEmpty()) {
+			QHash<QString, QString> modelPartProps = itemBase->modelPart()->properties();
+			for (const QString& key : modelPartProps.keys()) {
+				QString value = modelPartProps.value(key);
+				if (key.compare("capacitance", Qt::CaseInsensitive) == 0 ||
+				    key.compare("voltage", Qt::CaseInsensitive) == 0) {
+					DebugDialog::debug(QString("prepDeleteOtherProps: Preserving static property '%1' = '%2' from obsolete capacitor %3")
+						.arg(key).arg(value).arg(itemBase->moduleID()));
+					properties.insert(key, value);
+				}
+			}
+		}
+
+		for (const QString& prop : properties.keys()) {
+			QString value = properties.value(prop);
+			new SetPropCommand(this, id, prop, value, value, true, parentCommand);
 		}
 	}
 

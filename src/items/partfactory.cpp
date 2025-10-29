@@ -201,6 +201,10 @@ ItemBase * PartFactory::createPartAux( ModelPart * modelPart, ViewLayer::ViewID 
 		}
 
 		QString family = modelPart->properties().value("family", "");
+		// Check for obsolete capacitor family to ensure properties are preserved during replacement
+		if (family.compare("//obsolete//capacitor", Qt::CaseInsensitive) == 0) {
+			return new Capacitor(modelPart, viewID, viewGeometry, id, itemMenu, doLabel);
+		}
 		if (family.compare("mystery part", Qt::CaseInsensitive) == 0) {
 			return new MysteryPart(modelPart, viewID, viewGeometry, id, itemMenu, doLabel);
 		}
