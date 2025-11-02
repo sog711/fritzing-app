@@ -31,6 +31,7 @@ unix:!macx {
 win32 {
 	if ($$LIBGIT_STATIC) {
 		LIBGIT2INCLUDE = "$$LIBGITPATH/include"
+		LIBGIT2LIB = "$$LIBGITPATH/lib"
 
 		exists($$LIBGIT2INCLUDE/git2.h) {
 			message("found libgit2 include path at $$LIBGIT2INCLUDE")
@@ -42,12 +43,6 @@ win32 {
 			error("libgit2 include path not found in $$LIBGIT2INCLUDE")
 		}
 	}
-
-    contains(QMAKE_TARGET.arch, x86_64) {
-        LIBGIT2LIB = "$$LIBGITPATH/build64/Release"
-    } else {
-        LIBGIT2LIB = "$$LIBGITPATH/build32/Release"
-    }
 
     exists($$LIBGIT2LIB/git2.lib) {
         message("found libgit2 library in $$LIBGIT2LIB")
