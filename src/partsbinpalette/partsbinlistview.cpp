@@ -371,6 +371,28 @@ void PartsBinListView::reloadPart(const QString & moduleID) {
 
 void PartsBinListView::loadImage(ModelPart * modelPart, QListWidgetItem * lwi, const QString & moduleID)
 {
+	// Try database first for faster loading
+	if (m_referenceModel != nullptr && modelPart != nullptr) {
+		QString iconKey = modelPart->moduleID() + "_icon";
+		QPixmap dbIcon = m_referenceModel->retrieveIcon(iconKey);
+		if (!dbIcon.isNull()) {
+			QSize listViewSize = iconSize();
+			QPixmap scaledIcon = dbIcon.scaled(listViewSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+			lwi->setIcon(QIcon(scaledIcon));
+
+			ItemBase * itemBase = ItemBaseHash.value(moduleID);
+			if (itemBase == nullptr) {
+				itemBase = PartFactory::createPart(modelPart, ViewLayer::NewTop, ViewLayer::IconView, ViewGeometry(), ItemBase::getNextID(), nullptr, nullptr, false);
+				ItemBaseHash.insert(moduleID, itemBase);
+			}
+			lwi->setData(Qt::UserRole, QVariant::fromValue( itemBase ) );
+			lwi->setData(Qt::UserRole + 1, dbIcon.size());
+			m_itemBaseHash.insert(moduleID, itemBase);
+			return;
+		}
+	}
+
 	ItemBase * itemBase = ItemBaseHash.value(moduleID);
 	if (itemBase == nullptr) {
 		itemBase = PartFactory::createPart(modelPart, ViewLayer::NewTop, ViewLayer::IconView, ViewGeometry(), ItemBase::getNextID(), nullptr, nullptr, false);
