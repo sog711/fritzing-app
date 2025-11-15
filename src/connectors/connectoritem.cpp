@@ -1011,24 +1011,28 @@ void ConnectorItem::setInactive(bool inactivate) {
 }
 
 void ConnectorItem::setHiddenOrInactive() {
-	// Guard clause: Check for problematic conditions upfront
-	bool hasNullCursor = (CursorMaster::MakeWireCursor == nullptr);
-	bool hasEmptyViews = (!scene() || scene()->views().isEmpty());
-	bool itemHasCursor = this->hasCursor();
+	bool hasViews = (scene() && !scene()->views().isEmpty());
 
 	if (m_hidden || m_inactive || m_hybrid || m_layerHidden) {
 		this->setAcceptedMouseButtons(Qt::NoButton);
 		// Only unsetCursor if we have valid views AND the item actually has a cursor
-		if (!hasEmptyViews && itemHasCursor) {
-			this->unsetCursor();
+		if (hasViews) {
+			bool itemHasCursor = this->hasCursor();
+			if (itemHasCursor) {
+				this->unsetCursor();
+			}
 		}
 		setAcceptHoverEvents(false);
-	}
-	else {
+	} else {
 		this->setAcceptedMouseButtons(ALLMOUSEBUTTONS);
 		// Only setCursor if we have valid cursor and views
-		if (!hasNullCursor && !hasEmptyViews) {
-			this->setCursor(attachedToItemType() == ModelPart::Wire ? *CursorMaster::BendpointCursor : *CursorMaster::MakeWireCursor);
+		if (hasViews) {
+			QCursor *acceptCursor = attachedToItemType() == ModelPart::Wire
+										? CursorMaster::BendpointCursor
+										: CursorMaster::MakeWireCursor;
+			if (acceptCursor) {
+				this->setCursor(*acceptCursor);
+			}
 		}
 		setAcceptHoverEvents(true);
 	}
