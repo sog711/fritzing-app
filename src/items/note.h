@@ -108,6 +108,7 @@ class NoteGraphicsTextItem : public QGraphicsTextItem
 public:
 	NoteGraphicsTextItem(QGraphicsItem * parent = NULL);
 	void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
+	void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
 protected:
 	void focusInEvent(QFocusEvent *);

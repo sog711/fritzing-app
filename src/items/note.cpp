@@ -37,6 +37,8 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QLineEdit>
 #include <QDialogButtonBox>
 #include <QPushButton>
+#include <QPaintEngine>
+#include <QImage>
 
 // TODO:
 //		** search for ModelPart:: and fix up
@@ -112,6 +114,10 @@ NoteGraphicsTextItem::NoteGraphicsTextItem(QGraphicsItem * parent) : QGraphicsTe
 	QTextFrameFormat altFormat(format);
 	altFormat.setMargin(0);										// so document never thinks a mouse click is a move event
 	document()->rootFrame()->setFrameFormat(altFormat);
+
+	// Disable caching to prevent texture-based rendering issues with OpenGL
+	// This forces the text to be re-rendered each frame, which may preserve kerning
+	setCacheMode(QGraphicsItem::NoCache);
 }
 
 void NoteGraphicsTextItem::contextMenuEvent(QGraphicsSceneContextMenuEvent *) {
@@ -135,6 +141,89 @@ void NoteGraphicsTextItem::focusOutEvent(QFocusEvent * event) {
 	QApplication::instance()->removeEventFilter((Note *) this->parentItem());
 	QGraphicsTextItem::focusOutEvent(event);
 	DebugDialog::debug("note focus out");
+}
+
+void NoteGraphicsTextItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
+	// Check if we're using an OpenGL paint engine
+	bool isOpenGL = (painter->paintEngine()->type() == QPaintEngine::OpenGL2 ||
+	                 painter->paintEngine()->type() == QPaintEngine::OpenGL);
+
+	if (isOpenGL) {
+		// Workaround for OpenGL kerning issues: render to QImage first, then draw
+		// This bypasses OpenGL's texture-based text caching that breaks kerning
+		QRectF br = boundingRect();
+		if (br.width() > 0 && br.height() > 0) {
+			// Get the device pixel ratio for high-DPI rendering
+			qreal dpr = painter->device() ? painter->device()->devicePixelRatioF() : 1.0;
+
+			// Detect current zoom level from painter's transformation
+			QTransform transform = painter->transform();
+			qreal zoomLevel = qSqrt(transform.m11() * transform.m11() + transform.m12() * transform.m12());
+
+			// Optimization: only render the visible/exposed portion of the note
+			// This is crucial at high zoom levels where only a fraction is visible
+			QRectF exposedRect = option->exposedRect;
+			QRectF renderRect = br.intersected(exposedRect);
+
+			if (renderRect.isEmpty()) {
+				return; // Nothing visible to render
+			}
+
+			// Start with scale factor matching zoom level
+			qreal scaleFactor = qMax(1.0, zoomLevel);
+
+			// Calculate desired image size
+			QSizeF desiredSize = renderRect.size() * scaleFactor * dpr;
+
+			// Limit total pixel count to avoid excessive memory usage
+			// 16 megapixels = 64MB for ARGB32, which is reasonable
+			const qreal maxPixels = 16.0 * 1024.0 * 1024.0;
+			qreal actualPixels = desiredSize.width() * desiredSize.height();
+
+			// If pixel count exceeds limit, scale down proportionally
+			if (actualPixels > maxPixels) {
+				qreal scaleRatio = qSqrt(maxPixels / actualPixels);
+				scaleFactor *= scaleRatio;
+			}
+
+			QSize imageSize = (renderRect.size() * scaleFactor * dpr).toSize();
+			DebugDialog::debug(QString("NoteGraphicsTextItem: rendering %1x%2 px (zoom: %3x, visible: %4x%5, total: %6x%7)")
+				.arg(imageSize.width())
+				.arg(imageSize.height())
+				.arg(zoomLevel, 0, 'f', 2)
+				.arg(renderRect.width(), 0, 'f', 1)
+				.arg(renderRect.height(), 0, 'f', 1)
+				.arg(br.width(), 0, 'f', 1)
+				.arg(br.height(), 0, 'f', 1));
+			QImage image(imageSize, QImage::Format_ARGB32_Premultiplied);
+			image.setDevicePixelRatio(1.0);  // Don't use DPR on the image, we handle scaling manually
+			image.fill(Qt::transparent);
+
+			// Paint text to image using non-OpenGL raster engine (preserves kerning)
+			QPainter imagePainter(&image);
+			imagePainter.setRenderHint(QPainter::Antialiasing, true);
+			imagePainter.setRenderHint(QPainter::TextAntialiasing, true);
+			imagePainter.setRenderHint(QPainter::SmoothPixmapTransform, true);
+
+			// Scale the painter to match our higher resolution image
+			imagePainter.scale(scaleFactor * dpr, scaleFactor * dpr);
+			// Translate to render only the visible portion
+			imagePainter.translate(-renderRect.topLeft());
+
+			// Call base class to render to the image
+			QGraphicsTextItem::paint(&imagePainter, option, widget);
+			imagePainter.end();
+
+			// Draw the pre-rendered high-res image to the OpenGL context with smooth scaling
+			painter->save();
+			painter->setRenderHint(QPainter::SmoothPixmapTransform, true);
+			painter->drawImage(renderRect, image);
+			painter->restore();
+		}
+	} else {
+		// Non-OpenGL rendering: use standard path
+		QGraphicsTextItem::paint(painter, option, widget);
+	}
 }
 
 //////////////////////////////////////////

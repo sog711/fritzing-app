@@ -5,6 +5,7 @@
 #include <QOpenGLFunctions>
 #include <QScreen>
 #include <QOffscreenSurface>
+#include <QGraphicsView>
 #include "utils/fmessagebox.h"
 #include "debugdialog.h"
 #include <algorithm>
@@ -151,7 +152,6 @@ void FPSMonitor::showDiagnostics()
 {
 	QString diagnostics;
 
-	// Get OpenGL info
 	QOpenGLContext *context = QOpenGLContext::currentContext();
 	if (context) {
 		QOpenGLFunctions *f = context->functions();
@@ -165,6 +165,26 @@ void FPSMonitor::showDiagnostics()
 	} else {
 		diagnostics += "OpenGL context not available\n";
 	}
+
+	// Qt Platform and Rendering Backend
+	diagnostics += "\nQt Rendering Backend:\n";
+	diagnostics += QString("Platform plugin: %1\n").arg(QGuiApplication::platformName());
+
+	// Application attributes that affect rendering
+	diagnostics += QString("AA_UseDesktopOpenGL: %1\n").arg(QCoreApplication::testAttribute(Qt::AA_UseDesktopOpenGL) ? "true" : "false");
+	diagnostics += QString("AA_UseOpenGLES: %1\n").arg(QCoreApplication::testAttribute(Qt::AA_UseOpenGLES) ? "true" : "false");
+	diagnostics += QString("AA_UseSoftwareOpenGL: %1\n").arg(QCoreApplication::testAttribute(Qt::AA_UseSoftwareOpenGL) ? "true" : "false");
+
+	// Viewport information (if this FPSMonitor belongs to a QGraphicsView)
+	diagnostics += "\nViewport Rendering Path:\n";
+	QGraphicsView* view = qobject_cast<QGraphicsView*>(parent());
+	if (view) {
+		QWidget* viewport = view->viewport();
+		diagnostics += QString("Viewport type: %1\n").arg(viewport->metaObject()->className());
+	} else {
+		diagnostics += "No viewport information available (parent is not QGraphicsView)\n";
+	}
+
 
 	// Get info for all screens
 	QList<QScreen*> screens = QGuiApplication::screens();
