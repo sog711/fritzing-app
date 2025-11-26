@@ -1192,13 +1192,15 @@ void ResizableBoard::hoverMoveEvent( QGraphicsSceneHoverEvent * event ) {
 	switch (m_corner) {
 	case ResizableBoard::BOTTOM_RIGHT:
 	case ResizableBoard::TOP_LEFT:
+		// Diagonal resize: northwest-southeast (nwse-resize in CSS)
+		cursor = Qt::SizeFDiagCursor;
+		break;
 	case ResizableBoard::TOP_RIGHT:
 	case ResizableBoard::BOTTOM_LEFT:
-		//DebugDialog::debug("setting scale cursor");
-		cursor = *CursorMaster::ScaleCursor;
+		// Diagonal resize: northeast-southwest (nesw-resize in CSS)
+		cursor = Qt::SizeBDiagCursor;
 		break;
 	default:
-		//DebugDialog::debug("setting other cursor");
 		cursor = Qt::ArrowCursor;
 		break;
 	}

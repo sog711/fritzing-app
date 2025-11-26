@@ -347,7 +347,7 @@ ResizableBoard::Corner Pad::findCorner(QPointF scenePos, Qt::KeyboardModifiers m
 
 	if (modifiers & altOrMetaModifier()) {
 		// free rotate
-		setCursor(*CursorMaster::RotateCursor);
+		setCursor(*SvgCursorBuilder::RotateCursor);
 		return ResizableBoard::NO_CORNER;
 	}
 

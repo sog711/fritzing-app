@@ -3115,7 +3115,7 @@ void SketchWidget::mouseMoveEvent(QMouseEvent *event) {
 
 				auto * drag = new QDrag(this);
 				drag->setMimeData(mimeData);
-				//QBitmap bitmap = *CursorMaster::MoveCursor->bitmap();
+				//QBitmap bitmap = *SvgCursorBuilder::MoveCursor->bitmap();
 				//drag->setDragCursor(bitmap, Qt::MoveAction);
 
 				QPointF offset;
@@ -7134,12 +7134,12 @@ void SketchWidget::spaceBarIsPressedSlot(bool isPressed) {
 	if (isPressed) {
 		setDragMode(QGraphicsView::ScrollHandDrag);
 		//setInteractive(false);
-		//CursorMaster::instance()->addCursor(this, Qt::OpenHandCursor);
+		//SvgCursorBuilder::instance()->addCursor(this, Qt::OpenHandCursor);
 		//setCursor(Qt::OpenHandCursor);
 		//DebugDialog::debug("setting open hand cursor");
 	}
 	else {
-		//CursorMaster::instance()->removeCursor(this);
+		//SvgCursorBuilder::instance()->removeCursor(this);
 		setDragMode(QGraphicsView::RubberBandDrag);
 		//setInteractive(true);
 		//setCursor(Qt::ArrowCursor);

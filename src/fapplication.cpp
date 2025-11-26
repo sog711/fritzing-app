@@ -41,7 +41,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "partsbinpalette/svgiconwidget.h"
 #include "partsbinpalette/partsbinpalettewidget.h"
 #include "utils/ratsnestcolors.h"
-#include "utils/cursormaster.h"
+#include "utils/svgcursorbuilder.h"
 #include "utils/textutils.h"
 #include "utils/graphicsutils.h"
 #include "utils/uploadpair.h"
@@ -762,7 +762,7 @@ int FApplication::init() {
 	SvgIconWidget::initNames();
 	PinHeader::initNames();
 	if (m_serviceType == ServiceType::NoService) {
-		CursorMaster::initCursors();
+		SvgCursorBuilder::initCursors();
 	}
 
 #ifdef Q_OS_MACOS
@@ -804,7 +804,7 @@ FApplication::~FApplication(void)
 	PartFactory::cleanup();
 	PartsBinView::cleanup();
 	PropertyDefMaster::cleanup();
-	CursorMaster::cleanup();
+	SvgCursorBuilder::cleanup();
 	LockManager::cleanup();
 	PartsBinPaletteWidget::cleanup();
 }
@@ -875,7 +875,7 @@ bool FApplication::eventFilter(QObject *obj, QEvent *event)
 			if (!kevent->isAutoRepeat() && (kevent->key() == Qt::Key_Space)) {
 				m_spaceBarIsPressed = true;
 				//DebugDialog::debug("spacebar pressed");
-				CursorMaster::instance()->block();
+				SvgCursorBuilder::instance()->block();
 				setOverrideCursor(Qt::OpenHandCursor);
 				Q_EMIT spaceBarIsPressedSignal(true);
 			}
@@ -891,7 +891,7 @@ bool FApplication::eventFilter(QObject *obj, QEvent *event)
 				m_spaceBarIsPressed = false;
 				//DebugDialog::debug("spacebar pressed");
 				restoreOverrideCursor();
-				CursorMaster::instance()->unblock();
+				SvgCursorBuilder::instance()->unblock();
 				Q_EMIT spaceBarIsPressedSignal(false);
 			}
 		}

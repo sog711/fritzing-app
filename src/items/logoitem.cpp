@@ -27,7 +27,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../svg/gerbergenerator.h"
 #include "moduleidnames.h"
 #include "../svg/groundplanegenerator.h"
-#include "../utils/cursormaster.h"
+#include "../utils/svgcursorbuilder.h"
 #include "../debugdialog.h"
 #include "../svg/clipperhelpers.h"
 #include "utils/misc.h"
@@ -1108,7 +1108,7 @@ ResizableBoard::Corner LogoItem::findCorner(QPointF scenePos, Qt::KeyboardModifi
 
 	if (modifiers & altOrMetaModifier()) {
 		// free rotate
-		setCursor(*CursorMaster::RotateCursor);
+		setCursor(*SvgCursorBuilder::RotateCursor);
 		return ResizableBoard::NO_CORNER;
 	}
 

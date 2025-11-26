@@ -223,7 +223,7 @@ parts editor support
 #include "../utils/ratsnestcolors.h"
 #include "../utils/bezier.h"
 #include "../utils/bezierdisplay.h"
-#include "../utils/cursormaster.h"
+#include "../utils/svgcursorbuilder.h"
 #include "ercdata.h"
 #include "utils/ftooltip.h"
 #include "utils/misc.h"
@@ -375,7 +375,7 @@ void ConnectorItem::hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) {
 	}
 
 	//DebugDialog::debug("---CI set override cursor");
-	CursorMaster::instance()->addCursor(this, cursor());
+	SvgCursorBuilder::instance()->addCursor(this, cursor());
 	bool setDefaultCursor = true;
 	m_hoverEnterSpaceBarWasPressed = false;
 	setHoverColor();
@@ -394,7 +394,7 @@ void ConnectorItem::hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) {
 		m_attachedTo->hoverEnterConnectorItem(event, this);
 	}
 
-	if (setDefaultCursor) CursorMaster::instance()->addCursor(this, *CursorMaster::MakeWireCursor);
+	if (setDefaultCursor) SvgCursorBuilder::instance()->addCursor(this, *SvgCursorBuilder::MakeWireCursor);
 }
 
 void ConnectorItem::hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) {
@@ -410,14 +410,14 @@ void ConnectorItem::hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) {
 		infoGraphicsView->hoverLeaveConnectorItem(event, this);
 	}
 
-	CursorMaster::instance()->removeCursor(this);
+	SvgCursorBuilder::instance()->removeCursor(this);
 
 	if (this->m_attachedTo) {
 		m_attachedTo->hoverLeaveConnectorItem(event, this);
 	}
 
 	//DebugDialog::debug("------CI restore override cursor");
-	CursorMaster::instance()->removeCursor(this);
+	SvgCursorBuilder::instance()->removeCursor(this);
 }
 
 void ConnectorItem::hoverMoveEvent ( QGraphicsSceneHoverEvent * event ) {
@@ -1028,8 +1028,8 @@ void ConnectorItem::setHiddenOrInactive() {
 		// Only setCursor if we have valid cursor and views
 		if (hasViews) {
 			QCursor *acceptCursor = attachedToItemType() == ModelPart::Wire
-										? CursorMaster::BendpointCursor
-										: CursorMaster::MakeWireCursor;
+										? SvgCursorBuilder::BendpointCursor
+										: SvgCursorBuilder::MakeWireCursor;
 			if (acceptCursor) {
 				this->setCursor(*acceptCursor);
 			}
@@ -2895,7 +2895,7 @@ void ConnectorItem::cursorKeyEvent(Qt::KeyboardModifiers modifiers)
 void ConnectorItem::updateWireCursor(Qt::KeyboardModifiers modifiers)
 {
 	//DebugDialog::debug("uwc");
-	QCursor cursor = *CursorMaster::BendpointCursor;
+	QCursor cursor = *SvgCursorBuilder::BendpointCursor;
 	if (isBendpoint()) {
 		//DebugDialog::debug("uwc bend");
 		if (modifiers & altOrMetaModifier()) {
@@ -2903,12 +2903,12 @@ void ConnectorItem::updateWireCursor(Qt::KeyboardModifiers modifiers)
 			Wire * wire = qobject_cast<Wire *>(attachedTo());
 			if (wire && wire->canChainMultiple()) {
 				//DebugDialog::debug("uwc make wire");
-				cursor = *CursorMaster::MakeWireCursor;
+				cursor = *SvgCursorBuilder::MakeWireCursor;
 			}
 		}
 	}
 
-	CursorMaster::instance()->addCursor(this, cursor);
+	SvgCursorBuilder::instance()->addCursor(this, cursor);
 }
 
 void ConnectorItem::updateLegCursor(QPointF p, Qt::KeyboardModifiers modifiers)
@@ -2921,19 +2921,19 @@ void ConnectorItem::updateLegCursor(QPointF p, Qt::KeyboardModifiers modifiers)
 		cursor = *attachedTo()->getCursor(modifiers);
 		break;
 	case InBendpoint:
-		cursor = *CursorMaster::BendpointCursor;
+		cursor = *SvgCursorBuilder::BendpointCursor;
 		break;
 	case InSegment:
-		cursor = curvyWiresIndicated(modifiers) ? *CursorMaster::MakeCurveCursor : *CursorMaster::NewBendpointCursor;
+		cursor = curvyWiresIndicated(modifiers) ? *SvgCursorBuilder::MakeCurveCursor : *SvgCursorBuilder::NewBendpointCursor;
 		break;
 	case InConnector:
-		cursor = (modifiers & altOrMetaModifier()) ? *CursorMaster::MakeWireCursor : *CursorMaster::BendlegCursor;
+		cursor = (modifiers & altOrMetaModifier()) ? *SvgCursorBuilder::MakeWireCursor : *SvgCursorBuilder::BendpointCursor;
 		break;
 	default:
 		cursor = Qt::ArrowCursor;
 		break;
 	}
-	CursorMaster::instance()->addCursor(this, cursor);
+	SvgCursorBuilder::instance()->addCursor(this, cursor);
 }
 
 bool ConnectorItem::curvyWiresIndicated(Qt::KeyboardModifiers modifiers)

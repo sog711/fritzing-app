@@ -23,7 +23,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "nonconnectoritem.h"
 #include "connector.h"
-#include "utils/cursormaster.h"
+#include "utils/svgcursorbuilder.h"
 #include "utils/bezier.h"
 
 #include <QThread>

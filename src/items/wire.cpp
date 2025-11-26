@@ -71,7 +71,7 @@ later:
 #include "../utils/graphicsutils.h"
 #include "../utils/bezier.h"
 #include "../utils/bezierdisplay.h"
-#include "../utils/cursormaster.h"
+#include "../utils/svgcursorbuilder.h"
 #include "../utils/ratsnestcolors.h"
 #include "../layerattributes.h"
 #include "utils/misc.h"
@@ -915,7 +915,7 @@ void Wire::hoverLeaveConnectorItem(QGraphicsSceneHoverEvent * event, ConnectorIt
 
 void Wire::hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) {
 	ItemBase::hoverEnterEvent(event);
-	CursorMaster::instance()->addCursor(this, cursor());
+	SvgCursorBuilder::instance()->addCursor(this, cursor());
 	//DebugDialog::debug("---wire set override cursor");
 	updateCursor(event->modifiers());
 }
@@ -923,7 +923,7 @@ void Wire::hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) {
 void Wire::hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) {
 	ItemBase::hoverLeaveEvent(event);
 	//DebugDialog::debug("------wire restore override cursor");
-	CursorMaster::instance()->removeCursor(this);
+	SvgCursorBuilder::instance()->removeCursor(this);
 }
 
 
@@ -1961,17 +1961,17 @@ void Wire::updateCursor(Qt::KeyboardModifiers modifiers)
 
 	if (segment) {
 		// dragging a segment of wire between bounded by two other wires
-		CursorMaster::instance()->addCursor(this, *CursorMaster::RubberbandCursor);
+		SvgCursorBuilder::instance()->addCursor(this, *SvgCursorBuilder::RubberbandCursor);
 	}
 	else if (totalConnections == 0) {
 		// only in breadboard view
-		CursorMaster::instance()->addCursor(this, *CursorMaster::MoveCursor);
+		SvgCursorBuilder::instance()->addCursor(this, Qt::SizeAllCursor);
 	}
 	else if ((infoGraphicsView != nullptr) && infoGraphicsView->curvyWiresIndicated(modifiers)) {
-		CursorMaster::instance()->addCursor(this, *CursorMaster::MakeCurveCursor);
+		SvgCursorBuilder::instance()->addCursor(this, *SvgCursorBuilder::MakeCurveCursor);
 	}
 	else if (m_displayBendpointCursor) {
-		CursorMaster::instance()->addCursor(this, *CursorMaster::NewBendpointCursor);
+		SvgCursorBuilder::instance()->addCursor(this, *SvgCursorBuilder::NewBendpointCursor);
 	}
 }
 

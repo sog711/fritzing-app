@@ -33,7 +33,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../model/modelpart.h"
 
 #include "itembase.h"
-#include "../utils/cursormaster.h"
+#include "utils/svgcursorbuilder.h"
 
 class LayerKinPaletteItem;
 

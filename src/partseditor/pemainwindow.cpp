@@ -175,7 +175,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../connectors/bus.h"
 #include "../installedfonts.h"
 #include "../dock/layerpalette.h"
-#include "../utils/cursormaster.h"
+#include "../utils/svgcursorbuilder.h"
 #include "../infoview/htmlinfoview.h"
 
 #include <QtDebug>
@@ -1753,7 +1753,7 @@ void PEMainWindow::reload(bool firstTime)
 {
 	Q_UNUSED(firstTime);
 
-	CursorMaster::instance()->addCursor(this, Qt::WaitCursor);
+	SvgCursorBuilder::instance()->addCursor(this, Qt::WaitCursor);
 
 	QList<ItemBase *> toDelete;
 
@@ -1834,7 +1834,7 @@ void PEMainWindow::reload(bool firstTime)
 	// processEventBlocker might be enough?
 	QTimer::singleShot(10, this, SLOT(initZoom()));
 
-	CursorMaster::instance()->removeCursor(this);
+	SvgCursorBuilder::instance()->removeCursor(this);
 
 }
 

@@ -21,6 +21,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "stripboard.h"
 #include "../utils/graphicsutils.h"
 #include "../utils/familypropertycombobox.h"
+#include "../utils/svgcursorbuilder.h"
 #include "../svg/gerbergenerator.h"
 #include "../sketch/infographicsview.h"
 #include "moduleidnames.h"
@@ -41,9 +42,6 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 //	disconnect and reconnect affected parts
 //	swapping
 
-static QCursor * SpotFaceCutterCursor = nullptr;
-static QCursor * MagicWandCursor = nullptr;
-
 static bool ShiftDown = false;
 static QPointF OriginalShiftPos;
 static bool ShiftX = false;
@@ -63,16 +61,6 @@ static QString EmptyString("no strips");
 Stripbit::Stripbit(const QPainterPath & path, int x, int y, bool horizontal, QGraphicsItem * parent = nullptr)
 	: QGraphicsPathItem(path, parent)
 {
-	if (SpotFaceCutterCursor == nullptr) {
-		QPixmap pixmap(":resources/images/cursor/spot_face_cutter.png");
-		SpotFaceCutterCursor = new QCursor(pixmap, 0, 0);
-	}
-
-	if (MagicWandCursor == nullptr) {
-		QPixmap pixmap(":resources/images/cursor/magic_wand.png");
-		MagicWandCursor = new QCursor(pixmap, 0, 0);
-	}
-
 	setZValue(-999);			// beneath connectorItems
 
 	setPen(Qt::NoPen);
@@ -225,7 +213,7 @@ void Stripbit::hoverEnterEvent( QGraphicsSceneHoverEvent * event )
 	}
 
 	SpaceBarWasPressed = false;
-	setCursor(m_removed ? *MagicWandCursor : *SpotFaceCutterCursor);
+	setCursor(m_removed ? *SvgCursorBuilder::SpotFaceConnectCursor : *SvgCursorBuilder::SpotFaceCutterCursor);
 	Q_UNUSED(event);
 	m_inHover = true;
 	update();

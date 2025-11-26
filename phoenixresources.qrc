@@ -370,17 +370,14 @@
         <file>resources/fonts/Segment16/Segment16C Regular.ttf</file>
         <file>resources/fonts/Segment16/Segment16C Bold.ttf</file>
         <file>resources/images/icons/toolbarStopSimulationEnabled_icon.png</file>
-        <file>resources/images/cursor/bendleg.png</file>
-        <file>resources/images/cursor/bendpoint.png</file>
-        <file>resources/images/cursor/curve.png</file>
-        <file>resources/images/cursor/make_wire.png</file>
-        <file>resources/images/cursor/new_bendpoint.png</file>
-        <file>resources/images/cursor/part_move.png</file>
-        <file>resources/images/cursor/rotate.png</file>
         <file>resources/images/cursor/rubberband_move.png</file>
-        <file>resources/images/cursor/scale.png</file>
-        <file>resources/images/cursor/magic_wand.png</file>
-        <file>resources/images/cursor/spot_face_cutter.png</file>
+        <file>resources/images/cursor/bendpoint.svg</file>
+        <file>resources/images/cursor/spot_face_connect.svg</file>
+        <file>resources/images/cursor/curve.svg</file>
+        <file>resources/images/cursor/make_wire.svg</file>
+        <file>resources/images/cursor/new_bendpoint.svg</file>
+        <file>resources/images/cursor/rotate.svg</file>
+        <file>resources/images/cursor/spot_face_cutter.svg</file>
         <file>resources/images/icons/smalToolarrow-inactive.svg</file>
         <file>resources/images/icons/smalToolarrow-pressed.svg</file>
         <file>resources/images/icons/smalToolarrow-normal.svg</file>

@@ -31,7 +31,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "wire.h"
 #include "partlabel.h"
 #include "../utils/graphicsutils.h"
-#include "../utils/cursormaster.h"
+#include "../utils/svgcursorbuilder.h"
 
 #include <QBrush>
 #include <QPen>
@@ -569,7 +569,7 @@ void PaletteItemBase::hoverEnterEvent ( QGraphicsSceneHoverEvent * event ) {
 	if (event->isAccepted()) {
 		if (hasRubberBandLeg()) {
 			//DebugDialog::debug("---pab set override cursor");
-			CursorMaster::instance()->addCursor(this, cursor());
+			SvgCursorBuilder::instance()->addCursor(this, cursor());
 
 			bool connected = false;
 			Q_FOREACH (ConnectorItem * connectorItem, cachedConnectorItems()) {
@@ -595,7 +595,7 @@ void PaletteItemBase::hoverLeaveEvent ( QGraphicsSceneHoverEvent * event ) {
 		//DebugDialog::debug("------pab restore override cursor");
 	}
 
-	CursorMaster::instance()->removeCursor(this);
+	SvgCursorBuilder::instance()->removeCursor(this);
 
 	ItemBase::hoverLeaveEvent(event);
 }
@@ -608,12 +608,12 @@ void PaletteItemBase::cursorKeyEvent(Qt::KeyboardModifiers modifiers)
 	if (hasRubberBandLeg()) {
 		QCursor cursor;
 		if (modifiers & altOrMetaModifier()) {
-			cursor = *CursorMaster::RubberbandCursor;
+			cursor = *SvgCursorBuilder::RubberbandCursor;
 		}
 		else {
-			cursor = *CursorMaster::MoveCursor;
+			cursor = Qt::SizeAllCursor;
 		}
-		CursorMaster::instance()->addCursor(this, cursor);
+		SvgCursorBuilder::instance()->addCursor(this, cursor);
 	}
 }
 
@@ -758,14 +758,15 @@ const QCursor * PaletteItemBase::getCursor(Qt::KeyboardModifiers modifiers)
 		if ((modifiers & altOrMetaModifier()) != 0u) {
 			Q_FOREACH (ConnectorItem * connectorItem, cachedConnectorItems()) {
 				if (connectorItem->connectionsCount() > 0) {
-					return CursorMaster::RubberbandCursor;
+					return SvgCursorBuilder::RubberbandCursor;
 				}
 			}
 		}
 	}
 
 	//DebugDialog::debug("returning move cursor");
-	return CursorMaster::MoveCursor;
+	static QCursor moveCursor(Qt::SizeAllCursor);
+	return &moveCursor;
 }
 
 bool PaletteItemBase::freeRotationAllowed(Qt::KeyboardModifiers modifiers) {
@@ -813,10 +814,10 @@ void PaletteItemBase::checkFreeRotation(Qt::KeyboardModifiers modifiers, QPointF
 	bool inCorner = inRotationLocation(scenePos, modifiers, returnPoint);
 
 	if (inCorner) {
-		CursorMaster::instance()->addCursor(this, *CursorMaster::RotateCursor);
+		SvgCursorBuilder::instance()->addCursor(this, *SvgCursorBuilder::RotateCursor);
 	}
 	else {
-		CursorMaster::instance()->addCursor(this, cursor());
+		SvgCursorBuilder::instance()->addCursor(this, cursor());
 	}
 }
 

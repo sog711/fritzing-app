@@ -36,7 +36,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../utils/folderutils.h"
 #include "../utils/textutils.h"
 #include "../utils/graphicsutils.h"
-#include "../utils/cursormaster.h"
+#include "../utils/svgcursorbuilder.h"
 #include "../utils/clickablelabel.h"
 #include "../utils/familypropertycombobox.h"
 #include "../referencemodel/referencemodel.h"
@@ -118,7 +118,7 @@ ItemBase::ItemBase( ModelPart* modelPart, ViewLayer::ViewID viewID, const ViewGe
 	if (m_modelPart != nullptr) {
 		m_modelPart->addViewItem(this);
 	}
-	setCursor(*CursorMaster::MoveCursor);
+	setCursor(Qt::SizeAllCursor);
 
 	setAcceptHoverEvents ( true );
 }
@@ -2219,7 +2219,8 @@ QPainterPath ItemBase::hoverShape() const
 
 const QCursor * ItemBase::getCursor(Qt::KeyboardModifiers)
 {
-	return CursorMaster::MoveCursor;
+	static QCursor moveCursor(Qt::SizeAllCursor);
+	return &moveCursor;
 }
 
 PartLabel * ItemBase::partLabel() {
