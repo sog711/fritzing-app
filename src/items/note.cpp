@@ -153,8 +153,18 @@ void NoteGraphicsTextItem::paint(QPainter *painter, const QStyleOptionGraphicsIt
 		// This bypasses OpenGL's texture-based text caching that breaks kerning
 		QRectF br = boundingRect();
 		if (br.width() > 0 && br.height() > 0) {
-			// Get the device pixel ratio for high-DPI rendering
-			qreal dpr = painter->device() ? painter->device()->devicePixelRatioF() : 1.0;
+			// Calculate DPI scaling factor
+			// physicalDpiX is set to higher values during exports (e.g., 189 for 300 DPI)
+			qreal dpr = 1.0;
+			if (painter->device()) {
+				int physicalDpiX = painter->device()->physicalDpiX();
+				const int standardDpi = 96;
+
+				if (physicalDpiX > standardDpi) {
+					// Use physical DPI for scaling (handles high-DPI exports)
+					dpr = static_cast<qreal>(physicalDpiX) / standardDpi;
+				}
+			}
 
 			// Detect current zoom level from painter's transformation
 			QTransform transform = painter->transform();
@@ -172,6 +182,11 @@ void NoteGraphicsTextItem::paint(QPainter *painter, const QStyleOptionGraphicsIt
 			// Start with scale factor matching zoom level
 			qreal scaleFactor = qMax(1.0, zoomLevel);
 
+			// Apply 2x oversampling only if DPR is low (not already scaled for export)
+			if (dpr < 1.5) {
+				scaleFactor *= 2.0;
+			}
+
 			// Calculate desired image size
 			QSizeF desiredSize = renderRect.size() * scaleFactor * dpr;
 
@@ -187,14 +202,6 @@ void NoteGraphicsTextItem::paint(QPainter *painter, const QStyleOptionGraphicsIt
 			}
 
 			QSize imageSize = (renderRect.size() * scaleFactor * dpr).toSize();
-			DebugDialog::debug(QString("NoteGraphicsTextItem: rendering %1x%2 px (zoom: %3x, visible: %4x%5, total: %6x%7)")
-				.arg(imageSize.width())
-				.arg(imageSize.height())
-				.arg(zoomLevel, 0, 'f', 2)
-				.arg(renderRect.width(), 0, 'f', 1)
-				.arg(renderRect.height(), 0, 'f', 1)
-				.arg(br.width(), 0, 'f', 1)
-				.arg(br.height(), 0, 'f', 1));
 			QImage image(imageSize, QImage::Format_ARGB32_Premultiplied);
 			image.setDevicePixelRatio(1.0);  // Don't use DPR on the image, we handle scaling manually
 			image.fill(Qt::transparent);
@@ -321,7 +328,7 @@ Note::Note( ModelPart * modelPart, ViewLayer::ViewID viewID,  const ViewGeometry
 	//connect(m_resizeGrip, SIGNAL(zoomChangedSignal(double)), this, SLOT(handleZoomChangedSlot(double)));
 
 	m_graphicsTextItem = new NoteGraphicsTextItem();
-	QFont font("Droid Sans", 9, QFont::Normal);
+	QFont font("Noto Sans", 9, QFont::Normal);
 	m_graphicsTextItem->setFont(font);
 	m_graphicsTextItem->setDefaultTextColor(QColor("grey"));
 	m_graphicsTextItem->document()->setDefaultFont(font);
@@ -476,10 +483,10 @@ void Note::forceFormat(int position, int charsAdded) {
 	QTextCursor textCursor = m_graphicsTextItem->textCursor();
 
 	QTextCharFormat f;
-	QFont font("Droid Sans", 9, QFont::Normal);
+	QFont font("Noto Sans", 9, QFont::Normal);
 
 	f.setFont(font);
-	f.setFontFamilies(QStringList("Droid Sans"));
+	f.setFontFamilies(QStringList("Noto Sans"));
 	f.setFontPointSize(9);
 
 	int cc = m_graphicsTextItem->document()->characterCount();
@@ -892,7 +899,7 @@ QString Note::retrieveSvg(ViewLayer::ViewLayerID viewLayerID, QHash<QString, QSt
 			svg += QString("<text  x='%1' y='%2' font-family='%3' stroke='none' fill='#000000' text-anchor='left' font-size='%4' >\n")
 			       .arg((left + r.left()) * dpi / GraphicsUtils::SVGDPI)
 			       .arg((top + r.top() + line.ascent()) * dpi / GraphicsUtils::SVGDPI)
-			       .arg("Droid Sans")
+			       .arg("Noto Sans")
 			       .arg(line.ascent() * dpi / GraphicsUtils::SVGDPI)
 			       ;
 
