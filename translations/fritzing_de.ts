@@ -2743,12 +2743,12 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="971"/>
         <source>Unable to export %1 as shareable.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 konnte nicht zum Teilen exportiert werden.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="972"/>
         <source>Saving failed. Please check if home and destionation directory are writeable and not full.</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern fehlgeschlagen. Bitte überprüfe, ob Home- und Zielverzeichnis schreibbar und nicht voll sind.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="985"/>
@@ -8267,9 +8267,9 @@ im Sortiment. Nicht erneut hinzufügen?</translation>
     <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="156"/>
         <source>%n path(s) in paste mask layers</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n Pfad in Lötpastenmasken-Ebenen</numerusform>
+            <numerusform>%n Pfade in Lötpastenmasken-Ebenen</numerusform>
         </translation>
     </message>
     <message>
@@ -9292,14 +9292,16 @@ Wenn die Teile aus dem Simulations-Bin stammen, melden Sie den Fehler in GitHub.
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="9081"/>
         <source>We need to move these parts.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wir müssen diese Bauteile verschieben.</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="9082"/>
         <source>To delete this connection, some parts need to be moved from their current positions.
 The parts will be moved automatically. You can use the Undo History to review these changes.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Um diese Verbindung zu löschen, müssen einige Bauteile von ihren aktuellen Positionen verschoben werden.
+Die Bauteile werden automatisch verschoben. Du kannst die Rückgängig-Historie verwenden, um diese Änderungen zu überprüfen.
+</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="9397"/>
@@ -9734,7 +9736,7 @@ Beachte: Du kannst diese Anzeige auch aufrufen, indem Du den Routing-Status in d
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="83"/>
         <source>If you can&apos;t find a part in the Parts Bin, the Generic IC is your friend.  Drag it onto your sketch, then use the widgets in the Inspector to: choose from among 25 different through-hole and SMD packages; change the pin label; and--for DIPs and SIPs--change the number of pins.  You can also change the pin names with the Pin Label editor.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn du ein Bauteil nicht im Bauteil-Bin findest, ist das Generic IC dein Freund. Ziehe es auf deine Skizze, und nutze dann die Widgets im Inspektor, um: aus 25 verschiedenen Durchsteck- und SMD-Gehäusen zu wählen; die Kontaktbezeichnung zu ändern; und--für DIPs und SIPs--die Anzahl der Kontakte zu ändern. Du kannst die Kontaktnamen auch mit dem Pin-Label-Editor ändern.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="84"/>
@@ -9779,7 +9781,7 @@ Beachte: Du kannst diese Anzeige auch aufrufen, indem Du den Routing-Status in d
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="135"/>
         <source>A virtual wire between connections in one view indicates that there is already a corresponding connection in another view.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine virtuelle Verbindung zwischen Anschlüssen in einer Ansicht zeigt an, dass bereits eine entsprechende Verbindung in einer anderen Ansicht existiert.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="136"/>
