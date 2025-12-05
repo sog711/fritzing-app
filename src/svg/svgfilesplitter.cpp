@@ -460,8 +460,15 @@ void SvgFileSplitter::normalizeChild(QDomElement & element,
 		TextUtils::fixStyleAttribute(element);
 		normalizeAttribute(element, "x", sNewWidth, vbWidth);
 		normalizeAttribute(element, "y", sNewHeight, vbHeight);
-		normalizeAttribute(element, "dx", sNewWidth, vbWidth);
-		normalizeAttribute(element, "dy", sNewHeight, vbHeight);
+		// Skip normalization for dx/dy with em/ex units (font-relative)
+		QString dx = element.attribute("dx").trimmed();
+		if (!dx.endsWith("em") && !dx.endsWith("ex")) {
+			normalizeAttribute(element, "dx", sNewWidth, vbWidth);
+		}
+		QString dy = element.attribute("dy").trimmed();
+		if (!dy.endsWith("em") && !dy.endsWith("ex")) {
+			normalizeAttribute(element, "dy", sNewHeight, vbHeight);
+		}
 		normalizeAttribute(element, "stroke-width", sNewWidth, vbWidth);
 		normalizeFontSize(element, "font-size", sNewWidth, vbWidth);
 		setStrokeOrFill(element, blackOnly, "black", false);
