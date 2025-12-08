@@ -74,6 +74,15 @@ constexpr int TriangleOffset = 7;
 
 constexpr double InactiveOpacity = 0.5;
 
+// Line height for Noto Sans to match the line spacing of Droid Sans
+// 80% line height with Noto Sans gives approximately the same line distance as previous default Droid Sans
+// 90% is the compromise between the old compact look and the new spacy appearance (avoid exceeding size for
+// many existing sketches)
+constexpr int NotoSansLineHeightPercent = 90;
+
+// Default font size for notes
+constexpr double NoteDefaultFontSize = 8.5;
+
 QString Note::initialTextString;
 
 QRegularExpression UrlTag("<a.*href=[\"']([^\"]+[.\\s]*)[\"'].*>");
@@ -328,10 +337,19 @@ Note::Note( ModelPart * modelPart, ViewLayer::ViewID viewID,  const ViewGeometry
 	//connect(m_resizeGrip, SIGNAL(zoomChangedSignal(double)), this, SLOT(handleZoomChangedSlot(double)));
 
 	m_graphicsTextItem = new NoteGraphicsTextItem();
-	QFont font("Noto Sans", 9, QFont::Normal);
+	QFont font("Noto Sans");
+	font.setPointSizeF(NoteDefaultFontSize);
+	font.setWeight(QFont::Normal);
 	m_graphicsTextItem->setFont(font);
 	m_graphicsTextItem->setDefaultTextColor(QColor("grey"));
 	m_graphicsTextItem->document()->setDefaultFont(font);
+
+	QTextBlockFormat blockFormat;
+	blockFormat.setLineHeight(NotoSansLineHeightPercent, QTextBlockFormat::ProportionalHeight);
+	QTextCursor cursor(m_graphicsTextItem->document());
+	cursor.select(QTextCursor::Document);
+	cursor.mergeBlockFormat(blockFormat);
+
 	m_graphicsTextItem->setParentItem(this);
 	m_graphicsTextItem->setVisible(true);
 	m_graphicsTextItem->setPlainText(initialTextString);
@@ -483,11 +501,13 @@ void Note::forceFormat(int position, int charsAdded) {
 	QTextCursor textCursor = m_graphicsTextItem->textCursor();
 
 	QTextCharFormat f;
-	QFont font("Noto Sans", 9, QFont::Normal);
+	QFont font("Noto Sans");
+	font.setPointSizeF(NoteDefaultFontSize);
+	font.setWeight(QFont::Normal);
 
 	f.setFont(font);
 	f.setFontFamilies(QStringList("Noto Sans"));
-	f.setFontPointSize(9);
+	f.setFontPointSize(NoteDefaultFontSize);
 
 	int cc = m_graphicsTextItem->document()->characterCount();
 	textCursor.setPosition(position, QTextCursor::MoveAnchor);
@@ -498,9 +518,10 @@ void Note::forceFormat(int position, int charsAdded) {
 
 	//textCursor.setCharFormat(f);
 	textCursor.mergeCharFormat(f);
-	//DebugDialog::debug(QString("setting font tc:%1,%2 params:%3,%4")
-	//.arg(textCursor.anchor()).arg(textCursor.position())
-	//.arg(position).arg(position + charsAdded));
+
+	QTextBlockFormat blockFormat;
+	blockFormat.setLineHeight(NotoSansLineHeightPercent, QTextBlockFormat::ProportionalHeight);
+	textCursor.mergeBlockFormat(blockFormat);
 
 	/*
 	textCursor = m_graphicsTextItem->textCursor();
