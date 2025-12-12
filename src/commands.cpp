@@ -509,7 +509,7 @@ QString FlipItemCommand::getParamString() const {
 	       + BaseCommand::getParamString() +
 	       QString(" id:%1 by:%2")
 	       .arg(m_itemID)
-	       .arg(m_orientation);
+	       .arg(QVariant::fromValue(m_orientation).toString());
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1830,7 +1830,7 @@ QString RotateFlipLabelCommand::getParamString() const {
 	}
 	
 	result += QString(" id:%1 degrees:%2 orientation:%3")
-	          .arg(m_itemID).arg(m_degrees).arg(m_orientation);
+	          .arg(m_itemID).arg(m_degrees).arg(QVariant::fromValue(m_orientation).toString());
 	
 	return result;
 }

@@ -2004,7 +2004,7 @@ void ItemBase::debugInfo2(const QString & msg) const
 	                   .arg(this->instanceTitle())
 	                   .arg(this->viewLayerID())
 	                   .arg(this->viewLayerPlacement())
-	                   .arg(this->wireFlags())
+	                   .arg(QVariant::fromValue(this->wireFlags()).toString())
 			   .arg((long) dynamic_cast<const QGraphicsItem *>(this), 0, 16)
 	                   .arg(m_viewID)
 	                   .arg(this->zValue())
