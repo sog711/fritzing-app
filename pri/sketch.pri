@@ -25,6 +25,7 @@ HEADERS += \
     src/sketch/zoomablegraphicsview.h \
     src/sketch/subpartswapmanager.h \
 	src/sketch/swapthing.h \
+    src/sketch/FProbeScrollPosition.h \
 
 
 SOURCES += \
@@ -40,3 +41,4 @@ SOURCES += \
     src/sketch/zoomablegraphicsview.cpp \
     src/sketch/subpartswapmanager.cpp \
 	src/sketch/swapthing.cpp \
+    src/sketch/FProbeScrollPosition.cpp \

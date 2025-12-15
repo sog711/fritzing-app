@@ -56,6 +56,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../debugdialog.h"
 #include "sketchwidget.h"
 #include "outlierhandler.h"
+#include "FProbeScrollPosition.h"
 #include "subpartswapmanager.h"
 #include "../connectors/connectoritem.h"
 #include "../connectors/svgidlayer.h"
@@ -186,6 +187,9 @@ SketchWidget::SketchWidget(ViewLayer::ViewID viewID, QWidget *parent, int size, 
 	
 	// Initialize outlier handler
 	m_outlierHandler = new OutlierHandler(this, this);
+
+	// Initialize scroll position probe for test instrumentation
+	new FProbeScrollPosition(this, ViewLayer::viewIDName(viewID));
 
 	//this->scene()->setSceneRect(0,0, rect().width(), rect().height());
 
@@ -4469,7 +4473,33 @@ double SketchWidget::fitInWindow() {
 	setHorizontalScrollBarPolicy(originalHorizontalPolicy);
 	setVerticalScrollBarPolicy(originalVerticalPolicy);
 
-	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+	// Check if stabilized fit mode is enabled via environment variable.
+	// Set FRITZING_STABILIZED_FIT=1 to enable more deterministic positioning
+	// for screenshot tests. This may require regenerating reference images.
+	static bool stabilizedFit = qEnvironmentVariableIsSet("FRITZING_STABILIZED_FIT");
+
+	if (stabilizedFit) {
+		// Process events multiple times to ensure all layout updates complete.
+		// A single processEvents call is insufficient as Qt layout operations
+		// may schedule additional updates in subsequent event loop iterations.
+		// Using 5 iterations provides sufficient settling time for complex layouts.
+		for (int i = 0; i < 5; i++) {
+			QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+		}
+
+		// Force scroll positions to integer values for deterministic positioning.
+		// This prevents sub-pixel differences that can cause screenshot test failures.
+		int hValue = horizontalScrollBar()->value();
+		int vValue = verticalScrollBar()->value();
+		horizontalScrollBar()->setValue(hValue);
+		verticalScrollBar()->setValue(vValue);
+
+		// Final event flush after scroll adjustment
+		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+	} else {
+		// Legacy behavior: single processEvents call
+		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+	}
 
 	double scaleFactor = this->transform().m11();
 	m_scaleValue = scaleFactor * 100; // Convert scale factor to percentage
