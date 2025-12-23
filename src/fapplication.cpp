@@ -621,7 +621,7 @@ int FApplication::init() {
 			DebugDialog::debug(QString("Version changed from %1 to %2 - migrating settings").arg(prevVersion, currVersion));
 
 			// Settings to preserve during clear
-			QStringList preserveKeys = {"pid", "language", "locale"};
+			QStringList preserveKeys = {"pid", "language", "locale", "recentFileList"};
 			if (FTesting::getInstance()->enabled()) {
 				preserveKeys.append("gerberExportImprovementsEnabled");
 			}
