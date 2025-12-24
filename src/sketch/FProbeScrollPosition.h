@@ -56,7 +56,7 @@ public:
 	~FProbeScrollPosition();
 
 	QVariant read();
-	void write(QVariant) {}
+	void write(QVariant value);
 
 private:
 	SketchWidget * m_sketchWidget;

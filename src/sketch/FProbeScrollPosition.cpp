@@ -22,9 +22,11 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "../debugdialog.h"
 
+#include <QApplication>
 #include <QScrollBar>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QJsonParseError>
 
 FProbeScrollPosition::FProbeScrollPosition(SketchWidget * sketchWidget, const QString& viewSuffix) :
 	FProbe(viewSuffix.isEmpty() ? "ScrollPosition" : ("ScrollPosition_" + viewSuffix).toStdString()),
@@ -117,4 +119,53 @@ QVariant FProbeScrollPosition::read() {
 	DebugDialog::debug(QString("ScrollPosition: %1").arg(jsonString));
 
 	return QVariant(jsonString);
+}
+
+void FProbeScrollPosition::write(QVariant value) {
+	if (!m_sketchWidget) {
+		DebugDialog::debug("ScrollPosition write: No sketch widget");
+		return;
+	}
+
+	QString jsonString = value.toString();
+	DebugDialog::debug(QString("ScrollPosition write: %1").arg(jsonString));
+
+	QJsonParseError parseError;
+	QJsonDocument doc = QJsonDocument::fromJson(jsonString.toUtf8(), &parseError);
+	if (parseError.error != QJsonParseError::NoError) {
+		DebugDialog::debug(QString("ScrollPosition write: JSON parse error: %1").arg(parseError.errorString()));
+		return;
+	}
+
+	QJsonObject obj = doc.object();
+
+	// Set zoom first (if provided), as it affects scroll ranges
+	if (obj.contains("zoom")) {
+		double zoom = obj["zoom"].toDouble();
+		DebugDialog::debug(QString("ScrollPosition write: Setting zoom to %1").arg(zoom));
+		m_sketchWidget->absoluteZoom(zoom);
+		// Process events to allow layout updates after zoom change
+		QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+	}
+
+	// Set scroll positions (if provided)
+	QScrollBar* hBar = m_sketchWidget->horizontalScrollBar();
+	QScrollBar* vBar = m_sketchWidget->verticalScrollBar();
+
+	if (obj.contains("hValue") && hBar) {
+		int hValue = obj["hValue"].toInt();
+		DebugDialog::debug(QString("ScrollPosition write: Setting hValue to %1").arg(hValue));
+		hBar->setValue(hValue);
+	}
+
+	if (obj.contains("vValue") && vBar) {
+		int vValue = obj["vValue"].toInt();
+		DebugDialog::debug(QString("ScrollPosition write: Setting vValue to %1").arg(vValue));
+		vBar->setValue(vValue);
+	}
+
+	// Final event flush to ensure positions are applied
+	QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+
+	DebugDialog::debug("ScrollPosition write: Complete");
 }
