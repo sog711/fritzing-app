@@ -41,10 +41,27 @@ FProbeScrollPosition::~FProbeScrollPosition() {
 QVariant FProbeScrollPosition::read() {
 	if (!m_sketchWidget) {
 		DebugDialog::debug("ScrollPosition: No sketch widget");
-		return QVariant();
+		QJsonObject error;
+		error["error"] = "No sketch widget";
+		return QVariant(QString(QJsonDocument(error).toJson(QJsonDocument::Compact)));
 	}
 
 	QJsonObject result;
+
+	// Check if this view is currently active (visible)
+	if (!m_sketchWidget->isVisible()) {
+		QString viewType;
+		switch (m_sketchWidget->viewID()) {
+		case ViewLayer::BreadboardView: viewType = "breadboard"; break;
+		case ViewLayer::SchematicView: viewType = "schematic"; break;
+		case ViewLayer::PCBView: viewType = "pcb"; break;
+		default: viewType = "unknown"; break;
+		}
+		result["error"] = QString("View '%1' is not active").arg(viewType);
+		result["viewType"] = viewType;
+		DebugDialog::debug(QString("ScrollPosition: %1").arg(result["error"].toString()));
+		return QVariant(QString(QJsonDocument(result).toJson(QJsonDocument::Compact)));
+	}
 
 	// Get scrollbar values
 	QScrollBar* hBar = m_sketchWidget->horizontalScrollBar();
