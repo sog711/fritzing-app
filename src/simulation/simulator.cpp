@@ -662,8 +662,11 @@ void Simulator::updateMultimeterScreen(ItemBase * multimeter, QString msg){
 	QGraphicsTextItem * schScreen = new QGraphicsTextItem(msg, multimeter);
 	schScreen->setPos(QPointF(10,10));
 	schScreen->setZValue(std::numeric_limits<double>::max());
-	QFont font("Segment16C", 10, QFont::Normal);
-	bbScreen->setFont(font);
+	QFont seg_font("Segment16C", 10, QFont::Normal);
+	bbScreen->setFont(seg_font);
+	QFont noto_font("Noto Sans", 10, QFont::Normal);
+	schScreen->setFont(noto_font);
+
 	//There are issues as the size of the text changes depending on the display settings in windows
 	//This hack scales the text to match the appropiate value
 	QRectF bbMultBoundingBox = m_sch2bbItemHash.value(multimeter)->boundingRect();
