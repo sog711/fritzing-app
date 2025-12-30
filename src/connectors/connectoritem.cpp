@@ -2028,6 +2028,13 @@ ConnectorItem * ConnectorItem::findConnectorUnder(bool useTerminalPoint, bool al
 					return std::pow(this->sceneBoundingRect().center().x() - other->sceneBoundingRect().center().x(), 2) +
 						std::pow(this->sceneBoundingRect().center().y() - other->sceneBoundingRect().center().y(), 2);
 				};
+				// Prefer non-wire connectors over wire connectors
+				// Wire-to-wire connection should only win if there's no part connector nearby
+				bool aIsWire = (a->attachedToItemType() == ModelPart::Wire);
+				bool bIsWire = (b->attachedToItemType() == ModelPart::Wire);
+				if (aIsWire != bIsWire) {
+					return bIsWire;
+				}
 				if (a->zValue() == b->zValue()) {
 					return squaredDistanceTo(a) < squaredDistanceTo(b);
 				}
