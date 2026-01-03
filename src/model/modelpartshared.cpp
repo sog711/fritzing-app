@@ -28,6 +28,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QHash>
 #include <QMessageBox>
+#include <QFile>
 
 void copyPinAttributes(QDomElement & from, QDomElement & to)
 {
@@ -144,6 +145,18 @@ bool ModelPartShared::setDomDocument(QDomDocument & domDocument) {
 	QDomElement version = root.firstChildElement("version");
 	if (!version.isNull()) {
 		m_replacedby = version.attribute("replacedby");
+	}
+
+	// Parse history entries for soft migration
+	QDomElement historyElement = root.firstChildElement("history");
+	while (!historyElement.isNull()) {
+		HistoryEntry entry;
+		entry.date = historyElement.attribute("date");
+		entry.author = historyElement.attribute("author");
+		entry.mode = historyElement.attribute("mode", "ask");
+		entry.description = historyElement.text().trimmed();
+		m_history.append(entry);
+		historyElement = historyElement.nextSiblingElement("history");
 	}
 
 	QDomElement spice = root.firstChildElement("spice");
@@ -501,6 +514,57 @@ const QString & ModelPartShared::replacedby() {
 
 void ModelPartShared::setReplacedby(const QString & replacedby) {
 	m_replacedby = replacedby;
+}
+
+const QList<HistoryEntry> & ModelPartShared::history() const {
+	return m_history;
+}
+
+bool ModelPartShared::hasHistory() const {
+	return !m_history.isEmpty();
+}
+
+bool ModelPartShared::loadHistoryFromFile() {
+	// If history is already loaded, nothing to do
+	if (!m_history.isEmpty()) {
+		return true;
+	}
+
+	// Try to load history from the FZP file
+	if (m_path.isEmpty()) {
+		return false;
+	}
+
+	QFile file(m_path);
+	if (!file.open(QIODevice::ReadOnly)) {
+		return false;
+	}
+
+	QDomDocument doc;
+	if (!doc.setContent(&file)) {
+		file.close();
+		return false;
+	}
+	file.close();
+
+	QDomElement root = doc.documentElement();
+	if (root.isNull()) {
+		return false;
+	}
+
+	// Parse history entries
+	QDomElement historyElement = root.firstChildElement("history");
+	while (!historyElement.isNull()) {
+		HistoryEntry entry;
+		entry.date = historyElement.attribute("date");
+		entry.author = historyElement.attribute("author");
+		entry.mode = historyElement.attribute("mode", "ask");
+		entry.description = historyElement.text().trimmed();
+		m_history.append(entry);
+		historyElement = historyElement.nextSiblingElement("history");
+	}
+
+	return !m_history.isEmpty();
 }
 
 void ModelPartShared::setFlippedSMD(bool f) {

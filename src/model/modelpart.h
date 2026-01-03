@@ -172,6 +172,9 @@ public:
 
 	const QString & replacedby();
 	bool isObsolete();
+	const QList<HistoryEntry> & history();
+	bool hasHistory();
+	bool loadHistoryFromFile();
 
 	bool flippedSMD();
 	bool needsCopper1();

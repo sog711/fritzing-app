@@ -48,6 +48,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 class SubpartSwapManager;
 class OutlierHandler;
+class MigrationHandler;
 
 struct ItemCount {
 	int selCount;
@@ -85,6 +86,7 @@ public:
 
 	void pushCommand(QUndoCommand *, QObject * signalTarget);
 	class WaitPushUndoStack * undoStack();
+	MigrationHandler * migrationHandler();
 	virtual ItemBase * addItem(ModelPart *, ViewLayer::ViewLayerPlacement, BaseCommand::CrossViewType, const ViewGeometry &, long id, long modelIndex, AddDeleteItemCommand * originatingCommand);
 	ItemBase * addItemForCommand(const QString & moduleID, ViewLayer::ViewLayerPlacement, BaseCommand::CrossViewType, const ViewGeometry &, long id, long modelIndex, AddDeleteItemCommand * originatingCommand);
 	void deleteItemForCommand(long id, bool deleteModelPart, bool doEmit, bool later);
@@ -676,6 +678,7 @@ protected:
 	QPointer<class ReferenceModel> m_referenceModel;
 	QPointer<SketchModel> m_sketchModel;
 	OutlierHandler* m_outlierHandler;
+	MigrationHandler* m_migrationHandler;
 	ViewLayer::ViewID m_viewID;
 	class WaitPushUndoStack * m_undoStack = nullptr;
 	class SelectItemCommand * m_holdingSelectItemCommand = nullptr;

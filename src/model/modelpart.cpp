@@ -922,6 +922,22 @@ bool ModelPart::isObsolete() {
 	return false;
 }
 
+const QList<HistoryEntry> & ModelPart::history() {
+	static QList<HistoryEntry> emptyHistory;
+	if (m_modelPartShared != nullptr) return m_modelPartShared->history();
+	return emptyHistory;
+}
+
+bool ModelPart::hasHistory() {
+	if (m_modelPartShared != nullptr) return m_modelPartShared->hasHistory();
+	return false;
+}
+
+bool ModelPart::loadHistoryFromFile() {
+	if (m_modelPartShared != nullptr) return m_modelPartShared->loadHistoryFromFile();
+	return false;
+}
+
 bool ModelPart::flippedSMD() {
 	if (m_modelPartShared != nullptr) {
 		return m_modelPartShared->flippedSMD();

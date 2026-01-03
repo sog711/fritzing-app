@@ -43,6 +43,18 @@ struct ViewImage {
 	ViewImage(ViewLayer::ViewID);
 };
 
+struct HistoryEntry {
+	QString date;        // ISO date string "2026-01-01"
+	QString author;
+	QString mode;        // "silent", "ask", "forced"
+	QString description;
+
+	QDate parsedDate() const { return QDate::fromString(date, Qt::ISODate); }
+	bool isSilent() const { return mode == "silent"; }
+	bool isAsk() const { return mode == "ask"; }
+	bool isForced() const { return mode == "forced"; }
+};
+
 class ModelPartShared : public QObject
 {
 	Q_OBJECT
@@ -133,6 +145,9 @@ public:
 	bool showInLabel(const QString & key);
 	const QString & replacedby();
 	void setReplacedby(const QString & replacedby);
+	const QList<HistoryEntry> & history() const;
+	bool hasHistory() const;
+	bool loadHistoryFromFile();
 
 	void flipSMDAnd();
 	void setFlippedSMD(bool);
@@ -185,6 +200,7 @@ protected:
 	QString m_url;
 	QString m_date;
 	QString m_replacedby;
+	QList<HistoryEntry> m_history;
 
 	QString m_path;
 	QString m_taxonomy;

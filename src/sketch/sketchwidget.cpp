@@ -58,6 +58,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "sketchwidget.h"
 #include "outlierhandler.h"
 #include "FProbeScrollPosition.h"
+#include "migrationhandler.h"
 #include "subpartswapmanager.h"
 #include "../connectors/connectoritem.h"
 #include "../connectors/svgidlayer.h"
@@ -199,6 +200,9 @@ SketchWidget::SketchWidget(ViewLayer::ViewID viewID, QWidget *parent, int size, 
 
 	// Initialize scroll position probe for test instrumentation
 	new FProbeScrollPosition(this, ViewLayer::viewIDName(viewID));
+	
+	// Initialize migration handler
+	m_migrationHandler = new MigrationHandler(this, this);
 
 	//this->scene()->setSceneRect(0,0, rect().width(), rect().height());
 
@@ -254,6 +258,10 @@ void SketchWidget::restartPasteCount() {
 
 WaitPushUndoStack* SketchWidget::undoStack() {
 	return m_undoStack;
+}
+
+MigrationHandler* SketchWidget::migrationHandler() {
+	return m_migrationHandler;
 }
 
 void SketchWidget::setUndoStack(WaitPushUndoStack * undoStack) {

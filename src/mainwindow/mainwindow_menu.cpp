@@ -48,6 +48,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../sketch/schematicsketchwidget.h"
 #include "../sketch/pcbsketchwidget.h"
 #include "../sketch/sketchwidget.h"
+#include "../sketch/migrationhandler.h"
 #include "../partsbinpalette/binmanager/binmanager.h"
 #include "../utils/expandinglabel.h"
 #include "../infoview/htmlinfoview.h"
@@ -491,7 +492,45 @@ bool MainWindow::mainLoad(const QString & fileName, const QString & displayName,
 		if (m_pcbGraphicsView) {
 			QList<ItemBase *> items = m_pcbGraphicsView->selectAllObsolete();
 			if (items.count() > 0) {
-				checkSwapObsolete(items, true);
+				// Separate items into soft migration candidates and legacy obsolete
+				QList<ItemBase *> legacyObsoleteItems;
+				MigrationHandler* migrationHandler = m_pcbGraphicsView->migrationHandler();
+
+				for (ItemBase* item : items) {
+					ModelPart* oldPart = item->modelPart();
+					ModelPart* newPart = findReplacedby(oldPart);
+
+					if (newPart) {
+						// Try to load history from file if not already loaded
+						if (!newPart->hasHistory()) {
+							newPart->loadHistoryFromFile();
+						}
+
+						if (newPart->hasHistory()) {
+							// Check for relevant history entries
+							QList<HistoryEntry> relevantHistory =
+							    MigrationHandler::getRelevantHistory(oldPart, newPart->history());
+
+							if (!relevantHistory.isEmpty()) {
+								// Queue for soft migration
+								migrationHandler->queueMigration(item, oldPart, newPart, relevantHistory);
+								continue;
+							}
+						}
+					}
+					// No history or all entries filtered out - use legacy flow
+					legacyObsoleteItems.append(item);
+				}
+
+				// Process soft migrations if any
+				if (migrationHandler->hasPendingMigrations()) {
+					migrationHandler->processMigrations();
+				}
+
+				// Handle legacy obsolete items with the old dialog
+				if (legacyObsoleteItems.count() > 0) {
+					checkSwapObsolete(legacyObsoleteItems, true);
+				}
 			}
 		}
 	}

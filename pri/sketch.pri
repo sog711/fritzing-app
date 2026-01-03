@@ -21,6 +21,7 @@ HEADERS += \
     src/sketch/schematicsketchwidget.h \
     src/sketch/sketchwidget.h \
     src/sketch/outlierhandler.h \
+    src/sketch/migrationhandler.h \
     src/sketch/welcomeview.h \
     src/sketch/zoomablegraphicsview.h \
     src/sketch/subpartswapmanager.h \
@@ -37,6 +38,7 @@ SOURCES += \
     src/sketch/schematicsketchwidget.cpp \
     src/sketch/sketchwidget.cpp \
     src/sketch/outlierhandler.cpp \
+    src/sketch/migrationhandler.cpp \
     src/sketch/welcomeview.cpp \
     src/sketch/zoomablegraphicsview.cpp \
     src/sketch/subpartswapmanager.cpp \
