@@ -399,7 +399,7 @@ void PEMainWindow::closeEvent(QCloseEvent *event)
 		messageBox.setDefaultButton(keepWorkingButton);
 
 		messageBox.exec();
-		if (messageBox.clickedButton() != keepWorkingButton) {
+		if (messageBox.clickedButton() == keepWorkingButton) {
 			event->ignore();
 			return;
 		}
