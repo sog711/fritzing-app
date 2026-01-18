@@ -65,6 +65,10 @@ protected:
 	double m_f2g = 1.0;
 	QString m_G54 = "G54";
 
+	// When set, standardAperture() uses this aperture instead of creating new ones.
+	// Used for contour files where a single fixed aperture (D10) should be used.
+	QString m_overrideAperture;
+
 protected:
 
 	void normalizeSVG();
