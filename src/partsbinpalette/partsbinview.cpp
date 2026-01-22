@@ -28,6 +28,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "items/itembase.h"
 #include "partsbinview.h"
 #include "partsbinpalettewidget.h"
+#include "debugdialog.h"
 
 
 QHash<QString, QString> PartsBinView::TranslatedCategoryNames;
@@ -202,7 +203,22 @@ void PartsBinView::dropEventAux(QDropEvent* event, bool justAppend) {
 			moveItem(fromIndex,toIndex);
 		}
 	} else {
-		QByteArray itemData = event->mimeData()->data("application/x-dnditemdata");
+		const QMimeData *mimeData = event->mimeData();
+		if (!mimeData) {
+			DebugDialog::debug("PartsBinView::dropEventAux: mimeData() is null");
+			event->ignore();
+			return;
+		}
+
+		QByteArray itemData = mimeData->data("application/x-dnditemdata");
+		if (itemData.isEmpty()) {
+			QStringList formats = mimeData->formats();
+			DebugDialog::debug(QString("PartsBinView::dropEventAux: itemData is empty. "
+				"Available MIME formats: %1").arg(formats.join(", ")));
+			event->ignore();
+			return;
+		}
+
 		QDataStream dataStream(&itemData, QIODevice::ReadOnly);
 
 		QString moduleID;
@@ -210,14 +226,19 @@ void PartsBinView::dropEventAux(QDropEvent* event, bool justAppend) {
 		dataStream >> moduleID >> offset;
 
 		ModelPart * mp = m_referenceModel->retrieveModelPart(moduleID);
+		if (mp == nullptr) {
+			DebugDialog::debug(QString("PartsBinView::dropEventAux: "
+				"retrieveModelPart returned nullptr for moduleID: '%1'").arg(moduleID));
+			event->ignore();
+			return;
+		}
+
 		m_parent->copyFilesToContrib(mp, ItemDrag::originator());
-		if(mp != nullptr) {
-			if(m_parent->contains(moduleID)) {
-				QMessageBox::information(nullptr, QObject::tr("Part already in bin"), QObject::tr("The part that you have just added,\nis already there, we won't add it again, right?"));
-			} else {
-				m_parent->addPart(mp,toIndex);
-				m_parent->setDirty();
-			}
+		if (m_parent->contains(moduleID)) {
+			QMessageBox::information(nullptr, QObject::tr("Part already in bin"), QObject::tr("The part that you have just added,\nis already there, we won't add it again, right?"));
+		} else {
+			m_parent->addPart(mp,toIndex);
+			m_parent->setDirty();
 		}
 	}
 	event->acceptProposedAction();
