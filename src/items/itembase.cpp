@@ -2076,6 +2076,39 @@ bool ItemBase::isBomItem()
 	return itemType() == ModelPart::Part;
 }
 
+QString ItemBase::electricalValue()
+{
+	if (m_modelPart == nullptr) return "";
+
+	static const QString OhmSymbol = QString(QChar(0x03A9));
+	// Properties checked in this order; non-empty ones are concatenated, so
+	// single-value parts (resistor, cap, inductor, crystal) get one string and
+	// multi-value parts (LED with color+current) get both. List order also
+	// defines display order. Resistors store bare numbers and need the Ω
+	// appended; caps/inductors/crystals store their units inline ("10µF",
+	// "100mH", "16 MHz") so we leave them as-is.
+	static const QStringList valueProperties = {
+		"frequency", "resistance", "capacitance", "inductance",
+		"color", "current"
+	};
+
+	QStringList parts;
+	for (const QString & propertyName : valueProperties) {
+		QString value = m_modelPart->localProp(propertyName).toString();
+		if (value.isEmpty()) {
+			value = m_modelPart->properties().value(propertyName, "");
+		}
+		if (value.isEmpty()) continue;
+
+		if (propertyName == "resistance" && !value.endsWith(OhmSymbol)) {
+			value += OhmSymbol;
+		}
+		parts << value;
+	}
+
+	return parts.join(", ");
+}
+
 void ItemBase::collectPropsMap(QString & family, QMap<QString, QString> & propsMap) {
 	QHash<QString, QString> properties;
 	properties = m_modelPart->properties();

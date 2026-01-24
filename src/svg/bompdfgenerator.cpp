@@ -68,8 +68,6 @@ static const int TableBodyFontSize = 9;
 static const int FooterFontSize = 8;
 static const int MetadataFontSize = 10;
 
-static const QString OhmSymbol = QString(QChar(0x03A9));
-
 bool BomPdfGenerator::exportToPdf(
 	const QString & fileName,
 	const QString & sketchFileName,
@@ -91,7 +89,7 @@ bool BomPdfGenerator::exportToPdf(
 
 		BomPdfRow row;
 		row.label = itemBase->instanceTitle();
-		row.value = getElectricalValue(itemBase);
+		row.value = itemBase->electricalValue();
 		row.partType = itemBase->title();
 		row.package = getPackage(itemBase);
 		row.properties = getProperties(itemBase);
@@ -231,31 +229,6 @@ bool BomPdfGenerator::exportToPdf(
 	}
 
 	return true;
-}
-
-QString BomPdfGenerator::getElectricalValue(ItemBase * itemBase)
-{
-	if (itemBase == nullptr || itemBase->modelPart() == nullptr) {
-		return "";
-	}
-
-	static const QStringList valueProperties = {"resistance", "capacitance", "inductance"};
-
-	for (const QString & propertyName : valueProperties) {
-		QString value = itemBase->modelPart()->localProp(propertyName).toString();
-		if (value.isEmpty()) {
-			value = itemBase->modelPart()->properties().value(propertyName, "");
-		}
-		if (!value.isEmpty()) {
-			// Resistance values are stored without the Ohm symbol, so append it
-			if (propertyName == "resistance" && !value.endsWith(OhmSymbol)) {
-				value += OhmSymbol;
-			}
-			return value;
-		}
-	}
-
-	return "";
 }
 
 QString BomPdfGenerator::getPackage(ItemBase * itemBase)

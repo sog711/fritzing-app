@@ -1250,21 +1250,23 @@ QString MainWindow::getExportBOM_CSV() {
 	}
 	propertiess += "\n";
 
-	QString assembly = "Label" + separator + "Part Type" + separator + propertiess;
+	QString assembly = "Label" + separator + "Value" + separator + "Part Type" + separator + propertiess;
 
 	for (auto&& itemBase: partList) {
 		if (!itemBase->isBomItem()) continue;
-		QStringList keys;
+		QString electricalValue = itemBase->electricalValue();
+		electricalValue.replace('\t', ' ');
 		QString desc = itemBase->title() + separator;
-		for ( const QString & property: properties) {
+		for (const QString & property: properties) {
 			QString prop = itemBase->prop(property);
 			desc += prop.replace('\t', ' ') + separator;
 		}
-		++descrs[desc];
-		assembly += itemBase->instanceTitle() + separator + desc + "\n";
+		QString descWithValue = electricalValue + separator + desc;
+		++descrs[descWithValue];
+		assembly += itemBase->instanceTitle() + separator + descWithValue + "\n";
 	}
 
-	QString shopping = "Amount" + separator + "Part Type" + separator + propertiess;
+	QString shopping = "Amount" + separator + "Value" + separator + "Part Type" + separator + propertiess;
 
 	for(const auto & [key, value] : descrs) {
 		shopping += QString::number(value) + separator + key + "\n";
@@ -1351,9 +1353,9 @@ void MainWindow::exportBOM() {
 
 	Q_FOREACH (ItemBase * itemBase, partList) {
 		if (!itemBase->isBomItem()) continue;
-		QStringList keys;
-//		QHash<QString, QString> properties = HtmlInfoView::getPartProperties(itemBase->modelPart(), itemBase, false, keys);
-		QString desc = itemBase->prop("mn") + "%%%%%" + itemBase->prop("mpn") + "%%%%%" + itemBase->title() + "%%%%%" + getBomProps(itemBase);  // keeps different parts separate if there are no properties
+		// Group on value+mn+mpn+title+props so that e.g. 100Ω and 10kΩ resistors
+		// land in separate shopping-list rows rather than merging by part type.
+		QString desc = itemBase->electricalValue() + "%%%%%" + itemBase->prop("mn") + "%%%%%" + itemBase->prop("mpn") + "%%%%%" + itemBase->title() + "%%%%%" + getBomProps(itemBase);
 		descrs.insert(desc, itemBase);
 		if (!descrList.contains(desc)) {
 			descrList.append(desc);
@@ -1363,16 +1365,26 @@ void MainWindow::exportBOM() {
 	QString assemblyString;
 	Q_FOREACH (ItemBase * itemBase, partList) {
 		if (!itemBase->isBomItem()) continue;
-		QStringList keys;
-//		QHash<QString, QString> properties = HtmlInfoView::getPartProperties(itemBase->modelPart(), itemBase, false, keys);
-		assemblyString += bomRowTemplate.arg(itemBase->instanceTitle()).arg(itemBase->prop("mn")).arg(itemBase->prop("mpn")).arg(itemBase->title()).arg(getBomProps(itemBase));
+		assemblyString += bomRowTemplate
+		                  .arg(itemBase->instanceTitle())
+		                  .arg(itemBase->electricalValue())
+		                  .arg(itemBase->prop("mn"))
+		                  .arg(itemBase->prop("mpn"))
+		                  .arg(itemBase->title())
+		                  .arg(getBomProps(itemBase));
 	}
 
 	QString shoppingListString;
 	Q_FOREACH (QString descr, descrList) {
 		QList<ItemBase *> itemBases = descrs.values(descr);
 		QStringList split = descr.split("%%%%%");
-		shoppingListString += bomRowTemplate.arg(itemBases.count()).arg(split.at(0)).arg(split.at(1)).arg(split.at(2)).arg(split.at(3));
+		shoppingListString += bomRowTemplate
+		                      .arg(itemBases.count())
+		                      .arg(split.at(0))
+		                      .arg(split.at(1))
+		                      .arg(split.at(2))
+		                      .arg(split.at(3))
+		                      .arg(split.at(4));
 	}
 
 	QString bom = bomTemplate.arg(

@@ -215,6 +215,7 @@ public:
 	virtual void addedToScene(bool temporary);
 	virtual bool hasPartNumberProperty();
 	virtual bool isBomItem();
+	QString electricalValue();
 	void collectPropsMap(QString & family, QMap<QString, QString> &);
 	virtual bool rotationAllowed();
 	virtual bool rotation45Allowed();

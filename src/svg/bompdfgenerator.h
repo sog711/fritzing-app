@@ -53,7 +53,6 @@ public:
 	);
 
 private:
-	static QString getElectricalValue(ItemBase * itemBase);
 	static QString getPackage(ItemBase * itemBase);
 	static QString getProperties(ItemBase * itemBase);
 	static void collectMetadata(SketchWidget * schematicView,
