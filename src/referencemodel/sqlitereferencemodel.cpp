@@ -1230,7 +1230,7 @@ QStringList SqliteReferenceModel::propValues(const QString &family, const QStrin
 	QSqlQuery query;
 	query.prepare(QString(
 	                  "SELECT %1 prop.value FROM properties prop JOIN parts PART ON part.id = prop.part_id \n"
-	                  "WHERE part.family = :family AND prop.name = :propName ORDER BY prop.value \n"
+	                  "WHERE part.family = :family AND prop.name = :propName AND (part.replacedby IS NULL OR part.replacedby = '') ORDER BY prop.value \n"
 	              ).arg(distinct ? " DISTINCT ":"")
 	             );
 	query.bindValue(":family",family.toLower().trimmed());
@@ -1288,7 +1288,7 @@ QMultiHash<QString, QString> SqliteReferenceModel::allPropValues(const QString &
 	QSqlQuery query;
 	query.prepare(QString(
 	                  "SELECT value, moduleID FROM properties prop JOIN parts part ON part.id = prop.part_id \n"
-	                  "WHERE part.family = :family AND prop.name = :propName\n"
+	                  "WHERE part.family = :family AND prop.name = :propName AND (part.replacedby IS NULL OR part.replacedby = '')\n"
 	              )
 	             );
 	query.bindValue(":family",family.toLower().trimmed());
