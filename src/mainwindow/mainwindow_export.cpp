@@ -47,6 +47,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "sketch/pcbsketchwidget.h"
 #include "svg/svgfilesplitter.h"
 #include "svg/gerbergenerator.h"
+#include "svg/bompdfgenerator.h"
 #include "utils/fileprogressdialog.h"
 #include "utils/folderutils.h"
 #include "utils/graphicsutils.h"
@@ -63,6 +64,7 @@ static QString pngActionType = ".png";
 static QString svgActionType = ".svg";
 static QString bomActionType = ".html";
 static QString bomCsvActionType = ".csv";
+static QString bomPdfActionType = "_bom.pdf";
 static QString ipcActionType = ".ipc";
 static QString netlistActionType = ".xml";
 static QString spiceNetlistActionType = ".cir";
@@ -108,7 +110,7 @@ bool sortPartList(ItemBase * b1, ItemBase * b2) {
 
 void MainWindow::initNames()
 {
-	OtherKnownExtensions << jpgActionType << pdfActionType << pngActionType << svgActionType << bomActionType << bomCsvActionType << ipcActionType << netlistActionType << spiceNetlistActionType;
+	OtherKnownExtensions << jpgActionType << pdfActionType << pngActionType << svgActionType << bomActionType << bomCsvActionType << bomPdfActionType << ipcActionType << netlistActionType << spiceNetlistActionType;
 
 	filePrintFormats[pdfActionType] = QPrinter::PdfFormat;
 
@@ -121,6 +123,7 @@ void MainWindow::initNames()
 	fileExtFormats[svgActionType] = tr("SVG Image (*.svg)");
 	fileExtFormats[bomActionType] = tr("BoM Text File (*.html)");
 	fileExtFormats[bomCsvActionType] = tr("BoM CSV File (*.csv)");
+	fileExtFormats[bomPdfActionType] = tr("PDF (*.pdf)");
 	fileExtFormats[ipcActionType] = tr("IPC-D-356 File (*.ipc)");
 
 	QSettings settings;
@@ -499,6 +502,11 @@ void MainWindow::doExport() {
 
 	if (actionType.compare(bomCsvActionType) == 0) {
 		exportBOM_CSV();
+		return;
+	}
+
+	if (actionType.compare(bomPdfActionType) == 0) {
+		exportBOM_PDF();
 		return;
 	}
 
@@ -1035,6 +1043,11 @@ void MainWindow::createExportActions() {
 	m_exportBomCsvAct->setStatusTip(tr("Save a Bill of Materials (BoM)/Shopping List as text"));
 	connect(m_exportBomCsvAct, SIGNAL(triggered()), this, SLOT(doExport()));
 
+	m_exportBomPdfAct = new QAction(tr("Bill of Materials as &PDF"), this);
+	m_exportBomPdfAct->setData(bomPdfActionType);
+	m_exportBomPdfAct->setStatusTip(tr("Save a Bill of Materials with checkboxes as PDF"));
+	connect(m_exportBomPdfAct, SIGNAL(triggered()), this, SLOT(doExport()));
+
 	m_exportIpcAct = new QAction(tr("IPC-D-356A netlist"), this);
 	m_exportIpcAct->setData(ipcActionType);
 	m_exportIpcAct->setStatusTip(tr("Save a netlist in IPC-D-356A format"));
@@ -1271,6 +1284,33 @@ void MainWindow::exportBOM_CSV() {
 				   );
 
 	return;
+}
+
+void MainWindow::exportBOM_PDF() {
+	QString path = defaultSaveFolder();
+	QString fileName = FolderUtils::getSaveFileName(this,
+		tr("Export Bill of Materials as PDF"),
+		path + "/" + constructFileName("bom", bomPdfActionType),
+		fileExtFormats[bomPdfActionType], nullptr);
+
+	if (fileName.isEmpty()) return;
+	if (!fileName.endsWith(".pdf", Qt::CaseInsensitive)) {
+		fileName += ".pdf";
+	}
+
+	// Collect parts
+	QList<ItemBase*> partList;
+	m_currentGraphicsView->collectParts(partList);
+	std::sort(partList.begin(), partList.end(), sortPartList);
+
+	// Delegate to generator
+	bool ok = BomPdfGenerator::exportToPdf(
+		fileName, m_fwFilename, partList,
+		m_schematicGraphicsView);
+	if (!ok) {
+		FMessageBox::warning(this, tr("Fritzing"),
+		                     tr("Unable to write PDF to %1").arg(fileName));
+	}
 }
 
 void MainWindow::exportBOM() {

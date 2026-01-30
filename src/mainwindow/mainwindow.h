@@ -514,6 +514,7 @@ protected:
 	void exportToGerber();
 	void exportBOM();
 	void exportBOM_CSV();
+	void exportBOM_PDF();
 	void exportNetlist();
 	void exportSpiceNetlist();
 	void exportSvg(double res, bool selectedItems, bool flatten);
@@ -765,6 +766,7 @@ protected:
 	QAction *m_exportEtchableSvgAct = nullptr;
 	QAction *m_exportBomAct = nullptr;
 	QAction *m_exportBomCsvAct = nullptr;
+	QAction *m_exportBomPdfAct = nullptr;
 	QAction *m_exportIpcAct = nullptr;
 	QAction *m_exportNetlistAct = nullptr;
 	QAction *m_exportSpiceNetlistAct = nullptr;

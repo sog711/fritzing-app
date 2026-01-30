@@ -1449,6 +1449,7 @@ void MainWindow::createFileMenu() {
 
 	m_exportMenu->addAction(m_exportBomAct);
 	m_exportMenu->addAction(m_exportBomCsvAct);
+	m_exportMenu->addAction(m_exportBomPdfAct);
 	m_exportMenu->addAction(m_exportIpcAct);
 	m_exportMenu->addAction(m_exportNetlistAct);
 	m_exportMenu->addAction(m_exportSpiceNetlistAct);
