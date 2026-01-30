@@ -296,6 +296,11 @@ bool Pad::hasPartNumberProperty()
 	return false;
 }
 
+bool Pad::isBomItem()
+{
+	return false;
+}
+
 void Pad::setInitialSize() {
 	double w = m_modelPart->localProp("width").toDouble();
 	if (w == 0) {

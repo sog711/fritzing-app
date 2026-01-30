@@ -87,7 +87,7 @@ bool BomPdfGenerator::exportToPdf(
 	QMap<QString, BomPdfRow> shoppingMap;
 
 	for (ItemBase * itemBase : partList) {
-		if (itemBase->itemType() != ModelPart::Part) continue;
+		if (!itemBase->isBomItem()) continue;
 
 		BomPdfRow row;
 		row.label = itemBase->instanceTitle();

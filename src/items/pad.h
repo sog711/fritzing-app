@@ -52,6 +52,7 @@ public:
 	bool freeRotationAllowed(Qt::KeyboardModifiers);
 	bool freeRotationAllowed();
 	bool hasPartNumberProperty();
+	bool isBomItem() override;
 	void setInitialSize();
 	void addedToScene(bool temporary);
 	void paintHover(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);

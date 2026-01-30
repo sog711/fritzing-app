@@ -1253,7 +1253,7 @@ QString MainWindow::getExportBOM_CSV() {
 	QString assembly = "Label" + separator + "Part Type" + separator + propertiess;
 
 	for (auto&& itemBase: partList) {
-		if (itemBase->itemType() != ModelPart::Part) continue;
+		if (!itemBase->isBomItem()) continue;
 		QStringList keys;
 		QString desc = itemBase->title() + separator;
 		for ( const QString & property: properties) {
@@ -1350,7 +1350,7 @@ void MainWindow::exportBOM() {
 	std::sort(partList.begin(), partList.end(), sortPartList);
 
 	Q_FOREACH (ItemBase * itemBase, partList) {
-		if (itemBase->itemType() != ModelPart::Part) continue;
+		if (!itemBase->isBomItem()) continue;
 		QStringList keys;
 //		QHash<QString, QString> properties = HtmlInfoView::getPartProperties(itemBase->modelPart(), itemBase, false, keys);
 		QString desc = itemBase->prop("mn") + "%%%%%" + itemBase->prop("mpn") + "%%%%%" + itemBase->title() + "%%%%%" + getBomProps(itemBase);  // keeps different parts separate if there are no properties
@@ -1362,7 +1362,7 @@ void MainWindow::exportBOM() {
 
 	QString assemblyString;
 	Q_FOREACH (ItemBase * itemBase, partList) {
-		if (itemBase->itemType() != ModelPart::Part) continue;
+		if (!itemBase->isBomItem()) continue;
 		QStringList keys;
 //		QHash<QString, QString> properties = HtmlInfoView::getPartProperties(itemBase->modelPart(), itemBase, false, keys);
 		assemblyString += bomRowTemplate.arg(itemBase->instanceTitle()).arg(itemBase->prop("mn")).arg(itemBase->prop("mpn")).arg(itemBase->title()).arg(getBomProps(itemBase));

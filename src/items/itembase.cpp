@@ -2071,6 +2071,11 @@ bool ItemBase::hasPartNumberProperty()
 	return true;
 }
 
+bool ItemBase::isBomItem()
+{
+	return itemType() == ModelPart::Part;
+}
+
 void ItemBase::collectPropsMap(QString & family, QMap<QString, QString> & propsMap) {
 	QHash<QString, QString> properties;
 	properties = m_modelPart->properties();
