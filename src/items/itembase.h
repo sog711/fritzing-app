@@ -227,13 +227,12 @@ public:
 	PartLabel * partLabel();
 	virtual void doneLoading();
 	QString family();
-	QPixmap * getPixmap(QSize size);
 	FSvgRenderer * fsvgRenderer() const;
 	void setSharedRendererEx(FSvgRenderer *);
 	bool reloadRenderer(const QString & svg, bool fastload);
 	bool resetRenderer(const QString & svg);
 	bool resetRenderer(const QString & svg, QString & newSvg);
-	void getPixmaps(QPixmap * &, QPixmap * &, QPixmap * &, bool swappingEnabled, QSize);
+	virtual ViewLayer::ViewID useViewIDForPixmap(ViewLayer::ViewID, bool swappingEnabled);
 	FSvgRenderer * setUpImage(ModelPart * modelPart, LayerAttributes &);
 	void showConnectors(const QStringList &);
 	void setItemIsSelectable(bool selectable);
@@ -350,8 +349,7 @@ protected:
 	virtual void setDefaultTooltip();
 	void setInstanceTitleAux(const QString & title, bool initial);
 	void saveLocAndTransform(QXmlStreamWriter & streamWriter);
-	QPixmap * getPixmap(ViewLayer::ViewID, bool swappingEnabled, QSize size);
-	virtual ViewLayer::ViewID useViewIDForPixmap(ViewLayer::ViewID, bool swappingEnabled);
+
 	virtual bool makeLocalModifications(QByteArray & svg, const QString & filename);
 	void updateHidden();
 	virtual void createShape(LayerAttributes & layerAttributes);

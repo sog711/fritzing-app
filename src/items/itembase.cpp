@@ -2133,39 +2133,6 @@ QString ItemBase::family() {
 	return modelPart()->family();
 }
 
-QPixmap * ItemBase::getPixmap(QSize size) {
-	if (renderer() != nullptr && renderer()->isValid()) {
-		return FSvgRenderer::getPixmap(renderer(), size);
-	}
-
-	// Lazy-load the SVG when the renderer wasn't set up
-	// (e.g., when pre-rendered db icon was used for bin display).
-	// Cache it on the ItemBase so subsequent calls use it directly.
-	if (modelPart() == nullptr) return nullptr;
-
-	QString baseName = modelPart()->hasBaseNameFor(viewID());
-	if (baseName.isEmpty()) return nullptr;
-
-	QString filename = PartFactory::getSvgFilename(modelPart(), baseName, true, true);
-	if (filename.isEmpty()) return nullptr;
-
-	QFile file(filename);
-	if (!file.open(QFile::ReadOnly)) return nullptr;
-
-	auto * newRenderer = new FSvgRenderer();
-	LoadInfo loadInfo(filename);
-	QByteArray resultBytes = newRenderer->loadSvg(file.readAll(), loadInfo);
-	if (resultBytes.isEmpty()) {
-		delete newRenderer;
-		return nullptr;
-	}
-
-	DebugDialog::debug(QString("lazy-loading SVG renderer for %1 from %2")
-		.arg(modelPart()->moduleID(), filename));
-	setSharedRendererEx(newRenderer);
-	return FSvgRenderer::getPixmap(newRenderer, size);
-}
-
 FSvgRenderer * ItemBase::fsvgRenderer() const {
 	if (m_fsvgRenderer != nullptr) return m_fsvgRenderer;
 
@@ -2227,67 +2194,6 @@ bool ItemBase::resetRenderer(const QString & svg, QString & newSvg) {
 		delete newRenderer;
 	}
 	return result;
-}
-
-void ItemBase::getPixmaps(QPixmap * & pixmap1, QPixmap * & pixmap2, QPixmap * & pixmap3, bool swappingEnabled, QSize size)
-{
-	pixmap1 = getPixmap(ViewLayer::BreadboardView, swappingEnabled, size);
-	pixmap2 = getPixmap(ViewLayer::SchematicView, swappingEnabled, size);
-	pixmap3 = getPixmap(ViewLayer::PCBView, swappingEnabled, size);
-}
-
-QPixmap * ItemBase::getPixmap(ViewLayer::ViewID vid, bool swappingEnabled, QSize size)
-{
-	ItemBase * vItemBase = nullptr;
-
-	if (viewID() == vid) {
-		if (!isEverVisible()) return nullptr;
-	}
-	else {
-		vItemBase = modelPart()->viewItem(vid);
-		if ((vItemBase != nullptr) && !vItemBase->isEverVisible()) return nullptr;
-	}
-
-	vid = useViewIDForPixmap(vid, swappingEnabled);
-	if (vid == ViewLayer::UnknownView) return nullptr;
-
-	if (viewID() == vid) {
-		return getPixmap(size);
-	}
-
-	if (vItemBase != nullptr) {
-		return vItemBase->getPixmap(size);
-	}
-
-
-	if (!modelPart()->hasViewFor(vid)) return nullptr;
-
-	QString baseName = modelPart()->hasBaseNameFor(vid);
-	if (baseName.isEmpty()) return nullptr;
-
-	QString filename = PartFactory::getSvgFilename(modelPart(), baseName, true, true);
-	if (filename.isEmpty()) {
-		return nullptr;
-	}
-
-	QSvgRenderer renderer(filename);
-
-	auto * pixmap = new QPixmap(size);
-	pixmap->fill(Qt::transparent);
-	QPainter painter(pixmap);
-	// preserve aspect ratio
-	QSize def = renderer.defaultSize();
-	double newW = size.width();
-	double newH = newW * def.height() / def.width();
-	if (newH > size.height()) {
-		newH = size.height();
-		newW = newH * def.width() / def.height();
-	}
-	QRectF bounds((size.width() - newW) / 2.0, (size.height() - newH) / 2.0, newW, newH);
-	renderer.render(&painter, bounds);
-	painter.end();
-
-	return pixmap;
 }
 
 ViewLayer::ViewID ItemBase::useViewIDForPixmap(ViewLayer::ViewID vid, bool)
