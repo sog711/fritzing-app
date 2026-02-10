@@ -19,6 +19,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 ********************************************************************/
 
 #include <QBuffer>
+#include <QCache>
 #include <QHBoxLayout>
 #include <QSettings>
 #include <QPalette>
@@ -658,7 +659,14 @@ void HtmlInfoView::setUpTitle(ItemBase * itemBase)
 
 }
 
-static QPixmap * loadIconFromSvg(ItemBase * itemBase, ViewLayer::ViewID vid, bool swappingEnabled, QSize size) {
+// Cache inspector icon pixmaps by moduleID + viewID to avoid repeated file I/O and SVG rendering.
+// Cost is in bytes (160x160 RGBA = ~102KB per entry). 200 entries ~ 20MB max.
+static QCache<QString, QPixmap> & inspectorIconCache() {
+	static QCache<QString, QPixmap> cache(200);
+	return cache;
+}
+
+static const QPixmap * cachedIconFromSvg(ItemBase * itemBase, ViewLayer::ViewID vid, bool swappingEnabled, QSize size) {
 	if (itemBase == nullptr || itemBase->modelPart() == nullptr) return nullptr;
 
 	// Check visibility
@@ -671,6 +679,12 @@ static QPixmap * loadIconFromSvg(ItemBase * itemBase, ViewLayer::ViewID vid, boo
 
 	vid = itemBase->useViewIDForPixmap(vid, swappingEnabled);
 	if (vid == ViewLayer::UnknownView) return nullptr;
+
+	QString cacheKey = itemBase->modelPart()->moduleID() + "/" + QString::number(vid);
+	if (const QPixmap * cached = inspectorIconCache().object(cacheKey)) {
+		// DebugDialog::debug(QString("inspector icon cache hit: %1").arg(cacheKey));
+		return cached;
+	}
 
 	if (!itemBase->modelPart()->hasViewFor(vid)) return nullptr;
 
@@ -696,6 +710,9 @@ static QPixmap * loadIconFromSvg(ItemBase * itemBase, ViewLayer::ViewID vid, boo
 	QRectF bounds((size.width() - newW) / 2.0, (size.height() - newH) / 2.0, newW, newH);
 	renderer.render(&painter, bounds);
 	painter.end();
+
+	// DebugDialog::debug(QString("inspector icon cache miss, loaded SVG: %1 from %2").arg(cacheKey, filename));
+	inspectorIconCache().insert(cacheKey, pixmap);
 	return pixmap;
 }
 
@@ -706,15 +723,11 @@ void HtmlInfoView::setUpIcons(ItemBase * itemBase, bool swappingEnabled) {
 
 	QSize size = QSize(ScaledIconFrame::STANDARD_ICON_IMG_WIDTH, ScaledIconFrame::STANDARD_ICON_IMG_HEIGHT);
 
-	QPixmap *pixmap1 = loadIconFromSvg(itemBase, ViewLayer::BreadboardView, swappingEnabled, size);
-	QPixmap *pixmap2 = loadIconFromSvg(itemBase, ViewLayer::SchematicView, swappingEnabled, size);
-	QPixmap *pixmap3 = loadIconFromSvg(itemBase, ViewLayer::PCBView, swappingEnabled, size);
+	const QPixmap *pixmap1 = cachedIconFromSvg(itemBase, ViewLayer::BreadboardView, swappingEnabled, size);
+	const QPixmap *pixmap2 = cachedIconFromSvg(itemBase, ViewLayer::SchematicView, swappingEnabled, size);
+	const QPixmap *pixmap3 = cachedIconFromSvg(itemBase, ViewLayer::PCBView, swappingEnabled, size);
 
 	m_iconFrame->setIcons(pixmap1, pixmap2, pixmap3);
-
-	delete pixmap1;
-	delete pixmap2;
-	delete pixmap3;
 }
 
 void HtmlInfoView::addSpice(ModelPart * modelPart) {
