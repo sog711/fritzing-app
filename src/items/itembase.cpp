@@ -2134,7 +2134,36 @@ QString ItemBase::family() {
 }
 
 QPixmap * ItemBase::getPixmap(QSize size) {
-	return FSvgRenderer::getPixmap(renderer(), size);
+	if (renderer() != nullptr && renderer()->isValid()) {
+		return FSvgRenderer::getPixmap(renderer(), size);
+	}
+
+	// Lazy-load the SVG when the renderer wasn't set up
+	// (e.g., when pre-rendered db icon was used for bin display).
+	// Cache it on the ItemBase so subsequent calls use it directly.
+	if (modelPart() == nullptr) return nullptr;
+
+	QString baseName = modelPart()->hasBaseNameFor(viewID());
+	if (baseName.isEmpty()) return nullptr;
+
+	QString filename = PartFactory::getSvgFilename(modelPart(), baseName, true, true);
+	if (filename.isEmpty()) return nullptr;
+
+	QFile file(filename);
+	if (!file.open(QFile::ReadOnly)) return nullptr;
+
+	auto * newRenderer = new FSvgRenderer();
+	LoadInfo loadInfo(filename);
+	QByteArray resultBytes = newRenderer->loadSvg(file.readAll(), loadInfo);
+	if (resultBytes.isEmpty()) {
+		delete newRenderer;
+		return nullptr;
+	}
+
+	DebugDialog::debug(QString("lazy-loading SVG renderer for %1 from %2")
+		.arg(modelPart()->moduleID(), filename));
+	setSharedRendererEx(newRenderer);
+	return FSvgRenderer::getPixmap(newRenderer, size);
 }
 
 FSvgRenderer * ItemBase::fsvgRenderer() const {

@@ -509,14 +509,12 @@ void HtmlInfoView::appendItemStuff(ItemBase * itemBase, ModelPart * modelPart, b
 void HtmlInfoView::setContent()
 {
 	m_setContentTimer.stop();
-	//DebugDialog::debug(QString("start updating %1").arg(QTime::currentTime().toString("HH:mm:ss.zzz")));
 	if (m_pendingItemBase == nullptr) {
 		setNullContent();
 		m_setContentTimer.stop();
 		return;
 	}
 
-	//DebugDialog::debug(QString("pending %1").arg(m_pendingItemBase->title()));
 	m_currentSwappingEnabled = m_pendingSwappingEnabled;
 
 	appendStuff(m_pendingItemBase, m_pendingSwappingEnabled);
