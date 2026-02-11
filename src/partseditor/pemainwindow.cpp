@@ -829,22 +829,6 @@ bool PEMainWindow::setInitialItem(PaletteItem * paletteItem)
 		viewThing->referenceFile = getSvgReferenceFile(itemBase->filename());
 
 		if (!itemBase->hasCustomSVG()) {
-			QFile file(itemBase->filename());
-			if (!file.open(QFile::ReadOnly)) {
-				QMessageBox::critical(nullptr, tr("Parts Editor"), tr("Unable to load '%1'. Please close the parts editor without saving and try again.").arg(itemBase->filename()));
-				continue;
-			}
-
-			QString svg = file.readAll();
-			insertDesc(viewThing->referenceFile, svg);
-			TextUtils::fixMuch(svg, true);
-			QString svgPath = makeSvgPath2(viewThing->sketchWidget);
-			bool result = writeXml(m_userPartsFolderSvgPath + svgPath, removeGorn(svg), true);
-			if (!result) {
-				QMessageBox::critical(nullptr, tr("Parts Editor"), tr("Unable to write svg to  %1").arg(svgPath));
-				return false;
-			}
-
 			continue;
 		}
 
