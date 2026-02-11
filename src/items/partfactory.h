@@ -50,6 +50,7 @@ protected:
 	static class ItemBase * createPartAux(class ModelPart *, ViewLayer::ViewID, const class ViewGeometry & viewGeometry, long id, QMenu * itemMenu, QMenu * wireMenu, bool doLabel);
 	static QDomElement showSubpart(QDomElement & root, const QString & subpart);
 	static void fixSubpartBounds(QDomElement &, ModelPartShared *);
+	static void generateSubpartSvgs(ModelPart * modelPart, ModelPartShared * parentShared);
 
 
 

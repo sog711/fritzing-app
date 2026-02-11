@@ -281,36 +281,21 @@ QString PartFactory::getSvgFilename(ModelPart * modelPart, const QString & baseN
 
 	if (handleSubparts && (modelPart->modelPartShared() != nullptr) && modelPart->modelPartShared()->hasSubparts())
 	{
-		ModelPartShared * superpart = modelPart->modelPartShared();
-		QString schematicName = superpart->imageFileName(ViewLayer::SchematicView);
-		QString originalPath = getSvgFilename(modelPart, schematicName, true, false);
-		Q_FOREACH (ModelPartShared * mps, superpart->subparts()) {
-			QString schematicFileName = mps->imageFileName(ViewLayer::SchematicView);
-			if (schematicFileName.isEmpty()) continue;
+		generateSubpartSvgs(modelPart, modelPart->modelPartShared());
+	}
 
-			QString path = partPath() + schematicFileName;
-			QFileInfo info(path);
-			if (info.exists()) {
-				mps->setSubpartOffset(SubpartOffsets.value(path, QPointF(0, 0)));
-				continue;
+	// If the file was not found and this part is a subpart, generate all
+	// sibling subpart SVGs from the superpart on demand.  Previously this
+	// only happened as a side effect of icon rendering in SvgIconWidget,
+	// which is skipped when rasterized icons are cached in the database.
+	if (filename.isEmpty() && modelPart->modelPartShared() != nullptr) {
+		ModelPartShared * parentShared = modelPart->modelPartShared()->superpart();
+		if (parentShared != nullptr) {
+			generateSubpartSvgs(modelPart, parentShared);
+			QString generatedPath = partPath() + baseName;
+			if (QFileInfo(generatedPath).exists()) {
+				filename = generatedPath;
 			}
-
-			QFile file(originalPath);
-			if (!file.open(QIODevice::ReadOnly)) {
-				DebugDialog::debug(QString("Unable to open :%1").arg(originalPath));
-			}
-			QDomDocument doc;
-			QDomDocument::ParseResult parseResult = doc.setContent(&file);
-			if (!parseResult) {
-				DebugDialog::debug(QString("xml failure %1 %2 %3").arg(parseResult.errorMessage).arg(parseResult.errorLine).arg(parseResult.errorColumn));
-				continue;
-			}
-
-			QDomElement root = doc.documentElement();
-			QDomElement top = showSubpart(root, mps->subpartID());
-			fixSubpartBounds(top, mps);
-			SubpartOffsets.insert(path, mps->subpartOffset());
-			TextUtils::writeUtf8(path, doc.toString(4));
 		}
 	}
 
@@ -532,6 +517,44 @@ QString PartFactory::getFzpFilename(const QString & moduleID)
 	}
 
 	return "";
+}
+
+void PartFactory::generateSubpartSvgs(ModelPart * modelPart, ModelPartShared * parentShared)
+{
+	QString schematicName = parentShared->imageFileName(ViewLayer::SchematicView);
+	if (schematicName.isEmpty()) return;
+
+	QString originalPath = getSvgFilename(modelPart, schematicName, true, false);
+	if (originalPath.isEmpty()) return;
+
+	for (ModelPartShared * mps : parentShared->subparts()) {
+		QString schematicFileName = mps->imageFileName(ViewLayer::SchematicView);
+		if (schematicFileName.isEmpty()) continue;
+
+		QString path = partPath() + schematicFileName;
+		QFileInfo info(path);
+		if (info.exists()) {
+			mps->setSubpartOffset(SubpartOffsets.value(path, QPointF(0, 0)));
+			continue;
+		}
+
+		QFile file(originalPath);
+		if (!file.open(QIODevice::ReadOnly)) {
+			DebugDialog::debug(QString("Unable to open :%1").arg(originalPath));
+		}
+		QDomDocument doc;
+		QDomDocument::ParseResult parseResult = doc.setContent(&file);
+		if (!parseResult) {
+			DebugDialog::debug(QString("xml failure %1 %2 %3").arg(parseResult.errorMessage).arg(parseResult.errorLine).arg(parseResult.errorColumn));
+			continue;
+		}
+
+		QDomElement root = doc.documentElement();
+		QDomElement top = showSubpart(root, mps->subpartID());
+		fixSubpartBounds(top, mps);
+		SubpartOffsets.insert(path, mps->subpartOffset());
+		TextUtils::writeUtf8(path, doc.toString(4));
+	}
 }
 
 void PartFactory::initFolder()
