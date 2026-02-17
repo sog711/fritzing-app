@@ -55,7 +55,7 @@
  <url type="forum">https://forum.fritzing.org</url>
  <url type="translate">https://weblate.fritzing.org</url>
  <releases>
-  <release version="1.0.6" date="2025-04-16"/>
+  <release version="1.0.7" date="2026-02-17"/>
  </releases>
  <provides>
   <binary>Fritzing</binary>
