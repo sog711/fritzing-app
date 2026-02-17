@@ -529,8 +529,8 @@ protected:
 	void updatePCBTraceMenu(QGraphicsItem *, TraceMenuThing &);
 
 	QList<ModelPart*> moveToPartsFolder(QDir &unzipDir, bool addToBin, bool addToAlien, const QString & prefixFolder, const QString &destFolder, bool importingSinglePart);
-	QString copyToSvgFolder(const QFileInfo& file, bool addToAlien, const QString & prefixFolder, const QString &destFolder);
-	ModelPart* copyToPartsFolder(const QFileInfo& file, bool addToAlien, const QString & prefixFolder, const QString &destFolder);
+	QString copyToSvgFolder(const QFileInfo& file, bool addToAlien, const QString & prefixFolder, const QString &destFolder, const QString &moduleID = QString());
+	ModelPart* copyToPartsFolder(const QFileInfo& file, bool addToAlien, const QString & prefixFolder, const QString &destFolder, const QString &moduleID = QString());
 
 	void closeIfEmptySketch(MainWindow* mw);
 	bool whatToDoWithAlienFiles();
@@ -647,7 +647,7 @@ protected:
 	virtual void setCurrentTabIndex(int);
 	virtual QWidget * currentTabWidget();
 	virtual bool activeLayerWidgetAlwaysOn();
-	bool copySvg(const QString & path, QFileInfoList & svgEntryInfoList);
+	bool copySvg(const QString & path, QFileInfoList & svgEntryInfoList, const QString &moduleID = QString());
 	void checkSwapObsolete(QList<ItemBase *> &, bool includeUpdateLaterMessage);
 	QMessageBox::StandardButton oldSchematicMessage(const QString & filename);
 	MainWindow * revertAux();

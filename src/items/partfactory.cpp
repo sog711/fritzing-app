@@ -232,6 +232,15 @@ QString PartFactory::getSvgFilename(ModelPart * modelPart, const QString & baseN
 	QString postfix = "/"+ SvgFilesDir +"/%1/"+ baseName;
 	QString userStore = FolderUtils::getUserPartsPath()+postfix;
 	QString pfPath = PartFactory::folderPath() + postfix;
+
+	// moduleID-based search paths (highest priority for subfolder-structured parts)
+	QString moduleID = modelPart->moduleID();
+	if (!moduleID.isEmpty()) {
+		QString moduleIDPostfix = "/" + SvgFilesDir + "/%1/" + moduleID + "/" + baseName;
+		tempPaths << FolderUtils::getUserPartsPath() + moduleIDPostfix;
+		tempPaths << PartFactory::folderPath() + moduleIDPostfix;
+	}
+
 	if(!modelPart->path().isEmpty()) {
 		QString path = modelPart->path();
 		QDir dir(path);			// is a path to a filename

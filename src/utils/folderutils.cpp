@@ -793,6 +793,14 @@ QString FolderUtils::addToBasename(const QString &filePath, const QString &addit
 	return QString("%1/%2%3.%4").arg(path, baseName, addition, suffix);
 }
 
+bool FolderUtils::ensureDirectoryExists(const QString & filePath) {
+	QDir dir = QFileInfo(filePath).absoluteDir();
+	if (!dir.exists()) {
+		return dir.mkpath(dir.absolutePath());
+	}
+	return true;
+}
+
 bool FolderUtils::checkFileLoadability(QWidget* parent, const QString& filePath) {
 	QString fileType;
 	static const QMap<QString, QString> fileTypes {

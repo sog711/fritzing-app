@@ -1625,7 +1625,7 @@ QString MainWindow::loadBundledSketch(const QString &fileName, bool addToRecent,
 				continue;
 			}
 
-			mp = copyToPartsFolder(fzpInfo, false, PartFactory::folderPath(), "contrib");
+			mp = copyToPartsFolder(fzpInfo, false, PartFactory::folderPath(), "contrib", moduleID);
 			if (mp == nullptr) {
 				DebugDialog::debug(QString("unable to create model part in %1: %2").arg(file.fileName()).arg(fzp));
 				continue;
@@ -1638,7 +1638,7 @@ QString MainWindow::loadBundledSketch(const QString &fileName, bool addToRecent,
 				QDomElement layers = view.firstChildElement("layers");
 				QString path = layers.attribute("image", "");
 				if (!path.isEmpty()) {
-					bool copied = copySvg(path, svgEntryInfoList);
+					bool copied = copySvg(path, svgEntryInfoList, moduleID);
 					if (!copied) {
 						if (!missingSvgPaths.contains(path)) {
 							missingSvgPaths << path;
@@ -1681,7 +1681,7 @@ QString MainWindow::loadBundledSketch(const QString &fileName, bool addToRecent,
 	return "";
 }
 
-bool MainWindow::copySvg(const QString & path, QFileInfoList & svgEntryInfoList)
+bool MainWindow::copySvg(const QString & path, QFileInfoList & svgEntryInfoList, const QString &moduleID)
 {
 	int slash = path.indexOf("/");
 	QString subpath = path.mid(slash + 1);
@@ -1689,7 +1689,7 @@ bool MainWindow::copySvg(const QString & path, QFileInfoList & svgEntryInfoList)
 	for (int jx = svgEntryInfoList.count() - 1; jx >= 0; jx--) {
 		QFileInfo svgInfo = svgEntryInfoList.at(jx);
 		if (svgInfo.fileName().contains(subpath)) {
-			copyToSvgFolder(svgInfo, false, PartFactory::folderPath(), "contrib");
+			copyToSvgFolder(svgInfo, false, PartFactory::folderPath(), "contrib", moduleID);
 			// Don't remove from svgEntryInfoList — multiple fzps in the
 			// same .fzz may reference the same SVG files.
 			gotOne = true;
@@ -2061,16 +2061,52 @@ QList<ModelPart*> MainWindow::moveToPartsFolder(QDir &unzipDir, bool addToBin, b
 		validatePartInfo(fzpPath);
 	}
 
-	namefilters.clear();
-	namefilters << ZIP_SVG+"*";
-	Q_FOREACH(QFileInfo file, unzipDir.entryInfoList(namefilters)) { // svg files
-		//DebugDialog::debug("unzip svg " + file.absoluteFilePath());
-		copyToSvgFolder(file, addToAlien, prefixFolder, destFolder);
+	// Pre-parse FZPs to build SVG-to-moduleID mapping
+	QMap<QString, QString> svgImageToModuleID;  // "breadboard/filename.svg" -> moduleID
+	QMap<QString, QString> fzpToModuleID;       // fzp filename -> moduleID
+	for (const QFileInfo &fzpInfo : partEntryInfoList) {
+		QFile fzpFile(fzpInfo.absoluteFilePath());
+		if (!fzpFile.open(QFile::ReadOnly)) continue;
+		QString fzpContent = fzpFile.readAll();
+		fzpFile.close();
+		QString moduleID = TextUtils::parseForModuleID(fzpContent);
+		if (moduleID.isEmpty()) continue;
+		fzpToModuleID[fzpInfo.fileName()] = moduleID;
+
+		// Parse SVG image references from FZP
+		QDomDocument doc;
+		if (!doc.setContent(fzpContent)) continue;
+		QDomElement views = doc.documentElement().firstChildElement("views");
+		QDomElement view = views.firstChildElement();
+		while (!view.isNull()) {
+			QDomElement layers = view.firstChildElement("layers");
+			QString imagePath = layers.attribute("image", "");
+			if (!imagePath.isEmpty()) {
+				svgImageToModuleID[imagePath] = moduleID;
+			}
+			view = view.nextSiblingElement();
+		}
 	}
 
-	Q_FOREACH(QFileInfo file, partEntryInfoList) { // part files
-		//DebugDialog::debug("unzip part " + file.absoluteFilePath());
-		ModelPart * mp = copyToPartsFolder(file, addToAlien, prefixFolder, destFolder);
+	// Copy SVG files with moduleID subfolder
+	namefilters.clear();
+	namefilters << ZIP_SVG+"*";
+	for (const QFileInfo &file : unzipDir.entryInfoList(namefilters)) {
+		// Reconstruct the image path to look up the moduleID
+		QString stripped = file.fileName();
+		stripped.remove(QRegularExpression("^"+ZIP_SVG));
+		QString viewFolder = stripped.left(stripped.indexOf("."));
+		QString baseName = stripped.mid(viewFolder.length() + 1);
+		QString imagePath = viewFolder + "/" + baseName;
+		QString moduleID = svgImageToModuleID.value(imagePath);
+
+		copyToSvgFolder(file, addToAlien, prefixFolder, destFolder, moduleID);
+	}
+
+	// Copy FZP files with moduleID subfolder
+	for (const QFileInfo &file : partEntryInfoList) {
+		QString moduleID = fzpToModuleID.value(file.fileName());
+		ModelPart * mp = copyToPartsFolder(file, addToAlien, prefixFolder, destFolder, moduleID);
 		if (mp) {
 			retval << mp;
 			if (addToBin) {
@@ -2083,16 +2119,21 @@ QList<ModelPart*> MainWindow::moveToPartsFolder(QDir &unzipDir, bool addToBin, b
 	return retval;
 }
 
-QString MainWindow::copyToSvgFolder(const QFileInfo& file, bool addToAlien, const QString & prefixFolder, const QString &destFolder) {
+QString MainWindow::copyToSvgFolder(const QFileInfo& file, bool addToAlien, const QString & prefixFolder, const QString &destFolder, const QString &moduleID) {
 	QFile svgfile(file.filePath());
 	// let's make sure that we remove just the suffix
 	QString fileName = file.fileName().remove(QRegularExpression("^"+ZIP_SVG));
 	QString viewFolder = fileName.left(fileName.indexOf("."));
 	fileName.remove(0, viewFolder.length() + 1);
 
-	QString destFilePath =
-	    prefixFolder+"/svg/"+destFolder+"/"+viewFolder+"/"+fileName;
+	QString destFilePath;
+	if (!moduleID.isEmpty()) {
+		destFilePath = prefixFolder+"/svg/"+destFolder+"/"+moduleID+"/"+viewFolder+"/"+fileName;
+	} else {
+		destFilePath = prefixFolder+"/svg/"+destFolder+"/"+viewFolder+"/"+fileName;
+	}
 
+	FolderUtils::ensureDirectoryExists(destFilePath);
 	backupExistingFileIfExists(destFilePath);
 	if(FolderUtils::slamCopy(svgfile, destFilePath)) {
 		if (addToAlien) {
@@ -2104,12 +2145,20 @@ QString MainWindow::copyToSvgFolder(const QFileInfo& file, bool addToAlien, cons
 	return "";
 }
 
-ModelPart* MainWindow::copyToPartsFolder(const QFileInfo& file, bool addToAlien, const QString & prefixFolder, const QString &destFolder) {
+ModelPart* MainWindow::copyToPartsFolder(const QFileInfo& file, bool addToAlien, const QString & prefixFolder, const QString &destFolder, const QString &moduleID) {
 	QFile partfile(file.filePath());
 	// let's make sure that we remove just the suffix
-	QString destFilePath =
-	    prefixFolder+"/"+destFolder+"/"+file.fileName().remove(QRegularExpression("^"+ZIP_PART));
+	QString baseName = file.fileName();
+	baseName.remove(QRegularExpression("^"+ZIP_PART));
 
+	QString destFilePath;
+	if (!moduleID.isEmpty()) {
+		destFilePath = prefixFolder+"/"+destFolder+"/"+moduleID+"/"+baseName;
+	} else {
+		destFilePath = prefixFolder+"/"+destFolder+"/"+baseName;
+	}
+
+	FolderUtils::ensureDirectoryExists(destFilePath);
 	backupExistingFileIfExists(destFilePath);
 	if(FolderUtils::slamCopy(partfile, destFilePath)) {
 		if (addToAlien) {

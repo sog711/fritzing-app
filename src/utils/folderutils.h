@@ -65,6 +65,7 @@ public:
 	static void createUserDataStoreFolders();
 	static QString addToBasename(const QString &filePath, const QString &addition);
 	static bool checkFileLoadability(QWidget* parent, const QString& filePath);
+	static bool ensureDirectoryExists(const QString & filePath);
 
 protected:
 	FolderUtils();

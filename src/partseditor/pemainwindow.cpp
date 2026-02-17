@@ -2165,6 +2165,27 @@ bool PEMainWindow::saveAs(bool overWrite)
 
 	QDomElement views = fzpRoot.firstChildElement("views");
 
+	// Determine the moduleID for the save destination subfolder
+	QString targetModuleID;
+	if (overWrite) {
+		// Backward compat: if original FZP is in a moduleID subfolder, keep it there
+		QDir fzpDir(QFileInfo(m_originalFzpPath).absolutePath());
+		if (fzpDir.dirName() == m_originalModuleID) {
+			targetModuleID = m_originalModuleID;
+		}
+		// else: flat structure, targetModuleID stays empty -> flat save
+	} else {
+		// Save As New — always use subfolder
+		targetModuleID = QString("%1_%2_%3").arg(m_prefix).arg(m_guid).arg(m_fileIndex);
+	}
+
+	QString svgBasePath = m_userPartsFolderSvgPath;
+	QString fzpBasePath = m_userPartsFolderPath;
+	if (!targetModuleID.isEmpty()) {
+		svgBasePath = m_userPartsFolderSvgPath + targetModuleID + "/";
+		fzpBasePath = m_userPartsFolderPath + targetModuleID + "/";
+	}
+
 	QHash<ViewLayer::ViewID, QString> svgPaths;
 
 	Q_FOREACH (ViewLayer::ViewID viewID, m_viewThings.keys()) {
@@ -2252,7 +2273,8 @@ bool PEMainWindow::saveAs(bool overWrite)
 		QString svgPath = makeSvgPath2(viewThing->sketchWidget);
 		setImageAttribute(layers, svgPath);
 
-		QString actualPath = m_userPartsFolderSvgPath + svgPath;
+		QString actualPath = svgBasePath + svgPath;
+		FolderUtils::ensureDirectoryExists(actualPath);
 		peAlienFiles << actualPath;
 		// DebugDialog::debug(QString("peAlienFiles %1").arg(peAlienFiles));
 		bool result = writeXml(actualPath, removeGorn(svg), false);
@@ -2261,7 +2283,8 @@ bool PEMainWindow::saveAs(bool overWrite)
 		}
 	}
 
-	QDir dir(m_userPartsFolderPath);
+	QDir dir(fzpBasePath);
+	FolderUtils::ensureDirectoryExists(dir.absoluteFilePath("dummy"));
 	QString suffix = QString("%1_%2_%3").arg(m_prefix).arg(m_guid).arg(m_fileIndex++);
 	QString fzpPath = dir.absoluteFilePath(QString("%1.fzp").arg(suffix));
 
