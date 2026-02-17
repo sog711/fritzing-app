@@ -2128,7 +2128,8 @@ QString MainWindow::copyToSvgFolder(const QFileInfo& file, bool addToAlien, cons
 
 	QString destFilePath;
 	if (!moduleID.isEmpty()) {
-		destFilePath = prefixFolder+"/svg/"+destFolder+"/"+moduleID+"/"+viewFolder+"/"+fileName;
+		// Co-locate SVGs with FZP in the same moduleID subfolder
+		destFilePath = prefixFolder+"/"+destFolder+"/"+moduleID+"/"+viewFolder+"/"+fileName;
 	} else {
 		destFilePath = prefixFolder+"/svg/"+destFolder+"/"+viewFolder+"/"+fileName;
 	}

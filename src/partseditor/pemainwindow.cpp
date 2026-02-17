@@ -2182,8 +2182,9 @@ bool PEMainWindow::saveAs(bool overWrite)
 	QString svgBasePath = m_userPartsFolderSvgPath;
 	QString fzpBasePath = m_userPartsFolderPath;
 	if (!targetModuleID.isEmpty()) {
-		svgBasePath = m_userPartsFolderSvgPath + targetModuleID + "/";
+		// Co-locate SVGs with FZP in the same moduleID subfolder
 		fzpBasePath = m_userPartsFolderPath + targetModuleID + "/";
+		svgBasePath = fzpBasePath;
 	}
 
 	QHash<ViewLayer::ViewID, QString> svgPaths;
