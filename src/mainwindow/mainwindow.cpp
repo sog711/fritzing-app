@@ -2099,6 +2099,7 @@ QList<ModelPart*> MainWindow::moveToPartsFolder(QDir &unzipDir, bool addToBin, b
 		QString baseName = stripped.mid(viewFolder.length() + 1);
 		QString imagePath = viewFolder + "/" + baseName;
 		QString moduleID = svgImageToModuleID.value(imagePath);
+		if (moduleID.isEmpty()) continue;
 
 		copyToSvgFolder(file, addToAlien, prefixFolder, destFolder, moduleID);
 	}
@@ -2106,6 +2107,15 @@ QList<ModelPart*> MainWindow::moveToPartsFolder(QDir &unzipDir, bool addToBin, b
 	// Copy FZP files with moduleID subfolder
 	for (const QFileInfo &file : partEntryInfoList) {
 		QString moduleID = fzpToModuleID.value(file.fileName());
+		if (moduleID.isEmpty()) {
+			if (importingSinglePart) {
+				QString partName = file.fileName();
+				partName.remove(QRegularExpression("^" + ZIP_PART));
+				throw tr("Unable to load part '%1': the part definition has an empty or missing module ID (moduleId attribute).").arg(partName);
+			}
+			DebugDialog::debug(QString("Skipping part with empty module ID: %1").arg(file.fileName()));
+			continue;
+		}
 		ModelPart * mp = copyToPartsFolder(file, addToAlien, prefixFolder, destFolder, moduleID);
 		if (mp) {
 			retval << mp;
@@ -2128,7 +2138,6 @@ QString MainWindow::copyToSvgFolder(const QFileInfo& file, bool addToAlien, cons
 
 	QString destFilePath;
 	if (!moduleID.isEmpty()) {
-		// Co-locate SVGs with FZP in the same moduleID subfolder
 		destFilePath = prefixFolder+"/"+destFolder+"/"+moduleID+"/"+viewFolder+"/"+fileName;
 	} else {
 		destFilePath = prefixFolder+"/svg/"+destFolder+"/"+viewFolder+"/"+fileName;
@@ -2152,12 +2161,7 @@ ModelPart* MainWindow::copyToPartsFolder(const QFileInfo& file, bool addToAlien,
 	QString baseName = file.fileName();
 	baseName.remove(QRegularExpression("^"+ZIP_PART));
 
-	QString destFilePath;
-	if (!moduleID.isEmpty()) {
-		destFilePath = prefixFolder+"/"+destFolder+"/"+moduleID+"/"+baseName;
-	} else {
-		destFilePath = prefixFolder+"/"+destFolder+"/"+baseName;
-	}
+	QString destFilePath = prefixFolder+"/"+destFolder+"/"+moduleID+"/"+baseName;
 
 	FolderUtils::ensureDirectoryExists(destFilePath);
 	backupExistingFileIfExists(destFilePath);

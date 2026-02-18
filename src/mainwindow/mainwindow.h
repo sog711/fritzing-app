@@ -530,7 +530,7 @@ protected:
 
 	QList<ModelPart*> moveToPartsFolder(QDir &unzipDir, bool addToBin, bool addToAlien, const QString & prefixFolder, const QString &destFolder, bool importingSinglePart);
 	QString copyToSvgFolder(const QFileInfo& file, bool addToAlien, const QString & prefixFolder, const QString &destFolder, const QString &moduleID = QString());
-	ModelPart* copyToPartsFolder(const QFileInfo& file, bool addToAlien, const QString & prefixFolder, const QString &destFolder, const QString &moduleID = QString());
+	ModelPart* copyToPartsFolder(const QFileInfo& file, bool addToAlien, const QString & prefixFolder, const QString &destFolder, const QString &moduleID);
 
 	void closeIfEmptySketch(MainWindow* mw);
 	bool whatToDoWithAlienFiles();
