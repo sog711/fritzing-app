@@ -28,6 +28,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QTextStream>
 #include <QUuid>
 #include <QCryptographicHash>
+#include <QDateTime>
 #include <QProcess>
 #include <QDesktopServices>
 #include <QUrl>
@@ -49,6 +50,7 @@ FolderUtils::FolderUtils() {
 	m_userFolders
 	        << "partfactory"
 	        << "backup"
+	        << "history"
 	        << "fzz"
 	        << "local_parts";
 	m_documentFolders
@@ -888,4 +890,49 @@ bool FolderUtils::checkFileLoadability(QWidget* parent, const QString& filePath)
 		return false;
 	}
 	return true;
+}
+
+QString FolderUtils::getHistoryPath() {
+	return getTopLevelUserDataStorePath() + "/history";
+}
+
+void FolderUtils::savePreviousVersionToHistory(const QString &filePath, int maxVersions) {
+	QFileInfo sourceInfo(filePath);
+	if (!sourceInfo.exists() || sourceInfo.size() == 0) {
+		return;
+	}
+
+	QString historyDir = getHistoryPath();
+	QDir dir(historyDir);
+	if (!dir.exists()) {
+		dir.mkpath(historyDir);
+	}
+
+	// Build history filename: <md5_8chars>_<basename>_<timestamp>.<ext>
+	QByteArray pathHash = QCryptographicHash::hash(
+		sourceInfo.absoluteFilePath().toUtf8(), QCryptographicHash::Md5);
+	QString hashPrefix = pathHash.toHex().left(8);
+
+	QString timestamp = QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss");
+	QString historyFileName = QString("%1_%2_%3.%4")
+		.arg(hashPrefix,
+		     sourceInfo.completeBaseName(),
+		     timestamp,
+		     sourceInfo.suffix());
+
+	QString historyFilePath = dir.absoluteFilePath(historyFileName);
+	if (!QFile::copy(filePath, historyFilePath)) {
+		DebugDialog::debug(QString("savePreviousVersionToHistory: failed to copy '%1' to '%2'")
+			.arg(filePath, historyFilePath));
+		return;
+	}
+
+	// Prune: keep at most maxVersions files matching this path hash prefix
+	QStringList nameFilter;
+	nameFilter << (hashPrefix + "_*");
+	QFileInfoList historyFiles = dir.entryInfoList(nameFilter, QDir::Files, QDir::Time);
+	while (historyFiles.size() > maxVersions) {
+		QFileInfo oldest = historyFiles.takeLast();
+		QFile::remove(oldest.absoluteFilePath());
+	}
 }

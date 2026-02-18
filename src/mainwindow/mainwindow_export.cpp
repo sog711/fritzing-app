@@ -824,31 +824,36 @@ bool MainWindow::saveAsAux(const QString & fileName) {
 
 bool MainWindow::saveAsAuxAux(const QString & fileName) {
 	QApplication::setOverrideCursor(Qt::WaitCursor);
-
 	connectStartSave(true);
 
-	m_programView->saveAll();
-
-	QDir dir(this->m_fzzFolder);
-	QStringList nameFilters("*" + FritzingSketchExtension);
-	QFileInfoList fileList = dir.entryInfoList(nameFilters, QDir::Files | QDir::NoSymLinks);
-	Q_FOREACH (QFileInfo fileInfo, fileList) {
-		QFile file(fileInfo.absoluteFilePath());
-		file.remove();
+	bool result = false;
+	if (fileName.endsWith(FritzingBundleExtension, Qt::CaseInsensitive)) {
+		result = saveBundleDirectly(fileName);
+	} else {
+		// Unbundled .fz save — keep existing flow
+		FolderUtils::savePreviousVersionToHistory(fileName);
+		m_programView->saveAll();
+		QDir dir(this->m_fzzFolder);
+		QStringList nameFilters("*" + FritzingSketchExtension);
+		QFileInfoList fileList = dir.entryInfoList(nameFilters, QDir::Files | QDir::NoSymLinks);
+		for (const QFileInfo &fi : fileList) {
+			QFile file(fi.absoluteFilePath());
+			file.remove();
+		}
+		QString fzName = dir.absoluteFilePath(
+			QFileInfo(fileName).completeBaseName() + FritzingSketchExtension);
+		result = m_sketchModel->save(fzName, false);
+		if (result) {
+			result = saveAsShareable(fileName, false);
+		}
 	}
-
-	QString fzName = dir.absoluteFilePath(QFileInfo(fileName).completeBaseName() + FritzingSketchExtension);
-	bool result = m_sketchModel->save(fzName, false);
 
 	if (result) {
 		saveLastTabList();
-		result = saveAsShareable(fileName, false);
 	}
 
 	connectStartSave(false);
-
 	QApplication::restoreOverrideCursor();
-
 	return result;
 }
 

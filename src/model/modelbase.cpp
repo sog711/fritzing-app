@@ -25,10 +25,16 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../utils/textutils.h"
 #include "../utils/folderutils.h"
 #include "../utils/fmessagebox.h"
+#include "../utils/misc.h"
 #include "../version/version.h"
 #include "../viewgeometry.h"
 
+#include <QFileDevice>
 #include <QMessageBox>
+#include <quazip/quazipfile.h>
+
+#include <cerrno>
+#include <cstring>
 
 QList<QString> ModelBase::CoreList;
 
@@ -533,6 +539,65 @@ void ModelBase::save(const QString & fileName, QXmlStreamWriter & streamWriter, 
 	} else {
 		m_root->saveInstances(fileName, streamWriter, true, false);
 	}
+}
+
+static QString getIoDeviceError(QuaZip *zip) {
+	QIODevice *dev = zip->getIoDevice();
+	if (!dev) return QString();
+	auto *fd = qobject_cast<QFileDevice *>(dev);
+	if (fd && fd->error() != QFileDevice::NoError) {
+		return fd->errorString();
+	}
+	// Fallback: QSaveFile may not report write errors that went through
+	// zlib buffering. Check errno directly — it's still valid right after
+	// the failing close/flush call.
+	if (errno != 0) {
+		return QString::fromLocal8Bit(strerror(errno));
+	}
+	return QString();
+}
+
+bool ModelBase::saveToZip(QuaZip *zip, const QString &fileName, bool asPart, QString *errorOut) {
+	QuaZipFile zipFile(zip);
+	QString entryName = QFileInfo(fileName).completeBaseName() + FritzingSketchExtension;
+	if (!zipFile.open(QIODevice::WriteOnly, QuaZipNewInfo(entryName))) {
+		QString devError = getIoDeviceError(zip);
+		QString msg = devError.isEmpty()
+			? QString("saveToZip: failed to open zip entry '%1', error %2")
+				.arg(entryName).arg(zipFile.getZipError())
+			: devError;
+		DebugDialog::debug(QString("saveToZip: failed to open zip entry '%1', error %2")
+			.arg(entryName).arg(zipFile.getZipError()));
+		if (errorOut) *errorOut = msg;
+		return false;
+	}
+
+	QXmlStreamWriter streamWriter(&zipFile);
+	save(fileName, streamWriter, asPart);
+
+	if (streamWriter.hasError()) {
+		QString devError = getIoDeviceError(zip);
+		QString msg = devError.isEmpty()
+			? QString("saveToZip: XML write error for '%1'").arg(entryName)
+			: devError;
+		DebugDialog::debug(QString("saveToZip: XML write error for '%1'").arg(entryName));
+		if (errorOut) *errorOut = msg;
+		zipFile.close();
+		return false;
+	}
+
+	zipFile.close();
+	if (zipFile.getZipError() != UNZ_OK) {
+		QString devError = getIoDeviceError(zip);
+		QString msg = devError.isEmpty()
+			? QString("saveToZip: zip entry close error %1").arg(zipFile.getZipError())
+			: devError;
+		DebugDialog::debug(QString("saveToZip: zip entry close error %1").arg(zipFile.getZipError()));
+		if (errorOut) *errorOut = msg;
+		return false;
+	}
+
+	return true;
 }
 
 bool ModelBase::paste(ModelBase * referenceModel, QByteArray & data, QList<ModelPart *> & modelParts, QHash<QString, QRectF> & boundingRects, bool preserveIndex)

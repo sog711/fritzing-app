@@ -41,6 +41,9 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QStyleFactory>
 
 
+#include <QSaveFile>
+#include <quazip/quazipfile.h>
+
 #include "mainwindow.h"
 #include "../debugdialog.h"
 #include "../infoview/htmlinfoview.h"
@@ -1995,6 +1998,180 @@ QStringList MainWindow::saveBundledAux(ModelPart *mp, const QDir &destFolder) {
 	}
 
 	return names;
+}
+
+bool MainWindow::writeFileToZip(QuaZip *zip, const QString &filePath, const QString &fileNameInZip) {
+	QFile inFile(filePath);
+	if (!inFile.open(QIODevice::ReadOnly)) {
+		DebugDialog::debug(QString("writeFileToZip: cannot open '%1': %2")
+			.arg(filePath, inFile.errorString()));
+		return false;
+	}
+	QByteArray data = inFile.readAll();
+	inFile.close();
+
+	QuaZipFile zipFile(zip);
+	if (!zipFile.open(QIODevice::WriteOnly, QuaZipNewInfo(fileNameInZip))) {
+		DebugDialog::debug(QString("writeFileToZip: cannot create zip entry '%1', error %2")
+			.arg(fileNameInZip).arg(zipFile.getZipError()));
+		return false;
+	}
+	zipFile.write(data);
+	zipFile.close();
+	if (zipFile.getZipError() != UNZ_OK) {
+		DebugDialog::debug(QString("writeFileToZip: zip entry close error %1").arg(zipFile.getZipError()));
+		return false;
+	}
+	return true;
+}
+
+int MainWindow::writePartToZip(QuaZip *zip, ModelPart *mp) {
+	int entriesWritten = 0;
+
+	// Write the .fzp file
+	QString partPath = mp->path();
+	QString fzpEntryName = ZIP_PART + QFileInfo(partPath).fileName();
+	if (!writeFileToZip(zip, partPath, fzpEntryName)) {
+		return -1;
+	}
+	entriesWritten++;
+
+	// Write SVG files for each view
+	QList<ViewLayer::ViewID> viewIDs;
+	viewIDs << ViewLayer::IconView << ViewLayer::BreadboardView
+	        << ViewLayer::SchematicView << ViewLayer::PCBView;
+	for (ViewLayer::ViewID viewID : viewIDs) {
+		QString basename = mp->hasBaseNameFor(viewID);
+		if (basename.isEmpty()) continue;
+
+		QString filename = PartFactory::getSvgFilename(mp, basename, true, true);
+		if (filename.isEmpty()) continue;
+
+		QString svgBasename = basename;
+		svgBasename.replace("/", ".");
+		QString svgEntryName = ZIP_SVG + svgBasename;
+		if (!writeFileToZip(zip, filename, svgEntryName)) {
+			return -1;
+		}
+		entriesWritten++;
+	}
+
+	return entriesWritten;
+}
+
+bool MainWindow::saveBundleDirectly(const QString &bundledFileName) {
+	m_programView->saveAll();
+
+	QSaveFile saveFile(bundledFileName);
+	if (!saveFile.open(QIODevice::WriteOnly)) {
+		FMessageBox::warning(
+			this,
+			tr("Fritzing"),
+			tr("Cannot open file '%1' for writing.\n\n%2")
+				.arg(bundledFileName, saveFile.errorString()));
+		return false;
+	}
+
+	QuaZip zip(&saveFile);
+	zip.setAutoClose(false);  // We control commit() ourselves
+	if (!zip.open(QuaZip::mdCreate)) {
+		FMessageBox::warning(
+			this,
+			tr("Fritzing"),
+			tr("Cannot create ZIP archive for '%1'.\n\n%2")
+				.arg(bundledFileName, saveFile.errorString()));
+		return false;
+	}
+
+	int entriesWritten = 0;
+
+	// 1. Write sketch XML entry
+	QString saveError;
+	if (!m_sketchModel->saveToZip(&zip, bundledFileName, false, &saveError)) {
+		FMessageBox::warning(
+			this,
+			tr("Fritzing"),
+			tr("Failed to write sketch data to '%1'.\n\n%2")
+				.arg(bundledFileName, saveError));
+		return false;
+	}
+	entriesWritten++;
+
+	// 2. Write linked program files (non-fatal if missing)
+	for (int i = 0; i < m_linkedProgramFiles.count(); i++) {
+		LinkedFile *linkedFile = m_linkedProgramFiles.at(i);
+		QFileInfo fileInfo(linkedFile->linkedFilename);
+		if (fileInfo.exists()) {
+			writeFileToZip(&zip, linkedFile->linkedFilename, fileInfo.fileName());
+			entriesWritten++;
+		}
+	}
+
+	// 3. Collect and write non-core parts
+	QHash<QString, ModelPart *> saveParts;
+	for (QGraphicsItem *item : m_pcbGraphicsView->scene()->items()) {
+		auto *itemBase = dynamic_cast<ItemBase *>(item);
+		if (itemBase == nullptr) continue;
+		if (itemBase->modelPart() == nullptr) continue;
+		if (itemBase->modelPart()->isCore()) continue;
+		if (itemBase->moduleID().contains(PartFactory::OldSchematicPrefix)) continue;
+		saveParts.insert(itemBase->moduleID(), itemBase->modelPart());
+	}
+
+	for (ModelPart *mp : saveParts.values()) {
+		int partEntries = writePartToZip(&zip, mp);
+		if (partEntries < 0) {
+			QString devError = saveFile.errorString();
+			if (saveFile.error() == QFileDevice::NoError)
+				devError = QString("zip error writing part files");
+			FMessageBox::warning(
+				this,
+				tr("Fritzing"),
+				tr("Failed to write part '%1' to '%2'.\n\n%3")
+					.arg(mp->title(), bundledFileName, devError));
+			return false;
+		}
+		entriesWritten += partEntries;
+	}
+
+	// 4. Validate: must have at least the sketch entry
+	if (entriesWritten < 1) {
+		FMessageBox::warning(
+			this,
+			tr("Fritzing"),
+			tr("Save produced an empty archive for '%1'. Save aborted.")
+				.arg(bundledFileName));
+		return false;
+	}
+
+	// 5. Close the ZIP (finalizes central directory) but don't commit yet
+	zip.close();
+	if (zip.getZipError() != UNZ_OK) {
+		QString devError = saveFile.errorString();
+		if (saveFile.error() == QFileDevice::NoError)
+			devError = QString("zip finalization error %1").arg(zip.getZipError());
+		FMessageBox::warning(
+			this,
+			tr("Fritzing"),
+			tr("Error finalizing ZIP archive for '%1'.\n\n%2")
+				.arg(bundledFileName, devError));
+		return false;
+	}
+
+	// 6. Save previous version to history before overwriting
+	FolderUtils::savePreviousVersionToHistory(bundledFileName);
+
+	// 7. Atomic commit — replaces old file or creates new one
+	if (!saveFile.commit()) {
+		FMessageBox::warning(
+			this,
+			tr("Fritzing"),
+			tr("Failed to commit file '%1'. The original file is untouched.\n\n%2")
+				.arg(bundledFileName, saveFile.errorString()));
+		return false;
+	}
+
+	return true;
 }
 
 void MainWindow::validatePartInfo(const QString &fzpPath)

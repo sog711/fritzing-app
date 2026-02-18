@@ -43,6 +43,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "../model/modelpart.h"
 #include "../partseditor/peutils.h"
+#include <quazip/quazip.h>
 #include "../program/programwindow.h"
 #include "../project_properties.h"
 #include "../routingstatus.h"
@@ -1001,6 +1002,9 @@ protected:
 
 private:
 	void validatePartInfo(const QString &fzpPath);
+	bool saveBundleDirectly(const QString &bundledFileName);
+	bool writeFileToZip(QuaZip *zip, const QString &filePath, const QString &fileNameInZip);
+	int writePartToZip(QuaZip *zip, ModelPart *mp);
 };
 
 #endif

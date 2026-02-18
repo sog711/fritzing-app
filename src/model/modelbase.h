@@ -24,6 +24,8 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QObject>
 #include "modelpart.h"
 
+#include <quazip/quazip.h>
+
 class ModelBase : public QObject
 {
 	Q_OBJECT
@@ -39,6 +41,7 @@ public:
 	bool loadFromFile(const QString & fileName, ModelBase* referenceModel, QList<ModelPart *> & modelParts, bool checkInstances);
 	bool save(const QString & fileName, bool asPart);
 	void save(const QString & fileName, class QXmlStreamWriter &, bool asPart);
+	bool saveToZip(QuaZip *zip, const QString &fileName, bool asPart, QString *errorOut = nullptr);
 	virtual ModelPart * addPart(QString newPartPath, bool addToReference);
 	virtual bool addPart(ModelPart * modelPart, bool update);
 	virtual ModelPart * addPart(QString newPartPath, bool addToReference, bool updateIdAlreadyExists);

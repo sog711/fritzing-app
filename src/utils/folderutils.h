@@ -68,6 +68,8 @@ public:
 	static bool checkFileLoadability(QWidget* parent, const QString& filePath);
 	static bool ensureDirectoryExists(const QString & filePath);
 	static QString sanitizeForFolder(const QString & name);
+	static void savePreviousVersionToHistory(const QString &filePath, int maxVersions = 10);
+	static QString getHistoryPath();
 
 protected:
 	FolderUtils();
