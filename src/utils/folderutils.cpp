@@ -19,6 +19,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 ********************************************************************/
 
 #include "folderutils.h"
+#include "sanitizeforpath.h"
 #include "lockmanager.h"
 #include "textutils.h"
 #include <QDesktopServices>
@@ -799,6 +800,10 @@ bool FolderUtils::ensureDirectoryExists(const QString & filePath) {
 		return dir.mkpath(dir.absolutePath());
 	}
 	return true;
+}
+
+QString FolderUtils::sanitizeForFolder(const QString & name) {
+	return sanitizeForPath(name);
 }
 
 bool FolderUtils::checkFileLoadability(QWidget* parent, const QString& filePath) {

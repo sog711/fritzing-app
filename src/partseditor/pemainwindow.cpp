@@ -2172,6 +2172,7 @@ bool PEMainWindow::saveAs(bool overWrite)
 	} else {
 		targetModuleID = QString("%1_%2_%3").arg(m_prefix).arg(m_guid).arg(m_fileIndex);
 	}
+	targetModuleID = FolderUtils::sanitizeForFolder(targetModuleID);
 
 	// Co-locate SVGs with FZP in the same moduleID subfolder
 	QString fzpBasePath = m_userPartsFolderPath + targetModuleID + "/";

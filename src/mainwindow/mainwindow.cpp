@@ -2071,7 +2071,7 @@ QList<ModelPart*> MainWindow::moveToPartsFolder(QDir &unzipDir, bool addToBin, b
 		fzpFile.close();
 		QString moduleID = TextUtils::parseForModuleID(fzpContent);
 		if (moduleID.isEmpty()) continue;
-		fzpToModuleID[fzpInfo.fileName()] = moduleID;
+		fzpToModuleID[fzpInfo.fileName()] = FolderUtils::sanitizeForFolder(moduleID);
 
 		// Parse SVG image references from FZP
 		QDomDocument doc;

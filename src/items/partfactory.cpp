@@ -235,7 +235,7 @@ QString PartFactory::getSvgFilename(ModelPart * modelPart, const QString & baseN
 
 	// moduleID-based search paths (highest priority for subfolder-structured parts)
 	// SVGs are co-located with FZP in {partsRoot}/%1/{moduleID}/{baseName}
-	QString moduleID = modelPart->moduleID();
+	QString moduleID = FolderUtils::sanitizeForFolder(modelPart->moduleID());
 	if (!moduleID.isEmpty()) {
 		QString moduleIDPostfix = "/%1/" + moduleID + "/" + baseName;
 		tempPaths << FolderUtils::getUserPartsPath() + moduleIDPostfix;
