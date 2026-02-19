@@ -2096,21 +2096,21 @@ bool PEMainWindow::saveAs(bool overWrite)
 {
 	QStringList peAlienFiles;
 
-	bool ok = false;
-	QString prefix = QInputDialog::getText(
-	                     this,
-	                     tr("Filename prefix"),
-	                     tr("<p>Please enter a prefix to help you identify the part files.<br/>"
-	                        "The file names will have the form 'PREFIX_%1'.<br/>"
-	                        "(It is not necessary to change the proposed prefix, since a unique suffix is always added.)</p>").arg(m_guid),
-	                     QLineEdit::Normal,
-	                     m_prefix,
-	                     &ok
-	                 );
-	if (!ok || prefix.isEmpty()) return false;
-
-	if (prefix != m_prefix) overWrite = false;
-	m_prefix = prefix;
+	if (!overWrite) {
+		bool ok = false;
+		QString prefix = QInputDialog::getText(
+		                     this,
+		                     tr("Filename prefix"),
+		                     tr("<p>Please enter a prefix to help you identify the part files.<br/>"
+		                        "The file names will have the form 'PREFIX_%1'.<br/>"
+		                        "(It is not necessary to change the proposed prefix, since a unique suffix is always added.)</p>").arg(m_guid),
+		                     QLineEdit::Normal,
+		                     m_prefix,
+		                     &ok
+		                 );
+		if (!ok || prefix.isEmpty()) return false;
+		m_prefix = prefix;
+	}
 
 	QDomElement fzpRoot = m_fzpDocument.documentElement();
 
@@ -2168,24 +2168,14 @@ bool PEMainWindow::saveAs(bool overWrite)
 	// Determine the moduleID for the save destination subfolder
 	QString targetModuleID;
 	if (overWrite) {
-		// Backward compat: if original FZP is in a moduleID subfolder, keep it there
-		QDir fzpDir(QFileInfo(m_originalFzpPath).absolutePath());
-		if (fzpDir.dirName() == m_originalModuleID) {
-			targetModuleID = m_originalModuleID;
-		}
-		// else: flat structure, targetModuleID stays empty -> flat save
+		targetModuleID = m_originalModuleID;
 	} else {
-		// Save As New — always use subfolder
 		targetModuleID = QString("%1_%2_%3").arg(m_prefix).arg(m_guid).arg(m_fileIndex);
 	}
 
-	QString svgBasePath = m_userPartsFolderSvgPath;
-	QString fzpBasePath = m_userPartsFolderPath;
-	if (!targetModuleID.isEmpty()) {
-		// Co-locate SVGs with FZP in the same moduleID subfolder
-		fzpBasePath = m_userPartsFolderPath + targetModuleID + "/";
-		svgBasePath = fzpBasePath;
-	}
+	// Co-locate SVGs with FZP in the same moduleID subfolder
+	QString fzpBasePath = m_userPartsFolderPath + targetModuleID + "/";
+	QString svgBasePath = fzpBasePath;
 
 	QHash<ViewLayer::ViewID, QString> svgPaths;
 
@@ -2286,14 +2276,16 @@ bool PEMainWindow::saveAs(bool overWrite)
 
 	QDir dir(fzpBasePath);
 	FolderUtils::ensureDirectoryExists(dir.absoluteFilePath("dummy"));
-	QString suffix = QString("%1_%2_%3").arg(m_prefix).arg(m_guid).arg(m_fileIndex++);
-	QString fzpPath = dir.absoluteFilePath(QString("%1.fzp").arg(suffix));
 
-	peAlienFiles << fzpPath;
+	QString fzpPath;
 	if (overWrite) {
-		fzpPath = m_originalFzpPath;
-	}
-	else {
+		// Keep original filename, save to moduleID subfolder
+		fzpPath = dir.absoluteFilePath(QFileInfo(m_originalFzpPath).fileName());
+		peAlienFiles << fzpPath;
+	} else {
+		QString suffix = QString("%1_%2_%3").arg(m_prefix).arg(m_guid).arg(m_fileIndex++);
+		fzpPath = dir.absoluteFilePath(QString("%1.fzp").arg(suffix));
+		peAlienFiles << fzpPath;
 		fzpRoot.setAttribute("moduleId", suffix);
 		QString family = m_metadataView->family();
 		QString variant = m_metadataView->variant();
@@ -2308,6 +2300,13 @@ bool PEMainWindow::saveAs(bool overWrite)
 	}
 
 	bool result = writeXml(fzpPath, m_fzpDocument.toString(), false);
+
+	// Track old path for migration cleanup (defer deletion until after all updates)
+	QString oldFzpPath;
+	if (overWrite && fzpPath != m_originalFzpPath) {
+		oldFzpPath = m_originalFzpPath;
+		m_originalFzpPath = fzpPath;
+	}
 
 	if (!overWrite) {
 		m_originalFzpPath = fzpPath;
@@ -2332,7 +2331,7 @@ bool PEMainWindow::saveAs(bool overWrite)
 			modelPart->setAlien(true);
 			Q_EMIT addToMyPartsSignal(modelPart, peAlienFiles);
 		} else {
-			QMessageBox::critical(nullptr, tr("Parts Editor Error"), tr("The file %2 with prefix %1 was not saved.").arg(prefix).arg(fzpPath));
+			QMessageBox::critical(nullptr, tr("Parts Editor Error"), tr("The file %2 with prefix %1 was not saved.").arg(m_prefix).arg(fzpPath));
 		}
 	}
 	else {
@@ -2349,7 +2348,20 @@ bool PEMainWindow::saveAs(bool overWrite)
 	}
 
 	m_autosaveNeeded = false;
+
+	// Flush any pending delayed commands before marking the stack clean.
+	// PE commands use waitPush() with a 100ms delay; if the user saves
+	// before the timer fires, the command would be pushed after setClean(),
+	// causing a false modification state.
+	m_undoStack->waitForTimers();
 	m_undoStack->setClean();
+
+	// Delete old file after all updates are complete
+	if (!oldFzpPath.isEmpty()) {
+		QFile::remove(oldFzpPath);
+	}
+
+	setWindowModified(false);
 
 	return result;
 }
