@@ -631,6 +631,10 @@ bool PartsBinPaletteWidget::hasAlienParts() {
 
 void PartsBinPaletteWidget::addPart(const QString& moduleID, int position) {
 	ModelPart *modelPart = m_referenceModel->retrieveModelPart(moduleID);
+	if (!modelPart) {
+		DebugDialog::debug(QString("PartsBinPaletteWidget::addPart: module '%1' not found").arg(moduleID));
+		return;
+	}
 	addPart(modelPart, position);
 }
 
