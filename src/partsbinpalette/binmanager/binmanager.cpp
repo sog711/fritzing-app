@@ -43,9 +43,10 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "referencemodel/referencemodel.h"
 #include "items/partfactory.h"
 #include "partsbinpalette/partsbinpalettewidget.h"
-#include "partsbinpalette//searchbinpalettewidget.h"
+#include "partsbinpalette/searchbinpalettewidget.h"
 #include "partsbinpalette/partsbinview.h"
 #include "utils/fmessagebox.h"
+#include "mainwindow/fprobeactions.h"
 
 ///////////////////////////////////////////////////////////
 
@@ -138,6 +139,8 @@ void BinManager::initStandardBins()
 {
 	createCombinedMenu();
 	createContextMenus();
+
+	new FProbeActions("BinMenu", m_combinedMenu);
 
 	//DebugDialog::debug("init bin manager");
 	QList<BinLocation *> actualLocations;

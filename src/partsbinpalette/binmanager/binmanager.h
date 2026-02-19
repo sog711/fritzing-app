@@ -110,6 +110,7 @@ public:
 	void hideTabBar();
 	void reloadPart(const QString & moduleID);
 	void moveSearchBinToTop();
+	PartsBinPaletteWidget* currentBin();
 
 Q_SIGNALS:
 	void savePartAsBundled(const QString &moduleId);
@@ -146,7 +147,6 @@ protected:
 	PartsBinPaletteWidget* newBin(bool isSearchBin);
 	void registerBin(PartsBinPaletteWidget* bin);
 	PartsBinPaletteWidget* getBin(int index);
-	PartsBinPaletteWidget* currentBin();
 	void setAsCurrentTab(PartsBinPaletteWidget* bin);
 	PartsBinPaletteWidget* getOrOpenMyPartsBin();
 	PartsBinPaletteWidget* getOrOpenSearchBin();
@@ -225,6 +225,7 @@ public:
 	static bool isTabReorderingEvent(QDropEvent* event);
 	static void initNames();
 	static bool getBinTitle(const QString & filename, QString & binTitle, QString & binIcon);
+
 };
 
 #endif /* BINMANAGER_H_ */
