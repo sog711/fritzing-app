@@ -637,6 +637,22 @@ int FApplication::init() {
 				}
 			}
 
+			// Preserve version-patterned groups (e.g. "1.0.3", "2.0.0") for forward compatibility
+			QRegularExpression versionGroupRx("^\\d+\\.\\d+\\.\\d+");
+			QMap<QString, QMap<QString, QVariant>> versionGroups;
+			for (const QString& group : settings.childGroups()) {
+				if (versionGroupRx.match(group).hasMatch()) {
+					settings.beginGroup(group);
+					QMap<QString, QVariant> groupValues;
+					for (const QString& key : settings.allKeys()) {
+						groupValues[key] = settings.value(key);
+					}
+					settings.endGroup();
+					versionGroups[group] = groupValues;
+					DebugDialog::debug(QString("Settings migration - preserving version group [%1] with %2 key(s)").arg(group).arg(groupValues.size()));
+				}
+			}
+
 			settings.clear();
 
 			// Restore preserved values
@@ -644,7 +660,16 @@ int FApplication::init() {
 				settings.setValue(it.key(), it.value());
 			}
 
-			DebugDialog::debug(QString("Settings migration complete - preserved %1 setting(s)").arg(preservedCount));
+			// Restore version-patterned groups
+			for (auto git = versionGroups.constBegin(); git != versionGroups.constEnd(); ++git) {
+				settings.beginGroup(git.key());
+				for (auto kit = git.value().constBegin(); kit != git.value().constEnd(); ++kit) {
+					settings.setValue(kit.key(), kit.value());
+				}
+				settings.endGroup();
+			}
+
+			DebugDialog::debug(QString("Settings migration complete - preserved %1 setting(s) and %2 version group(s)").arg(preservedCount).arg(versionGroups.size()));
 		}
 		else {
 			DebugDialog::debug(QString("Fritzing %1 - loading existing settings").arg(currVersion));
