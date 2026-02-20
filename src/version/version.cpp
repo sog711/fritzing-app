@@ -106,6 +106,10 @@ const QString & Version::year() {
 	return m_year;
 }
 
+QString Version::shortVersion() {
+	return QString("%1.%2.%3").arg(m_majorVersion, m_minorVersion, m_minorSubVersion);
+}
+
 bool Version::candidateGreaterThanCurrent(const VersionThing & candidateVersionThing)
 {
 	VersionThing myVersionThing;

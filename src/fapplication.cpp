@@ -607,72 +607,93 @@ int FApplication::init() {
 	qRegisterMetaType<QLocale>();
 	qRegisterMetaType<UploadPair>("UploadPair");
 
-	// Check version and clear settings if version changed
+	// Check version group and migrate settings if this version hasn't run before
 	// This must happen BEFORE any settings are read or written
 	{
 		QSettings settings;
-		QString prevVersion = settings.value("version").toString();
-		QString currVersion = Version::versionString();
+		QString shortVer = Version::shortVersion();
+		bool versionGroupExists = settings.childGroups().contains(shortVer);
 
-		if (prevVersion.isEmpty()) {
-			DebugDialog::debug(QString("First start with Fritzing %1 - creating fresh settings").arg(currVersion));
-		}
-		else if (prevVersion != currVersion) {
-			DebugDialog::debug(QString("Version changed from %1 to %2 - migrating settings").arg(prevVersion, currVersion));
-
-			// Settings to preserve during clear
-			QStringList preserveKeys = {"pid", "language", "locale", "recentFileList"};
-			if (FTesting::getInstance()->enabled()) {
-				preserveKeys.append("gerberExportImprovementsEnabled");
-			}
-
-			// Store values we want to keep
-			QMap<QString, QVariant> preserveValues;
-			int preservedCount = 0;
-			for (const QString& key : preserveKeys) {
-				QVariant value = settings.value(key);
-				if (!value.isNull()) {
-					preserveValues[key] = value;
-					preservedCount++;
-				}
-			}
-
-			// Preserve version-patterned groups (e.g. "1.0.3", "2.0.0") for forward compatibility
-			QRegularExpression versionGroupRx("^\\d+\\.\\d+\\.\\d+");
-			QMap<QString, QMap<QString, QVariant>> versionGroups;
-			for (const QString& group : settings.childGroups()) {
-				if (versionGroupRx.match(group).hasMatch()) {
-					settings.beginGroup(group);
-					QMap<QString, QVariant> groupValues;
-					for (const QString& key : settings.allKeys()) {
-						groupValues[key] = settings.value(key);
-					}
-					settings.endGroup();
-					versionGroups[group] = groupValues;
-					DebugDialog::debug(QString("Settings migration - preserving version group [%1] with %2 key(s)").arg(group).arg(groupValues.size()));
-				}
-			}
-
-			settings.clear();
-
-			// Restore preserved values
-			for (auto it = preserveValues.constBegin(); it != preserveValues.constEnd(); ++it) {
-				settings.setValue(it.key(), it.value());
-			}
-
-			// Restore version-patterned groups
-			for (auto git = versionGroups.constBegin(); git != versionGroups.constEnd(); ++git) {
-				settings.beginGroup(git.key());
-				for (auto kit = git.value().constBegin(); kit != git.value().constEnd(); ++kit) {
-					settings.setValue(kit.key(), kit.value());
-				}
-				settings.endGroup();
-			}
-
-			DebugDialog::debug(QString("Settings migration complete - preserved %1 setting(s) and %2 version group(s)").arg(preservedCount).arg(versionGroups.size()));
+		if (versionGroupExists) {
+			DebugDialog::debug(QString("Fritzing %1 - loading existing settings (group [%2] found)")
+				.arg(Version::versionString(), shortVer));
 		}
 		else {
-			DebugDialog::debug(QString("Fritzing %1 - loading existing settings").arg(currVersion));
+			// Distinguish first-ever run from version upgrade
+			QString prevVersion = settings.value("version").toString();
+			QRegularExpression versionGroupRx("^\\d+\\.\\d+\\.\\d+");
+			bool hasAnyVersionGroup = false;
+			for (const QString& group : settings.childGroups()) {
+				if (versionGroupRx.match(group).hasMatch()) {
+					hasAnyVersionGroup = true;
+					break;
+				}
+			}
+
+			bool isFirstEverRun = prevVersion.isEmpty() && !hasAnyVersionGroup;
+
+			if (isFirstEverRun) {
+				DebugDialog::debug(QString("First start with Fritzing %1 - creating fresh settings")
+					.arg(Version::versionString()));
+			}
+			else {
+				DebugDialog::debug(QString("Version group [%1] not found - migrating settings")
+					.arg(shortVer));
+
+				// Settings to preserve during clear (includes "version" so old versions still see their own)
+				QStringList preserveKeys = {"pid", "language", "locale", "recentFileList", "version"};
+				if (FTesting::getInstance()->enabled()) {
+					preserveKeys.append("gerberExportImprovementsEnabled");
+				}
+
+				QMap<QString, QVariant> preserveValues;
+				int preservedCount = 0;
+				for (const QString& key : preserveKeys) {
+					QVariant value = settings.value(key);
+					if (!value.isNull()) {
+						preserveValues[key] = value;
+						preservedCount++;
+					}
+				}
+
+				// Preserve version-patterned groups for forward compatibility
+				QMap<QString, QMap<QString, QVariant>> versionGroups;
+				for (const QString& group : settings.childGroups()) {
+					if (versionGroupRx.match(group).hasMatch()) {
+						settings.beginGroup(group);
+						QMap<QString, QVariant> groupValues;
+						for (const QString& key : settings.allKeys()) {
+							groupValues[key] = settings.value(key);
+						}
+						settings.endGroup();
+						versionGroups[group] = groupValues;
+						DebugDialog::debug(QString("Settings migration - preserving version group [%1] with %2 key(s)")
+							.arg(group).arg(groupValues.size()));
+					}
+				}
+
+				settings.clear();
+
+				for (auto it = preserveValues.constBegin(); it != preserveValues.constEnd(); ++it) {
+					settings.setValue(it.key(), it.value());
+				}
+				for (auto git = versionGroups.constBegin(); git != versionGroups.constEnd(); ++git) {
+					settings.beginGroup(git.key());
+					for (auto kit = git.value().constBegin(); kit != git.value().constEnd(); ++kit) {
+						settings.setValue(kit.key(), kit.value());
+					}
+					settings.endGroup();
+				}
+
+				DebugDialog::debug(QString("Settings migration complete - preserved %1 setting(s) and %2 version group(s)")
+					.arg(preservedCount).arg(versionGroups.size()));
+			}
+
+			// Create version group marker (both first-run and migration)
+			settings.beginGroup(shortVer);
+			settings.setValue("migrated", Version::versionString());
+			settings.endGroup();
+			DebugDialog::debug(QString("Created version group [%1]").arg(shortVer));
 		}
 	}
 
@@ -1488,9 +1509,8 @@ void FApplication::registerFont(const QString &fontFile, bool reallyRegister) {
 
 void FApplication::finish()
 {
-	QString currVersion = Version::versionString();
-	QSettings settings;
-	settings.setValue("version", currVersion);
+	// Version tracking is now handled by version groups created on startup.
+	// The legacy "version" key is preserved but no longer written.
 }
 
 void FApplication::loadNew(QString path) {
