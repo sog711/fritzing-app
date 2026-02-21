@@ -245,10 +245,6 @@ QString PartFactory::getSvgFilename(ModelPart * modelPart, const QString & baseN
 		if (tempPaths.at(0).compare(pfPath) != 0) {
 			tempPaths << pfPath;
 		}
-		DebugDialog::debug(QString("getSvgFilename: baseName='%1' modelPart='%2'").arg(baseName).arg(modelPart->moduleID()));
-		for (const QString &tempPath : tempPaths) {
-			DebugDialog::debug(QString("  search path: %1").arg(tempPath));
-		}
 	}
 	else {
 		DebugDialog::debug("modelPart with no path--this shouldn't happen");
@@ -276,15 +272,7 @@ QString PartFactory::getSvgFilename(ModelPart * modelPart, const QString & baseN
 	}
 
 	if (!exists && generate) {
-		DebugDialog::debug(QString("getSvgFilename: not found in search paths, trying generate for '%1'").arg(baseName));
 		filename = PartFactory::getSvgFilename(baseName);
-	}
-	if (exists) {
-		DebugDialog::debug(QString("getSvgFilename: found '%1'").arg(filename));
-	} else if (!filename.isEmpty()) {
-		DebugDialog::debug(QString("getSvgFilename: generated '%1'").arg(filename));
-	} else {
-		DebugDialog::debug(QString("getSvgFilename: FAILED to find '%1'").arg(baseName));
 	}
 
 	if (handleSubparts && (modelPart->modelPartShared() != nullptr) && modelPart->modelPartShared()->hasSubparts())

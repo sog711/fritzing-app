@@ -1585,10 +1585,6 @@ QString MainWindow::loadBundledSketch(const QString &fileName, bool addToRecent,
 	namefilters.clear();
 	namefilters << "*.svg";
 	QFileInfoList svgEntryInfoList = dir.entryInfoList(namefilters);
-	DebugDialog::debug(QString("svgEntryInfoList has %1 entries from %2:").arg(svgEntryInfoList.count()).arg(m_fzzFolder));
-	for (const QFileInfo &si : svgEntryInfoList) {
-		DebugDialog::debug(QString("  svg entry: %1").arg(si.fileName()));
-	}
 
 	m_addedToTemp = false;
 	QStringList missingSvgPaths;
@@ -1613,7 +1609,6 @@ QString MainWindow::loadBundledSketch(const QString &fileName, bool addToRecent,
 		}
 
 		ModelPart * mp = m_referenceModel->retrieveModelPart(moduleID);
-		DebugDialog::debug(QString("fzp '%1' moduleID='%2' retrieveModelPart=%3").arg(fzpInfo.fileName()).arg(moduleID).arg(mp != nullptr ? "found" : "null"));
 		if (mp == nullptr) {
 			QDomDocument doc;
 			QDomDocument::ParseResult parseResult = doc.setContent(fzp);
@@ -1642,7 +1637,6 @@ QString MainWindow::loadBundledSketch(const QString &fileName, bool addToRecent,
 				if (!path.isEmpty()) {
 					bool copied = copySvg(path, svgEntryInfoList);
 					if (!copied) {
-						DebugDialog::debug(QString("missing svg %1").arg(path));
 						if (!missingSvgPaths.contains(path)) {
 							missingSvgPaths << path;
 						}
@@ -1688,24 +1682,21 @@ bool MainWindow::copySvg(const QString & path, QFileInfoList & svgEntryInfoList)
 {
 	int slash = path.indexOf("/");
 	QString subpath = path.mid(slash + 1);
-	DebugDialog::debug(QString("copySvg: path='%1' subpath='%2' svgEntryInfoList.count=%3").arg(path).arg(subpath).arg(svgEntryInfoList.count()));
 	bool gotOne = false;
 	for (int jx = svgEntryInfoList.count() - 1; jx >= 0; jx--) {
 		QFileInfo svgInfo = svgEntryInfoList.at(jx);
-		DebugDialog::debug(QString("  copySvg: comparing '%1'.contains('%2') = %3").arg(svgInfo.fileName()).arg(subpath).arg(svgInfo.fileName().contains(subpath)));
 		if (svgInfo.fileName().contains(subpath)) {
-			QString destPath = copyToSvgFolder(svgInfo, false, PartFactory::folderPath(), "contrib");
-			DebugDialog::debug(QString("  copySvg: copied to '%1'").arg(destPath));
+			copyToSvgFolder(svgInfo, false, PartFactory::folderPath(), "contrib");
 			// Don't remove from svgEntryInfoList — multiple fzps in the
 			// same .fzz may reference the same SVG files.
 			gotOne = true;
 		}
 	}
 
-	if (gotOne) return true;
-
-	DebugDialog::debug(QString("svg matching fz path %1 not found").arg(path));
-	return false;
+	if (!gotOne) {
+		DebugDialog::debug(QString("svg matching fz path %1 not found").arg(path));
+	}
+	return gotOne;
 }
 
 
@@ -2098,8 +2089,6 @@ QString MainWindow::copyToSvgFolder(const QFileInfo& file, bool addToAlien, cons
 
 	QString destFilePath =
 	    prefixFolder+"/svg/"+destFolder+"/"+viewFolder+"/"+fileName;
-
-	DebugDialog::debug(QString("copyToSvgFolder: src='%1' viewFolder='%2' fileName='%3' dest='%4'").arg(file.fileName()).arg(viewFolder).arg(fileName).arg(destFilePath));
 
 	backupExistingFileIfExists(destFilePath);
 	if(FolderUtils::slamCopy(svgfile, destFilePath)) {
