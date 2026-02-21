@@ -566,6 +566,7 @@ bool FolderUtils::unzipTo(const QString &filepath, const QString &dirToDecompres
 			return false;
 		}
 		name=file.getActualFileName();
+		DebugDialog::debug(QString("  unzipped: %1").arg(name));
 		if(file.getZipError()!=UNZ_OK) {
 			error = QString("file.getFileName(): %1").arg(file.getZipError());
 			DebugDialog::debug(error);

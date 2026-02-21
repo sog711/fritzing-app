@@ -1603,6 +1603,10 @@ QString MainWindow::loadBundledSketch(const QString &fileName, bool addToRecent,
 	namefilters.clear();
 	namefilters << "*.svg";
 	QFileInfoList svgEntryInfoList = dir.entryInfoList(namefilters);
+	DebugDialog::debug(QString("svgEntryInfoList has %1 entries from %2:").arg(svgEntryInfoList.count()).arg(m_fzzFolder));
+	for (const QFileInfo &si : svgEntryInfoList) {
+		DebugDialog::debug(QString("  svg entry: %1").arg(si.fileName()));
+	}
 
 	m_addedToTemp = false;
 
@@ -1629,6 +1633,7 @@ QString MainWindow::loadBundledSketch(const QString &fileName, bool addToRecent,
 		}
 
 		ModelPart * mp = m_referenceModel->retrieveModelPart(moduleID);
+		DebugDialog::debug(QString("fzp '%1' moduleID='%2' retrieveModelPart=%3").arg(fzpInfo.fileName()).arg(moduleID).arg(mp != nullptr ? "found" : "null"));
 		if (mp == nullptr) {
 			QDomDocument doc;
 			QDomDocument::ParseResult parseResult = doc.setContent(fzp);
@@ -1689,8 +1694,17 @@ QString MainWindow::loadBundledSketch(const QString &fileName, bool addToRecent,
 		}
 	}
 
+	DebugDialog::debug(QString("missing svg resolution: %1 missing entries, %2 svg entries remaining").arg(missing.count()).arg(svgEntryInfoList.count()));
+
+	// TEMPORARY: fail hard to detect if any test sketches trigger the connector-count fallback
+	if (!missing.isEmpty() && !svgEntryInfoList.isEmpty()) {
+		qFatal("connector-count SVG fallback triggered: %d missing entries, %d svg entries remaining — remove this line after testing",
+			missing.count(), svgEntryInfoList.count());
+	}
+
 	std::sort(missing.begin(), missing.end(), byConnectorCount);
 	Q_FOREACH (MissingSvgInfo msi, missing) {
+		DebugDialog::debug(QString("  resolving missing svg: requestedPath='%1' connectorSvgIds=%2 equal=%3").arg(msi.requestedPath).arg(msi.connectorSvgIds.count()).arg(msi.equal));
 		if (msi.equal) {
 			// two or more parts have the same number of connectors--so we can't figure out how to assign them
 			continue;
@@ -1699,8 +1713,10 @@ QString MainWindow::loadBundledSketch(const QString &fileName, bool addToRecent,
 		int slash = msi.requestedPath.indexOf("/");
 		QString suffix = msi.requestedPath.mid(slash + 1);
 		QString prefix = msi.requestedPath.left(slash);
+		DebugDialog::debug(QString("  prefix='%1' suffix='%2'").arg(prefix).arg(suffix));
 		for (int jx = svgEntryInfoList.count() - 1; jx >= 0; jx--) {
 			QFileInfo svgInfo = svgEntryInfoList.at(jx);
+			DebugDialog::debug(QString("    checking '%1' contains prefix '%2': %3").arg(svgInfo.fileName()).arg(prefix).arg(svgInfo.fileName().contains(prefix, Qt::CaseInsensitive)));
 			if (!svgInfo.fileName().contains(prefix, Qt::CaseInsensitive)) continue;
 
 			QFile svgfile(svgInfo.absoluteFilePath());
@@ -1764,13 +1780,18 @@ bool MainWindow::copySvg(const QString & path, QFileInfoList & svgEntryInfoList)
 {
 	int slash = path.indexOf("/");
 	QString subpath = path.mid(slash + 1);
+	DebugDialog::debug(QString("copySvg: path='%1' subpath='%2' svgEntryInfoList.count=%3").arg(path).arg(subpath).arg(svgEntryInfoList.count()));
 	bool gotOne = false;
 	for (int jx = svgEntryInfoList.count() - 1; jx >= 0; jx--) {
 		QFileInfo svgInfo = svgEntryInfoList.at(jx);
+		DebugDialog::debug(QString("  copySvg: comparing '%1'.contains('%2') = %3").arg(svgInfo.fileName()).arg(subpath).arg(svgInfo.fileName().contains(subpath)));
 		if (svgInfo.fileName().contains(subpath)) {
-			copyToSvgFolder(svgInfo, false, PartFactory::folderPath(), "contrib");
-			svgEntryInfoList.removeAt(jx);
-			// jrc 30 oct 2012: not sure why we can't just return at this point--can there be other matching files?
+			QString destPath = copyToSvgFolder(svgInfo, false, PartFactory::folderPath(), "contrib");
+			DebugDialog::debug(QString("  copySvg: copied to '%1'").arg(destPath));
+			// Don't remove from svgEntryInfoList here — multiple fzps in the
+			// same .fzz may reference the same SVG files.  The list is only
+			// consumed during the GUID-fallback resolution phase where an SVG
+			// is copied under a different name.
 			gotOne = true;
 		}
 	}
@@ -1781,6 +1802,9 @@ bool MainWindow::copySvg(const QString & path, QFileInfoList & svgEntryInfoList)
 	// most of the time it's just a GUID difference
 
 	DebugDialog::debug(QString("svg matching fz path %1 not found").arg(path));
+
+	// TEMPORARY: fail hard to detect if any test sketches trigger the GUID fallback
+	qFatal("copySvg GUID fallback triggered for '%s' — remove this line after testing", qPrintable(path));
 	QRegularExpressionMatch match;
 	int guidix = subpath.lastIndexOf(GuidMatcher, -1, &match);
 	if (guidix < 0) return false;
@@ -2205,6 +2229,8 @@ QString MainWindow::copyToSvgFolder(const QFileInfo& file, bool addToAlien, cons
 
 	QString destFilePath =
 	    prefixFolder+"/svg/"+destFolder+"/"+viewFolder+"/"+fileName;
+
+	DebugDialog::debug(QString("copyToSvgFolder: src='%1' viewFolder='%2' fileName='%3' dest='%4'").arg(file.fileName()).arg(viewFolder).arg(fileName).arg(destFilePath));
 
 	backupExistingFileIfExists(destFilePath);
 	if(FolderUtils::slamCopy(svgfile, destFilePath)) {
