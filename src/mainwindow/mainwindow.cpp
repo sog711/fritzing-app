@@ -218,24 +218,6 @@ void FTabBar::drawTab(QStylePainter & p, QStyleOptionTabV3 & tabV3, int index)
 
 ///////////////////////////////////////////////
 
-struct MissingSvgInfo {
-	QString requestedPath;
-	QStringList connectorSvgIds;
-	ModelPart * modelPart;
-	bool equal;
-};
-
-bool byConnectorCount(MissingSvgInfo & m1, MissingSvgInfo & m2)
-{
-	if (m1.connectorSvgIds.count() == m2.connectorSvgIds.count() && m1.modelPart != m2.modelPart) {
-		m1.equal = m2.equal = true;
-	}
-
-	return (m1.connectorSvgIds.count() > m2.connectorSvgIds.count());
-}
-
-///////////////////////////////////////////////
-
 #define ZIP_PART QString("part.")
 #define ZIP_SVG  QString("svg.")
 
@@ -1609,9 +1591,7 @@ QString MainWindow::loadBundledSketch(const QString &fileName, bool addToRecent,
 	}
 
 	m_addedToTemp = false;
-
-	QList<MissingSvgInfo> missing;
-	QList<ModelPart *> missingModelParts;
+	QStringList missingSvgPaths;
 
 	Q_FOREACH (QFileInfo fzpInfo, entryInfoList) {
 		QFile file(dir.absoluteFilePath(fzpInfo.fileName()));
@@ -1663,23 +1643,9 @@ QString MainWindow::loadBundledSketch(const QString &fileName, bool addToRecent,
 					bool copied = copySvg(path, svgEntryInfoList);
 					if (!copied) {
 						DebugDialog::debug(QString("missing svg %1").arg(path));
-						MissingSvgInfo msi;
-						msi.equal = false;
-						msi.modelPart = mp;
-						missingModelParts << mp;
-						msi.requestedPath = path;
-						ViewLayer::ViewID viewID = ViewLayer::idFromXmlName(view.tagName());
-						QDomElement connectors = root.firstChildElement("connectors");
-						QDomElement connector = connectors.firstChildElement("connector");
-						while (!connector.isNull()) {
-							QString id, terminalID;
-							ViewLayer::getConnectorSvgIDs(connector, viewID, id, terminalID);
-							if (!id.isEmpty()) {
-								msi.connectorSvgIds.append(id);
-							}
-							connector = connector.nextSiblingElement("connector");
+						if (!missingSvgPaths.contains(path)) {
+							missingSvgPaths << path;
 						}
-						missing << msi;
 					}
 				}
 				view = view.nextSiblingElement();
@@ -1688,79 +1654,21 @@ QString MainWindow::loadBundledSketch(const QString &fileName, bool addToRecent,
 			mp->setFzz(true);
 		}
 
-		if (!missingModelParts.contains(mp)) {
-			m_binManager->addToTempPartsBin(mp);
-			m_addedToTemp = true;
-		}
-	}
-
-	DebugDialog::debug(QString("missing svg resolution: %1 missing entries, %2 svg entries remaining").arg(missing.count()).arg(svgEntryInfoList.count()));
-
-	// TEMPORARY: fail hard to detect if any test sketches trigger the connector-count fallback
-	if (!missing.isEmpty() && !svgEntryInfoList.isEmpty()) {
-		qFatal("connector-count SVG fallback triggered: %d missing entries, %d svg entries remaining — remove this line after testing",
-			missing.count(), svgEntryInfoList.count());
-	}
-
-	std::sort(missing.begin(), missing.end(), byConnectorCount);
-	Q_FOREACH (MissingSvgInfo msi, missing) {
-		DebugDialog::debug(QString("  resolving missing svg: requestedPath='%1' connectorSvgIds=%2 equal=%3").arg(msi.requestedPath).arg(msi.connectorSvgIds.count()).arg(msi.equal));
-		if (msi.equal) {
-			// two or more parts have the same number of connectors--so we can't figure out how to assign them
-			continue;
-		}
-
-		int slash = msi.requestedPath.indexOf("/");
-		QString suffix = msi.requestedPath.mid(slash + 1);
-		QString prefix = msi.requestedPath.left(slash);
-		DebugDialog::debug(QString("  prefix='%1' suffix='%2'").arg(prefix).arg(suffix));
-		for (int jx = svgEntryInfoList.count() - 1; jx >= 0; jx--) {
-			QFileInfo svgInfo = svgEntryInfoList.at(jx);
-			DebugDialog::debug(QString("    checking '%1' contains prefix '%2': %3").arg(svgInfo.fileName()).arg(prefix).arg(svgInfo.fileName().contains(prefix, Qt::CaseInsensitive)));
-			if (!svgInfo.fileName().contains(prefix, Qt::CaseInsensitive)) continue;
-
-			QFile svgfile(svgInfo.absoluteFilePath());
-			if (!svgfile.open(QIODevice::ReadOnly)) {
-				DebugDialog::debug(QString("Unable to open :%1").arg(svgInfo.absoluteFilePath()));
-			}
-			QDomDocument svgDoc;
-			if (!svgDoc.setContent(&svgfile)) continue;
-
-			QList<QDomElement> elements;
-			QDomElement root = svgDoc.documentElement();
-			TextUtils::findElementsWithAttribute(root, "id", elements);
-			if (elements.count() < msi.connectorSvgIds.count()) continue;
-
-			QStringList ids;
-			Q_FOREACH (QDomElement element, elements) {
-				ids << element.attribute("id");
-			}
-
-			bool allGood = true;
-			Q_FOREACH (QString id, msi.connectorSvgIds) {
-				if (!ids.contains(id)) {
-					allGood = false;
-					break;
-				}
-			}
-
-			if (!allGood) continue;
-
-			QString destPath = copyToSvgFolder(svgInfo, false, PartFactory::folderPath(), "contrib");   // copy file with original name
-			if (!destPath.isEmpty()) {
-				QFileInfo destInfo(destPath);
-				QFile file(destPath);
-				DebugDialog::debug(QString("found missing %1").arg(destPath));
-				FolderUtils::slamCopy(file, destInfo.absoluteDir().absoluteFilePath(suffix));         // make another copy that has the name used in the fzp file
-				svgEntryInfoList.removeAt(jx);
-				break;
-			}
-		}
-	}
-
-	Q_FOREACH (ModelPart * mp, missingModelParts) {
 		m_binManager->addToTempPartsBin(mp);
 		m_addedToTemp = true;
+	}
+
+	if (!missingSvgPaths.isEmpty()) {
+		FMessageBox::warning(
+			this,
+			tr("Fritzing"),
+			tr("The sketch '%1' is missing %n SVG file(s) that were not bundled correctly: %2. "
+			   "The sketch will still load, but some parts may not display correctly. "
+			   "Try opening the sketch with an older version of Fritzing (0.9.x) and re-saving it.",
+			   nullptr, missingSvgPaths.count())
+			.arg(fileName)
+			.arg(missingSvgPaths.join(", "))
+		);
 	}
 
 	if (!m_addedToTemp) {
@@ -1788,55 +1696,16 @@ bool MainWindow::copySvg(const QString & path, QFileInfoList & svgEntryInfoList)
 		if (svgInfo.fileName().contains(subpath)) {
 			QString destPath = copyToSvgFolder(svgInfo, false, PartFactory::folderPath(), "contrib");
 			DebugDialog::debug(QString("  copySvg: copied to '%1'").arg(destPath));
-			// Don't remove from svgEntryInfoList here — multiple fzps in the
-			// same .fzz may reference the same SVG files.  The list is only
-			// consumed during the GUID-fallback resolution phase where an SVG
-			// is copied under a different name.
+			// Don't remove from svgEntryInfoList — multiple fzps in the
+			// same .fzz may reference the same SVG files.
 			gotOne = true;
 		}
 	}
 
 	if (gotOne) return true;
 
-	// deal with a bug in which all the svg files exist in the fzz but the fz file points to the wrong name
-	// most of the time it's just a GUID difference
-
 	DebugDialog::debug(QString("svg matching fz path %1 not found").arg(path));
-
-	// TEMPORARY: fail hard to detect if any test sketches trigger the GUID fallback
-	qFatal("copySvg GUID fallback triggered for '%s' — remove this line after testing", qPrintable(path));
-	QRegularExpressionMatch match;
-	int guidix = subpath.lastIndexOf(GuidMatcher, -1, &match);
-	if (guidix < 0) return false;
-
-	QString originalGuid = match.captured(0);
-	QString tryPath = subpath;
-	tryPath.replace(guidix, originalGuid.length(), "%%%%");
-	for (int jx = svgEntryInfoList.count() - 1; jx >= 0; jx--) {
-		QFileInfo svgInfo = svgEntryInfoList.at(jx);
-		QString tempPath = svgInfo.fileName();
-		QRegularExpressionMatch match;
-		guidix = tempPath.lastIndexOf(GuidMatcher, -1, &match);
-		if (guidix < 0) continue;
-
-		tempPath.replace(guidix, match.captured(0).length(), "%%%%");
-		if (!tempPath.contains(tryPath)) continue;
-
-		QString destPath = copyToSvgFolder(svgInfo, false, PartFactory::folderPath(), "contrib");
-		if (!destPath.isEmpty()) {
-			QFile file(destPath);
-			match = QRegularExpressionMatch();
-			guidix = destPath.lastIndexOf(GuidMatcher, -1, &match);
-			destPath.replace(guidix, match.captured(0).length(), originalGuid);
-			FolderUtils::slamCopy(file, destPath);
-			DebugDialog::debug(QString("found matching svg %1").arg(destPath));
-			svgEntryInfoList.removeAt(jx);
-			return true;
-		}
-	}
-
 	return false;
-
 }
 
 
