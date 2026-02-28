@@ -1344,25 +1344,25 @@ void BinManager::copyFilesToContrib(ModelPart * mp, QWidget * originator) {
 	QString path = mp->path();
 	if (path.isEmpty()) return;
 
+	QString moduleID = FolderUtils::sanitizeForFolder(mp->moduleID());
+	if (moduleID.isEmpty()) return;
+
+	QString destDir = FolderUtils::getLocalPartsPath() + "/contrib/" + moduleID;
+	QDir().mkpath(destDir);
+
 	QFileInfo info(path);
 	QFile fzp(path);
+	FolderUtils::slamCopy(fzp, destDir + "/" + info.fileName());
 
-	QString parts = FolderUtils::getUserPartsPath();
-	FolderUtils::slamCopy(fzp, parts + "/contrib/" + info.fileName());
-	QString prefix = parts + "/svg/contrib/";
-
-	QDir dir = info.absoluteDir();
-	dir.cdUp();
-	dir.cd("svg");
-	dir.cd("contrib");
-
+	QDir srcDir = info.absoluteDir();
 	QList<ViewLayer::ViewID> viewIDs;
-	viewIDs << ViewLayer::IconView << ViewLayer::BreadboardView << ViewLayer::SchematicView << ViewLayer::PCBView;
-	Q_FOREACH (ViewLayer::ViewID viewID, viewIDs) {
+	viewIDs << ViewLayer::IconView << ViewLayer::BreadboardView
+	        << ViewLayer::SchematicView << ViewLayer::PCBView;
+	for (ViewLayer::ViewID viewID : viewIDs) {
 		QString fn = mp->hasBaseNameFor(viewID);
 		if (!fn.isEmpty()) {
-			QFile svg(dir.absoluteFilePath(fn));
-			FolderUtils::slamCopy(svg, prefix + fn);
+			QFile svg(srcDir.absoluteFilePath(fn));
+			FolderUtils::slamCopy(svg, destDir + "/" + fn);
 		}
 	}
 }
