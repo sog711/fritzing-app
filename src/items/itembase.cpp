@@ -1784,12 +1784,18 @@ QList<QPair<QString, QString>> ItemBase::collectPartsOfFamilyWithProp(const QStr
 	return collection;
 }
 
-QStringList ItemBase::collectValues(const QString & family, const QString & prop, QString & /* value */) {
+QStringList ItemBase::collectValues(const QString & family, const QString & prop, QString & value) {
 
 	if (TheReferenceModel == nullptr) return ___emptyStringList___;
 
 	QStringList values = CachedValues.value(family + prop, QStringList());
-	if (values.count() > 0) return values;
+	if (values.count() > 0) {
+		QStringList result = values;
+		if (!value.isEmpty() && !result.contains(value)) {
+			result.append(value);
+		}
+		return result;
+	}
 
 	values = TheReferenceModel->propValues(family, prop, true);
 
@@ -1815,7 +1821,13 @@ QStringList ItemBase::collectValues(const QString & family, const QString & prop
 	//foreach(QString v, values) {
 	//    DebugDialog::debug("\t" + v);
 	//}
-	return values;
+
+	QStringList result = values;
+	if (!value.isEmpty() && !result.contains(value)) {
+		result.append(value);
+	}
+
+	return result;
 }
 
 void ItemBase::resetValues(const QString & family, const QString & prop) {
