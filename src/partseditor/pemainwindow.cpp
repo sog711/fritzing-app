@@ -309,8 +309,8 @@ PEMainWindow::PEMainWindow(ReferenceModel * referenceModel, QWidget * parent)
 
 	m_autosaveTimer.stop();
 	disconnect(&m_autosaveTimer, SIGNAL(timeout()), this, SLOT(backupSketch()));
-	m_userPartsFolderPath = FolderUtils::getUserPartsPath()+"/user/";
-	m_userPartsFolderSvgPath = FolderUtils::getUserPartsPath()+"/svg/user/";
+	m_userPartsFolderPath = FolderUtils::getLocalPartsPath()+"/user/";
+	m_userPartsFolderSvgPath = m_userPartsFolderPath;
 }
 
 PEMainWindow::~PEMainWindow()

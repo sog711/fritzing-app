@@ -39,6 +39,7 @@ public:
 	static QString getTopLevelDocumentsPath();
 	static QString getUserBinsPath();
 	static QString getUserPartsPath();
+	static QString getLocalPartsPath();
 	static bool createFolderAndCdIntoIt(QDir &dir, QString newFolder);
 	static bool setApplicationPath(const QString & path);
 	static bool setAppPartsPath(const QString & path);

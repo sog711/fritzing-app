@@ -1724,7 +1724,7 @@ bool MainWindow::loadBundledNonAtomicEntity(const QString &fileName, Bundler* bu
 	QDir unzipDir(unzipDirPath);
 
 	if (bundler->preloadBundledAux(unzipDir, dontAsk)) {
-		QList<ModelPart*> mps = moveToPartsFolder(unzipDir, addToBin, true, FolderUtils::getUserPartsPath(), "contrib", false);
+		QList<ModelPart*> mps = moveToPartsFolder(unzipDir, addToBin, true, FolderUtils::getLocalPartsPath(), "contrib", false);
 		// the bundled itself
 		bundler->loadBundledAux(unzipDir,mps);
 	}
@@ -1828,7 +1828,7 @@ QList<ModelPart*> MainWindow::loadPart(const QString &fzpFile, bool addToBin) {
 
 
 	try {
-		mps = moveToPartsFolder(tmpDir, addToBin, true, FolderUtils::getUserPartsPath(), "user", true);
+		mps = moveToPartsFolder(tmpDir, addToBin, true, FolderUtils::getLocalPartsPath(), "user", true);
 	}
 	catch (const QString & msg) {
 		FMessageBox::warning(
@@ -1874,7 +1874,7 @@ QList<ModelPart*> MainWindow::loadBundledPart(const QString &fileName, bool addT
 
 	QList<ModelPart*> mps;
 	try {
-		mps = moveToPartsFolder(unzipDir, addToBin, true, FolderUtils::getUserPartsPath(), "user", true);
+		mps = moveToPartsFolder(unzipDir, addToBin, true, FolderUtils::getLocalPartsPath(), "user", true);
 	}
 	catch (const QString & msg) {
 		FMessageBox::warning(

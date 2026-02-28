@@ -49,7 +49,8 @@ FolderUtils::FolderUtils() {
 	m_userFolders
 	        << "partfactory"
 	        << "backup"
-	        << "fzz";
+	        << "fzz"
+	        << "local_parts";
 	m_documentFolders
 	        << "bins"
 	        << "parts/user" << "parts/contrib"
@@ -153,6 +154,11 @@ QString FolderUtils::getUserBinsPath() {
 QString FolderUtils::getUserPartsPath() {
 	QDir dir(getTopLevelDocumentsPath());
 	return dir.absoluteFilePath("parts");
+}
+
+QString FolderUtils::getLocalPartsPath() {
+	QDir dir(getTopLevelUserDataStorePath());
+	return dir.absoluteFilePath("local_parts");
 }
 
 bool FolderUtils::createFolderAndCdIntoIt(QDir &dir, QString newFolder) {

@@ -115,6 +115,7 @@ void PaletteModel::loadParts(bool dbExists) {
 	QDir dir2(FolderUtils::getUserPartsPath());
 	QDir dir3(":/resources/parts");
 	QDir dir4(s_fzpOverrideFolder);
+	QDir dir5(FolderUtils::getLocalPartsPath());
 
 	if (m_fullLoad || !dbExists) {
 		// otherwise these will already be in the database
@@ -125,6 +126,7 @@ void PaletteModel::loadParts(bool dbExists) {
 	if (!m_fullLoad) {
 		// don't include local parts when doing full load
 		countParts(dir2, nameFilters, totalPartCount);
+		countParts(dir5, nameFilters, totalPartCount);
 		if (!s_fzpOverrideFolder.isEmpty()) {
 			countParts(dir4, nameFilters, totalPartCount);
 		}
@@ -141,6 +143,7 @@ void PaletteModel::loadParts(bool dbExists) {
 
 	if (!m_fullLoad) {
 		loadPartsAux(dir2, nameFilters, loadingPart, totalPartCount);
+		loadPartsAux(dir5, nameFilters, loadingPart, totalPartCount);
 		if (!s_fzpOverrideFolder.isEmpty()) {
 			loadPartsAux(dir4, nameFilters, loadingPart, totalPartCount);
 		}

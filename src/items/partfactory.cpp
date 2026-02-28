@@ -238,6 +238,7 @@ QString PartFactory::getSvgFilename(ModelPart * modelPart, const QString & baseN
 	QString moduleID = FolderUtils::sanitizeForFolder(modelPart->moduleID());
 	if (!moduleID.isEmpty()) {
 		QString moduleIDPostfix = "/%1/" + moduleID + "/" + baseName;
+		tempPaths << FolderUtils::getLocalPartsPath() + moduleIDPostfix;
 		tempPaths << FolderUtils::getUserPartsPath() + moduleIDPostfix;
 		tempPaths << PartFactory::folderPath() + moduleIDPostfix;
 	}
