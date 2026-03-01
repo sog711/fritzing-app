@@ -233,9 +233,7 @@ bool validConnectors(ConnectorItem *c1, ConnectorItem *c2)
 
 	// Strict check: terminal points must be within epsilon range
 	QPointF t1(c1->mapToScene(c1->adjustedTerminalPoint()));
-	DebugDialog::debug(QString("t1 %1").arg(pointAsString(t1)));
 	QPointF t2(c2->mapToScene(c2->adjustedTerminalPoint()));
-	DebugDialog::debug(QString("t2 %1").arg(pointAsString(t2)));
 
 	bool near = QLineF(t1, t2).length() < 0.01;
 	return near;
@@ -282,8 +280,6 @@ QSet<ItemBase *> DebugConnectors::doWireCheck()
 			continue;
 		}
 		for (ConnectorItem *c1 : {wire->connector0(), wire->connector1()}) {
-			DebugDialog::debug(
-				QString("wire %1, %2").arg(wire->instanceTitle(), c1->connectorSharedID()));
 			bool found = false;
 			for (QPointer<ConnectorItem> c2 : c1->connectedToItems())
 			{
@@ -294,10 +290,10 @@ QSet<ItemBase *> DebugConnectors::doWireCheck()
 					continue;
 				}
 				found = true;
-				DebugDialog::debug(QString("attached to %1, %2")
-									   .arg(attached->instanceTitle(), c2->connectorSharedID()));
 				if (!validConnectors(c1, c2)) {
-					DebugDialog::debug("ghost connection error");
+					DebugDialog::debug(QString("ghost connection error: wire %1 %2 attached to %3 %4")
+						.arg(wire->instanceTitle(), c1->connectorSharedID(),
+							 attached->instanceTitle(), c2->connectorSharedID()));
 					errors << wire;
 					errors << attached;
 				}
