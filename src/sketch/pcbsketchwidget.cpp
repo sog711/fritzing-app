@@ -2245,7 +2245,7 @@ void PCBSketchWidget::setGroundFillSeeds(const QString & intro)
 
 		QJsonDocument doc(seedsJson);
 		QString jsonString = doc.toJson(QJsonDocument::Compact);
-		FMessageBox::information(nullptr, "GROUND_FILL_SEEDS_DATA", jsonString);
+		DebugDialog::debug("GROUND_FILL_SEEDS_DATA " + jsonString);
 	}
 
 	GroundFillSeedDialog gfsd(this, seeds, intro, nullptr);
