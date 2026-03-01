@@ -47,8 +47,12 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "items/FProbeRPartLabel.h"
 #include "installedfonts.h"
 #include "utils/fmessagebox.h"
+#include "testing/FTesting.h"
 
 #include <QApplication>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonDocument>
 #include <QScrollBar>
 #include <QDialog>
 #include <QRadioButton>
@@ -2223,6 +2227,27 @@ void PCBSketchWidget::setGroundFillSeeds(const QString & intro)
 {
 	QList<ConnectorItem *> seeds;
 	collectGroundFillSeeds(seeds, true);
+
+	if (FTesting::getInstance()->enabled()) {
+		QJsonArray seedsJson;
+		for (int i = 0; i < seeds.count(); i++) {
+			ConnectorItem * ci = seeds.at(i);
+			ItemBase * attachedTo = ci->attachedTo();
+
+			QJsonObject seedObj;
+			seedObj["partID"] = attachedTo ? QString::number(attachedTo->id()) : "null";
+			seedObj["connectorID"] = ci->connectorSharedID();
+			seedObj["activated"] = ci->isGroundFillSeed();
+			seedObj["partTitle"] = attachedTo ? attachedTo->title() : "null";
+
+			seedsJson.append(seedObj);
+		}
+
+		QJsonDocument doc(seedsJson);
+		QString jsonString = doc.toJson(QJsonDocument::Compact);
+		FMessageBox::information(nullptr, "GROUND_FILL_SEEDS_DATA", jsonString);
+	}
+
 	GroundFillSeedDialog gfsd(this, seeds, intro, nullptr);
 	int result = gfsd.exec();
 	if (result == QDialog::Accepted) {
