@@ -1,7 +1,7 @@
 /*******************************************************************
 
 Part of the Fritzing project - http://fritzing.org
-Copyright (c) 2022 Fritzing GmbH
+Copyright (c) 2022,2026 Fritzing GmbH
 
 Fritzing is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -21,6 +21,9 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "FProbeSwitchProperty.h"
 #include "debugdialog.h"
 #include <QString>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <string>
 #include <cctype>
 
@@ -30,6 +33,20 @@ FProbeSwitchProperty::FProbeSwitchProperty(FamilyPropertyComboBox *familyPropert
 	, m_familyPropertyComboBox(familyPropertyComboBox)
 {
 	assert(!property.empty() && std::isupper(property[0]));
+}
+
+QVariant FProbeSwitchProperty::read() {
+	QJsonObject obj;
+	obj["currentIndex"] = m_familyPropertyComboBox->currentIndex();
+	obj["currentText"] = m_familyPropertyComboBox->currentText();
+
+	QJsonArray items;
+	for (int i = 0; i < m_familyPropertyComboBox->count(); i++) {
+		items.append(m_familyPropertyComboBox->itemText(i));
+	}
+	obj["items"] = items;
+
+	return QJsonDocument(obj).toJson(QJsonDocument::Compact);
 }
 
 void FProbeSwitchProperty::write(QVariant data) {

@@ -1,7 +1,7 @@
 /*******************************************************************
 
 Part of the Fritzing project - http://fritzing.org
-Copyright (c) 2022 Fritzing GmbH
+Copyright (c) 2022,2026 Fritzing GmbH
 
 Fritzing is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -33,7 +33,7 @@ public:
 	FProbeSwitchProperty(FamilyPropertyComboBox * familyPropertyComboBox, std::string property);
 	~FProbeSwitchProperty() {};
 
-	QVariant read() { return QVariant(); };
+	QVariant read();
 	void write(QVariant);
 
 	static void insertIf(QString property,
