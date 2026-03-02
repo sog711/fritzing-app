@@ -47,7 +47,6 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "items/FProbeRPartLabel.h"
 #include "installedfonts.h"
 #include "utils/fmessagebox.h"
-#include "testing/FTesting.h"
 
 #include <QApplication>
 #include <QJsonObject>
@@ -2228,7 +2227,7 @@ void PCBSketchWidget::setGroundFillSeeds(const QString & intro)
 	QList<ConnectorItem *> seeds;
 	collectGroundFillSeeds(seeds, true);
 
-	if (FTesting::getInstance()->enabled()) {
+	if (DebugDialog::enabled()) {
 		QJsonArray seedsJson;
 		for (int i = 0; i < seeds.count(); i++) {
 			ConnectorItem * ci = seeds.at(i);
