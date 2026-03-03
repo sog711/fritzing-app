@@ -1662,9 +1662,9 @@ QString MainWindow::loadBundledSketch(const QString &fileName, bool addToRecent,
 		FMessageBox::warning(
 			this,
 			tr("Fritzing"),
-			tr("The sketch '%1' is missing %n SVG file(s) that were not bundled correctly: %2. "
+			tr("The sketch '%1' is missing %n SVG file(s): %2. "
 			   "The sketch will still load, but some parts may not display correctly. "
-			   "Try opening the sketch with an older version of Fritzing (0.9.x) and re-saving it.",
+			   "If the sketch is very old, try loading it with an older version of Fritzing (0.9.x) and re-saving it.",
 			   nullptr, missingSvgPaths.count())
 			.arg(fileName)
 			.arg(missingSvgPaths.join(", "))
