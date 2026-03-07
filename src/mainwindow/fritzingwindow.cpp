@@ -225,7 +225,7 @@ QMessageBox::StandardButton FritzingWindow::beforeClosingMessage(const QString &
 	}
 
 	messageBox.setIcon(QMessageBox::Warning);
-	messageBox.setWindowModality(Qt::WindowModal);
+	messageBox.setWindowModality(Qt::ApplicationModal);
 	messageBox.button(QMessageBox::Discard)->setShortcut(tr("Ctrl+D"));
 
 	return (QMessageBox::StandardButton) messageBox.exec();
