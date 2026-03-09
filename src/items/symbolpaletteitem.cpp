@@ -584,9 +584,13 @@ QString NetLabel::makeSvg(ViewLayer::ViewLayerID viewLayerID)
 	double labelBaseLine = (useOldVersion ? 220 : 228) / divisor;
 
 	QString fontName = useOldVersion ? "Droid Sans" : "Noto Sans";
+#ifdef Q_OS_MAC
+	QFont font(fontName, labelFontSize, QFont::Normal);
+#else
 	QFont font(useOldVersion ?
 				   QFont("Droid Sans", labelFontSize * 72 / GraphicsUtils::StandardFritzingDPI, QFont::Normal) :
 				   QFont("Noto Sans", labelFontSize, QFont::Normal));
+#endif
 	QFontMetricsF fm(font);
 
 #ifdef Q_OS_MAC
