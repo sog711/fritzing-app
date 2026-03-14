@@ -961,7 +961,19 @@ void BinManager::search(const QString & searchText) {
 	connect(m_referenceModel, SIGNAL(addSearchMaximum(int)), &progress, SLOT(addMaximum(int)));
 	connect(m_referenceModel, SIGNAL(incSearch()), &progress, SLOT(incValue()));
 
-	QList<ModelPart *> modelParts = m_referenceModel->search(searchText, false);
+	QString effectiveSearchText = searchText;
+	bool allowObsolete = false;
+	QRegularExpression obsoleteRx("\\bobsolete\\b", QRegularExpression::CaseInsensitiveOption);
+	if (obsoleteRx.match(searchText).hasMatch()) {
+		allowObsolete = true;
+		QString stripped = searchText;
+		stripped.remove(obsoleteRx);
+		stripped = stripped.simplified();
+		if (!stripped.isEmpty()) {
+			effectiveSearchText = stripped;
+		}
+	}
+	QList<ModelPart *> modelParts = m_referenceModel->search(effectiveSearchText, allowObsolete);
 
 	progress.setIncValueMod(1);
 	searchBin->removeParts();
