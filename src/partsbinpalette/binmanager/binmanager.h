@@ -111,6 +111,7 @@ public:
 	void reloadPart(const QString & moduleID);
 	void moveSearchBinToTop();
 	PartsBinPaletteWidget* currentBin();
+	PartsBinPaletteWidget* searchBin() const;
 
 Q_SIGNALS:
 	void savePartAsBundled(const QString &moduleId);

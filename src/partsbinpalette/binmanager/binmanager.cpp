@@ -569,6 +569,10 @@ PartsBinPaletteWidget* BinManager::currentBin() {
 	return qobject_cast<PartsBinPaletteWidget*>(m_stackTabWidget->currentWidget());
 }
 
+PartsBinPaletteWidget* BinManager::searchBin() const {
+	return m_searchBin;
+}
+
 void BinManager::updateFileName(PartsBinPaletteWidget* bin, const QString &newFileName, const QString &oldFilename) {
 	m_openedBins.remove(oldFilename);
 	m_openedBins[newFileName] = bin;

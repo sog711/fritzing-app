@@ -83,6 +83,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../mainwindow/fprobefocuswidget.h"
 #include "FProbeCurrentSketchXml.h"
 #include "partsbinpalette/FProbeBin.h"
+#include "partsbinpalette/FProbeSearch.h"
 #include "model/fzpinfo.h"
 #include "connectors/debugconnectors.h"
 #include "connectors/debugconnectorsprobe.h"
@@ -525,6 +526,7 @@ void MainWindow::init(ReferenceModel *referenceModel, bool lockFiles) {
 	new DebugConnectorsProbe(m_breadboardGraphicsView, m_schematicGraphicsView, m_pcbGraphicsView);
 
 	new FProbeBin(m_binManager);
+	new FProbeSearch(m_binManager);
 
 	m_projectProperties = QSharedPointer<ProjectProperties>(new ProjectProperties());
 	m_serviceListFetcher = QSharedPointer<ServiceListFetcher>(new ServiceListFetcher());
