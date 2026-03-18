@@ -23,6 +23,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../utils/textutils.h"
 #include "../fsvgrenderer.h"
 #include "../sketch/infographicsview.h"
+#include "../infoview/htmlinfoview.h"
 #include "../svg/svgfilesplitter.h"
 #include "../svg/gerbergenerator.h"
 #include "moduleidnames.h"
@@ -1257,6 +1258,9 @@ void BreadboardLogoItem::changeTextColor() {
 	InfoGraphicsView * infoGraphicsView = InfoGraphicsView::getInfoGraphicsView(this);
 	if (infoGraphicsView != nullptr) {
 		infoGraphicsView->setProp(this, "color", tr("color"), m_color, newColor.name(), true);
+		if (infoGraphicsView->infoView()) {
+			infoGraphicsView->infoView()->setFocus();
+		}
 	}
 }
 
