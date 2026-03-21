@@ -50,3 +50,43 @@ BOOST_AUTO_TEST_CASE( svg2gerber_parse )
 	}
 	BOOST_CHECK_EQUAL(pathUserData1.string.toStdString(), pathUserData2.string.toStdString());
 }
+
+/*
+Testing that normalizeChild correctly scales <image> element coordinates
+when the SVG viewBox is rescaled during gerber export.
+*/
+BOOST_AUTO_TEST_CASE( normalize_image_element )
+{
+	QString svg =
+		"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+		"<svg xmlns=\"http://www.w3.org/2000/svg\" "
+		"xmlns:xlink=\"http://www.w3.org/1999/xlink\" "
+		"width=\"1in\" height=\"1in\" viewBox=\"0 0 100 100\">"
+		"<image x=\"10\" y=\"20\" width=\"80\" height=\"60\" "
+		"xlink:href=\"data:image/png;base64,"
+		"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAA"
+		"DUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==\"/>"
+		"</svg>";
+
+	SvgFileSplitter splitter;
+	bool loadResult = splitter.splitString(svg, "");
+	BOOST_CHECK(loadResult);
+
+	double factor;
+	bool result = splitter.normalize(1000.0, "", false, factor);
+	BOOST_CHECK(result);
+
+	// Original viewBox: 0 0 100 100, size: 1in x 1in
+	// New viewBox: 0 0 1000 1000 => scale factor 10x
+	// Expected: x=100, y=200, width=800, height=600
+	QDomDocument doc;
+	doc.setContent(splitter.toString());
+	QDomNodeList images = doc.elementsByTagName("image");
+	BOOST_REQUIRE_EQUAL(images.count(), 1);
+	QDomElement img = images.at(0).toElement();
+
+	BOOST_CHECK_CLOSE(img.attribute("x").toDouble(), 100.0, 0.01);
+	BOOST_CHECK_CLOSE(img.attribute("y").toDouble(), 200.0, 0.01);
+	BOOST_CHECK_CLOSE(img.attribute("width").toDouble(), 800.0, 0.01);
+	BOOST_CHECK_CLOSE(img.attribute("height").toDouble(), 600.0, 0.01);
+}
