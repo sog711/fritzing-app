@@ -496,6 +496,12 @@ void SvgFileSplitter::normalizeChild(QDomElement & element,
 			//DebugDialog::debug(QString("unable to handle radialGradient with gradientUnits=%1").arg(element.attribute("gradientUnits")));
 		}
 	}
+	else if (nodeName.compare("image") == 0) {
+		normalizeAttribute(element, "x", sNewWidth, vbWidth);
+		normalizeAttribute(element, "y", sNewHeight, vbHeight);
+		normalizeAttribute(element, "width", sNewWidth, vbWidth);
+		normalizeAttribute(element, "height", sNewHeight, vbHeight);
+	}
 	else {
 		doChildren = true;
 	}
