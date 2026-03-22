@@ -21,6 +21,23 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "bugannotation.h"
 #include "itembase.h"
 
+#include <QGraphicsScene>
+#include <QGraphicsSceneMouseEvent>
+
+namespace {
+
+class BugItem : public QGraphicsSvgItem {
+public:
+    using QGraphicsSvgItem::QGraphicsSvgItem;
+protected:
+    void mousePressEvent(QGraphicsSceneMouseEvent *) override {
+        if (scene()) scene()->clearSelection();
+        if (parentItem()) parentItem()->setSelected(true);
+    }
+};
+
+} // namespace
+
 BugAnnotation::BugAnnotation(ItemBase * owner)
 	: m_owner(owner)
 {
@@ -39,9 +56,9 @@ void BugAnnotation::show(const QString & source, const QStringList & errors)
 	m_errors[source] = errors;
 
 	if (m_item == nullptr) {
-		m_item = new QGraphicsSvgItem();
+		m_item = new BugItem();
 		m_item->setAcceptHoverEvents(true);
-		m_item->setAcceptedMouseButtons(Qt::NoButton);
+		m_item->setAcceptedMouseButtons(Qt::LeftButton);
 		m_item->setSharedRenderer(&renderer());
 		m_item->setZValue(99999);
 		m_item->setParentItem(m_owner);
