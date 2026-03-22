@@ -21,6 +21,8 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef ITEMBASE_H
 #define ITEMBASE_H
 
+#include "bugannotation.h"
+
 #include <QXmlStreamWriter>
 #include <QPointF>
 #include <QSize>
@@ -192,6 +194,9 @@ public:
 	virtual void setProp(const QString & prop, const QString & value);
 	QString prop(const QString & p);
 	bool isObsolete();
+	void showBug(const QString & source, const QStringList & errors);
+	void clearBug(const QString & source);
+	bool hasBug() const;
 	virtual QHash<QString, QString> prepareProps(ModelPart *, bool wantDebug, QStringList & keys);
 	void resetValues(const QString & family, const QString & prop);
 	const QString & filename();
@@ -390,6 +395,7 @@ protected:
 	QList<ConnectorItem *> m_cachedConnectorItems;
 	QGraphicsSvgItem * m_moveLockItem = nullptr;
 	QGraphicsSvgItem * m_stickyItem = nullptr;
+	BugAnnotation m_bugAnnotation;
 	FSvgRenderer * m_fsvgRenderer = nullptr;
 	bool m_acceptsMousePressLegEvent = true;
 	bool m_swappable = true;

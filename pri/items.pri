@@ -14,6 +14,7 @@
 # ********************************************************************/
 
 HEADERS += \
+    src/items/bugannotation.h \
     src/items/breadboard.h \
     src/items/capacitor.h \
     src/items/clipablewire.h \
@@ -55,6 +56,7 @@ HEADERS += \
 
 
 SOURCES += \
+    src/items/bugannotation.cpp \
     src/items/breadboard.cpp \
     src/items/capacitor.cpp \
     src/items/clipablewire.cpp \

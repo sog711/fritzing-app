@@ -36,8 +36,7 @@ DebugConnectors::DebugConnectors(SketchWidget *breadboardGraphicsView, SketchWid
 	  m_schematicGraphicsView(schematicGraphicsView),
 	  m_pcbGraphicsView(pcbGraphicsView),
 	  timer(new QTimer(this)),
-	  firstCall(true),
-	  colorChanged(false)
+	  firstCall(true)
 {
 	monitorConnections(false);
 	timer->setSingleShot(true);
@@ -193,15 +192,6 @@ void DebugConnectors::onRepairErrors()
 	emit repairErrorsCompleted();
 }
 
-void DebugConnectors::fixColor() {
-	QList<SketchWidget *> views;
-	views << m_breadboardGraphicsView << m_schematicGraphicsView << m_pcbGraphicsView;
-	Q_FOREACH(SketchWidget * view, views) {
-		if (view->background() == QColor("red")) {
-			view->setBackgroundColor(view->standardBackground(), false);
-		}
-	}
-}
 
 QString rectAsString(QRectF rect)
 {
@@ -423,25 +413,21 @@ QSet<ItemBase *> DebugConnectors::doRoutingCheck() {
 
 void DebugConnectors::reportErrors(QSet<ItemBase *> errors)
 {
-	if (!errors.empty()) {
-		if (!colorChanged) {
-			fixColor();
-			breadboardBackgroundColor = m_breadboardGraphicsView->background();
-			schematicBackgroundColor = m_schematicGraphicsView->background();
-			pcbBackgroundColor = m_pcbGraphicsView->background();
+	QList<QPointer<ItemBase>> remaining;
+	for (auto & ptr : m_displayedBugs) {
+		if (ptr && !errors.contains(ptr.data())) {
+			ptr->clearBug(QStringLiteral("routing"));
+		} else if (ptr) {
+			remaining << ptr;
 		}
-		m_breadboardGraphicsView->setBackgroundColor(QColor("red"), false);
-		m_schematicGraphicsView->setBackgroundColor(QColor("red"), false);
-		m_pcbGraphicsView->setBackgroundColor(QColor("red"), false);
-		colorChanged = true;
-	} else {
-		if (colorChanged) {
-			m_breadboardGraphicsView->setBackgroundColor(breadboardBackgroundColor, false);
-			m_schematicGraphicsView->setBackgroundColor(schematicBackgroundColor, false);
-			m_pcbGraphicsView->setBackgroundColor(pcbBackgroundColor, false);
-			colorChanged = false;
-		} else {
-			fixColor();
+	}
+	m_displayedBugs = remaining;
+
+	for (ItemBase * item : errors) {
+		if (item) {
+			item->showBug(QStringLiteral("routing"),
+				QStringList() << tr("Routing error: connector mismatch between views."));
+			m_displayedBugs << QPointer<ItemBase>(item);
 		}
 	}
 }

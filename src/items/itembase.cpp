@@ -111,7 +111,8 @@ ItemBase::ItemBase( ModelPart* modelPart, ViewLayer::ViewID viewID, const ViewGe
 	  m_viewGeometry(viewGeometry),
 	  m_modelPart(modelPart),
 	  m_viewID(viewID),
-	  m_itemMenu(itemMenu)
+	  m_itemMenu(itemMenu),
+	  m_bugAnnotation(this)
 {
 	//DebugDialog::debug(QString("itembase %1 %2").arg(id).arg((long) static_cast<QGraphicsItem *>(this), 0, 16));
 	if (m_modelPart != nullptr) {
@@ -1627,6 +1628,21 @@ bool ItemBase::isObsolete() {
 	return modelPart()->isObsolete();
 }
 
+void ItemBase::showBug(const QString & source, const QStringList & errors)
+{
+	m_bugAnnotation.show(source, errors);
+}
+
+void ItemBase::clearBug(const QString & source)
+{
+	m_bugAnnotation.clear(source);
+}
+
+bool ItemBase::hasBug() const
+{
+	return m_bugAnnotation.isActive();
+}
+
 bool ItemBase::collectExtraInfo(QWidget * parent, const QString & family, const QString & prop, const QString & value, bool swappingEnabled, QString & returnProp, QString & returnValue, QWidget * & returnWidget, bool & hide)
 {
 	Q_UNUSED(hide);                 // assume this is set by the caller (HtmlInfoView)
@@ -2038,6 +2054,10 @@ void ItemBase::addedToScene(bool temporary) {
 			// ensure icon is visible
 			setLocalSticky(true);
 		}
+	}
+	if (!temporary && isObsolete()) {
+		showBug(QStringLiteral("obsolete"),
+				QStringList() << tr("This part is obsolete and has been replaced."));
 	}
 }
 

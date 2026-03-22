@@ -23,8 +23,9 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QSet>
 #include <QString>
-#include <QColor>
+#include <QPointer>
 #include "../sketch/sketchwidget.h"
+#include "../items/itembase.h"
 
 class DebugConnectors : public QObject {
 	Q_OBJECT
@@ -56,18 +57,14 @@ private:
 	QList<ItemBase *> toSortedItembases(const QList<QGraphicsItem *> &graphicsItems);
 	void collectPartsForCheck(QList<ItemBase *> &partList, QGraphicsScene *scene);
 	QList<Wire *> collectWiresForCheck(ViewGeometry::WireFlag flag, QGraphicsScene *scene);
-	void fixColor();
 
 	QTimer *timer;
 	QElapsedTimer lastExecution;
 	bool firstCall;
-	bool colorChanged;
 	static constexpr qint64 minimumInterval = 300;
-	QColor breadboardBackgroundColor;
-	QColor schematicBackgroundColor;
-	QColor pcbBackgroundColor;
 
 	bool m_monitorEnabled;
+	QList<QPointer<ItemBase>> m_displayedBugs;
 
 	QSet<ItemBase *> findConnectors(ConnectorItem *c1);
 	void reportErrors(QSet<ItemBase *> errors);
