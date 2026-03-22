@@ -21,7 +21,6 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef BUGANNOTATION_H
 #define BUGANNOTATION_H
 
-#include <QGraphicsItem>
 #include <QMap>
 #include <QStringList>
 #include <QSvgRenderer>
@@ -32,10 +31,12 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QtSvgWidgets/QGraphicsSvgItem>
 #endif
 
+class ItemBase;
+
 class BugAnnotation
 {
 public:
-	explicit BugAnnotation(QGraphicsItem * owner);
+	explicit BugAnnotation(ItemBase * owner);
 	~BugAnnotation();
 
 	void show(const QString & source, const QStringList & errors);
@@ -43,7 +44,7 @@ public:
 	bool isActive() const;
 
 private:
-	QGraphicsItem * m_owner;
+	ItemBase * m_owner;
 	QGraphicsSvgItem * m_item = nullptr;
 	QMap<QString, QStringList> m_errors;
 

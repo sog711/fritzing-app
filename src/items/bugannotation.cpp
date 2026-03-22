@@ -19,8 +19,9 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 ********************************************************************/
 
 #include "bugannotation.h"
+#include "itembase.h"
 
-BugAnnotation::BugAnnotation(QGraphicsItem * owner)
+BugAnnotation::BugAnnotation(ItemBase * owner)
 	: m_owner(owner)
 {
 }
@@ -73,7 +74,11 @@ void BugAnnotation::updateTooltip()
 {
 	QStringList all;
 	for (const QStringList & errs : m_errors) all << errs;
-	m_item->setToolTip(all.join(QStringLiteral("\n")));
+	QString title = m_owner->instanceTitle();
+	QString tip = title.isEmpty()
+		? all.join(QStringLiteral("\n"))
+		: title + QStringLiteral(": ") + all.join(QStringLiteral("\n"));
+	m_item->setToolTip(tip);
 }
 
 void BugAnnotation::destroyItem()
