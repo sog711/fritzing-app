@@ -42,6 +42,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "infoview/htmlinfoview.h"
 #include "ipc/ipc_d_356.h"
 #include "program/programwindow.h"
+#include "sketch/breadboardsketchwidget.h"
 #include "sketch/schematicsketchwidget.h"
 #include "sketch/pcbsketchwidget.h"
 #include "svg/svgfilesplitter.h"
@@ -861,16 +862,19 @@ bool MainWindow::saveAsShareable(const QString & path, bool saveModel)
 {
 	QString filename = path;
 	QHash<QString, ModelPart *> saveParts;
-	Q_FOREACH (QGraphicsItem * item, m_pcbGraphicsView->scene()->items()) {
-		auto * itemBase = dynamic_cast<ItemBase *>(item);
-		if (itemBase == nullptr) continue;
-		if (itemBase->modelPart() == nullptr) {
-			continue;
-		}
-		if (itemBase->modelPart()->isCore()) continue;
-		if (itemBase->moduleID().contains(PartFactory::OldSchematicPrefix)) continue;
+	const QList<SketchWidget *> views = {m_pcbGraphicsView, m_breadboardGraphicsView, m_schematicGraphicsView};
+	for (auto *view : views) {
+		if (view == nullptr || view->scene() == nullptr) continue;
+		for (QGraphicsItem *item : view->scene()->items()) {
+			auto * itemBase = dynamic_cast<ItemBase *>(item);
+			if (itemBase == nullptr) continue;
+			if (itemBase->modelPart() == nullptr) continue;
+			if (itemBase->modelPart()->isCore()) continue;
+			if (itemBase->moduleID().contains(PartFactory::OldSchematicPrefix)) continue;
+			if (saveParts.contains(itemBase->moduleID())) continue;
 
-		saveParts.insert(itemBase->moduleID(), itemBase->modelPart());
+			saveParts.insert(itemBase->moduleID(), itemBase->modelPart());
+		}
 	}
 	bool result = false;
 	if(alreadyHasExtension(filename, FritzingSketchExtension)) {

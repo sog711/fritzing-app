@@ -2109,15 +2109,20 @@ bool MainWindow::saveBundleDirectly(const QString &bundledFileName) {
 		}
 	}
 
-	// 3. Collect and write non-core parts
+	// 3. Collect and write non-core parts from all views
 	QHash<QString, ModelPart *> saveParts;
-	for (QGraphicsItem *item : m_pcbGraphicsView->scene()->items()) {
-		auto *itemBase = dynamic_cast<ItemBase *>(item);
-		if (itemBase == nullptr) continue;
-		if (itemBase->modelPart() == nullptr) continue;
-		if (itemBase->modelPart()->isCore()) continue;
-		if (itemBase->moduleID().contains(PartFactory::OldSchematicPrefix)) continue;
-		saveParts.insert(itemBase->moduleID(), itemBase->modelPart());
+	const QList<SketchWidget *> views = {m_pcbGraphicsView, m_breadboardGraphicsView, m_schematicGraphicsView};
+	for (auto *view : views) {
+		if (view == nullptr || view->scene() == nullptr) continue;
+		for (QGraphicsItem *item : view->scene()->items()) {
+			auto *itemBase = dynamic_cast<ItemBase *>(item);
+			if (itemBase == nullptr) continue;
+			if (itemBase->modelPart() == nullptr) continue;
+			if (itemBase->modelPart()->isCore()) continue;
+			if (itemBase->moduleID().contains(PartFactory::OldSchematicPrefix)) continue;
+			if (saveParts.contains(itemBase->moduleID())) continue;
+			saveParts.insert(itemBase->moduleID(), itemBase->modelPart());
+		}
 	}
 
 	for (ModelPart *mp : saveParts.values()) {
