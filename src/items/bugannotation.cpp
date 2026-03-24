@@ -20,6 +20,8 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "bugannotation.h"
 #include "itembase.h"
+#include "wire.h"
+#include "../utils/bezier.h"
 
 #include <QGraphicsScene>
 #include <QGraphicsSceneMouseEvent>
@@ -37,6 +39,23 @@ protected:
 };
 
 } // namespace
+
+static QPointF iconPos(ItemBase * owner, const QRectF & ib)
+{
+	Wire * wire = qobject_cast<Wire *>(owner);
+	if (wire) {
+		QPointF mid;
+		if (wire->isCurved()) {
+			const Bezier * b = wire->curve();
+			mid = QPointF(b->xFromT(0.5), b->yFromT(0.5));
+		} else {
+			mid = wire->line().pointAt(0.5);
+		}
+		return mid - QPointF(ib.width() / 2, ib.height() / 2);
+	}
+	QRectF ob = owner->boundingRect();
+	return QPointF(ob.left() - ib.width(), ob.bottom() - ib.height() / 2);
+}
 
 BugAnnotation::BugAnnotation(ItemBase * owner)
 	: m_owner(owner)
@@ -64,9 +83,8 @@ void BugAnnotation::show(const QString & source, const QStringList & errors)
 		m_item->setParentItem(m_owner);
 		m_item->setVisible(true);
 	}
-	QRectF ob = m_owner->boundingRect();
 	QRectF ib = m_item->boundingRect();
-	m_item->setPos(ob.left() - ib.width(), ob.bottom() - ib.height() / 2);
+	m_item->setPos(iconPos(m_owner, ib));
 	updateTooltip();
 	m_owner->update();
 }
