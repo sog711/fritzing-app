@@ -196,6 +196,7 @@ public:
 	bool isObsolete();
 	void showBug(const QString & source, const QStringList & errors);
 	void clearBug(const QString & source);
+	void repositionBug();
 	bool hasBug() const;
 	virtual QHash<QString, QString> prepareProps(ModelPart *, bool wantDebug, QStringList & keys);
 	void resetValues(const QString & family, const QString & prop);

@@ -41,6 +41,7 @@ public:
 
 	void show(const QString & source, const QStringList & errors);
 	void clear(const QString & source);
+	void reposition();
 	bool isActive() const;
 
 private:

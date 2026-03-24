@@ -100,6 +100,13 @@ void BugAnnotation::clear(const QString & source)
 	m_owner->update();
 }
 
+void BugAnnotation::reposition()
+{
+	if (m_item == nullptr) return;
+	QRectF ib = m_item->boundingRect();
+	m_item->setPos(iconPos(m_owner, ib));
+}
+
 bool BugAnnotation::isActive() const
 {
 	return m_item != nullptr;

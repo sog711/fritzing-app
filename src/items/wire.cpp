@@ -1833,6 +1833,7 @@ void Wire::setLine(const QLineF &line)
 		return;
 	prepareGeometryChange();
 	m_line = line;
+	repositionBug();
 	update();
 }
 
@@ -1874,6 +1875,7 @@ bool Wire::canHaveCurve() {
 void Wire::dragCurve(QPointF eventPos, Qt::KeyboardModifiers)
 {
 	m_bezier->recalc(eventPos);
+	repositionBug();
 }
 
 void Wire::changeCurve(const Bezier * bezier)
@@ -1881,6 +1883,7 @@ void Wire::changeCurve(const Bezier * bezier)
 	prepareGeometryChange();
 	if (m_bezier == nullptr) m_bezier = new Bezier;
 	m_bezier->copy(bezier);
+	repositionBug();
 	update();
 }
 

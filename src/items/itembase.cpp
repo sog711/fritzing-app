@@ -1638,6 +1638,11 @@ void ItemBase::clearBug(const QString & source)
 	m_bugAnnotation.clear(source);
 }
 
+void ItemBase::repositionBug()
+{
+	m_bugAnnotation.reposition();
+}
+
 bool ItemBase::hasBug() const
 {
 	return m_bugAnnotation.isActive();
