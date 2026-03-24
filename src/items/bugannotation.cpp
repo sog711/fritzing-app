@@ -66,7 +66,7 @@ void BugAnnotation::show(const QString & source, const QStringList & errors)
 	}
 	QRectF ob = m_owner->boundingRect();
 	QRectF ib = m_item->boundingRect();
-	m_item->setPos(ob.left(), ob.bottom() - ib.height());
+	m_item->setPos(ob.left() - ib.width(), ob.bottom() - ib.height() / 2);
 	updateTooltip();
 	m_owner->update();
 }
