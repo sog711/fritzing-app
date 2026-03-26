@@ -1538,7 +1538,7 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
 All parts must have a title tag.</source>
         <translation type="unfinished">Dem Bauteil fehlt ein Titel.
 
-Alle Bauteile müssen ein Title-Tag haben.</translation>
+Alle Bauteile müssen ein Titel-Tag haben.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="157"/>
