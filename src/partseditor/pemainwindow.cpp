@@ -3819,10 +3819,10 @@ void PEMainWindow::connectorWarning() {
 			if (unassigned.value(viewID) > 0) viewCount++;
 		}
 		QMessageBox::warning(nullptr, tr("Parts Editor"),
-		                     tr("This part has %1 unassigned connector(s) across %2 view(s). "
-		                        "Until all connectors are assigned to SVG elements, the part will not work correctly. "
+		                     tr("This part has %n unassigned connector(s). ", "", unassignedTotal) +
+		                     tr("This affects %n view(s). ", "", viewCount) +
+		                     tr("Until all connectors are assigned to SVG elements, the part will not work correctly. "
 		                        "Exiting the Parts Editor now is fine, as long as you remember to finish the assignments later.")
-		                     .arg(unassignedTotal).arg(viewCount)
 		                    );
 	}
 
