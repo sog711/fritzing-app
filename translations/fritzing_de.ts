@@ -1504,66 +1504,70 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="63"/>
         <source>Cannot open file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Datei kann nicht geöffnet werden</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="64"/>
         <source>Cannot open file &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Datei «%1» kann nicht geöffnet werden.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="71"/>
         <source>File is empty</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Datei ist leer</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="72"/>
         <source>File &apos;%1&apos; is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Datei «%1» ist leer.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="128"/>
         <source>XML Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">XML-Fehler</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="146"/>
         <source>Title is missing.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Titel fehlt.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="147"/>
         <source>The part is missing a title.
 
 All parts must have a title tag.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dem Bauteil fehlt ein Titel.
+
+Alle Bauteile müssen ein Title-Tag haben.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="157"/>
         <source>Version number missing.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Versionsnummer fehlt.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="158"/>
         <source>The part is missing a fritzing version.
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dem Bauteil fehlt eine Fritzing-Version.
+</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="159"/>
         <source>All parts must have a fritzingVersion attribute: fritzingVersion=&quot;x.y.z&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Alle Bauteile müssen ein fritzingVersion-Attribut haben: fritzingVersion=&quot;x.y.z&quot;.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="170"/>
         <source>Invalid Version</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ungültige Version</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="171"/>
         <source>The fritzing version &apos;%1&apos; is invalid.
 The part might not work properly.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Die Fritzing-Version «%1» ist ungültig.
+Das Bauteil funktioniert möglicherweise nicht korrekt.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="183"/>
@@ -1576,13 +1580,18 @@ The part might not work properly.</source>
 Current version is &apos;%2&apos; which might not support it properly.Please consider updating your Fritzing.
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dieses Bauteil wurde mit Fritzing-Version «%1» erstellt.
+Die aktuelle Version ist «%2», die es möglicherweise nicht korrekt unterstützt.
+Bitte erwägen Sie, Ihr Fritzing zu aktualisieren.
+
+</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="212"/>
         <source>Location: Line %1, Column %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Position: Zeile %1, Spalte %2
+</translation>
     </message>
 </context>
 <context>
@@ -2257,7 +2266,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1897"/>
         <source>No part files with the required prefix &apos;%1&apos; where found inside in the shareable part &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Es wurden keine Bauteil-Dateien mit dem erforderlichen Präfix «%1» im teilbaren Bauteil «%2» gefunden</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1933"/>
@@ -2270,47 +2279,59 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <source>Cannot open file &apos;%1&apos; for writing.
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Datei «%1» kann nicht zum Schreiben geöffnet werden.
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2081"/>
         <source>Cannot create ZIP archive for &apos;%1&apos;.
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ZIP-Archiv für «%1» kann nicht erstellt werden.
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2094"/>
         <source>Failed to write sketch data to &apos;%1&apos;.
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Skizzendaten konnten nicht in «%1» geschrieben werden.
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2130"/>
         <source>Failed to write part &apos;%1&apos; to &apos;%2&apos;.
 
 %3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bauteil «%1» konnte nicht in «%2» geschrieben werden.
+
+%3</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2142"/>
         <source>Save produced an empty archive for &apos;%1&apos;. Save aborted.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Das Speichern hat ein leeres Archiv für «%1» erzeugt. Speichern abgebrochen.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2156"/>
         <source>Error finalizing ZIP archive for &apos;%1&apos;.
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fehler beim Abschließen des ZIP-Archivs für «%1».
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2169"/>
         <source>Failed to commit file &apos;%1&apos;. The original file is untouched.
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Datei «%1» konnte nicht gespeichert werden. Die Originaldatei ist unverändert.
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2188"/>
@@ -2338,7 +2359,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2291"/>
         <source>Unable to load part &apos;%1&apos;: the part definition has an empty or missing module ID (moduleId attribute).</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Teil «%1» kann nicht geladen werden: Die Teildefinition hat eine leere oder fehlende Modul-ID (moduleId-Attribut).</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3129"/>
@@ -2549,10 +2570,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message numerus="yes">
         <location filename="../src/mainwindow/mainwindow.cpp" line="1665"/>
         <source>The sketch &apos;%1&apos; is missing %n SVG file(s): %2. The sketch will still load, but some parts may not display correctly. If the sketch is very old, try loading it with an older version of Fritzing (0.9.x) and re-saving it.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
+        <translation type="unfinished"><numerusform>Der Skizze «%1» fehlt %n SVG-Datei: %2. Die Skizze wird trotzdem geladen, aber einige Teile werden möglicherweise nicht korrekt angezeigt. Wenn die Skizze sehr alt ist, versuchen Sie, sie mit einer älteren Version von Fritzing (0.9.x) zu öffnen und erneut zu speichern.</numerusform><numerusform>Der Skizze «%1» fehlen %n SVG-Dateien: %2. Die Skizze wird trotzdem geladen, aber einige Teile werden möglicherweise nicht korrekt angezeigt. Wenn die Skizze sehr alt ist, versuchen Sie, sie mit einer älteren Version von Fritzing (0.9.x) zu öffnen und erneut zu speichern.</numerusform></translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1720"/>
@@ -5150,25 +5168,25 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="132"/>
         <source>Hidden → Docked → Floating</source>
         <comment>dock widget state cycle sequence starting from hidden</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ausgeblendet → Angedockt → Schwebend</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="137"/>
         <source>Docked → Floating → Hidden</source>
         <comment>dock widget state cycle sequence starting from docked</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Angedockt → Schwebend → Ausgeblendet</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="142"/>
         <source>Floating → Hidden → Docked</source>
         <comment>dock widget state cycle sequence starting from floating</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Schwebend → Ausgeblendet → Angedockt</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="146"/>
         <source>%1 - Click to cycle: %2</source>
         <comment>dock widget status tip: %1=dock name, %2=cycle sequence</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 – Klicken zum Wechseln: %2</translation>
     </message>
 </context>
 <context>
@@ -5283,10 +5301,7 @@ We&apos;re working to avoid this message, and only let you choose between proper
     <message numerus="yes">
         <location filename="../src/model/modelbase.cpp" line="421"/>
         <source>Unable to find %n part(s). Click &apos;Show Details&apos; for a list of missing parts.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
-        </translation>
+        <translation type="unfinished"><numerusform>%n Teil kann nicht gefunden werden. Klicken Sie auf «Details anzeigen» für eine Liste der fehlenden Teile.</numerusform><numerusform>%n Teile können nicht gefunden werden. Klicken Sie auf «Details anzeigen» für eine Liste der fehlenden Teile.</numerusform></translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="523"/>
@@ -5335,113 +5350,113 @@ Ursache: %2 (Fehlercode %3)</translation>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="149"/>
         <source>Outlier Components Navigator</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Navigator für Ausreißer-Bauteile</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="175"/>
         <source>◀ Previous</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">◀ Zurück</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="176"/>
         <source>Next ▶</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Weiter ▶</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="188"/>
         <source>Fix This Item</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dieses Element korrigieren</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="190"/>
         <source>Fix All Items</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Alle Elemente korrigieren</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="193"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Schließen</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="264"/>
         <source>Reposition Outlier Components</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ausreißer-Bauteile neu positionieren</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="388"/>
         <source>Problematic Item</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Problematisches Element</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="390"/>
         <source>Item %1 of %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Element %1 von %2</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="395"/>
         <source>&lt;b&gt;Problem:&lt;/b&gt; Label positioned far from its component&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;Problem:&lt;/b&gt; Beschriftung weit vom Bauteil entfernt positioniert&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="396"/>
         <location filename="../src/sketch/outlierhandler.cpp" line="408"/>
         <source>&lt;b&gt;Component:&lt;/b&gt; %1&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;Bauteil:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="397"/>
         <source>&lt;b&gt;Label Position:&lt;/b&gt; (%1, %2)&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;Beschriftungsposition:&lt;/b&gt; (%1, %2)&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="400"/>
         <source>&lt;b&gt;Component Position:&lt;/b&gt; (%1, %2)&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;Bauteilposition:&lt;/b&gt; (%1, %2)&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="402"/>
         <source>&lt;b&gt;Distance:&lt;/b&gt; %1 units&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;Abstand:&lt;/b&gt; %1 Einheiten&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="404"/>
         <source>&lt;b&gt;Impact:&lt;/b&gt; This label&apos;s distant position causes &apos;Fit in Window&apos; to zoom out excessively.&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;Auswirkung:&lt;/b&gt; Die weit entfernte Position dieser Beschriftung führt dazu, dass «Ins Fenster einpassen» übermäßig herauszoomt.&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="405"/>
         <source>&lt;b&gt;Solution:&lt;/b&gt; The label will be repositioned to the top-right of its component.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;Lösung:&lt;/b&gt; Die Beschriftung wird rechts oberhalb des Bauteils neu positioniert.</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="407"/>
         <source>&lt;b&gt;Problem:&lt;/b&gt; Component positioned far outside the circuit area&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;Problem:&lt;/b&gt; Bauteil weit außerhalb des Schaltungsbereichs positioniert&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="409"/>
         <source>&lt;b&gt;Type:&lt;/b&gt; %1&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;Typ:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="410"/>
         <source>&lt;b&gt;Position:&lt;/b&gt; (%1, %2)&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;Position:&lt;/b&gt; (%1, %2)&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="411"/>
         <source>&lt;b&gt;Size:&lt;/b&gt; %1 × %2&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;Größe:&lt;/b&gt; %1 × %2&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="412"/>
         <source>&lt;b&gt;Impact:&lt;/b&gt; This component&apos;s position causes &apos;Fit in Window&apos; to zoom out excessively.&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;Auswirkung:&lt;/b&gt; Die Position dieses Bauteils führt dazu, dass «Ins Fenster einpassen» übermäßig herauszoomt.&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="413"/>
         <source>&lt;b&gt;Solution:&lt;/b&gt; The component will be moved to a reasonable location near the main circuit.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;Lösung:&lt;/b&gt; Das Bauteil wird an eine sinnvolle Position in der Nähe der Hauptschaltung verschoben.</translation>
     </message>
 </context>
 <context>
@@ -5562,7 +5577,7 @@ Ursache: %2 (Fehlercode %3)</translation>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1515"/>
         <source>Fritzing error: unable to render copper svg (2).</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fritzing-Fehler: Kupfer-SVG kann nicht gerendert werden (2).</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1535"/>
@@ -5579,17 +5594,17 @@ Ursache: %2 (Fehlercode %3)</translation>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1583"/>
         <source>The bottom ground fill is split into %1 sections. </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Die untere Massefüllung ist in %1 Abschnitte aufgeteilt. </translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1586"/>
         <source>The top ground fill is split into %1 sections. </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Die obere Massefüllung ist in %1 Abschnitte aufgeteilt. </translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1588"/>
         <source>Please manually ensure connectivity, especially for ground seeds.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bitte stellen Sie die Konnektivität manuell sicher, insbesondere für Masse-Startpunkte.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1589"/>
@@ -7225,7 +7240,9 @@ Hinweis: Diese Warnung wird nur einmal angezeigt.</translation>
         <source>The gerber file generator will use six decimals precision instead of three.
 Some deprecated gerber commands are removed or replaced.
 This feature is enabled by default. If you need to maintain compatibility with older processes designed for earlier Fritzing versions, you can disable this feature.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Der Gerber-Dateigenerator verwendet sechs Dezimalstellen Genauigkeit anstatt drei.
+Einige veraltete Gerber-Befehle werden entfernt oder ersetzt.
+Diese Funktion ist standardmäßig aktiviert. Wenn Sie die Kompatibilität mit älteren Prozessen beibehalten müssen, die für frühere Fritzing-Versionen entwickelt wurden, können Sie diese Funktion deaktivieren.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="471"/>
@@ -8516,7 +8533,7 @@ im Sortiment. Nicht erneut hinzufügen?</translation>
     <message>
         <location filename="../src/svg/x2svg.cpp" line="71"/>
         <source>failure in svg conversion 2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fehler bei der SVG-Konvertierung 2</translation>
     </message>
     <message>
         <source>failure in svg conversion 2: %1 %2 %3</source>
@@ -8536,52 +8553,52 @@ im Sortiment. Nicht erneut hinzufügen?</translation>
         <location filename="../src/utils/folderutils.cpp" line="817"/>
         <source>Fritzing sketch</source>
         <comment>This is a file type used for an error message.</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fritzing-Skizze</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="818"/>
         <source>Fritzing bundle</source>
         <comment>This is a file type used for an error message.</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fritzing-Paket</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="819"/>
         <source>Fritzing bin</source>
         <comment>This is a file type used for an error message.</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fritzing-Bauteilbibliothek</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="820"/>
         <source>Fritzing bundled bin</source>
         <comment>This is a file type used for an error message.</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fritzing-Bündeldatei</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="821"/>
         <source>Fritzing part</source>
         <comment>This is a file type used for an error message.</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fritzing-Bauteil</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="822"/>
         <source>Fritzing bundled part</source>
         <comment>This is a file type used for an error message.</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fritzing-gebündeltes Bauteil</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="836"/>
         <source>A symbolic link exists but points to missing file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ein symbolischer Link existiert, verweist aber auf eine fehlende Datei: %1</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="842"/>
         <source>The parent directory does not exist: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Das übergeordnete Verzeichnis existiert nicht: %1</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="851"/>
         <source>Found similar filename with different case: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ähnlicher Dateiname mit anderer Groß-/Kleinschreibung gefunden: %1</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="862"/>
@@ -8590,7 +8607,11 @@ im Sortiment. Nicht erneut hinzufügen?</translation>
 File type: %2
 
 Please check if the file exists.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Datei „%1&quot; kann nicht gefunden werden.
+
+Dateityp: %2
+
+Bitte überprüfen Sie, ob die Datei existiert.</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="874"/>
@@ -8599,7 +8620,11 @@ Please check if the file exists.</source>
 File type: %2
 
 Please ensure you have permission to read the file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Datei „%1&quot; kann nicht gelesen werden.
+
+Dateityp: %2
+
+Bitte stellen Sie sicher, dass Sie Leserechte für die Datei haben.</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="886"/>
@@ -8608,7 +8633,11 @@ Please ensure you have permission to read the file.</source>
 File type: %2
 
 This could be due to a cloud storage or network drive issue. Please ensure the file has been properly synchronized and saved.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Datei „%1&quot; ist leer.
+
+Dateityp: %2
+
+Dies könnte an einem Cloud-Speicher- oder Netzlaufwerk-Problem liegen. Bitte stellen Sie sicher, dass die Datei ordnungsgemäß synchronisiert und gespeichert wurde.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/kicadmoduledialog.cpp" line="36"/>
@@ -8674,18 +8703,12 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
     <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="152"/>
         <source>%n path(s) in board outline layer</source>
-        <translation>
-            <numerusform></numerusform>
-            <numerusform>%n &quot;path&quot; Elemente in der Kontur</numerusform>
-        </translation>
+        <translation type="unfinished"><numerusform>%n Pfad in der Platinenumriss-Ebene</numerusform><numerusform>%n Pfade in der Platinenumriss-Ebene</numerusform></translation>
     </message>
     <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="153"/>
         <source>%n path(s) in silkscreen layers</source>
-        <translation>
-            <numerusform></numerusform>
-            <numerusform>%n Pfade in Siebdruckebenen</numerusform>
-        </translation>
+        <translation type="unfinished"><numerusform>%n Pfad in Siebdruckschichten</numerusform><numerusform>%n Pfade in Siebdruckschichten</numerusform></translation>
     </message>
     <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="154"/>
@@ -8820,7 +8843,7 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
     <message>
         <location filename="../src/commands.cpp" line="2675"/>
         <source>Rotate %1 %2° (%3)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 um %2° drehen (%3)</translation>
     </message>
     <message>
         <location filename="../src/dialogs/groundfillseeddialog.cpp" line="39"/>
@@ -9685,17 +9708,17 @@ Wenn die Teile aus dem Simulations-Bin stammen, melden Sie den Fehler in GitHub.
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="7635"/>
         <source>Rotate label &apos;%1&apos; (%2°)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Beschriftung «%1» drehen (%2°)</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="7639"/>
         <source>Flip label &apos;%1&apos; (horizontal)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Beschriftung «%1» spiegeln (horizontal)</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="7641"/>
         <source>Flip label &apos;%1&apos; (vertical)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Beschriftung «%1» spiegeln (vertikal)</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="8281"/>
