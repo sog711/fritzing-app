@@ -1664,7 +1664,7 @@ Il est également possible de choisir un connecteur comme une graine de rempliss
         <source>connected to %n item(s)</source>
         <translation>
             <numerusform>connecté à %n élément</numerusform>
-            <numerusform>connecté à %n élément(s)</numerusform>
+            <numerusform>connecté à %n éléments</numerusform>
         </translation>
     </message>
     <message>
@@ -3812,8 +3812,8 @@ Nous travaillons à éliminer ce message afin de ne vous laisser choisir que des
         <location filename="../src/mainwindow/mainwindow.cpp" line="2430"/>
         <source>%1 of %2 nets routed - %n connector(s) still to be routed</source>
         <translation>
-            <numerusform>%1 des %2 réseaux a été routé - %n connecteur(s) doivent êtres reliés</numerusform>
-            <numerusform>%1 des %2 réseaux ont été routé - %n connecteur(s) doivent êtres reliés</numerusform>
+            <numerusform>%1 des %2 réseaux a été routé - %n connecteur doit être relié</numerusform>
+            <numerusform>%1 des %2 réseaux ont été routé - %n connecteurs doivent être reliés</numerusform>
         </translation>
     </message>
     <message>
@@ -8873,17 +8873,17 @@ Fritzing va continuer à fonctionner, mais vous n&apos;aurez pas la possibilité
     <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="154"/>
         <source>%n path(s) in copper layers</source>
-        <translation type="unfinished"><numerusform>%n chemin(s) dans les couches de cuivre</numerusform><numerusform>%n chemin(s) dans les couches de cuivre</numerusform></translation>
+        <translation type="unfinished"><numerusform>%n chemin dans les couches de cuivre</numerusform><numerusform>%n chemins dans les couches de cuivre</numerusform></translation>
     </message>
     <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="155"/>
         <source>%n path(s) in mask layers</source>
-        <translation type="unfinished"><numerusform>%n chemin(s) dans les couches de masque</numerusform><numerusform>%n chemin(s) dans les couches de masque</numerusform></translation>
+        <translation type="unfinished"><numerusform>%n chemin dans les couches de masque</numerusform><numerusform>%n chemins dans les couches de masque</numerusform></translation>
     </message>
     <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="156"/>
         <source>%n path(s) in paste mask layers</source>
-        <translation type="unfinished"><numerusform>%n chemin(s) dans les couches de masque de pâte</numerusform><numerusform>%n chemin(s) dans les couches de masque de pâte</numerusform></translation>
+        <translation type="unfinished"><numerusform>%n chemin dans les couches de masque de pâte</numerusform><numerusform>%n chemins dans les couches de masque de pâte</numerusform></translation>
     </message>
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="159"/>
@@ -9682,8 +9682,8 @@ Les composants seront déplacés automatiquement. Vous pouvez utiliser l&apos;hi
         <location filename="../src/sketch/sketchwidget.cpp" line="7678"/>
         <source>show %n part label(s)</source>
         <translation>
-            <numerusform>Afficher les %n label(s) du composant</numerusform>
             <numerusform>Afficher le %n label du composant</numerusform>
+            <numerusform>Afficher les %n labels du composant</numerusform>
         </translation>
     </message>
     <message>

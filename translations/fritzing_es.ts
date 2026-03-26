@@ -2448,7 +2448,7 @@ Es también posible elegir un conector como &lt;i&gt;semilla de tierra&lt;/i&gt;
     <message numerus="yes">
         <location filename="../src/mainwindow/mainwindow.cpp" line="1665"/>
         <source>The sketch &apos;%1&apos; is missing %n SVG file(s): %2. The sketch will still load, but some parts may not display correctly. If the sketch is very old, try loading it with an older version of Fritzing (0.9.x) and re-saving it.</source>
-        <translation type="unfinished"><numerusform>Al esquema «%1» le faltan %n archivo(s) SVG: %2. El esquema se cargará igualmente, pero algunas piezas podrían no mostrarse correctamente. Si el esquema es muy antiguo, intente abrirlo con una versión anterior de Fritzing (0.9.x) y vuelva a guardarlo.</numerusform><numerusform>Al esquema «%1» le faltan %n archivos SVG: %2. El esquema se cargará igualmente, pero algunas piezas podrían no mostrarse correctamente. Si el esquema es muy antiguo, intente abrirlo con una versión anterior de Fritzing (0.9.x) y vuelva a guardarlo.</numerusform></translation>
+        <translation type="unfinished"><numerusform>Al esquema «%1» le falta %n archivo SVG: %2. El esquema se cargará igualmente, pero algunas piezas podrían no mostrarse correctamente. Si el esquema es muy antiguo, intente abrirlo con una versión anterior de Fritzing (0.9.x) y vuelva a guardarlo.</numerusform><numerusform>Al esquema «%1» le faltan %n archivos SVG: %2. El esquema se cargará igualmente, pero algunas piezas podrían no mostrarse correctamente. Si el esquema es muy antiguo, intente abrirlo con una versión anterior de Fritzing (0.9.x) y vuelva a guardarlo.</numerusform></translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1720"/>

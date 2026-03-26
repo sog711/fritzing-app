@@ -2441,8 +2441,8 @@ Também é possível escolher um conector como ponto de aterramento clicando com
         <location filename="../src/mainwindow/mainwindow.cpp" line="2430"/>
         <source>%1 of %2 nets routed - %n connector(s) still to be routed</source>
         <translation>
-            <numerusform>%1 de %2 redes roteadas - %n conector(es) a serem roteado(s)</numerusform>
-            <numerusform>%1 de %2 redes roteadas - %n conector(es) a serem roteado(s)</numerusform>
+            <numerusform>%1 de %2 redes roteadas - %n conector a ser roteado</numerusform>
+            <numerusform>%1 de %2 redes roteadas - %n conectores a serem roteados</numerusform>
         </translation>
     </message>
     <message>
@@ -3687,7 +3687,7 @@ Por favor verifique em todos os modos de visualização para verificar alguma mo
         <source>Routing completed using %n jumper part(s)</source>
         <translation>
             <numerusform>Roteamento completo usando %n elementos jumper</numerusform>
-            <numerusform>Roteamento completo usando %n elementos jumper(s)</numerusform>
+            <numerusform>Roteamento completo usando %n elementos jumper</numerusform>
         </translation>
     </message>
     <message>
