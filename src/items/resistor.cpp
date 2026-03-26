@@ -118,7 +118,7 @@ void Resistor::setResistance(QString resistance, QString pinSpacing, bool force)
 		resistance.chop(1);
 	}
 
-	modelPart()->setLocalTitle(resistance + " " + OhmSymbol + " " + tr("Resistor"));
+	modelPart()->setLocalTitle(tr("%1 %2 Resistor").arg(resistance, OhmSymbol));
 
 	switch (this->m_viewID) {
 	case ViewLayer::BreadboardView:

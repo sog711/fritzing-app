@@ -1724,7 +1724,7 @@ void MainWindow::exportIPC_D_356A_interactive() {
 				ipcActionType,
 				tr("Export IPC-D-356..."),
 				"d356a",
-				tr("Unable to save IPC file.") + tr("But the content was copied to the clipboard.")
+				tr("Unable to save IPC file. But the content was copied to the clipboard.")
 				);
 
 	return;
@@ -1807,7 +1807,7 @@ void MainWindow::exportNetlist() {
 				netlistActionType,
 				tr("Export Netlist..."),
 				"netlist",
-				tr("Unable to save netlist file.") + tr("But the content was copied to the clipboard.")
+				tr("Unable to save netlist file. But the content was copied to the clipboard.")
 				);
 
 	return;

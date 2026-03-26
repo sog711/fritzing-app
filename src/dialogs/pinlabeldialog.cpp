@@ -78,8 +78,8 @@ PinLabelDialog::PinLabelDialog(const QStringList & labels, bool singleRow, const
 
 	auto * label = new QLabel("<html><body>" +
 	                            tr("<p><h2>Pin Label Editor</h2></p>") +
-	                            tr("<p>Click on a label next to a pin number to rename that pin.") + " " +
-	                            tr("You can use the tab key to move through the labels in order.</p>") +
+	                            tr("<p>Click on a label next to a pin number to rename that pin. "
+	                               "You can use the tab key to move through the labels in order.</p>") +
 	                            "</body></html>");
 	label->setMaximumWidth(150);
 	label->setWordWrap(true);

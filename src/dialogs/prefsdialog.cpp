@@ -640,17 +640,20 @@ void PrefsDialog::updateWheelText() {
 	switch((ZoomableGraphicsView::WheelMapping) m_wheelMapping) {
 	case ZoomableGraphicsView::ScrollPrimary:
 	default:
-		text = tr("<b>Scroll priority</b><br/>") + tr("no keys down = scroll<br/><kbd>Shift</kbd> key swaps scroll axis<br/><kbd>Alt</kbd> or <kbd>%1</kbd> = zoom").arg(cKey);
+		text = tr("<b>Scroll priority</b><br/>"
+			"no keys down = scroll<br/><kbd>Shift</kbd> key swaps scroll axis<br/><kbd>Alt</kbd> or <kbd>%1</kbd> = zoom").arg(cKey);
 		break;
 	case ZoomableGraphicsView::ZoomPrimary:
-		text = tr("<b>Zoom priority</b><br/>") + tr("no keys down = zoom<br/><kbd>Alt</kbd> or <kbd>%1</kbd> = scroll<br/><kbd>Shift</kbd> key swaps scroll axis").arg(cKey);
+		text = tr("<b>Zoom priority</b><br/>"
+			"no keys down = zoom<br/><kbd>Alt</kbd> or <kbd>%1</kbd> = scroll<br/><kbd>Shift</kbd> key swaps scroll axis").arg(cKey);
 		break;
 	case ZoomableGraphicsView::Guess:
-		text = tr("<b>Guess</b><br/>") +
-				tr("Let Fritzing guess if the input is from a wheel or a touchpad. <kbd>Alt</kbd> or <kbd>%1</kbd> modify scrolling. <kbd>Shift</kbd> can modify the axis or the speed.").arg(cKey);
+		text = tr("<b>Guess</b><br/>"
+				"Let Fritzing guess if the input is from a wheel or a touchpad. <kbd>Alt</kbd> or <kbd>%1</kbd> modify scrolling. <kbd>Shift</kbd> can modify the axis or the speed.").arg(cKey);
 		break;
 	case ZoomableGraphicsView::Pure:
-		text = tr("<b>Pure</b><br/>") + tr("Use system defaults to interpret the wheel input. Don't try anything fancy. Recommended when using a touchpad with pinch gestures.");
+		text = tr("<b>Pure</b><br/>"
+			"Use system defaults to interpret the wheel input. Don't try anything fancy. Recommended when using a touchpad with pinch gestures.");
 	}
 
 	// border, border-radius and padding are not supported

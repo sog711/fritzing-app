@@ -155,8 +155,8 @@ void FzpInfo::validateVersion()
 	if (m_fritzingVersion.isEmpty()) {
 		addWarning(
 			tr("Version number missing."),
-			tr("The part is missing a fritzing version.\n") +
-			tr("All parts must have a fritzingVersion attribute: fritzingVersion=\"x.y.z\"."),
+			tr("The part is missing a fritzing version.\n"
+			   "All parts must have a fritzingVersion attribute: fritzingVersion=\"x.y.z\"."),
 			m_moduleLineNumber
 			);
 		return;

@@ -143,7 +143,7 @@ bool SqliteReferenceModel::loadAll(const QString & databaseName, bool fullLoad, 
 				message += FailurePartMessages.at(i);
 				message += ("\n");
 			}
-			message += "\n" + tr("and %1 other parts").arg(FailurePartMessages.count() - 4);
+			message += tr("\nand %1 other parts").arg(FailurePartMessages.count() - 4);
 		}
 		FMessageBox::warning(QApplication::activeWindow(), QObject::tr("Oops!"), message, QMessageBox::Ok);
 	}
@@ -160,7 +160,7 @@ bool SqliteReferenceModel::loadAll(const QString & databaseName, bool fullLoad, 
 				message += FailurePropertyMessages.at(i);
 				message += ("\n");
 			}
-			message += "\n" + tr("and %1 other properties").arg(FailurePropertyMessages.count() - 4);
+			message += tr("\nand %1 other properties").arg(FailurePropertyMessages.count() - 4);
 		}
 		FMessageBox::warning(QApplication::activeWindow(), QObject::tr("Oops!"), message, QMessageBox::Ok);
 	}

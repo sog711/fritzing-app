@@ -330,13 +330,13 @@ void RegenerateDatabaseThread::run() {
 		file.close();
 	}
 	else {
-		m_error = tr("Unable to open temporary file") + " (" + fileName + ")";
+		m_error = tr("Unable to open temporary file (%1)").arg(fileName);
 		return;
 	}
 
 	bool ok = ((FApplication *) qApp)->loadReferenceModel(fileName, true, m_referenceModel);
 	if (!ok) {
-		m_error = tr("Database failure") + "\n" + m_referenceModel->error();
+		m_error = tr("Database failure\n%1").arg(m_referenceModel->error());
 		return;
 	}
 
@@ -2271,8 +2271,8 @@ void FApplication::doCommand(const QString & command, const QString & params, QS
 void FApplication::regeneratePartsDatabase() {
 	QMessageBox messageBox;
 	messageBox.setWindowTitle(tr("Regenerate parts database?"));
-	messageBox.setText(tr("Regenerating the parts database will take some minutes and you will have to restart Fritzing\n\n") +
-	                   tr("Would you like to regenerate the parts database?\n")
+	messageBox.setText(tr("Regenerating the parts database will take some minutes and you will have to restart Fritzing\n\n"
+	                   "Would you like to regenerate the parts database?\n")
 	                  );
 	messageBox.setInformativeText(tr("This option is usefull if you modify the parts database on your own. "
 									 "If you want to recover from an error, "

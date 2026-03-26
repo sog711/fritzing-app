@@ -485,10 +485,10 @@ void Simulator::showSimulatorError(QWidget* parent, const QString& errorHint, co
 		QMessageBox::Ok
 		);
 
-	QString detailedText = tr("Errors:\n") +
-						   QString::fromStdString(simulator->getLog(false)) +
-						   QString::fromStdString(simulator->getLog(true)) +
-						   "\n\nNetlist:\n" + spiceNetlist;
+	QString detailedText = tr("Errors:\n%1%2\n\nNetlist:\n%3")
+						   .arg(QString::fromStdString(simulator->getLog(false)),
+						        QString::fromStdString(simulator->getLog(true)),
+						        spiceNetlist);
 
 	msgBox->setDetailedText(detailedText);
 	msgBox->enableClipboardButton(true);

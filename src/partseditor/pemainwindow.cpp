@@ -800,11 +800,13 @@ bool PEMainWindow::setInitialItem(PaletteItem * paletteItem)
 	if (hasLegID && !RubberBandLegWarning) {
 		RubberBandLegWarning = true;
 		QMessageBox::warning(nullptr, tr("Parts Editor"),
-		                     tr("This part has bendable legs. ") +
-		                     tr("This version of the Parts Editor does not yet support editing bendable legs, and the legs may not be displayed correctly in breadboard view . ") +
-		                     tr("If you make changes to breadboard view, or change connector metadata, the legs may no longer work. ") +
-		                     tr("You can safely make changes to Schematic or PCB view.\n\n") +
-		                     tr("This warning will not be repeated in this session of Fritzing")
+		                     tr("This part has bendable legs. "
+		                        "This version of the Parts Editor does not yet support editing bendable legs, "
+		                        "and the legs may not be displayed correctly in breadboard view. "
+		                        "If you make changes to breadboard view, or change connector metadata, "
+		                        "the legs may no longer work. "
+		                        "You can safely make changes to Schematic or PCB view.\n\n"
+		                        "This warning will not be repeated in this session of Fritzing")
 		                    );
 	}
 
@@ -1552,10 +1554,9 @@ void PEMainWindow::loadImage()
 	else {
 		newReferenceFile = origPath;
 		if (origPath.endsWith("png") || origPath.endsWith("jpg") || origPath.endsWith("jpeg")) {
-			QString message = tr("You may use a PNG or JPG image to construct your part, but it is better to use an SVG. ") +
-			                  tr("PNG and JPG images retain their nature as bitmaps and do not look good when scaled--") +
-			                  tr("so for Fritzing parts it is best to use PNG and JPG only as placeholders.")
-			                  ;
+			QString message = tr("You may use a PNG or JPG image to construct your part, but it is better to use an SVG. "
+			                     "PNG and JPG images retain their nature as bitmaps and do not look good when scaled--"
+			                     "so for Fritzing parts it is best to use PNG and JPG only as placeholders.");
 
 			QMessageBox::information(nullptr, tr("Use of PNG and JPG discouraged"), message);
 
@@ -1589,11 +1590,10 @@ void PEMainWindow::loadImage()
 			check = TextUtils::findElementWithAttribute(root, "id", "copper0");
 		}
 		if (check.isNull()) {
-			QString message = tr("There are no copper layers defined in: %1. ").arg(origPath) +
-			                  tr("See <a href=\"http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/\">this explanation</a>.") +
-			                  tr("<br/><br/>This will not be a problem in the next release of the Parts Editor, ") +
-			                  tr("but for now please modify the file according to the instructions in the link.")
-			                  ;
+			QString message = tr("There are no copper layers defined in: %1. "
+			                     "See <a href=\"http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/\">this explanation</a>."
+			                     "<br/><br/>This will not be a problem in the next release of the Parts Editor, "
+			                     "but for now please modify the file according to the instructions in the link.").arg(origPath);
 
 			QMessageBox::warning(nullptr, tr("SVG problem"), message);
 			return;
@@ -2148,12 +2148,19 @@ bool PEMainWindow::saveAs(bool overWrite)
 				message += tr("Saving this part will make a change to the sketch that cannot be undone.");
 			}
 			else {
-				message =  tr("The open sketches ");
-				for (int i = 0; i < affectedWindows.count() - 1; i++) {
-					message += tr("'%1', ").arg(affectedWindows.at(i)->windowTitle());
+				QStringList sketchNames;
+				for (int i = 0; i < affectedWindows.count(); i++) {
+					sketchNames << QString("'%1'").arg(affectedWindows.at(i)->windowTitle());
 				}
-				message += tr("and '%1' ").arg(affectedWindows.last()->windowTitle());
-				message += tr("Saving this part will make a change to these sketches that cannot be undone.");
+				QString sketchList;
+				if (sketchNames.count() == 2) {
+					sketchList = tr("%1 and %2").arg(sketchNames.at(0), sketchNames.at(1));
+				} else {
+					QString last = sketchNames.takeLast();
+					sketchList = sketchNames.join(", ") + tr(", and %1").arg(last);
+				}
+				message = tr("The open sketches %1 use the part you are editing. "
+				             "Saving this part will make a change to these sketches that cannot be undone.").arg(sketchList);
 
 			}
 			message += tr("\n\nGo ahead and save?");
@@ -3812,10 +3819,10 @@ void PEMainWindow::connectorWarning() {
 			if (unassigned.value(viewID) > 0) viewCount++;
 		}
 		QMessageBox::warning(nullptr, tr("Parts Editor"),
-		                     tr("This part has %n unassigned connectors ", "", unassignedTotal) +
-		                     tr("across %n views. ", "", viewCount) +
-		                     tr("Until all connectors are assigned to SVG elements, the part will not work correctly. ") +
-		                     tr("Exiting the Parts Editor now is fine, as long as you remember to finish the assignments later.")
+		                     tr("This part has %1 unassigned connector(s) across %2 view(s). "
+		                        "Until all connectors are assigned to SVG elements, the part will not work correctly. "
+		                        "Exiting the Parts Editor now is fine, as long as you remember to finish the assignments later.")
+		                     .arg(unassignedTotal).arg(viewCount)
 		                    );
 	}
 

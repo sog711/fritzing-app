@@ -83,7 +83,7 @@ bool Syntaxer::loadSyntax(const QString &filename)
 	m_name = root.attribute("name");
 	QStringList extensions = root.attribute("extensions").split(";", Qt::SkipEmptyParts);
 	if (extensions.count() > 0) {
-		m_extensionString = m_name + " " + QObject::tr("files") + " (";
+		m_extensionString = QObject::tr("%1 files (", "file type filter, e.g. 'Arduino files ('").arg(m_name);
 		Q_FOREACH (QString ext, extensions) {
 			m_extensionString += ext + " ";
 			int ix = ext.indexOf(".");

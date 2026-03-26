@@ -81,8 +81,8 @@ Board::Board( ModelPart * modelPart, ViewLayer::ViewID viewID, const ViewGeometr
 	}
 
 	if (StandardCustomBoardExplanation.isEmpty()) {
-		StandardCustomBoardExplanation = tr("\n\nA custom board svg typically has one or two silkscreen layers and one board layer.\n") +
-		                                 tr("Have a look at the circle_pcb.svg file in your Fritzing installation folder at parts/svg/core/pcb/.\n\n");
+		StandardCustomBoardExplanation = tr("\n\nA custom board svg typically has one or two silkscreen layers and one board layer.\n"
+		                                    "Have a look at the circle_pcb.svg file in your Fritzing installation folder at parts/svg/core/pcb/.\n\n");
 	}
 
 	if (NamesToXmlNames.count() == 0) {

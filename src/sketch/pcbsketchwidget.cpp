@@ -3041,11 +3041,11 @@ void PCBSketchWidget::setGroundFillKeepout() {
 
 	bool ok;
 	double mils = QInputDialog::getInt(this, tr("Enter Keepout"),
-	                                   tr("Keepout is in mils (.001 inches).\n\n") +
-	                                   tr("Note that due to aliasing, distances may be too short by up to 2 mils\n") +
-	                                   tr("so you may want to increase the keepout value by that much.\n\n") +
-	                                   tr("10 mils is a good default choice.\n\n") +
-	                                   tr("Enter keepout value:"),
+	                                   tr("Keepout is in mils (.001 inches).\n\n"
+	                                   "Note that due to aliasing, distances may be too short by up to 2 mils\n"
+	                                   "so you may want to increase the keepout value by that much.\n\n"
+	                                   "10 mils is a good default choice.\n\n"
+	                                   "Enter keepout value:"),
 	                                   qRound(getKeepoutMils()), 0, 10 * 1000, 1, &ok);
 
 
