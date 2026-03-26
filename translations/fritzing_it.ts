@@ -2222,7 +2222,7 @@ E&apos; anche possibile scegliere un connettore come seme per il piano massa con
     <message numerus="yes">
         <location filename="../src/mainwindow/mainwindow.cpp" line="1665"/>
         <source>The sketch &apos;%1&apos; is missing %n SVG file(s): %2. The sketch will still load, but some parts may not display correctly. If the sketch is very old, try loading it with an older version of Fritzing (0.9.x) and re-saving it.</source>
-        <translation type="unfinished"><numerusform>Lo sketck «%1» non contiene %n file SVG: %2. Lo sketch verrà comunque caricato, ma alcuni componenti potrebbero non essere visualizzati correttamente. Se lo sketch è molto vecchio, prova a caricarlo con una versione precedente di Fritzing (0.9.x) e a salvarlo nuovamente.</numerusform><numerusform>Lo sketch «%1» non contiene %n file SVG: %2. Lo sketch verrà comunque caricato, ma alcuni componenti potrebbero non essere visualizzati correttamente. Se lo sketch è molto vecchio, prova a caricarlo con una versione precedente di Fritzing (0.9.x) e a salvarlo nuovamente.</numerusform></translation>
+        <translation type="unfinished"><numerusform>Lo sketch «%1» non contiene %n file SVG: %2. Lo sketch verrà comunque caricato, ma alcuni componenti potrebbero non essere visualizzati correttamente. Se lo sketch è molto vecchio, prova a caricarlo con una versione precedente di Fritzing (0.9.x) e a salvarlo nuovamente.</numerusform><numerusform>Lo sketch «%1» non contiene %n file SVG: %2. Lo sketch verrà comunque caricato, ma alcuni componenti potrebbero non essere visualizzati correttamente. Se lo sketch è molto vecchio, prova a caricarlo con una versione precedente di Fritzing (0.9.x) e a salvarlo nuovamente.</numerusform></translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1897"/>
@@ -4051,7 +4051,7 @@ Verifica tutte le viste per potenziali effetti collaterali.</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1836"/>
         <source>Sketch exported to Gerber</source>
-        <translation type="unfinished">Sketck esportato in Gerber</translation>
+        <translation type="unfinished">Sketch esportato in Gerber</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2794"/>
