@@ -483,11 +483,11 @@ int & ProgramWindow::untitledFileCount() {
 }
 
 void ProgramWindow::setTitle() {
-	setWindowTitle(tr("Code Window"));
+	setWindowTitle(tr("Code Window", "dialog title"));
 }
 
 void ProgramWindow::setTitle(const QString & filename) {
-	setWindowTitle(tr("Code Window - %1").arg(filename));
+	setWindowTitle(tr("Code Window - %1", "dialog title").arg(filename));
 }
 
 /**

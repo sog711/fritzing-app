@@ -178,7 +178,7 @@ void FabUploadProgress::onError(QNetworkReply::NetworkError code)
 
 	auto *reply = qobject_cast<QNetworkReply*>(sender());
 	FMessageBox::critical(this,
-						  tr("Fritzing"),
+						  tr("Fritzing", "dialog title"),
 						  tr("Could not connect to Fritzing fab.")
 							  + "Error: " + reply->errorString() + " " + errorString);
 
@@ -208,7 +208,7 @@ void FabUploadProgress::httpError(QNetworkReply* reply)
 		errorMessage += QString(" - %1").arg(jsonErrors);
 	}
 
-	FMessageBox::critical(this, tr("Fritzing"), errorMessage);
+	FMessageBox::critical(this, tr("Fritzing", "dialog title"), errorMessage);
 	DebugDialog::debug(errorMessage);
 
 	Q_EMIT closeUploadError();
@@ -218,7 +218,7 @@ void FabUploadProgress::httpError(QNetworkReply* reply)
 void FabUploadProgress::apiError(const QString &message)
 {
 	DebugDialog::debug(message);
-	FMessageBox::critical(this, tr("Fritzing"), message);
+	FMessageBox::critical(this, tr("Fritzing", "dialog title"), message);
 	Q_EMIT closeUploadError();
 }
 
@@ -288,7 +288,7 @@ void FabUploadProgress::updateProcessingStatus()
 				}
 				if (mRedirect_url.isEmpty()) {
 					QString error("Upload failed, no project url");
-					FMessageBox::critical(this, tr("Fritzing"), error);
+					FMessageBox::critical(this, tr("Fritzing", "dialog title"), error);
 				} else {
 					QSettings settings;
 					QString service = j["service"].toString();

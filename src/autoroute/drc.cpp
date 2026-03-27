@@ -135,7 +135,7 @@ DRCResultsDialog::DRCResultsDialog(const QString & message, const QStringList & 
 	m_displayImage = displayImage;
 	m_collidingThings = collidingThings;
 
-	this->setWindowTitle(tr("DRC Results"));
+	this->setWindowTitle(tr("DRC Results", "dialog title"));
 
 	auto * vLayout = new QVBoxLayout(this);
 
@@ -281,7 +281,7 @@ QStringList DRC::start(bool showOkMessage, double keepoutMils) {
 
 	if (showOkMessage) {
 		if (messages.count() == 0) {
-			QMessageBox::information(m_sketchWidget->window(), tr("Fritzing"), message);
+			QMessageBox::information(m_sketchWidget->window(), tr("Fritzing", "dialog title"), message);
 		}
 		else {
 			auto * dialog = new DRCResultsDialog(message, messages, collidingThings, m_displayItem, m_displayImage, m_sketchWidget, m_sketchWidget->window());

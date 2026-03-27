@@ -242,7 +242,7 @@ void MainWindow::mainLoadAux(const QString & fileName)
 
 	QFile file(fileName);
 	if (!file.exists()) {
-		FMessageBox::warning(this, tr("Fritzing"),
+		FMessageBox::warning(this, tr("Fritzing", "dialog title"),
 		                     tr("Cannot find file %1.")
 		                     .arg(fileName));
 
@@ -253,7 +253,7 @@ void MainWindow::mainLoadAux(const QString & fileName)
 
 
 	if (!file.open(QFile::ReadOnly | QFile::Text)) {
-		FMessageBox::warning(this, tr("Fritzing"),
+		FMessageBox::warning(this, tr("Fritzing", "dialog title"),
 		                     tr("Cannot read file  1 %1:\n%2.")
 							 .arg(fileName, file.errorString()));
 		return;
@@ -270,7 +270,7 @@ void MainWindow::mainLoadAux(const QString & fileName)
 void MainWindow::revert() {
 	QMessageBox::StandardButton answer = QMessageBox::question(
 	        this,
-	        tr("Revert?"),
+	        tr("Revert?", "dialog title"),
 	        tr("This operation can not be undone--you will lose all of your changes."
 	           "\n\nGo ahead and revert?"),
 	        QMessageBox::Yes | QMessageBox::No,
@@ -313,7 +313,7 @@ MainWindow * MainWindow::revertAux()
 bool MainWindow::loadWhich(const QString & fileName, bool setAsLastOpened, bool addToRecent, bool checkObsolete, const QString & displayName)
 {
 	if (!QFileInfo(fileName).exists()) {
-		FMessageBox::warning(nullptr, tr("Fritzing"), tr("File '%1' not found").arg(fileName));
+		FMessageBox::warning(nullptr, tr("Fritzing", "dialog title"), tr("File '%1' not found").arg(fileName));
 		return false;
 	}
 
@@ -2308,7 +2308,7 @@ void MainWindow::hundredPercentSize() {
 }
 
 void MainWindow::actualSize() {
-	QMessageBox::information(this, tr("Actual Size"),
+	QMessageBox::information(this, tr("Actual Size", "dialog title"),
 	                         tr("It doesn't seem to be possible to automatically determine the actual physical size of the monitor, so "
 	                            "'actual size' as currently implemented is only a guess. "
 	                            "Your best bet would be to drag out a ruler part, then place a real (physical) ruler on top and zoom until they match up."
@@ -2539,7 +2539,7 @@ void MainWindow::pageSetup() {
 }
 
 void MainWindow::notYetImplemented(QString action) {
-	QMessageBox::warning(this, tr("Fritzing"),
+	QMessageBox::warning(this, tr("Fritzing", "dialog title"),
 	                     tr("Sorry, \"%1\" has not been implemented yet").arg(action));
 }
 
@@ -2717,7 +2717,7 @@ void MainWindow::openRecentOrExampleFile(const QString & filename, const QString
 	}
 
 	if (!QFileInfo(filename).exists()) {
-		QMessageBox::warning(nullptr, tr("Fritzing"), tr("File '%1' not found").arg(filename));
+		QMessageBox::warning(nullptr, tr("Fritzing", "dialog title"), tr("File '%1' not found").arg(filename));
 		return;
 	}
 
@@ -3031,12 +3031,12 @@ void MainWindow::newAutoroute() {
 		int boardCount;
 		board = pcbSketchWidget->findSelectedBoard(boardCount);
 		if (boardCount == 0) {
-			QMessageBox::critical(this, tr("Fritzing"),
+			QMessageBox::critical(this, tr("Fritzing", "dialog title"),
 			                      tr("Your sketch does not have a board yet!  Please add a PCB in order to use the autorouter."));
 			return;
 		}
 		if (board == nullptr) {
-			QMessageBox::critical(this, tr("Fritzing"),
+			QMessageBox::critical(this, tr("Fritzing", "dialog title"),
 			                      tr("Please select the board you want to autoroute. The autorouter can only handle one board at a time."));
 			return;
 		}
@@ -3315,12 +3315,12 @@ void MainWindow::groundFillAux(bool fillGroundTraces, ViewLayer::ViewLayerID vie
 	int boardCount;
 	ItemBase * board = m_pcbGraphicsView->findSelectedBoard(boardCount);
 	if (boardCount == 0) {
-		QMessageBox::critical(this, tr("Fritzing"),
+		QMessageBox::critical(this, tr("Fritzing", "dialog title"),
 		                      tr("Your sketch does not have a board yet!  Please add a PCB in order to use ground or copper fill."));
 		return;
 	}
 	if (board == nullptr) {
-		QMessageBox::critical(this, tr("Fritzing"),
+		QMessageBox::critical(this, tr("Fritzing", "dialog title"),
 		                      tr("Please select a PCB--copper fill only works for one board at a time."));
 		return;
 	}
@@ -3359,12 +3359,12 @@ void MainWindow::removeGroundFill(ViewLayer::ViewLayerID viewLayerID, QUndoComma
 	int boardCount;
 	ItemBase * board = m_pcbGraphicsView->findSelectedBoard(boardCount);
 	if (boardCount == 0) {
-		QMessageBox::critical(this, tr("Fritzing"),
+		QMessageBox::critical(this, tr("Fritzing", "dialog title"),
 		                      tr("Your sketch does not have a board yet!  Please add a PCB in order to remove copper fill."));
 		return;
 	}
 	if (board == nullptr) {
-		QMessageBox::critical(this, tr("Fritzing"),
+		QMessageBox::critical(this, tr("Fritzing", "dialog title"),
 		                      tr("Please select a PCB--ground fill operations only work on a one board at a time."));
 		return;
 	}
@@ -3705,7 +3705,7 @@ QMessageBox::StandardButton MainWindow::oldSchematicMessage(const QString & file
 							  "</li></ul>";
 
 	QScopedPointer<FMessageBox> messageBox(FMessageBox::createCustom(
-		nullptr, QMessageBox::Icon::Question, tr("Schematic view update"), text,
+		nullptr, QMessageBox::Icon::Question, tr("Schematic view update", "dialog title"), text,
 		QMessageBox::StandardButtons(), QMessageBox::NoButton));
 
 	messageBox->setInformativeText(informativeText);
@@ -3942,7 +3942,7 @@ void MainWindow::onShareOnlineFinished() {
 	if (reply->error() == QNetworkReply::NoError) {
 		QDesktopServices::openUrl(QString("https://fritzing.org/projects/create/"));
 	} else {
-		FMessageBox::critical(this, tr("Fritzing"), QString("Online sharing is currently not available."));
+		FMessageBox::critical(this, tr("Fritzing", "dialog title"), QString("Online sharing is currently not available."));
 	}
 	reply->deleteLater();
 }
@@ -3972,7 +3972,7 @@ QList<ItemBase *> MainWindow::selectAllObsolete(bool displayFeedback) {
 	if (!displayFeedback) return items;
 
 	if (items.count() <= 0) {
-		QMessageBox::information(this, tr("Fritzing"), tr("No outdated parts found.\nAll your parts are up-to-date.") );
+		QMessageBox::information(this, tr("Fritzing", "dialog title"), tr("No outdated parts found.\nAll your parts are up-to-date.") );
 	}
 	else {
 		checkSwapObsolete(items, false);
@@ -4115,7 +4115,7 @@ void MainWindow::swapObsolete(bool displayFeedback, QList<ItemBase *> & items) {
 	}
 
 	if (displayFeedback) {
-		FMessageBox::information(this, tr("Fritzing"), tr("Successfully updated %1 part(s).\n"
+		FMessageBox::information(this, tr("Fritzing", "dialog title"), tr("Successfully updated %1 part(s).\n"
 		                         "Please check all views for potential side-effects.").arg(count) );
 	}
 	DebugDialog::debug(QString("updated %1 obsolete in %2").arg(count).arg(m_fwFilename));
@@ -4339,13 +4339,13 @@ QStringList MainWindow::newDesignRulesCheck(bool showOkMessage)
 		if (boardCount == 0) {
 			QString message = tr("Your sketch does not have a board yet! DRC only works with a PCB.");
 			results << message;
-			FMessageBox::critical(this, tr("Fritzing"), message);
+			FMessageBox::critical(this, tr("Fritzing", "dialog title"), message);
 			return results;
 		}
 		if (board == nullptr) {
 			QString message = tr("Please select a PCB. DRC only works on one board at a time.");
 			results << message;
-			FMessageBox::critical(this, tr("Fritzing"), message);
+			FMessageBox::critical(this, tr("Fritzing", "dialog title"), message);
 			return results;
 		}
 	}
@@ -4482,7 +4482,7 @@ void MainWindow::orderFab()
 			QCheckBox *notAgain = new QCheckBox(tr("Don't show this again."));
 
 			QMessageBox box(this);
-			box.setWindowTitle(tr("Missing copper fill"));
+			box.setWindowTitle(tr("Missing copper fill", "dialog title"));
 			box.setText(tr("It is recommended to add copper/ground fill to your circuit to reduce acid usage during production.\n\nContinue upload?"));
 			box.setIcon(QMessageBox::Icon::Question);
 			box.addButton(QMessageBox::Cancel);
@@ -4515,7 +4515,7 @@ void MainWindow::orderFab()
 		upload.exec();
 		delete manager;
 	} else {
-		FMessageBox::information(this, tr("Fritzing Fab Upload"), tr("Please first save your project in order to upload it."));
+		FMessageBox::information(this, tr("Fritzing Fab Upload", "dialog title"), tr("Please first save your project in order to upload it."));
 	}
 }
 
@@ -4523,12 +4523,12 @@ void MainWindow::setGroundFillSeeds() {
 	int boardCount;
 	ItemBase * board = m_pcbGraphicsView->findSelectedBoard(boardCount);
 	if (boardCount == 0) {
-		QMessageBox::critical(this, tr("Fritzing"),
+		QMessageBox::critical(this, tr("Fritzing", "dialog title"),
 		                      tr("Your sketch does not have a board yet! Please add a PCB in order to use copper fill operations."));
 		return;
 	}
 	if (board == nullptr) {
-		QMessageBox::critical(this, tr("Fritzing"),
+		QMessageBox::critical(this, tr("Fritzing", "dialog title"),
 		                      tr("Please select a PCB. Copper fill operations only work on one board at a time."));
 		return;
 	}
@@ -4540,12 +4540,12 @@ void MainWindow::clearGroundFillSeeds() {
 	int boardCount;
 	ItemBase * board = m_pcbGraphicsView->findSelectedBoard(boardCount);
 	if (boardCount == 0) {
-		QMessageBox::critical(this, tr("Fritzing"),
+		QMessageBox::critical(this, tr("Fritzing", "dialog title"),
 		                      tr("Your sketch does not have a board yet! Please add a PCB in order to use copper fill operations."));
 		return;
 	}
 	if (board == nullptr) {
-		QMessageBox::critical(this, tr("Fritzing"),
+		QMessageBox::critical(this, tr("Fritzing", "dialog title"),
 		                      tr("Please select a PCB. Copper fill operations only work on one board at a time."));
 		return;
 	}
@@ -4646,7 +4646,7 @@ void MainWindow::findPartInSketch() {
 	if (m_currentGraphicsView == nullptr) return;
 
 	bool ok;
-	QString text = QInputDialog::getText(this, tr("Enter Text"),
+	QString text = QInputDialog::getText(this, tr("Enter Text", "dialog title"),
 	                                     tr("Text will match part label, description, title, etc. Enter text to search for:"),
 	                                     QLineEdit::Normal, lastSearchText, &ok);
 	if (!ok || text.isEmpty()) return;
@@ -4693,7 +4693,7 @@ void MainWindow::findPartInSketch() {
 	QList<ItemBase *> matched = partialMatched + exactMatched;
 
 	if (matched.isEmpty()) {
-		QMessageBox::information(this, tr("Search"), tr("No parts matched search term '%1'.").arg(text));
+		QMessageBox::information(this, tr("Search", "dialog title"), tr("No parts matched search term '%1'.").arg(text));
 		return;
 	}
 

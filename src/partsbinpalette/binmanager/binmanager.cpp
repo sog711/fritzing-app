@@ -1162,7 +1162,7 @@ void BinManager::deleteBin() {
 
 	QMessageBox::StandardButton answer = QMessageBox::question(
 	        this,
-	        tr("Delete bin"),
+	        tr("Delete bin", "dialog title"),
 	        tr("Do you really want to delete bin '%1'?  This action cannot be undone.").arg(bin->title()),
 	        QMessageBox::Yes | QMessageBox::No,
 	        QMessageBox::No
@@ -1215,7 +1215,7 @@ void BinManager::renameBin() {
 
 	if (!currentBin()->allowsChanges()) {
 		// TODO: disable menu item instead
-		QMessageBox::warning(this, tr("Read-only bin"), tr("This bin cannot be renamed."));
+		QMessageBox::warning(this, tr("Read-only bin", "dialog title"), tr("This bin cannot be renamed."));
 		return;
 	}
 
@@ -1293,13 +1293,13 @@ bool BinManager::removeSelected() {
 	if (mp == nullptr) return false;
 
 	if (m_mainWindow->anyUsePart(mp->moduleID())) {
-		QMessageBox::warning(this, tr("Remove from Bin"), tr("Unable to remove part '%1'--it is in use in a sketch").arg(mp->title()));
+		QMessageBox::warning(this, tr("Remove from Bin", "dialog title"), tr("Unable to remove part '%1'--it is in use in a sketch").arg(mp->title()));
 		return false;
 	}
 
 	QMessageBox::StandardButton answer = QMessageBox::question(
 	        this,
-			tr("Remove from Bin"),
+			tr("Remove from Bin", "dialog title"),
 	        tr("Do you really want to remove '%1' from the bin? This operation cannot be undone.").arg(mp->title()),
 	        QMessageBox::Yes | QMessageBox::No,
 	        QMessageBox::No

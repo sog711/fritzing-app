@@ -518,7 +518,7 @@ QString Board::setBoardOutline(const QString & svg) {
 void Board::unableToLoad(const QString & fileName, const QString & reason) {
 	QMessageBox::information(
 	    nullptr,
-	    tr("Unable to load"),
+	    tr("Unable to load", "dialog title"),
 	    tr("Unable to load image from %1 %2").arg(fileName).arg(reason)
 	);
 }
@@ -526,7 +526,7 @@ void Board::unableToLoad(const QString & fileName, const QString & reason) {
 bool Board::canLoad(const QString & fileName, const QString & reason) {
 	QMessageBox::StandardButton answer = QMessageBox::question(
 	        nullptr,
-	        tr("Can load, but"),
+	        tr("Can load, but", "dialog title"),
 	        tr("The image from %1 can be loaded, but %2\nUse the file?").arg(fileName).arg(reason),
 	        QMessageBox::Yes | QMessageBox::No,
 	        QMessageBox::No

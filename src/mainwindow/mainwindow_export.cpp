@@ -165,12 +165,12 @@ void MainWindow::exportEtchable(bool wantPDF, bool wantSVG)
 	int boardCount;
 	ItemBase * board = m_pcbGraphicsView->findSelectedBoard(boardCount);
 	if (boardCount == 0) {
-		QMessageBox::critical(this, tr("Fritzing"),
+		QMessageBox::critical(this, tr("Fritzing", "dialog title"),
 		                      tr("Your sketch does not have a board yet! Please add a PCB in order to export etchable."));
 		return;
 	}
 	if (board == nullptr) {
-		QMessageBox::critical(this, tr("Fritzing"),
+		QMessageBox::critical(this, tr("Fritzing", "dialog title"),
 		                      tr("Etchable export can only handle one board at a time--please select the board you want to export."));
 		return;
 	}
@@ -200,7 +200,7 @@ void MainWindow::exportEtchable(bool wantPDF, bool wantSVG)
 		prefix = QString("%1_%2_").arg(board->instanceTitle()).arg(board->id());
 	}
 
-	QString exportDir = QFileDialog::getExistingDirectory(this, tr("Choose a folder for exporting"),
+	QString exportDir = QFileDialog::getExistingDirectory(this, tr("Choose a folder for exporting", "dialog title"),
 	                    defaultSaveFolder(),
 	                    QFileDialog::ShowDirsOnly
 	                    | QFileDialog::DontResolveSymlinks);
@@ -401,7 +401,7 @@ void MainWindow::exportEtchable(bool wantPDF, bool wantSVG)
 
 		bool result = image.save(fileName);
 		if (!result) {
-			QMessageBox::warning(this, tr("Fritzing"), tr("Unable to save %1").arg(fileName) );
+			QMessageBox::warning(this, tr("Fritzing", "dialog title"), tr("Unable to save %1").arg(fileName) );
 		}
 
 	*/
@@ -613,7 +613,7 @@ void MainWindow::exportAux(QString fileName, QImage::Format format, int quality,
 	imageWriter.setQuality(quality);
 	bool result = imageWriter.write(image);
 	if (!result) {
-		QMessageBox::warning(this, tr("Fritzing"), tr("Unable to save %1").arg(fileName) );
+		QMessageBox::warning(this, tr("Fritzing", "dialog title"), tr("Unable to save %1").arg(fileName) );
 	}
 }
 
@@ -648,7 +648,7 @@ void MainWindow::printAux(QPrinter &printer, bool removeBackground, bool paginat
 	QPainter painter;
 	if (!painter.begin(&printer)) {
 		afterExport(removeBackground);
-		QMessageBox::warning(this, tr("Fritzing"), tr("Cannot print to %1").arg(printer.docName()));
+		QMessageBox::warning(this, tr("Fritzing", "dialog title"), tr("Cannot print to %1").arg(printer.docName()));
 		return;
 	}
 
@@ -783,7 +783,7 @@ bool MainWindow::saveAsAux(const QString & fileName) {
 
 	if (fileInfo.exists()) {
 		if (!fileInfo.isWritable()) {
-			FMessageBox::warning(this, tr("Fritzing"),
+			FMessageBox::warning(this, tr("Fritzing", "dialog title"),
 					     tr("Cannot write file %1:\n%2.")
 									 .arg(fileName, tr("File is not writable")));
 			return false;
@@ -792,7 +792,7 @@ bool MainWindow::saveAsAux(const QString & fileName) {
 		// If the file does not exist, check if we can create it
 		QFile file(fileName);
 		if (!file.open(QFile::WriteOnly | QFile::Text)) {
-			FMessageBox::warning(this, tr("Fritzing"),
+			FMessageBox::warning(this, tr("Fritzing", "dialog title"),
 					     tr("Cannot write file %1:\n%2.")
 					     .arg(fileName, file.errorString()));
 			return false;
@@ -984,7 +984,7 @@ bool MainWindow::saveBundledNonAtomicEntity(QString &filename, const QString &ex
 	if(!result) {
 		FMessageBox::warning(
 			this,
-			tr("Fritzing"),
+			tr("Fritzing", "dialog title"),
 			tr("Unable to export %1 as shareable.").arg(bundledFileName) +
 				tr("Saving failed. Please check if home and destination directory are writeable and not full.")
 		);
@@ -1107,7 +1107,7 @@ void MainWindow::exportToEagle() {
 			"strangely, please let us know.");
 	*/
 
-	QMessageBox::information(this, tr("Fritzing"), text);
+	QMessageBox::information(this, tr("Fritzing", "dialog title"), text);
 
 	auto eagle = Fritzing2Eagle(m_pcbGraphicsView);
 	(void) eagle;
@@ -1139,7 +1139,7 @@ void MainWindow::exportToEagle() {
 
 		exportInfoString += label + tr(" which is a ") + desc + tr(" in a ") + package + tr(" package.\n");
 	}
-	QMessageBox::information(this, tr("Fritzing"), exportInfoString);
+	QMessageBox::information(this, tr("Fritzing", "dialog title"), exportInfoString);
 	*/
 
 	/*
@@ -1434,7 +1434,7 @@ void MainWindow::save_text_file(QString text, QString actionType, QString dialog
 	}
 
 	if (!TextUtils::writeUtf8(fileName, text)) {
-		QMessageBox::warning(this, tr("Fritzing"), errorMessage);
+		QMessageBox::warning(this, tr("Fritzing", "dialog title"), errorMessage);
 	}
 
 	QFileInfo info(fileName);
@@ -1708,12 +1708,12 @@ void MainWindow::exportIPC_D_356A_interactive() {
 
 	// barf an error if there's no board
 	if (boardCount == 0) {
-		QMessageBox::critical(this, tr("Fritzing"),
+		QMessageBox::critical(this, tr("Fritzing", "dialog title"),
 					  tr("Your sketch does not have a board yet!  Please add a PCB in order to export to IPC netlist."));
 		return;
 	}
 	if (board == nullptr) {
-		QMessageBox::critical(this, tr("Fritzing"),
+		QMessageBox::critical(this, tr("Fritzing", "dialog title"),
 					  tr("IPC netlist export can only handle one board at a time--please select the board you want to export."));
 		return;
 	}
@@ -1861,17 +1861,17 @@ void MainWindow::exportToGerber() {
 
 	// barf an error if there's no board
 	if (boardCount == 0) {
-		QMessageBox::critical(this, tr("Fritzing"),
+		QMessageBox::critical(this, tr("Fritzing", "dialog title"),
 		                      tr("Your sketch does not have a board yet!  Please add a PCB in order to export to Gerber."));
 		return;
 	}
 	if (board == nullptr) {
-		QMessageBox::critical(this, tr("Fritzing"),
+		QMessageBox::critical(this, tr("Fritzing", "dialog title"),
 		                      tr("Gerber export can only handle one board at a time--please select the board you want to export."));
 		return;
 	}
 
-	QString exportDir = QFileDialog::getExistingDirectory(this, tr("Choose a folder for exporting"),
+	QString exportDir = QFileDialog::getExistingDirectory(this, tr("Choose a folder for exporting", "dialog title"),
 	                    defaultSaveFolder(),
 	                    QFileDialog::ShowDirsOnly
 	                    | QFileDialog::DontResolveSymlinks);

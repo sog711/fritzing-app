@@ -1464,7 +1464,7 @@ bool MainWindow::whatToDoWithAlienFiles() {
 		QString basename = QFileInfo(m_fwFilename).fileName();
 		QMessageBox::StandardButton reply;
 		QString	alienPartsMsg = tr("Do you want to keep the imported parts?");
-		reply = QMessageBox::question(this, tr("Save %1").arg(basename),
+		reply = QMessageBox::question(this, tr("Save %1", "dialog title").arg(basename),
 									  alienPartsMsg,
 		                              QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
 
@@ -2236,7 +2236,7 @@ void MainWindow::validatePartInfo(const QString &fzpPath)
 		auto msgBox = FMessageBox::createCustom(
 			this,
 			FMessageBox::Critical,
-			tr("Critical Issues"),
+			tr("Critical Issues", "dialog title"),
 			tr("Part '%1' has critical issues that prevent it from loading:\n\n%2")
 				.arg(info.title().isEmpty() ? info.path() : info.title(), info.getSummaryText()));
 		msgBox->setDetailedText(info.getDetailsText());
@@ -2247,7 +2247,7 @@ void MainWindow::validatePartInfo(const QString &fzpPath)
 		auto msgBox = FMessageBox::createCustom(
 			this,
 			FMessageBox::Warning,
-			tr("Warning"),
+			tr("Warning", "dialog title"),
 			tr("Part '%1' was loaded with warnings:\n\n%2")
 				.arg(info.title(), info.getSummaryText()),
 			FMessageBox::Ok);
@@ -2594,7 +2594,7 @@ void MainWindow::swapSelectedMap(const QString & family, const QString & prop, Q
 				if (value.contains("copper1") && m_currentGraphicsView->boardLayers() == 1) {
 					QMessageBox::warning(
 					    this,
-					    tr("No copper top layer"),
+					    tr("No copper top layer", "dialog title"),
 					    tr("The copper top (copper 1) layer is not available on a one-sided board.  Please switch the board to double-sided or choose the copper bottom (copper 0) layer.")
 					);
 					return;
@@ -2673,7 +2673,7 @@ void MainWindow::swapSelectedMap(const QString & family, const QString & prop, Q
 	if (moduleID.isEmpty()) {
 		QMessageBox::information(
 		    this,
-		    tr("Sorry!"),
+		    tr("Sorry!", "dialog title"),
 		    tr(
 		        "No part with those characteristics.\n"
 		        "We're working to avoid this message, and only let you choose between properties that do exist")
@@ -2853,7 +2853,7 @@ long MainWindow::swapSelectedAuxAux(ItemBase * itemBase, const QString & moduleI
 void MainWindow::svgMissingLayer(const QString & layername, const QString & path) {
 	QMessageBox::warning(
 	    this,
-	    tr("Fritzing"),
+	    tr("Fritzing", "dialog title"),
 	    tr("Svg %1 is missing a '%2' layer. "
 	       "For more information on how to create a custom board shape, "
 	       "see the tutorial at <a href='http://fritzing.org/learning/tutorials/designing-pcb/pcb-custom-shape/'>http://fritzing.org/learning/tutorials/designing-pcb/pcb-custom-shape/</a>.")
@@ -2959,7 +2959,7 @@ bool MainWindow::save() {
 bool MainWindow::saveAs() {
 	bool convertSchematic = false;
 	if ((m_schematicGraphicsView != nullptr) && m_schematicGraphicsView->isOldSchematic()) {
-		QMessageBox::StandardButton reply = QMessageBox::question(this, tr("Schematic conversion"),
+		QMessageBox::StandardButton reply = QMessageBox::question(this, tr("Schematic conversion", "dialog title"),
 		                                    tr("Saving this sketch will convert it to the new schematic graphics standard. Go ahead and convert?"),
 		                                    QMessageBox::Yes | QMessageBox::No);
 		if (reply != QMessageBox::Yes) {
@@ -3221,7 +3221,7 @@ void MainWindow::routingStatusLabelMouse(QMouseEvent*, bool show) {
 	}
 
 	if (!show && toShow.count() == 0) {
-		QMessageBox::information(this, tr("Unrouted connections"),
+		QMessageBox::information(this, tr("Unrouted connections", "dialog title"),
 		                         tr("There are no unrouted connections in this view."));
 	}
 }

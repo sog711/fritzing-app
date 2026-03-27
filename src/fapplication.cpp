@@ -1857,7 +1857,7 @@ bool FApplication::notify(QObject *receiver, QEvent *e)
 	catch (char const *str) {
 		FMessageBox::critical(
 					nullptr,
-					tr("Fritzing failure"),
+					tr("Fritzing failure", "dialog title"),
 					tr("Fritzing caught an exception %1 from %2 in event %3")
 					.arg(str)
 					.arg(receiver->objectName())
@@ -1865,10 +1865,10 @@ bool FApplication::notify(QObject *receiver, QEvent *e)
 	}
 	catch (std::exception& exp) {
 		qDebug() << QString("notify %1 %2").arg(receiver->metaObject()->className()).arg(e->type());
-		FMessageBox::critical(nullptr, tr("Fritzing failure"), tr("Fritzing caught an exception from %1 in event %2: %3").arg(receiver->objectName()).arg(e->type()).arg(exp.what()));
+		FMessageBox::critical(nullptr, tr("Fritzing failure", "dialog title"), tr("Fritzing caught an exception from %1 in event %2: %3").arg(receiver->objectName()).arg(e->type()).arg(exp.what()));
 	}
 	catch (...) {
-		FMessageBox::critical(nullptr, tr("Fritzing failure"), tr("Fritzing caught an exception from %1 in event %2").arg(receiver->objectName()).arg(e->type()));
+		FMessageBox::critical(nullptr, tr("Fritzing failure", "dialog title"), tr("Fritzing caught an exception from %1 in event %2").arg(receiver->objectName()).arg(e->type()));
 	}
 	closeAllWindows2();
 	QApplication::exit(-1);
@@ -2270,7 +2270,7 @@ void FApplication::doCommand(const QString & command, const QString & params, QS
 
 void FApplication::regeneratePartsDatabase() {
 	QMessageBox messageBox;
-	messageBox.setWindowTitle(tr("Regenerate parts database?"));
+	messageBox.setWindowTitle(tr("Regenerate parts database?", "dialog title"));
 	messageBox.setText(tr("Regenerating the parts database will take some minutes and you will have to restart Fritzing\n\n"
 	                   "Would you like to regenerate the parts database?\n")
 	                  );

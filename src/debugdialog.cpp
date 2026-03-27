@@ -135,7 +135,7 @@ DebugDialog::DebugDialog(QWidget *parent)
 
 	singleton = this;
 	m_debugLevel = DebugDialog::Debug;
-	setWindowTitle(tr("for debugging"));
+	setWindowTitle(tr("for debugging", "dialog title"));
 	resize(400, 300);
 	m_textEdit = new QTextEdit(this);
 	m_textEdit->setGeometry(QRect(10, 10, 381, 281));

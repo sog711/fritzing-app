@@ -468,7 +468,7 @@ void SymbolPaletteItem::labelEntry() {
 	if (edit->text().compare(current) == 0) return;
 
 	if (edit->text().isEmpty()) {
-		QMessageBox::warning(nullptr, tr("Net labels"), tr("Net labels cannot be blank"));
+		QMessageBox::warning(nullptr, tr("Net labels", "dialog title"), tr("Net labels cannot be blank"));
 		return;
 	}
 

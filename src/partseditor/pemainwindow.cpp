@@ -378,7 +378,7 @@ void PEMainWindow::closeEvent(QCloseEvent *event)
 	bool discard = true;
 	if (messages.count() > 0) {
 		QMessageBox messageBox(this);
-		messageBox.setWindowTitle(tr("Close without saving?"));
+		messageBox.setWindowTitle(tr("Close without saving?", "dialog title"));
 
 		QString message = tr("This part cannot be saved as-is:\n\n");
 		for (const QString &string : messages) {
@@ -799,7 +799,7 @@ bool PEMainWindow::setInitialItem(PaletteItem * paletteItem)
 
 	if (hasLegID && !RubberBandLegWarning) {
 		RubberBandLegWarning = true;
-		QMessageBox::warning(nullptr, tr("Parts Editor"),
+		QMessageBox::warning(nullptr, tr("Parts Editor", "dialog title"),
 		                     tr("This part has bendable legs. "
 		                        "This version of the Parts Editor does not yet support editing bendable legs, "
 		                        "and the legs may not be displayed correctly in breadboard view. "
@@ -902,14 +902,14 @@ bool PEMainWindow::setInitialItem(PaletteItem * paletteItem)
 		FolderUtils::ensureDirectoryExists(actualPath);
 		bool result = writeXml(actualPath, removeGorn(svg), true);
 		if (!result) {
-			QMessageBox::critical(nullptr, tr("Parts Editor"), tr("Unable to write svg to  %1").arg(svgPath));
+			QMessageBox::critical(nullptr, tr("Parts Editor", "dialog title"), tr("Unable to write svg to  %1").arg(svgPath));
 			return false;
 		}
 
 		QDomElement view = views.firstChildElement(ViewLayer::viewIDXmlName(viewThing->sketchWidget->viewID()));
 		QDomElement layers = view.firstChildElement("layers");
 		if (layers.isNull()) {
-			QMessageBox::critical(nullptr, tr("Parts Editor"), tr("Unable to parse fzp file  %1").arg(originalModelPart->path()));
+			QMessageBox::critical(nullptr, tr("Parts Editor", "dialog title"), tr("Unable to parse fzp file  %1").arg(originalModelPart->path()));
 			return false;
 		}
 
@@ -1029,7 +1029,7 @@ void PEMainWindow::changeSpecialProperty(const QString & name, const QString & v
 	QHash<QString, QString> oldProperties = getOldProperties();
 
 	if (value.isEmpty()) {
-		QMessageBox::warning(nullptr, tr("Blank not allowed"), tr("The value of '%1' can not be blank.").arg(name));
+		QMessageBox::warning(nullptr, tr("Blank not allowed", "dialog title"), tr("The value of '%1' can not be blank.").arg(name));
 		m_metadataView->resetProperty(name, value);
 		return;
 	}
@@ -1066,7 +1066,7 @@ void PEMainWindow::metadataChanged(const QString & name, const QString & value)
 			values.removeOne(moduleID);
 		}
 		if (values.count() > 0) {
-			QMessageBox::warning(nullptr, tr("Must be unique"), tr("Variant '%1' is in use. The variant name must be unique.").arg(value));
+			QMessageBox::warning(nullptr, tr("Must be unique", "dialog title"), tr("Variant '%1' is in use. The variant name must be unique.").arg(value));
 			return;
 		}
 
@@ -1149,12 +1149,12 @@ void PEMainWindow::propertiesChanged(const QHash<QString, QString> & newProperti
 
 	QStringList keys = newProperties.keys();
 	if (keys.contains("family", Qt::CaseInsensitive)) {
-		QMessageBox::warning(nullptr, tr("Duplicate problem"), tr("Duplicate 'family' property not allowed"));
+		QMessageBox::warning(nullptr, tr("Duplicate problem", "dialog title"), tr("Duplicate 'family' property not allowed"));
 		return;
 	}
 
 	if (keys.contains("variant", Qt::CaseInsensitive)) {
-		QMessageBox::warning(nullptr, tr("Duplicate problem"), tr("Duplicate 'variant' property not allowed"));
+		QMessageBox::warning(nullptr, tr("Duplicate problem", "dialog title"), tr("Duplicate 'variant' property not allowed"));
 		return;
 	}
 
@@ -1307,7 +1307,7 @@ void PEMainWindow::initSvgTree(SketchWidget * sketchWidget, ItemBase * itemBase,
 			if (parent0.attribute("id") == "copper1") ;
 			else if (parent1.attribute("id") == "copper0") ;
 			else {
-				QMessageBox::warning(nullptr, tr("SVG problem"),
+				QMessageBox::warning(nullptr, tr("SVG problem", "dialog title"),
 				                     tr("This version of the new Parts Editor can not deal with separate copper0 and copper1 layers in '%1'. ").arg(itemBase->filename()) +
 				                     tr("So editing may produce an invalid PCB view image"));
 			}
@@ -1520,14 +1520,14 @@ void PEMainWindow::loadImage()
 		newReferenceFile = getSvgReferenceFile(origPath);
 		QFile origFile(origPath);
 		if (!origFile.open(QFile::ReadOnly)) {
-			QMessageBox::warning(nullptr, tr("Conversion problem"), tr("Unable to load '%1'").arg(origPath));
+			QMessageBox::warning(nullptr, tr("Conversion problem", "dialog title"), tr("Unable to load '%1'").arg(origPath));
 			return;
 		}
 
 		svg = origFile.readAll();
 		origFile.close();
 		if (svg.contains("coreldraw", Qt::CaseInsensitive) && svg.contains("cdata", Qt::CaseInsensitive)) {
-			QMessageBox::warning(nullptr, tr("Conversion problem"),
+			QMessageBox::warning(nullptr, tr("Conversion problem", "dialog title"),
 			                     tr("The SVG file '%1' appears to have been exported from CorelDRAW without the 'presentation attributes' setting. ").arg(origPath) +
 			                     tr("Please re-export the SVG file using that setting, and try loading again.")
 			                    );
@@ -1546,7 +1546,7 @@ void PEMainWindow::loadImage()
 			bool reallyFixed = false;
 			TextUtils::fixFonts(svg, destFont, reallyFixed);
 			if (reallyFixed) {
-				QMessageBox::information(nullptr, tr("Fonts"),
+				QMessageBox::information(nullptr, tr("Fonts", "dialog title"),
 				                         tr("Fritzing currently only supports OCRA and Droid fonts--these have been substituted in for the fonts in '%1'").arg(origPath));
 			}
 		}
@@ -1558,7 +1558,7 @@ void PEMainWindow::loadImage()
 			                     "PNG and JPG images retain their nature as bitmaps and do not look good when scaled--"
 			                     "so for Fritzing parts it is best to use PNG and JPG only as placeholders.");
 
-			QMessageBox::information(nullptr, tr("Use of PNG and JPG discouraged"), message);
+			QMessageBox::information(nullptr, tr("Use of PNG and JPG discouraged", "dialog title"), message);
 
 		}
 
@@ -1566,20 +1566,20 @@ void PEMainWindow::loadImage()
 			svg = createSvgFromImage(origPath);
 		}
 		catch (const QString & msg) {
-			QMessageBox::warning(nullptr, tr("Conversion problem"), tr("Unable to load image file '%1':\n\n%2").arg(origPath).arg(msg));
+			QMessageBox::warning(nullptr, tr("Conversion problem", "dialog title"), tr("Unable to load image file '%1':\n\n%2").arg(origPath).arg(msg));
 			return;
 		}
 	}
 
 	if (svg.isEmpty()) {
-		QMessageBox::warning(nullptr, tr("Conversion problem"), tr("Unable to load image file '%1'").arg(origPath));
+		QMessageBox::warning(nullptr, tr("Conversion problem", "dialog title"), tr("Unable to load image file '%1'").arg(origPath));
 		return;
 	}
 
 	QDomDocument doc;
 	QDomDocument::ParseResult parseResult = doc.setContent(svg.toUtf8());
 	if (!parseResult) {
-		QMessageBox::warning(nullptr, tr("SVG problem"), tr("Unable to parse '%1': %2 line:%3 column:%4").arg(origPath).arg(parseResult.errorMessage).arg(parseResult.errorLine).arg(parseResult.errorColumn));
+		QMessageBox::warning(nullptr, tr("SVG problem", "dialog title"), tr("Unable to parse '%1': %2 line:%3 column:%4").arg(origPath).arg(parseResult.errorMessage).arg(parseResult.errorLine).arg(parseResult.errorColumn));
 		return;
 	}
 
@@ -1595,7 +1595,7 @@ void PEMainWindow::loadImage()
 			                     "<br/><br/>This will not be a problem in the next release of the Parts Editor, "
 			                     "but for now please modify the file according to the instructions in the link.").arg(origPath);
 
-			QMessageBox::warning(nullptr, tr("SVG problem"), message);
+			QMessageBox::warning(nullptr, tr("SVG problem", "dialog title"), message);
 			return;
 		}
 	}
@@ -1606,7 +1606,7 @@ void PEMainWindow::loadImage()
 	FolderUtils::ensureDirectoryExists(newPath);
 	bool success = writeXml(newPath, removeGorn(svg), true);
 	if (!success) {
-		QMessageBox::warning(nullptr, tr("Copy problem"), tr("Unable to make a local copy of: '%1'").arg(origPath));
+		QMessageBox::warning(nullptr, tr("Copy problem", "dialog title"), tr("Unable to make a local copy of: '%1'").arg(origPath));
 		return;
 	}
 
@@ -2141,7 +2141,7 @@ bool PEMainWindow::saveAs(bool overWrite)
 
 		if (affectedWindows.count() > 0 && !m_gaveSaveWarning) {
 			QMessageBox messageBox(this);
-			messageBox.setWindowTitle(tr("Sketch Change Warning"));
+			messageBox.setWindowTitle(tr("Sketch Change Warning", "dialog title"));
 			QString message;
 			if (affectedWindows.count() == 1) {
 				message = tr("The open sketch '%1' uses the part you are editing. ").arg(affectedWindows.first()->windowTitle());
@@ -2349,7 +2349,7 @@ bool PEMainWindow::saveAs(bool overWrite)
 			modelPart->setAlien(true);
 			Q_EMIT addToMyPartsSignal(modelPart, peAlienFiles);
 		} else {
-			QMessageBox::critical(nullptr, tr("Parts Editor Error"), tr("The file %2 with prefix %1 was not saved.").arg(m_prefix).arg(fzpPath));
+			QMessageBox::critical(nullptr, tr("Parts Editor Error", "dialog title"), tr("The file %2 with prefix %1 was not saved.").arg(m_prefix).arg(fzpPath));
 		}
 	}
 	else {
@@ -2749,7 +2749,7 @@ void PEMainWindow::setBeforeClosingText(const QString & filename, QMessageBox & 
 	Q_UNUSED(filename);
 
 	QString partTitle = getPartTitle();
-	messageBox.setWindowTitle(tr("Save \"%1\"").arg(partTitle));
+	messageBox.setWindowTitle(tr("Save \"%1\"", "dialog title").arg(partTitle));
 	messageBox.setText(tr("Do you want to save the changes you made in the part \"%1\"?").arg(partTitle));
 	messageBox.setInformativeText(tr("Your changes will be lost if you don't save them."));
 }
@@ -2790,7 +2790,7 @@ bool PEMainWindow::loadFzp(const QString & path) {
 	}
 	QDomDocument::ParseResult parseResult = m_fzpDocument.setContent(&file);
 	if (!parseResult) {
-		QMessageBox::critical(nullptr, tr("Parts Editor"), tr("Unable to load fzp from %1").arg(path));
+		QMessageBox::critical(nullptr, tr("Parts Editor", "dialog title"), tr("Unable to load fzp from %1").arg(path));
 		return false;
 	}
 
@@ -2847,7 +2847,7 @@ void PEMainWindow::connectorCountChanged(int newCount) {
 		tempDoc.setContent(m_removedConnector);
 		connectorModel = tempDoc.documentElement();
 		if (connectorModel.isNull()) {
-			QMessageBox::critical(nullptr, tr("Parts Editor"), tr("Unable to create new connector--you may have to start over."));
+			QMessageBox::critical(nullptr, tr("Parts Editor", "dialog title"), tr("Unable to create new connector--you may have to start over."));
 			return;
 		}
 	}
@@ -3053,7 +3053,7 @@ void PEMainWindow::deleteBusConnection() {
 	QString busID = bus.attribute("id");
 
 	if (nodeMember0.isNull() || nodeMember1.isNull()) {
-		QMessageBox::critical(nullptr, tr("Parts Editor"), tr("Internal connections are very messed up."));
+		QMessageBox::critical(nullptr, tr("Parts Editor", "dialog title"), tr("Internal connections are very messed up."));
 		return;
 	}
 
@@ -3463,7 +3463,7 @@ void PEMainWindow::smdChanged(const QString & after) {
 	QDomElement svgCopper0 = TextUtils::findElementWithAttribute(svgRoot, "id", "copper0");
 	QDomElement svgCopper1 = TextUtils::findElementWithAttribute(svgRoot, "id", "copper1");
 	if (svgCopper0.isNull() && svgCopper1.isNull()) {
-		QMessageBox::critical(nullptr, tr("Parts Editor"), tr("Unable to parse '%1'").arg(itemBase->filename()));
+		QMessageBox::critical(nullptr, tr("Parts Editor", "dialog title"), tr("Unable to parse '%1'").arg(itemBase->filename()));
 		return;
 	}
 
@@ -3818,7 +3818,7 @@ void PEMainWindow::connectorWarning() {
 		Q_FOREACH (ViewLayer::ViewID viewID, unassigned.keys()) {
 			if (unassigned.value(viewID) > 0) viewCount++;
 		}
-		QMessageBox::warning(nullptr, tr("Parts Editor"),
+		QMessageBox::warning(nullptr, tr("Parts Editor", "dialog title"),
 		                     tr("This part has %n unassigned connector(s). ", "", unassignedTotal) +
 		                     tr("This affects %n view(s). ", "", viewCount) +
 		                     tr("Until all connectors are assigned to SVG elements, the part will not work correctly. "

@@ -150,7 +150,7 @@ void ConsoleWindow::openSerialPort()
 		                           .arg(p.name).arg(p.stringBaudRate).arg(p.stringDataBits)
 		                           .arg(p.stringParity).arg(p.stringStopBits).arg(p.stringFlowControl));
 	} else {
-		QMessageBox::critical(this, tr("Error"), serial->errorString());
+		QMessageBox::critical(this, tr("Error", "dialog title"), serial->errorString());
 
 		ui->statusBar->showMessage(tr("Serial port open error"));
 	}
@@ -198,7 +198,7 @@ void ConsoleWindow::readData()
 void ConsoleWindow::handleError(QSerialPort::SerialPortError error)
 {
 	if (error == QSerialPort::ResourceError) {
-		QMessageBox::critical(this, tr("Critical Error"), serial->errorString());
+		QMessageBox::critical(this, tr("Critical Error", "dialog title"), serial->errorString());
 		closeSerialPort();
 	}
 }

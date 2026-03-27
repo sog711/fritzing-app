@@ -46,7 +46,7 @@ SetColorDialog::SetColorDialog(const QString & message, QColor & currentColor, Q
     m_selectedColorLabel(nullptr),
     m_prefsCheckBox(nullptr)
 {
-	this->setWindowTitle(tr("%1 Color...").arg(message));
+	this->setWindowTitle(tr("%1 Color...", "dialog title").arg(message));
 
 	auto * vLayout = new QVBoxLayout(this);
 

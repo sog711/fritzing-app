@@ -453,14 +453,14 @@ bool PartsBinPaletteWidget::loadBundledAux(QDir &unzipDir, QList<ModelPart*> mps
 bool PartsBinPaletteWidget::open(QString fileName, QWidget * progressTarget, bool fastLoad) {
 	QFile file(fileName);
 	if (!file.exists()) {
-		QMessageBox::warning(nullptr, tr("Fritzing"),
+		QMessageBox::warning(nullptr, tr("Fritzing", "dialog title"),
 		                     tr("Cannot find file %1.")
 		                     .arg(fileName));
 		return false;
 	}
 
 	if (!file.open(QFile::ReadOnly | QFile::Text)) {
-		QMessageBox::warning(nullptr, tr("Fritzing"),
+		QMessageBox::warning(nullptr, tr("Fritzing", "dialog title"),
 		                     tr("Cannot read file %1:\n%2.")
 		                     .arg(fileName)
 		                     .arg(file.errorString()));
@@ -528,7 +528,7 @@ void PartsBinPaletteWidget::load(const QString &filename, QWidget * progressTarg
 		//DebugDialog::debug(QString("done loading bin '%1'").arg(name));
 
 		if (!result) {
-			QMessageBox::warning(nullptr, QObject::tr("Fritzing"), QObject::tr("Fritzing cannot load the parts bin"));
+			QMessageBox::warning(nullptr, QObject::tr("Fritzing", "dialog title"), QObject::tr("Fritzing cannot load the parts bin"));
 		}
 		else {
 			m_fileName = filename;
@@ -580,7 +580,7 @@ bool PartsBinPaletteWidget::beforeClosing() {
 		}
 		else {
 			QMessageBox messageBox(this);
-			messageBox.setWindowTitle(tr("Save bin \"%1\"").arg(title()));
+			messageBox.setWindowTitle(tr("Save bin \"%1\"", "dialog title").arg(title()));
 			messageBox.setText(tr("Do you want to save the changes you made in the bin \"%1\"?").arg(title()));
 			messageBox.setInformativeText(tr("Your changes will be lost if you don't save them."));
 			messageBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
@@ -693,7 +693,7 @@ void PartsBinPaletteWidget::addPartCommand(const QString& moduleID) {
 
 	QMessageBox::StandardButton answer = QMessageBox::question(
 	        this,
-	        tr("Add to bin"),
+	        tr("Add to bin", "dialog title"),
 	        tr("Do you really want to add the selected part to the bin?"),
 	        QMessageBox::Yes | QMessageBox::No,
 	        QMessageBox::Yes

@@ -194,7 +194,7 @@ void Simulator::simulate() {
 		simInitOK = m_simulator->init();
 	}
 	catch (std::exception& e) {
-		FMessageBox::warning(nullptr, tr("Simulator Error"), tr("An error occurred when starting the simulation."));
+		FMessageBox::warning(nullptr, tr("Simulator Error", "dialog title"), tr("An error occurred when starting the simulation."));
 		stopSimulation();
 		return;
 	}
@@ -434,7 +434,7 @@ void Simulator::simulate() {
 	if (elapsedTime >= simTimeOut) {
 		m_simulator->command("bg_halt");
 		stopSimulation();
-		FMessageBox::warning(m_mainWindow, tr("Simulator Timeout"), tr("The spice simulator did not finish after %1 ms. Aborting simulation.").arg(simTimeOut));
+		FMessageBox::warning(m_mainWindow, tr("Simulator Timeout", "dialog title"), tr("The spice simulator did not finish after %1 ms. Aborting simulation.").arg(simTimeOut));
 		return;
 	} else {
 		DebugDialog::stream() << "The spice simulator has finished. ElapsedTime: " << m_elapsedAnimationTimer.elapsed();
@@ -480,7 +480,7 @@ void Simulator::showSimulatorError(QWidget* parent, const QString& errorHint, co
 	FMessageBox* msgBox = FMessageBox::createCustom(
 		parent,
 		QMessageBox::Warning,
-		tr("Simulator Error"),
+		tr("Simulator Error", "dialog title"),
 		errorHint,
 		QMessageBox::Ok
 		);

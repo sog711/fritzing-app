@@ -50,7 +50,7 @@ TipsAndTricks::TipsAndTricks(QWidget *parent)
 	html += "</body></html>";
 
 	Singleton = this;
-	setWindowTitle(tr("Tips and Tricks"));
+	setWindowTitle(tr("Tips and Tricks", "dialog title"));
 	resize(600, 500);
 	m_textEdit = new QTextEdit();
 	m_textEdit->setReadOnly(true);

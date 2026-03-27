@@ -617,7 +617,7 @@ void PaletteItem::openPinLabelDialog() {
 	if (infoGraphicsView == nullptr) {
 		QMessageBox::warning(
 		    nullptr,
-		    tr("Fritzing"),
+		    tr("Fritzing", "dialog title"),
 		    tr("Unable to proceed; unable to find top level view.")
 		);
 		return;
@@ -628,7 +628,7 @@ void PaletteItem::openPinLabelDialog() {
 	if (sortedConnectors.count() == 0) {
 		QMessageBox::warning(
 		    nullptr,
-		    tr("Fritzing"),
+		    tr("Fritzing", "dialog title"),
 		    tr("Unable to proceed; part connectors do no have standard IDs.")
 		);
 		return;
@@ -652,7 +652,7 @@ void PaletteItem::openPinLabelDialog() {
 	if (newLabels.count() != sortedConnectors.count()) {
 		QMessageBox::warning(
 		    nullptr,
-		    tr("Fritzing"),
+		    tr("Fritzing", "dialog title"),
 		    tr("Label mismatch.  Nothing was saved.")
 		);
 		return;

@@ -4115,7 +4115,7 @@ void SketchWidget::dragRatsnestChanged()
 	ViewLayer::ViewLayerPlacement viewLayerPlacement = createWireViewLayerPlacement(ends[0], ends[1]);
 	if (viewLayerPlacement == ViewLayer::UnknownPlacement) {
 		// for now this should not be possible
-		FMessageBox::critical(this, tr("Fritzing"), tr("This seems like an attempt to create a trace across layers. This circumstance should not arise: please contact the developers."));
+		FMessageBox::critical(this, tr("Fritzing", "dialog title"), tr("This seems like an attempt to create a trace across layers. This circumstance should not arise: please contact the developers."));
 		return;
 	}
 
@@ -10023,7 +10023,7 @@ void SketchWidget::showUnrouted() {
 
 	QString message = tr("Unrouted connections are highlighted in yellow.");
 	if (toShow.count() == 0) message = tr("There are no unrouted connections");
-	FMessageBox::information(this, tr("Unrouted connections"),
+	FMessageBox::information(this, tr("Unrouted connections", "dialog title"),
 	                         tr("%1\n\n"
 	                            "Note: you can also trigger this display by mousing down on the routing status text in the status bar.").arg(message));
 

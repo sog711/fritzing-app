@@ -168,7 +168,7 @@ QuoteDialog::QuoteDialog(bool full, QWidget *parent) : QDialog(parent)
 		this->setStyleSheet(styleSheet.readAll());
 	}
 
-	setWindowTitle(tr("Fritzing Fab Quote"));
+	setWindowTitle(tr("Fritzing Fab Quote", "dialog title"));
 
 	auto * vLayout = new QVBoxLayout(this);
 

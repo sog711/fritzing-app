@@ -34,7 +34,7 @@ FirstTimeHelpDialog::FirstTimeHelpDialog(QWidget *parent)
 	this->setWindowIcon(QIcon(QPixmap(":resources/images/fritzing_icon.png")));
 	this->setObjectName("firstTimeHelpDialog");
 
-	setWindowTitle(tr("First Time Help"));
+	setWindowTitle(tr("First Time Help", "dialog title"));
 	m_label = new QLabel();
 	m_label->setWordWrap(true);
 	m_label->setObjectName("firstTimeHelpDialogText");

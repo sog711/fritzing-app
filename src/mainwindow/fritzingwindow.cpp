@@ -75,7 +75,7 @@ void FritzingWindow::createCloseAction() {
 }
 
 void FritzingWindow::setTitle() {
-	setWindowTitle(tr("%1 - %2")
+	setWindowTitle(tr("%1 - %2", "dialog title")
 					   .arg(QFileInfo(m_fwFilename).fileName()+(m_readOnly?ReadOnlyPlaceholder:"")+QtFunkyPlaceholder,
 					   fritzingTitle()));
 }
@@ -234,7 +234,7 @@ QMessageBox::StandardButton FritzingWindow::beforeClosingMessage(const QString &
 void FritzingWindow::setBeforeClosingText(const QString & filename, QMessageBox & messageBox)
 {
 	QString basename = QFileInfo(filename).fileName();
-	messageBox.setWindowTitle(tr("Save \"%1\"").arg(basename));
+	messageBox.setWindowTitle(tr("Save \"%1\"", "dialog title").arg(basename));
 	messageBox.setText(tr("Do you want to save the changes you made in the document \"%1\"?").arg(basename));
 	messageBox.setInformativeText(tr("Your changes will be lost if you don't save them."));
 }

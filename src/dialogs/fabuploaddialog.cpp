@@ -158,7 +158,7 @@ void FabUploadDialog::handleError(QNetworkReply *reply, const QString &message)
 	if (reply)
 		reply->deleteLater();
 	close();
-	FMessageBox::critical(this, tr("Fritzing"), tr("Error: ") + message);
+	FMessageBox::critical(this, tr("Fritzing", "dialog title"), tr("Error: ") + message);
 }
 
 void FabUploadDialog::setFabName(QString fabName)

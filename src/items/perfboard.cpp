@@ -293,7 +293,7 @@ bool Perfboard::boardSizeWarning()
 		if (x * y >= WarningSize) {
 			m_gotWarning = true;
 			QMessageBox messageBox(nullptr);
-			messageBox.setWindowTitle(tr("Performance Warning"));
+			messageBox.setWindowTitle(tr("Performance Warning", "dialog title"));
 			messageBox.setText(tr("Performance of perfboards and stripboards with more than approximately 2000 holes can be slow. Are you sure ?\n"
 			                      "\nNote: this warning will not be repeated during this session."
 			                     ));

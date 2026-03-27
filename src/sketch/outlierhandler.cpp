@@ -146,7 +146,7 @@ bool OutlierHandler::askUserToRepositionOutliers(const QList<OutlierInfo>& outli
 
 	// Create navigation dialog as a heap object to avoid blocking
 	m_navigationDialog = new QDialog(qobject_cast<QWidget*>(m_sketchWidget));
-	m_navigationDialog->setWindowTitle(tr("Outlier Components Navigator"));
+	m_navigationDialog->setWindowTitle(tr("Outlier Components Navigator", "dialog title"));
 	m_navigationDialog->setModal(false); // Non-modal to avoid rendering issues
 	m_navigationDialog->resize(600, 400);
 	m_navigationDialog->setAttribute(Qt::WA_DeleteOnClose); // Auto-delete when closed

@@ -10,7 +10,7 @@ ExportParametersDialog::ExportParametersDialog(int dpi, QWidget *parent) :
     ui->dpiSpinBox->setRange(minDPI, maxDPI);
     ui->dpiSpinBox->setSingleStep(stepDPI);
     ui->dpiSpinBox->setValue(m_dpi);
-    this->setWindowTitle(tr("Export parameters"));
+    this->setWindowTitle(tr("Export parameters", "dialog title"));
 }
 
 ExportParametersDialog::~ExportParametersDialog()
