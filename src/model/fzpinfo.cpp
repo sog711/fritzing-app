@@ -14,7 +14,7 @@ FzpInfo::~FzpInfo() {}
 
 void FzpInfo::addError(const QString& message)
 {
-	addError(tr("Error"), message);
+	addError(tr("Error", "error title"), message);
 }
 
 void FzpInfo::addError(
@@ -28,7 +28,7 @@ void FzpInfo::addError(
 }
 
 void FzpInfo::addWarning(const QString& message) {
-	addWarning(tr("Warning"), message);
+	addWarning(tr("Warning", "warning title"), message);
 }
 
 void FzpInfo::addWarning(const QString& title, const QString& message, int line, int column)
@@ -60,7 +60,7 @@ void FzpInfo::parse()
 	QFile file(m_path);
 	if (!file.open(QFile::ReadOnly)) {
 		addError(
-			tr("Cannot open file"),
+			tr("Cannot open file", "error title"),
 			tr("Cannot open file '%1'.").arg(m_path)
 			);
 		return;
@@ -68,7 +68,7 @@ void FzpInfo::parse()
 
 	if (file.size() == 0) {
 		addError(
-			tr("File is empty"),
+			tr("File is empty", "error title"),
 			tr("File '%1' is empty.").arg(m_path)
 			);
 		return;
@@ -125,7 +125,7 @@ void FzpInfo::parse()
 
 	if (streamReader.hasError()) {
 		addError(
-			tr("XML Error"),
+			tr("XML Error", "error title"),
 			streamReader.errorString(),
 			streamReader.lineNumber(),
 			streamReader.columnNumber()
@@ -143,7 +143,7 @@ void FzpInfo::validateTitle()
 {
 	if (m_title.isEmpty()) {
 		addWarning(
-			tr("Title is missing."),
+			tr("Title is missing.", "warning title"),
 			tr("The part is missing a title.\n\n"
 			   "All parts must have a title tag.")
 			);
@@ -154,7 +154,7 @@ void FzpInfo::validateVersion()
 {
 	if (m_fritzingVersion.isEmpty()) {
 		addWarning(
-			tr("Version number missing."),
+			tr("Version number missing.", "warning title"),
 			tr("The part is missing a fritzing version.\n"
 			   "All parts must have a fritzingVersion attribute: fritzingVersion=\"x.y.z\"."),
 			m_moduleLineNumber
@@ -167,7 +167,7 @@ void FzpInfo::validateVersion()
 
 	if (!versionThingFzp.ok) {
 		addWarning(
-			tr("Invalid Version"),
+			tr("Invalid Version", "warning title"),
 			tr("The fritzing version '%1' is invalid.\n"
 			   "The part might not work properly.").arg(m_fritzingVersion),
 			m_moduleLineNumber
@@ -180,7 +180,7 @@ void FzpInfo::validateVersion()
 
 	if (Version::greaterThan(currentVersionThing, versionThingFzp)) {
 		addWarning(
-			tr("Version Mismatch"),
+			tr("Version Mismatch", "warning title"),
 			tr("This part was created with Fritzing version '%1'.\n"
 			   "Current version is '%2' which might not support it properly."
 			   "Please consider updating your Fritzing.\n\n")
