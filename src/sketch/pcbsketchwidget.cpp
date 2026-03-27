@@ -2884,13 +2884,13 @@ void PCBSketchWidget::fabQuote() {
 	QuoteDialog::setQuoteSucceeded(false);
 
 	if (boardCount == 0) {
-		QMessageBox::information(this, tr("Fritzing Fab Quote"),
+		QMessageBox::information(this, tr("Fritzing Fab Quote", "dialog title"),
 		                         tr("Your sketch does not have a board yet. You cannot fabricate this sketch without a PCB part."));
 		return;
 	}
 	if (qFuzzyIsNull(width) && qFuzzyIsNull(height)) {
-		QMessageBox::information(this, tr("Fritzing Fab Quote"),
-					 tr("You need to select one board if you have multiple PCB boards."));
+		QMessageBox::information(this, tr("Fritzing Fab Quote", "dialog title"),
+					 tr("You need to select one board if you have multiple PCBs in your sketch."));
 		return;
 	}
 	QEventLoop waitLoop;
@@ -2900,8 +2900,8 @@ void PCBSketchWidget::fabQuote() {
 	waitLoop.exec();
 
 	if (!QuoteDialog::quoteSucceeded()) {
-		QMessageBox::information(this, tr("Fritzing Fab Quote"),
-		                         tr("Sorry, http://fab.fritzing.org is not responding to the quote request. Please check your network connection and/or try again later."));
+		QMessageBox::information(this, tr("Fritzing Fab Quote", "dialog title"),
+								 tr("Sorry, fab.fritzing.org is not responding to the quote request. Please check your network connection and/or try again later."));
 		return;
 	}
 
