@@ -2171,7 +2171,7 @@ bool MainWindow::saveBundleDirectly(const QString &bundledFileName) {
 		FMessageBox::warning(
 			this,
 			tr("Fritzing"),
-			tr("Save produced an empty archive for '%1'. Save aborted.")
+			tr("Could not save '%1' because the file would be empty. Please try again.")
 				.arg(bundledFileName));
 		return false;
 	}
