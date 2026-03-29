@@ -88,6 +88,9 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "connectors/debugconnectors.h"
 #include "connectors/debugconnectorsprobe.h"
 #include "testing/FTesting.h"
+#include "testing/FProbeWire.h"
+#include "testing/FProbePart.h"
+
 #include "servicelistfetcher.h"
 #include "utils/uploadpair.h"
 #include "version/version.h"
@@ -527,6 +530,9 @@ void MainWindow::init(ReferenceModel *referenceModel, bool lockFiles) {
 
 	new FProbeBin(m_binManager);
 	new FProbeSearch(m_binManager);
+
+	new FProbeWire(this);
+	new FProbePart(this);
 
 	m_projectProperties = QSharedPointer<ProjectProperties>(new ProjectProperties());
 	m_serviceListFetcher = QSharedPointer<ServiceListFetcher>(new ServiceListFetcher());
@@ -1243,6 +1249,10 @@ QList<QWidget*> MainWindow::getButtonsForView(ViewLayer::ViewID viewId) {
 
 void MainWindow::updateZoomSlider(double zoom) {
 	m_zoomSlider->setValue(zoom);
+}
+
+SketchWidget *MainWindow::currentGraphicsView() {
+	return m_currentGraphicsView;
 }
 
 SketchAreaWidget *MainWindow::currentSketchArea() {

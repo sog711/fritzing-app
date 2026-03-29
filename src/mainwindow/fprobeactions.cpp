@@ -135,7 +135,7 @@ bool FProbeActions::searchActionsInMenu(const QMenu* menu, const QString& search
 			(matchEnd && actionText.endsWith(actualSearchText, Qt::CaseInsensitive)) ||
 			(!matchStart && !matchEnd && actionText.contains(actualSearchText, Qt::CaseInsensitive))) {
 			DebugDialog::DebugStream() << "Triggering action:" << action->text();
-			emit action->triggered();
+			action->trigger();
 			return true; // Match found
 		}
 	}

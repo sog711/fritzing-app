@@ -15,13 +15,17 @@
 HEADERS += \
     src/testing/FTesting.h \
     src/testing/FProbe.h \
-    src/testing/FTestingServer.h
+    src/testing/FTestingServer.h \
+    src/testing/FProbeWire.h \
+    src/testing/FProbePart.h
 
 
 SOURCES += \
     src/testing/FTesting.cpp \
     src/testing/FProbe.cpp \
-    src/testing/FTestingServer.cpp
+    src/testing/FTestingServer.cpp \
+    src/testing/FProbeWire.cpp \
+    src/testing/FProbePart.cpp
 
 
 INCLUDEPATH += src

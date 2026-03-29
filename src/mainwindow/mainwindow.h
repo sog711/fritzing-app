@@ -149,9 +149,17 @@ struct TraceMenuThing {
 	}
 };
 
+class FProbeWire;
+class FProbePart;
+
 class MainWindow : public FritzingWindow
 {
 	Q_OBJECT
+
+	friend class FProbeWire;
+	friend class FProbePart;
+
+	class SketchWidget * currentGraphicsView();
 
 	void setEnableSubmenu(QMenu *menu, bool value);
 	void save_text_file(QString text, QString actionType, QString dialogTitle, QString differentiator, QString errorMessage);
