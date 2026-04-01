@@ -109,7 +109,7 @@ AboutBox::AboutBox(QWidget *parent)
 		tr("Gero Herkenrath, Jeff Hoefs, Tom Hulbert, ") +
 		tr("Tom Igoe, Hans-Peter Kadel, Till Savelkoul, ") +
 		tr("Jan Sieber, Yaniv Steiner, Olaf Val, ") +
-		tr("Michaela Vieser and Julia Werner.") +
+		tr("Peter Van Epp, Michaela Vieser and Julia Werner.") +
 		"</p>" +
 
 		"<p>" +
