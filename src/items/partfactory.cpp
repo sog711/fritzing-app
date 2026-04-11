@@ -243,6 +243,11 @@ QString PartFactory::getSvgFilename(ModelPart * modelPart, const QString & baseN
 		tempPaths << PartFactory::folderPath() + moduleIDPostfix;
 	}
 
+	// Search localPartsPath without moduleID or svg subdirectory.
+	// Used for Parts Editor temporary SVGs during editing sessions.
+	QString localPostfix = "/%1/" + baseName;
+	tempPaths << FolderUtils::getLocalPartsPath() + localPostfix;
+
 	if(!modelPart->path().isEmpty()) {
 		QString path = modelPart->path();
 		QDir dir(path);			// is a path to a filename
