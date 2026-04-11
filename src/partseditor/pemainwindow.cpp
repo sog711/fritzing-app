@@ -890,7 +890,9 @@ bool PEMainWindow::setInitialItem(PaletteItem * paletteItem)
 		header += makeDesc(viewThing->referenceFile);
 		svg = header + svg + "</svg>";
 		QString svgPath = makeSvgPath2(viewThing->sketchWidget);
-		bool result = writeXml(m_userPartsFolderSvgPath + svgPath, removeGorn(svg), true);
+		QString actualPath = m_userPartsFolderSvgPath + svgPath;
+		FolderUtils::ensureDirectoryExists(actualPath);
+		bool result = writeXml(actualPath, removeGorn(svg), true);
 		if (!result) {
 			QMessageBox::critical(nullptr, tr("Parts Editor"), tr("Unable to write svg to  %1").arg(svgPath));
 			return false;
@@ -1595,6 +1597,7 @@ void PEMainWindow::loadImage()
 	TextUtils::fixMuch(svg, true);
 	insertDesc(newReferenceFile, svg);
 	QString newPath = m_userPartsFolderSvgPath + makeSvgPath2(m_currentGraphicsView);
+	FolderUtils::ensureDirectoryExists(newPath);
 	bool success = writeXml(newPath, removeGorn(svg), true);
 	if (!success) {
 		QMessageBox::warning(nullptr, tr("Copy problem"), tr("Unable to make a local copy of: '%1'").arg(origPath));
@@ -2054,6 +2057,7 @@ void PEMainWindow::relocateConnectorSvg(SketchWidget * sketchWidget, const QStri
 
 	// update svg in case there is a subsequent call to reload
 	QString newPath = m_userPartsFolderSvgPath + makeSvgPath2(sketchWidget);
+	FolderUtils::ensureDirectoryExists(newPath);
 	QString svg = TextUtils::svgNSOnly(svgDoc->toString());
 	writeXml(newPath, removeGorn(svg), true);
 	setImageAttribute(fzpRoot, newPath, viewID);
@@ -2567,6 +2571,7 @@ void PEMainWindow::moveTerminalPoint(SketchWidget * sketchWidget, const QString 
 
 		// update svg in case there is a subsequent call to reload
 		QString newPath = m_userPartsFolderSvgPath + makeSvgPath2(sketchWidget);
+		FolderUtils::ensureDirectoryExists(newPath);
 		QString svg = TextUtils::svgNSOnly(svgDoc->toString());
 		writeXml(newPath, removeGorn(svg), true);
 		setImageAttribute(fzpRoot, newPath, sketchWidget->viewID());
@@ -3492,6 +3497,7 @@ void PEMainWindow::smdChanged(const QString & after) {
 	}
 
 	QString newPath = m_userPartsFolderSvgPath + makeSvgPath2(m_pcbGraphicsView);
+	FolderUtils::ensureDirectoryExists(newPath);
 	QString svg = TextUtils::svgNSOnly(svgDoc.toString());
 	writeXml(newPath, removeGorn(svg), true);
 
@@ -3955,6 +3961,7 @@ void PEMainWindow::convertToTenth() {
 	ViewThing * viewThing = m_viewThings.value(m_currentGraphicsView->viewID());
 	QString originalSvgPath = viewThing->itemBase->filename();
 	QString newSvgPath = m_userPartsFolderSvgPath + makeSvgPath2(m_currentGraphicsView);
+	FolderUtils::ensureDirectoryExists(newSvgPath);
 	QFile::copy(originalSvgPath, newSvgPath);
 
 	S2S s2s(false);
