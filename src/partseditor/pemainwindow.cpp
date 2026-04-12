@@ -711,6 +711,12 @@ bool PEMainWindow::setInitialItem(PaletteItem * paletteItem)
 	m_originalFzpPath = originalModelPart->path();
 	m_originalModuleID = originalModelPart->moduleID();
 
+	// Use moduleID subfolder for temp SVGs, consistent with saveAs() and PartFactory search paths
+	QString sanitizedModuleID = FolderUtils::sanitizeForFolder(m_originalModuleID);
+	if (!sanitizedModuleID.isEmpty()) {
+		m_userPartsFolderSvgPath = m_userPartsFolderPath + sanitizedModuleID + "/";
+	}
+
 	QFileInfo info(originalModelPart->path());
 	QString basename = info.completeBaseName();
 	int ix = basename.indexOf(GuidMatcher, 0);
