@@ -25,6 +25,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../items/itembase.h"
 #include "../simulation/ngspice_simulator.h"
 #include <QElapsedTimer>
+#include <QPointer>
 
 enum TransistorLeg { BASE, COLLECTOR, EMITER };
 
@@ -59,7 +60,7 @@ signals:
 	void simulationEnabled(bool enabled);
 
 protected:
-	void updateParts(QSet<ItemBase *>, int);
+	void updateParts(QList<QPointer<ItemBase>>, int);
 	void drawSmoke(ItemBase* part);
 	void updateMultimeterScreen(ItemBase *, QString);
 	void updateLabPowerSupplyScreen(ItemBase *, double, double);
@@ -107,7 +108,7 @@ protected:
 	unsigned long m_previousSimTime = 0;
 	bool m_debugSimResult = false;
 
-	QSet<ItemBase *> itemBases;
+	QList<QPointer<ItemBase>> itemBases;
 	QHash<ItemBase *, ItemBase *> m_sch2bbItemHash;
 	QHash<ConnectorItem *, int> m_connector2netHash;
 

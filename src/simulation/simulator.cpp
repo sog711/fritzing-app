@@ -217,15 +217,17 @@ void Simulator::simulate() {
 	m_simulator->clearLog();
 
 	QList< QList<ConnectorItem *>* > netList;
+	QSet<ItemBase *> rawItemBases;
+	m_spiceNetlist = m_mainWindow->getSpiceNetlist("Simulator Netlist", netList, rawItemBases);
 	itemBases.clear();
-	m_spiceNetlist = m_mainWindow->getSpiceNetlist("Simulator Netlist", netList, itemBases);
+	for (ItemBase * it : rawItemBases) itemBases.append(it);
 
 	//TODO: Fix this in the parts
 	m_spiceNetlist.replace("IC=0", "");
 
 	//Select the type of analysis based on if there is an oscilloscope in the simulation
 	m_simEndTime = -1, m_simStartTime = std::numeric_limits<double>::max();;
-	foreach (ItemBase * item, itemBases) {
+	foreach (ItemBase * item, rawItemBases) {
 		if(item->family().toLower().contains("oscilloscope")) {
 			//TODO: Use TextUtils::convertFromPowerPrefixU function
 			double time_div = TextUtils::convertFromPowerPrefix(item->getProperty("time/div"), "s");
@@ -392,7 +394,7 @@ void Simulator::simulate() {
 	//Generate a hash table to find the breadboard parts from parts in the schematic view
 	DebugDialog::stream() << "Generate a hash table to find the breadboard parts from parts in the schematic view";
 	m_sch2bbItemHash.clear();
-	foreach (ItemBase* schPart, itemBases) {
+	foreach (ItemBase* schPart, rawItemBases) {
 		foreach (QGraphicsItem * bbItem, m_breadboardGraphicsView->scene()->items()) {
 			ItemBase * bbPart = dynamic_cast<ItemBase *>(bbItem);
 			if (!bbPart) continue;
@@ -412,7 +414,7 @@ void Simulator::simulate() {
 
 	//If there are parts that are not being simulated, grey them out
 	DebugDialog::stream() << "greyOutNonSimParts(itemBases);";
-	greyOutNonSimParts(itemBases);
+	greyOutNonSimParts(rawItemBases);
 	DebugDialog::stream() << "-----------------------------------";
 
 	DebugDialog::stream() << "Waiting for simulator thread to stop";
@@ -576,11 +578,17 @@ void Simulator::showSimulationResults() {
  * @param[in] itemBases A set of parts to be updated
  * @param[in] time The simulation time to be used for getting the voltages and currents
  */
-void Simulator::updateParts(QSet<ItemBase *> itemBases, int timeStep) {
-	foreach (ItemBase * part, itemBases){
+void Simulator::updateParts(QList<QPointer<ItemBase>> itemBases, int timeStep) {
+	foreach (QPointer<ItemBase> partPtr, itemBases){
+		// Schematic part may have been deleted mid-simulation (e.g. swap on
+		// pulse-generator curve change, switch toggle). QPointer auto-nulls.
+		ItemBase * part = partPtr.data();
+		if (!part) continue;
+		ItemBase * bbPart = m_sch2bbItemHash.value(part);
+
 		//Remove the effects, if any
 		part->setGraphicsEffect(nullptr);
-		m_sch2bbItemHash.value(part)->setGraphicsEffect(nullptr);
+		if (bbPart) bbPart->setGraphicsEffect(nullptr);
 
 		if(m_debugSimResult) {
 			DebugDialog::stream() << "-----------------------------------" ;
@@ -627,8 +635,8 @@ void Simulator::updateParts(QSet<ItemBase *> itemBases, int timeStep) {
 		}
 		if (family.contains("oscilloscope")) {
 			Oscilloscope* oscilloscope = dynamic_cast<Oscilloscope *>(part);
-			if(oscilloscope)
-				oscilloscope->updateOscilloscope(timeStep + m_interactionStep, m_simStartTime, m_simStepTime, this, m_sch2bbItemHash.value(part));
+			if(oscilloscope && bbPart)
+				oscilloscope->updateOscilloscope(timeStep + m_interactionStep, m_simStartTime, m_simStepTime, this, bbPart);
 			continue;
 		}
 	}
