@@ -66,7 +66,8 @@ private:
 	void uploadMultipart(const QString &url, const QString &file_path);
 	void checkProcessingStatus(QUrl url);
 	void httpError(QNetworkReply *reply);
-	void apiError(QString message);
+	void apiError(const QString &message);
+	QString errorMessageFromCode(const QString &code) const;
 };
 
 

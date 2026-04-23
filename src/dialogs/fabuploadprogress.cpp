@@ -215,11 +215,19 @@ void FabUploadProgress::httpError(QNetworkReply* reply)
 }
 
 // Handle errors reported by remote server
-void FabUploadProgress::apiError(QString message)
+void FabUploadProgress::apiError(const QString &message)
 {
 	DebugDialog::debug(message);
-	FMessageBox::critical(this, tr("Fritzing"), tr("Error processing the project. The factory says: %1").arg(message));
+	FMessageBox::critical(this, tr("Fritzing"), message);
 	Q_EMIT closeUploadError();
+}
+
+QString FabUploadProgress::errorMessageFromCode(const QString &code) const
+{
+	if (code == "fab_error") {
+		return tr("The fabrication service says: %1");
+	}
+	return QString();
 }
 
 
@@ -254,10 +262,19 @@ void FabUploadProgress::updateProcessingStatus()
 		auto d = reply->readAll();
 		auto j = NetworkHelper::string_to_hash(d);
 		int progress = j["progress"].toInt();
-		QString message(j["message"].toString());
 		if (progress < 0) {
+			QString message = j["message"].toString();
+			QString code = j["code"].toString();
+			if (code.isEmpty()) {
+				code = "fab_error";
+			}
+			QString translatedTemplate = errorMessageFromCode(code);
+			if (!translatedTemplate.isEmpty()) {
+				message = translatedTemplate.arg(message);
+			}
 			apiError(message);
 		} else {
+			QString message(j["message"].toString());
 			findChild<QLabel*>("message")->setText(message);
 			Q_EMIT processProgressChanged(std::min(progress, 100));
 			if(progress < 100) {
