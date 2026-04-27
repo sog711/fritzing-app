@@ -4008,6 +4008,26 @@ void SketchWidget::dragWireChanged(Wire* wire, ConnectorItem * fromOnWire, Conne
 		}
 		if (to) {
 			extendChangeConnectionCommand(BaseCommand::CrossView, to, fromOnWire, ViewLayer::specFromID(wire->viewLayerID()), true, parentCommand);
+
+			// At a wire-bendpoint bigdot 'to' is one of two sibling wire connectors at the
+			// same junction point. Connect fromOnWire to the sibling as well so that
+			// categorizeDragWires can propagate OUT_ through the full junction and correctly
+			// leave this wire at the bendpoint when a component is later moved.
+			//
+			// Guard 1: skip when 'to' is a component connector. Wires sharing a component
+			// connector (e.g. R1.1) are independent; chaining them together causes ghost
+			// connections when one is later dragged away.
+			// Guard 2: only add connections to other wire connectors in the loop body so that
+			// a component connector reachable from 'to' cannot sneak in and make chained=true.
+			if (to->attachedToItemType() == ModelPart::Wire) {
+				for (const QPointer<ConnectorItem>& connectedConnector : to->connectedToItems()) {
+					if (connectedConnector != to && connectedConnector != fromOnWire
+					        && connectedConnector->attachedToItemType() == ModelPart::Wire) {
+						extendChangeConnectionCommand(BaseCommand::CrossView, connectedConnector, fromOnWire,
+						                              ViewLayer::specFromID(wire->viewLayerID()), true, parentCommand);
+					}
+				}
+			}
 		}
 
 		setUpColor(m_connectorDragConnector, to, wire, parentCommand);
