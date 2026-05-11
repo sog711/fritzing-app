@@ -580,7 +580,12 @@
         <translation>Encontrar Componentes no Esboço</translation>
     </message>
     <message>
-        <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1296"/>
+        <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1286"/>
+        <source>Remove from Bin</source>
+        <translation>Remover do Binário</translation>
+    </message>
+    <message>
+        <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1280"/>
         <source>Unable to remove part &apos;%1&apos;--it is in use in a sketch</source>
         <translation>Incapaz de remover a parte &apos;%1&apos;--está em uso no esboço</translation>
     </message>
@@ -1519,62 +1524,91 @@ The part might not work properly.</source>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="17"/>
         <source>Error</source>
-        <comment>error title</comment>
-        <translation type="unfinished">Erro</translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="31"/>
         <source>Warning</source>
-        <comment>warning title</comment>
-        <translation type="unfinished">Aviso</translation>
+        <translation>Aviso</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="63"/>
         <source>Cannot open file</source>
+        <translation>Não pode abrir o ficheiro</translation>
         <comment>error title</comment>
-        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/fzpinfo.cpp" line="64"/>
+        <source>Cannot open file &apos;%1&apos;.</source>
+        <translation>Não pode abrir o ficheiro &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="71"/>
         <source>File is empty</source>
+        <translation>O ficheiro está vazio</translation>
         <comment>error title</comment>
-        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/fzpinfo.cpp" line="72"/>
+        <source>File &apos;%1&apos; is empty.</source>
+        <translation>O ficheiro &apos;%1&apos; está vazio.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="128"/>
         <source>XML Error</source>
         <comment>error title</comment>
-        <translation type="unfinished"></translation>
+        <translation>Erro XML</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="146"/>
         <source>Title is missing.</source>
         <comment>warning title</comment>
-        <translation type="unfinished"></translation>
+        <translation>Título em falta.</translation>
+    </message>
+    <message>
+        <location filename="../src/model/fzpinfo.cpp" line="147"/>
+        <source>The part is missing a title.
+
+All parts must have a title tag.</source>
+        <translation>A peça tem o título em falta.
+
+Todas as peças devem ter um título de etiqueta.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="157"/>
         <source>Version number missing.</source>
         <comment>warning title</comment>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="158"/>
         <source>The part is missing a fritzing version.
-All parts must have a fritzingVersion attribute: fritzingVersion=&quot;x.y.z&quot;.</source>
-        <translation type="unfinished"></translation>
+</source>
+        <translation>A peça tem em falta uma versão do fritzing.
+</translation>
+    </message>
+    <message>
+        <location filename="../src/model/fzpinfo.cpp" line="159"/>
+        <source>All parts must have a fritzingVersion attribute: fritzingVersion=&quot;x.y.z&quot;.</source>
+        <translation>Todas as peças devem ter um fritzingVersion atributo: fritzingVersion=&quot;x.y.z&quot;.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="170"/>
         <source>Invalid Version</source>
+        <translation>Versão Inválida</translation>
         <comment>warning title</comment>
-        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/model/fzpinfo.cpp" line="171"/>
+        <source>The fritzing version &apos;%1&apos; is invalid.
+The part might not work properly.</source>
+        <translation>A versão fritzing &apos;%1&apos; é inválida.
+A peça pode não funcionar corretamente.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="183"/>
         <source>Version Mismatch</source>
+        <translation>Incompatibilidade de Versão</translation>
         <comment>warning title</comment>
-        <translation type="unfinished">Incompatibilidade de Versão</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="184"/>
@@ -1582,13 +1616,17 @@ All parts must have a fritzingVersion attribute: fritzingVersion=&quot;x.y.z&quo
 Current version is &apos;%2&apos; which might not support it properly.Please consider updating your Fritzing.
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Esta peça foi criada com o Fritzing versão &apos;%1&apos;.
+A versão atual é &apos;%2&apos; que pode não funcionar corretamente.Por favor considere atualizar o Fritzing.
+
+</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="212"/>
         <source>Location: Line %1, Column %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Localização: Linha %1, Coluna %2
+</translation>
     </message>
 </context>
 <context>
@@ -2212,15 +2250,15 @@ Também é possível escolher um conector como uma semente de aterramento clican
     <message numerus="yes">
         <location filename="../src/mainwindow/mainwindow.cpp" line="1692"/>
         <source>The sketch &apos;%1&apos; is missing %n SVG file(s): %2. The sketch will still load, but some parts may not display correctly. If the sketch is very old, try loading it with an older version of Fritzing (0.9.x) and re-saving it.</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>O esboço &apos;%1&apos; falta o ficheiro SVG %n. O esboço irá ainda carregar, mas algumas peças podem não aparecer corretamente. Se o esboço é muito antigo, tente carregá-lo com uma antiga versão do Fritzing (0.9.x) e re-guardá-lo.</numerusform>
+            <numerusform>Os esboços &apos;%1&apos; faltam o ficheiro SVG %n. Os esboços irão ainda carregar, mas algumas peças podem não aparecer corretamente. Se os esboços são muito antigos, tente carregá-los com uma antiga versão do Fritzing (0.9.x) e re-guardá-los.</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1924"/>
         <source>No part files with the required prefix &apos;%1&apos; where found inside in the shareable part &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem ficheiros de peças com o prefixo &apos;%1&apos; onde encontrado dentro da peça partilhável &apos;%2&apos;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1960"/>
@@ -2233,42 +2271,59 @@ Também é possível escolher um conector como uma semente de aterramento clican
         <source>Cannot open file &apos;%1&apos; for writing.
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Não pode abrir o ficheiro &apos;%1&apos; para escrita.
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2108"/>
         <source>Cannot create ZIP archive for &apos;%1&apos;.
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Não pode abrir o arquivo ZIP para &apos;%1&apos;.
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2121"/>
         <source>Failed to write sketch data to &apos;%1&apos;.
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Falha ao escrever dados do esboço para &apos;%1&apos;.
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2162"/>
         <source>Failed to write part &apos;%1&apos; to &apos;%2&apos;.
 
 %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Falha ao escrever peça &apos;%1&apos; para &apos;%2&apos;.
+
+%3</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow.cpp" line="2188"/>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2142"/>
+        <source>Save produced an empty archive for &apos;%1&apos;. Save aborted.</source>
+        <translation>Guardar produziu um arquivo vazio para o &apos;%1&apos;. Guardar abortado.</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow/mainwindow.cpp" line="2156"/>
         <source>Error finalizing ZIP archive for &apos;%1&apos;.
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro ao finalizar o arquivo ZIP para &apos;%1&apos;.
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2201"/>
         <source>Failed to commit file &apos;%1&apos;. The original file is untouched.
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Falha ao confirmar o ficheiro &apos;%1&apos;. O ficheiro original está intacto.
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2221"/>
@@ -2288,7 +2343,7 @@ Também é possível escolher um conector como uma semente de aterramento clican
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2323"/>
         <source>Unable to load part &apos;%1&apos;: the part definition has an empty or missing module ID (moduleId attribute).</source>
-        <translation type="unfinished"></translation>
+        <translation>Incapaz de carregar a peça &apos;%1&apos;: a definição da peça tem um módulo ID vazio ou em falta (moduleId attribute).</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3168"/>
@@ -3206,11 +3261,23 @@ Estamos a trabalhar para evitar esta mensagem, e apenas deixar escolher entre pr
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="988"/>
-        <source>Unable to export %1 as shareable.</source>
-        <translation type="unfinished"></translation>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="199"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1818"/>
+        <source>Choose a folder for exporting</source>
+        <translation>Escolha uma pasta para exportar</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1018"/>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="976"/>
+        <source>Unable to export %1 as shareable.</source>
+        <translation>Incapaz de exportar %1 como partilhável.</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="977"/>
+        <source>Saving failed. Please check if home and destionation directory are writeable and not full.</source>
+        <translation>Falha ao guardar. Por favor verifique se os diretórios casa e destino estão em escrita e não estão cheios.</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow/mainwindow_export.cpp" line="1006"/>
         <source>Export the visible area of the current sketch as a JPG image</source>
         <translation>Exportar a área visível do sketch atual como uma imagem JPG</translation>
     </message>
@@ -5088,43 +5155,43 @@ Nota: se você deseja atualizar mais tarde, existem opções no menu &apos;Compo
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="64"/>
         <source>Inspector</source>
         <comment>dock widget title</comment>
-        <translation type="unfinished">Inspector</translation>
+        <translation>Inspector</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="66"/>
         <source>Undo History</source>
         <comment>dock widget title</comment>
-        <translation type="unfinished">Anular Histórico</translation>
+        <translation>Anular Histórico</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="69"/>
         <source>Layers</source>
         <comment>dock widget title</comment>
-        <translation type="unfinished">Camadas</translation>
+        <translation>Camadas</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="132"/>
         <source>Hidden → Docked → Floating</source>
         <comment>dock widget state cycle sequence starting from hidden</comment>
-        <translation type="unfinished"></translation>
+        <translation>Oculto → Atracado → Flutuante</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="137"/>
         <source>Docked → Floating → Hidden</source>
         <comment>dock widget state cycle sequence starting from docked</comment>
-        <translation type="unfinished"></translation>
+        <translation>Atracado → Flutuante → Oculto</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="142"/>
         <source>Floating → Hidden → Docked</source>
         <comment>dock widget state cycle sequence starting from floating</comment>
-        <translation type="unfinished"></translation>
+        <translation>Flutuante → Oculto → Atracado</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="146"/>
         <source>%1 - Click to cycle: %2</source>
         <comment>dock widget status tip: %1=dock name, %2=cycle sequence</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Clicar para ciclo: %2</translation>
     </message>
 </context>
 <context>
