@@ -85,8 +85,10 @@ inline bool operator<(const PD& lhs, const PD& rhs) noexcept {
 
 QPointF GraphicsUtils::calcConstraint(QPointF initial, QPointF current) {
 	std::vector<PD> pds;
+	// horizontal: snap onto y = initial.y, distance is the vertical offset
 	pds.emplace_back(current.x(), initial.y(), (current.y() - initial.y()) * (current.y() - initial.y()));
-	pds.emplace_back(initial.x(), initial.y(), (current.x() - initial.x()) * (current.x() - initial.x()));
+	// vertical: snap onto x = initial.x, distance is the horizontal offset (#3919)
+	pds.emplace_back(initial.x(), current.y(), (current.x() - initial.x()) * (current.x() - initial.x()));
 
 	QLineF plus45(initial.x() - 10000, initial.y() - 10000, initial.x() + 10000, initial.y() + 10000);
 	auto dl0 = distanceFromLine(current.x(), current.y(), plus45.p1().x(), plus45.p1().y(), plus45.p2().x(), plus45.p2().y());
