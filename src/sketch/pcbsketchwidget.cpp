@@ -2670,14 +2670,17 @@ QString PCBSketchWidget::makePasteMask(const QString & svgMask, ItemBase * board
 	if (pads.count() == 0) return "";
 
 	QRectF boardRect = board->sceneBoundingRect();
-	QList<QRectF> connectorRects;
+	struct ThPart { QRectF rect; long ownerId; long chiefId; };
+	QList<ThPart> connectorRects;
 	Q_FOREACH (ConnectorItem * connectorItem, throughHoles) {
 		QRectF r = connectorItem->sceneBoundingRect();
 		QRectF s((r.left() - boardRect.left())  * dpi / GraphicsUtils::SVGDPI,
 		         (r.top() - boardRect.top()) * dpi / GraphicsUtils::SVGDPI,
 		         r.width() * dpi / GraphicsUtils::SVGDPI,
 		         r.height() * dpi / GraphicsUtils::SVGDPI);
-		connectorRects << s;
+		long ownerId = connectorItem->attachedTo()->id();
+		long chiefId = connectorItem->attachedTo()->layerKinChief()->id();
+		connectorRects.append({s, ownerId, chiefId});
 	}
 
 	QDomDocument doc;
@@ -2698,13 +2701,35 @@ QString PCBSketchWidget::makePasteMask(const QString & svgMask, ItemBase * board
 		QRectF bounds = renderer.boundsOnElement(id);
 		QRectF leafRect = renderer.transformForElement(id).mapRect(bounds);
 		QPointF leafCenter = leafRect.center();
-		Q_FOREACH (QRectF r, connectorRects) {
-			if (!leafRect.intersects(r)) continue;
 
-			if (!r.contains(leafCenter)) continue;
+		// partID is set by SketchWidget::renderToSVG on each item's wrapping <g>
+		long leafPartID = -1;
+		bool leafPartIDKnown = false;
+		QDomNode n = element.parentNode();
+		while (!n.isNull()) {
+			QDomElement e = n.toElement();
+			if (!e.isNull() && e.tagName() == "g" && e.hasAttribute("partID")) {
+				bool ok = false;
+				long parsed = e.attribute("partID").toLong(&ok);
+				if (ok) {
+					leafPartID = parsed;
+					leafPartIDKnown = true;
+				}
+				break;
+			}
+			n = n.parentNode();
+		}
+		if (!leafPartIDKnown) continue;
 
-			QPointF rCenter = r.center();
+		for (const ThPart & t : connectorRects) {
+			if (!leafRect.intersects(t.rect)) continue;
+
+			if (!t.rect.contains(leafCenter)) continue;
+
+			QPointF rCenter = t.rect.center();
 			if (!leafRect.contains(rCenter)) continue;
+
+			if (leafPartID != t.ownerId && leafPartID != t.chiefId) continue;
 
 			element.setTagName("g");
 			break;
