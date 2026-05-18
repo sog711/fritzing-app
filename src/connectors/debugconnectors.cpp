@@ -35,12 +35,11 @@ DebugConnectors::DebugConnectors(SketchWidget *breadboardGraphicsView, SketchWid
 	: m_breadboardGraphicsView(breadboardGraphicsView),
 	  m_schematicGraphicsView(schematicGraphicsView),
 	  m_pcbGraphicsView(pcbGraphicsView),
-	  timer(new QTimer(this)),
-	  firstCall(true)
+	  timer(new QTimer(this))
 {
 	monitorConnections(false);
 	timer->setSingleShot(true);
-	connect(timer, &QTimer::timeout, this, &DebugConnectors::onChangeConnection);
+	connect(timer, &QTimer::timeout, this, &DebugConnectors::performCheck);
 	connect(m_breadboardGraphicsView,
 			&SketchWidget::routingCheckSignal,
 			this,
@@ -140,19 +139,23 @@ void DebugConnectors::onChangeConnection()
 	if (!m_monitorEnabled) {
 		return;
 	}
+	// Trailing-edge debounce: every signal restarts the timer; the check
+	// runs once after minimumInterval of silence. Multi-step parent commands
+	// (e.g. dragWireChanged building a clique) emit routingCheckSignal once
+	// per child ChangeConnectionCommand; coalescing into a single trailing
+	// tick avoids seeing the model mid-burst.
+	timer->start(minimumInterval);
+}
 
-	qint64 elapsed = lastExecution.elapsed();
-	if (!firstCall && elapsed < minimumInterval) {
-		if (!timer->isActive()) {
-			timer->start(minimumInterval - elapsed);
-		}
-	} else {
-		firstCall = false;
-		QSet<ItemBase *> errors;
-		errors = doRoutingCheck();
-		errors += doWireCheck();
-		reportErrors(errors);
+void DebugConnectors::performCheck()
+{
+	if (!m_monitorEnabled) {
+		return;
 	}
+	QSet<ItemBase *> errors;
+	errors = doRoutingCheck();
+	errors += doWireCheck();
+	reportErrors(errors);
 }
 
 void DebugConnectors::onSelectErrors()
@@ -300,7 +303,6 @@ QSet<ItemBase *> DebugConnectors::doWireCheck()
 
 QSet<ItemBase *> DebugConnectors::doRoutingCheck() {
 	DebugDialog::debug("debug connectors do");
-	lastExecution.restart();
 	QHash<qint64, ItemBase *> bbID2ItemHash;
 	QHash<qint64, ItemBase *> pcbID2ItemHash;
 	QList<ItemBase *> bbList;

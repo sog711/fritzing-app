@@ -37,6 +37,7 @@ public:
 public slots:
 	void monitorConnections(bool enabled);
 	void onChangeConnection();
+	void performCheck();
 
 	void onSelectErrors();
 	void onRepairErrors();
@@ -59,8 +60,6 @@ private:
 	QList<Wire *> collectWiresForCheck(ViewGeometry::WireFlag flag, QGraphicsScene *scene);
 
 	QTimer *timer;
-	QElapsedTimer lastExecution;
-	bool firstCall;
 	static constexpr qint64 minimumInterval = 300;
 
 	bool m_monitorEnabled;
