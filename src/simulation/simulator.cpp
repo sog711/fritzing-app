@@ -219,8 +219,8 @@ void Simulator::simulate() {
 	QList< QList<ConnectorItem *>* > netList;
 	QSet<ItemBase *> rawItemBases;
 	m_spiceNetlist = m_mainWindow->getSpiceNetlist("Simulator Netlist", netList, rawItemBases);
-	itemBases.clear();
-	for (ItemBase * it : rawItemBases) itemBases.append(it);
+	m_itemBases.clear();
+	for (ItemBase * it : rawItemBases) m_itemBases.append(it);
 
 	//TODO: Fix this in the parts
 	m_spiceNetlist.replace("IC=0", "");
@@ -465,7 +465,7 @@ void Simulator::simulate() {
 
 
 	//The spice simulation has finished, iterate over each part being simulated and update it (if it is necessary).
-	updateParts(itemBases, 0);
+	updateParts(m_itemBases, 0);
 
 	//If this a transitory simulation, set the timer for the animation
 	if (m_simEndTime > 0) {
@@ -547,7 +547,7 @@ void Simulator::showSimulationResults() {
 
 	//Render current simulation step
 	removeSimItems();
-	updateParts(itemBases, localTimeStep);
+	updateParts(m_itemBases, localTimeStep);
 	double simTime = m_simStartTime + m_currSimStep * m_simStepTime;
 	QString simMessage = QString::number(simTime, 'f', 3) + " s";
 	m_breadboardGraphicsView->setSimulatorMessage(simMessage);

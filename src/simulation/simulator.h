@@ -108,7 +108,7 @@ protected:
 	unsigned long m_previousSimTime = 0;
 	bool m_debugSimResult = false;
 
-	QList<QPointer<ItemBase>> itemBases;
+	QList<QPointer<ItemBase>> m_itemBases;
 	QHash<ItemBase *, ItemBase *> m_sch2bbItemHash;
 	QHash<ConnectorItem *, int> m_connector2netHash;
 
