@@ -30,6 +30,7 @@ HEADERS += \
     src/items/moduleidnames.h \
     src/items/mysterypart.h \
     src/items/note.h \
+    src/items/oscilloscope.h \
     src/items/pad.h \
     src/items/paletteitem.h \
     src/items/paletteitembase.h \
@@ -72,6 +73,7 @@ SOURCES += \
     src/items/moduleidnames.cpp \
     src/items/mysterypart.cpp \
     src/items/note.cpp \
+    src/items/oscilloscope.cpp \
     src/items/pad.cpp \
     src/items/paletteitem.cpp \
     src/items/paletteitembase.cpp \
