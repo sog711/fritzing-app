@@ -2092,15 +2092,40 @@ QString ItemBase::electricalValue()
 		"color", "current"
 	};
 
+	// Source the actual key set from the part's fzp definition. PropertyDefMaster
+	// pre-seeds localProps with the default of every variant whose suffix matches
+	// the moduleID (e.g. a 5mm pp cap ends up with localProp("capacitance")="100nF"
+	// even though that variant isn't in its fzp), so we can't trust localProp keys.
+	const QHash<QString, QString> & fzpProps = m_modelPart->properties();
+
 	QStringList parts;
-	for (const QString & propertyName : valueProperties) {
-		QString value = m_modelPart->localProp(propertyName).toString();
+	for (const QString & baseName : valueProperties) {
+		QString actualName;
+		if (fzpProps.contains(baseName)) {
+			actualName = baseName;
+		} else if (baseName == "capacitance") {
+			// pp capacitors carry package-specific keys (capacitance5mm,
+			// capacitance7.5mm, capacitance10mm, ...). Use whichever variant
+			// the fzp actually defines.
+			const auto keys = fzpProps.keys();
+			for (const QString & key : keys) {
+				if (key.startsWith("capacitance")
+				    && key.length() > baseName.length()
+				    && key.at(baseName.length()).isDigit()) {
+					actualName = key;
+					break;
+				}
+			}
+		}
+		if (actualName.isEmpty()) continue;
+
+		QString value = m_modelPart->localProp(actualName).toString();
 		if (value.isEmpty()) {
-			value = m_modelPart->properties().value(propertyName, "");
+			value = fzpProps.value(actualName, "");
 		}
 		if (value.isEmpty()) continue;
 
-		if (propertyName == "resistance" && !value.endsWith(OhmSymbol)) {
+		if (baseName == "resistance" && !value.endsWith(OhmSymbol)) {
 			value += OhmSymbol;
 		}
 		parts << value;
