@@ -733,14 +733,12 @@
 			<sketch id="SimplePotentiometer"/>
 			<sketch id="IrSensorTransistorMotor"/>
 			</category>
-			<!--
-			<category>
+			<category requires="transient">
 				<language country="en" name="Transient Simulation"/>
 				<language country="es" name="Simulacion Transitoria"/>
 				<sketch id="flipFlopLedFlashingCircuit"/>
 				<sketch id="555ICastable"/>
 			</category>
-			-->
 	</category>
 	<category>
 		<language country="en" name="Shields"/>

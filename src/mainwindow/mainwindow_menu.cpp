@@ -762,10 +762,24 @@ QHash<QString, struct SketchDescriptor *> MainWindow::indexAvailableElements(QDo
 	return retval;
 }
 
+bool MainWindow::evaluateMenuRequires(const QString & requiresAttr) {
+	// Conditional gate for example-menu entries. Empty = always shown.
+	// Supported tokens: "transient" — only show when transient simulation is enabled
+	// (which itself is debug/FTesting-gated, see isTransientSimulationEnabled()).
+	if (requiresAttr.isEmpty()) return true;
+	if (requiresAttr == "transient") return isTransientSimulationEnabled();
+	qWarning() << QString("MainWindow::populateMenuWithIndex: unknown requires='%1'").arg(requiresAttr);
+	return false;
+}
+
 void MainWindow::populateMenuWithIndex(const QHash<QString, struct SketchDescriptor *>  &index, QMenu * parentMenu, QDomElement &domElem, const QString & localeName) {
 	// note: the <sketch> element here is not the same as the <sketch> element in indexAvailableElements()
 	QDomElement e = domElem.firstChildElement();
 	while(!e.isNull()) {
+		if (!evaluateMenuRequires(e.attribute("requires"))) {
+			e = e.nextSiblingElement();
+			continue;
+		}
 		if (e.nodeName() == "sketch") {
 			QString id = e.attribute("id");
 			if (!id.isEmpty()) {

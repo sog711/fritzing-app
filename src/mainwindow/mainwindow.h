@@ -489,6 +489,7 @@ protected:
 	void populateMenuFromXMLFile(QMenu *parentMenu, QStringList &actionsTracker, const QString &folderPath, const QString &indexFileName);
 	QHash<QString, struct SketchDescriptor *> indexAvailableElements(QDomElement &domElem, const QString &srcPrefix, QStringList & actionsTracker, const QString & localeName);
 	void populateMenuWithIndex(const QHash<QString, struct SketchDescriptor *> &, QMenu * parentMenu, QDomElement &domElem, const QString & localeName);
+	bool evaluateMenuRequires(const QString & requiresAttr);
 	void populateMenuFromFolderContent(QMenu *parentMenu, const QString &path);
 	void createOpenRecentMenu();
 	void createEditMenuActions();
