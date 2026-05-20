@@ -233,7 +233,6 @@ void Simulator::simulate() {
 			double time_div = TextUtils::convertFromPowerPrefix(item->getProperty("time/div"), "s");
 			double pos = TextUtils::convertFromPowerPrefix(item->getProperty("horizontal position"), "s");
 			DebugDialog::stream() << "Found oscilloscope: time/div: " << item->getProperty("time/div").toStdString() << " " << time_div << item->getProperty("horizontal position").toStdString() << " " << pos;
-			m_transientSimulationEnabled = true;
 			if (pos < m_simStartTime) {
 				m_simStartTime = pos;
 			}
