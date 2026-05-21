@@ -261,7 +261,8 @@ void Simulator::simulate() {
 	DebugDialog::stream() << "timeStepModeStr: " << timeStepModeStr.toStdString() << ", numStepsStr: "
 						  << numStepsStr.toStdString() << ", timeStepStr: " << timeStepStr.toStdString()
 						  << ", animationTimeStr: " << animationTimeStr.toStdString();
-	if (m_transientSimulationEnabled && m_mainWindow->isTransientSimulationEnabled()) {
+	bool doTransientSimulation = m_transientSimulationEnabled && m_mainWindow->isTransientSimulationEnabled();
+	if (doTransientSimulation) {
 		if (timeStepModeStr.contains("true", Qt::CaseInsensitive)) {
 			m_simStepTime = TextUtils::convertFromPowerPrefixU(timeStepStr, "s");
 			m_simNumberOfSteps = (m_simEndTime-m_simStartTime)/m_simStepTime;
@@ -422,7 +423,7 @@ void Simulator::simulate() {
 		QThread::usleep(100);
 		elapsedTime++;
 		//If this a transitory simulation and we have partial results, start the animation
-		if (m_simEndTime > 0) {
+		if (doTransientSimulation) {
 			auto timeInfo = m_simulator->getVecInfo(QString("time").toStdString());
 			if(timeInfo.size() > 0)
 				break;
@@ -467,7 +468,7 @@ void Simulator::simulate() {
 	updateParts(m_itemBases, 0);
 
 	//If this a transitory simulation, set the timer for the animation
-	if (m_simEndTime > 0) {
+	if (doTransientSimulation) {
 		m_previousRenderedStep = 0;
 		m_showResultsTimer->start();
 	}
