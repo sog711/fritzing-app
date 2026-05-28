@@ -1627,7 +1627,22 @@ QString MainWindow::loadBundledSketch(const QString &fileName, bool addToRecent,
 		}
 
 		ModelPart * mp = m_referenceModel->retrieveModelPart(moduleID);
-		if (mp == nullptr) {
+		// If the currently loaded part is missing its definition or SVG files,
+		// use the copy bundled with the sketch.
+		bool loadedPartFilesMissing = (mp == nullptr) || !QFileInfo::exists(mp->path());
+		if (!loadedPartFilesMissing) {
+			for (ViewLayer::ViewID viewID : { ViewLayer::IconView, ViewLayer::BreadboardView, ViewLayer::SchematicView, ViewLayer::PCBView }) {
+				QString baseName = mp->hasBaseNameFor(viewID);
+				if (baseName.isEmpty()) continue;
+
+				if (PartFactory::getSvgFilename(mp, baseName, false, false).isEmpty()) {
+					loadedPartFilesMissing = true;
+					break;
+				}
+			}
+		}
+		const bool loadFromBundle = loadedPartFilesMissing;
+		if (loadFromBundle) {
 			QDomDocument doc;
 			QDomDocument::ParseResult parseResult = doc.setContent(fzp);
 			if (!parseResult) {
@@ -2364,7 +2379,14 @@ ModelPart* MainWindow::copyToPartsFolder(const QFileInfo& file, bool addToAlien,
 			m_alienFiles << destFilePath;
 		}
 	}
-	ModelPart *mp = m_referenceModel->loadPart(destFilePath, true);
+	ModelPart *mp = nullptr;
+	// Replace a stale entry so later sketch loading resolves this module ID to
+	// the copied .fzp.
+	if (m_referenceModel->retrieveModelPart(moduleID) != nullptr) {
+		mp = m_referenceModel->reloadPart(destFilePath, moduleID);
+	} else {
+		mp = m_referenceModel->loadPart(destFilePath, true);
+	}
 	if (mp != nullptr) {
 		mp->setAlien(true);
 	} else {
