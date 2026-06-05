@@ -48,6 +48,13 @@ static QList< QPointer<ConnectorItem> > LocalGrounds;
 static QList<double> Voltages;
 double SymbolPaletteItem::DefaultVoltage = 5;
 
+// Leading and trailing whitespace in a net label is purely cosmetic (it is used to
+// align the box sizes of several net labels), so it must be ignored when grouping
+// net labels into sub-nets. Inner whitespace is kept significant.
+static QString netLabelKey(const QString & label) {
+	return label.trimmed();
+}
+
 /////////////////////////////////////////////////////
 
 /*
@@ -146,9 +153,9 @@ void SymbolPaletteItem::removeMeFromBus(double v) {
 	Q_FOREACH (ConnectorItem * connectorItem, cachedConnectorItems()) {
 		if (m_isNetLabel) {
 			if (m_voltageReference) {
-				LocalNetLabels.remove(getLabel(), connectorItem);
+				LocalNetLabels.remove(netLabelKey(getLabel()), connectorItem);
 			} else {
-				LocalNetLabels.remove(m_label, connectorItem);
+				LocalNetLabels.remove(netLabelKey(m_label), connectorItem);
 			}
 		}
 		else {
@@ -198,7 +205,7 @@ ConnectorItem* SymbolPaletteItem::newConnectorItem(Connector *connector)
 	}
 
 	if (m_isNetLabel) {
-		LocalNetLabels.insert(getLabel(), connectorItem);
+		LocalNetLabels.insert(netLabelKey(getLabel()), connectorItem);
 	}
 	else if (connectorItem->isGrounded()) {
 		LocalGrounds.append(connectorItem);
@@ -223,7 +230,7 @@ bool SymbolPaletteItem::busConnectorItems(ConnectorItem * fromConnectorItem, QLi
 
 	QList< QPointer<ConnectorItem> > mitems;
 	if (m_isNetLabel) {
-		mitems.append(LocalNetLabels.values(getLabel()));
+		mitems.append(LocalNetLabels.values(netLabelKey(getLabel())));
 	}
 	else if (bus->id().compare("groundbus", Qt::CaseInsensitive) == 0) {
 		mitems.append(LocalGrounds);
@@ -266,7 +273,7 @@ void SymbolPaletteItem::setLabel(const QString & label) {
 
 	//Add the conectors of the item to the new net label
 	Q_FOREACH (ConnectorItem * connectorItem, cachedConnectorItems()) {
-		LocalNetLabels.insert(label, connectorItem);
+		LocalNetLabels.insert(netLabelKey(label), connectorItem);
 	}
 
 	QTransform  transform = untransform();
