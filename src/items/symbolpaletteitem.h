@@ -74,13 +74,19 @@ public:
 	void setLabel(const QString &);
 	QString getLabel();
 	QString getDirection();
+	void setStyle(const QString &);
+	QString effectiveStyle();
+	void refreshNetLabelStyleFromDefault();
 
 public:
 	static double DefaultVoltage;
+	static QString defaultNetLabelStyle();
+	static void refreshDefaultNetLabelStyle();
 
 public Q_SLOTS:
 	void voltageEntry(int index);
 	void labelEntry();
+	void styleEntry(int index);
 	void swapEntry(int index);
 
 protected:

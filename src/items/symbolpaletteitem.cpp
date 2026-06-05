@@ -36,6 +36,8 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QLineEdit>
 #include <QMultiHash>
 #include <QMessageBox>
+#include <QComboBox>
+#include <QSettings>
 
 #include <cmath>
 
@@ -47,6 +49,17 @@ static QMultiHash<QString, QPointer<ConnectorItem> > LocalNetLabels;
 static QList< QPointer<ConnectorItem> > LocalGrounds;
 static QList<double> Voltages;
 double SymbolPaletteItem::DefaultVoltage = 5;
+
+// Net label rendering styles (stored canonically in the "style" localProp).
+static const QString NetLabelStyleLegacy("legacy");
+static const QString NetLabelStyleOutside("outside");
+static const QString NetLabelStyleConnector("connector");
+
+// Cached default net label style, read lazily from QSettings (the "schemNetLabelStyle"
+// key, set in the Schematic preferences tab). makeSvg/effectiveStyle run on every render,
+// so we avoid constructing a QSettings object each time.
+static QString NetLabelDefaultStyle;
+static bool NetLabelDefaultStyleLoaded = false;
 
 // Leading and trailing whitespace in a net label is purely cosmetic (it is used to
 // align the box sizes of several net labels), so it must be ignored when grouping
@@ -262,6 +275,10 @@ void SymbolPaletteItem::setProp(const QString & prop, const QString & value) {
 		setLabel(value);
 		return;
 	}
+	if (prop.compare("style", Qt::CaseInsensitive) == 0 && m_isNetLabel) {
+		setStyle(value);
+		return;
+	}
 
 	PaletteItem::setProp(prop, value);
 }
@@ -277,6 +294,69 @@ void SymbolPaletteItem::setLabel(const QString & label) {
 	}
 
 	QTransform  transform = untransform();
+
+	QString svg = makeSvg(this->viewLayerID());
+	resetRenderer(svg);
+	resetLayerKin();
+	resetConnectors(nullptr, nullptr);
+
+	retransform(transform);
+}
+
+QString SymbolPaletteItem::defaultNetLabelStyle() {
+	if (!NetLabelDefaultStyleLoaded) {
+		QSettings settings;
+		QString value = settings.value("schemNetLabelStyle", NetLabelStyleConnector).toString();
+		// Legacy is only ever the initial state of old parts, never a configurable default.
+		NetLabelDefaultStyle = (value == NetLabelStyleOutside) ? NetLabelStyleOutside : NetLabelStyleConnector;
+		NetLabelDefaultStyleLoaded = true;
+	}
+	return NetLabelDefaultStyle;
+}
+
+void SymbolPaletteItem::refreshDefaultNetLabelStyle() {
+	NetLabelDefaultStyleLoaded = false;
+}
+
+QString SymbolPaletteItem::effectiveStyle() {
+	// Old (v4 and earlier) net labels render in the legacy Droid Sans style.
+	if (modelPart()->modelPartShared()->version().toInt() <= 4) {
+		return NetLabelStyleLegacy;
+	}
+	QString style = modelPart()->localProp("style").toString();
+	if (style.isEmpty()) {
+		return defaultNetLabelStyle();
+	}
+	if (style != NetLabelStyleOutside && style != NetLabelStyleConnector && style != NetLabelStyleLegacy) {
+		return defaultNetLabelStyle();
+	}
+	return style;
+}
+
+void SymbolPaletteItem::setStyle(const QString & style) {
+	m_modelPart->setLocalProp("style", style);
+
+	// Only the text alignment within the box changes (the connector/box geometry is
+	// identical across styles), but re-render via the same proven path as setLabel().
+	QTransform transform = untransform();
+
+	QString svg = makeSvg(this->viewLayerID());
+	resetRenderer(svg);
+	resetLayerKin();
+	resetConnectors(nullptr, nullptr);
+
+	retransform(transform);
+}
+
+void SymbolPaletteItem::refreshNetLabelStyleFromDefault() {
+	// Re-render a net label that follows the configurable default style (used when the
+	// default changes in the preferences). Labels with an explicit style, and legacy
+	// (v4) labels, are unaffected.
+	if (!m_isNetLabel) return;
+	if (modelPart()->modelPartShared()->version().toInt() <= 4) return;
+	if (!modelPart()->localProp("style").toString().isEmpty()) return;
+
+	QTransform transform = untransform();
 
 	QString svg = makeSvg(this->viewLayerID());
 	resetRenderer(svg);
@@ -357,6 +437,9 @@ QString SymbolPaletteItem::replaceTextElement(QString svg) {
 QString SymbolPaletteItem::getProperty(const QString & key) {
 	if (key.compare("voltage", Qt::CaseInsensitive) == 0) {
 		return QString::number(m_voltage);
+	}
+	if (key.compare("style", Qt::CaseInsensitive) == 0 && m_isNetLabel) {
+		return effectiveStyle();
 	}
 
 	return PaletteItem::getProperty(key);
@@ -453,6 +536,30 @@ bool SymbolPaletteItem::collectExtraInfo(QWidget * parent, const QString & famil
 		return true;
 	}
 
+	if (prop.compare("style", Qt::CaseInsensitive) == 0 && m_isNetLabel)
+	{
+		QString current = effectiveStyle();
+
+		auto * edit = new FocusOutComboBox(parent);
+		edit->setEnabled(swappingEnabled);
+		// All three styles can be chosen per item (Legacy is only excluded from the
+		// global default in the preferences).
+		edit->addItem(tr("Outside aligned"), NetLabelStyleOutside);
+		edit->addItem(tr("Connector aligned"), NetLabelStyleConnector);
+		edit->addItem(tr("Legacy"), NetLabelStyleLegacy);
+
+		int ix = edit->findData(current);
+		edit->setCurrentIndex(ix >= 0 ? ix : 0);
+		edit->setObjectName("infoViewComboBox");
+
+		connect(edit, SIGNAL(currentIndexChanged(int)), this, SLOT(styleEntry(int)));
+		returnWidget = edit;
+
+		returnValue = current;
+		returnProp = tr("style");
+		return true;
+	}
+
 	return PaletteItem::collectExtraInfo(parent, family, prop, value, swappingEnabled, returnProp, returnValue, returnWidget, hide);
 }
 
@@ -482,6 +589,20 @@ void SymbolPaletteItem::labelEntry() {
 	InfoGraphicsView * infoGraphicsView = InfoGraphicsView::getInfoGraphicsView(this);
 	if (infoGraphicsView != nullptr) {
 		infoGraphicsView->setProp(this, "label", ItemBase::TranslatedPropertyNames.value("label"), current, edit->text(), true);
+	}
+}
+
+void SymbolPaletteItem::styleEntry(int index) {
+	auto * comboBox = qobject_cast<QComboBox *>(sender());
+	if (comboBox == nullptr) return;
+
+	QString newValue = comboBox->itemData(index).toString();
+	QString current = effectiveStyle();
+	if (newValue.compare(current) == 0) return;
+
+	InfoGraphicsView * infoGraphicsView = InfoGraphicsView::getInfoGraphicsView(this);
+	if (infoGraphicsView != nullptr) {
+		infoGraphicsView->setProp(this, "style", ItemBase::TranslatedPropertyNames.value("style"), current, newValue, true);
 	}
 }
 
@@ -580,7 +701,8 @@ QString NetLabel::getVersion()
 
 QString NetLabel::makeSvg(ViewLayer::ViewLayerID viewLayerID)
 {
-	bool useOldVersion = this->getVersion().toInt() <= 4;  // v4 is used in Fritzing 1.0.4 and earlier
+	QString style = effectiveStyle();
+	bool useOldVersion = (style == "legacy");  // "legacy" == old Droid Sans rendering (v4 and earlier)
 	double divisor = moduleID().contains(PartFactory::OldSchematicPrefix) ? 1 : 3;  // Fritzing before ~0.7.0
 
 	double labelFontSize = 200 / divisor;
@@ -652,21 +774,32 @@ QString NetLabel::makeSvg(ViewLayer::ViewLayerID viewLayerID)
 
 	if (viewLayerID == ViewLayer::SchematicText) {
 		double xPosition;
+		QString textAnchor = "start";
 		if (useOldVersion) {
 			double labelOffset = 20 / divisor;
 			xPosition = labelOffset + offset;
 		} else {
+			// Align the text within the box either away from the connector ("outside")
+			// or against it ("connector"). The arrow/connector occupies arrowWidth on the
+			// left when goLeft, otherwise on the right; the rest of the box (minus the two
+			// labelPaddings) is the text band, and the 50-unit width-rounding slack falls
+			// on whichever side the text does not hug.
 			double labelPadding = 50 / divisor;
-			xPosition = labelPadding + offset;
+			double bandLeft = labelPadding + (goLeft ? arrowWidth : 0);
+			double bandRight = totalWidth - labelPadding - (goLeft ? 0 : arrowWidth);
+			bool startAtLeft = (style == "connector") ? goLeft : !goLeft;
+			xPosition = startAtLeft ? bandLeft : bandRight;
+			textAnchor = startAtLeft ? "start" : "end";
 		}
 
 		svg += QString("<text id='label' x='%1' y='%2' fill='#000000' font-family='%5' font-weight='400' "
-					   "font-size='%3'>%4</text>\n")
+					   "text-anchor='%6' font-size='%3'>%4</text>\n")
 				   .arg(xPosition)
 				   .arg(labelBaseLine)
 				   .arg(labelFontSize)
 				   .arg(getLabel(),
-						fontName);
+						fontName)
+				   .arg(textAnchor);
 	} else {
 		QString pin = QString("<rect id='connector0pin' x='%1' y='%2' width='%3' height='%4' "
 							  "fill='none' stroke='none' stroke-width='0' />\n");

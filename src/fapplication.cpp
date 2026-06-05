@@ -53,6 +53,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "items/pinheader.h"
 #include "items/partfactory.h"
 #include "items/propertydef.h"
+#include "items/symbolpaletteitem.h"
 #include "dialogs/recoverydialog.h"
 #include "processeventblocker.h"
 #include "autoroute/checker.h"
@@ -68,6 +69,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #define CurrentReferenceModel SqliteReferenceModel
 
 #include <QSettings>
+#include <QGraphicsScene>
 #include <QKeyEvent>
 #include <QFileInfo>
 #include <QDesktopServices>
@@ -1613,6 +1615,18 @@ void FApplication::updatePrefs(PrefsDialog & prefsDialog)
 				Q_FOREACH (SketchWidget * sketchWidget, mainWindow->sketchWidgets()) {
 					if (key.contains(sketchWidget->getShortName())) {
 						sketchWidget->setCurvyWires(hash.value(key).compare("1") == 0);
+					}
+				}
+			}
+		}
+		else if (key.compare("schemNetLabelStyle") == 0) {
+			SymbolPaletteItem::refreshDefaultNetLabelStyle();   // invalidate the cached default (QSettings already updated above)
+			Q_FOREACH (MainWindow * mainWindow, mainWindows) {
+				Q_FOREACH (SketchWidget * sketchWidget, mainWindow->sketchWidgets()) {
+					if (sketchWidget->scene() == nullptr) continue;
+					Q_FOREACH (QGraphicsItem * gItem, sketchWidget->scene()->items()) {
+						auto * symbol = dynamic_cast<SymbolPaletteItem *>(gItem);
+						if (symbol != nullptr) symbol->refreshNetLabelStyleFromDefault();
 					}
 				}
 			}

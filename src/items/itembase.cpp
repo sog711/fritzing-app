@@ -266,6 +266,7 @@ void ItemBase::initNames() {
 		TranslatedPropertyNames.insert("silkscreen top", tr("silkscreen top"));
 		TranslatedPropertyNames.insert("mn", tr("mn", "Manufacturer Number"));
 		TranslatedPropertyNames.insert("mpn", tr("mpn", "Manufacturer Parts Number"));
+		TranslatedPropertyNames.insert("style", tr("style", "net label rendering style"));
 
 		// TODO: translate more known property names from fzp files and resource xml files
 

@@ -142,6 +142,7 @@ void PrefsDialog::initSchematic(QWidget * widget, ViewInfoThing * viewInfoThing)
 {
 	auto * vLayout = new QVBoxLayout();
 	vLayout->addWidget(createCurvyForm(viewInfoThing));
+	vLayout->addWidget(createNetLabelStyleForm());
 	vLayout->addSpacerItem(new QSpacerItem(1, 1, QSizePolicy::Preferred, QSizePolicy::Expanding));
 
 	widget->setLayout(vLayout);
@@ -712,4 +713,53 @@ void PrefsDialog::curvyChanged() {
 
 	ViewInfoThing * viewInfoThing = &m_viewInfoThings[sender()->property("index").toInt()];
 	m_settings.insert(QString("%1CurvyWires").arg(viewInfoThing->shortName), checkBox->isChecked() ? "1" : "0");
+}
+
+QWidget* PrefsDialog::createNetLabelStyleForm()
+{
+	auto * groupBox = new QGroupBox(tr("Net label style"));
+	auto * layout = new QVBoxLayout;
+
+	auto * label = new QLabel(tr("The default alignment of the text inside new net labels. "
+	                             "\"Connector aligned\" keeps the text next to the connector; "
+	                             "\"Outside aligned\" pushes it to the far edge. "
+	                             "You can override this per net label in the Inspector."));
+	label->setWordWrap(true);
+	layout->addWidget(label);
+
+	layout->addSpacing(10);
+
+	auto * comboBox = new QComboBox(this);
+	// Canonical values stored as item data; "legacy" is intentionally not offered as a
+	// global default (it can still be selected per item in the Inspector).
+	comboBox->addItem(tr("Connector aligned"), "connector");
+	comboBox->addItem(tr("Outside aligned"), "outside");
+	comboBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
+	// Force readable colors: on Linux the dialog background is dark grey, and the default
+	// combobox text would otherwise be dark-on-dark (the same reason linux-fritzing.qss
+	// lightens #infoViewComboBox). A white field with dark text reads on every platform.
+	comboBox->setStyleSheet("QComboBox { background-color: #ffffff; color: #333333; }"
+	                        "QComboBox QAbstractItemView { background-color: #ffffff; color: #333333; }");
+
+	QSettings settings;
+	QString current = settings.value("schemNetLabelStyle", "connector").toString();
+	comboBox->setCurrentIndex(current.compare("outside", Qt::CaseInsensitive) == 0 ? 1 : 0);
+
+	connect(comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(netLabelStyleChanged(int)));
+
+	// Keep the combobox at its natural width rather than stretching across the group box.
+	auto * hLayout = new QHBoxLayout;
+	hLayout->addWidget(comboBox);
+	hLayout->addStretch(1);
+	layout->addLayout(hLayout);
+
+	groupBox->setLayout(layout);
+	return groupBox;
+}
+
+void PrefsDialog::netLabelStyleChanged(int index) {
+	auto * comboBox = qobject_cast<QComboBox *>(sender());
+	if (comboBox == nullptr) return;
+
+	m_settings.insert("schemNetLabelStyle", comboBox->itemData(index).toString());
 }
