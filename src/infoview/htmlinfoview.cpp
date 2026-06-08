@@ -428,6 +428,19 @@ void HtmlInfoView::appendWireStuff(Wire* wire, bool swappingEnabled) {
 	if (modelPart == nullptr) return;
 	if (modelPart->modelPartShared() == nullptr) return;
 
+	// When several wires are selected, the inspector is in group mode: the shared width/
+	// color controls apply to all selected wires (already handled by changeWireColor/
+	// changeWireWidthMils), so here we just signpost it with an "N wires" title.
+	QList<Wire *> selectedWires;
+	bool wireGroup = false;
+	{
+		InfoGraphicsView * igv = InfoGraphicsView::getInfoGraphicsView(wire);
+		if ((igv != nullptr) && igv->collectSelectedWires(selectedWires) > 1
+		        && selectedWires.contains(wire)) {
+			wireGroup = true;
+		}
+	}
+
 	QString autoroutable = wire->getAutoroutable() ? tr("(autoroutable)") : "";
 	QString nameString = tr("Wire");
 	if (swappingEnabled) {
@@ -441,7 +454,12 @@ void HtmlInfoView::appendWireStuff(Wire* wire, bool swappingEnabled) {
 	else {
 		nameString = modelPart->description();
 	}
-	partTitle(nameString, modelPart->version(), modelPart->url(), modelPart->isObsolete());
+	if (wireGroup) {
+		partTitle(tr("%n wires", "", selectedWires.count()), QString(), QString(), false);
+	}
+	else {
+		partTitle(nameString, modelPart->version(), modelPart->url(), modelPart->isObsolete());
+	}
 	m_lockFrame->setVisible(false);
 	m_lockLabel->setVisible(false);
 	m_locationFrame->setVisible(false);
@@ -451,6 +469,7 @@ void HtmlInfoView::appendWireStuff(Wire* wire, bool swappingEnabled) {
 
 	setUpTitle(wire);
 	setUpIcons(wire, swappingEnabled);
+	m_titleEdit->setVisible(!m_tinyMode && !wireGroup);
 
 	displayProps(modelPart, wire, swappingEnabled);
 

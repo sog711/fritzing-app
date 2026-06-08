@@ -86,6 +86,18 @@ bool TraceWire::collectExtraInfo(QWidget * parent, const QString & family, const
 		comboBox->setEnabled(swappingEnabled);
 		comboBox->setObjectName("infoViewComboBox");
 
+		// Group mode: if multiple wires are selected with differing widths, blank the combo
+		// (a chosen width still applies to all via changeWireWidthMils).
+		InfoGraphicsView * groupIgv = InfoGraphicsView::getInfoGraphicsView(this);
+		QList<Wire *> groupWires;
+		if ((groupIgv != nullptr) && groupIgv->collectSelectedWires(groupWires) > 1 && groupWires.contains(this)) {
+			bool mixed = false;
+			Q_FOREACH (Wire * w, groupWires) {
+				if (qAbs(w->mils() - mils()) >= 0.01) { mixed = true; break; }
+			}
+			if (mixed) comboBox->setCurrentIndex(-1);
+		}
+
 		connect(comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(widthEntry(int)));
 		returnWidget = comboBox;
 		returnValue = comboBox->currentText();

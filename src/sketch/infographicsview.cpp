@@ -225,6 +225,12 @@ void InfoGraphicsView::setNetLabelStyleForSelection(const QString & policy)
 	Q_UNUSED(policy);
 }
 
+int InfoGraphicsView::collectSelectedWires(QList<Wire *> & wires)
+{
+	Q_UNUSED(wires);
+	return 0;
+}
+
 void InfoGraphicsView::setHoleSize(ItemBase * item, const QString & prop, const QString & trProp, const QString & oldValue, const QString & newValue, QRectF & oldRect, QRectF & newRect, bool redraw)
 {
 	Q_UNUSED(item);

@@ -8359,6 +8359,17 @@ int SketchWidget::collectSelectedNetLabels(QList<SymbolPaletteItem *> & netLabel
 	return netLabels.count();
 }
 
+int SketchWidget::collectSelectedWires(QList<Wire *> & wires)
+{
+	Q_FOREACH (QGraphicsItem * gItem, scene()->selectedItems()) {
+		auto * wire = dynamic_cast<Wire *>(gItem);
+		if (wire != nullptr) {
+			wires.append(wire);
+		}
+	}
+	return wires.count();
+}
+
 void SketchWidget::setNetLabelStyleForSelection(const QString & policy)
 {
 	QList<SymbolPaletteItem *> netLabels;

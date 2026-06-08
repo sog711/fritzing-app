@@ -650,6 +650,7 @@ public Q_SLOTS:
 	virtual void setProp(ItemBase *, const QString & propName, const QString & translatedPropName, const QString & oldValue, const QString & newValue, bool redraw);
 	int collectSelectedNetLabels(QList<class SymbolPaletteItem *> & netLabels);
 	void setNetLabelStyleForSelection(const QString & policy);
+	int collectSelectedWires(QList<class Wire *> & wires);
 	void setHoleSize(ItemBase *, const QString & propName, const QString & translatedPropName, const QString & oldValue, const QString & newValue, QRectF & oldRect, QRectF & newRect, bool redraw);
 	virtual void showLabelFirstTimeForCommand(long itemID, bool show, bool doEmit);
 	void resizeBoard(double w, double h, bool doEmit);

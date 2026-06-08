@@ -1682,6 +1682,18 @@ bool Wire::collectExtraInfo(QWidget * parent, const QString & family, const QStr
 				}
 			}
 
+			// Group mode: if multiple wires are selected with differing colors, blank the
+			// combo (a chosen color still applies to all via changeWireColor).
+			InfoGraphicsView * groupIgv = InfoGraphicsView::getInfoGraphicsView(this);
+			QList<Wire *> groupWires;
+			if ((groupIgv != nullptr) && groupIgv->collectSelectedWires(groupWires) > 1 && groupWires.contains(this)) {
+				bool mixed = false;
+				Q_FOREACH (Wire * w, groupWires) {
+					if (w->colorString().compare(englishCurrColor, Qt::CaseInsensitive) != 0) { mixed = true; break; }
+				}
+				if (mixed) comboBox->setCurrentIndex(-1);
+			}
+
 			connect(comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(colorEntry(int)));
 
 			if (this->hasShadow()) {
