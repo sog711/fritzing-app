@@ -158,6 +158,9 @@ public:
 	void setCanFlipVertical(bool);
 	virtual void clearModelPart();
 	virtual bool hasPartLabel();
+	// True if a property shown in the inspector depends on the item's transform (e.g. a
+	// net label's actual text alignment), so the inspector should rebuild on rotate/flip.
+	virtual bool inspectorRefreshOnTransform();
 	ViewLayer::ViewLayerID partLabelViewLayerID();
 	void clearPartLabel();
 	bool isPartLabelVisible();

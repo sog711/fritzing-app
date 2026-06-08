@@ -87,7 +87,7 @@ protected Q_SLOTS:
 	void toggleAutosave(bool);
 	void changeAutosavePeriod(int);
 	void curvyChanged();
-	void netLabelStyleChanged(int);
+	void netLabelStyleChanged(class QAbstractButton *);
 	void chooseProgrammer();
     void setSimulationTimeStepMode(const bool &timeStepMode);
     void setSimulationNumberOfSteps(const QString &numberOfSteps);

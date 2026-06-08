@@ -1875,6 +1875,10 @@ bool ItemBase::hasPartLabel() {
 	return true;
 }
 
+bool ItemBase::inspectorRefreshOnTransform() {
+	return false;
+}
+
 const QString & ItemBase::filename() {
 	return m_filename;
 }

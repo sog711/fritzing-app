@@ -24,6 +24,9 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "paletteitem.h"
 
+#include <QPixmap>
+#include <QSize>
+
 /*
 #include <QTime>
 
@@ -68,6 +71,7 @@ public:
 	void addedToScene(bool temporary);
 	bool hasPartNumberProperty();
 	virtual bool isOnlyNetLabel();
+	bool inspectorRefreshOnTransform();
 	bool hasPartLabel();
 	bool getAutoroutable();
 	void setAutoroutable(bool);
@@ -75,7 +79,7 @@ public:
 	QString getLabel();
 	QString getDirection();
 	void setStyle(const QString &);
-	QString effectiveStyle();
+	QString effectiveAlign();
 	void refreshNetLabelStyleFromDefault();
 
 public:
@@ -122,6 +126,10 @@ public:
 	QString getInspectorTitle();
 	void setInspectorTitle(const QString & oldText, const QString & newText);
 	QString getVersion(); // Only used in NetLabel currenty, but a candiate for PartBase or similar, to support future migrations
+
+	// Renders a small preview of a net label for the given orientation-independent policy
+	// ("outside"/"connector") and orientation (goLeft), used by the Schematic preferences.
+	static QPixmap stylePreviewPixmap(const QString & policy, bool goLeft, const QSize & size);
 
 protected:
 	QString makeSvg(ViewLayer::ViewLayerID);

@@ -21,12 +21,14 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "prefsdialog.h"
 #include "translatorlistmodel.h"
 #include "../items/itembase.h"
+#include "../items/symbolpaletteitem.h"
 #include "setcolordialog.h"
 #include "../sketch/zoomablegraphicsview.h"
 #include "../mainwindow/mainwindow.h"
 #include "../utils/folderutils.h"
 
 #include <QFormLayout>
+#include <QGridLayout>
 #include <QLabel>
 #include <QComboBox>
 #include <QPushButton>
@@ -34,6 +36,8 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QDialogButtonBox>
 #include <QGroupBox>
 #include <QRadioButton>
+#include <QButtonGroup>
+#include <QAbstractButton>
 #include <QSpinBox>
 #include <QSettings>
 #include <QLineEdit>
@@ -720,46 +724,62 @@ QWidget* PrefsDialog::createNetLabelStyleForm()
 	auto * groupBox = new QGroupBox(tr("Net label style"));
 	auto * layout = new QVBoxLayout;
 
-	auto * label = new QLabel(tr("The default alignment of the text inside new net labels. "
+	auto * label = new QLabel(tr("The default text alignment for new net labels. "
 	                             "\"Connector aligned\" keeps the text next to the connector; "
-	                             "\"Outside aligned\" pushes it to the far edge. "
-	                             "You can override this per net label in the Inspector."));
+	                             "\"Outside aligned\" pushes it to the far edge. The two symbols "
+	                             "show the result for both label orientations. "
+	                             "You can override the alignment per net label in the Inspector."));
 	label->setWordWrap(true);
 	layout->addWidget(label);
 
 	layout->addSpacing(10);
 
-	auto * comboBox = new QComboBox(this);
-	// Canonical values stored as item data; "legacy" is intentionally not offered as a
-	// global default (it can still be selected per item in the Inspector).
-	comboBox->addItem(tr("Connector aligned"), "connector");
-	comboBox->addItem(tr("Outside aligned"), "outside");
-	comboBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
-	// Force readable colors: on Linux the dialog background is dark grey, and the default
-	// combobox text would otherwise be dark-on-dark (the same reason linux-fritzing.qss
-	// lightens #infoViewComboBox). A white field with dark text reads on every platform.
-	comboBox->setStyleSheet("QComboBox { background-color: #ffffff; color: #333333; }"
-	                        "QComboBox QAbstractItemView { background-color: #ffffff; color: #333333; }");
-
 	QSettings settings;
 	QString current = settings.value("schemNetLabelStyle", "connector").toString();
-	comboBox->setCurrentIndex(current.compare("outside", Qt::CaseInsensitive) == 0 ? 1 : 0);
 
-	connect(comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(netLabelStyleChanged(int)));
+	// "legacy" is intentionally not offered as a global default (it can still be selected
+	// per item in the Inspector).
+	const QString policies[2] = { "connector", "outside" };
+	const QString texts[2] = { tr("Connector aligned"), tr("Outside aligned") };
+	const QSize iconSize(56, 22);
 
-	// Keep the combobox at its natural width rather than stretching across the group box.
-	auto * hLayout = new QHBoxLayout;
-	hLayout->addWidget(comboBox);
-	hLayout->addStretch(1);
-	layout->addLayout(hLayout);
+	// A grid keeps the two preview columns vertically aligned regardless of the (differing)
+	// radio-button label widths.
+	auto * grid = new QGridLayout;
+	auto * group = new QButtonGroup(this);
+	for (int i = 0; i < 2; ++i) {
+		auto * radio = new QRadioButton(texts[i]);
+		radio->setProperty("policy", policies[i]);
+		radio->setChecked(current.compare(policies[i], Qt::CaseInsensitive) == 0);
+		group->addButton(radio);
+		grid->addWidget(radio, i, 0);
 
+		// The two arrows point inward (toward each other): right-pointing on the left,
+		// left-pointing on the right. So "outside" reads as text on the outer edges and
+		// "connector" as text meeting in the middle near the connectors.
+		int col = 1;
+		for (bool goLeft : { false, true }) {
+			auto * symbol = new QLabel();
+			symbol->setPixmap(NetLabel::stylePreviewPixmap(policies[i], goLeft, iconSize));
+			symbol->setFixedSize(iconSize);
+			grid->addWidget(symbol, i, col++);
+		}
+	}
+	grid->setColumnStretch(3, 1);
+	grid->setHorizontalSpacing(6);
+	// Make sure exactly one is selected even if the stored value was unexpected.
+	if (group->checkedButton() == nullptr && !group->buttons().isEmpty()) {
+		group->buttons().first()->setChecked(true);
+	}
+
+	connect(group, SIGNAL(buttonClicked(QAbstractButton *)), this, SLOT(netLabelStyleChanged(QAbstractButton *)));
+
+	layout->addLayout(grid);
 	groupBox->setLayout(layout);
 	return groupBox;
 }
 
-void PrefsDialog::netLabelStyleChanged(int index) {
-	auto * comboBox = qobject_cast<QComboBox *>(sender());
-	if (comboBox == nullptr) return;
-
-	m_settings.insert("schemNetLabelStyle", comboBox->itemData(index).toString());
+void PrefsDialog::netLabelStyleChanged(QAbstractButton * button) {
+	if (button == nullptr) return;
+	m_settings.insert("schemNetLabelStyle", button->property("policy").toString());
 }

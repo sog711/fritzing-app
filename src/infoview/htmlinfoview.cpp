@@ -1324,6 +1324,12 @@ void HtmlInfoView::updateRotation(ItemBase * itemBase) {
 	if (itemBase != m_lastItemBase) return;
 
 	setRotation(itemBase);
+
+	// Some property widgets show transform-dependent values (e.g. a net label's actual
+	// text alignment); rebuild the inspector so they reflect the new transform.
+	if (itemBase->inspectorRefreshOnTransform()) {
+		reloadContent(InfoGraphicsView::getInfoGraphicsView(itemBase));
+	}
 }
 
 void HtmlInfoView::xyEntry() {
