@@ -8348,6 +8348,43 @@ void SketchWidget::setProp(ItemBase * item, const QString & prop, const QString 
 	m_undoStack->waitPush(cmd, PropChangeDelay);
 }
 
+int SketchWidget::collectSelectedNetLabels(QList<SymbolPaletteItem *> & netLabels)
+{
+	Q_FOREACH (QGraphicsItem * gItem, scene()->selectedItems()) {
+		auto * symbol = dynamic_cast<SymbolPaletteItem *>(gItem);
+		if ((symbol != nullptr) && symbol->isOnlyNetLabel()) {
+			netLabels.append(symbol);
+		}
+	}
+	return netLabels.count();
+}
+
+void SketchWidget::setNetLabelStyleForSelection(const QString & policy)
+{
+	QList<SymbolPaletteItem *> netLabels;
+	collectSelectedNetLabels(netLabels);
+	if (netLabels.isEmpty()) return;
+
+	auto * parentCommand = new QUndoCommand(tr("Align %n net label(s)", "", netLabels.count()));
+
+	bool any = false;
+	Q_FOREACH (SymbolPaletteItem * netLabel, netLabels) {
+		bool goLeft = (netLabel->getDirection() == "left");
+		QString newAlign = SymbolPaletteItem::alignForPolicy(policy, goLeft);
+		QString oldAlign = netLabel->modelPart()->localProp("style").toString();
+		if (newAlign != oldAlign) {
+			new SetPropCommand(this, netLabel->id(), "style", oldAlign, newAlign, true, parentCommand);
+			any = true;
+		}
+	}
+
+	if (any) {
+		m_undoStack->waitPush(parentCommand, PropChangeDelay);
+	} else {
+		delete parentCommand;
+	}
+}
+
 void SketchWidget::setHoleSize(ItemBase * item, const QString & prop, const QString & trProp, const QString & oldValue, const QString & newValue, QRectF & oldRect, QRectF & newRect, bool redraw)
 {
 	if (oldValue.isEmpty() && newValue.isEmpty()) return;

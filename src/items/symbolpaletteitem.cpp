@@ -348,6 +348,22 @@ QString SymbolPaletteItem::effectiveAlign() {
 	return (defaultNetLabelStyle() == NetLabelStyleOutside) ? NetLabelAlignLeft : NetLabelAlignRight;
 }
 
+QString SymbolPaletteItem::alignForPolicy(const QString & policy, bool goLeft) {
+	// The connector is on the local-left edge when goLeft. "outside" puts the text on the
+	// non-connector edge, "connector" on the connector edge.
+	if (policy == NetLabelStyleConnector) {
+		return goLeft ? NetLabelAlignLeft : NetLabelAlignRight;
+	}
+	return goLeft ? NetLabelAlignRight : NetLabelAlignLeft;   // outside
+}
+
+QString SymbolPaletteItem::policyForAlign(const QString & align, bool goLeft) {
+	// Inverse of alignForPolicy: the text is at the connector when its edge matches the
+	// connector's (local-left when goLeft).
+	bool textLeft = (align == NetLabelAlignLeft);
+	return (textLeft == goLeft) ? NetLabelStyleConnector : NetLabelStyleOutside;
+}
+
 void SymbolPaletteItem::setStyle(const QString & style) {
 	m_modelPart->setLocalProp("style", style);
 
@@ -536,8 +552,27 @@ bool SymbolPaletteItem::collectExtraInfo(QWidget * parent, const QString & famil
 		return true;
 	}
 
+	// When several net labels are selected, the inspector switches to a group mode: the
+	// per-label text field is hidden, and the alignment is expressed with the orientation-
+	// independent outside/connector policy applied to the whole selection.
+	bool groupMode = false;
+	QList<SymbolPaletteItem *> selectedNetLabels;
+	if (isOnlyNetLabel()) {
+		InfoGraphicsView * igv = InfoGraphicsView::getInfoGraphicsView(this);
+		if ((igv != nullptr) && igv->collectSelectedNetLabels(selectedNetLabels) > 1
+		        && selectedNetLabels.contains(this)) {
+			groupMode = true;
+		}
+	}
+
 	if (prop.compare("label", Qt::CaseInsensitive) == 0 && m_isNetLabel)
 	{
+		if (groupMode) {
+			// Can't give many labels one name.
+			hide = true;
+			return true;
+		}
+
 		auto * edit = new QLineEdit(parent);
 		edit->setEnabled(swappingEnabled);
 		edit->setText(getLabel());
@@ -553,14 +588,38 @@ bool SymbolPaletteItem::collectExtraInfo(QWidget * parent, const QString & famil
 
 	if (prop.compare("style", Qt::CaseInsensitive) == 0 && m_isNetLabel)
 	{
-		QString align = effectiveAlign();
-
 		auto * edit = new FocusOutComboBox(parent);
 		edit->setEnabled(swappingEnabled);
-		// The Inspector shows the label's ACTUAL on-screen text alignment with standard
-		// left/right align icons (+ legacy). The stored value is in the label's local
-		// frame, so the actual side differs from it whenever the transform mirrors the
-		// x-axis (horizontal flip OR 180° rotation, i.e. m11 < 0).
+		edit->setObjectName("infoViewComboBox");
+		returnProp = tr("style");
+
+		if (groupMode) {
+			// Orientation-independent policy applied to the whole selection.
+			edit->addItem(tr("Outside aligned"), NetLabelStyleOutside);
+			edit->addItem(tr("Connector aligned"), NetLabelStyleConnector);
+
+			QString common;
+			bool first = true, mixed = false;
+			Q_FOREACH (SymbolPaletteItem * netLabel, selectedNetLabels) {
+				QString a = netLabel->effectiveAlign();
+				if (a == NetLabelStyleLegacy) { mixed = true; break; }
+				QString p = policyForAlign(a, netLabel->getDirection() == "left");
+				if (first) { common = p; first = false; }
+				else if (p != common) { mixed = true; break; }
+			}
+			edit->setCurrentIndex(mixed ? -1 : edit->findData(common));
+
+			connect(edit, SIGNAL(currentIndexChanged(int)), this, SLOT(groupStyleEntry(int)));
+			returnWidget = edit;
+			returnValue = mixed ? QString() : common;
+			return true;
+		}
+
+		// Single item: show the ACTUAL on-screen text alignment with standard left/right
+		// align icons (+ legacy). The stored value is in the label's local frame, so the
+		// actual side differs from it whenever the transform mirrors the x-axis (horizontal
+		// flip OR 180° rotation, i.e. m11 < 0).
+		QString align = effectiveAlign();
 		edit->addItem(QIcon(":/resources/images/icons/align_left.svg"), tr("Left aligned"), NetLabelAlignLeft);
 		edit->addItem(QIcon(":/resources/images/icons/align_right.svg"), tr("Right aligned"), NetLabelAlignRight);
 		edit->addItem(tr("Legacy"), NetLabelStyleLegacy);
@@ -574,13 +633,10 @@ bool SymbolPaletteItem::collectExtraInfo(QWidget * parent, const QString & famil
 
 		int ix = edit->findData(shown);
 		edit->setCurrentIndex(ix >= 0 ? ix : 0);
-		edit->setObjectName("infoViewComboBox");
 
 		connect(edit, SIGNAL(currentIndexChanged(int)), this, SLOT(styleEntry(int)));
 		returnWidget = edit;
-
 		returnValue = shown;
-		returnProp = tr("style");
 		return true;
 	}
 
@@ -639,6 +695,20 @@ void SymbolPaletteItem::styleEntry(int index) {
 	InfoGraphicsView * infoGraphicsView = InfoGraphicsView::getInfoGraphicsView(this);
 	if (infoGraphicsView != nullptr) {
 		infoGraphicsView->setProp(this, "style", ItemBase::TranslatedPropertyNames.value("style"), current, newValue, true);
+	}
+}
+
+void SymbolPaletteItem::groupStyleEntry(int index) {
+	auto * comboBox = qobject_cast<QComboBox *>(sender());
+	if (comboBox == nullptr) return;
+
+	QString policy = comboBox->itemData(index).toString();   // "outside" / "connector"
+	if (policy.isEmpty()) return;
+
+	// Apply the policy to every selected net label as one undoable action.
+	InfoGraphicsView * infoGraphicsView = InfoGraphicsView::getInfoGraphicsView(this);
+	if (infoGraphicsView != nullptr) {
+		infoGraphicsView->setNetLabelStyleForSelection(policy);
 	}
 }
 

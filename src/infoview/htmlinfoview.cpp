@@ -34,6 +34,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "htmlinfoview.h"
 #include "scalediconframe.h"
 #include "../sketch/infographicsview.h"
+#include "../items/symbolpaletteitem.h"
 #include "../debugdialog.h"
 #include "../connectors/connector.h"
 #include "../utils/flineedit.h"
@@ -471,17 +472,54 @@ void HtmlInfoView::appendItemStuff(ItemBase * itemBase, ModelPart * modelPart, b
 	if (modelPart == nullptr) return;
 	if (modelPart->modelPartShared() == nullptr) return;
 
+	// When several net labels are selected, the inspector is in group mode: there is no
+	// single editable title, and the constant title lists all selected labels.
+	QList<SymbolPaletteItem *> selectedNetLabels;
+	bool netLabelGroup = false;
+	{
+		auto * symbol = dynamic_cast<SymbolPaletteItem *>(itemBase);
+		if ((symbol != nullptr) && symbol->isOnlyNetLabel()) {
+			InfoGraphicsView * igv = InfoGraphicsView::getInfoGraphicsView(itemBase);
+			if ((igv != nullptr) && igv->collectSelectedNetLabels(selectedNetLabels) > 1
+			        && selectedNetLabels.contains(symbol)) {
+				netLabelGroup = true;
+			}
+		}
+	}
+
 	setUpTitle(itemBase);
 	setUpIcons(itemBase, swappingEnabled);
 
-	QString nameString;
-	if (swappingEnabled) {
-		nameString = (itemBase) != nullptr ? itemBase->getInspectorTitle() : modelPart->title();
+	// Hide the per-item editable title in group mode (restore otherwise).
+	m_titleEdit->setVisible(!m_tinyMode && !netLabelGroup);
+
+	if (netLabelGroup) {
+		// Collapse repeated titles into a multiplier, e.g. "2×VCC, GND", keeping the order
+		// in which each distinct title first appears.
+		QStringList order;
+		QHash<QString, int> counts;
+		Q_FOREACH (SymbolPaletteItem * netLabel, selectedNetLabels) {
+			QString title = netLabel->getInspectorTitle();
+			if (!counts.contains(title)) order << title;
+			counts[title] += 1;
+		}
+		QStringList parts;
+		Q_FOREACH (const QString & title, order) {
+			int n = counts.value(title);
+			parts << (n > 1 ? QString("%1×%2").arg(n).arg(title) : title);
+		}
+		partTitle(parts.join(", "), QString(), QString(), false);
 	}
 	else {
-		nameString = modelPart->description();
+		QString nameString;
+		if (swappingEnabled) {
+			nameString = (itemBase) != nullptr ? itemBase->getInspectorTitle() : modelPart->title();
+		}
+		else {
+			nameString = modelPart->description();
+		}
+		partTitle(nameString, modelPart->version(), modelPart->url(), modelPart->isObsolete());
 	}
-	partTitle(nameString, modelPart->version(), modelPart->url(), modelPart->isObsolete());
 	m_lockFrame->setVisible(swappingEnabled);
 	m_lockLabel->setVisible(swappingEnabled);
 	m_lockCheckbox->setChecked(itemBase->moveLock());

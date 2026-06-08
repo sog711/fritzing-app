@@ -86,11 +86,16 @@ public:
 	static double DefaultVoltage;
 	static QString defaultNetLabelStyle();
 	static void refreshDefaultNetLabelStyle();
+	// Map between the orientation-independent policy ("outside"/"connector") and the stored
+	// local alignment ("left"/"right"), given the label's arrow side (goLeft).
+	static QString alignForPolicy(const QString & policy, bool goLeft);
+	static QString policyForAlign(const QString & align, bool goLeft);
 
 public Q_SLOTS:
 	void voltageEntry(int index);
 	void labelEntry();
 	void styleEntry(int index);
+	void groupStyleEntry(int index);
 	void swapEntry(int index);
 
 protected:

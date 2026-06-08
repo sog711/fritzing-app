@@ -214,6 +214,17 @@ void InfoGraphicsView::setProp(ItemBase * item, const QString & prop, const QStr
 	Q_UNUSED(redraw);
 }
 
+int InfoGraphicsView::collectSelectedNetLabels(QList<SymbolPaletteItem *> & netLabels)
+{
+	Q_UNUSED(netLabels);
+	return 0;
+}
+
+void InfoGraphicsView::setNetLabelStyleForSelection(const QString & policy)
+{
+	Q_UNUSED(policy);
+}
+
 void InfoGraphicsView::setHoleSize(ItemBase * item, const QString & prop, const QString & trProp, const QString & oldValue, const QString & newValue, QRectF & oldRect, QRectF & newRect, bool redraw)
 {
 	Q_UNUSED(item);
