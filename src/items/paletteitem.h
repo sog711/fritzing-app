@@ -174,6 +174,15 @@ protected Q_SLOTS:
 
 public:
 	static const QString HoleSizePrefix;
+	// Resolve a hole-size string/preset and clamp its diameter and ring thickness to this
+	// part type's limits (e.g. a via's minimum annular ring). Returns "diameter,thickness".
+	QString clampHoleSize(const QString & holeSizeStr);
+
+protected:
+	// If this is a hole/via and several holes are selected, apply the given diameter and/or
+	// ring thickness (empty = keep each hole's own) to the whole selection in one undoable
+	// action. Returns true if it handled a group (so callers skip the single-item path).
+	bool applyHoleSizeToSelectionIfGroup(const QString & diameter, const QString & ringThickness);
 
 protected:
 	QList<class ItemBase *> m_layerKin;

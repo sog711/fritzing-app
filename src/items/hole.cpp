@@ -276,9 +276,12 @@ bool Hole::collectExtraInfo(QWidget * parent, const QString & family, const QStr
 void Hole::changeHoleSize(const QString & newSize) {
 	InfoGraphicsView * infoGraphicsView = InfoGraphicsView::getInfoGraphicsView(this);
 	if (infoGraphicsView != nullptr) {
+		// Clamp to this part's limits (e.g. a via's minimum ring) so the rect used for
+		// recentering and the stored value stay consistent and valid.
+		QString clampedSize = clampHoleSize(newSize);
 		QRectF holeRect = getRect(holeSize());
-		QRectF newHoleRect = getRect(newSize);
-		infoGraphicsView->setHoleSize(this, "hole size", tr("hole size"), holeSize(), newSize, holeRect, newHoleRect, true);
+		QRectF newHoleRect = getRect(clampedSize);
+		infoGraphicsView->setHoleSize(this, "hole size", tr("hole size"), holeSize(), clampedSize, holeRect, newHoleRect, true);
 	}
 }
 

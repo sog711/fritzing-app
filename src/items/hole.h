@@ -66,10 +66,10 @@ protected:
 	ItemBase * setBothSvg(const QString & holeDiameter, const QString & ringThickness);
 	void setBothNonConnectors(ItemBase * itemBase, SvgIdLayer * svgIdLayer);
 	virtual void setBoth(const QString & holeDiameter, const QString &  thickness);
-	QRectF getRect(const QString & newSize);
 	ViewLayer::ViewID useViewIDForPixmap(ViewLayer::ViewID, bool swappingEnabled);
 
 public:
+	QRectF getRect(const QString & newSize);   // public so a group apply can recenter each hole
 	static const double OffsetPixels;
 };
 

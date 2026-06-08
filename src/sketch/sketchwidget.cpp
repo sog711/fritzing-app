@@ -8370,6 +8370,60 @@ int SketchWidget::collectSelectedWires(QList<Wire *> & wires)
 	return wires.count();
 }
 
+int SketchWidget::collectSelectedHoles(QList<Hole *> & holes)
+{
+	Q_FOREACH (QGraphicsItem * gItem, scene()->selectedItems()) {
+		auto * hole = dynamic_cast<Hole *>(gItem);
+		if (hole != nullptr) {
+			holes.append(hole);
+		}
+	}
+	return holes.count();
+}
+
+void SketchWidget::setHoleSizeForSelection(const QString & diameter, const QString & ringThickness)
+{
+	// Apply a hole diameter and/or ring thickness to every selected hole/via in one
+	// undoable action. An empty argument means "keep that hole's current value", so a
+	// diameter-only change preserves each hole's own ring thickness and vice versa.
+	QList<Hole *> holes;
+	collectSelectedHoles(holes);
+	if (holes.isEmpty()) return;
+
+	auto * parentCommand = new QUndoCommand(tr("Change hole size of %n hole(s)", "", holes.count()));
+
+	bool any = false;
+	Q_FOREACH (Hole * hole, holes) {
+		QStringList dt = hole->holeSize().split(",");
+		if (dt.count() != 2) continue;
+		QString newDiameter = diameter.isEmpty() ? dt.at(0) : diameter;
+		QString newThickness = ringThickness.isEmpty() ? dt.at(1) : ringThickness;
+		QString oldSize = hole->holeSize();
+		// Clamp to this hole's limits (e.g. a via's minimum ring thickness) so a value
+		// below the minimum becomes the minimum rather than an invalid size.
+		QString newSize = hole->clampHoleSize(newDiameter + "," + newThickness);
+		if (newSize == oldSize) continue;
+
+		QRectF oldRect = hole->getRect(oldSize);
+		QRectF newRect = hole->getRect(newSize);
+
+		new SetPropCommand(this, hole->id(), "hole size", oldSize, newSize, true, parentCommand);
+		hole->saveGeometry();
+		ViewGeometry vg(hole->getViewGeometry());
+		QPointF p(vg.loc().x() + (oldRect.width() / 2) - (newRect.width() / 2),
+		          vg.loc().y() + (oldRect.height() / 2) - (newRect.height() / 2));
+		vg.setLoc(p);
+		new MoveItemCommand(this, hole->id(), hole->getViewGeometry(), vg, false, parentCommand);
+		any = true;
+	}
+
+	if (any) {
+		m_undoStack->waitPush(parentCommand, PropChangeDelay);
+	} else {
+		delete parentCommand;
+	}
+}
+
 void SketchWidget::setNetLabelStyleForSelection(const QString & policy)
 {
 	QList<SymbolPaletteItem *> netLabels;

@@ -35,6 +35,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "scalediconframe.h"
 #include "../sketch/infographicsview.h"
 #include "../items/symbolpaletteitem.h"
+#include "../items/hole.h"
 #include "../debugdialog.h"
 #include "../connectors/connector.h"
 #include "../utils/flineedit.h"
@@ -506,11 +507,26 @@ void HtmlInfoView::appendItemStuff(ItemBase * itemBase, ModelPart * modelPart, b
 		}
 	}
 
+	// Likewise, several selected holes/vias form a group; the shared diameter/ring controls
+	// apply to all (handled in PaletteItem), so here we just show an "N holes" title.
+	QList<Hole *> selectedHoles;
+	bool holeGroup = false;
+	{
+		auto * hole = dynamic_cast<Hole *>(itemBase);
+		if (hole != nullptr) {
+			InfoGraphicsView * igv = InfoGraphicsView::getInfoGraphicsView(itemBase);
+			if ((igv != nullptr) && igv->collectSelectedHoles(selectedHoles) > 1
+			        && selectedHoles.contains(hole)) {
+				holeGroup = true;
+			}
+		}
+	}
+
 	setUpTitle(itemBase);
 	setUpIcons(itemBase, swappingEnabled);
 
 	// Hide the per-item editable title in group mode (restore otherwise).
-	m_titleEdit->setVisible(!m_tinyMode && !netLabelGroup);
+	m_titleEdit->setVisible(!m_tinyMode && !netLabelGroup && !holeGroup);
 
 	if (netLabelGroup) {
 		// Collapse repeated titles into a multiplier, e.g. "2×VCC, GND", keeping the order
@@ -528,6 +544,9 @@ void HtmlInfoView::appendItemStuff(ItemBase * itemBase, ModelPart * modelPart, b
 			parts << (n > 1 ? QString("%1×%2").arg(n).arg(title) : title);
 		}
 		partTitle(parts.join(", "), QString(), QString(), false);
+	}
+	else if (holeGroup) {
+		partTitle(tr("%n holes", "", selectedHoles.count()), QString(), QString(), false);
 	}
 	else {
 		QString nameString;

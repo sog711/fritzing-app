@@ -231,6 +231,18 @@ int InfoGraphicsView::collectSelectedWires(QList<Wire *> & wires)
 	return 0;
 }
 
+int InfoGraphicsView::collectSelectedHoles(QList<Hole *> & holes)
+{
+	Q_UNUSED(holes);
+	return 0;
+}
+
+void InfoGraphicsView::setHoleSizeForSelection(const QString & diameter, const QString & ringThickness)
+{
+	Q_UNUSED(diameter);
+	Q_UNUSED(ringThickness);
+}
+
 void InfoGraphicsView::setHoleSize(ItemBase * item, const QString & prop, const QString & trProp, const QString & oldValue, const QString & newValue, QRectF & oldRect, QRectF & newRect, bool redraw)
 {
 	Q_UNUSED(item);

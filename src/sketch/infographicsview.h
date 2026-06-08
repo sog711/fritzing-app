@@ -102,6 +102,8 @@ public:
 	virtual int collectSelectedNetLabels(QList<class SymbolPaletteItem *> & netLabels);
 	virtual void setNetLabelStyleForSelection(const QString & policy);
 	virtual int collectSelectedWires(QList<class Wire *> & wires);
+	virtual int collectSelectedHoles(QList<class Hole *> & holes);
+	virtual void setHoleSizeForSelection(const QString & diameter, const QString & ringThickness);
 	virtual void setHoleSize(ItemBase *, const QString & propName, const QString & translatedPropName, const QString & oldValue, const QString & newValue, QRectF & oldRect, QRectF & newRect, bool redraw);
 	virtual void changeWireWidthMils(const QString newWidth);
 	virtual void changeWireColor(const QString newColor);
