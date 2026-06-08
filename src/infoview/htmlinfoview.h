@@ -123,6 +123,9 @@ protected:
 	void addSpice(ModelPart * modelPart);
 	void addTags(ModelPart * modelPart);
 	void partTitle(const QString & title, const QString & version, const QString & url, bool obsolete);
+	// Group-mode title: a read-only summary in the (same-size) title field plus a
+	// selection-count heading below the icons.
+	void showGroupTitle(const QString & summary, const QString & countText);
 	void displayProps(ModelPart * modelPart, ItemBase * itemBase, bool swappingEnabled);
 	void restoreFocusAfterRefresh(QWidget * previouslyFocused);
 	bool eventFilter(QObject * target, QEvent * event) override;

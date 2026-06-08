@@ -422,6 +422,68 @@ void HtmlInfoView::appendStuff(ItemBase* item, bool swappingEnabled) {
 	}
 }
 
+// ---- group-mode title summaries ----
+
+static QString groupNetLabelNames(const QList<SymbolPaletteItem *> & labels) {
+	// e.g. "2×VCC, GND" — collapse repeats into a multiplier, first-appearance order.
+	QStringList order;
+	QHash<QString, int> counts;
+	Q_FOREACH (SymbolPaletteItem * netLabel, labels) {
+		QString title = netLabel->getInspectorTitle();
+		if (!counts.contains(title)) order << title;
+		counts[title] += 1;
+	}
+	QStringList parts;
+	Q_FOREACH (const QString & title, order) {
+		int n = counts.value(title);
+		parts << (n > 1 ? QString("%1×%2").arg(n).arg(title) : title);
+	}
+	return parts.join(", ");
+}
+
+static QString groupHoleDiameters(const QList<Hole *> & holes) {
+	QString minStr, maxStr;
+	double minIn = 0, maxIn = 0;
+	bool first = true;
+	Q_FOREACH (Hole * hole, holes) {
+		QStringList dt = hole->holeSize().split(",");
+		if (dt.isEmpty()) continue;
+		bool ok;
+		double in = TextUtils::convertToInches(dt.at(0), &ok, false);
+		if (!ok) continue;
+		if (first || in < minIn) { minIn = in; minStr = dt.at(0); }
+		if (first || in > maxIn) { maxIn = in; maxStr = dt.at(0); }
+		first = false;
+	}
+	if (first) return QString();
+	return (minStr == maxStr) ? minStr : QString("%1 – %2").arg(minStr).arg(maxStr);
+}
+
+static QString groupWireWidths(const QList<Wire *> & wires) {
+	double minMils = 0, maxMils = 0;
+	bool first = true;
+	Q_FOREACH (Wire * wire, wires) {
+		double m = wire->mils();
+		if (first || m < minMils) minMils = m;
+		if (first || m > maxMils) maxMils = m;
+		first = false;
+	}
+	if (first) return QString();
+	if (qAbs(minMils - maxMils) < 0.01) {
+		return QObject::tr("%1 mil").arg(QString::number(qRound(minMils)));
+	}
+	return QObject::tr("%1 – %2 mil").arg(QString::number(qRound(minMils))).arg(QString::number(qRound(maxMils)));
+}
+
+void HtmlInfoView::showGroupTitle(const QString & summary, const QString & countText) {
+	// Same-size, non-editable title (avoids the layout shift of hiding it). setUpTitle
+	// re-enables it when a single item is shown again.
+	m_titleEdit->setText(summary);
+	m_titleEdit->setEnabled(false);
+	m_titleEdit->setCursorPosition(0);
+	partTitle(countText, QString(), QString(), false);
+}
+
 void HtmlInfoView::appendWireStuff(Wire* wire, bool swappingEnabled) {
 	if (wire == nullptr) return;
 
@@ -455,12 +517,6 @@ void HtmlInfoView::appendWireStuff(Wire* wire, bool swappingEnabled) {
 	else {
 		nameString = modelPart->description();
 	}
-	if (wireGroup) {
-		partTitle(tr("%n wires", "", selectedWires.count()), QString(), QString(), false);
-	}
-	else {
-		partTitle(nameString, modelPart->version(), modelPart->url(), modelPart->isObsolete());
-	}
 	m_lockFrame->setVisible(false);
 	m_lockLabel->setVisible(false);
 	m_locationFrame->setVisible(false);
@@ -470,7 +526,15 @@ void HtmlInfoView::appendWireStuff(Wire* wire, bool swappingEnabled) {
 
 	setUpTitle(wire);
 	setUpIcons(wire, swappingEnabled);
-	m_titleEdit->setVisible(!m_tinyMode && !wireGroup);
+	m_titleEdit->setVisible(!m_tinyMode);
+
+	if (wireGroup) {
+		// Read-only title = min/max trace width; heading = selection count.
+		showGroupTitle(groupWireWidths(selectedWires), tr("%n wires", "", selectedWires.count()));
+	}
+	else {
+		partTitle(nameString, modelPart->version(), modelPart->url(), modelPart->isObsolete());
+	}
 
 	displayProps(modelPart, wire, swappingEnabled);
 
@@ -492,8 +556,8 @@ void HtmlInfoView::appendItemStuff(ItemBase * itemBase, ModelPart * modelPart, b
 	if (modelPart == nullptr) return;
 	if (modelPart->modelPartShared() == nullptr) return;
 
-	// When several net labels are selected, the inspector is in group mode: there is no
-	// single editable title, and the constant title lists all selected labels.
+	// When several net labels are selected, the inspector is in group mode: the title field
+	// shows the (read-only) list of names and the heading shows the selection count.
 	QList<SymbolPaletteItem *> selectedNetLabels;
 	bool netLabelGroup = false;
 	{
@@ -525,28 +589,17 @@ void HtmlInfoView::appendItemStuff(ItemBase * itemBase, ModelPart * modelPart, b
 	setUpTitle(itemBase);
 	setUpIcons(itemBase, swappingEnabled);
 
-	// Hide the per-item editable title in group mode (restore otherwise).
-	m_titleEdit->setVisible(!m_tinyMode && !netLabelGroup && !holeGroup);
+	m_titleEdit->setVisible(!m_tinyMode);
 
 	if (netLabelGroup) {
-		// Collapse repeated titles into a multiplier, e.g. "2×VCC, GND", keeping the order
-		// in which each distinct title first appears.
-		QStringList order;
-		QHash<QString, int> counts;
-		Q_FOREACH (SymbolPaletteItem * netLabel, selectedNetLabels) {
-			QString title = netLabel->getInspectorTitle();
-			if (!counts.contains(title)) order << title;
-			counts[title] += 1;
-		}
-		QStringList parts;
-		Q_FOREACH (const QString & title, order) {
-			int n = counts.value(title);
-			parts << (n > 1 ? QString("%1×%2").arg(n).arg(title) : title);
-		}
-		partTitle(parts.join(", "), QString(), QString(), false);
+		// Read-only title = the list of net names; heading = selection count.
+		showGroupTitle(groupNetLabelNames(selectedNetLabels),
+		               tr("%n net labels", "", selectedNetLabels.count()));
 	}
 	else if (holeGroup) {
-		partTitle(tr("%n holes", "", selectedHoles.count()), QString(), QString(), false);
+		// Read-only title = min/max diameter; heading = selection count.
+		showGroupTitle(groupHoleDiameters(selectedHoles),
+		               tr("%n holes", "", selectedHoles.count()));
 	}
 	else {
 		QString nameString;

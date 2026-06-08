@@ -567,22 +567,9 @@ bool SymbolPaletteItem::collectExtraInfo(QWidget * parent, const QString & famil
 
 	if (prop.compare("label", Qt::CaseInsensitive) == 0 && m_isNetLabel)
 	{
-		if (groupMode) {
-			// Can't give many labels one name.
-			hide = true;
-			return true;
-		}
-
-		auto * edit = new QLineEdit(parent);
-		edit->setEnabled(swappingEnabled);
-		edit->setText(getLabel());
-		edit->setObjectName("infoViewLineEdit");
-
-		connect(edit, SIGNAL(editingFinished()), this, SLOT(labelEntry()));
-		returnWidget = edit;
-
-		returnValue = getLabel();
-		returnProp = tr("label");
+		// The net label name is edited via the inspector's title field, so this duplicate
+		// property row is always hidden (single and group).
+		hide = true;
 		return true;
 	}
 
