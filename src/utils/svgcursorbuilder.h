@@ -22,6 +22,8 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #define SVGCURSORBUILDER_H
 
 #include <QString>
+#include <QByteArray>
+#include <QHash>
 #include <QPixmap>
 #include <QCursor>
 #include <QObject>
@@ -129,6 +131,30 @@ public:
 	 * device pixel ratio.
 	 */
 	static QCursor createCursor(const QString& svgPath, int baseSize = 0);
+
+	/**
+	 * @brief Resolve CSS custom properties - var(--name, fallback) - in raw
+	 *        SVG data.
+	 *
+	 * Qt's SVG renderer does not understand CSS custom properties, so the
+	 * cursor SVGs declare their themeable colors as var(--name, fallback)
+	 * and we resolve them here before rendering. Each var() reference is
+	 * replaced with the value from @p values for its name, or with its inline
+	 * fallback when the name is not in the map. This keeps the raw SVGs valid
+	 * and correctly themed in standard SVG viewers (browsers, Illustrator).
+	 *
+	 * The cursors declare:
+	 *   --cursor-body     the ".cls-1" body fill  (fallback #fff)
+	 *   --cursor-outline  the outline fill         (fallback #000)
+	 * On macOS these are flipped to #000 / #fff for the native black cursor
+	 * with a white halo; elsewhere the fallbacks give the white body / black
+	 * outline look.
+	 *
+	 * @param svgData Raw SVG bytes, modified in place.
+	 * @param values  Custom-property name -> value overrides. An empty map
+	 *                leaves every var() at its inline fallback.
+	 */
+	static void resolveSvgVariables(QByteArray & svgData, const QHash<QString, QString> & values);
 
 	/**
 	 * @brief Add a cursor to the stack

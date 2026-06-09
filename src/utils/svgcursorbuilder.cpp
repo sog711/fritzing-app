@@ -23,6 +23,8 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QApplication>
 #include <QFile>
+#include <QByteArray>
+#include <QHash>
 #include <QXmlStreamReader>
 #include <QSvgRenderer>
 #include <QPainter>
@@ -105,15 +107,31 @@ void SvgCursorBuilder::initCursors()
 CursorInfo SvgCursorBuilder::loadCursorFromSvg(const QString& svgPath, int requestedSize, qreal scale) {
 	CursorInfo info;
 
-	// Open the SVG file
+	// Open and read the whole SVG file. We keep the raw bytes so that, on
+	// macOS, we can recolor them before handing them to the renderer.
 	QFile file(svgPath);
 	if (!file.open(QIODevice::ReadOnly)) {
 		info.error = QString("Cannot open file: %1").arg(svgPath);
 		return info;
 	}
+	QByteArray svgData = file.readAll();
+	file.close();
+
+	// The cursor SVGs declare their colors as CSS custom properties with
+	// fallbacks - var(--cursor-body, #fff) / var(--cursor-outline, #000).
+	// Qt's SVG renderer can't resolve var(), so we resolve them here on every
+	// platform. With no overrides each var() falls back to its inline default
+	// (the standard white-body / black-outline look).
+	QHash<QString, QString> cursorColors;
+#ifdef Q_OS_MACOS
+	// macOS cursors are black with a white halo - the inverse scheme.
+	cursorColors.insert(QStringLiteral("--cursor-body"), QStringLiteral("#000"));
+	cursorColors.insert(QStringLiteral("--cursor-outline"), QStringLiteral("#fff"));
+#endif
+	resolveSvgVariables(svgData, cursorColors);
 
 	// Parse the SVG XML to extract attributes
-	QXmlStreamReader xml(&file);
+	QXmlStreamReader xml(svgData);
 
 	int svgWidth = 0;
 	int svgHeight = 0;
@@ -158,8 +176,6 @@ CursorInfo SvgCursorBuilder::loadCursorFromSvg(const QString& svgPath, int reque
 		}
 	}
 
-	file.close();
-
 	// Check for XML parsing errors
 	if (xml.hasError()) {
 		info.error = QString("XML parsing error: %1").arg(xml.errorString());
@@ -192,8 +208,8 @@ CursorInfo SvgCursorBuilder::loadCursorFromSvg(const QString& svgPath, int reque
 	info.hotspotX = static_cast<int>(info.hotspotX * scale);
 	info.hotspotY = static_cast<int>(info.hotspotY * scale);
 
-	// Render the SVG to a pixmap
-	QSvgRenderer renderer(svgPath);
+	// Render the SVG to a pixmap (from the possibly-recolored bytes)
+	QSvgRenderer renderer(svgData);
 	if (!renderer.isValid()) {
 		info.error = "Failed to load SVG for rendering";
 		return info;
@@ -214,6 +230,32 @@ CursorInfo SvgCursorBuilder::loadCursorFromSvg(const QString& svgPath, int reque
 	info.valid = true;
 
 	return info;
+}
+
+void SvgCursorBuilder::resolveSvgVariables(QByteArray & svgData, const QHash<QString, QString> & values) {
+	QString svg = QString::fromUtf8(svgData);
+
+	// Matches a CSS custom-property reference: var(--name) or
+	// var(--name, fallback). Group 1 is the name, group 2 the (optional)
+	// fallback.
+	static const QRegularExpression varRef(
+		QStringLiteral("var\\(\\s*(--[A-Za-z0-9_-]+)\\s*(?:,\\s*([^)]*?))?\\s*\\)"));
+
+	QString out;
+	out.reserve(svg.size());
+	qsizetype last = 0;
+	QRegularExpressionMatchIterator it = varRef.globalMatch(svg);
+	while (it.hasNext()) {
+		QRegularExpressionMatch m = it.next();
+		out += svg.mid(last, m.capturedStart() - last);
+		const QString name = m.captured(1);
+		// Use the override if present, otherwise the inline fallback.
+		out += values.value(name, m.captured(2).trimmed());
+		last = m.capturedEnd();
+	}
+	out += svg.mid(last);
+
+	svgData = out.toUtf8();
 }
 
 QCursor SvgCursorBuilder::createCursor(const QString& svgPath, int baseSize) {
