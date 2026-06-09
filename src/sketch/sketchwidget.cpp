@@ -2314,6 +2314,7 @@ bool SketchWidget::shouldAlignToGrid() const {
 void SketchWidget::mousePressEvent(QMouseEvent *event)
 {
 	m_originatingItem = nullptr;
+	m_modifierClickItem = nullptr;
 	m_draggingBendpoint = false;
 	if (m_movingByArrow) return;
 
@@ -2413,6 +2414,12 @@ void SketchWidget::mousePressEvent(QMouseEvent *event)
 	if (itemBase) {
 		viewItemInfo(itemBase);
 		setLastPaletteItemSelectedIf(itemBase);
+		// Remember a Ctrl+left-click target so we can re-apply the selection toggle on release.
+		// Qt only toggles when the release scene position exactly equals the press position, so
+		// a few pixels of drift during the click silently drops it (see mouseReleaseEvent).
+		if (event->button() == Qt::LeftButton && (event->modifiers() & Qt::ControlModifier) != 0) {
+			m_modifierClickItem = itemBase;
+		}
 	}
 
 	if (resizingBoardPress(itemBase)) {
@@ -3338,6 +3345,21 @@ void SketchWidget::mouseReleaseEvent(QMouseEvent *event) {
 	turnOffAutoscroll();
 
 	QGraphicsView::mouseReleaseEvent(event);
+
+	// Qt applies a Ctrl+click selection toggle only when the release scene position exactly
+	// equals the press position (QGraphicsItem::mouseReleaseEvent), so even a single pixel of
+	// drift during the click silently drops the toggle. Re-apply it for a Ctrl+click that
+	// drifted (m_moveEventCount > 0 is exactly the case Qt suppressed) but stayed within click
+	// distance, i.e. did not become a drag. A real drag exceeds startDragDistance and goes
+	// through the QDrag path, so it never reaches here.
+	if (m_modifierClickItem && m_moveEventCount > 0) {
+		bool wasClick = (event->globalPosition().toPoint() - m_mousePressGlobalPos).manhattanLength()
+		                < QApplication::startDragDistance();
+		if (wasClick) {
+			m_modifierClickItem->setSelected(!m_modifierClickItem->isSelected());
+		}
+	}
+	m_modifierClickItem = nullptr;
 
 	if (m_connectorDragWire) {
 		// remove again (may not have been removed earlier)

@@ -746,6 +746,10 @@ protected:
 	int m_autoScrollThreshold = 0;
 	bool m_clearSceneRect = false;
 	QPointer<ItemBase> m_moveReferenceItem;
+	// The item a Ctrl+left-click landed on, so we can re-apply the selection toggle on
+	// release: Qt only toggles when the press and release scene positions are exactly equal,
+	// so a few pixels of drift during the click silently drops the toggle.
+	QPointer<ItemBase> m_modifierClickItem;
 	QPointer<QSvgRenderer> m_movingSVGRenderer;
 	QPointF m_movingSVGOffset;
 	QPointer<QGraphicsSvgItem> m_movingItem;
