@@ -204,10 +204,6 @@ CursorInfo SvgCursorBuilder::loadCursorFromSvg(const QString& svgPath, int reque
 		info.hotspotY = static_cast<int>(info.hotspotY * scaleFactor);
 	}
 
-	// Apply HiDPI scaling to hotspot
-	info.hotspotX = static_cast<int>(info.hotspotX * scale);
-	info.hotspotY = static_cast<int>(info.hotspotY * scale);
-
 	// Render the SVG to a pixmap (from the possibly-recolored bytes)
 	QSvgRenderer renderer(svgData);
 	if (!renderer.isValid()) {
