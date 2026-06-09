@@ -34,6 +34,9 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QKeyEvent>
 #include <QEvent>
 #include <QDebug>
+#ifdef Q_OS_WIN
+#include <QVersionNumber>
+#endif
 
 // Static cursor pointers
 QCursor * SvgCursorBuilder::BendpointCursor = nullptr;
@@ -48,6 +51,98 @@ QCursor * SvgCursorBuilder::SpotFaceCutterCursor = nullptr;
 SvgCursorBuilder SvgCursorBuilder::TheSvgCursorBuilder;
 static QList<QObject *> Listeners;
 static QList<QCursor **> Cursors;
+
+// Sources for rebuilding the managed cursors at a different scale factor,
+// needed by the Windows override-cursor workaround (see overrideSafeCursor()).
+struct CursorSource {
+	QString svgPath;      // empty -> scale basePixmap instead of re-rendering
+	QPixmap basePixmap;
+	QPoint baseHotspot;   // in device-independent pixels
+};
+static QList<CursorSource> CursorSources;
+static QHash<qint64, int> CursorPixmapKeys;   // QPixmap::cacheKey() -> index into CursorSources
+
+#ifdef Q_OS_WIN
+struct CompensatedCursor {
+	QCursor cursor;
+	qreal targetFactor = 0;
+	qreal applyFactor = 0;
+};
+static QHash<int, CompensatedCursor> CompensatedCursors;
+#endif
+
+static void registerCursorSource(const QCursor & cursor, const QString & svgPath, const QPixmap & basePixmap)
+{
+	if (cursor.pixmap().isNull()) return;   // cursor creation failed, fell back to a shape cursor
+
+	CursorSources.append({svgPath, basePixmap, cursor.hotSpot()});
+	CursorPixmapKeys.insert(cursor.pixmap().cacheKey(), CursorSources.count() - 1);
+}
+
+// QTBUG-132709 (fixed in Qt 6.12): on Windows, QGuiApplication::setOverrideCursor()
+// builds one native cursor per screen and calls SetCursor() each time, so the
+// cursor built for the *last* screen in QGuiApplication::screens() is the one
+// that stays visible. With mixed scale factors it is sized for the wrong screen.
+// Compensate by re-rendering the cursor for the screen under the pointer while
+// tagging it with the device pixel ratio of the screen Qt builds the visible
+// native cursor with; the two factors then cancel out to the correct pixel size.
+static QCursor overrideSafeCursor(const QCursor & cursor)
+{
+#ifdef Q_OS_WIN
+	static const bool qtHandlesOverrideScaling =
+		QVersionNumber::fromString(qVersion()) >= QVersionNumber(6, 12, 0);
+	if (qtHandlesOverrideScaling) return cursor;
+
+	const QList<QScreen *> screens = QGuiApplication::screens();
+	if (screens.count() < 2) return cursor;
+
+	QScreen * pointerScreen = QGuiApplication::screenAt(QCursor::pos());
+	if (pointerScreen == nullptr) pointerScreen = QGuiApplication::primaryScreen();
+	if (pointerScreen == nullptr) return cursor;
+	const qreal targetFactor = pointerScreen->devicePixelRatio();
+	const qreal applyFactor = screens.last()->devicePixelRatio();
+	if (qFuzzyCompare(targetFactor, applyFactor)) return cursor;
+
+	const QPixmap pixmap = cursor.pixmap();
+	if (pixmap.isNull()) return cursor;   // shape cursors are handled natively
+	auto it = CursorPixmapKeys.constFind(pixmap.cacheKey());
+	if (it == CursorPixmapKeys.constEnd()) return cursor;
+	int index = it.value();
+
+	CompensatedCursor & comp = CompensatedCursors[index];
+	if (!comp.cursor.pixmap().isNull()
+	    && qFuzzyCompare(comp.targetFactor, targetFactor)
+	    && qFuzzyCompare(comp.applyFactor, applyFactor)) {
+		return comp.cursor;
+	}
+
+	const CursorSource & source = CursorSources.at(index);
+	QPixmap scaled;
+	QPoint hotspot = source.baseHotspot;
+	if (!source.svgPath.isEmpty()) {
+		CursorInfo info = SvgCursorBuilder::loadCursorFromSvg(source.svgPath, 0, targetFactor);
+		if (!info.valid) return cursor;
+		scaled = info.pixmap;
+		hotspot = QPoint(info.hotspotX, info.hotspotY);
+	} else {
+		QSizeF baseSize = QSizeF(source.basePixmap.size()) / source.basePixmap.devicePixelRatio();
+		scaled = source.basePixmap.scaled((baseSize * targetFactor).toSize(),
+			Qt::KeepAspectRatio, Qt::SmoothTransformation);
+	}
+	// The platform multiplies the hotspot by the scale factor of the screen it
+	// builds the cursor for, so pre-divide by that and scale to the pointer screen.
+	scaled.setDevicePixelRatio(applyFactor);
+	hotspot = QPoint(qRound(hotspot.x() * targetFactor / applyFactor),
+	                 qRound(hotspot.y() * targetFactor / applyFactor));
+
+	comp.cursor = QCursor(scaled, hotspot.x(), hotspot.y());
+	comp.targetFactor = targetFactor;
+	comp.applyFactor = applyFactor;
+	return comp.cursor;
+#else
+	return cursor;
+#endif
+}
 
 SvgCursorBuilder::SvgCursorBuilder() : QObject()
 {
@@ -64,6 +159,11 @@ void SvgCursorBuilder::cleanup() {
 		delete *cursor;
 	}
 	Cursors.clear();
+	CursorSources.clear();
+	CursorPixmapKeys.clear();
+#ifdef Q_OS_WIN
+	CompensatedCursors.clear();
+#endif
 
 	// Clean up PNG cursors loaded separately
 	delete RubberbandCursor;
@@ -94,11 +194,13 @@ void SvgCursorBuilder::initCursors()
 
 		for (int i = 0; i < Cursors.count(); i++) {
 			*Cursors.at(i) = new QCursor(createCursor(names.at(i)));
+			registerCursorSource(**Cursors.at(i), names.at(i), QPixmap());
 		}
 
 		// Load rubberband cursor from PNG (temporary until we have SVG version)
 		QPixmap rubberbandPixmap(":resources/images/cursor/rubberband_move.png");
 		RubberbandCursor = new QCursor(rubberbandPixmap, 0, 0);
+		registerCursorSource(*RubberbandCursor, QString(), rubberbandPixmap);
 
 		QApplication::instance()->installEventFilter(instance());
 	}
@@ -274,18 +376,20 @@ void SvgCursorBuilder::addCursor(QObject * object, const QCursor & cursor)
 
 	if (object == nullptr) return;
 
+	const QCursor effectiveCursor = overrideSafeCursor(cursor);
+
 	if (Listeners.contains(object)) {
 		if (Listeners.first() != object) {
 			Listeners.removeOne(object);
 			Listeners.push_front(object);
 		}
-		QApplication::changeOverrideCursor(cursor);
+		QApplication::changeOverrideCursor(effectiveCursor);
 		return;
 	}
 
 	Listeners.push_front(object);
 	connect(object, SIGNAL(destroyed(QObject *)), this, SLOT(deleteCursor(QObject *)));
-	QApplication::setOverrideCursor(cursor);
+	QApplication::setOverrideCursor(effectiveCursor);
 }
 
 void SvgCursorBuilder::removeCursor(QObject * object)
