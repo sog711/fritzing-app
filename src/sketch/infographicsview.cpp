@@ -243,6 +243,12 @@ void InfoGraphicsView::setHoleSizeForSelection(const QString & diameter, const Q
 	Q_UNUSED(ringThickness);
 }
 
+QStringList InfoGraphicsView::commonPropValues(const QString & prop)
+{
+	Q_UNUSED(prop);
+	return QStringList();
+}
+
 void InfoGraphicsView::setHoleSize(ItemBase * item, const QString & prop, const QString & trProp, const QString & oldValue, const QString & newValue, QRectF & oldRect, QRectF & newRect, bool redraw)
 {
 	Q_UNUSED(item);

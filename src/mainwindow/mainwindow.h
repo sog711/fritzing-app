@@ -210,6 +210,7 @@ public:
 	class PCBSketchWidget * pcbView();
 	void noBackup();
 	void swapSelectedAux(ItemBase * itemBase, const QString & moduleID, bool useViewLayerPlacement, ViewLayer::ViewLayerPlacement, QMap<QString, QString> & propsMap);
+	void swapSelectionForProp(const QString & prop, const QString & value);
 	void swapLayers(ItemBase * itemBase, int layers, const QString & msg);
 	bool saveAsAux(const QString & fileName);
 	void swapObsolete(bool displayFeedback, QList<ItemBase *> &);

@@ -8389,6 +8389,41 @@ int SketchWidget::collectSelectedHoles(QList<Hole *> & holes)
 	return holes.count();
 }
 
+QStringList SketchWidget::commonPropValues(const QString & prop)
+{
+	// The intersection of available values for `prop` across the families of the selected
+	// parts (e.g. the packages every selected part's family offers).
+	QList<ItemBase *> items;
+	Q_FOREACH (QGraphicsItem * gItem, scene()->selectedItems()) {
+		auto * ib = dynamic_cast<ItemBase *>(gItem);
+		if (ib == nullptr) continue;
+		ItemBase * chief = ib->layerKinChief();
+		if (!items.contains(chief)) items.append(chief);
+	}
+	ReferenceModel * refModel = referenceModel();
+	if (items.isEmpty() || (refModel == nullptr)) return QStringList();
+
+	QStringList common;
+	bool first = true;
+	Q_FOREACH (ItemBase * item, items) {
+		if (item->modelPart() == nullptr) continue;
+		QStringList values = refModel->propValues(item->modelPart()->family(), prop, true);
+		if (first) {
+			common = values;
+			first = false;
+		}
+		else {
+			QStringList keep;
+			Q_FOREACH (const QString & v, common) {
+				if (values.contains(v)) keep.append(v);
+			}
+			common = keep;
+		}
+		if (common.isEmpty()) break;
+	}
+	return common;
+}
+
 void SketchWidget::setHoleSizeForSelection(const QString & diameter, const QString & ringThickness)
 {
 	// Apply a hole diameter and/or ring thickness to every selected hole/via in one

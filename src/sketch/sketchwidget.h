@@ -653,6 +653,7 @@ public Q_SLOTS:
 	int collectSelectedWires(QList<class Wire *> & wires);
 	int collectSelectedHoles(QList<class Hole *> & holes);
 	void setHoleSizeForSelection(const QString & diameter, const QString & ringThickness);
+	QStringList commonPropValues(const QString & prop);
 	void setHoleSize(ItemBase *, const QString & propName, const QString & translatedPropName, const QString & oldValue, const QString & newValue, QRectF & oldRect, QRectF & newRect, bool redraw);
 	virtual void showLabelFirstTimeForCommand(long itemID, bool show, bool doEmit);
 	void resizeBoard(double w, double h, bool doEmit);

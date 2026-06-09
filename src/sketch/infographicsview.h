@@ -104,6 +104,7 @@ public:
 	virtual int collectSelectedWires(QList<class Wire *> & wires);
 	virtual int collectSelectedHoles(QList<class Hole *> & holes);
 	virtual void setHoleSizeForSelection(const QString & diameter, const QString & ringThickness);
+	virtual QStringList commonPropValues(const QString & prop);
 	virtual void setHoleSize(ItemBase *, const QString & propName, const QString & translatedPropName, const QString & oldValue, const QString & newValue, QRectF & oldRect, QRectF & newRect, bool redraw);
 	virtual void changeWireWidthMils(const QString newWidth);
 	virtual void changeWireColor(const QString newColor);

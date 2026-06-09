@@ -2668,6 +2668,23 @@ void MainWindow::swapSelectedMap(const QString & family, const QString & prop, Q
 		return;
 	}
 
+	// Multi-selection: apply the chosen value to every selected part (each re-resolved from
+	// its own family/properties) in one undo, rather than only the active item.
+	if (m_currentGraphicsView != nullptr) {
+		int selectedParts = 0;
+		QList<ItemBase *> chiefs;
+		Q_FOREACH (QGraphicsItem * gItem, m_currentGraphicsView->scene()->selectedItems()) {
+			auto * ib = dynamic_cast<ItemBase *>(gItem);
+			if (ib == nullptr) continue;
+			ItemBase * chief = ib->layerKinChief();
+			if (!chiefs.contains(chief)) { chiefs.append(chief); ++selectedParts; }
+		}
+		if (selectedParts > 1) {
+			swapSelectionForProp(prop, currPropsMap.value(prop));
+			return;
+		}
+	}
+
 	Q_FOREACH (QString key, currPropsMap.keys()) {
 		QString value = currPropsMap.value(key);
 		m_referenceModel->recordProperty(key, value);
@@ -2696,6 +2713,57 @@ void MainWindow::swapSelectedMap(const QString & family, const QString & prop, Q
 	}
 
 	swapSelectedAux(itemBase, moduleID, false, ViewLayer::UnknownPlacement, currPropsMap);
+}
+
+void MainWindow::swapSelectionForProp(const QString & prop, const QString & value)
+{
+	if (m_currentGraphicsView == nullptr) return;
+
+	// Unique selected parts (deduped by layer-kin chief).
+	QList<ItemBase *> items;
+	Q_FOREACH (QGraphicsItem * gItem, m_currentGraphicsView->scene()->selectedItems()) {
+		auto * ib = dynamic_cast<ItemBase *>(gItem);
+		if (ib == nullptr) continue;
+		ItemBase * chief = ib->layerKinChief();
+		if (!items.contains(chief)) items.append(chief);
+	}
+	if (items.isEmpty()) return;
+
+	auto * parentCommand = new QUndoCommand(tr("Change %1 of %n part(s)", "", items.count()).arg(prop));
+	new CleanUpWiresCommand(m_breadboardGraphicsView, CleanUpWiresCommand::UndoOnly, parentCommand);
+	new CleanUpRatsnestsCommand(m_breadboardGraphicsView, CleanUpWiresCommand::UndoOnly, parentCommand);
+
+	bool any = false;
+	Q_FOREACH (ItemBase * item, items) {
+		if (item->modelPart() == nullptr) continue;
+		QString family = item->modelPart()->family();
+
+		// Resolve this item's target part: its own properties with `prop` overridden,
+		// closest-matching on `prop` (so a part with the chosen value is found even when the
+		// exact combination doesn't exist).
+		const QHash<QString, QString> props = item->modelPart()->properties();
+		Q_FOREACH (const QString & key, props.keys()) {
+			if (key.compare("family", Qt::CaseInsensitive) == 0) continue;
+			QString v = (key.compare(prop, Qt::CaseInsensitive) == 0) ? value : item->getProperty(key);
+			m_referenceModel->recordProperty(key, v);
+		}
+		QString moduleID = m_referenceModel->retrieveModuleIdWith(family, prop, true);
+		if (moduleID.isEmpty() || (moduleID == item->moduleID())) continue;
+
+		QMap<QString, QString> propsMap;
+		propsMap.insert(prop, value);
+		swapSelectedAuxAux(item, moduleID, item->viewLayerPlacement(), propsMap, parentCommand);
+		any = true;
+	}
+
+	new CleanUpRatsnestsCommand(m_breadboardGraphicsView, CleanUpWiresCommand::RedoOnly, parentCommand);
+	new CleanUpWiresCommand(m_breadboardGraphicsView, CleanUpWiresCommand::RedoOnly, parentCommand);
+
+	if (any) {
+		m_undoStack->push(parentCommand);
+	} else {
+		delete parentCommand;
+	}
 }
 
 bool MainWindow::swapSpecial(const QString & theProp, QMap<QString, QString> & currPropsMap) {

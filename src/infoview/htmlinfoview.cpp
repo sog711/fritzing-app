@@ -29,6 +29,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QScrollBar>
 #include <QPainter>
 #include <QSvgRenderer>
+#include <QSignalBlocker>
 #include <qmath.h>
 
 #include "htmlinfoview.h"
@@ -1211,10 +1212,24 @@ void HtmlInfoView::displayProps(ModelPart * modelPart, ItemBase * itemBase, bool
 		}
 
 		if (multiSelect && !hide) {
-			// A generic swap-based property combo would only swap the active item, so
-			// disable it in a multi-selection (swap-to-all is deferred); blank it if mixed.
 			auto * familyCombo = qobject_cast<FamilyPropertyComboBox *>(newWidget);
-			if (familyCombo != nullptr) {
+			if ((familyCombo != nullptr) && key.compare("package", Qt::CaseInsensitive) == 0) {
+				// Offer the packages common to all selected parts' families; choosing one
+				// swaps every selected part (handled in MainWindow::swapSelectionForProp).
+				QStringList common;
+				InfoGraphicsView * igv = InfoGraphicsView::getInfoGraphicsView(itemBase);
+				if (igv != nullptr) common = igv->commonPropValues("package");
+
+				QSignalBlocker blocker(familyCombo);   // repopulating must not fire swapEntry
+				familyCombo->clear();
+				Q_FOREACH (const QString & v, common) familyCombo->addItem(v);
+				QString shared = valuesDiffer(key) ? QString() : itemBase->getProperty(key);
+				familyCombo->setCurrentIndex(shared.isEmpty() ? -1 : familyCombo->findText(shared));
+				familyCombo->setEnabled(true);
+			}
+			else if (familyCombo != nullptr) {
+				// Other generic swap combos would only swap the active item, so disable them
+				// in a multi-selection (swap-to-all is deferred); blank if values differ.
 				familyCombo->setEnabled(false);
 				if (valuesDiffer(key)) familyCombo->setCurrentIndex(-1);
 			}
