@@ -1104,6 +1104,18 @@ void HtmlInfoView::displayProps(ModelPart * modelPart, ItemBase * itemBase, bool
 			if (inAll) commonKeys.append(key);
 		}
 		keys = commonKeys;
+
+		// Manufacturer number / part number only make sense for a group of identical parts
+		// (same moduleID). For a mixed group, drop them.
+		bool identicalParts = true;
+		Q_FOREACH (ItemBase * gi, groupItems) {
+			if (gi->moduleID() != itemBase->moduleID()) { identicalParts = false; break; }
+		}
+		if (!identicalParts) {
+			keys.removeAll("mn");
+			keys.removeAll("mpn");
+			keys.removeAll("part number");
+		}
 	}
 
 	// True if the selected items disagree on the value of a property (so we blank it).
