@@ -8300,27 +8300,35 @@ void SketchWidget::setLastPaletteItemSelectedIf(ItemBase * itemBase)
 
 void SketchWidget::setResistance(QString resistance, QString pinSpacing)
 {
-	PaletteItem * item = getSelectedPart();
-	if (!item) return;
+	// Apply to every selected resistor (getSelectedPart() returns null on a multi-selection).
+	QList<Resistor *> resistors;
+	Q_FOREACH (QGraphicsItem * gItem, scene()->selectedItems()) {
+		auto * resistor = dynamic_cast<Resistor *>(gItem);
+		if (resistor != nullptr) resistors.append(resistor);
+	}
+	if (resistors.isEmpty()) {
+		// Not a multi-selection: fall back to the single active part.
+		auto * resistor = qobject_cast<Resistor *>(getSelectedPart());
+		if (resistor != nullptr) resistors.append(resistor);
+	}
+	if (resistors.isEmpty()) return;
 
-	ModelPart * modelPart = item->modelPart();
+	auto * parentCommand = new QUndoCommand(tr("Change resistance of %n part(s)", "", resistors.count()));
 
-	if (!modelPart->moduleID().endsWith(ModuleIDNames::ResistorModuleIDName)) return;
-
-	auto * resistor = qobject_cast<Resistor *>(item);
-	if (!resistor) return;
-
-	if (resistance.isEmpty()) {
-		resistance = resistor->resistance();
+	bool any = false;
+	Q_FOREACH (Resistor * resistor, resistors) {
+		QString newResistance = resistance.isEmpty() ? resistor->resistance() : resistance;
+		QString newPinSpacing = pinSpacing.isEmpty() ? resistor->pinSpacing() : pinSpacing;
+		if (newResistance == resistor->resistance() && newPinSpacing == resistor->pinSpacing()) continue;
+		new SetResistanceCommand(this, resistor->id(), resistor->resistance(), newResistance, resistor->pinSpacing(), newPinSpacing, parentCommand);
+		any = true;
 	}
 
-	if (pinSpacing.isEmpty()) {
-		pinSpacing = resistor->pinSpacing();
+	if (any) {
+		m_undoStack->waitPush(parentCommand, PropChangeDelay);
+	} else {
+		delete parentCommand;
 	}
-
-	auto * cmd = new SetResistanceCommand(this, item->id(), resistor->resistance(), resistance, resistor->pinSpacing(), pinSpacing, nullptr);
-	cmd->setText(tr("Change Resistance from %1 to %2").arg(resistor->resistance()).arg(resistance));
-	m_undoStack->waitPush(cmd, PropChangeDelay);
 }
 
 void SketchWidget::setResistance(long itemID, QString resistance, QString pinSpacing, bool doEmit) {

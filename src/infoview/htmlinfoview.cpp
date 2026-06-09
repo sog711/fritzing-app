@@ -36,6 +36,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../sketch/infographicsview.h"
 #include "../items/symbolpaletteitem.h"
 #include "../items/hole.h"
+#include "../utils/familypropertycombobox.h"
 #include "../debugdialog.h"
 #include "../connectors/connector.h"
 #include "../utils/flineedit.h"
@@ -475,6 +476,35 @@ static QString groupWireWidths(const QList<Wire *> & wires) {
 	return QObject::tr("%1 – %2 mil").arg(QString::number(qRound(minMils))).arg(QString::number(qRound(maxMils)));
 }
 
+static QString groupPartTitles(const QList<ItemBase *> & items) {
+	// The list of selected parts by their instance title, e.g. "R1, R2, R3, C1".
+	QStringList titles;
+	Q_FOREACH (ItemBase * ib, items) {
+		QString t = ib->instanceTitle();
+		if (t.isEmpty()) t = ib->title();
+		titles << t;
+	}
+	return titles.join(", ");
+}
+
+static QString groupPartTypeCounts(const QList<ItemBase *> & items) {
+	// Count by part family, e.g. "3×Resistor, 2×Capacitor" (first-appearance order).
+	QStringList order;
+	QHash<QString, int> counts;
+	Q_FOREACH (ItemBase * ib, items) {
+		QString fam = (ib->modelPart() != nullptr) ? ib->modelPart()->family() : QString();
+		if (fam.isEmpty()) fam = ib->title();
+		if (!counts.contains(fam)) order << fam;
+		counts[fam] += 1;
+	}
+	QStringList parts;
+	Q_FOREACH (const QString & fam, order) {
+		int n = counts.value(fam);
+		parts << (n > 1 ? QString("%1×%2").arg(n).arg(fam) : fam);
+	}
+	return parts.join(", ");
+}
+
 void HtmlInfoView::showGroupTitle(const QString & summary, const QString & countText) {
 	// Same-size, non-editable title (avoids the layout shift of hiding it). setUpTitle
 	// re-enables it when a single item is shown again.
@@ -586,6 +616,24 @@ void HtmlInfoView::appendItemStuff(ItemBase * itemBase, ModelPart * modelPart, b
 		}
 	}
 
+	// Any other multi-selection of parts is a generic group: list the part titles in the
+	// (read-only) title field and a per-family count below the icons.
+	QList<ItemBase *> genericGroupItems;
+	bool genericGroup = false;
+	if (!netLabelGroup && !holeGroup) {
+		InfoGraphicsView * igv = InfoGraphicsView::getInfoGraphicsView(itemBase);
+		if ((igv != nullptr) && (igv->scene() != nullptr)) {
+			Q_FOREACH (QGraphicsItem * gItem, igv->scene()->selectedItems()) {
+				auto * ib = dynamic_cast<ItemBase *>(gItem);
+				if (ib == nullptr) continue;
+				ItemBase * chief = ib->layerKinChief();
+				if (!genericGroupItems.contains(chief)) genericGroupItems.append(chief);
+			}
+		}
+		genericGroup = (itemBase != nullptr) && genericGroupItems.count() > 1
+		               && genericGroupItems.contains(itemBase->layerKinChief());
+	}
+
 	setUpTitle(itemBase);
 	setUpIcons(itemBase, swappingEnabled);
 
@@ -600,6 +648,10 @@ void HtmlInfoView::appendItemStuff(ItemBase * itemBase, ModelPart * modelPart, b
 		// Read-only title = min/max diameter; heading = selection count.
 		showGroupTitle(groupHoleDiameters(selectedHoles),
 		               tr("%n holes", "", selectedHoles.count()));
+	}
+	else if (genericGroup) {
+		// Read-only title = list of selected parts; heading = per-family count.
+		showGroupTitle(groupPartTitles(genericGroupItems), groupPartTypeCounts(genericGroupItems));
 	}
 	else {
 		QString nameString;
@@ -1020,6 +1072,52 @@ void HtmlInfoView::displayProps(ModelPart * modelPart, ItemBase * itemBase, bool
 
 	showLayers(sl, itemBase, family, properties.value("layer", ""), swappingEnabled);
 
+	// Generic multi-selection rule: when several items are selected, show only the
+	// properties they all have in common. Value-based editors (the per-type group handlers)
+	// keep applying to the whole selection; generic swap-based combos are disabled here
+	// (applying a part swap to every selected item is deferred).
+	QList<ItemBase *> groupItems;
+	{
+		InfoGraphicsView * igv = (itemBase != nullptr) ? InfoGraphicsView::getInfoGraphicsView(itemBase) : nullptr;
+		if ((igv != nullptr) && (igv->scene() != nullptr)) {
+			Q_FOREACH (QGraphicsItem * gItem, igv->scene()->selectedItems()) {
+				auto * ib = dynamic_cast<ItemBase *>(gItem);
+				if (ib == nullptr) continue;
+				ItemBase * chief = ib->layerKinChief();
+				if (!groupItems.contains(chief)) groupItems.append(chief);
+			}
+		}
+	}
+	bool multiSelect = (itemBase != nullptr) && groupItems.count() > 1
+	                   && groupItems.contains(itemBase->layerKinChief());
+
+	if (multiSelect) {
+		QStringList commonKeys;
+		Q_FOREACH (const QString & key, keys) {
+			bool inAll = true;
+			Q_FOREACH (ItemBase * gi, groupItems) {
+				if ((gi->modelPart() == nullptr) || !gi->modelPart()->properties().contains(key)) {
+					inAll = false;
+					break;
+				}
+			}
+			if (inAll) commonKeys.append(key);
+		}
+		keys = commonKeys;
+	}
+
+	// True if the selected items disagree on the value of a property (so we blank it).
+	auto valuesDiffer = [&groupItems](const QString & key) -> bool {
+		QString v0;
+		bool first = true;
+		Q_FOREACH (ItemBase * gi, groupItems) {
+			QString v = gi->getProperty(key);
+			if (first) { v0 = v; first = false; }
+			else if (v != v0) return true;
+		}
+		return false;
+	};
+
 	int ix = 0;
 	Q_FOREACH(QString key, keys) {
 		if (ix >= m_propThings.count()) {
@@ -1098,6 +1196,20 @@ void HtmlInfoView::displayProps(ModelPart * modelPart, ItemBase * itemBase, bool
 		else {
 			newName = translatedName;
 			newValue = value;
+		}
+
+		if (multiSelect && !hide) {
+			// A generic swap-based property combo would only swap the active item, so
+			// disable it in a multi-selection (swap-to-all is deferred); blank it if mixed.
+			auto * familyCombo = qobject_cast<FamilyPropertyComboBox *>(newWidget);
+			if (familyCombo != nullptr) {
+				familyCombo->setEnabled(false);
+				if (valuesDiffer(key)) familyCombo->setCurrentIndex(-1);
+			}
+			else if ((newWidget == nullptr) && valuesDiffer(key)) {
+				// Plain value row whose items disagree: show nothing rather than one value.
+				newValue = "";
+			}
 		}
 
 		if (oldPlugin != nullptr) {
