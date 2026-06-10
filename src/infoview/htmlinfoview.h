@@ -124,6 +124,8 @@ protected:
 	void addTags(ModelPart * modelPart);
 	void partTitle(const QString & title, const QString & version, const QString & url, bool obsolete);
 	void displayProps(ModelPart * modelPart, ItemBase * itemBase, bool swappingEnabled);
+	void restoreFocusAfterRefresh(QWidget * previouslyFocused);
+	bool eventFilter(QObject * target, QEvent * event) override;
 	void clearPropThingPlugin(PropThing * propThing);
 	void clearPropThingPlugin(PropThing * propThing, QWidget * plugin);
 	void viewConnectorItemInfo(QGraphicsSceneHoverEvent * event, ConnectorItem* item);

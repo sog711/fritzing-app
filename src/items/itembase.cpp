@@ -50,6 +50,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QSet>
 #include <QSettings>
 #include <QComboBox>
+#include <QSignalBlocker>
 #include <QBitmap>
 #include <QApplication>
 #include <QClipboard>
@@ -1651,6 +1652,17 @@ bool ItemBase::hasBug() const
 bool ItemBase::collectExtraInfo(QWidget * parent, const QString & family, const QString & prop, const QString & value, bool swappingEnabled, QString & returnProp, QString & returnValue, QWidget * & returnWidget, bool & hide)
 {
 	Q_UNUSED(hide);                 // assume this is set by the caller (HtmlInfoView)
+	// HtmlInfoView::displayProps seeds returnWidget with the plugin widget this row held before
+	// the inspector refresh; returning that same pointer keeps the widget alive instead of
+	// destroying and recreating it. Reuse our combo when it matches this family and property, so
+	// the widget — and the keyboard focus it holds right after the user picked a value — survives
+	// the refresh. Losing that focus left the application without a focus widget, breaking
+	// shortcuts like undo/redo.
+	auto * reuseComboBox = qobject_cast<FamilyPropertyComboBox *>(returnWidget);
+	if ((reuseComboBox != nullptr)
+			&& (reuseComboBox->family() != family || reuseComboBox->prop() != prop)) {
+		reuseComboBox = nullptr;
+	}
 	returnWidget = nullptr;
 	returnProp = ItemBase::translatePropertyName(prop);
 	returnValue = value;
@@ -1703,19 +1715,31 @@ bool ItemBase::collectExtraInfo(QWidget * parent, const QString & family, const 
 	}
 
 	if (collection.count() > 1) {
-		auto *comboBox = new FamilyPropertyComboBox(family, prop, parent);
-		comboBox->setObjectName("infoViewComboBox");
+		FamilyPropertyComboBox * comboBox = reuseComboBox;
+		if (comboBox != nullptr) {
+			// The previous fill connected the combo to swapEntry of a possibly different item;
+			// drop that connection before retargeting it below.
+			disconnect(comboBox, &QComboBox::currentIndexChanged, nullptr, nullptr);
+		}
+		else {
+			comboBox = new FamilyPropertyComboBox(family, prop, parent);
+			comboBox->setObjectName("infoViewComboBox");
+		}
 
 		int currentIndex = collection.count() - 1;
-		for (const auto &kv : collection) {
-			comboBox->addItem(kv.second, kv.first);
-			if (kv.first.isEmpty() && kv.second == tempValue) {
-				currentIndex = comboBox->count() - 1;
-			} else if (!kv.first.isEmpty() && kv.first == tempValue) {
-				currentIndex = comboBox->count() - 1;
+		{
+			QSignalBlocker blocker(comboBox);   // repopulating must not fire swapEntry
+			comboBox->clear();
+			for (const auto &kv : collection) {
+				comboBox->addItem(kv.second, kv.first);
+				if (kv.first.isEmpty() && kv.second == tempValue) {
+					currentIndex = comboBox->count() - 1;
+				} else if (!kv.first.isEmpty() && kv.first == tempValue) {
+					currentIndex = comboBox->count() - 1;
+				}
 			}
+			comboBox->setCurrentIndex(currentIndex);
 		}
-		comboBox->setCurrentIndex(currentIndex);
 		comboBox->setEnabled(swappingEnabled);
 		comboBox->setSizeAdjustPolicy(QComboBox::AdjustToContents);
 

@@ -255,9 +255,23 @@ bool LogoItem::collectExtraInfo(QWidget * parent, const QString & family, const 
 			returnProp = tr("text");
 			returnValue = m_logo;
 
-			auto * edit = new QLineEdit(parent);
-			edit->setObjectName("infoViewLineEdit");
+			// Reuse the edit from the previous inspector fill (seeded into returnWidget by
+			// HtmlInfoView::displayProps) so it survives the refresh that follows a text
+			// change; see ItemBase::collectExtraInfo.
+			auto * edit = qobject_cast<QLineEdit *>(returnWidget);
+			if ((edit != nullptr) && edit->property("logoTextEntry").toBool()) {
+				// the previous fill may have connected it to another logo item
+				disconnect(edit, SIGNAL(editingFinished()), nullptr, nullptr);
+			}
+			else {
+				edit = new QLineEdit(parent);
+				edit->setObjectName("infoViewLineEdit");
+				edit->setProperty("logoTextEntry", true);
+			}
 
+			// Set unconditionally: setText also clears the edit's internal undo history, so a
+			// ctrl-z right after committing reaches the application's undo action instead of
+			// being consumed by the field (see HtmlInfoView::eventFilter).
 			edit->setText(m_logo);
 			edit->setEnabled(swappingEnabled);
 			connect(edit, SIGNAL(editingFinished()), this, SLOT(logoEntry()));
@@ -274,6 +288,10 @@ bool LogoItem::collectExtraInfo(QWidget * parent, const QString & family, const 
 	}
 
 	if (prop.compare("shape", Qt::CaseInsensitive) == 0) {
+		// returnWidget is seeded with the previous plugin (see HtmlInfoView::displayProps);
+		// setUpDimEntry would embed it in the new frame, briefly reparenting the dying old
+		// frame — and kicking the keyboard focus off its width/height editor. Discard it.
+		returnWidget = nullptr;
 		returnWidget = setUpDimEntry(true, !m_hasLogo, false, returnWidget);
 		returnWidget->setEnabled(swappingEnabled);
 		returnProp = tr("shape");
@@ -1237,8 +1255,21 @@ bool BreadboardLogoItem::collectExtraInfo(QWidget * parent, const QString & fami
 			returnProp = tr("color");
 			returnValue = m_color;
 
-			auto * button = new QPushButton(tr("Set text color"));
-			button->setObjectName("infoViewButton");
+			// Reuse the button from the previous inspector fill (seeded into returnWidget by
+			// HtmlInfoView::displayProps) so it survives the refresh that follows a color
+			// change — destroying it while focused left the application without a focus
+			// widget, breaking undo/redo. Identified by a dynamic property because the
+			// objectName is shared by other inspector buttons (and used by stylesheets).
+			auto * button = qobject_cast<QPushButton *>(returnWidget);
+			if ((button != nullptr) && button->property("logoTextColorButton").toBool()) {
+				// the previous fill may have connected it to another logo item
+				disconnect(button, SIGNAL(pressed()), nullptr, nullptr);
+			}
+			else {
+				button = new QPushButton(tr("Set text color"));
+				button->setObjectName("infoViewButton");
+				button->setProperty("logoTextColorButton", true);
+			}
 			connect(button, SIGNAL(pressed()), this, SLOT(changeTextColor()));
 
 			returnWidget = button;
@@ -1250,17 +1281,16 @@ bool BreadboardLogoItem::collectExtraInfo(QWidget * parent, const QString & fami
 }
 
 void BreadboardLogoItem::changeTextColor() {
+	InfoGraphicsView * infoGraphicsView = InfoGraphicsView::getInfoGraphicsView(this);
+	QWidget * dialogParent = (infoGraphicsView != nullptr) ? infoGraphicsView->infoView() : nullptr;
+
 	QColor color(m_color);
-	QColor newColor = QColorDialog::getColor(color, nullptr, tr("Select text color"));
+	QColor newColor = QColorDialog::getColor(color, dialogParent, tr("Select text color"));
 	if (!newColor.isValid()) return;
 	if (newColor.name().compare(m_color, Qt::CaseInsensitive) == 0) return;
 
-	InfoGraphicsView * infoGraphicsView = InfoGraphicsView::getInfoGraphicsView(this);
 	if (infoGraphicsView != nullptr) {
 		infoGraphicsView->setProp(this, "color", tr("color"), m_color, newColor.name(), true);
-		if (infoGraphicsView->infoView()) {
-			infoGraphicsView->infoView()->setFocus();
-		}
 	}
 }
 

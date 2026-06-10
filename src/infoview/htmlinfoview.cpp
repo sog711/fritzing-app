@@ -18,8 +18,10 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 ********************************************************************/
 
+#include <QApplication>
 #include <QBuffer>
 #include <QCache>
+#include <QKeyEvent>
 #include <QHBoxLayout>
 #include <QSettings>
 #include <QPalette>
@@ -153,6 +155,8 @@ void HtmlInfoView::init(bool tinyMode) {
 
 	setInstanceTitleColors(m_titleEdit, QColor(0xaf, 0xaf, 0xb4), QColor(0x00, 0x00, 0x00)); //b3b3b3, 575757
 	m_titleEdit->setAutoFillBackground(true);
+	// don't let the title editor swallow undo/redo it can't use (see eventFilter)
+	m_titleEdit->installEventFilter(this);
 
 	vlo->addWidget(m_titleEdit);
 	if (tinyMode) m_titleEdit->setVisible(false);
@@ -513,9 +517,24 @@ void HtmlInfoView::appendItemStuff(ItemBase * itemBase, ModelPart * modelPart, b
 void HtmlInfoView::setContent()
 {
 	m_setContentTimer.stop();
+
+	// Refreshing the inspector can hide or (when a plugin widget is not reusable, see
+	// displayProps / ItemBase::collectExtraInfo) destroy the property widget that currently
+	// holds the keyboard focus — e.g. a combo or button the user just changed a value with.
+	// That leaves the application without a focus widget, so shortcuts like undo/redo are no
+	// longer delivered. Remember the inspector's focus so restoreFocusAfterRefresh can hand it
+	// back after the refresh. We only restore focus the inspector already had, so ordinary
+	// hover/selection refreshes never steal it from the sketch.
+	QWidget * focusWidget = QApplication::focusWidget();
+	bool hadFocus = isAncestorOf(focusWidget);
+	QPointer<QWidget> previouslyFocused = hadFocus ? focusWidget : nullptr;
+
 	if (m_pendingItemBase == nullptr) {
 		setNullContent();
 		m_setContentTimer.stop();
+		if (hadFocus) {
+			restoreFocusAfterRefresh(previouslyFocused);
+		}
 		return;
 	}
 
@@ -534,8 +553,55 @@ void HtmlInfoView::setContent()
 	m_propFrame->setVisible(true);
 
 	m_setContentTimer.stop();
+
+	// See note at the top of this method.
+	if (hadFocus) {
+		restoreFocusAfterRefresh(previouslyFocused);
+	}
 	//DebugDialog::debug(QString("end   updating %1").arg(QTime::currentTime().toString("HH:mm:ss.zzz")));
 
+}
+
+void HtmlInfoView::restoreFocusAfterRefresh(QWidget * previouslyFocused)
+{
+	QWidget * focusWidget = QApplication::focusWidget();
+	if ((focusWidget != nullptr) && (focusWidget == previouslyFocused)) {
+		return;   // focus survived the refresh (reused plugin widget, see displayProps)
+	}
+
+	// Hiding the focused widget during the refresh handed the focus to an arbitrary next
+	// widget (or to nothing, if the widget was destroyed). Prefer giving it back to the
+	// widget that had it — a reused plugin survives the refresh. Fall back to the inspector
+	// itself, which at least keeps shortcuts like undo/redo working.
+	if ((previouslyFocused != nullptr) && previouslyFocused->isVisible() && isAncestorOf(previouslyFocused)) {
+		previouslyFocused->setFocus(Qt::OtherFocusReason);
+	}
+	else {
+		setFocus(Qt::OtherFocusReason);
+	}
+}
+
+bool HtmlInfoView::eventFilter(QObject * target, QEvent * event)
+{
+	// Text fields consume the undo/redo shortcuts for their internal text-editing history,
+	// even when that history is empty — which it always is right after a committed value
+	// change, because committing syncs the field programmatically via setText. So a ctrl-z
+	// immediately after changing e.g. a board width died in the field. Let the field consume
+	// undo/redo only while it can actually use them (i.e. while editing); otherwise decline
+	// the shortcut override so the application's undo/redo action handles the key.
+	// Installed on every text field shown in the inspector (see init and displayProps).
+	if (event->type() == QEvent::ShortcutOverride) {
+		auto * lineEdit = qobject_cast<QLineEdit *>(target);
+		if (lineEdit != nullptr) {
+			auto * keyEvent = static_cast<QKeyEvent *>(event);
+			if ((keyEvent->matches(QKeySequence::Undo) && !lineEdit->isUndoAvailable())
+					|| (keyEvent->matches(QKeySequence::Redo) && !lineEdit->isRedoAvailable())) {
+				event->ignore();
+				return true;
+			}
+		}
+	}
+	return QScrollArea::eventFilter(target, event);
 }
 
 QSize HtmlInfoView::sizeHint() const {
@@ -885,6 +951,16 @@ void HtmlInfoView::displayProps(ModelPart * modelPart, ItemBase * itemBase, bool
 				}
 				//DebugDialog::debug(QString("adding %1 %2").arg(newName).arg((long) resultWidget, 0, 16));
 				propThing->m_plugin = resultWidget;
+
+				// don't let the plugin's text fields swallow undo/redo they can't use
+				// (installing twice is harmless, so no need to skip reused plugins)
+				auto * lineEdit = qobject_cast<QLineEdit *>(resultWidget);
+				if (lineEdit != nullptr) {
+					lineEdit->installEventFilter(this);
+				}
+				for (QLineEdit * childEdit : resultWidget->findChildren<QLineEdit *>()) {
+					childEdit->installEventFilter(this);
+				}
 			}
 			else {
 				newValue = resultValue;
