@@ -2414,11 +2414,13 @@ void SketchWidget::mousePressEvent(QMouseEvent *event)
 	if (itemBase) {
 		viewItemInfo(itemBase);
 		setLastPaletteItemSelectedIf(itemBase);
-		// Remember a Ctrl+left-click target so we can re-apply the selection toggle on release.
-		// Qt only toggles when the release scene position exactly equals the press position, so
-		// a few pixels of drift during the click silently drops it (see mouseReleaseEvent).
+		// Remember a Ctrl+left-click target and its selection state so the release handler can
+		// apply the toggle deterministically (see mouseReleaseEvent). Store the layer kin chief
+		// so the toggle stays consistent across layer kin. With Ctrl held, Qt changes selection
+		// only on release, never on press, so isSelected() here is the pre-click state.
 		if (event->button() == Qt::LeftButton && (event->modifiers() & Qt::ControlModifier) != 0) {
-			m_modifierClickItem = itemBase;
+			m_modifierClickItem = itemBase->layerKinChief();
+			m_modifierClickWasSelected = m_modifierClickItem->isSelected();
 		}
 	}
 
@@ -3132,6 +3134,7 @@ void SketchWidget::mouseMoveEvent(QMouseEvent *event) {
 
 				m_moveEventCount = 0;					// reset m_moveEventCount to make sure that equal potential highlights are cleared
 				m_movingByMouse = false;
+				m_modifierClickItem = nullptr;			// a real drag owns the release; the gesture is no longer a Ctrl+click
 
 				drag->exec();
 
@@ -3348,15 +3351,18 @@ void SketchWidget::mouseReleaseEvent(QMouseEvent *event) {
 
 	// Qt applies a Ctrl+click selection toggle only when the release scene position exactly
 	// equals the press position (QGraphicsItem::mouseReleaseEvent), so even a single pixel of
-	// drift during the click silently drops the toggle. Re-apply it for a Ctrl+click that
-	// drifted (m_moveEventCount > 0 is exactly the case Qt suppressed) but stayed within click
-	// distance, i.e. did not become a drag. A real drag exceeds startDragDistance and goes
-	// through the QDrag path, so it never reaches here.
-	if (m_modifierClickItem && m_moveEventCount > 0) {
+	// drift during the click silently drops the toggle; conversely Qt may deliver move events
+	// with no actual movement, so counting them cannot tell whether Qt toggled. Instead of
+	// guessing, enforce the deterministic outcome of a Ctrl+click: the item ends up in the
+	// opposite of its pre-press selection state. If Qt's toggle already fired this is a no-op;
+	// if Qt dropped it, this applies it. A release beyond startDragDistance was a drag, not a
+	// click, and keeps whatever selection state the drag produced.
+	if (m_modifierClickItem) {
 		bool wasClick = (event->globalPosition().toPoint() - m_mousePressGlobalPos).manhattanLength()
 		                < QApplication::startDragDistance();
-		if (wasClick) {
-			m_modifierClickItem->setSelected(!m_modifierClickItem->isSelected());
+		bool shouldBeSelected = !m_modifierClickWasSelected;
+		if (wasClick && m_modifierClickItem->isSelected() != shouldBeSelected) {
+			m_modifierClickItem->setSelected(shouldBeSelected);
 		}
 	}
 	m_modifierClickItem = nullptr;
