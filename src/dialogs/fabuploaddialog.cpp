@@ -19,8 +19,8 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 ********************************************************************/
 
 #include "fabuploaddialog.h"
+#include "debugdialog.h"
 #include "networkhelper.h"
-#include "qstyle.h"
 #include "qurlquery.h"
 #include "referencemodel/sqlitereferencemodel.h"
 #include "ui_fabuploaddialog.h"
@@ -44,6 +44,10 @@ FabUploadDialog::FabUploadDialog(QNetworkAccessManager *manager,
 
 	ui->setupUi(this);
 	setWindowFlags(Qt::Dialog | windowFlags());
+	// Word-wrapped labels in a layout don't reserve enough vertical space; reserve
+	// a fixed number of lines so the text doesn't get cut off when it wraps.
+	ui->label_2->setMinimumHeight(3 * ui->label_2->fontMetrics().lineSpacing());
+	ui->fab_message->setMinimumHeight(7 * ui->fab_message->fontMetrics().lineSpacing());
 	ui->stackedWidget->setCurrentIndex(0);
 	ui->upload->init(manager, filename, width, height, boardCount, boardTitle);
 	ui->uploadButton_2->setEnabled(false);
@@ -64,8 +68,15 @@ void FabUploadDialog::setFabMessage(const QString& text)
 
 void FabUploadDialog::setFabIcon(const QPixmap& pixmap)
 {
-	int bigIconSize = QApplication::style()->pixelMetric(QStyle::PM_MessageBoxIconSize);
-	QPixmap resizedPixmap = pixmap.scaled(bigIconSize, bigIconSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+	constexpr int maxIconSize = 128;
+	QPixmap resizedPixmap = pixmap;
+	if (pixmap.width() > maxIconSize || pixmap.height() > maxIconSize) {
+		resizedPixmap = pixmap.scaled(maxIconSize, maxIconSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+	}
+	DebugDialog::debug(QString("fab icon: original size %1x%2, max %3, scaled size %4x%5")
+					   .arg(pixmap.width()).arg(pixmap.height())
+					   .arg(maxIconSize)
+					   .arg(resizedPixmap.width()).arg(resizedPixmap.height()));
 	SqliteReferenceModel().insertIcon(m_fabName, resizedPixmap);
 	ui->fab_icon->setPixmap(resizedPixmap);
 }
