@@ -41,7 +41,7 @@
     <message>
         <location filename="../src/help/aboutbox.cpp" line="101"/>
         <source>Jenny Chowdhury, Lionel Michel, Fabian Althaus, Jannis Leidel, </source>
-        <translation type="unfinished"></translation>
+        <translation>Jenny Chowdhury, Lionel Michel, Fabian Althaus, Jannis Leidel, </translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="107"/>
@@ -76,22 +76,22 @@
     <message>
         <location filename="../src/help/aboutbox.cpp" line="116"/>
         <source>Thanks for the translations go out to: </source>
-        <translation type="unfinished"></translation>
+        <translation>অনুবাদের জন্য ধন্যবাদ জানাই: </translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="118"/>
         <source>Yuelin and Ninjia</source>
-        <translation type="unfinished"></translation>
+        <translation>ইউয়েলিন এবং নিনজিয়া</translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="119"/>
         <source>Chinese (Traditional): </source>
-        <translation type="unfinished"></translation>
+        <translation>চীনা (ঐতিহ্যবাহী): </translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="119"/>
         <source>Robert Lee</source>
-        <translation type="unfinished"></translation>
+        <translation>Robert Lee</translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="125"/>
@@ -106,12 +106,12 @@
     <message>
         <location filename="../src/help/aboutbox.cpp" line="126"/>
         <source>Jinbuhm Kim</source>
-        <translation type="unfinished"></translation>
+        <translation>Jinbuhm Kim</translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="131"/>
         <source>Spanish: </source>
-        <translation type="unfinished"></translation>
+        <translation>স্প্যানিশ: </translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="138"/>
