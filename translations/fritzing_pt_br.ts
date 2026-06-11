@@ -11,7 +11,7 @@
     <message>
         <location filename="../src/help/aboutbox.cpp" line="215"/>
         <source>&lt;b&gt;Copyright %1 Fritzing GmbH&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Copyright %1 Fritzing GmbH&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="95"/>
@@ -46,47 +46,47 @@
     <message>
         <location filename="../src/help/aboutbox.cpp" line="151"/>
         <source>LGPLv3</source>
-        <translation type="unfinished"></translation>
+        <translation>LGPLv3</translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="152"/>
         <source>GPLv2 with linking exception</source>
-        <translation type="unfinished"></translation>
+        <translation>GPLv2 com exceção de vinculação</translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="153"/>
         <source>Boost License 1.0</source>
-        <translation type="unfinished"></translation>
+        <translation>Boost License 1.0</translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="154"/>
         <source>Modified BSD License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licença BSD Modificada</translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="155"/>
         <source>BSD License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licença BSD</translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="156"/>
         <source>PNG Reference Library License version 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Licença da Biblioteca de Referência PNG versão 2</translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="157"/>
         <source>Dual OpenSSL and SSLeay License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licença Dupla OpenSSL e SSLeay</translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="158"/>
         <source>zlib License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licença zlib</translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="161"/>
         <source>The following libraries are used by Fritzing:</source>
-        <translation type="unfinished"></translation>
+        <translation>As seguintes bibliotecas são usadas pelo Fritzing:</translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="107"/>
@@ -393,12 +393,12 @@
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="740"/>
         <source>The &apos;Contributed Parts&apos; bin has been replaced with &apos;My Parts&apos; since Fritzing 0.7.12.</source>
-        <translation type="unfinished"></translation>
+        <translation>O compartimento &apos;Contributed Parts&apos; foi substituído por &apos;My Parts&apos; desde o Fritzing 0.7.12.</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="741"/>
         <source>Would you like Fritzing to move the parts over?</source>
-        <translation type="unfinished"></translation>
+        <translation>Você gostaria que o Fritzing movesse as peças?</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1033"/>
@@ -696,7 +696,7 @@
     <message>
         <location filename="../src/items/resizableboard.cpp" line="454"/>
         <source>&lt;br/&gt;&lt;br/&gt;If you intended your custom shape to have cutouts and you did not get the expected result, it is likely because Fritzing requires that you make cutouts using a shape &apos;subtraction&apos; or &apos;difference&apos; operation in your vector graphics editor.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br/&gt;&lt;br/&gt;Se você pretendia que sua forma personalizada tivesse recortes e não obteve o resultado esperado, provavelmente é porque o Fritzing exige que você faça os recortes usando uma operação de &apos;subtração&apos; ou &apos;diferença&apos; de formas no seu editor de gráficos vetoriais.</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="521"/>
@@ -738,39 +738,39 @@ Um svg de placa personalizada tipicamente tem uma ou mais camadas de impressão 
     <message>
         <location filename="../src/items/resizableboard.cpp" line="430"/>
         <source>&lt;b&gt;The custom shape has been loaded, and you will see the new board shortly.&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;O formato personalizado foi carregado e você verá a nova placa em breve.&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="432"/>
         <source>Before ordering PCB manufacturing, we recommend validating your design by exporting it as Gerber files (File → Export → for Production → Extended Gerber).</source>
-        <translation type="unfinished"></translation>
+        <translation>Antes de encomendar a fabricação do PCB, recomendamos validar seu projeto exportando-o como arquivos Gerber (Arquivo → Exportar → para Produção → Extended Gerber).</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="436"/>
         <source>Check the resulting contour file with a Gerber-viewer application to make sure the shape came out as expected.&lt;br/&gt;&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Verifique o arquivo de contorno resultante com um aplicativo visualizador de Gerber para garantir que a forma saiu como esperado.&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="440"/>
         <source>The rest of this message concerns &apos;cutouts&apos;. </source>
-        <translation type="unfinished"></translation>
+        <translation>O restante desta mensagem diz respeito a &quot;recortes&quot;. </translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="441"/>
         <source>These are circular or irregularly-shaped holes that you can optionally incorporate into a custom PCB shape.&lt;br/&gt;&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Estes são furos circulares ou de formas irregulares que você pode opcionalmente incorporar em um formato de PCB personalizado.&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="446"/>
         <source>&lt;b&gt;The custom shape has no cutouts.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;A forma personalizada não tem recortes.&lt;/b&gt;</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/items/resizableboard.cpp" line="449"/>
         <source>&lt;b&gt;The custom shape has %n cutouts.&lt;/b&gt;</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>&lt;b&gt;A forma personalizada tem %n recortes.&lt;/b&gt;</numerusform>
+            <numerusform>&lt;b&gt;A forma personalizada tem %n recortes.&lt;/b&gt;</numerusform>
         </translation>
     </message>
     <message>
@@ -904,57 +904,57 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
     <message>
         <location filename="../src/program/consolesettings.ui" line="116"/>
         <source>Vendor ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>ID do fornecedor:</translation>
     </message>
     <message>
         <location filename="../src/program/consolesettings.ui" line="123"/>
         <source>Product ID:</source>
-        <translation type="unfinished"></translation>
+        <translation>ID do produto:</translation>
     </message>
     <message>
         <location filename="../src/program/consolesettings.ui" line="148"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicar</translation>
     </message>
     <message>
         <location filename="../src/program/consolesettings.ui" line="157"/>
         <source>Additional options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opções adicionais</translation>
     </message>
     <message>
         <location filename="../src/program/consolesettings.ui" line="163"/>
         <source>Local echo</source>
-        <translation type="unfinished"></translation>
+        <translation>Eco local</translation>
     </message>
     <message>
         <location filename="../src/program/consolesettings.cpp" line="89"/>
         <source>Description: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Descrição: %1</translation>
     </message>
     <message>
         <location filename="../src/program/consolesettings.cpp" line="90"/>
         <source>Manufacturer: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fabricante: %1</translation>
     </message>
     <message>
         <location filename="../src/program/consolesettings.cpp" line="91"/>
         <source>Serial number: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Número de série: %1</translation>
     </message>
     <message>
         <location filename="../src/program/consolesettings.cpp" line="92"/>
         <source>Location: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Localização: %1</translation>
     </message>
     <message>
         <location filename="../src/program/consolesettings.cpp" line="93"/>
         <source>Vendor Identifier: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Identificador do fornecedor: %1</translation>
     </message>
     <message>
         <location filename="../src/program/consolesettings.cpp" line="94"/>
         <source>Product Identifier: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Identificador do produto: %1</translation>
     </message>
 </context>
 <context>
@@ -962,27 +962,27 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
     <message>
         <location filename="../src/program/consolewindow.ui" line="14"/>
         <source>Serial Monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitor Serial</translation>
     </message>
     <message>
         <location filename="../src/program/consolewindow.ui" line="30"/>
         <source>Monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Monitor</translation>
     </message>
     <message>
         <location filename="../src/program/consolewindow.ui" line="39"/>
         <source>Tools</source>
-        <translation type="unfinished">Ferramentas</translation>
+        <translation>Ferramentas</translation>
     </message>
     <message>
         <location filename="../src/program/consolewindow.ui" line="62"/>
         <source>&amp;About</source>
-        <translation type="unfinished">&amp;Sobre</translation>
+        <translation>&amp;Sobre</translation>
     </message>
     <message>
         <location filename="../src/program/consolewindow.ui" line="65"/>
         <source>About program</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobre o programa</translation>
     </message>
     <message>
         <location filename="../src/program/consolewindow.ui" line="68"/>
@@ -992,17 +992,17 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
     <message>
         <location filename="../src/program/consolewindow.ui" line="73"/>
         <source>About Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobre o Qt</translation>
     </message>
     <message>
         <location filename="../src/program/consolewindow.ui" line="78"/>
         <source>C&amp;onnect</source>
-        <translation type="unfinished"></translation>
+        <translation>C&amp;onectar</translation>
     </message>
     <message>
         <location filename="../src/program/consolewindow.ui" line="81"/>
         <source>Connect to serial port</source>
-        <translation type="unfinished"></translation>
+        <translation>Conecte à porta serial</translation>
     </message>
     <message>
         <location filename="../src/program/consolewindow.ui" line="84"/>
@@ -1017,7 +1017,7 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
     <message>
         <location filename="../src/program/consolewindow.ui" line="92"/>
         <source>Disconnect from serial port</source>
-        <translation type="unfinished"></translation>
+        <translation>Desconectar da porta serial</translation>
     </message>
     <message>
         <location filename="../src/program/consolewindow.ui" line="95"/>
@@ -1082,22 +1082,22 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
     <message>
         <location filename="../src/program/consolewindow.cpp" line="175"/>
         <source>Disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Desconectado</translation>
     </message>
     <message>
         <location filename="../src/program/consolewindow.cpp" line="201"/>
         <source>Critical Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro Crítico</translation>
     </message>
     <message>
         <location filename="../src/program/consolewindow.cpp" line="181"/>
         <source>About Serial Monitor</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobre o Monitor Serial</translation>
     </message>
     <message>
         <location filename="../src/program/consolewindow.cpp" line="182"/>
         <source>This terminal displays the serial communication on the selected port, usually between your computer and the connected microcontroller.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este terminal exibe a comunicação serial na porta selecionada, geralmente entre seu computador e o microcontrolador conectado.</translation>
     </message>
 </context>
 <context>
@@ -1160,7 +1160,7 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="1122"/>
         <source>Connector %1 on %2 should have both copper top and bottom layers, but the svg only specifies one layer.</source>
-        <translation type="unfinished"></translation>
+        <translation>O conector %1 em %2 deveria ter camadas de cobre tanto na parte superior quanto na inferior, mas o arquivo SVG especifica apenas uma camada.</translation>
     </message>
 </context>
 <context>
@@ -1284,22 +1284,23 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <location filename="../src/fapplication.cpp" line="2275"/>
         <source>Would you like to regenerate the parts database?
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Você gostaria de regenerar o banco de dados de peças?
+</translation>
     </message>
     <message>
         <location filename="../src/fapplication.cpp" line="2283"/>
         <source>Regenerate</source>
-        <translation type="unfinished"></translation>
+        <translation>Regenerar</translation>
     </message>
     <message>
         <location filename="../src/fapplication.cpp" line="2292"/>
         <source>Regenerating parts database...</source>
-        <translation type="unfinished"></translation>
+        <translation>Regenerando banco de dados de peças...</translation>
     </message>
     <message>
         <location filename="../src/fapplication.cpp" line="2277"/>
         <source>This option is usefull if you modify the parts database on your own. If you want to recover from an error, you may be better off downloading the latest Fritzing release.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta opção é útil se você modificar o banco de dados de peças por conta própria. Se você quiser se recuperar de um erro, pode ser melhor baixar a versão mais recente do Fritzing.</translation>
     </message>
 </context>
 <context>
@@ -1307,7 +1308,7 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
     <message>
         <location filename="../src/utils/fmessagebox.cpp" line="134"/>
         <source>Copy to Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar para a área de transferência</translation>
     </message>
 </context>
 <context>
@@ -1315,22 +1316,22 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
     <message>
         <location filename="../src/dialogs/fabuploaddialog.ui" line="19"/>
         <source>Fritzing Fab Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Upload Fritzing Fab</translation>
     </message>
     <message>
         <location filename="../src/dialogs/fabuploaddialog.ui" line="69"/>
         <source>Get your board fabricated effortlessly!</source>
-        <translation type="unfinished"></translation>
+        <translation>Faça sua placa ser fabricada sem esforço!</translation>
     </message>
     <message>
         <location filename="../src/dialogs/fabuploaddialog.ui" line="105"/>
         <source>Upload your design now to see a preview. Review it, and once satisfied, proceed to order for manufacturing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Faça o upload do seu design agora para ver uma prévia. Revise-o e, quando estiver satisfeito, prossiga para o pedido de fabricação.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/fabuploaddialog.ui" line="146"/>
         <source>Checking for fab...</source>
-        <translation type="unfinished"></translation>
+        <translation>Verificando a fábrica...</translation>
     </message>
     <message>
         <location filename="../src/dialogs/fabuploaddialog.ui" line="205"/>
