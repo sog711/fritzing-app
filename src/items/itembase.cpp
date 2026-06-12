@@ -74,6 +74,9 @@ static QSvgRenderer MoveLockRenderer;
 static QSvgRenderer MoveLockOpenRenderer;
 static QSvgRenderer StickyRenderer;
 
+// keeps the lock symbol (and the sticky symbol chained to its right) off the part's corner
+static constexpr double LockSymbolInset = 1.5;
+
 /////////////////////////////////
 
 QHash<QString, QString> ItemBase::TranslatedPropertyNames;
@@ -143,6 +146,7 @@ void LockSymbolItem::setFlashing(bool flashing)
 
 	m_flashing = flashing;
 	if (flashing) {
+		m_basePos = pos();
 		m_baseScale = scale();
 		m_baseZ = zValue();
 		// a child item can never rise above its parent's z-plane (the part's other layer
@@ -160,7 +164,7 @@ void LockSymbolItem::setFlashing(bool flashing)
 	else {
 		setGraphicsEffect(nullptr);
 		setParentItem(m_owner);
-		setPos(0, 0);
+		setPos(m_basePos);
 		setScale(m_baseScale);
 		setZValue(m_baseZ);
 	}
@@ -964,7 +968,8 @@ void ItemBase::setLocalSticky(bool s)
 			m_stickyItem->setAcceptHoverEvents(false);
 			m_stickyItem->setAcceptedMouseButtons(Qt::NoButton);
 			m_stickyItem->setSharedRenderer(&StickyRenderer);
-			m_stickyItem->setPos(m_moveLockItem == nullptr ? 0 : m_moveLockItem->boundingRect().width() + 1, 0);
+			m_stickyItem->setPos(m_moveLockItem == nullptr ? 0 : LockSymbolInset + m_moveLockItem->boundingRect().width() + 1,
+			                     m_moveLockItem == nullptr ? 0 : LockSymbolInset);
 			m_stickyItem->setZValue(-99999);
 			m_stickyItem->setParentItem(this);
 			m_stickyItem->setVisible(true);
@@ -2143,7 +2148,7 @@ void ItemBase::updateLockSymbol()
 		// boards draw the symbol above their opaque graphic; other parts keep the
 		// legacy placement behind the part
 		m_moveLockItem->setZValue(lockSymbolAlwaysVisible() ? 99999 : -99999);
-		m_moveLockItem->setPos(0, 0);
+		m_moveLockItem->setPos(LockSymbolInset, LockSymbolInset);
 		m_moveLockItem->setToolTip(m_moveLock
 			? tr("Locked. The part cannot be moved or selected. Double-click to unlock.")
 			: tr("Double-click to lock the board in place."));
@@ -2151,7 +2156,8 @@ void ItemBase::updateLockSymbol()
 	}
 
 	if (m_stickyItem != nullptr) {
-		m_stickyItem->setPos(m_moveLockItem == nullptr ? 0 : m_moveLockItem->boundingRect().width() + 1, 0);
+		m_stickyItem->setPos(m_moveLockItem == nullptr ? 0 : LockSymbolInset + m_moveLockItem->boundingRect().width() + 1,
+		                     m_moveLockItem == nullptr ? 0 : LockSymbolInset);
 	}
 
 	update();

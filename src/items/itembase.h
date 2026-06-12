@@ -86,6 +86,7 @@ protected:
 
 private:
 	ItemBase * m_owner = nullptr;
+	QPointF m_basePos;
 	double m_baseScale = 1.0;
 	double m_baseZ = 0.0;
 	bool m_flashing = false;
