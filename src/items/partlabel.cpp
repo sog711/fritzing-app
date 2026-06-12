@@ -115,6 +115,7 @@ PartLabel::PartLabel(ItemBase * owner, QWidget *parentWidget, QGraphicsItem * pa
 
 	setFlag(QGraphicsItem::ItemIsSelectable, false);
 	setFlag(QGraphicsItem::ItemIsMovable, false);					// don't move this in the standard QGraphicsItem way
+	setFlag(QGraphicsItem::ItemSendsGeometryChanges, true);			// the owner's lock symbol follows label moves
 	setVisible(false);
 	setAcceptHoverEvents(true);
 	AllPartLabels.insert(m_owner->id(), this);
@@ -603,6 +604,12 @@ QVariant PartLabel::itemChange(QGraphicsItem::GraphicsItemChange change, const Q
 	switch (change) {
 	case QGraphicsItem::ItemSceneHasChanged:
 		if (this->scene() != nullptr) {
+		}
+		break;
+	case QGraphicsItem::ItemPositionHasChanged:
+		if (m_owner) {
+			// the lock symbol dodges connectors using the label as anchor: follow moves live
+			m_owner->updateLockSymbol();
 		}
 		break;
 	default:

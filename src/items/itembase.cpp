@@ -151,10 +151,12 @@ void LockSymbolItem::setFlashing(bool flashing)
 		m_baseScale = scale();
 		m_baseZ = zValue();
 		// a child item can never rise above its parent's z-plane (the part's other layer
-		// kin and overlapping parts would hide it), so float on top of the scene while flashing
-		QPointF sceneAnchor = m_owner->mapToScene(QPointF(0, 0));
+		// kin and overlapping parts would hide it), so float on top of the scene while
+		// flashing; anchor so the doubled symbol keeps the resting symbol's center
+		QPointF sceneTopLeft = m_owner->mapToScene(m_basePos);
+		QSizeF half = boundingRect().size() * m_baseScale / 2;
 		setParentItem(nullptr);
-		setPos(sceneAnchor);
+		setPos(sceneTopLeft - QPointF(half.width(), half.height()));
 		setScale(m_baseScale * 2);
 		setZValue(999999);
 		auto * colorize = new QGraphicsColorizeEffect();
