@@ -2111,6 +2111,11 @@ bool ItemBase::moveLock() {
 void ItemBase::setMoveLock(bool moveLock)
 {
 	m_moveLock = moveLock;
+	if (moveLock && isSelected()) {
+		// locked items are not selectable: drop a selection acquired before locking,
+		// which also stops the part label from being movable
+		setSelected(false);
+	}
 	updateLockSymbol();
 }
 
