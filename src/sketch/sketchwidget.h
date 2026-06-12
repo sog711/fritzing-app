@@ -243,6 +243,7 @@ public:
 	QList<ItemBase *> selectAllObsolete();
 	int selectAllMoveLock();
 	void setMoveLockForCommand(long id, bool lock);
+	void changeMoveLock(ItemBase * itemBase, bool moveLock);
 	bool partLabelsVisible();
 	void restorePartLabelForCommand(long itemID, QDomElement & element);
 	void loadLogoImage(ItemBase *, const QString & oldSvg, const QSizeF oldAspectRatio, const QString & oldFilename, const QString & newFilename, bool addName);

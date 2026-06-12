@@ -2238,10 +2238,14 @@ void ItemBase::flashLockSymbol()
 
 void ItemBase::toggleMoveLockFromSymbol()
 {
-	// parity with MainWindow::moveLock: direct set plus Inspector refresh, no undo command
-	setMoveLock(!moveLock());
 	InfoGraphicsView * igv = InfoGraphicsView::getInfoGraphicsView(this);
-	if (igv != nullptr) igv->viewItemInfo(this);
+	if (igv != nullptr) {
+		// undoable; the command path also keeps the Inspector in sync
+		igv->changeMoveLock(this, !moveLock());
+	}
+	else {
+		setMoveLock(!moveLock());
+	}
 }
 
 void ItemBase::debugInfo(const QString & msg) const

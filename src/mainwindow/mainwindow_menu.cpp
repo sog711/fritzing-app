@@ -33,6 +33,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "mainwindow.h"
 #include "../debugdialog.h"
 #include "../waitpushundostack.h"
+#include "../commands.h"
 #include "../partseditor/pemainwindow.h"
 #include "../help/aboutbox.h"
 #include "../autoroute/mazerouter/mazerouter.h"
@@ -4437,17 +4438,26 @@ void MainWindow::moveLock()
 		}
 	}
 
-	ItemBase * viewedItem = m_infoView->currentItem();
+	auto * parentCommand = new QUndoCommand();
+	QSet<long> seen;
 	Q_FOREACH (QGraphicsItem  * item, m_currentGraphicsView->scene()->selectedItems()) {
 		ItemBase * itemBase = ItemBase::extractTopLevelItemBase(item);
 		if (itemBase == nullptr) continue;
 		if (itemBase->itemType() == ModelPart::Wire) continue;
+		if (itemBase->moveLock() == moveLock) continue;
+		if (seen.contains(itemBase->id())) continue;
 
-		itemBase->setMoveLock(moveLock);
-		if (viewedItem && viewedItem->layerKinChief() == itemBase->layerKinChief()) {
-			m_currentGraphicsView->viewItemInfo(itemBase);
-		}
+		seen.insert(itemBase->id());
+		new MoveLockCommand(m_currentGraphicsView, itemBase->id(), itemBase->moveLock(), moveLock, parentCommand);
 	}
+
+	if (seen.isEmpty()) {
+		delete parentCommand;
+		return;
+	}
+
+	parentCommand->setText(moveLock ? tr("Lock %n part(s)", "", seen.count()) : tr("Unlock %n part(s)", "", seen.count()));
+	m_undoStack->push(parentCommand);
 }
 
 void MainWindow::selectMoveLock()

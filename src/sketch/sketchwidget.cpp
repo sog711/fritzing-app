@@ -9742,7 +9742,26 @@ bool SketchWidget::curvyWiresIndicated(Qt::KeyboardModifiers modifiers)
 void SketchWidget::setMoveLockForCommand(long id, bool lock)
 {
 	ItemBase * itemBase = findItem(id);
-	if (itemBase) itemBase->setMoveLock(lock);
+	if (itemBase == nullptr) return;
+
+	itemBase->setMoveLock(lock);
+	if (m_infoView && m_infoView->currentItem()
+	        && m_infoView->currentItem()->layerKinChief() == itemBase->layerKinChief()) {
+		// keep the Inspector lock checkbox in sync, also on undo/redo replay
+		viewItemInfo(itemBase);
+	}
+}
+
+void SketchWidget::changeMoveLock(ItemBase * itemBase, bool moveLock)
+{
+	if (itemBase == nullptr) return;
+
+	ItemBase * chief = itemBase->layerKinChief();
+	if (chief->moveLock() == moveLock) return;
+
+	auto * parentCommand = new QUndoCommand(moveLock ? tr("Lock part") : tr("Unlock part"));
+	new MoveLockCommand(this, chief->id(), chief->moveLock(), moveLock, parentCommand);
+	m_undoStack->push(parentCommand);
 }
 
 void SketchWidget::triggerRotate(ItemBase * itemBase, double degrees)

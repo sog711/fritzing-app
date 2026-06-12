@@ -1045,7 +1045,13 @@ void HtmlInfoView::changeLock(bool lockState)
 	if (m_currentItem == nullptr) return;
 	if (m_currentItem->itemType() == ModelPart::Wire) return;
 
-	m_currentItem->setMoveLock(lockState);
+	InfoGraphicsView * infoGraphicsView = InfoGraphicsView::getInfoGraphicsView(m_currentItem);
+	if (infoGraphicsView != nullptr) {
+		infoGraphicsView->changeMoveLock(m_currentItem, lockState);		// undoable
+	}
+	else {
+		m_currentItem->setMoveLock(lockState);
+	}
 	m_locationFrame->setDisabled(lockState);
 	m_rotationFrame->setDisabled(lockState);
 }

@@ -110,6 +110,7 @@ public:
 	Qt::Orientations smdOrientation();
 	virtual void moveItem(ItemBase *, double x, double y);
 	virtual void rotateX(double degrees, bool rubberBandLegEnabled, ItemBase * originatingItem);
+	virtual void changeMoveLock(ItemBase *, bool moveLock);
 
 public Q_SLOTS:
 	virtual void setVoltage(double, bool doEmit);

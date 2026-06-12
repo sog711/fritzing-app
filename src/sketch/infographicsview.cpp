@@ -409,3 +409,8 @@ void InfoGraphicsView::rotateX(double degrees, bool rubberBandLegEnabled, ItemBa
 	Q_UNUSED(rubberBandLegEnabled);
 	Q_UNUSED(originatingItem);
 }
+
+void InfoGraphicsView::changeMoveLock(ItemBase *, bool moveLock)
+{
+	Q_UNUSED(moveLock);
+}
