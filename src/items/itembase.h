@@ -390,6 +390,8 @@ protected:
 	void saveLocAndTransform(QXmlStreamWriter & streamWriter);
 
 	virtual bool makeLocalModifications(QByteArray & svg, const QString & filename);
+	QPointF lockSymbolPosition();
+	bool lockSymbolCollidesWithConnectors(const QRectF & localRect);
 	void updateHidden();
 	virtual void createShape(LayerAttributes & layerAttributes);
 

@@ -57,6 +57,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QGraphicsColorizeEffect>
 #include <QClipboard>
 #include <qmath.h>
+#include <algorithm>
 
 /////////////////////////////////
 
@@ -2148,7 +2149,7 @@ void ItemBase::updateLockSymbol()
 		// boards draw the symbol above their opaque graphic; other parts keep the
 		// legacy placement behind the part
 		m_moveLockItem->setZValue(lockSymbolAlwaysVisible() ? 99999 : -99999);
-		m_moveLockItem->setPos(LockSymbolInset, LockSymbolInset);
+		m_moveLockItem->setPos(lockSymbolPosition());
 		m_moveLockItem->setToolTip(m_moveLock
 			? tr("Locked. The part cannot be moved or selected. Double-click to unlock.")
 			: tr("Double-click to lock the board in place."));
@@ -2161,6 +2162,51 @@ void ItemBase::updateLockSymbol()
 	}
 
 	update();
+}
+
+// Connector pads draw in layers above the symbol and would hide it. Try the home corner
+// first, then the four sides of the part label (whether or not the label is shown),
+// preferring the side that points toward the part center; if everything collides, give up
+// and use the home corner anyway.
+QPointF ItemBase::lockSymbolPosition()
+{
+	QPointF home(LockSymbolInset, LockSymbolInset);
+	if (m_moveLockItem == nullptr || scene() == nullptr) return home;
+
+	QSizeF size = m_moveLockItem->boundingRect().size();
+	if (!lockSymbolCollidesWithConnectors(QRectF(home, size))) return home;
+
+	PartLabel * label = partLabel();
+	if (label == nullptr || !label->initialized()) return home;
+
+	QRectF labelRect = mapRectFromScene(label->sceneBoundingRect());
+	QPointF toCenter = boundingRect().center() - labelRect.center();
+
+	QList<QPair<double, QPointF>> candidates;
+	candidates.append({ -toCenter.x(), QPointF(labelRect.left() - LockSymbolInset - size.width(), labelRect.center().y() - size.height() / 2) });
+	candidates.append({  toCenter.x(), QPointF(labelRect.right() + LockSymbolInset, labelRect.center().y() - size.height() / 2) });
+	candidates.append({ -toCenter.y(), QPointF(labelRect.center().x() - size.width() / 2, labelRect.top() - LockSymbolInset - size.height()) });
+	candidates.append({  toCenter.y(), QPointF(labelRect.center().x() - size.width() / 2, labelRect.bottom() + LockSymbolInset) });
+	std::sort(candidates.begin(), candidates.end(),
+	          [](const QPair<double, QPointF> & a, const QPair<double, QPointF> & b) { return a.first > b.first; });
+
+	for (const QPair<double, QPointF> & candidate : candidates) {
+		if (!lockSymbolCollidesWithConnectors(QRectF(candidate.second, size))) {
+			return candidate.second;
+		}
+	}
+
+	return home;
+}
+
+bool ItemBase::lockSymbolCollidesWithConnectors(const QRectF & localRect)
+{
+	const QList<QGraphicsItem *> itemsInRect = scene()->items(mapRectToScene(localRect));
+	for (QGraphicsItem * gitem : itemsInRect) {
+		auto * connectorItem = dynamic_cast<ConnectorItem *>(gitem);
+		if (connectorItem && connectorItem->isVisible()) return true;
+	}
+	return false;
 }
 
 void ItemBase::flashLockSymbol()
