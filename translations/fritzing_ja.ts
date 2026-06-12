@@ -69,10 +69,6 @@
         <translation>Jan Sieber, Yaniv Steiner, Olaf Val, </translation>
     </message>
     <message>
-        <source>Michaela Vieser and Julia Werner.</source>
-        <translation type="vanished">Michaela VieserとJulia Wernerです。</translation>
-    </message>
-    <message>
         <location filename="../src/help/aboutbox.cpp" line="151"/>
         <source>LGPLv3</source>
         <translation type="unfinished">LGPLv3</translation>
@@ -511,17 +507,9 @@
         <translation>パーツを取り外し</translation>
     </message>
     <message>
-        <source>Delete bin</source>
-        <translation type="vanished">ビンを削除</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1166"/>
         <source>Do you really want to delete bin &apos;%1&apos;?  This action cannot be undone.</source>
         <translation>本当にビン &apos;%1&apos; を削除しますか？  この操作は不可逆です。</translation>
-    </message>
-    <message>
-        <source>Read-only bin</source>
-        <translation type="vanished">ビンを読み取り専用</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1218"/>
@@ -622,10 +610,6 @@
         <source>Copy all loaded parts to the sketch</source>
         <translation>読み込んだパーツをすべてスケッチにコピー</translation>
     </message>
-    <message>
-        <source>Remove from Bin</source>
-        <translation type="vanished">ビンから取り外し</translation>
-    </message>
 </context>
 <context>
     <name>Board</name>
@@ -638,14 +622,6 @@
         <location filename="../src/items/resizableboard.cpp" line="124"/>
         <source>two layers (double-sided)</source>
         <translation>2層（両面）</translation>
-    </message>
-    <message>
-        <source>Have a look at the circle_pcb.svg file in your Fritzing installation folder at parts/svg/core/pcb/.
-
-</source>
-        <translation type="vanished">Fritzingのインストールフォルダ（parts/svg/core/pcb/）にあるcircle_pcb.svgファイルを見てみましょう。
-
-</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="84"/>
@@ -745,17 +721,9 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
         <translation type="unfinished">読み込みが可能ですが</translation>
     </message>
     <message>
-        <source>Unable to load</source>
-        <translation type="vanished">読み込みができません</translation>
-    </message>
-    <message>
         <location filename="../src/items/resizableboard.cpp" line="522"/>
         <source>Unable to load image from %1 %2</source>
         <translation>%1 %2 の画像をロードできません</translation>
-    </message>
-    <message>
-        <source>Can load, but</source>
-        <translation type="vanished">読み込みが可能ですが</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="530"/>
@@ -763,16 +731,6 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
 Use the file?</source>
         <translation>%1の画像をロードできますが %2
 ファイルを使用しますか?</translation>
-    </message>
-    <message>
-        <source>
-
-A custom board svg typically has one or two silkscreen layers and one board layer.
-</source>
-        <translation type="vanished">
-
-svgのカスタムボード一般的に1～2枚のシルクスクリーンレイヤーと1枚のボードレイヤーで構成されています。
-</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="381"/>
@@ -783,10 +741,6 @@ svgのカスタムボード一般的に1～2枚のシルクスクリーンレイ
         <location filename="../src/items/resizableboard.cpp" line="430"/>
         <source>&lt;b&gt;The custom shape has been loaded, and you will see the new board shortly.&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;カスタム形状が読み込まれ、まもなく新規ボードが表示されます。&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>Before actual PCB production we recommend that you test your custom shape by using the &apos;File &gt; Export for Production &gt; Extended Gerber&apos; option. </source>
-        <translation type="vanished">実物のPCB構造を始める前に &apos;File &gt; Export for Production &gt; Extended Gerber&apos; のオプションでカスタム形状をテストすることをお勧めします。 </translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="436"/>
@@ -819,14 +773,6 @@ svgのカスタムボード一般的に1～2枚のシルクスクリーンレイ
         <location filename="../src/items/resizableboard.cpp" line="451"/>
         <source>&lt;br/&gt;However, the cutouts may not be formatted correctly.</source>
         <translation>&lt;br/&gt;しかし、カットアウトが正しくフォーマットされていないかもしれません。</translation>
-    </message>
-    <message>
-        <source>&lt;br/&gt;&lt;br/&gt;If you intended your custom shape to have cutouts and you did not get the expected result, </source>
-        <translation type="vanished">&lt;br/&gt;&lt;br/&gt;カスタム形状にカットアウトを含まれることを意図している場合、期待される結果に得られません。 </translation>
-    </message>
-    <message>
-        <source>it is because Fritzing requires that you make cutouts using a shape &apos;subtraction&apos; or &apos;difference&apos; operation in your vector graphics editor.</source>
-        <translation type="vanished">それは、Fritzingでは、ベクターグラフィックエディターで図形の「引き算」か「差分」の操作を使ってカットアウトを行う必要があるからです。</translation>
     </message>
 </context>
 <context>
@@ -1122,10 +1068,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <translation>接続先は %1 : %2, %3, %4, %5, %6</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="vanished">エラー</translation>
-    </message>
-    <message>
         <location filename="../src/program/consolewindow.cpp" line="153"/>
         <source>Error</source>
         <comment>dialog title</comment>
@@ -1146,10 +1088,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <source>Critical Error</source>
         <comment>dialog title</comment>
         <translation type="unfinished">クリティカルエラー</translation>
-    </message>
-    <message>
-        <source>Critical Error</source>
-        <translation type="vanished">クリティカルエラー</translation>
     </message>
     <message>
         <location filename="../src/program/consolewindow.cpp" line="181"/>
@@ -1206,10 +1144,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <translation>想定外のＳＶＧレンダリング失敗--fritzing.orgご連絡ください</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/autoroute/drc.cpp" line="549"/>
         <source>%1 is overlapping (%2 layer)</source>
         <translation>%1は (%2 layer)に重なっている</translation>
@@ -1232,10 +1166,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>DRCResultsDialog</name>
-    <message>
-        <source>DRC Results</source>
-        <translation type="vanished">DRCの結果</translation>
-    </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="138"/>
         <source>DRC Results</source>
@@ -1263,10 +1193,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>DebugDialog</name>
-    <message>
-        <source>for debugging</source>
-        <translation type="vanished">デバッグ用</translation>
-    </message>
     <message>
         <location filename="../src/debugdialog.cpp" line="138"/>
         <source>for debugging</source>
@@ -1327,10 +1253,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 <context>
     <name>FApplication</name>
     <message>
-        <source>Fritzing failure</source>
-        <translation type="vanished">Fritzing 失敗</translation>
-    </message>
-    <message>
         <location filename="../src/fapplication.cpp" line="1871"/>
         <source>Fritzing caught an exception from %1 in event %2</source>
         <translation>Fritzing はイベント %2 で %1 の例外を検出しました</translation>
@@ -1376,24 +1298,6 @@ Would you like to regenerate the parts database?
         <location filename="../src/fapplication.cpp" line="1868"/>
         <source>Fritzing caught an exception from %1 in event %2: %3</source>
         <translation>Fritzing はイベント %2: %3 で %1 の例外を検出しました</translation>
-    </message>
-    <message>
-        <source>Regenerate parts database?</source>
-        <translation type="vanished">パーツのデータベースを再生？</translation>
-    </message>
-    <message>
-        <source>Regenerating the parts database will take some minutes and you will have to restart Fritzing
-
-</source>
-        <translation type="vanished">パーツデ再生ータベースの再生には数分かかって、Fritzingを再起動する必要があります
-
-</translation>
-    </message>
-    <message>
-        <source>Would you like to regenerate the parts database?
-</source>
-        <translation type="vanished">パーツデータベースを再生してみませんか？
-</translation>
     </message>
     <message>
         <location filename="../src/fapplication.cpp" line="2283"/>
@@ -1479,10 +1383,6 @@ Would you like to regenerate the parts database?
         <translation type="unfinished">Fritzing</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/fabuploaddialog.cpp" line="161"/>
         <source>Error: </source>
         <translation type="unfinished">エラー: </translation>
@@ -1490,10 +1390,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FabUploadProgress</name>
-    <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
     <message>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="181"/>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="211"/>
@@ -1516,10 +1412,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FirstTimeHelpDialog</name>
-    <message>
-        <source>First Time Help</source>
-        <translation type="vanished">初ヘルプ</translation>
-    </message>
     <message>
         <location filename="../src/help/firsttimehelpdialog.cpp" line="37"/>
         <source>First Time Help</source>
@@ -1560,17 +1452,9 @@ Would you like to regenerate the parts database?
         <translation>現在のスケッチを閉じる</translation>
     </message>
     <message>
-        <source>%1 - %2</source>
-        <translation type="vanished">%1 - %2</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="132"/>
         <source>Specify a file name</source>
         <translation>ファイル名を選択してください</translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">保存 &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="238"/>
@@ -1608,38 +1492,14 @@ Would you like to regenerate the parts database?
 <context>
     <name>FzpInfo</name>
     <message>
-        <source>Error</source>
-        <translation type="obsolete">エラー</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="obsolete">警告</translation>
-    </message>
-    <message>
-        <source>Cannot open file</source>
-        <translation type="obsolete">ファイルを開けません</translation>
-    </message>
-    <message>
         <location filename="../src/model/fzpinfo.cpp" line="64"/>
         <source>Cannot open file &apos;%1&apos;.</source>
         <translation type="unfinished">ファイル &apos;%1&apos; を開けません。</translation>
     </message>
     <message>
-        <source>File is empty</source>
-        <translation type="obsolete">ファイルが空です</translation>
-    </message>
-    <message>
         <location filename="../src/model/fzpinfo.cpp" line="72"/>
         <source>File &apos;%1&apos; is empty.</source>
         <translation type="unfinished">ファイル &apos;%1&apos; は空です。</translation>
-    </message>
-    <message>
-        <source>XML Error</source>
-        <translation type="obsolete">XMLエラー</translation>
-    </message>
-    <message>
-        <source>Title is missing.</source>
-        <translation type="obsolete">タイトルがありません。</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="147"/>
@@ -1651,33 +1511,11 @@ All parts must have a title tag.</source>
 すべてのパーツにはタイトルタグが必要です。</translation>
     </message>
     <message>
-        <source>Version number missing.</source>
-        <translation type="obsolete">バージョン番号がありません。</translation>
-    </message>
-    <message>
-        <source>The part is missing a fritzing version.
-</source>
-        <translation type="obsolete">パーツにFritzingバージョンがありません。
-</translation>
-    </message>
-    <message>
-        <source>All parts must have a fritzingVersion attribute: fritzingVersion=&quot;x.y.z&quot;.</source>
-        <translation type="obsolete">すべてのパーツには fritzingVersion 属性が必要です: fritzingVersion=&quot;x.y.z&quot;。</translation>
-    </message>
-    <message>
-        <source>Invalid Version</source>
-        <translation type="obsolete">無効なバージョン</translation>
-    </message>
-    <message>
         <location filename="../src/model/fzpinfo.cpp" line="171"/>
         <source>The fritzing version &apos;%1&apos; is invalid.
 The part might not work properly.</source>
         <translation type="unfinished">Fritzingバージョン «%1» は無効です。
 パーツが正しく動作しない可能性があります。</translation>
-    </message>
-    <message>
-        <source>Version Mismatch</source>
-        <translation type="obsolete">バージョンの不一致</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="17"/>
@@ -1846,10 +1684,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>ワイヤー</translation>
     </message>
     <message>
-        <source>Trace wire %1</source>
-        <translation type="vanished">ワイヤーを配線する %1</translation>
-    </message>
-    <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="217"/>
         <source>Properties</source>
         <translation>プロパティ</translation>
@@ -1873,10 +1707,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/infoview/htmlinfoview.cpp" line="1024"/>
         <source>Locked</source>
         <translation>ロックされました</translation>
-    </message>
-    <message>
-        <source>Ratsnest line</source>
-        <translation type="vanished">ラッツネストワイヤー</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="1026"/>
@@ -1954,21 +1784,9 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
 <context>
     <name>ItemBase</name>
     <message>
-        <source>Part</source>
-        <translation type="vanished">パーツ</translation>
-    </message>
-    <message>
-        <source>family</source>
-        <translation type="vanished">ファミリー</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="226"/>
         <source>color</source>
         <translation>カラー</translation>
-    </message>
-    <message>
-        <source>resistance</source>
-        <translation type="vanished">抵抗</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="230"/>
@@ -1979,10 +1797,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="233"/>
         <source>pin spacing</source>
         <translation>ピン間隔</translation>
-    </message>
-    <message>
-        <source>rated power</source>
-        <translation type="vanished">定格電力</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="235"/>
@@ -2222,26 +2036,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>banded</source>
-        <translation type="vanished">縞模様</translation>
-    </message>
-    <message>
-        <source>top</source>
-        <translation type="vanished">トップ</translation>
-    </message>
-    <message>
-        <source>bottom</source>
-        <translation type="vanished">ボトム</translation>
-    </message>
-    <message>
-        <source>copper bottom</source>
-        <translation type="vanished">底銅</translation>
-    </message>
-    <message>
-        <source>copper top</source>
-        <translation type="vanished">上銅</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="263"/>
         <source>silkscreen bottom</source>
         <translation>低シルクスクリーン</translation>
@@ -2415,10 +2209,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>準備完了</translation>
     </message>
     <message>
-        <source>Save %1</source>
-        <translation type="vanished">%1を保存</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1653"/>
         <source>unable to parse fzp in %1. line: %2 column: %3 error: %4</source>
         <translation type="unfinished">%1 の fzp を解析できません。行: %2 列: %3 エラー: %4</translation>
@@ -2478,10 +2268,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
 %3</translation>
     </message>
     <message>
-        <source>Save produced an empty archive for &apos;%1&apos;. Save aborted.</source>
-        <translation type="obsolete">«%1» の保存で空のアーカイブが生成されました。保存を中止しました。</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2188"/>
         <source>Error finalizing ZIP archive for &apos;%1&apos;.
 
@@ -2513,10 +2299,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/mainwindow/mainwindow.cpp" line="2230"/>
         <source>Failed to process part file: %1</source>
         <translation type="unfinished">パーツファイルの処理に失敗しました: %1</translation>
-    </message>
-    <message>
-        <source>Critical Issues</source>
-        <translation type="obsolete">重大な問題</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2323"/>
@@ -2732,10 +2514,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1810"/>
         <source>Unable to save netlist file. But the content was copied to the clipboard.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to save netlist file.</source>
-        <translation type="obsolete">ネットリストファイルを保存できません。</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="161"/>
@@ -3489,17 +3267,9 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <translation>スケッチはボードを含んでいません。ガーバーへエクスポートするには、PCBを追加してください。</translation>
     </message>
     <message>
-        <source>Choose a folder for exporting</source>
-        <translation type="vanished">エクスポートするフォルダを選んでください</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="988"/>
         <source>Unable to export %1 as shareable.</source>
         <translation type="unfinished">%1 を共有可能な形式でエクスポートできません。</translation>
-    </message>
-    <message>
-        <source>Saving failed. Please check if home and destionation directory are writeable and not full.</source>
-        <translation type="obsolete">保存に失敗しました。ホームディレクトリと保存先ディレクトリが書き込み可能で、空き容量があることを確認してください。</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1018"/>
@@ -3643,14 +3413,6 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1725"/>
         <source>Export IPC-D-356...</source>
         <translation>IPC-D-356 をエクスポート...</translation>
-    </message>
-    <message>
-        <source>Unable to save IPC file.</source>
-        <translation type="obsolete">IPC ファイルを保存できません。</translation>
-    </message>
-    <message>
-        <source>But the content was copied to the clipboard.</source>
-        <translation type="vanished">しかし、内容はクリップボードにコピーされた。</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1808"/>
@@ -4305,10 +4067,6 @@ Please check all views for potential side-effects.</source>
         <translation>GROUNDに接続されているトレースを除く、銅層の空いている領域を埋める</translation>
     </message>
     <message>
-        <source>No copper top layer</source>
-        <translation type="vanished">銅の上層なし</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2598"/>
         <source>The copper top (copper 1) layer is not available on a one-sided board.  Please switch the board to double-sided or choose the copper bottom (copper 0) layer.</source>
         <translation>片面基板では、上面銅層の（銅1）を選択できません。  両面基板に変更するか、底面銅層（銅0）を選択してください。</translation>
@@ -4422,10 +4180,6 @@ Please check all views for potential side-effects.</source>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1203"/>
         <source>Show the grid</source>
         <translation>グリッドを表示</translation>
-    </message>
-    <message>
-        <source>Actual Size</source>
-        <translation type="vanished">現寸法</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2312"/>
@@ -4603,10 +4357,6 @@ Please check all views for potential side-effects.</source>
         <translation type="unfinished">今後このメッセージを表示しない</translation>
     </message>
     <message>
-        <source>Missing copper fill</source>
-        <translation type="obsolete">銅箔の塗りつぶしがありません</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4486"/>
         <source>It is recommended to add copper/ground fill to your circuit to reduce acid usage during production.
 
@@ -4648,10 +4398,6 @@ Continue upload?</source>
         <translation>当ビアはベンドポイントに変換</translation>
     </message>
     <message>
-        <source>Revert?</source>
-        <translation type="vanished">元に戻す？</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="274"/>
         <source>This operation can not be undone--you will lose all of your changes.
 
@@ -4674,10 +4420,6 @@ Go ahead and revert?</source>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="662"/>
         <source>Reload the sketch</source>
         <translation>スケッチを再読み込み</translation>
-    </message>
-    <message>
-        <source>Unrouted connections</source>
-        <translation type="vanished">ルーティングされてない接続</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3225"/>
@@ -4705,14 +4447,6 @@ Go ahead and revert?</source>
         <translation>すべてのルーティングされてないコネクタを強調表示</translation>
     </message>
     <message>
-        <source>Inspector</source>
-        <translation type="vanished">インスペクター</translation>
-    </message>
-    <message>
-        <source>Undo History</source>
-        <translation type="vanished">履歴をやり直し</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="581"/>
         <source>Breadboard</source>
         <translation>ブレッドボード</translation>
@@ -4726,14 +4460,6 @@ Go ahead and revert?</source>
         <location filename="../src/mainwindow/mainwindow.cpp" line="599"/>
         <source>PCB</source>
         <translation>PCB</translation>
-    </message>
-    <message>
-        <source>Layers</source>
-        <translation type="vanished">層</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t get the dock widget</source>
-        <translation type="vanished">ドックウィジットを取得できません</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="949"/>
@@ -4863,10 +4589,6 @@ Go ahead and revert?</source>
         <translation>テキストは、パーツラベル、説明、タイトル等に一致します。検索するテキストを入力：</translation>
     </message>
     <message>
-        <source>Search</source>
-        <translation type="vanished">検索</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4696"/>
         <source>No parts matched search term &apos;%1&apos;.</source>
         <translation>条件 &apos;%1&apos; に一致するパーツがありません。</translation>
@@ -4916,10 +4638,6 @@ Go ahead and revert?</source>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2903"/>
         <source>Set the minimum distance between ground fill and traces or connectors</source>
         <translation>グランドフィルとトレース又はコネクターの最小距離を設定する</translation>
-    </message>
-    <message>
-        <source>Enter Text</source>
-        <translation type="vanished">テキスト入力</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1078"/>
@@ -5194,10 +4912,6 @@ Note: if you want to update later, there are options under the &apos;Part&apos; 
         <translation>%1の背景</translation>
     </message>
     <message>
-        <source>Schematic conversion</source>
-        <translation type="vanished">回路図の変換</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2963"/>
         <source>Saving this sketch will convert it to the new schematic graphics standard. Go ahead and convert?</source>
         <translation>このスケッチを保存すると、新規回路図標準に変換されます。変換してみますか？</translation>
@@ -5211,24 +4925,6 @@ Note: if you want to update later, there are options under the &apos;Part&apos; 
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1005"/>
         <source>Connect all connectors to a single test part</source>
         <translation>すべてのコネクターを1つのテストパーツに接続</translation>
-    </message>
-    <message>
-        <source>Schematic view update</source>
-        <translation type="vanished">回路図の更新</translation>
-    </message>
-    <message>
-        <source>There is a new graphics standard for schematic-view part images, beginning with version 0.8.6.
-
-</source>
-        <translation type="vanished">バージョン0.8.6以降、回路図ビューのパーツ画像に新規のグラフィック標準標準が導入されました。
-
-</translation>
-    </message>
-    <message>
-        <source>Would you like to convert &apos;%1&apos; to the new standard now or open the file read-only?
-</source>
-        <translation type="vanished">今すぐ &apos;%1&apos; を新規標準に変換しますか、それともファイルを読み取り専用で開きますか？
-</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3698"/>
@@ -5351,10 +5047,6 @@ Note: if you want to update later, there are options under the &apos;Part&apos; 
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2801"/>
         <source>Routing</source>
         <translation>ルーティング</translation>
-    </message>
-    <message>
-        <source>Fritzing Fab Upload</source>
-        <translation type="vanished">Fritzingファブアップロード</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4518"/>
@@ -5565,16 +5257,6 @@ Reason: %2 (errcode %3)</source>
         <translation>%1に 上書きできませんでした.
 理由 %2 (エラーコード %3)</translation>
     </message>
-    <message numerus="yes">
-        <source>Unable to find the following %n part(s):</source>
-        <translation type="vanished">
-            <numerusform>次の%nパーツの検索できません：</numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>at</source>
-        <translation type="vanished">で</translation>
-    </message>
 </context>
 <context>
     <name>MysteryPart</name>
@@ -5607,10 +5289,6 @@ Reason: %2 (errcode %3)</source>
 </context>
 <context>
     <name>OutlierHandler</name>
-    <message>
-        <source>Outlier Components Navigator</source>
-        <translation type="obsolete">範囲外コンポーネントナビゲーター</translation>
-    </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="149"/>
         <source>Outlier Components Navigator</source>
@@ -5735,10 +5413,6 @@ Reason: %2 (errcode %3)</source>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="960"/>
         <source>Change trace layer</source>
         <translation>トレースレイヤーを変更</translation>
-    </message>
-    <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1422"/>
@@ -5921,10 +5595,6 @@ Enter keepout value:</source>
         <translation type="unfinished">特にグランドシードについて、手動で接続性を確認してください。</translation>
     </message>
     <message>
-        <source>Ground Fill</source>
-        <translation type="obsolete">グランドフィル</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2407"/>
         <source>Your sketch does not have a board yet!  Please add a PCB in order to use this selection operation.</source>
         <translation>スケッチはまだボードがありません！ この選択操作を使用するには、PCBを追加してください。</translation>
@@ -5956,56 +5626,6 @@ Enter keepout value:</source>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2888"/>
         <source>Your sketch does not have a board yet. You cannot fabricate this sketch without a PCB part.</source>
         <translation>スケッチはまだボードがありません。PCBパーツなしでこのスケッチを製作することはできません。</translation>
-    </message>
-    <message>
-        <source>You need to select one board if you have multiple PCB boards.</source>
-        <translation type="obsolete">複数のPCBボードがある場合は、1つのボードを選択する必要があります。</translation>
-    </message>
-    <message>
-        <source>Enter Keepout</source>
-        <translation type="vanished">キープアウトを入力</translation>
-    </message>
-    <message>
-        <source>Keepout is in mils (.001 inches).
-
-</source>
-        <translation type="vanished">キープアウトの単位はミル（0.001インチ）です。
-
-</translation>
-    </message>
-    <message>
-        <source>Note that due to aliasing, distances may be too short by up to 2 mils
-</source>
-        <translation type="vanished">エイリアシングの影響で、距離が2ミルまで短くなるかもしれません
-</translation>
-    </message>
-    <message>
-        <source>so you may want to increase the keepout value by that much.
-
-</source>
-        <translation type="vanished">それぐらいのキープアウト値を増加する必要があります。
-
-</translation>
-    </message>
-    <message>
-        <source>10 mils is a good default choice.
-
-</source>
-        <translation type="vanished">10milが適切なデフォルトです。
-
-</translation>
-    </message>
-    <message>
-        <source>Enter keepout value:</source>
-        <translation type="vanished">キープアウトの値を入力します：</translation>
-    </message>
-    <message>
-        <source>Fritzing Fab Quote</source>
-        <translation type="vanished">Fritzing ファブ見積もり</translation>
-    </message>
-    <message>
-        <source>Sorry, http://fab.fritzing.org is not responding to the quote request. Please check your network connection and/or try again later.</source>
-        <translation type="vanished">申し訳ありません。http://fab.fritzing.org は見積依頼に応答していません。お手数ですが、ネットワーク接続をご確認の上、再度お試しください。</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="257"/>
@@ -6043,10 +5663,6 @@ Enter keepout value:</source>
 </context>
 <context>
     <name>PEMainWindow</name>
-    <message>
-        <source>Parts Editor</source>
-        <translation type="vanished">パーツエディター</translation>
-    </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="964"/>
         <source>Show Icon</source>
@@ -6241,58 +5857,14 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Copy problem</source>
-        <translation type="vanished">コピーの問題</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1609"/>
         <source>Unable to make a local copy of: &apos;%1&apos;</source>
         <translation>&apos;%1&apos;のローカルコピーを作成することができません</translation>
     </message>
     <message>
-        <source>You may use a PNG or JPG image to construct your part, but it is better to use an SVG. </source>
-        <translation type="vanished">パーツの作成には、PNGやJPG等の画像を使用することもできますが、SVGを使用する方が良いです。 </translation>
-    </message>
-    <message>
-        <source>PNG and JPG images retain their nature as bitmaps and do not look good when scaled--</source>
-        <translation type="vanished">PNGやJPG画像はビットマップとしての性質を持っているため、拡大したら見た目が良くありません--</translation>
-    </message>
-    <message>
-        <source>so for Fritzing parts it is best to use PNG and JPG only as placeholders.</source>
-        <translation type="vanished">Fritzingパーツでは、PNGやJPGをプレースホルダーとしてのみ使用するのがベストです。</translation>
-    </message>
-    <message>
-        <source>Use of PNG and JPG discouraged</source>
-        <translation type="vanished">PNGやJPGの使用は推奨されません</translation>
-    </message>
-    <message>
-        <source>Conversion problem</source>
-        <translation type="vanished">変換の問題</translation>
-    </message>
-    <message>
-        <source>SVG problem</source>
-        <translation type="vanished">SVGの問題</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1582"/>
         <source>Unable to parse &apos;%1&apos;: %2 line:%3 column:%4</source>
         <translation>解析できません &apos;%1&apos;: %2 line:%3 column:%4</translation>
-    </message>
-    <message>
-        <source>There are no copper layers defined in: %1. </source>
-        <translation type="vanished">銅層はここで定義されていません：%1。 </translation>
-    </message>
-    <message>
-        <source>See &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;this explanation&lt;/a&gt;.</source>
-        <translation type="vanished">&lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;の説明を見る&lt;/a&gt;.</translation>
-    </message>
-    <message>
-        <source>&lt;br/&gt;&lt;br/&gt;This will not be a problem in the next release of the Parts Editor, </source>
-        <translation type="vanished">&lt;br/&gt;&lt;br/&gt;次のパーツエディターのリリースでは問題になりません。 </translation>
-    </message>
-    <message>
-        <source>but for now please modify the file according to the instructions in the link.</source>
-        <translation type="vanished">とりあえず、リンク先の説明に従ってファイルを修正してください。</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1636"/>
@@ -6320,10 +5892,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>&amp;ファイル</translation>
     </message>
     <message>
-        <source>Sketch Change Warning</source>
-        <translation type="vanished">スケッチ変更予告</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2147"/>
         <source>The open sketch &apos;%1&apos; uses the part you are editing. </source>
         <translation>開いているスケッチ&apos;%1&apos;は編集中のパーツを使用しています。 </translation>
@@ -6332,22 +5900,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2148"/>
         <source>Saving this part will make a change to the sketch that cannot be undone.</source>
         <translation>このパーツを保存すると、変更したスケッチを元に戻すことができません。</translation>
-    </message>
-    <message>
-        <source>The open sketches </source>
-        <translation type="vanished">スケッチを開く </translation>
-    </message>
-    <message>
-        <source>&apos;%1&apos;, </source>
-        <translation type="vanished">&apos;%1&apos;, </translation>
-    </message>
-    <message>
-        <source>and &apos;%1&apos; </source>
-        <translation type="vanished">と&apos;%1&apos; </translation>
-    </message>
-    <message>
-        <source>Saving this part will make a change to these sketches that cannot be undone.</source>
-        <translation type="vanished">このパーツを保存すると、変更したスケッチを元に戻すことができません。</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2166"/>
@@ -6372,10 +5924,6 @@ Go ahead and save?</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2734"/>
         <source>Remove %1 connectors</source>
         <translation>コネクタ%1 を取り外し</translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">保存 &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2753"/>
@@ -6416,10 +5964,6 @@ Go ahead and save?</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1157"/>
         <source>Duplicate &apos;variant&apos; property not allowed</source>
         <translation>バリアントのプロパティの重複は禁止</translation>
-    </message>
-    <message>
-        <source>Close without saving?</source>
-        <translation type="vanished">保存せずに閉じる？</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="383"/>
@@ -6472,10 +6016,6 @@ Go ahead and save?</source>
         <translation>コネクターのメタデータをリストビューで表示</translation>
     </message>
     <message>
-        <source>Blank not allowed</source>
-        <translation type="vanished">空欄は禁止</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1032"/>
         <source>The value of &apos;%1&apos; can not be blank.</source>
         <translation>&apos;%1&apos; の値を空欄にすることはできません。</translation>
@@ -6486,17 +6026,9 @@ Go ahead and save?</source>
         <translation>1を%2に変更</translation>
     </message>
     <message>
-        <source>Must be unique</source>
-        <translation type="vanished">ユニークが必</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1069"/>
         <source>Variant &apos;%1&apos; is in use. The variant name must be unique.</source>
         <translation>バリアント &apos;%1&apos; が使用されています。バリアント名はユニークではなければなりません。</translation>
-    </message>
-    <message>
-        <source>Duplicate problem</source>
-        <translation type="vanished">問題を複製</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1523"/>
@@ -6512,10 +6044,6 @@ Go ahead and save?</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1532"/>
         <source>Please re-export the SVG file using that setting, and try loading again.</source>
         <translation>その設定でSVGファイルを再エクスポートして、再度ロードを実行てください。</translation>
-    </message>
-    <message>
-        <source>Fonts</source>
-        <translation type="vanished">フォント</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1550"/>
@@ -6556,22 +6084,6 @@ Go ahead and save?</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="390"/>
         <source>Do you want to keep working or close without saving?</source>
         <translation>作業続くか保存しないまま閉じますか？</translation>
-    </message>
-    <message numerus="yes">
-        <source>This part has %n unassigned connectors </source>
-        <translation type="vanished">
-            <numerusform>このパーツは未割り付けコネクターがあります。 </numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>across %n views. </source>
-        <translation type="vanished">
-            <numerusform>%nのビューに渡る </numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>Until all connectors are assigned to SVG elements, the part will not work correctly. </source>
-        <translation type="vanished">すべてのコネクタがSVG要素に割り当てられるまでは、パーツは正しく作動しません。 </translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="537"/>
@@ -6724,10 +6236,6 @@ Go ahead and save?</source>
         <translation>%1 のビューのみを表示</translation>
     </message>
     <message>
-        <source>Exiting the Parts Editor now is fine, as long as you remember to finish the assignments later.</source>
-        <translation type="vanished">パーツエディターを今終了しても、後で課題を終わらせることを忘れなければ問題ありません。</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="565"/>
         <source>Load image for view...</source>
         <translation>表示する画像をロード...</translation>
@@ -6751,34 +6259,6 @@ Go ahead and save?</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="632"/>
         <source>&amp;Edit</source>
         <translation>&amp;編集</translation>
-    </message>
-    <message>
-        <source>This part has bendable legs. </source>
-        <translation type="vanished">このパーツは曲げる端子があります。 </translation>
-    </message>
-    <message>
-        <source>This version of the Parts Editor does not yet support editing bendable legs, and the legs may not be displayed correctly in breadboard view . </source>
-        <translation type="vanished">このバージョンのパーツエディターでは、曲り端子の編集がサポートできませんので、ブレッドボードビューで端子が正しく表示されない可能性があります。 </translation>
-    </message>
-    <message>
-        <source>If you make changes to breadboard view, or change connector metadata, the legs may no longer work. </source>
-        <translation type="vanished">ブレッドボードビューを変更したり、コネクターのメタデータを変更したりすると、端子が動作しなくなることがあります。 </translation>
-    </message>
-    <message>
-        <source>You can safely make changes to Schematic or PCB view.
-
-</source>
-        <translation type="vanished">回路図やPCBビューでの変更は無事に行うことがます。
-
-</translation>
-    </message>
-    <message>
-        <source>This warning will not be repeated in this session of Fritzing</source>
-        <translation type="vanished">この警告は今回のFritzingのセッションでは繰り返されません</translation>
-    </message>
-    <message>
-        <source>Unable to load &apos;%1&apos;. Please close the parts editor without saving and try again.</source>
-        <translation type="vanished">&apos;%1&apos; をロードできません。保存せずにパーツエディターを閉じて、もう一度試してください。</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1575"/>
@@ -6828,10 +6308,6 @@ Go ahead and save?</source>
         <translation>画像ファイル &apos;%1&apos; をロードできません
 
 %2</translation>
-    </message>
-    <message>
-        <source>Parts Editor Error</source>
-        <translation type="vanished">パーツエディターエラー</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2352"/>
@@ -7125,10 +6601,6 @@ Go ahead and save?</source>
         <translation>ピンラベルを編集</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/items/paletteitem.cpp" line="620"/>
         <location filename="../src/items/paletteitem.cpp" line="631"/>
         <location filename="../src/items/paletteitem.cpp" line="655"/>
@@ -7296,10 +6768,6 @@ Go ahead and save?</source>
         <translation type="unfinished">%1 のラベルを設定する</translation>
     </message>
     <message>
-        <source>Set label for %1</source>
-        <translation type="vanished">%1 のラベルを設定する</translation>
-    </message>
-    <message>
         <location filename="../src/items/partlabel.cpp" line="760"/>
         <source>Label text:</source>
         <translation>テキスト:</translation>
@@ -7393,10 +6861,6 @@ Go ahead and save?</source>
         <translation>ファイル名を選択してください</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="457"/>
         <source>Cannot find file %1.</source>
         <translation>%1のファイルが見つかりません.</translation>
@@ -7431,10 +6895,6 @@ Go ahead and save?</source>
         <translation>保存されていない変更は失われます.</translation>
     </message>
     <message>
-        <source>Add to bin</source>
-        <translation type="vanished">binへ追加</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="697"/>
         <source>Do you really want to add the selected part to the bin?</source>
         <translation>選択されたパーツをこのbinに追加しますか?</translation>
@@ -7443,10 +6903,6 @@ Go ahead and save?</source>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="584"/>
         <source>Do you want to save the changes you made in the bin &quot;%1&quot;?</source>
         <translation>作成したビン %1 の変更を保存しますか?</translation>
-    </message>
-    <message>
-        <source>Save bin &quot;%1&quot;</source>
-        <translation type="vanished">ビン &quot;%1&quot;を保存</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="513"/>
@@ -7520,10 +6976,6 @@ Go ahead and save?</source>
         <translation>列</translation>
     </message>
     <message>
-        <source>Performance Warning</source>
-        <translation type="vanished">パフォーマンスの注意</translation>
-    </message>
-    <message>
         <location filename="../src/items/perfboard.cpp" line="297"/>
         <source>Performance of perfboards and stripboards with more than approximately 2000 holes can be slow. Are you sure ?
 
@@ -7544,14 +6996,6 @@ Note: this warning will not be repeated during this session.</source>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="80"/>
         <source>&lt;p&gt;&lt;h2&gt;Pin Label Editor&lt;/h2&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;h2&gt;ピンラベルエディター&lt;/h2&gt;&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Click on a label next to a pin number to rename that pin.</source>
-        <translation type="vanished">&lt;p&gt;ピン名を変更するにはピン番号の横にあるラベルをクリックする。</translation>
-    </message>
-    <message>
-        <source>You can use the tab key to move through the labels in order.&lt;/p&gt;</source>
-        <translation type="vanished">タブキーでラベルを順番に移動することができます。&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="81"/>
@@ -7627,14 +7071,6 @@ Note: this warning will not be repeated during this session.</source>
         <location filename="../src/dialogs/prefsdialog.cpp" line="442"/>
         <source>Gerber</source>
         <translation type="unfinished">ガーバー</translation>
-    </message>
-    <message>
-        <source>The gerber file generator will use six decimals precision instead of three.
-Some deprecated gerber commands are removed or replaced.
-We recommend enabling this. Only to avoid surprises with processes that are optimized for earlier Fritzing versions, this is currently off by default.</source>
-        <translation type="vanished">ガーバー・ファイル・ジェネレーターは3桁ではなく6桁の精度を使用します。
-いくつかの非推奨ガーバー・コマンドが削除または置き換えられます。
-これを有効にすることをお勧めします。以前のFritzingバージョンに最適化されたプロセスでの驚きを避けるために、現在のところデフォルトではオフになっています。</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="455"/>
@@ -7764,38 +7200,6 @@ This feature is enabled by default. If you need to maintain compatibility with o
         <location filename="../src/dialogs/prefsdialog.cpp" line="518"/>
         <source>Animation time for the transitory simulation (s): </source>
         <translation type="unfinished">過渡シミュレーションのアニメーション時間 (秒)： </translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Scroll priority&lt;/b&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;b&gt;スクロール優先&lt;/b&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>no keys down = scroll&lt;br/&gt;&lt;kbd&gt;Shift&lt;/kbd&gt; key swaps scroll axis&lt;br/&gt;&lt;kbd&gt;Alt&lt;/kbd&gt; or &lt;kbd&gt;%1&lt;/kbd&gt; = zoom</source>
-        <translation type="vanished">下キーなし = スクロール&lt;br/&gt;&lt;kbd&gt;Shift&lt;/kbd&gt; キーはスクロール軸を切り替える&lt;br/&gt;&lt;kbd&gt;Alt&lt;/kbd&gt; または &lt;kbd&gt;%1&lt;/kbd&gt; = ズーム</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Zoom priority&lt;/b&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;b&gt;ズーム優先&lt;/b&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>no keys down = zoom&lt;br/&gt;&lt;kbd&gt;Alt&lt;/kbd&gt; or &lt;kbd&gt;%1&lt;/kbd&gt; = scroll&lt;br/&gt;&lt;kbd&gt;Shift&lt;/kbd&gt; key swaps scroll axis</source>
-        <translation type="vanished">キーを押さない = ズーム&lt;br/&gt;&lt;kbd&gt;Alt&lt;/kbd&gt; または &lt;kbd&gt;%1&lt;/kbd&gt; = スクロール&lt;br/&gt;&lt;kbd&gt;Shift&lt;/kbd&gt; キーはスクロール軸を入れ替えます</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Guess&lt;/b&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;b&gt;推測&lt;/b&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>Let Fritzing guess if the input is from a wheel or a touchpad. &lt;kbd&gt;Alt&lt;/kbd&gt; or &lt;kbd&gt;%1&lt;/kbd&gt; modify scrolling. &lt;kbd&gt;Shift&lt;/kbd&gt; can modify the axis or the speed.</source>
-        <translation type="vanished">入力がホイールかタッチパッドかをFritzingに推測させる。&lt;kbd&gt;Alt&lt;/kbd&gt; または&lt;kbd&gt;%1&lt;/kbd&gt; はスクロールを変更します。&lt;kbd&gt;Shift&lt;/kbd&gt; は軸や速度を変更することができます。</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Pure&lt;/b&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;b&gt;ピュア&lt;/b&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>Use system defaults to interpret the wheel input. Don&apos;t try anything fancy. Recommended when using a touchpad with pinch gestures.</source>
-        <translation type="obsolete">ホイール入力の解釈にシステムのデフォルトを使用します。特別な処理は行いません。ピンチジェスチャー対応のタッチパッドを使用している場合に推奨されます。</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="687"/>
@@ -8019,14 +7423,6 @@ This feature is enabled by default. If you need to maintain compatibility with o
         <location filename="../src/program/programwindow.cpp" line="339"/>
         <source>&amp;View</source>
         <translation>&amp;表示</translation>
-    </message>
-    <message>
-        <source>Code Window</source>
-        <translation type="vanished">コードウィンドウ</translation>
-    </message>
-    <message>
-        <source>Code Window - %1</source>
-        <translation type="vanished">コードウィンドウ - %1</translation>
     </message>
     <message>
         <location filename="../src/program/programwindow.cpp" line="741"/>
@@ -8591,10 +7987,6 @@ is already there, we won&apos;t add it again, right?</source>
         <translation>旧式パーツを選択</translation>
     </message>
     <message>
-        <source>files</source>
-        <translation type="vanished">ファイル</translation>
-    </message>
-    <message>
         <location filename="../src/svg/gedaelement2svg.cpp" line="51"/>
         <location filename="../src/svg/kicadmodule2svg.cpp" line="97"/>
         <location filename="../src/svg/kicadschematic2svg.cpp" line="69"/>
@@ -8728,10 +8120,6 @@ is already there, we won&apos;t add it again, right?</source>
         <location filename="../src/svg/x2svg.cpp" line="71"/>
         <source>failure in svg conversion 2</source>
         <translation type="unfinished">SVG 変換でエラーが発生しました 2</translation>
-    </message>
-    <message>
-        <source>failure in svg conversion 2: %1 %2 %3</source>
-        <translation type="vanished">svg 変換での失敗 2: %1 %2 %3</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="372"/>
@@ -9306,30 +8694,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
         <translation>エラー %1
 </translation>
     </message>
-    <message>
-        <source>the board outline layer, </source>
-        <translation type="vanished">ボードの概形層、 </translation>
-    </message>
-    <message>
-        <source>silkscreen layer(s), </source>
-        <translation type="vanished">シルクスクリーン層、 </translation>
-    </message>
-    <message>
-        <source>copper layer(s), </source>
-        <translation type="vanished">銅層、 </translation>
-    </message>
-    <message>
-        <source>mask layer(s), </source>
-        <translation type="vanished">マスク層、 </translation>
-    </message>
-    <message>
-        <source>paste mask layer(s), </source>
-        <translation type="vanished">ペーストマスク層、 </translation>
-    </message>
-    <message>
-        <source>Unable to translate svg curves in %1</source>
-        <translation type="vanished">％1のSVG曲線は移動できません</translation>
-    </message>
     <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="152"/>
         <source>%n path(s) in board outline layer</source>
@@ -9533,10 +8897,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
         <translation type="unfinished">選択された PCB（タイトル: %1）の寸法は %2 cm x %3 cm（%4 in x %5 in）です。&lt;br /&gt;</translation>
     </message>
     <message>
-        <source>Fritzing Fab Quote</source>
-        <translation type="vanished">Fritzing Fab見積もり</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/quotedialog.cpp" line="280"/>
         <source>Use Fritzing Fab to produce a PCB from your sketch.&lt;br /&gt;</source>
         <translation>Fritzing Fabを使って、スケッチをPCに製作します&lt;br /&gt;</translation>
@@ -9614,14 +8974,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
 <context>
     <name>RegenerateDatabaseThread</name>
     <message>
-        <source>Unable to open temporary file</source>
-        <translation type="vanished">仮のファイルを開けません</translation>
-    </message>
-    <message>
-        <source>Database failure</source>
-        <translation type="vanished">データベースの不具合</translation>
-    </message>
-    <message>
         <location filename="../src/fapplication.cpp" line="333"/>
         <source>Unable to open temporary file (%1)</source>
         <translation type="unfinished"></translation>
@@ -9654,10 +9006,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
         <location filename="../src/items/resistor.cpp" line="249"/>
         <source>resistance</source>
         <translation>抵抗</translation>
-    </message>
-    <message>
-        <source>Resistor</source>
-        <translation type="vanished">抵抗器</translation>
     </message>
     <message>
         <location filename="../src/items/resistor.cpp" line="267"/>
@@ -9775,10 +9123,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>Ruler</name>
-    <message>
-        <source>width</source>
-        <translation type="vanished">幅</translation>
-    </message>
     <message>
         <location filename="../src/items/ruler.cpp" line="198"/>
         <source>inch</source>
@@ -9931,10 +9275,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <translation>OK</translation>
     </message>
     <message>
-        <source>%1 Color...</source>
-        <translation type="vanished">%1 色...</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/setcolordialog.cpp" line="49"/>
         <source>%1 Color...</source>
         <comment>dialog title</comment>
@@ -9973,10 +9313,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>Simulator</name>
-    <message>
-        <source>Simulator Error</source>
-        <translation type="vanished">シミュレータエラー</translation>
-    </message>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="197"/>
         <source>An error occurred when starting the simulation.</source>
@@ -10026,10 +9362,6 @@ Netlist:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Simulator Timeout</source>
-        <translation type="vanished">シミュレータタイムアウト</translation>
-    </message>
-    <message>
         <location filename="../src/simulation/simulator.cpp" line="437"/>
         <source>The spice simulator did not finish after %1 ms. Aborting simulation.</source>
         <translation type="unfinished">SPICEシミュレータが %1 ミリ秒経過しても完了しませんでした。シミュレーションを中止します。</translation>
@@ -10044,12 +9376,6 @@ Netlist:
         <location filename="../src/simulation/simulator.cpp" line="449"/>
         <source>The simulator gave an error when trying to simulate this circuit. Please, check the wiring and try again.</source>
         <translation type="unfinished">この回路のシミュレーション中にシミュレータがエラーを返しました。配線を確認して再試行してください。</translation>
-    </message>
-    <message>
-        <source>Errors:
-</source>
-        <translation type="obsolete">エラー:
-</translation>
     </message>
 </context>
 <context>
@@ -10145,14 +9471,6 @@ Netlist:
         <translation>結合ワイヤーを作成</translation>
     </message>
     <message>
-        <source>Rotate</source>
-        <translation type="vanished">回転</translation>
-    </message>
-    <message>
-        <source>Flip</source>
-        <translation type="vanished">反転</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="6328"/>
         <source>Change %1 label to &apos;%2&apos;</source>
         <translation>%1 ラベルを &apos;%2&apos; に変更</translation>
@@ -10183,17 +9501,9 @@ Netlist:
         <translation>ラベル &apos;%1&apos; を移動</translation>
     </message>
     <message>
-        <source>%1 label &apos;%2&apos;</source>
-        <translation type="vanished">%1 ラベル &apos;%2&apos;</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="7737"/>
         <source>Resize Note</source>
         <translation>ノートをリサイズ</translation>
-    </message>
-    <message>
-        <source>Rotate %2 (%1)</source>
-        <translation type="vanished">回転 %2 (%1)</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="6240"/>
@@ -10278,10 +9588,6 @@ Netlist:
         <translation>ラッツネストを削除</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="4140"/>
         <source>This seems like an attempt to create a trace across layers. This circumstance should not arise: please contact the developers.</source>
         <translation>レイヤー間でトレースを作成する試みのようです。このような動作を実行できません：開発者に連絡してください。</translation>
@@ -10346,10 +9652,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="10047"/>
         <source>There are no unrouted connections</source>
         <translation>ルートされていない接続はありません</translation>
-    </message>
-    <message>
-        <source>Unrouted connections</source>
-        <translation type="vanished">ルートされてない接続</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="10049"/>
@@ -10439,14 +9741,6 @@ The parts will be moved automatically. You can use the Undo History to review th
 </translation>
     </message>
     <message>
-        <source>and %1 other parts</source>
-        <translation type="vanished">と %1 の他のパーツ</translation>
-    </message>
-    <message>
-        <source>and %1 other properties</source>
-        <translation type="vanished">と %1 の他のプロパティ</translation>
-    </message>
-    <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="146"/>
         <source>
 and %1 other parts</source>
@@ -10523,10 +9817,6 @@ and %1 other properties</source>
         <translation type="unfinished">ネットレーベル</translation>
     </message>
     <message>
-        <source>Net labels</source>
-        <translation type="vanished">ネットレーベル</translation>
-    </message>
-    <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="471"/>
         <source>Net labels cannot be blank</source>
         <translation>ネットラベルは空白にしてはなりません</translation>
@@ -10534,10 +9824,6 @@ and %1 other properties</source>
 </context>
 <context>
     <name>TipsAndTricks</name>
-    <message>
-        <source>Tips and Tricks</source>
-        <translation type="vanished">ヒントとコツ</translation>
-    </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="40"/>
         <source>Fritzing Tips and Tricks</source>
@@ -10552,14 +9838,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="81"/>
         <source>parts</source>
         <translation>パーツ</translation>
-    </message>
-    <message>
-        <source>If you can&apos;t find a part in the Parts Bin, the Generic IC is your friend.  Drag it onto your sketch, then use the widgets in the Inspector to: choose from among 25 different through-hole and SMD packages; change the pin label; and--for DIPs and SIPs--change the number of pins.  You can also change the pin names with the Pin Label editor</source>
-        <translation type="vanished">パーツビンに部品が見つからない場合は、ジェネリック ICが便利です。  スケッチにドラッグし、インスペクタのウィジェットを使用し：25種類のスルーホールおよびSMDパッケージからの選択；ピンラベルの変更；--DIPとSIPの場合はピン数の変更。  ピンラベルエディターでピンの名前を変更することもできます</translation>
-    </message>
-    <message>
-        <source>An icon in the parts bin may actually represent multiple related parts.  So when you drag an icon from the parts bin into a sketch, make sure you look at the inspector.  The inspector will display the range of choices available for you to modify a part, or swap it for a related part. The parts bin icon will also be a little &apos;stack&apos; and not just a flat icon.</source>
-        <translation type="vanished">パーツビンのアイコンは、実際には複数の関連パーツを表しています。  アイコンをパーツビンからスケッチにドラッグする時には、必ずインスペクタを確かめてください。  インスペクタではパーツを修正したり、関連するパーツと交換等の選択肢を表示しいます。パーツビンのアイコンは、1つだけのパーツの示していないが、「スタック」のように複数のパーツを示します。</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="85"/>
@@ -10702,10 +9980,6 @@ and %1 other properties</source>
         <translation>PCBの片側には水平に、反対側には垂直にトレースを引くのがもっと簡単です。</translation>
     </message>
     <message>
-        <source>Route traces in 45-degree angles to reduce noise.</source>
-        <translation type="vanished">乱雑さを減らすためにトレースを45度の角度で配線してください。</translation>
-    </message>
-    <message>
         <location filename="../src/help/tipsandtricks.cpp" line="157"/>
         <source>If Fritzing is missing a particular part and you don&apos;t want to build one yourself, then use pin headers as connectors and the grid to align them.</source>
         <translation>Fritzingを特定のパーツが欠けていて、自分で作成したくない場合は、ピンヘッダをコネクタとして使って、グリッドで合わせます。</translation>
@@ -10714,10 +9988,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="158"/>
         <source>You can put your own Logo in the silkscreen of your PCB. Just use the Logo part of the core library and select your own file. SVG is the best format.</source>
         <translation>PCBでシルクスクリーンに自作のロゴを入れることができます。コアライブラリのロゴパーツを使用し、自作のファイルを選択するだけです。SVG形式が最適です。</translation>
-    </message>
-    <message>
-        <source>Smaller PCBs are more affortable than larger ones. Save space and money.</source>
-        <translation type="vanished">小さいPCBは大きいの方より安い。スペースを小さくして、お金を節約できます。</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="159"/>
@@ -10745,21 +10015,9 @@ and %1 other properties</source>
         <translation>まず、「ファイル」→「例」にあるサンプル回路を見てみましょう。</translation>
     </message>
     <message>
-        <source>Can&apos;t find your part? Search for it by clicking the magnifier icon in the Parts Bin and type in some keywords</source>
-        <translation type="vanished">検索するのパーツが見つかりませんか？パーツビンの拡大鏡アイコンをクリックし、キーワードを入力して検索してください</translation>
-    </message>
-    <message>
-        <source>A ratsnest line (very thin &apos;wire&apos;) between connections in one view means that those connections are somehow connected in another view.</source>
-        <translation type="vanished">パーツ間のラッツネストライン（点線）は、別のビューで接続があることを示しています。例えば、ブレッドボードビューで2つのパーツがワイヤーで接続されている場合、PCBビューではラッツネストラインが表示されます。</translation>
-    </message>
-    <message>
         <location filename="../src/help/tipsandtricks.cpp" line="161"/>
         <source>To create a custom shape for your PCB, import an SVG file.</source>
         <translation>カスタム形状PCBを作成するには、SVGファイルをインポートしてください。</translation>
-    </message>
-    <message>
-        <source>To make a stylish Arduino shield in no time, switch the shape of the PCB from a rectangle to the Arduino</source>
-        <translation type="vanished">スタイリッシュなArduinoシールドをすぐに作成するには、PCBの形状を長方形からArduinoに切り替えてください</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="166"/>
@@ -10795,10 +10053,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="145"/>
         <source>In the Parts Editor, to select a graphic underneath another graphic, use the mouse wheel while holding down the shift key.</source>
         <translation>パーツエディターで、重ねっているグラフィックの下に居るグラフィックを選択するには、シフトキーを押しながらマウスホイールを使います。</translation>
-    </message>
-    <message>
-        <source>You can use the Parts Editor to find the SVG file for a part&apos;s image for a given view. In the Parts Editor, click on the tab for that view, then use &lt;b&gt;Show in Folder&lt;/b&gt; under the &lt;b&gt;File&lt;/b&gt; Menu</source>
-        <translation type="vanished">パーツエディターを使って、このビューでパーツ画像のSVGファイルを探すことができます。パーツエディターで、そのビューのタブをクリックし、&lt;b&gt;ファイル&lt;/b&gt;のメニューで&lt;b&gt;フォルダーで表示&lt;/b&gt;を使ってください</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="148"/>

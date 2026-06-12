@@ -762,10 +762,6 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to load</source>
-        <translation type="obsolete">無法載入</translation>
-    </message>
-    <message>
         <location filename="../src/items/resizableboard.cpp" line="522"/>
         <source>Unable to load image from %1 %2</source>
         <translation type="unfinished">無法從 %1 %2 載入圖檔</translation>
@@ -1123,10 +1119,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/autoroute/drc.cpp" line="284"/>
         <source>Fritzing</source>
         <comment>dialog title</comment>
@@ -1197,10 +1189,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>DebugDialog</name>
-    <message>
-        <source>for debugging</source>
-        <translation type="vanished">測試用</translation>
-    </message>
     <message>
         <location filename="../src/debugdialog.cpp" line="138"/>
         <source>for debugging</source>
@@ -1391,10 +1379,6 @@ Would you like to regenerate the parts database?
         <translation type="unfinished">Fritzing</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/fabuploaddialog.cpp" line="161"/>
         <source>Error: </source>
         <translation type="unfinished"></translation>
@@ -1402,10 +1386,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FabUploadProgress</name>
-    <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
     <message>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="181"/>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="211"/>
@@ -1428,10 +1408,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FirstTimeHelpDialog</name>
-    <message>
-        <source>First Time Help</source>
-        <translation type="obsolete">首次輔助說明</translation>
-    </message>
     <message>
         <location filename="../src/help/firsttimehelpdialog.cpp" line="37"/>
         <source>First Time Help</source>
@@ -1472,17 +1448,9 @@ Would you like to regenerate the parts database?
         <translation>關閉目前的草圖</translation>
     </message>
     <message>
-        <source>%1 - %2</source>
-        <translation type="vanished">%1 - %2</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="132"/>
         <source>Specify a file name</source>
         <translation>設定檔名</translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">存檔 &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="238"/>
@@ -1756,10 +1724,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>佈線</translation>
     </message>
     <message>
-        <source>Trace wire %1</source>
-        <translation type="vanished">徑跡導線 %1</translation>
-    </message>
-    <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="746"/>
         <source>No SPICE information. This part will not be simulated.</source>
         <translation type="unfinished"></translation>
@@ -1803,10 +1767,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
 <context>
     <name>ItemBase</name>
     <message>
-        <source>family</source>
-        <translation type="vanished">類別</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="223"/>
         <source>type</source>
         <translation type="unfinished">類型</translation>
@@ -1825,10 +1785,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="226"/>
         <source>color</source>
         <translation>顏色</translation>
-    </message>
-    <message>
-        <source>resistance</source>
-        <translation type="vanished">電阻</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="228"/>
@@ -1859,10 +1815,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="233"/>
         <source>pin spacing</source>
         <translation>接腳間隔</translation>
-    </message>
-    <message>
-        <source>rated power</source>
-        <translation type="vanished">定電力</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="222"/>
@@ -2062,10 +2014,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Part</source>
-        <translation type="vanished">元件</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="1336"/>
         <source>model part problem</source>
         <translation type="unfinished"></translation>
@@ -2242,10 +2190,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="148"/>
         <source>Ready</source>
         <translation>就緒</translation>
-    </message>
-    <message>
-        <source>Save %1</source>
-        <translation type="vanished">儲存 %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1571"/>
@@ -4860,10 +4804,6 @@ Continue upload?</source>
         <translation>草圖還沒有版子，請先增加一個 PCB 版，才能匯出到 Gerber。</translation>
     </message>
     <message>
-        <source>Choose a folder for exporting</source>
-        <translation type="vanished">請選取要匯出的資料夾</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="988"/>
         <source>Unable to export %1 as shareable.</source>
         <translation type="unfinished"></translation>
@@ -5099,14 +5039,6 @@ Please check all views for potential side-effects.</source>
         <translation>更新第 %1 個元件</translation>
     </message>
     <message>
-        <source>Inspector</source>
-        <translation type="obsolete">內容</translation>
-    </message>
-    <message>
-        <source>Undo History</source>
-        <translation type="obsolete">Undo歷程</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="581"/>
         <source>Breadboard</source>
         <translation type="unfinished">麵包板</translation>
@@ -5120,10 +5052,6 @@ Please check all views for potential side-effects.</source>
         <location filename="../src/mainwindow/mainwindow.cpp" line="599"/>
         <source>PCB</source>
         <translation type="unfinished">PCB</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t get the dock widget</source>
-        <translation type="obsolete">無法取得這個停靠控制件</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="64"/>
@@ -5447,10 +5375,6 @@ Reason: %2 (errcode %3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="257"/>
         <source>Your sketch does not have a board yet! Please add a PCB to use this selection operation.</source>
         <translation type="unfinished"></translation>
@@ -5692,10 +5616,6 @@ Enter keepout value:</source>
 </context>
 <context>
     <name>PEMainWindow</name>
-    <message>
-        <source>Parts Editor</source>
-        <translation type="obsolete">元件編輯器</translation>
-    </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="524"/>
         <source>SVG</source>
@@ -6239,10 +6159,6 @@ Go ahead and save?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="obsolete">存檔 &quot;%1&quot;</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2753"/>
         <source>Do you want to save the changes you made in the part &quot;%1&quot;?</source>
         <translation type="unfinished"></translation>
@@ -6632,10 +6548,6 @@ Go ahead and save?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/items/paletteitem.cpp" line="620"/>
         <location filename="../src/items/paletteitem.cpp" line="631"/>
         <location filename="../src/items/paletteitem.cpp" line="655"/>
@@ -6878,10 +6790,6 @@ Go ahead and save?</source>
         <translation type="unfinished">設定 %1 的標頭</translation>
     </message>
     <message>
-        <source>Set label for %1</source>
-        <translation type="vanished">設定 %1 的標頭</translation>
-    </message>
-    <message>
         <location filename="../src/items/partlabel.cpp" line="760"/>
         <source>Label text:</source>
         <translation>標頭文字:</translation>
@@ -6908,10 +6816,6 @@ Go ahead and save?</source>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="415"/>
         <source>Fritzing Bin (*%1)</source>
         <translation>Fritzing 元件庫 (*%1)</translation>
-    </message>
-    <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="457"/>
@@ -6983,10 +6887,6 @@ Go ahead and save?</source>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="585"/>
         <source>Your changes will be lost if you don&apos;t save them.</source>
         <translation>如不存檔，所做過的異動將消失。</translation>
-    </message>
-    <message>
-        <source>Add to bin</source>
-        <translation type="vanished">加入元件庫</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="697"/>
@@ -9131,10 +9031,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 <context>
     <name>Ruler</name>
     <message>
-        <source>width</source>
-        <translation type="vanished">寬</translation>
-    </message>
-    <message>
         <location filename="../src/items/ruler.cpp" line="198"/>
         <source>inch</source>
         <translation type="unfinished"></translation>
@@ -9481,21 +9377,9 @@ Netlist:
         <translation>建立並連接導線</translation>
     </message>
     <message>
-        <source>Rotate %2 (%1)</source>
-        <translation type="vanished">旋轉 %2 (%1)</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="6302"/>
         <source>Note text change</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rotate</source>
-        <translation type="vanished">旋轉</translation>
-    </message>
-    <message>
-        <source>Flip</source>
-        <translation type="vanished">翻轉</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="6174"/>
@@ -9526,10 +9410,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="3838"/>
         <source>Change leg bendpoint for %1.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="4140"/>
@@ -9611,10 +9491,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="7667"/>
         <source>Move label &apos;%1&apos;</source>
         <translation>移動標頭 &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>%1 label &apos;%2&apos;</source>
-        <translation type="vanished">%1 標頭 &apos;%2&apos;</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/sketch/sketchwidget.cpp" line="7720"/>
@@ -9852,10 +9728,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="40"/>
         <source>Fritzing Tips and Tricks</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tips and Tricks</source>
-        <translation type="vanished">提示與技巧</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="76"/>

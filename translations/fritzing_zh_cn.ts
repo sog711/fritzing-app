@@ -506,17 +506,9 @@
         <translation>移除元件</translation>
     </message>
     <message>
-        <source>Delete bin</source>
-        <translation type="vanished">删除库</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1166"/>
         <source>Do you really want to delete bin &apos;%1&apos;?  This action cannot be undone.</source>
         <translation>你确定要删除库&apos;%1&apos;?这个操作不能被恢复。</translation>
-    </message>
-    <message>
-        <source>Read-only bin</source>
-        <translation type="vanished">只读库</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1218"/>
@@ -631,14 +623,6 @@
         <translation>两层(双面)</translation>
     </message>
     <message>
-        <source>Have a look at the circle_pcb.svg file in your Fritzing installation folder at parts/svg/core/pcb/.
-
-</source>
-        <translation type="vanished">查看一下你的Fritziing安装文件夹parts/svg/core/pcb/中Circle_pcb.svg文件。
-
-</translation>
-    </message>
-    <message>
         <location filename="../src/items/resizableboard.cpp" line="84"/>
         <source>
 
@@ -731,17 +715,9 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
         <translation type="unfinished">不能载入，但是</translation>
     </message>
     <message>
-        <source>Unable to load</source>
-        <translation type="vanished">不能载入</translation>
-    </message>
-    <message>
         <location filename="../src/items/resizableboard.cpp" line="522"/>
         <source>Unable to load image from %1 %2</source>
         <translation>不能从%1 %2中载入图像</translation>
-    </message>
-    <message>
-        <source>Can load, but</source>
-        <translation type="vanished">不能载入，但是</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="530"/>
@@ -1165,10 +1141,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <translation>不可预料的SVG渲染错误--联系fritzing.org</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/autoroute/drc.cpp" line="549"/>
         <source>%1 is overlapping (%2 layer)</source>
         <translation type="unfinished"></translation>
@@ -1191,10 +1163,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>DRCResultsDialog</name>
-    <message>
-        <source>DRC Results</source>
-        <translation type="vanished">DRC结果</translation>
-    </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="138"/>
         <source>DRC Results</source>
@@ -1222,10 +1190,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>DebugDialog</name>
-    <message>
-        <source>for debugging</source>
-        <translation type="vanished">测试用</translation>
-    </message>
     <message>
         <location filename="../src/debugdialog.cpp" line="138"/>
         <source>for debugging</source>
@@ -1285,10 +1249,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>FApplication</name>
-    <message>
-        <source>Fritzing failure</source>
-        <translation type="vanished">Fritzing 出错了</translation>
-    </message>
     <message>
         <location filename="../src/fapplication.cpp" line="1871"/>
         <source>Fritzing caught an exception from %1 in event %2</source>
@@ -1420,10 +1380,6 @@ Would you like to regenerate the parts database?
         <translation type="unfinished">Fritzing</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/fabuploaddialog.cpp" line="161"/>
         <source>Error: </source>
         <translation type="unfinished"></translation>
@@ -1431,10 +1387,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FabUploadProgress</name>
-    <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
     <message>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="181"/>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="211"/>
@@ -1457,10 +1409,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FirstTimeHelpDialog</name>
-    <message>
-        <source>First Time Help</source>
-        <translation type="obsolete">首次使用帮助</translation>
-    </message>
     <message>
         <location filename="../src/help/firsttimehelpdialog.cpp" line="37"/>
         <source>First Time Help</source>
@@ -1501,17 +1449,9 @@ Would you like to regenerate the parts database?
         <translation>关闭当前程序</translation>
     </message>
     <message>
-        <source>%1 - %2</source>
-        <translation type="vanished">%1 - %2</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="132"/>
         <source>Specify a file name</source>
         <translation>指定文件名</translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">保存 &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="238"/>
@@ -1734,10 +1674,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>导线</translation>
     </message>
     <message>
-        <source>Trace wire %1</source>
-        <translation type="vanished">引导线%1</translation>
-    </message>
-    <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="217"/>
         <source>Properties</source>
         <translation>属性</translation>
@@ -1761,10 +1697,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/infoview/htmlinfoview.cpp" line="1024"/>
         <source>Locked</source>
         <translation>锁定</translation>
-    </message>
-    <message>
-        <source>Ratsnest line</source>
-        <translation type="vanished">飞线连线</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="1026"/>
@@ -1842,21 +1774,9 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
 <context>
     <name>ItemBase</name>
     <message>
-        <source>Part</source>
-        <translation type="vanished">元件</translation>
-    </message>
-    <message>
-        <source>family</source>
-        <translation type="vanished">类族</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="226"/>
         <source>color</source>
         <translation>颜色</translation>
-    </message>
-    <message>
-        <source>resistance</source>
-        <translation type="vanished">电阻</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="230"/>
@@ -1867,10 +1787,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="233"/>
         <source>pin spacing</source>
         <translation>针脚距离</translation>
-    </message>
-    <message>
-        <source>rated power</source>
-        <translation type="vanished">额定功率</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="235"/>
@@ -2110,14 +2026,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>top</source>
-        <translation type="obsolete">顶部</translation>
-    </message>
-    <message>
-        <source>bottom</source>
-        <translation type="obsolete">底部</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="263"/>
         <source>silkscreen bottom</source>
         <translation type="unfinished"></translation>
@@ -2294,10 +2202,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="148"/>
         <source>Ready</source>
         <translation>准备好</translation>
-    </message>
-    <message>
-        <source>Save %1</source>
-        <translation type="vanished">保存 %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1653"/>
@@ -3391,10 +3295,6 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <translation>你的设计中还没有包含板！请添加一块PCB以便导出至Gerber.</translation>
     </message>
     <message>
-        <source>Choose a folder for exporting</source>
-        <translation type="vanished">选择导出文件夹</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="988"/>
         <source>Unable to export %1 as shareable.</source>
         <translation type="unfinished"></translation>
@@ -4145,10 +4045,6 @@ Please check all views for potential side-effects.</source>
         <translation>填充铜层中空的区域--填充将不包含任何连接到地的线</translation>
     </message>
     <message>
-        <source>No copper top layer</source>
-        <translation type="vanished">顶层没有覆铜</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2598"/>
         <source>The copper top (copper 1) layer is not available on a one-sided board.  Please switch the board to double-sided or choose the copper bottom (copper 0) layer.</source>
         <translation>顶层覆铜(copper 1)层不支持单面板。请将板转换为双面或者选择底层覆铜(copper 0)层。</translation>
@@ -4262,10 +4158,6 @@ Please check all views for potential side-effects.</source>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1203"/>
         <source>Show the grid</source>
         <translation>显示指定的网格</translation>
-    </message>
-    <message>
-        <source>Actual Size</source>
-        <translation type="vanished">实际尺寸</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2312"/>
@@ -4482,10 +4374,6 @@ Continue upload?</source>
         <translation>转换飞线为曲点</translation>
     </message>
     <message>
-        <source>Revert?</source>
-        <translation type="vanished">恢复？</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="274"/>
         <source>This operation can not be undone--you will lose all of your changes.
 
@@ -4508,10 +4396,6 @@ Go ahead and revert?</source>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="662"/>
         <source>Reload the sketch</source>
         <translation>重新载入设计</translation>
-    </message>
-    <message>
-        <source>Unrouted connections</source>
-        <translation type="vanished">未布线的连接</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3225"/>
@@ -4539,14 +4423,6 @@ Go ahead and revert?</source>
         <translation>高亮所有未布线的接插件</translation>
     </message>
     <message>
-        <source>Inspector</source>
-        <translation type="vanished">指示栏</translation>
-    </message>
-    <message>
-        <source>Undo History</source>
-        <translation type="vanished">撤销历史</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="581"/>
         <source>Breadboard</source>
         <translation>面包板</translation>
@@ -4560,14 +4436,6 @@ Go ahead and revert?</source>
         <location filename="../src/mainwindow/mainwindow.cpp" line="599"/>
         <source>PCB</source>
         <translation>PCB</translation>
-    </message>
-    <message>
-        <source>Layers</source>
-        <translation type="vanished">层</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t get the dock widget</source>
-        <translation type="vanished">不能获得可停靠控件</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="949"/>
@@ -5361,16 +5229,6 @@ Reason: %2 (errcode %3)</source>
         <translation>不能覆盖文件 &apos;%1&apos;.
 原因是:%2 (错误代码为 %3)</translation>
     </message>
-    <message numerus="yes">
-        <source>Unable to find the following %n part(s):</source>
-        <translation type="vanished">
-            <numerusform>不能够找到如下%n个元件:</numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>at</source>
-        <translation type="vanished">在</translation>
-    </message>
 </context>
 <context>
     <name>MysteryPart</name>
@@ -5527,10 +5385,6 @@ Reason: %2 (errcode %3)</source>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="960"/>
         <source>Change trace layer</source>
         <translation>改变引导线层</translation>
-    </message>
-    <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1422"/>
@@ -5713,10 +5567,6 @@ Enter keepout value:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ground Fill</source>
-        <translation type="obsolete">接地填充</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2407"/>
         <source>Your sketch does not have a board yet!  Please add a PCB in order to use this selection operation.</source>
         <translation>你的设计中还没有板子！请增加一块PCB以便使用选择操作。</translation>
@@ -5785,10 +5635,6 @@ Enter keepout value:</source>
 </context>
 <context>
     <name>PEMainWindow</name>
-    <message>
-        <source>Parts Editor</source>
-        <translation type="vanished">元件编辑器</translation>
-    </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="964"/>
         <source>Show Icon</source>
@@ -5983,58 +5829,14 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Copy problem</source>
-        <translation type="vanished">复制问题</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1609"/>
         <source>Unable to make a local copy of: &apos;%1&apos;</source>
         <translation>不能建立本地副本：&apos;%1&apos;</translation>
     </message>
     <message>
-        <source>You may use a PNG or JPG image to construct your part, but it is better to use an SVG. </source>
-        <translation type="vanished">你可以使用PNG或JPG图像建立你的元件，但最好使用SVG建立。 </translation>
-    </message>
-    <message>
-        <source>PNG and JPG images retain their nature as bitmaps and do not look good when scaled--</source>
-        <translation type="vanished">PNG和JPG图像保持他们位图的属性，当缩放时看起来不好-- </translation>
-    </message>
-    <message>
-        <source>so for Fritzing parts it is best to use PNG and JPG only as placeholders.</source>
-        <translation type="vanished">所以对于Fritzing元件最好只使用PNG和JPG作为占位符。</translation>
-    </message>
-    <message>
-        <source>Use of PNG and JPG discouraged</source>
-        <translation type="vanished">使用PNG和JPG是不被建议的</translation>
-    </message>
-    <message>
-        <source>Conversion problem</source>
-        <translation type="vanished">转换问题</translation>
-    </message>
-    <message>
-        <source>SVG problem</source>
-        <translation type="vanished">SVG问题</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1582"/>
         <source>Unable to parse &apos;%1&apos;: %2 line:%3 column:%4</source>
         <translation>不能解析&apos;%1&apos;:%2线:%3列:%4</translation>
-    </message>
-    <message>
-        <source>There are no copper layers defined in: %1. </source>
-        <translation type="vanished">在%1中没有定义覆铜层。</translation>
-    </message>
-    <message>
-        <source>See &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;this explanation&lt;/a&gt;.</source>
-        <translation type="vanished">查看 &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;这个解释&lt;/a&gt;。</translation>
-    </message>
-    <message>
-        <source>&lt;br/&gt;&lt;br/&gt;This will not be a problem in the next release of the Parts Editor, </source>
-        <translation type="vanished">&lt;br/&gt;&lt;br/&gt;这在下一版的元件编辑器中将不再是问题, </translation>
-    </message>
-    <message>
-        <source>but for now please modify the file according to the instructions in the link.</source>
-        <translation type="vanished">但是现在请根据下面的连接来修改文件.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1636"/>
@@ -6062,10 +5864,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>文件(&amp;F)</translation>
     </message>
     <message>
-        <source>Sketch Change Warning</source>
-        <translation type="vanished">设计改变警告</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2147"/>
         <source>The open sketch &apos;%1&apos; uses the part you are editing. </source>
         <translation>打开的设计&apos;%1&apos;使用了你正在编辑的元件。</translation>
@@ -6074,22 +5872,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2148"/>
         <source>Saving this part will make a change to the sketch that cannot be undone.</source>
         <translation>保存这个元件将会对设计产生不能恢复的改变。</translation>
-    </message>
-    <message>
-        <source>The open sketches </source>
-        <translation type="vanished">打开的设计</translation>
-    </message>
-    <message>
-        <source>&apos;%1&apos;, </source>
-        <translation type="vanished">&apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>and &apos;%1&apos; </source>
-        <translation type="vanished">和&apos;%1&apos; </translation>
-    </message>
-    <message>
-        <source>Saving this part will make a change to these sketches that cannot be undone.</source>
-        <translation type="vanished">保存这个元件将会对这些设计造成改变，使他不能重做。</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2166"/>
@@ -6114,10 +5896,6 @@ Go ahead and save?</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2734"/>
         <source>Remove %1 connectors</source>
         <translation>移除%1接插件</translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">保存 &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2753"/>
@@ -6158,10 +5936,6 @@ Go ahead and save?</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1157"/>
         <source>Duplicate &apos;variant&apos; property not allowed</source>
         <translation>不允许复制&apos;variant&apos;的属性</translation>
-    </message>
-    <message>
-        <source>Close without saving?</source>
-        <translation type="vanished">不保存关闭？</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="383"/>
@@ -6212,10 +5986,6 @@ Go ahead and save?</source>
         <translation>在列表视图中显示元数据</translation>
     </message>
     <message>
-        <source>Blank not allowed</source>
-        <translation type="vanished">不允许为空</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1032"/>
         <source>The value of &apos;%1&apos; can not be blank.</source>
         <translation>&apos;%1&apos;的值不能为空。</translation>
@@ -6226,17 +5996,9 @@ Go ahead and save?</source>
         <translation>把%1转变为%2</translation>
     </message>
     <message>
-        <source>Must be unique</source>
-        <translation type="vanished">必须是唯一的</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1069"/>
         <source>Variant &apos;%1&apos; is in use. The variant name must be unique.</source>
         <translation>变量&apos;%1&apos;在使用中。变量名必须是唯一的。</translation>
-    </message>
-    <message>
-        <source>Duplicate problem</source>
-        <translation type="vanished">复制问题</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1523"/>
@@ -6252,10 +6014,6 @@ Go ahead and save?</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1532"/>
         <source>Please re-export the SVG file using that setting, and try loading again.</source>
         <translation>请使用设置重新导出SVG文件，并在此导入。</translation>
-    </message>
-    <message>
-        <source>Fonts</source>
-        <translation type="vanished">字体</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1550"/>
@@ -6305,22 +6063,6 @@ Go ahead and save?</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="390"/>
         <source>Do you want to keep working or close without saving?</source>
         <translation></translation>
-    </message>
-    <message numerus="yes">
-        <source>This part has %n unassigned connectors </source>
-        <translation type="vanished">
-            <numerusform>这个元件有%n个未分配的接插件 </numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>across %n views. </source>
-        <translation type="vanished">
-            <numerusform>交叉%n视图。</numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>Until all connectors are assigned to SVG elements, the part will not work correctly. </source>
-        <translation type="vanished">直到所有的接插件分配给SVG元素，这个元件才能正确工作。</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="537"/>
@@ -6473,10 +6215,6 @@ Go ahead and save?</source>
         <translation>只使%1视图可见</translation>
     </message>
     <message>
-        <source>Exiting the Parts Editor now is fine, as long as you remember to finish the assignments later.</source>
-        <translation type="vanished">现在退出元件编辑器是可以的，只要你记得之后完成分配就可以了。</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="565"/>
         <source>Load image for view...</source>
         <translation>在视图中载入图像...</translation>
@@ -6500,34 +6238,6 @@ Go ahead and save?</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="632"/>
         <source>&amp;Edit</source>
         <translation>编辑(&amp;E)</translation>
-    </message>
-    <message>
-        <source>This part has bendable legs. </source>
-        <translation type="vanished">次元件包含可弯曲的腿。</translation>
-    </message>
-    <message>
-        <source>This version of the Parts Editor does not yet support editing bendable legs, and the legs may not be displayed correctly in breadboard view . </source>
-        <translation type="vanished">这版的元件编辑器不支持编辑可弯曲的腿，腿可能不能在面板板视图中正确的显示。</translation>
-    </message>
-    <message>
-        <source>If you make changes to breadboard view, or change connector metadata, the legs may no longer work. </source>
-        <translation type="vanished">如果你做面包板视图的转换，或者转换元数据，腿将不再有效了。</translation>
-    </message>
-    <message>
-        <source>You can safely make changes to Schematic or PCB view.
-
-</source>
-        <translation type="vanished">你可以安全的对原理图或PCB视图进行修改。
-
-</translation>
-    </message>
-    <message>
-        <source>This warning will not be repeated in this session of Fritzing</source>
-        <translation type="vanished">这个警告不能在Fritzing这个阶段重复的出现</translation>
-    </message>
-    <message>
-        <source>Unable to load &apos;%1&apos;. Please close the parts editor without saving and try again.</source>
-        <translation type="vanished">不能载入&apos;%1&apos;。请关闭元件编辑器中未保存部分并重试。</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1575"/>
@@ -6861,10 +6571,6 @@ Go ahead and save?</source>
         <translation>编辑针脚标签</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/items/paletteitem.cpp" line="620"/>
         <location filename="../src/items/paletteitem.cpp" line="631"/>
         <location filename="../src/items/paletteitem.cpp" line="655"/>
@@ -7032,10 +6738,6 @@ Go ahead and save?</source>
         <translation type="unfinished">为%1设置标签</translation>
     </message>
     <message>
-        <source>Set label for %1</source>
-        <translation type="vanished">为%1设置标签</translation>
-    </message>
-    <message>
         <location filename="../src/items/partlabel.cpp" line="760"/>
         <source>Label text:</source>
         <translation>标签文字:</translation>
@@ -7134,10 +6836,6 @@ Go ahead and save?</source>
         <translation>Fritzing元件(*%1)</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="457"/>
         <source>Cannot find file %1.</source>
         <translation>找不到文件%1.</translation>
@@ -7165,17 +6863,9 @@ Go ahead and save?</source>
         <translation>如果不保存，所做的修改将会丢失.</translation>
     </message>
     <message>
-        <source>Add to bin</source>
-        <translation type="vanished">添加到元件</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="697"/>
         <source>Do you really want to add the selected part to the bin?</source>
         <translation>确定将所选元件加入到元件库中么?</translation>
-    </message>
-    <message>
-        <source>Save bin &quot;%1&quot;</source>
-        <translation type="vanished">保存元件库&quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="456"/>
@@ -7256,10 +6946,6 @@ Go ahead and save?</source>
         <translation>列</translation>
     </message>
     <message>
-        <source>Performance Warning</source>
-        <translation type="vanished">性能警告</translation>
-    </message>
-    <message>
         <location filename="../src/items/perfboard.cpp" line="297"/>
         <source>Performance of perfboards and stripboards with more than approximately 2000 holes can be slow. Are you sure ?
 
@@ -7280,14 +6966,6 @@ Note: this warning will not be repeated during this session.</source>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="80"/>
         <source>&lt;p&gt;&lt;h2&gt;Pin Label Editor&lt;/h2&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;h2&gt;针脚标签编辑器&lt;/h2&gt;&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Click on a label next to a pin number to rename that pin.</source>
-        <translation type="vanished">&lt;p&gt;在标签上点击然后选择需要重命名的针脚.</translation>
-    </message>
-    <message>
-        <source>You can use the tab key to move through the labels in order.&lt;/p&gt;</source>
-        <translation type="vanished">可以使用tab键在针脚之间按顺序移动.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="81"/>
@@ -8257,10 +7935,6 @@ Fritzing仍然在工作，但不能改变元件的属性.</translation>
         <translation>选择过期元件</translation>
     </message>
     <message>
-        <source>files</source>
-        <translation type="vanished">文件</translation>
-    </message>
-    <message>
         <location filename="../src/svg/gedaelement2svg.cpp" line="51"/>
         <location filename="../src/svg/kicadmodule2svg.cpp" line="97"/>
         <location filename="../src/svg/kicadschematic2svg.cpp" line="69"/>
@@ -8394,10 +8068,6 @@ Fritzing仍然在工作，但不能改变元件的属性.</translation>
         <location filename="../src/svg/x2svg.cpp" line="71"/>
         <source>failure in svg conversion 2</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>failure in svg conversion 2: %1 %2 %3</source>
-        <translation type="vanished">svg转换失败2:%1 %2 %3</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="372"/>
@@ -9274,10 +8944,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
         <translation>电阻</translation>
     </message>
     <message>
-        <source>Resistor</source>
-        <translation type="vanished">电阻</translation>
-    </message>
-    <message>
         <location filename="../src/items/resistor.cpp" line="267"/>
         <source>Select from the dropdown, or type in a %1 value
 Range: [%2 - %3] %4
@@ -9391,10 +9057,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>Ruler</name>
-    <message>
-        <source>width</source>
-        <translation type="vanished">宽度</translation>
-    </message>
     <message>
         <location filename="../src/items/ruler.cpp" line="198"/>
         <source>inch</source>
@@ -9742,18 +9404,6 @@ Netlist:
         <translation>创建和连接导线</translation>
     </message>
     <message>
-        <source>Rotate %2 (%1)</source>
-        <translation type="vanished">旋转%2 (%1)</translation>
-    </message>
-    <message>
-        <source>Rotate</source>
-        <translation type="vanished">旋转</translation>
-    </message>
-    <message>
-        <source>Flip</source>
-        <translation type="vanished">翻转</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="6174"/>
         <source>Double-click</source>
         <translation>双击</translation>
@@ -9807,10 +9457,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="7667"/>
         <source>Move label &apos;%1&apos;</source>
         <translation>移动标签 &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>%1 label &apos;%2&apos;</source>
-        <translation type="vanished">%1标签&apos;%2&apos;</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="7737"/>
@@ -9880,10 +9526,6 @@ Netlist:
         <translation>删除覆铜</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="4140"/>
         <source>This seems like an attempt to create a trace across layers. This circumstance should not arise: please contact the developers.</source>
         <translation>看起来像是夸层建立连接线。这种情况不应该产生：请联系开发者。</translation>
@@ -9943,11 +9585,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="10047"/>
         <source>There are no unrouted connections</source>
         <translation>没有未布线的连接</translation>
-    </message>
-    <message>
-        <source>Unrouted connections</source>
-        <translation type="vanished">未布线连接
-</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="10049"/>
@@ -10035,14 +9672,6 @@ The parts will be moved automatically. You can use the Undo History to review th
 </translation>
     </message>
     <message>
-        <source>and %1 other parts</source>
-        <translation type="vanished">和%1其他元件</translation>
-    </message>
-    <message>
-        <source>and %1 other properties</source>
-        <translation type="vanished">和%1其他属性</translation>
-    </message>
-    <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="146"/>
         <source>
 and %1 other parts</source>
@@ -10119,10 +9748,6 @@ and %1 other properties</source>
         <translation type="unfinished">网络标签</translation>
     </message>
     <message>
-        <source>Net labels</source>
-        <translation type="vanished">网络标签</translation>
-    </message>
-    <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="471"/>
         <source>Net labels cannot be blank</source>
         <translation>网络标签不能为空</translation>
@@ -10130,10 +9755,6 @@ and %1 other properties</source>
 </context>
 <context>
     <name>TipsAndTricks</name>
-    <message>
-        <source>Tips and Tricks</source>
-        <translation type="vanished">提示和技巧</translation>
-    </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="40"/>
         <source>Fritzing Tips and Tricks</source>

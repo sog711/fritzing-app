@@ -119,10 +119,6 @@
         <translation>Jan Sieber, Yaniv Steiner, Olaf Val, </translation>
     </message>
     <message>
-        <source>Michaela Vieser and Julia Werner.</source>
-        <translation type="vanished">Michaela Vieser and Julia Werner.</translation>
-    </message>
-    <message>
         <location filename="../src/help/aboutbox.cpp" line="101"/>
         <source>Jenny Chowdhury, Lionel Michel, Fabian Althaus, Jannis Leidel, </source>
         <translation>Jenny Chowdhury, Lionel Michel, Fabian Althaus, Jannis Leidel, </translation>
@@ -510,17 +506,9 @@
         <translation>Verwijder Onderdeel</translation>
     </message>
     <message>
-        <source>Delete bin</source>
-        <translation type="vanished">Verwijder koffer</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1166"/>
         <source>Do you really want to delete bin &apos;%1&apos;?  This action cannot be undone.</source>
         <translation>Weet u zeker dat u koffer &apos;%1&apos; wilt verwijderen? Dit kan niet ongedaan worden gemaakt.</translation>
-    </message>
-    <message>
-        <source>Read-only bin</source>
-        <translation type="vanished">Alleen-Lezen koffer</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1218"/>
@@ -592,10 +580,6 @@
         <translation>Vind Onderdeel in Sketch</translation>
     </message>
     <message>
-        <source>Remove from Bin</source>
-        <translation type="vanished">Verwijder uit de koffer</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1296"/>
         <source>Unable to remove part &apos;%1&apos;--it is in use in a sketch</source>
         <translation>Niet mogelijk om onderdeel &apos;%1&apos; te verwijderen--het is momenteel in gebruik in een sketch</translation>
@@ -637,14 +621,6 @@
         <location filename="../src/items/resizableboard.cpp" line="124"/>
         <source>two layers (double-sided)</source>
         <translation>Twee lagen (Dubbel zijdig)</translation>
-    </message>
-    <message>
-        <source>Have a look at the circle_pcb.svg file in your Fritzing installation folder at parts/svg/core/pcb/.
-
-</source>
-        <translation type="vanished">Kijk even naar het circle_pcb.svg bestand in je Fritzing installatiefolder onder parts/svg/core/pcb/.
-
-</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="84"/>
@@ -744,17 +720,9 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
         <translation type="unfinished">Kan laden, maar</translation>
     </message>
     <message>
-        <source>Unable to load</source>
-        <translation type="vanished">Niet mogelijk om te laden</translation>
-    </message>
-    <message>
         <location filename="../src/items/resizableboard.cpp" line="522"/>
         <source>Unable to load image from %1 %2</source>
         <translation>Niet mogelijk om de afbeelding te laden van %1 %2</translation>
-    </message>
-    <message>
-        <source>Can load, but</source>
-        <translation type="vanished">Kan laden, maar</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="530"/>
@@ -762,15 +730,6 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
 Use the file?</source>
         <translation>De afbeelding van %1 kan geladen worden, maar %2
 Wil je het bestand gebruiken?</translation>
-    </message>
-    <message>
-        <source>
-
-A custom board svg typically has one or two silkscreen layers and one board layer.
-</source>
-        <translation type="vanished">
-
-Een aangepast bord svg heeft normaal gesproken een of twee silkscreen lagen en een bordlaag.</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="381"/>
@@ -781,10 +740,6 @@ Een aangepast bord svg heeft normaal gesproken een of twee silkscreen lagen en e
         <location filename="../src/items/resizableboard.cpp" line="430"/>
         <source>&lt;b&gt;The custom shape has been loaded, and you will see the new board shortly.&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;De aangepaste vorm is geladen en zal snel in beeld komen.&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>Before actual PCB production we recommend that you test your custom shape by using the &apos;File &gt; Export for Production &gt; Extended Gerber&apos; option. </source>
-        <translation type="vanished">Voordat je de PCB gaat produceren, raden we je aan om de aangepaste vorm van het bord te testen. Ga naar Bestand &gt; Exporteer &gt;voor Productie &gt; Extended Gerber.</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="436"/>
@@ -818,14 +773,6 @@ Een aangepast bord svg heeft normaal gesproken een of twee silkscreen lagen en e
         <location filename="../src/items/resizableboard.cpp" line="451"/>
         <source>&lt;br/&gt;However, the cutouts may not be formatted correctly.</source>
         <translation>&lt;br/&gt;Het kan zijn dat de uitsnedes niet het juiste formaat hebben.</translation>
-    </message>
-    <message>
-        <source>&lt;br/&gt;&lt;br/&gt;If you intended your custom shape to have cutouts and you did not get the expected result, </source>
-        <translation type="vanished">&lt;br/&gt;&lt;br/&gt;Als je aangepaste vorm uitsnedes zou moeten hebben en je krijgt niet het gewenste resultaat, </translation>
-    </message>
-    <message>
-        <source>it is because Fritzing requires that you make cutouts using a shape &apos;subtraction&apos; or &apos;difference&apos; operation in your vector graphics editor.</source>
-        <translation type="vanished">is dat omdat Fritzing verlangt dat je de uitsnedes maakt door middel van een vorm via de &apos;substractie&apos; of &apos;verschil&apos; uitvoer binnen je vector programma.</translation>
     </message>
 </context>
 <context>
@@ -1198,10 +1145,6 @@ Er zijn geen banen of connectoren die elkaar overlappen of te dicht bij elkaar l
         <translation>Onverwachtte SVG render fout--Neem contact op met Fritzing.org</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/autoroute/drc.cpp" line="549"/>
         <source>%1 is overlapping (%2 layer)</source>
         <translation>%1 overlapt (%2 laag)</translation>
@@ -1224,10 +1167,6 @@ Er zijn geen banen of connectoren die elkaar overlappen of te dicht bij elkaar l
 </context>
 <context>
     <name>DRCResultsDialog</name>
-    <message>
-        <source>DRC Results</source>
-        <translation type="vanished">DRC Resultaten</translation>
-    </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="138"/>
         <source>DRC Results</source>
@@ -1255,10 +1194,6 @@ Er zijn geen banen of connectoren die elkaar overlappen of te dicht bij elkaar l
 </context>
 <context>
     <name>DebugDialog</name>
-    <message>
-        <source>for debugging</source>
-        <translation type="vanished">Voor foutopsporing</translation>
-    </message>
     <message>
         <location filename="../src/debugdialog.cpp" line="138"/>
         <source>for debugging</source>
@@ -1318,10 +1253,6 @@ Er zijn geen banen of connectoren die elkaar overlappen of te dicht bij elkaar l
 </context>
 <context>
     <name>FApplication</name>
-    <message>
-        <source>Fritzing failure</source>
-        <translation type="vanished">Fritzing fout</translation>
-    </message>
     <message>
         <location filename="../src/fapplication.cpp" line="1871"/>
         <source>Fritzing caught an exception from %1 in event %2</source>
@@ -1453,10 +1384,6 @@ Would you like to regenerate the parts database?
         <translation type="unfinished">Fritzing</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/fabuploaddialog.cpp" line="161"/>
         <source>Error: </source>
         <translation type="unfinished"></translation>
@@ -1464,10 +1391,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FabUploadProgress</name>
-    <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
     <message>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="181"/>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="211"/>
@@ -1490,10 +1413,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FirstTimeHelpDialog</name>
-    <message>
-        <source>First Time Help</source>
-        <translation type="obsolete">Eerste keer - help</translation>
-    </message>
     <message>
         <location filename="../src/help/firsttimehelpdialog.cpp" line="37"/>
         <source>First Time Help</source>
@@ -1534,17 +1453,9 @@ Would you like to regenerate the parts database?
         <translation>Sluit huidige sketch</translation>
     </message>
     <message>
-        <source>%1 - %2</source>
-        <translation type="vanished">%1 - %2</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="132"/>
         <source>Specify a file name</source>
         <translation>Specificeer een bestandsnaam</translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">&quot;%1&quot; Opslaan</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="238"/>
@@ -1768,10 +1679,6 @@ Het is ook mogelijk om op een connector rechts te klikken en kies &apos;Maak gro
         <translation>Draad</translation>
     </message>
     <message>
-        <source>Trace wire %1</source>
-        <translation type="vanished">Baan draad %1</translation>
-    </message>
-    <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="217"/>
         <source>Properties</source>
         <translation>Eigenschappen</translation>
@@ -1795,10 +1702,6 @@ Het is ook mogelijk om op een connector rechts te klikken en kies &apos;Maak gro
         <location filename="../src/infoview/htmlinfoview.cpp" line="1024"/>
         <source>Locked</source>
         <translation>Vastgezet</translation>
-    </message>
-    <message>
-        <source>Ratsnest line</source>
-        <translation type="vanished">Rattennest draad</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="1026"/>
@@ -1876,10 +1779,6 @@ Het is ook mogelijk om op een connector rechts te klikken en kies &apos;Maak gro
 <context>
     <name>ItemBase</name>
     <message>
-        <source>family</source>
-        <translation type="vanished">familie</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="225"/>
         <source>size</source>
         <translation>grootte</translation>
@@ -1890,10 +1789,6 @@ Het is ook mogelijk om op een connector rechts te klikken en kies &apos;Maak gro
         <translation>kleur</translation>
     </message>
     <message>
-        <source>resistance</source>
-        <translation type="vanished">weerstand</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="230"/>
         <source>voltage</source>
         <translation>spanning</translation>
@@ -1902,10 +1797,6 @@ Het is ook mogelijk om op een connector rechts te klikken en kies &apos;Maak gro
         <location filename="../src/items/itembase.cpp" line="233"/>
         <source>pin spacing</source>
         <translation>pin afstanden</translation>
-    </message>
-    <message>
-        <source>rated power</source>
-        <translation type="vanished">nominaal vermogen</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="235"/>
@@ -1941,10 +1832,6 @@ Het is ook mogelijk om op een connector rechts te klikken en kies &apos;Maak gro
         <location filename="../src/items/itembase.cpp" line="242"/>
         <source>maximum resistance</source>
         <translation>maximume weerstand</translation>
-    </message>
-    <message>
-        <source>Part</source>
-        <translation type="vanished">Onderdeel</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="1336"/>
@@ -2144,26 +2031,6 @@ Het is ook mogelijk om op een connector rechts te klikken en kies &apos;Maak gro
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>banded</source>
-        <translation type="vanished">gestreept</translation>
-    </message>
-    <message>
-        <source>top</source>
-        <translation type="vanished">boven</translation>
-    </message>
-    <message>
-        <source>bottom</source>
-        <translation type="vanished">onder</translation>
-    </message>
-    <message>
-        <source>copper bottom</source>
-        <translation type="vanished">koper onderkant</translation>
-    </message>
-    <message>
-        <source>copper top</source>
-        <translation type="vanished">koper bovenkant</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="263"/>
         <source>silkscreen bottom</source>
         <translation>silkscreen onderkant</translation>
@@ -2340,10 +2207,6 @@ Het is ook mogelijk om op een connector rechts te klikken en kies &apos;Maak gro
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="148"/>
         <source>Ready</source>
         <translation>Klaar</translation>
-    </message>
-    <message>
-        <source>Save %1</source>
-        <translation type="vanished">Opslaan %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1653"/>
@@ -3491,10 +3354,6 @@ Wij werken er momenteel aan om dit bericht te vermijden en je te laten kiezen tu
         <translation>Uw sketch heeft nog geen bord! Voeg a.u.b. een PCB toe om te kunnen exporteren naar Gerber.</translation>
     </message>
     <message>
-        <source>Choose a folder for exporting</source>
-        <translation type="vanished">Kies een map om te exporteren</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="988"/>
         <source>Unable to export %1 as shareable.</source>
         <translation type="unfinished"></translation>
@@ -4187,10 +4046,6 @@ Controleer a.u.b. alle weergaves voor potentiële fouten.</translation>
         <translation>Vul lege gebieden van de koperlaag--Vulling zal alle banen verbonden met GROUND uitsluiten</translation>
     </message>
     <message>
-        <source>No copper top layer</source>
-        <translation type="vanished">Geen bovenste koperlaag</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2598"/>
         <source>The copper top (copper 1) layer is not available on a one-sided board.  Please switch the board to double-sided or choose the copper bottom (copper 0) layer.</source>
         <translation>De bovenste koperlaag (Koper 1) is niet aanwezig op een enkelzijdig bord.  Wijzig naar dubbelzijdig bord of selecteer de onderste koperlaag. (Koper 0).</translation>
@@ -4304,10 +4159,6 @@ Controleer a.u.b. alle weergaves voor potentiële fouten.</translation>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1203"/>
         <source>Show the grid</source>
         <translation>Toon het raster</translation>
-    </message>
-    <message>
-        <source>Actual Size</source>
-        <translation type="vanished">Werkelijke grootte</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2312"/>
@@ -4524,10 +4375,6 @@ Continue upload?</source>
         <translation>Converteert een via naar een buigpunt</translation>
     </message>
     <message>
-        <source>Revert?</source>
-        <translation type="vanished">Terug naar vorige versie?</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="274"/>
         <source>This operation can not be undone--you will lose all of your changes.
 
@@ -4550,10 +4397,6 @@ Doorgaan en terug naar vorige versie?</translation>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="662"/>
         <source>Reload the sketch</source>
         <translation>Herlaad de sketch</translation>
-    </message>
-    <message>
-        <source>Unrouted connections</source>
-        <translation type="vanished">Ongeroute aansluitingen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3225"/>
@@ -4581,14 +4424,6 @@ Doorgaan en terug naar vorige versie?</translation>
         <translation>Markeer alle ongeroute aansluitingen</translation>
     </message>
     <message>
-        <source>Inspector</source>
-        <translation type="vanished">Inspector</translation>
-    </message>
-    <message>
-        <source>Undo History</source>
-        <translation type="vanished">Ongedaan maken geschiedenis</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="581"/>
         <source>Breadboard</source>
         <translation>Breadboard</translation>
@@ -4602,14 +4437,6 @@ Doorgaan en terug naar vorige versie?</translation>
         <location filename="../src/mainwindow/mainwindow.cpp" line="599"/>
         <source>PCB</source>
         <translation>PCB</translation>
-    </message>
-    <message>
-        <source>Layers</source>
-        <translation type="vanished">Lagen</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t get the dock widget</source>
-        <translation type="vanished">Fout bij ophalen dock widget</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="949"/>
@@ -4739,10 +4566,6 @@ Doorgaan en terug naar vorige versie?</translation>
         <translation>Tekst zal gelijk zijn aan het onderdeellabel, beschrijving, titel, etc. Voer tekst in om te zoeken:</translation>
     </message>
     <message>
-        <source>Search</source>
-        <translation type="vanished">Zoeken</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4696"/>
         <source>No parts matched search term &apos;%1&apos;.</source>
         <translation>Geen onderdelen gevonden met de zoekterm &apos;%1&apos;.</translation>
@@ -4792,10 +4615,6 @@ Doorgaan en terug naar vorige versie?</translation>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2903"/>
         <source>Set the minimum distance between ground fill and traces or connectors</source>
         <translation>Stel de minimale veiligheidsafstand in tussen een ground vulling en banen of aansluitingen</translation>
-    </message>
-    <message>
-        <source>Enter Text</source>
-        <translation type="vanished">Voer Text in</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1078"/>
@@ -5417,17 +5236,6 @@ Reason: %2 (errcode %3)</source>
         <translation>Kon bestand niet overschrijven &apos;%1&apos;.
 Reden : %2 (errcode %3)</translation>
     </message>
-    <message numerus="yes">
-        <source>Unable to find the following %n part(s):</source>
-        <translation type="vanished">
-            <numerusform>Kan het volgende %n onderdeel niet vinden:</numerusform>
-            <numerusform>Kan de volgende %n onderdelen niet vinden:</numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>at</source>
-        <translation type="vanished">in</translation>
-    </message>
 </context>
 <context>
     <name>MysteryPart</name>
@@ -5584,10 +5392,6 @@ Reden : %2 (errcode %3)</translation>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="960"/>
         <source>Change trace layer</source>
         <translation>Wijzig spoor laag</translation>
-    </message>
-    <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1422"/>
@@ -5770,10 +5574,6 @@ Enter keepout value:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ground Fill</source>
-        <translation type="obsolete">Ground vulling</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2407"/>
         <source>Your sketch does not have a board yet!  Please add a PCB in order to use this selection operation.</source>
         <translation>Je sketch heeft nog geen bord! Voeg a.u.b. een bord toe om te kunnen selecteren.</translation>
@@ -5805,51 +5605,6 @@ Enter keepout value:</source>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2888"/>
         <source>Your sketch does not have a board yet. You cannot fabricate this sketch without a PCB part.</source>
         <translation>Je sketch heeft nog geen bord! Je kunt je sketch niet fabriceren zonder een PCB onderdeel.</translation>
-    </message>
-    <message>
-        <source>Enter Keepout</source>
-        <translation type="vanished">Voer veiligheids afstand in</translation>
-    </message>
-    <message>
-        <source>Keepout is in mils (.001 inches).
-
-</source>
-        <translation type="vanished">Veiligheidsafstand is in mils (.001 inches).
-
-</translation>
-    </message>
-    <message>
-        <source>Note that due to aliasing, distances may be too short by up to 2 mils
-</source>
-        <translation type="vanished">Houd er rekening mee dat door kartelvorming afstanden tot 2 mils te kort kunnen zijn
-</translation>
-    </message>
-    <message>
-        <source>so you may want to increase the keepout value by that much.
-
-</source>
-        <translation type="vanished">dus je zult de veiligheidsafstand met die waarde moeten vergroten.
-</translation>
-    </message>
-    <message>
-        <source>10 mils is a good default choice.
-
-</source>
-        <translation type="vanished">10 mils is een goede standaard keuze.
-
-</translation>
-    </message>
-    <message>
-        <source>Enter keepout value:</source>
-        <translation type="vanished">Voer veiligheids afstand in:</translation>
-    </message>
-    <message>
-        <source>Fritzing Fab Quote</source>
-        <translation type="vanished">Fritzing Fab Offerte</translation>
-    </message>
-    <message>
-        <source>Sorry, http://fab.fritzing.org is not responding to the quote request. Please check your network connection and/or try again later.</source>
-        <translation type="vanished">Sorry, http://fab.fritzing.org reageert niet op je offerte verzoek. Controleer je netwerkinstellingen en/of probeer later opnieuw.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="257"/>
@@ -5887,10 +5642,6 @@ Enter keepout value:</source>
 </context>
 <context>
     <name>PEMainWindow</name>
-    <message>
-        <source>Parts Editor</source>
-        <translation type="vanished">Onderdeel Bewerker</translation>
-    </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="964"/>
         <source>Show Icon</source>
@@ -6087,58 +5838,14 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Copy problem</source>
-        <translation type="vanished">Kopieer probleem</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1609"/>
         <source>Unable to make a local copy of: &apos;%1&apos;</source>
         <translation>Niet mogelijk een lokale kopie te maken van :&apos;%1&apos;</translation>
     </message>
     <message>
-        <source>You may use a PNG or JPG image to construct your part, but it is better to use an SVG. </source>
-        <translation type="vanished">Je kunt een PNG of JPG gebuiken om je onderdeel te maken, maar het is beter om een SVG te gebruiken. </translation>
-    </message>
-    <message>
-        <source>PNG and JPG images retain their nature as bitmaps and do not look good when scaled--</source>
-        <translation type="vanished">PNG en JPG afbeeldingen behouden hun bitmap eigenschappen en zullen er niet goed uit zien als ze vergroten--</translation>
-    </message>
-    <message>
-        <source>so for Fritzing parts it is best to use PNG and JPG only as placeholders.</source>
-        <translation type="vanished">dus voor Fritzing onderdelen is het het beste om PNG en JPG te gebruiken als placeholders.</translation>
-    </message>
-    <message>
-        <source>Use of PNG and JPG discouraged</source>
-        <translation type="vanished">Gebruik van PNG en JPG afgeraden</translation>
-    </message>
-    <message>
-        <source>Conversion problem</source>
-        <translation type="vanished">Conversie probleem</translation>
-    </message>
-    <message>
-        <source>SVG problem</source>
-        <translation type="vanished">SVG probleem</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1582"/>
         <source>Unable to parse &apos;%1&apos;: %2 line:%3 column:%4</source>
         <translation>Niet mogelijk om &apos;%1&apos; te analyseren: %2 lijn:%3 kolom:%4</translation>
-    </message>
-    <message>
-        <source>There are no copper layers defined in: %1. </source>
-        <translation type="vanished">Er zijn geen koperlagen gedefineerd in: %1. </translation>
-    </message>
-    <message>
-        <source>See &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;this explanation&lt;/a&gt;.</source>
-        <translation type="vanished">Zie &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;deze uitleg&lt;/a&gt;.</translation>
-    </message>
-    <message>
-        <source>&lt;br/&gt;&lt;br/&gt;This will not be a problem in the next release of the Parts Editor, </source>
-        <translation type="vanished">&lt;br/&gt;&lt;br/&gt;Dit zal geen probeelm zijn in de volgende release van de onderdeel bewerker, </translation>
-    </message>
-    <message>
-        <source>but for now please modify the file according to the instructions in the link.</source>
-        <translation type="vanished">maar voor nu, pas het bestand aan zoals beschreven in de link.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1636"/>
@@ -6166,10 +5873,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>&amp;Bestand</translation>
     </message>
     <message>
-        <source>Sketch Change Warning</source>
-        <translation type="vanished">Sketch Aanpassing Waarschuwing</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2147"/>
         <source>The open sketch &apos;%1&apos; uses the part you are editing. </source>
         <translation>De geopende sketch &apos;%1&apos; maakt gebruik van het onderdeel dat u aanpast. </translation>
@@ -6178,22 +5881,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2148"/>
         <source>Saving this part will make a change to the sketch that cannot be undone.</source>
         <translation>Het opslaan van het onderdeel resulteerd in een wijziging in de sketch, welke niet ongedaan gemaakt kan worden.</translation>
-    </message>
-    <message>
-        <source>The open sketches </source>
-        <translation type="vanished">De geopende sketches</translation>
-    </message>
-    <message>
-        <source>&apos;%1&apos;, </source>
-        <translation type="vanished">&apos;%1&apos;, </translation>
-    </message>
-    <message>
-        <source>and &apos;%1&apos; </source>
-        <translation type="vanished">en &apos;%1&apos; </translation>
-    </message>
-    <message>
-        <source>Saving this part will make a change to these sketches that cannot be undone.</source>
-        <translation type="vanished">Het opslaan van het onderdeel resulteerd in een wijziging in de sketches, welke niet ongedaan gemaakt kan worden.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2166"/>
@@ -6218,10 +5905,6 @@ Doorgaan en opslaan?</translation>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2734"/>
         <source>Remove %1 connectors</source>
         <translation>Verwijder %1 aansluitingen</translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">&quot;%1&quot; opslaan</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2753"/>
@@ -6262,10 +5945,6 @@ Doorgaan en opslaan?</translation>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1157"/>
         <source>Duplicate &apos;variant&apos; property not allowed</source>
         <translation>Dupliceren van &apos;variant&apos; eigenschap niet toegestaan</translation>
-    </message>
-    <message>
-        <source>Close without saving?</source>
-        <translation type="vanished">Sluiten zonder opslaan?</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="383"/>
@@ -6316,10 +5995,6 @@ Doorgaan en opslaan?</translation>
         <translation>Toon de metadata van aansluitingen in lijstweergave</translation>
     </message>
     <message>
-        <source>Blank not allowed</source>
-        <translation type="vanished">Leeg niet toegestaan</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1032"/>
         <source>The value of &apos;%1&apos; can not be blank.</source>
         <translation>De waarde van &apos;%1&apos; kan niet leeg zijn.</translation>
@@ -6330,17 +6005,9 @@ Doorgaan en opslaan?</translation>
         <translation>Wijzig %1 naar %2</translation>
     </message>
     <message>
-        <source>Must be unique</source>
-        <translation type="vanished">Moet uniek zijn</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1069"/>
         <source>Variant &apos;%1&apos; is in use. The variant name must be unique.</source>
         <translation>Variant &apos;%1&apos; is in gebruik. De variantnaam moet uniek zijn.</translation>
-    </message>
-    <message>
-        <source>Duplicate problem</source>
-        <translation type="vanished">Probleem met dupliceren</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1523"/>
@@ -6356,10 +6023,6 @@ Doorgaan en opslaan?</translation>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1532"/>
         <source>Please re-export the SVG file using that setting, and try loading again.</source>
         <translation>Exporteer het SVG bestand nogmaals met de juiste instelling en probeer opnieuw.</translation>
-    </message>
-    <message>
-        <source>Fonts</source>
-        <translation type="vanished">Lettertypen</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1550"/>
@@ -6409,24 +6072,6 @@ Doorgaan en opslaan?</translation>
         <location filename="../src/partseditor/pemainwindow.cpp" line="390"/>
         <source>Do you want to keep working or close without saving?</source>
         <translation>Wil je doorwerken of sluiten zonder opslaan?</translation>
-    </message>
-    <message numerus="yes">
-        <source>This part has %n unassigned connectors </source>
-        <translation type="vanished">
-            <numerusform>Dit onderdeel heeft %n niet toegewezen aansluiting</numerusform>
-            <numerusform>Dit onderdeel heeft %n niet toegewezen aansluitingen</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>across %n views. </source>
-        <translation type="vanished">
-            <numerusform>binnen %n weergave.</numerusform>
-            <numerusform>binnen %n weergaven.</numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>Until all connectors are assigned to SVG elements, the part will not work correctly. </source>
-        <translation type="vanished">Dit anderdeel zal niet goed werken tot dat alle aansluitingen juist zijn toegewezen aan de SVG elementen. </translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="537"/>
@@ -6579,10 +6224,6 @@ Doorgaan en opslaan?</translation>
         <translation>Maak alleen %1 weergave zichtbaar</translation>
     </message>
     <message>
-        <source>Exiting the Parts Editor now is fine, as long as you remember to finish the assignments later.</source>
-        <translation type="vanished">De Onderdeel Bewerker nu verlaten is geen probleem, vergeet niet om later de toewijzingen af te maken.</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="565"/>
         <source>Load image for view...</source>
         <translation>Laad afbeelding voor weergave...</translation>
@@ -6606,34 +6247,6 @@ Doorgaan en opslaan?</translation>
         <location filename="../src/partseditor/pemainwindow.cpp" line="632"/>
         <source>&amp;Edit</source>
         <translation>&amp;Wijzig</translation>
-    </message>
-    <message>
-        <source>This part has bendable legs. </source>
-        <translation type="vanished">Dit onderdeel heeft buigbare pootjes. </translation>
-    </message>
-    <message>
-        <source>This version of the Parts Editor does not yet support editing bendable legs, and the legs may not be displayed correctly in breadboard view . </source>
-        <translation type="vanished">Deze versie van de Onderdeel Bewerker ondersteunt momenteel nog geen buigbare pootjes. De pootjes kunnen mogelijk verkeerd worden weergegeven in de breadboard weergave. </translation>
-    </message>
-    <message>
-        <source>If you make changes to breadboard view, or change connector metadata, the legs may no longer work. </source>
-        <translation type="vanished">Als je wijzigingen maakt aan de breadboard weergave of de metadat voor de aansluitingen aanpast, is het mogelijk dat de pootjes niet meer (goed) werken.</translation>
-    </message>
-    <message>
-        <source>You can safely make changes to Schematic or PCB view.
-
-</source>
-        <translation type="vanished">Je kunt nu veilig wijzigingen maken aan de schema of PCB of weergave.
-
-</translation>
-    </message>
-    <message>
-        <source>This warning will not be repeated in this session of Fritzing</source>
-        <translation type="vanished">Deze waarschuling zal de rest van deze sessie van Fritzing niet meer getoond worden</translation>
-    </message>
-    <message>
-        <source>Unable to load &apos;%1&apos;. Please close the parts editor without saving and try again.</source>
-        <translation type="vanished">Niet mogelijk om &apos;%1&apos; te laden. Sluit de Onderdeel Bewerker zonder opslaan en probeer opnieuw.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1575"/>
@@ -6967,10 +6580,6 @@ Doorgaan en opslaan?</translation>
         <translation>Wijzig Pin Labels</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/items/paletteitem.cpp" line="620"/>
         <location filename="../src/items/paletteitem.cpp" line="631"/>
         <location filename="../src/items/paletteitem.cpp" line="655"/>
@@ -7138,10 +6747,6 @@ Doorgaan en opslaan?</translation>
         <translation type="unfinished">Zet label voor %1</translation>
     </message>
     <message>
-        <source>Set label for %1</source>
-        <translation type="vanished">Zet label voor %1</translation>
-    </message>
-    <message>
         <location filename="../src/items/partlabel.cpp" line="760"/>
         <source>Label text:</source>
         <translation>Label tekst :</translation>
@@ -7240,10 +6845,6 @@ Doorgaan en opslaan?</translation>
         <translation>Fritzing koffer (*%1)</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="457"/>
         <source>Cannot find file %1.</source>
         <translation>Kan bestand %1 niet vinden.</translation>
@@ -7270,17 +6871,9 @@ Doorgaan en opslaan?</translation>
         <translation>Uw wijzigingen zullen verloren gaan indien u niet opslaat.</translation>
     </message>
     <message>
-        <source>Add to bin</source>
-        <translation type="vanished">Voeg toe aan koffer</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="697"/>
         <source>Do you really want to add the selected part to the bin?</source>
         <translation>Weet u zeker dat u het geselecteerde onderdeel wilt toevoegen aan de koffer?</translation>
-    </message>
-    <message>
-        <source>Save bin &quot;%1&quot;</source>
-        <translation type="vanished">Sla koffer &quot;%1% op</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="456"/>
@@ -7361,10 +6954,6 @@ Doorgaan en opslaan?</translation>
         <translation>kolommen</translation>
     </message>
     <message>
-        <source>Performance Warning</source>
-        <translation type="vanished">Prestatie Waarschuwing</translation>
-    </message>
-    <message>
         <location filename="../src/items/perfboard.cpp" line="297"/>
         <source>Performance of perfboards and stripboards with more than approximately 2000 holes can be slow. Are you sure ?
 
@@ -7385,14 +6974,6 @@ Noot: Deze waarschuling zal de rest van deze sessie van Fritzing niet meer getoo
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="80"/>
         <source>&lt;p&gt;&lt;h2&gt;Pin Label Editor&lt;/h2&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;h2&gt;Pin Label Bewerker&lt;/h2&gt;&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Click on a label next to a pin number to rename that pin.</source>
-        <translation type="vanished">&lt;p&gt;Klik op een label naast een pin nummer om deze te hernoemen.</translation>
-    </message>
-    <message>
-        <source>You can use the tab key to move through the labels in order.&lt;/p&gt;</source>
-        <translation type="vanished">Je kunt de &lt;Tab&gt; toets gebruiken om naar het volgende label te gaan.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="81"/>
@@ -7818,14 +7399,6 @@ This feature is enabled by default. If you need to maintain compatibility with o
         <location filename="../src/program/programwindow.cpp" line="339"/>
         <source>&amp;View</source>
         <translation>&amp;Weergave</translation>
-    </message>
-    <message>
-        <source>Code Window</source>
-        <translation type="vanished">Code Venster</translation>
-    </message>
-    <message>
-        <source>Code Window - %1</source>
-        <translation type="vanished">Code Venster - %1</translation>
     </message>
     <message>
         <location filename="../src/program/programwindow.cpp" line="741"/>
@@ -8369,10 +7942,6 @@ Fritzing werkt nog steeds, maar je kunt geen eigenschappen van de onderdelen wij
         <translation>Onbekende laag</translation>
     </message>
     <message>
-        <source>files</source>
-        <translation type="vanished">bestanden</translation>
-    </message>
-    <message>
         <location filename="../src/svg/gedaelement2svg.cpp" line="51"/>
         <location filename="../src/svg/kicadmodule2svg.cpp" line="97"/>
         <location filename="../src/svg/kicadschematic2svg.cpp" line="69"/>
@@ -8506,10 +8075,6 @@ Fritzing werkt nog steeds, maar je kunt geen eigenschappen van de onderdelen wij
         <location filename="../src/svg/x2svg.cpp" line="71"/>
         <source>failure in svg conversion 2</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>failure in svg conversion 2: %1 %2 %3</source>
-        <translation type="vanished">fout in SVG conversie 2: %1 %2 %3</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="372"/>
@@ -9279,10 +8844,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fritzing Fab Quote</source>
-        <translation type="vanished">Fritzing Fab Offerte</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/quotedialog.cpp" line="280"/>
         <source>Use Fritzing Fab to produce a PCB from your sketch.&lt;br /&gt;</source>
         <translation>Maak gebruik van Fritzing Fab om een PCB te laten produceren van je sketch&lt;br /&gt;</translation>
@@ -9392,10 +8953,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
         <location filename="../src/items/resistor.cpp" line="249"/>
         <source>resistance</source>
         <translation>weerstand</translation>
-    </message>
-    <message>
-        <source>Resistor</source>
-        <translation type="vanished">Weestand</translation>
     </message>
     <message>
         <location filename="../src/items/resistor.cpp" line="267"/>
@@ -9513,10 +9070,6 @@ Achtergrond: Groen = ok, Rood = onjuiste waarde, Grijs = huidige waarde</transla
 </context>
 <context>
     <name>Ruler</name>
-    <message>
-        <source>width</source>
-        <translation type="vanished">breedte</translation>
-    </message>
     <message>
         <location filename="../src/items/ruler.cpp" line="198"/>
         <source>inch</source>
@@ -9864,18 +9417,6 @@ Netlist:
         <translation>Creëer en connecteer een draad</translation>
     </message>
     <message>
-        <source>Rotate %2 (%1)</source>
-        <translation type="vanished">Roteer %2 (%1)</translation>
-    </message>
-    <message>
-        <source>Rotate</source>
-        <translation type="vanished">Roteer</translation>
-    </message>
-    <message>
-        <source>Flip</source>
-        <translation type="vanished">Flip</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="6174"/>
         <source>Double-click</source>
         <translation>Dubbelklikken</translation>
@@ -9929,10 +9470,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="7667"/>
         <source>Move label &apos;%1&apos;</source>
         <translation>Verplaats label &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>%1 label &apos;%2&apos;</source>
-        <translation type="vanished">%1 label &apos;%2&apos;</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="7737"/>
@@ -10002,10 +9539,6 @@ Netlist:
         <translation>Vewijder ratsnest</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="4140"/>
         <source>This seems like an attempt to create a trace across layers. This circumstance should not arise: please contact the developers.</source>
         <translation>Dit lijkt op een poging om een baan te maken tussen verschillende lagen. Van deze omstandigheid mag geen sprakezijn: neem contact op met de ontwikkelaars.</translation>
@@ -10065,10 +9598,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="10047"/>
         <source>There are no unrouted connections</source>
         <translation>Er zijn geen ongeroute aansluitingen</translation>
-    </message>
-    <message>
-        <source>Unrouted connections</source>
-        <translation type="vanished">Niet geroute aansluitingen</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="10049"/>
@@ -10158,14 +9687,6 @@ The parts will be moved automatically. You can use the Undo History to review th
 </translation>
     </message>
     <message>
-        <source>and %1 other parts</source>
-        <translation type="vanished">en %1 andere onderdelen</translation>
-    </message>
-    <message>
-        <source>and %1 other properties</source>
-        <translation type="vanished">en %1 andere eigenschappen</translation>
-    </message>
-    <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="146"/>
         <source>
 and %1 other parts</source>
@@ -10243,10 +9764,6 @@ and %1 other properties</source>
         <translation type="unfinished">Net labels</translation>
     </message>
     <message>
-        <source>Net labels</source>
-        <translation type="vanished">Net labels</translation>
-    </message>
-    <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="471"/>
         <source>Net labels cannot be blank</source>
         <translation>Net labels kunnen niet leeg zijn</translation>
@@ -10254,10 +9771,6 @@ and %1 other properties</source>
 </context>
 <context>
     <name>TipsAndTricks</name>
-    <message>
-        <source>Tips and Tricks</source>
-        <translation type="vanished">Tips en Trucs</translation>
-    </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="40"/>
         <source>Fritzing Tips and Tricks</source>

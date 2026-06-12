@@ -69,10 +69,6 @@
         <translation>Jan Sieber, Yaniv Steiner, Olaf Val, </translation>
     </message>
     <message>
-        <source>Michaela Vieser and Julia Werner.</source>
-        <translation type="vanished">Michaela Vieser și Julia Werner.</translation>
-    </message>
-    <message>
         <location filename="../src/help/aboutbox.cpp" line="116"/>
         <source>Thanks for the translations go out to: </source>
         <translation type="unfinished"></translation>
@@ -557,17 +553,9 @@
         <translation type="unfinished">Șterge cutia</translation>
     </message>
     <message>
-        <source>Delete bin</source>
-        <translation type="vanished">Șterge cutia</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1166"/>
         <source>Do you really want to delete bin &apos;%1&apos;?  This action cannot be undone.</source>
         <translation>Sigur doriți să ștergeți cutia &apos;%1&apos;?  Această acțiune nu poate fi refăcută.</translation>
-    </message>
-    <message>
-        <source>Read-only bin</source>
-        <translation type="vanished">Cutie doar-citire</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1218"/>
@@ -589,10 +577,6 @@
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1226"/>
         <source>Please choose a name for the bin:</source>
         <translation>Alegeți un nume pentru cutie:</translation>
-    </message>
-    <message>
-        <source>Remove from Bin</source>
-        <translation type="vanished">Elimină din cutie</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1296"/>
@@ -629,23 +613,6 @@
 </context>
 <context>
     <name>Board</name>
-    <message>
-        <source>
-
-A custom board svg typically has one or two silkscreen layers and one board layer.
-</source>
-        <translation type="vanished">
-
-O placă personalizată tipic svg are unul sau două straturi serigrafice și un strat placă.</translation>
-    </message>
-    <message>
-        <source>Have a look at the circle_pcb.svg file in your Fritzing installation folder at parts/svg/core/pcb/.
-
-</source>
-        <translation type="vanished">Consultați fișierul circle_pcb.svg în dosarul de instalare Fritzing la componente/svg/core/pcb/.
-
-</translation>
-    </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="84"/>
         <source>
@@ -764,10 +731,6 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
         <translation type="unfinished">Se poate încărca, dar</translation>
     </message>
     <message>
-        <source>Before actual PCB production we recommend that you test your custom shape by using the &apos;File &gt; Export for Production &gt; Extended Gerber&apos; option. </source>
-        <translation type="vanished">Înaintea producerii actualei PCB vă recomandăm să testați forma dumneavoastră personalizată utilizând opțiunea &apos;Fișier &gt; Exportă pentru producție &gt; Gerber extins&apos;. </translation>
-    </message>
-    <message>
         <location filename="../src/items/resizableboard.cpp" line="436"/>
         <source>Check the resulting contour file with a Gerber-viewer application to make sure the shape came out as expected.&lt;br/&gt;&lt;br/&gt;</source>
         <translation>Verificați fișierul contur rezultat cu o aplicație vizualizator Gerber ca să fiți sigur că forma a ieșit cum vă așteptați.&lt;br/&gt;&lt;br/&gt;</translation>
@@ -802,25 +765,9 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
         <translation>&lt;br/&gt;Oricum, decupajele pot fi neformatate corect.</translation>
     </message>
     <message>
-        <source>&lt;br/&gt;&lt;br/&gt;If you intended your custom shape to have cutouts and you did not get the expected result, </source>
-        <translation type="vanished">&lt;br/&gt;&lt;br/&gt;Dacă intenționați ca forma dumneavoastră personalizată să aibe decupaje și nu ați obținut rezultatul așteptat, </translation>
-    </message>
-    <message>
-        <source>it is because Fritzing requires that you make cutouts using a shape &apos;subtraction&apos; or &apos;difference&apos; operation in your vector graphics editor.</source>
-        <translation type="vanished">este fiindcă Fritzing are nevoie să faceți decupajele utilizând o formă operație &apos;scădere&apos; sau &apos;diferență&apos; în editorul dumneavoastră de grafică vectorială.</translation>
-    </message>
-    <message>
-        <source>Unable to load</source>
-        <translation type="vanished">Nu se poate încărca</translation>
-    </message>
-    <message>
         <location filename="../src/items/resizableboard.cpp" line="522"/>
         <source>Unable to load image from %1 %2</source>
         <translation>Nu se poate ăncărca imaginea de la %1 %2</translation>
-    </message>
-    <message>
-        <source>Can load, but</source>
-        <translation type="vanished">Se poate încărca, dar</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="530"/>
@@ -1121,10 +1068,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <translation>Conectat la %1 : %2, %3, %4, %5, %6</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="vanished">Eroare</translation>
-    </message>
-    <message>
         <location filename="../src/program/consolewindow.cpp" line="153"/>
         <source>Error</source>
         <comment>dialog title</comment>
@@ -1156,10 +1099,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <comment>dialog title</comment>
         <translation type="unfinished">Eroare critică</translation>
     </message>
-    <message>
-        <source>Critical Error</source>
-        <translation type="vanished">Eroare critică</translation>
-    </message>
 </context>
 <context>
     <name>DRC</name>
@@ -1182,10 +1121,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <location filename="../src/autoroute/drc.cpp" line="269"/>
         <source>Reposition them and run the DRC again to find more problems</source>
         <translation>Repoziționațile și rulați DRC din nou pentru a descoperii mai multe probleme</translation>
-    </message>
-    <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
     </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="284"/>
@@ -1232,10 +1167,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 <context>
     <name>DRCResultsDialog</name>
     <message>
-        <source>DRC Results</source>
-        <translation type="vanished">Rezultate DRC</translation>
-    </message>
-    <message>
         <location filename="../src/autoroute/drc.cpp" line="138"/>
         <source>DRC Results</source>
         <comment>dialog title</comment>
@@ -1262,10 +1193,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>DebugDialog</name>
-    <message>
-        <source>for debugging</source>
-        <translation type="vanished">pentru depanare</translation>
-    </message>
     <message>
         <location filename="../src/debugdialog.cpp" line="138"/>
         <source>for debugging</source>
@@ -1325,10 +1252,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>FApplication</name>
-    <message>
-        <source>Fritzing failure</source>
-        <translation type="vanished">Eșuare Fritzing</translation>
-    </message>
     <message>
         <location filename="../src/fapplication.cpp" line="1860"/>
         <location filename="../src/fapplication.cpp" line="1868"/>
@@ -1460,10 +1383,6 @@ Would you like to regenerate the parts database?
         <translation type="unfinished">Fritzing</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/fabuploaddialog.cpp" line="161"/>
         <source>Error: </source>
         <translation type="unfinished"></translation>
@@ -1471,10 +1390,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FabUploadProgress</name>
-    <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
     <message>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="181"/>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="211"/>
@@ -1497,10 +1412,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FirstTimeHelpDialog</name>
-    <message>
-        <source>First Time Help</source>
-        <translation type="vanished">Ajutor prima utilizare</translation>
-    </message>
     <message>
         <location filename="../src/help/firsttimehelpdialog.cpp" line="37"/>
         <source>First Time Help</source>
@@ -1547,17 +1458,9 @@ Would you like to regenerate the parts database?
         <translation type="unfinished">Salvează &quot;%1&quot;</translation>
     </message>
     <message>
-        <source>%1 - %2</source>
-        <translation type="vanished">%1 - %2</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="132"/>
         <source>Specify a file name</source>
         <translation>Specificați un nume fișier</translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">Salvează &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="238"/>
@@ -1588,10 +1491,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FzpInfo</name>
-    <message>
-        <source>Error</source>
-        <translation type="obsolete">Eroare</translation>
-    </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="64"/>
         <source>Cannot open file &apos;%1&apos;.</source>
@@ -1852,15 +1751,6 @@ Este deasemeni posibil să alegeți un conector ca sămânță umplere împămâ
         <translation>Fir</translation>
     </message>
     <message>
-        <source>Ratsnest line</source>
-        <translatorcomment>ratsnest is not translatable yet. see: http://commons.wikimedia.org/wiki/File:Rats_nest_diagram.JPG</translatorcomment>
-        <translation type="vanished">Fir ratsnest</translation>
-    </message>
-    <message>
-        <source>Trace wire %1</source>
-        <translation type="vanished">Traseu cablat %1</translation>
-    </message>
-    <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="792"/>
         <source>v. %1 %2</source>
         <translation>v. %1 %2</translation>
@@ -1889,10 +1779,6 @@ Este deasemeni posibil să alegeți un conector ca sămânță umplere împămâ
 <context>
     <name>ItemBase</name>
     <message>
-        <source>family</source>
-        <translation type="vanished">familie</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="223"/>
         <source>type</source>
         <translation>tip</translation>
@@ -1911,10 +1797,6 @@ Este deasemeni posibil să alegeți un conector ca sămânță umplere împămâ
         <location filename="../src/items/itembase.cpp" line="226"/>
         <source>color</source>
         <translation>culoare</translation>
-    </message>
-    <message>
-        <source>resistance</source>
-        <translation type="vanished">rezistență</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="228"/>
@@ -1945,10 +1827,6 @@ Este deasemeni posibil să alegeți un conector ca sămânță umplere împămâ
         <location filename="../src/items/itembase.cpp" line="233"/>
         <source>pin spacing</source>
         <translation>distanță pini</translation>
-    </message>
-    <message>
-        <source>rated power</source>
-        <translation type="vanished">putere nominală</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="222"/>
@@ -2138,26 +2016,6 @@ Este deasemeni posibil să alegeți un conector ca sămânță umplere împămâ
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>banded</source>
-        <translation type="vanished">marcat cu benzi</translation>
-    </message>
-    <message>
-        <source>top</source>
-        <translation type="vanished">sus</translation>
-    </message>
-    <message>
-        <source>bottom</source>
-        <translation type="vanished">jos</translation>
-    </message>
-    <message>
-        <source>copper bottom</source>
-        <translation type="vanished">cupru dedesubt</translation>
-    </message>
-    <message>
-        <source>copper top</source>
-        <translation type="vanished">cupru sus</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="263"/>
         <source>silkscreen bottom</source>
         <translation>serigrafia dedesubt</translation>
@@ -2166,10 +2024,6 @@ Este deasemeni posibil să alegeți un conector ca sămânță umplere împămâ
         <location filename="../src/items/itembase.cpp" line="264"/>
         <source>silkscreen top</source>
         <translation>serigrafia sus</translation>
-    </message>
-    <message>
-        <source>Part</source>
-        <translation type="vanished">Parte</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="1336"/>
@@ -2452,10 +2306,6 @@ notificare</translation>
         <source>Unrouted connections</source>
         <comment>dialog title</comment>
         <translation type="unfinished">Conexiuni netrasate</translation>
-    </message>
-    <message>
-        <source>Save %1</source>
-        <translation type="vanished">Salvează %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1571"/>
@@ -2778,10 +2628,6 @@ notificare</translation>
         <translation>%1 - [%2]</translation>
     </message>
     <message>
-        <source>No copper top layer</source>
-        <translation type="vanished">Nu este strat de cupru superior</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2598"/>
         <source>The copper top (copper 1) layer is not available on a one-sided board.  Please switch the board to double-sided or choose the copper bottom (copper 0) layer.</source>
         <translation>Stratul de cupru superior (cupru 1) nu este disponibil pe o placă monoplacată.  Comutați placa la dubluplacată sau alegeți stratul de cupru dedesubt (cupru 0).</translation>
@@ -2844,10 +2690,6 @@ Lucrăm pentru a evita acest mesaj și permisiunea de a alege între proprietă�
         <translation>schița nouă</translation>
     </message>
     <message>
-        <source>Schematic conversion</source>
-        <translation type="vanished">Conversie schemă</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2963"/>
         <source>Saving this sketch will convert it to the new schematic graphics standard. Go ahead and convert?</source>
         <translation>Salvând această schiță va fi convertită la noul standard grafic pentru schemă. Se continuă și se convertește?</translation>
@@ -2861,10 +2703,6 @@ Lucrăm pentru a evita acest mesaj și permisiunea de a alege între proprietă�
         <location filename="../src/mainwindow/mainwindow.cpp" line="3169"/>
         <source>Fritzing uncompressed (*%1)</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unrouted connections</source>
-        <translation type="vanished">Conexiuni netrasate</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3225"/>
@@ -2895,10 +2733,6 @@ Lucrăm pentru a evita acest mesaj și permisiunea de a alege între proprietă�
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1865"/>
         <source>Your sketch does not have a board yet!  Please add a PCB in order to export to Gerber.</source>
         <translation>Schița dumneavoastră nu are încă o placă!  Adăugați un PCB în scopul de a o exporta la Gerber.</translation>
-    </message>
-    <message>
-        <source>Choose a folder for exporting</source>
-        <translation type="vanished">Alegeți un dosar pentru export</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="120"/>
@@ -4107,10 +3941,6 @@ Doriți să actualizați acum?</translation>
         <translation>Fișiere Fritzing (*%1 *%2 *%3 *%4 *%5);;Fritzing (*%1);;Partajabile Fritzing (*%2);;Componentă Fritzing (*%3);;Cutie Fritzing (*%4);;Cutie partajabilă Fritzing (*%5)</translation>
     </message>
     <message>
-        <source>Revert?</source>
-        <translation type="vanished">Inversați?</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="274"/>
         <source>This operation can not be undone--you will lose all of your changes.
 
@@ -4656,10 +4486,6 @@ Continuați și inversați?</translation>
         <translation>Umple cu cupru (%1)</translation>
     </message>
     <message>
-        <source>Actual Size</source>
-        <translation type="vanished">Dimensiune actuală</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2312"/>
         <source>It doesn&apos;t seem to be possible to automatically determine the actual physical size of the monitor, so &apos;actual size&apos; as currently implemented is only a guess. Your best bet would be to drag out a ruler part, then place a real (physical) ruler on top and zoom until they match up.</source>
         <translation>Se pare că nu este posibil să fie determinată automat dimensiunea fizică actuală a monitorului, astfel &apos;dimensiunea actuală&apos; ca implementată curent este doar o aproximare. ,Cea mai bună alegere va fi să trageți o componentă riglă, apoi plasați o riglă reală (fizică) deasupra și acționați zoom-ul până ce acestea se potrivesc.</translation>
@@ -4769,25 +4595,6 @@ Continuați și inversați?</translation>
         <translation>Shift+Ctrl+1</translation>
     </message>
     <message>
-        <source>Schematic view update</source>
-        <translation type="vanished">Actualizare vizualizare schemă</translation>
-    </message>
-    <message>
-        <source>There is a new graphics standard for schematic-view part images, beginning with version 0.8.6.
-
-</source>
-        <translation type="vanished">Este un nou standard grafic pentru vizualizare schemă imagini componentă, începând cu versiunea 0.8.6.
-
-</translation>
-    </message>
-    <message>
-        <source>Would you like to convert &apos;%1&apos; to the new standard now or open the file read-only?
-</source>
-        <translation type="vanished">Doriți să convertiți acum &apos;%1&apos; la noul standard sau deschideți fișierul doar citire?
-
-</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3698"/>
         <source>The conversion process will not modify &apos;%1&apos;, until you save the file. </source>
         <translation>Procesul de conversie nu va modifica &apos;%1&apos;, până veți salva fișierul. </translation>
@@ -4857,17 +4664,9 @@ Continue upload?</source>
         <translation>%1 fundal</translation>
     </message>
     <message>
-        <source>Enter Text</source>
-        <translation type="vanished">Introduceți text</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4650"/>
         <source>Text will match part label, description, title, etc. Enter text to search for:</source>
         <translation>Textul se va potrivi cu eticheta componentei, descrierea, titlul, etc. Introduceți textul de căutat:</translation>
-    </message>
-    <message>
-        <source>Search</source>
-        <translation type="vanished">Căutare</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4696"/>
@@ -5282,14 +5081,6 @@ Verificați toate vizualizările pentru potențiale efecte secundare.</translati
         <translation>Actualizează %1 componentă(e)</translation>
     </message>
     <message>
-        <source>Inspector</source>
-        <translation type="vanished">Inspector</translation>
-    </message>
-    <message>
-        <source>Undo History</source>
-        <translation type="vanished">Anulează istoric</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="581"/>
         <source>Breadboard</source>
         <translation>Placă testare</translation>
@@ -5303,10 +5094,6 @@ Verificați toate vizualizările pentru potențiale efecte secundare.</translati
         <location filename="../src/mainwindow/mainwindow.cpp" line="599"/>
         <source>PCB</source>
         <translation>PCB</translation>
-    </message>
-    <message>
-        <source>Layers</source>
-        <translation type="vanished">Straturi</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="64"/>
@@ -5450,18 +5237,6 @@ Verificați toate vizualizările pentru potențiale efecte secundare.</translati
 </context>
 <context>
     <name>ModelBase</name>
-    <message numerus="yes">
-        <source>Unable to find the following %n part(s):</source>
-        <translation type="vanished">
-            <numerusform>Nu se poate găsi următoarea %n componentă:</numerusform>
-            <numerusform>Nu se pot găsi următoarele %n componente:</numerusform>
-            <numerusform>Nu se pot găsi următoarele %n de componente:</numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>at</source>
-        <translation type="vanished">la</translation>
-    </message>
     <message numerus="yes">
         <location filename="../src/model/modelbase.cpp" line="421"/>
         <source>Unable to find %n part(s). Click &apos;Show Details&apos; for a list of missing parts.</source>
@@ -5647,10 +5422,6 @@ Motivul: %2 (cod eroare %3)</translation>
         <translation>Schimbă stratul traseului</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="257"/>
         <source>Your sketch does not have a board yet! Please add a PCB to use this selection operation.</source>
         <translation type="unfinished"></translation>
@@ -5824,10 +5595,6 @@ Enter keepout value:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ground Fill</source>
-        <translation type="obsolete">Umple cu plan de masă</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1767"/>
         <source>Unable to create copper fill--probably the part wasn&apos;t dropped onto the PCB.</source>
         <translation>Nu se poate crea umplerea cu cupru--posibil că piesa nu a fost trasă pe PCB.</translation>
@@ -5868,54 +5635,9 @@ Enter keepout value:</source>
         <translation>Ascunde partea serigrafiată</translation>
     </message>
     <message>
-        <source>Fritzing Fab Quote</source>
-        <translation type="vanished">Citat Fritzing Fab</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2888"/>
         <source>Your sketch does not have a board yet. You cannot fabricate this sketch without a PCB part.</source>
         <translation>Schița dumneavoastră nu are încă o placă. Nu puteți fabrica această schiță fără o parte PCB.</translation>
-    </message>
-    <message>
-        <source>Sorry, http://fab.fritzing.org is not responding to the quote request. Please check your network connection and/or try again later.</source>
-        <translation type="vanished">Regretăm, http://fab.fritzing.org nu răspunde la citatul solicitat. Verificați conexiunea la rețea și/sau încercați mai târziu.</translation>
-    </message>
-    <message>
-        <source>Enter Keepout</source>
-        <translation type="vanished">Introduceți zona de restricționare</translation>
-    </message>
-    <message>
-        <source>Keepout is in mils (.001 inches).
-
-</source>
-        <translation type="vanished">Zona de restricționare este în mils (.001 inches).
-
-</translation>
-    </message>
-    <message>
-        <source>Note that due to aliasing, distances may be too short by up to 2 mils
-</source>
-        <translation type="vanished">Rețineți că din cauza amestecării, distanțele pot fi prea scurte până la 2 miimi de inch</translation>
-    </message>
-    <message>
-        <source>so you may want to increase the keepout value by that much.
-
-</source>
-        <translation type="vanished">astfel poate doriți să măriți valoarea zonei de restricționare cu atât de mult.
-
-</translation>
-    </message>
-    <message>
-        <source>10 mils is a good default choice.
-
-</source>
-        <translation type="vanished">10 mils este o alegere implicită bună.
-
-</translation>
-    </message>
-    <message>
-        <source>Enter keepout value:</source>
-        <translation type="vanished">Introduceți valoarea zonei de restricționare:</translation>
     </message>
 </context>
 <context>
@@ -5944,10 +5666,6 @@ Enter keepout value:</source>
 <context>
     <name>PEMainWindow</name>
     <message>
-        <source>Parts Editor</source>
-        <translation type="vanished">Editor componente</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="524"/>
         <source>SVG</source>
         <translation>SVG</translation>
@@ -5968,10 +5686,6 @@ Enter keepout value:</source>
         <translation>Nu este permisă duplicarea proprietății &apos;variantă&apos;</translation>
     </message>
     <message>
-        <source>Close without saving?</source>
-        <translation type="vanished">Se închide fără salvare?</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="396"/>
         <source>Close without saving</source>
         <translation>Închide fără salvare</translation>
@@ -5980,10 +5694,6 @@ Enter keepout value:</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="397"/>
         <source>Keep working</source>
         <translation>Păstrați lucrul</translation>
-    </message>
-    <message>
-        <source>Exiting the Parts Editor now is fine, as long as you remember to finish the assignments later.</source>
-        <translation type="vanished">Este în regulă să ieșiți din editorul componentelor acum, cât timp vă reamintiți să terminați sarcinile mai târziu.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="436"/>
@@ -6200,33 +5910,9 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Copy problem</source>
-        <translation type="vanished">Problemă la copiere</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1609"/>
         <source>Unable to make a local copy of: &apos;%1&apos;</source>
         <translation>Nu se poate face o copie locală a: &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>You may use a PNG or JPG image to construct your part, but it is better to use an SVG. </source>
-        <translation type="vanished">Puteți utiliza o imagine PNG sau JPG pentru a construi componenta, dar este cel mai bine să utilizați un SVG. </translation>
-    </message>
-    <message>
-        <source>PNG and JPG images retain their nature as bitmaps and do not look good when scaled--</source>
-        <translation type="vanished">Imaginile PNG și JPG păstrează natura lor ca bitmap și nu arată bine când se scalează--</translation>
-    </message>
-    <message>
-        <source>so for Fritzing parts it is best to use PNG and JPG only as placeholders.</source>
-        <translation type="vanished">astfel pentru componentele Fritzing este cel mai bine să utilizați PNG și JPG numai ca înlocuitori.</translation>
-    </message>
-    <message>
-        <source>Use of PNG and JPG discouraged</source>
-        <translation type="vanished">Utilizarea PNG și JPG este descurajată</translation>
-    </message>
-    <message>
-        <source>Conversion problem</source>
-        <translation type="vanished">Problemă la convertire</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="949"/>
@@ -6245,10 +5931,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>Arată metadatele conectorului într-o vizualizare listă</translation>
     </message>
     <message>
-        <source>Blank not allowed</source>
-        <translation type="vanished">Gol nu este permis</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1032"/>
         <source>The value of &apos;%1&apos; can not be blank.</source>
         <translation>Valoarea a &apos;%1&apos; nu poate fi goală.</translation>
@@ -6259,17 +5941,9 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>Modificați %1 la %2</translation>
     </message>
     <message>
-        <source>Must be unique</source>
-        <translation type="vanished">Trebuie să fie unic</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1069"/>
         <source>Variant &apos;%1&apos; is in use. The variant name must be unique.</source>
         <translation>Varianta &apos;%1&apos; este în utilizare. Numele variantei trebuie să fie unic.</translation>
-    </message>
-    <message>
-        <source>Duplicate problem</source>
-        <translation type="vanished">Problemă duplicare</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1523"/>
@@ -6287,10 +5961,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>Exportați din nou fișierul SVG utilizând acele configurări și încercați să-l încărcați din nou.</translation>
     </message>
     <message>
-        <source>Fonts</source>
-        <translation type="vanished">Fonturi</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1550"/>
         <source>Fritzing currently only supports OCRA and Droid fonts--these have been substituted in for the fonts in &apos;%1&apos;</source>
         <translation>Fritzing actualmente suportă numai fonturile OCRA și Droid fonts--cu acestea au fost înlocuite fonturile din &apos;%1&apos;</translation>
@@ -6303,10 +5973,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>Nu se poate încărca fișierul imagine &apos;%1&apos;:
 
 %2</translation>
-    </message>
-    <message>
-        <source>SVG problem</source>
-        <translation type="vanished">Problemă SVG</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="365"/>
@@ -6348,26 +6014,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2352"/>
         <source>The file %2 with prefix %1 was not saved.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message numerus="yes">
-        <source>This part has %n unassigned connectors </source>
-        <translation type="vanished">
-            <numerusform>Această componentă are %n conector neatribuit </numerusform>
-            <numerusform>Această componentă are %n conectoare neatribuite </numerusform>
-            <numerusform>Această componentă are %n de conectoare neatribuite </numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>across %n views. </source>
-        <translation type="vanished">
-            <numerusform>peste %n vizualizare. </numerusform>
-            <numerusform>peste %n de vizualizări. </numerusform>
-            <numerusform>peste %n vizualizări. </numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>Until all connectors are assigned to SVG elements, the part will not work correctly. </source>
-        <translation type="vanished">Până ce toți conectorii nu sunt atribuiți elementelor SVG, componenta nu va funcționa corect. </translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="537"/>
@@ -6456,22 +6102,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>Nu se poate analiza &apos;%1&apos;: %2 linia:%3 coloana:%4</translation>
     </message>
     <message>
-        <source>There are no copper layers defined in: %1. </source>
-        <translation type="vanished">Nu sunt straturi de cupru definite în: %1. </translation>
-    </message>
-    <message>
-        <source>See &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;this explanation&lt;/a&gt;.</source>
-        <translation type="vanished">Consultați &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;this explanation&lt;/a&gt;.</translation>
-    </message>
-    <message>
-        <source>&lt;br/&gt;&lt;br/&gt;This will not be a problem in the next release of the Parts Editor, </source>
-        <translation type="vanished">&lt;br/&gt;&lt;br/&gt;Aceasta nu va mai fi o problemă în următoarea versiune a editorului componentelor, </translation>
-    </message>
-    <message>
-        <source>but for now please modify the file according to the instructions in the link.</source>
-        <translation type="vanished">dar pentru moment modificați fișierul conform instrucțiunilor din link.</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1636"/>
         <source>no schematics found in %1</source>
         <translation>nu s-au găsit scheme în %1</translation>
@@ -6542,34 +6172,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>&amp;Editare</translation>
     </message>
     <message>
-        <source>This part has bendable legs. </source>
-        <translation type="vanished">Această componentă are picioare flexibile. </translation>
-    </message>
-    <message>
-        <source>This version of the Parts Editor does not yet support editing bendable legs, and the legs may not be displayed correctly in breadboard view . </source>
-        <translation type="vanished">Această versiune a editorului componente nu suportă încă editarea picioarelor flexibile, iar picioarele pot să nu fie afișate corect în vizualizare placă testare . </translation>
-    </message>
-    <message>
-        <source>If you make changes to breadboard view, or change connector metadata, the legs may no longer work. </source>
-        <translation type="vanished">Dacă faceți modificări vizualizării placă testare, sau modificați metadatele conectorilor, picioarele nu vor mai funcționa. </translation>
-    </message>
-    <message>
-        <source>You can safely make changes to Schematic or PCB view.
-
-</source>
-        <translation type="vanished">Puteți efectua modificări în siguranță vizualizărilor Schemă sau PCB.
-
-</translation>
-    </message>
-    <message>
-        <source>This warning will not be repeated in this session of Fritzing</source>
-        <translation type="vanished">Această avertizare nu se va mai repeta în această sesiune Fritzing</translation>
-    </message>
-    <message>
-        <source>Unable to load &apos;%1&apos;. Please close the parts editor without saving and try again.</source>
-        <translation type="vanished">Nu se poate încărca &apos;%1&apos;. Închideți editorul componentelor fără să salvați și încercați din nou.</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1575"/>
         <source>Unable to load image file &apos;%1&apos;</source>
         <translation>Nu se poate încărca fișierul imagine &apos;%1&apos;</translation>
@@ -6580,10 +6182,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>Prefix nume fișier</translation>
     </message>
     <message>
-        <source>Sketch Change Warning</source>
-        <translation type="vanished">Atenționare modificare schiță</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2147"/>
         <source>The open sketch &apos;%1&apos; uses the part you are editing. </source>
         <translation>Schița deschisă &apos;%1&apos; utilizează componenta pe care-ați editat-o. </translation>
@@ -6592,22 +6190,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2148"/>
         <source>Saving this part will make a change to the sketch that cannot be undone.</source>
         <translation>Salvând această componentă se va efectua o modificare schiței care nu mai poate fi anulată.</translation>
-    </message>
-    <message>
-        <source>The open sketches </source>
-        <translation type="vanished">Schițele deschise </translation>
-    </message>
-    <message>
-        <source>&apos;%1&apos;, </source>
-        <translation type="vanished">&apos;%1&apos;, </translation>
-    </message>
-    <message>
-        <source>and &apos;%1&apos; </source>
-        <translation type="vanished">și &apos;%1&apos; </translation>
-    </message>
-    <message>
-        <source>Saving this part will make a change to these sketches that cannot be undone.</source>
-        <translation type="vanished">Salvând această componentă se va efectua o modificare acestei schițe care nu poate fi anulată.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2166"/>
@@ -6632,10 +6214,6 @@ Continuați și salvați?</translation>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2734"/>
         <source>Remove %1 connectors</source>
         <translation>Elimină %1 conectori</translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">Salvează &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2753"/>
@@ -7027,10 +6605,6 @@ Continuați și salvați?</translation>
         <translation>Editare etichete pini</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/items/paletteitem.cpp" line="620"/>
         <location filename="../src/items/paletteitem.cpp" line="631"/>
         <location filename="../src/items/paletteitem.cpp" line="655"/>
@@ -7273,10 +6847,6 @@ Continuați și salvați?</translation>
         <translation type="unfinished">Configurează eticheta pentru %1</translation>
     </message>
     <message>
-        <source>Set label for %1</source>
-        <translation type="vanished">Configurează eticheta pentru %1</translation>
-    </message>
-    <message>
         <location filename="../src/items/partlabel.cpp" line="760"/>
         <source>Label text:</source>
         <translation>Text etichetă:</translation>
@@ -7303,10 +6873,6 @@ Continuați și salvați?</translation>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="415"/>
         <source>Fritzing Bin (*%1)</source>
         <translation>Cutie Fritzing (*%1)</translation>
-    </message>
-    <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="456"/>
@@ -7350,10 +6916,6 @@ Continuați și salvați?</translation>
         <translation type="unfinished">Adaugă la cutie</translation>
     </message>
     <message>
-        <source>Save bin &quot;%1&quot;</source>
-        <translation type="vanished">Salvează cutia &quot;%1&quot;</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="584"/>
         <source>Do you want to save the changes you made in the bin &quot;%1&quot;?</source>
         <translation>Doriți să salvați modificările efectuate în cutia &quot;%1&quot;?</translation>
@@ -7367,10 +6929,6 @@ Continuați și salvați?</translation>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="590"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
-    </message>
-    <message>
-        <source>Add to bin</source>
-        <translation type="vanished">Adaugă la cutie</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="697"/>
@@ -7399,10 +6957,6 @@ Continuați și salvați?</translation>
         <location filename="../src/items/perfboard.cpp" line="186"/>
         <source>size</source>
         <translation>dimensiune</translation>
-    </message>
-    <message>
-        <source>Performance Warning</source>
-        <translation type="vanished">Atenționare performanță</translation>
     </message>
     <message>
         <location filename="../src/items/perfboard.cpp" line="296"/>
@@ -7446,14 +7000,6 @@ Notificare: această atenționare nu se va repeta în timpul acestei sesiuni.</t
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="80"/>
         <source>&lt;p&gt;&lt;h2&gt;Pin Label Editor&lt;/h2&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;h2&gt;Editor etichetă pin&lt;/h2&gt;&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Click on a label next to a pin number to rename that pin.</source>
-        <translation type="vanished">&lt;p&gt;Apăsați pe o etichetă lângă un număr pin pentru a redenumi acel pin.</translation>
-    </message>
-    <message>
-        <source>You can use the tab key to move through the labels in order.&lt;/p&gt;</source>
-        <translation type="vanished">Puteți utiliza tasta tab pentru a muta printre etichete în ordine.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="81"/>
@@ -8012,14 +7558,6 @@ This feature is enabled by default. If you need to maintain compatibility with o
         <translation type="unfinished">Cod fereastră - %1</translation>
     </message>
     <message>
-        <source>Code Window</source>
-        <translation type="vanished">Cod fereastră</translation>
-    </message>
-    <message>
-        <source>Code Window - %1</source>
-        <translation type="vanished">Cod fereastră - %1</translation>
-    </message>
-    <message>
         <location filename="../src/program/programwindow.cpp" line="499"/>
         <source>%1%2</source>
         <translation>%1%2</translation>
@@ -8369,10 +7907,6 @@ este deja acolo, nu dorim să o adăugăm iară, corect?</translation>
         <translation>Selectați %1</translation>
     </message>
     <message>
-        <source>files</source>
-        <translation type="vanished">fișiere</translation>
-    </message>
-    <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="96"/>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="148"/>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="165"/>
@@ -8714,10 +8248,6 @@ Fritzing continuă să funcționeze, dar nu veți putea să modificați propriet
         <location filename="../src/svg/x2svg.cpp" line="71"/>
         <source>failure in svg conversion 2</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>failure in svg conversion 2: %1 %2 %3</source>
-        <translation type="vanished">a eșuat conversia în svg 2: %1 %2 %3</translation>
     </message>
     <message>
         <location filename="../src/utils/fileprogressdialog.cpp" line="68"/>
@@ -9379,10 +8909,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fritzing Fab Quote</source>
-        <translation type="vanished">Citat Fritzing Fab</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/quotedialog.cpp" line="198"/>
         <source>Price per board</source>
         <translation>Preț pe tablă</translation>
@@ -9457,10 +8983,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
 </context>
 <context>
     <name>Resistor</name>
-    <message>
-        <source>Resistor</source>
-        <translation type="vanished">Rezistor</translation>
-    </message>
     <message>
         <location filename="../src/items/resistor.cpp" line="121"/>
         <source>%1 %2 Resistor</source>
@@ -9585,10 +9107,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>Ruler</name>
-    <message>
-        <source>width</source>
-        <translation type="vanished">lățime</translation>
-    </message>
     <message>
         <location filename="../src/items/ruler.cpp" line="198"/>
         <source>inch</source>
@@ -9725,10 +9243,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>SetColorDialog</name>
-    <message>
-        <source>%1 Color...</source>
-        <translation type="vanished">%1 Culoare...</translation>
-    </message>
     <message>
         <location filename="../src/dialogs/setcolordialog.cpp" line="49"/>
         <source>%1 Color...</source>
@@ -9940,21 +9454,9 @@ Netlist:
         <translation>Creați și conectați fir</translation>
     </message>
     <message>
-        <source>Rotate %2 (%1)</source>
-        <translation type="vanished">Rotește %2 (%1)</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="6302"/>
         <source>Note text change</source>
         <translation>Notă modificare text</translation>
-    </message>
-    <message>
-        <source>Rotate</source>
-        <translation type="vanished">Rotește</translation>
-    </message>
-    <message>
-        <source>Flip</source>
-        <translation type="vanished">Întoarce</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="6174"/>
@@ -9986,10 +9488,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="3838"/>
         <source>Change leg bendpoint for %1.</source>
         <translation>Schimbă piciorul bendpoint pentru %1.</translation>
-    </message>
-    <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="4140"/>
@@ -10071,10 +9569,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="7667"/>
         <source>Move label &apos;%1&apos;</source>
         <translation>Mută eticheta &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>%1 label &apos;%2&apos;</source>
-        <translation type="vanished">%1 etichetă &apos;%2&apos;</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/sketch/sketchwidget.cpp" line="7720"/>
@@ -10197,10 +9691,6 @@ The parts will be moved automatically. You can use the Undo History to review th
         <translation>Nu sunt conexiuni netrasate</translation>
     </message>
     <message>
-        <source>Unrouted connections</source>
-        <translation type="vanished">Conexiuni netrasate</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="10049"/>
         <source>%1
 
@@ -10236,14 +9726,6 @@ Notificare: puteți deasemenea să declanșați acest afișaj prin trecerea maus
         <translation>Mecanismul de schimbare este dezactivat pentru:
 
 </translation>
-    </message>
-    <message>
-        <source>and %1 other parts</source>
-        <translation type="vanished">și %1 alte componente</translation>
-    </message>
-    <message>
-        <source>and %1 other properties</source>
-        <translation type="vanished">și %1 alte proprietăți</translation>
     </message>
     <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="146"/>
@@ -10324,10 +9806,6 @@ and %1 other properties</source>
         <translation type="unfinished">Etichete rețea</translation>
     </message>
     <message>
-        <source>Net labels</source>
-        <translation type="vanished">Etichete rețea</translation>
-    </message>
-    <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="471"/>
         <source>Net labels cannot be blank</source>
         <translation>Etichetele rețea nu pot fi goale</translation>
@@ -10339,10 +9817,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="40"/>
         <source>Fritzing Tips and Tricks</source>
         <translation>Sfaturi și trucuri Fritzing</translation>
-    </message>
-    <message>
-        <source>Tips and Tricks</source>
-        <translation type="vanished">Sfaturi și trucuri</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="76"/>
@@ -10358,18 +9832,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="81"/>
         <source>parts</source>
         <translation>componente</translation>
-    </message>
-    <message>
-        <source>Can&apos;t find your part? Search for it by clicking the magnifier icon in the Parts Bin and type in some keywords</source>
-        <translation type="vanished">Nu puteți găsi componenta? Căutați-o apăsând pictograma lupă în cutia componentelor și tastați unele cuvinte cheie</translation>
-    </message>
-    <message>
-        <source>If you can&apos;t find a part in the Parts Bin, the Generic IC is your friend.  Drag it onto your sketch, then use the widgets in the Inspector to: choose from among 25 different through-hole and SMD packages; change the pin label; and--for DIPs and SIPs--change the number of pins.  You can also change the pin names with the Pin Label editor</source>
-        <translation type="vanished">Dacă nu puteți găsi o componentă în Cutia componentelor, Generic IC vă este de ajutor.  Trageți-l pe schiță, apoi utilizați controalele în inspector pentru: alegeți dintre 25 de găuri diferite și pachete SMD; modificarea etichetei pinului; și--pentru DIP-uri și SIP-uri--modificați numărul pinilor.  Puteți de asemenea schimba numele pinilor cu editorul Etichetă Pin</translation>
-    </message>
-    <message>
-        <source>An icon in the parts bin may actually represent multiple related parts.  So when you drag an icon from the parts bin into a sketch, make sure you look at the inspector.  The inspector will display the range of choices available for you to modify a part, or swap it for a related part. The parts bin icon will also be a little &apos;stack&apos; and not just a flat icon.</source>
-        <translation type="vanished">O pictogramă în cutia componentelor poate reprezenta actual mai multe componente asociate.  Astfel când trageți o pictogramă într-o schiță, asigurați-vă că ați consultat inspectorul.  Inspectorul va afișa limitele alegerilor disponibile pentru modificarea unei componente, sau schimbați la o componentă asociată. Pictograma cutiei componentelor va fi de asemenea un pic &apos;îngrămădită&apos; nu doar ca o pictogramă plată.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="85"/>
@@ -10500,10 +9962,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="145"/>
         <source>In the Parts Editor, to select a graphic underneath another graphic, use the mouse wheel while holding down the shift key.</source>
         <translation>În editorul componentelor, pentru a selecta un grafic sub un alt grafic, utilizați rotița mausului în timp ce țineți apăsată tasta Shift.</translation>
-    </message>
-    <message>
-        <source>You can use the Parts Editor to find the SVG file for a part&apos;s image for a given view. In the Parts Editor, click on the tab for that view, then use &lt;b&gt;Show in Folder&lt;/b&gt; under the &lt;b&gt;File&lt;/b&gt; Menu</source>
-        <translation type="vanished">Puteți utiliza Editorul componentelor pentru a găsi fișierul SVG pentru imaginea unei componente pentru o vizualizare dată. În editorul componentelor, apăsați pe fila pentru acea vizualizare, apoi utilizați &lt;b&gt;Arată în dosar&lt;/b&gt; din meniul &lt;b&gt;Fișier&lt;/b&gt; </translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="148"/>
@@ -10642,10 +10100,6 @@ and %1 other properties</source>
         <translation>Vă ușurează viața trasarea traseelor orizontal pe o parte a unui PCB și vertical pe cealaltă parte.</translation>
     </message>
     <message>
-        <source>Route traces in 45-degree angles to reduce noise.</source>
-        <translation type="vanished">Trasează traseele în unghi de 45 de grade pentru reducerea zgomotului.</translation>
-    </message>
-    <message>
         <location filename="../src/help/tipsandtricks.cpp" line="157"/>
         <source>If Fritzing is missing a particular part and you don&apos;t want to build one yourself, then use pin headers as connectors and the grid to align them.</source>
         <translation type="unfinished"></translation>
@@ -10661,17 +10115,9 @@ and %1 other properties</source>
         <translation>Pentru a creea o formă personalizată pentru PCB-ul dumneavoastră, importați un fișier SVG.</translation>
     </message>
     <message>
-        <source>To make a stylish Arduino shield in no time, switch the shape of the PCB from a rectangle to the Arduino</source>
-        <translation type="vanished">Pentru a face o placă de extensie Arduino stilată ca niciodată, comutați forma PCB de la dreptunghiular la Arduino</translation>
-    </message>
-    <message>
         <location filename="../src/help/tipsandtricks.cpp" line="166"/>
         <source>pcb production</source>
         <translation>producție pcb</translation>
-    </message>
-    <message>
-        <source>Smaller PCBs are more affortable than larger ones. Save space and money.</source>
-        <translation type="vanished">PCB-urile mici sunt mai accesibile decât cele mari. Salvați spațiu și bani.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="169"/>
@@ -10682,11 +10128,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="159"/>
         <source>Use copper-blocker parts to mask out areas that you want free of copper fill.</source>
         <translation>Utilizați componente blocare-cupru pentru a masca zona pe care doriți să nu fie umplută cu cupru.</translation>
-    </message>
-    <message>
-        <source>A ratsnest line (very thin &apos;wire&apos;) between connections in one view means that those connections are somehow connected in another view.</source>
-        <translatorcomment>ratsnest is not translatable yet. see: http://commons.wikimedia.org/wiki/File:Rats_nest_diagram.JPG</translatorcomment>
-        <translation type="vanished">O linie ratsnest (&apos;fir&apos; foarte subțire) între conexiuni într-o vizualizare înseamnă că acele conexiunisunt cumva conectate în altă vizualizare.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="160"/>

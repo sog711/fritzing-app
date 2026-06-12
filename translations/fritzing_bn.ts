@@ -69,10 +69,6 @@
         <translation>Jan Sieber, Yaniv Steiner, Olaf Val,</translation>
     </message>
     <message>
-        <source>Michaela Vieser and Julia Werner.</source>
-        <translation type="vanished">Michaela Vieser and Julia Werner.</translation>
-    </message>
-    <message>
         <location filename="../src/help/aboutbox.cpp" line="116"/>
         <source>Thanks for the translations go out to: </source>
         <translation>অনুবাদের জন্য ধন্যবাদ জানাই: </translation>
@@ -591,19 +587,9 @@
         <translation type="unfinished">মুছে ফেলার বক্স</translation>
     </message>
     <message>
-        <source>Delete bin</source>
-        <translatorcomment>বক্স মুছে ফেলতে</translatorcomment>
-        <translation type="vanished">মুছে ফেলার বক্স</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1166"/>
         <source>Do you really want to delete bin &apos;%1&apos;?  This action cannot be undone.</source>
         <translation>আপনি কি বিন বক্স মুছতে চান &apos;%1&apos;?..যে কাজ টি অসমাপ্ত </translation>
-    </message>
-    <message>
-        <source>Read-only bin</source>
-        <translatorcomment>বক্স টি পরতে</translatorcomment>
-        <translation type="vanished">বক্স টি পড়ার জন্য মাত্র</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1218"/>
@@ -660,12 +646,6 @@
 </context>
 <context>
     <name>Board</name>
-    <message>
-        <source>Have a look at the circle_pcb.svg file in your Fritzing installation folder at parts/svg/core/pcb/.
-
-</source>
-        <translation type="vanished"> আপনার firtzing ইনস্টলেশন ফোল্ডারে একটি করে  parts/svg/core/pcb.&apos;আর বর্ণনা আছে।</translation>
-    </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="121"/>
         <source>one layer (single-sided)</source>
@@ -831,20 +811,10 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to load</source>
-        <translatorcomment>গ্রহন করার জন্য  অপ্রস্তুত </translatorcomment>
-        <translation type="vanished">লোড করতে অক্ষম</translation>
-    </message>
-    <message>
         <location filename="../src/items/resizableboard.cpp" line="522"/>
         <source>Unable to load image from %1 %2</source>
         <translatorcomment>এবং চিত্র পুনঃধারন %১ %২ করতে অক্ষম</translatorcomment>
         <translation>এবং% 1%2 থেকে চিত্র লোড করতে অক্ষম </translation>
-    </message>
-    <message>
-        <source>Can load, but</source>
-        <translatorcomment>ধারন সস্মব কিন্তু</translatorcomment>
-        <translation type="vanished">&apos;লোড করতে পারে, কিন্তু</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="530"/>
@@ -1203,10 +1173,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">ফ্রিটজিং</translation>
-    </message>
-    <message>
         <location filename="../src/autoroute/drc.cpp" line="284"/>
         <source>Fritzing</source>
         <comment>dialog title</comment>
@@ -1278,10 +1244,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 <context>
     <name>DebugDialog</name>
     <message>
-        <source>for debugging</source>
-        <translation type="vanished">ডিবাগ করার জন্য</translation>
-    </message>
-    <message>
         <location filename="../src/debugdialog.cpp" line="138"/>
         <source>for debugging</source>
         <comment>dialog title</comment>
@@ -1343,10 +1305,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>FApplication</name>
-    <message>
-        <source>Fritzing failure</source>
-        <translation type="vanished">ফ্রিটজিং ব্যর্থ</translation>
-    </message>
     <message>
         <location filename="../src/fapplication.cpp" line="1860"/>
         <location filename="../src/fapplication.cpp" line="1868"/>
@@ -1479,10 +1437,6 @@ Would you like to regenerate the parts database?
         <translation type="unfinished">ফ্রিটজিং</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">ফ্রিটজিং</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/fabuploaddialog.cpp" line="161"/>
         <source>Error: </source>
         <translation type="unfinished"></translation>
@@ -1490,10 +1444,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FabUploadProgress</name>
-    <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">ফ্রিটজিং</translation>
-    </message>
     <message>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="181"/>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="211"/>
@@ -1516,10 +1466,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FirstTimeHelpDialog</name>
-    <message>
-        <source>First Time Help</source>
-        <translation type="obsolete">প্রাথমিক সহায়তা </translation>
-    </message>
     <message>
         <location filename="../src/help/firsttimehelpdialog.cpp" line="37"/>
         <source>First Time Help</source>
@@ -1572,10 +1518,6 @@ Would you like to regenerate the parts database?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>%1 - %2</source>
-        <translation type="vanished">%1 - %2</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="132"/>
         <source>Specify a file name</source>
         <translation>একটি ফাইলের নাম উল্লেখ</translation>
@@ -1589,10 +1531,6 @@ Would you like to regenerate the parts database?
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="229"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">সঞ্চয় &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="238"/>
@@ -1874,15 +1812,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>তার</translation>
     </message>
     <message>
-        <source>Ratsnest line</source>
-        <translation type="vanished">Ratsnest তার</translation>
-    </message>
-    <message>
-        <source>Trace wire %1</source>
-        <translatorcomment>ট্রেস  তার %1</translatorcomment>
-        <translation type="vanished">ট্র্যাক তার %1</translation>
-    </message>
-    <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="792"/>
         <source>v. %1 %2</source>
         <translation>v. %1 %2</translation>
@@ -1912,10 +1841,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
 <context>
     <name>ItemBase</name>
     <message>
-        <source>family</source>
-        <translation type="vanished">এর ধরন</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="223"/>
         <source>type</source>
         <translatorcomment>রকম</translatorcomment>
@@ -1935,10 +1860,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="226"/>
         <source>color</source>
         <translation>রং</translation>
-    </message>
-    <message>
-        <source>resistance</source>
-        <translation type="vanished">রেজিস টেন্স</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="228"/>
@@ -1969,10 +1890,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="233"/>
         <source>pin spacing</source>
         <translation>মূল জায়গায় </translation>
-    </message>
-    <message>
-        <source>rated power</source>
-        <translation type="vanished">পাওয়ার রেট</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="222"/>
@@ -2175,10 +2092,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="264"/>
         <source>silkscreen top</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Part</source>
-        <translation type="vanished"> পার্টস </translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="1336"/>
@@ -2438,10 +2351,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <source>Unrouted connections</source>
         <comment>dialog title</comment>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save %1</source>
-        <translation type="vanished">সঞ্চয় %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1570"/>
@@ -2754,11 +2663,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>%1 - [%2]</translation>
     </message>
     <message>
-        <source>No copper top layer</source>
-        <translatorcomment>উপরের স্তর এ কোন তামা নাই </translatorcomment>
-        <translation type="vanished">উপরে লেয়ারে কোণ কপার নাই</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2598"/>
         <source>The copper top (copper 1) layer is not available on a one-sided board.  Please switch the board to double-sided or choose the copper bottom (copper 0) layer.</source>
         <translation>উপলুব্ধ একতরফা তামা (copper1)বোর্ড টি হয়নি অনুগ্রহ করে দুই পাস  তামার বোর্ড আনতে(copper0)নির্বাচন করুন।</translation>
@@ -2889,11 +2793,6 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unrouted connections</source>
-        <translatorcomment>অসংযুক্ত রাস্তা</translatorcomment>
-        <translation type="vanished">অসংযুক্ত সংযোগ </translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3225"/>
         <source>There are no unrouted connections in this view.</source>
         <translatorcomment>এখানে অসংযুক্ত রাস্তার চিত্র দেখা</translatorcomment>
@@ -2920,14 +2819,6 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Inspector</source>
-        <translation type="vanished">পরিদর্শক</translation>
-    </message>
-    <message>
-        <source>Undo History</source>
-        <translation type="vanished">পূর্বের ইতিহাস</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="581"/>
         <source>Breadboard</source>
         <translation>ব্রেডবোর্ড </translation>
@@ -2942,14 +2833,6 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <source>PCB</source>
         <translatorcomment>PCB</translatorcomment>
         <translation>পি সি বি </translation>
-    </message>
-    <message>
-        <source>Layers</source>
-        <translation type="vanished">স্তর সমূহ</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t get the dock widget</source>
-        <translation type="vanished">ডক কোন উইজেট পাইনি</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="120"/>
@@ -3026,11 +2909,6 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4157"/>
         <source>Cancel</source>
         <translation>বাতিল</translation>
-    </message>
-    <message>
-        <source>Choose a folder for exporting</source>
-        <translatorcomment>রপ্তানির জন্য  একটি ফোল্ডার নির্বাচন করুন </translatorcomment>
-        <translation type="vanished">পরীক্ষণের জন্য একটি ফোল্ডার নির্বাচন করুন </translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="340"/>
@@ -3402,11 +3280,6 @@ We&apos;re working to avoid this message, and only let you choose between proper
 %2.</source>
         <translation>1  ফাইলটি পড়তে পারচ্ছে না %1:
 %2</translation>
-    </message>
-    <message>
-        <source>Revert?</source>
-        <translatorcomment>প্রত্যাবর্তন?</translatorcomment>
-        <translation type="vanished">প্রত্যাবর্তন ?</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="274"/>
@@ -4687,10 +4560,6 @@ Would you like to convert &apos;%1&apos; to the new standard now or open the fil
         <translation> মুছুন </translation>
     </message>
     <message>
-        <source>Actual Size</source>
-        <translation type="vanished">আসল  সাইজ </translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2312"/>
         <source>It doesn&apos;t seem to be possible to automatically determine the actual physical size of the monitor, so &apos;actual size&apos; as currently implemented is only a guess. Your best bet would be to drag out a ruler part, then place a real (physical) ruler on top and zoom until they match up.</source>
         <translation> মনিটর এর প্রকৃত মাপ সয়ংক্রিয় ভাবে বের করা মনে হয় সম্ভব না এই জন্য প্রকৃত মাপ আনুমানিক ধরে নেওয়া হয়েছে। ভালো বুদ্ধি হচ্ছে একটা রুলার ধরে বসান এবং তারপর একটা আসল রুলার এর সাথে মিলাতে থাকুন (লম্বায় টেনে টেনে) যতক্ষণ পর্যন্ত না মিলে।</translation>
@@ -5460,17 +5329,6 @@ Continue upload?</source>
 <context>
     <name>ModelBase</name>
     <message numerus="yes">
-        <source>Unable to find the following %n part(s):</source>
-        <translation type="vanished">
-            <numerusform>নিম্নলিখিত%n পার্টস গুলিকে খুঁজে পাওয়া যায়নি:</numerusform>
-            <numerusform></numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>at</source>
-        <translation type="vanished">এতে</translation>
-    </message>
-    <message numerus="yes">
         <location filename="../src/model/modelbase.cpp" line="421"/>
         <source>Unable to find %n part(s). Click &apos;Show Details&apos; for a list of missing parts.</source>
         <translation type="unfinished">
@@ -5641,11 +5499,6 @@ Reason: %2 (errcode %3)</source>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="202"/>
         <source>Create Trace from Ratsnest</source>
         <translation>Ratsnest থেকে ট্রেস তৈরি</translation>
-    </message>
-    <message>
-        <source>Fritzing</source>
-        <translatorcomment>Fritzing</translatorcomment>
-        <translation type="vanished">ফ্রিটজিং</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="256"/>
@@ -5824,10 +5677,6 @@ Enter keepout value:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ground Fill</source>
-        <translation type="obsolete">গ্রাউনড ফিল</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1761"/>
         <source>Copper fill: please select only the board you want to fill.</source>
         <translation type="unfinished"></translation>
@@ -5938,10 +5787,6 @@ Enter keepout value:</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="571"/>
         <source>On the desktop, open the folder containing the current svg file.</source>
         <translation>ডেক্সটপ অন করুন,বর্তমান ফোল্ডার svgফাইল সংযোগ করুন </translation>
-    </message>
-    <message>
-        <source>Parts Editor</source>
-        <translation type="vanished">পার্টস এডিটর </translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="905"/>
@@ -6125,50 +5970,14 @@ Enter keepout value:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Copy problem</source>
-        <translation type="vanished">কপিতে সমস্যা </translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1609"/>
         <source>Unable to make a local copy of: &apos;%1&apos;</source>
         <translation>লোকাল কপি  করা অসম্ভব  &apos;%1&apos;</translation>
     </message>
     <message>
-        <source>PNG and JPG images retain their nature as bitmaps and do not look good when scaled--</source>
-        <translation type="vanished">JPGএবং PNG বিটম্যাপ ইমেজ চরিত্র বজায় রাখে,যখন কমে আসবে  তখন ভাল দেখাবে না --</translation>
-    </message>
-    <message>
-        <source>so for Fritzing parts it is best to use PNG and JPG only as placeholders.</source>
-        <translation type="vanished">Fritzing পার্টস স্থানধারক হিসাবে আমাদের  জন্য শ্রেষ্ঠ শুধুমাত্র JPGএবং PNG  ব্যবহার.</translation>
-    </message>
-    <message>
-        <source>Use of PNG and JPG discouraged</source>
-        <translation type="vanished">JPG, PNG এবং ব্যবহার বাঞ্ছনীয়</translation>
-    </message>
-    <message>
-        <source>Conversion problem</source>
-        <translation type="vanished">সমস্যার পরিবর্তন </translation>
-    </message>
-    <message>
-        <source>SVG problem</source>
-        <translation type="vanished">SVG সমস্যা</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1582"/>
         <source>Unable to parse &apos;%1&apos;: %2 line:%3 column:%4</source>
         <translation>প্রেস করা অসম্ভবঃ&apos;%1&apos;: %2 লাইনঃ%3 কলামঃ%4 </translation>
-    </message>
-    <message>
-        <source>There are no copper layers defined in: %1. </source>
-        <translation type="vanished">এতে কোন কপার লেয়ার পাওয়া যায়নাই  %1. </translation>
-    </message>
-    <message>
-        <source>See &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;this explanation&lt;/a&gt;.</source>
-        <translation type="vanished">এখানে দেখুন &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;বিস্তারিত আছে &lt;/a&gt;.</translation>
-    </message>
-    <message>
-        <source>&lt;br/&gt;&lt;br/&gt;This will not be a problem in the next release of the Parts Editor, </source>
-        <translation type="vanished">&lt;br/&gt;&lt;br/&gt;এতে সমস্যা নাই পরবর্তী রিলিজে এডিটর সমস্যার সৃষ্টি হতে পারে,&apos; </translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1636"/>
@@ -6480,10 +6289,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sketch Change Warning</source>
-        <translation type="vanished">স্কেচ পরিবর্তন সংকেত </translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2147"/>
         <source>The open sketch &apos;%1&apos; uses the part you are editing. </source>
         <translatorcomment>খুলুন স্কেচ &apos;% 1&apos; অংশ হয় তাহলে সম্পাদিত ব্যবহার করা. &apos;</translatorcomment>
@@ -6493,22 +6298,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2148"/>
         <source>Saving this part will make a change to the sketch that cannot be undone.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The open sketches </source>
-        <translation type="vanished">এই নকশাগুলি খুলতে </translation>
-    </message>
-    <message>
-        <source>&apos;%1&apos;, </source>
-        <translation type="vanished">&apos;%1&apos;,</translation>
-    </message>
-    <message>
-        <source>and &apos;%1&apos; </source>
-        <translation type="vanished">এবং &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>Saving this part will make a change to these sketches that cannot be undone.</source>
-        <translation type="vanished">এই অংশ সংরক্ষণ করুন স্কেস পরিবর্তনের পর তা পূর্বাবস্তায় আনা যাবে না </translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2166"/>
@@ -6544,10 +6333,6 @@ Go ahead and save?</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2734"/>
         <source>Remove %1 connectors</source>
         <translation>কানেক্টরস সরিয়ে ফেলতে %1 </translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">সঞ্চয় %1</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2753"/>
@@ -6909,11 +6694,6 @@ Go ahead and save?</source>
         <translation>পিন লেভেল নির্ধারণ</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translatorcomment>Fritzing</translatorcomment>
-        <translation type="vanished">ফ্রিটজিং</translation>
-    </message>
-    <message>
         <location filename="../src/items/paletteitem.cpp" line="620"/>
         <location filename="../src/items/paletteitem.cpp" line="631"/>
         <location filename="../src/items/paletteitem.cpp" line="655"/>
@@ -7160,10 +6940,6 @@ Go ahead and save?</source>
         <translation type="unfinished">লেভেল সেটের জন্য %1</translation>
     </message>
     <message>
-        <source>Set label for %1</source>
-        <translation type="vanished">লেভেল সেটের জন্য %1</translation>
-    </message>
-    <message>
         <location filename="../src/items/partlabel.cpp" line="760"/>
         <source>Label text:</source>
         <translation>টেক্সট লেভেল </translation>
@@ -7211,10 +6987,6 @@ Go ahead and save?</source>
         <translation type="unfinished">বিন যুক্ত করুন </translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">ফ্রিটজিং</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="457"/>
         <source>Cannot find file %1.</source>
         <translation>ফাইল খুজে পাচ্ছে না %1.</translation>
@@ -7236,10 +7008,6 @@ Go ahead and save?</source>
         <translation>লোডিং বিন %1 </translation>
     </message>
     <message>
-        <source>Save bin &quot;%1&quot;</source>
-        <translation type="vanished">সঞ্চয় বিন বক্স </translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="584"/>
         <source>Do you want to save the changes you made in the bin &quot;%1&quot;?</source>
         <translation>আপনি কি পরিবর্তন বিন তৈরি &quot;% 1&quot; সংরক্ষণ করতে চান?</translation>
@@ -7253,10 +7021,6 @@ Go ahead and save?</source>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="590"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
-    </message>
-    <message>
-        <source>Add to bin</source>
-        <translation type="vanished">বিন যুক্ত করুন </translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="697"/>
@@ -7290,11 +7054,6 @@ Go ahead and save?</source>
         <location filename="../src/items/perfboard.cpp" line="253"/>
         <source>set board size</source>
         <translation>বোর্ড আকার সেট </translation>
-    </message>
-    <message>
-        <source>Performance Warning</source>
-        <translatorcomment>কর্মক্ষমতা সতর্কতা </translatorcomment>
-        <translation type="vanished">কর্মক্ষম সতর্কতা </translation>
     </message>
     <message>
         <location filename="../src/items/perfboard.cpp" line="296"/>
@@ -7333,14 +7092,6 @@ Note: this warning will not be repeated during this session.</source>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="80"/>
         <source>&lt;p&gt;&lt;h2&gt;Pin Label Editor&lt;/h2&gt;&lt;/p&gt;</source>
         <translation>&lt;P&gt;&lt;H2&gt;পিন লাবেল সম্পাদক &lt;/h2&gt;&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Click on a label next to a pin number to rename that pin.</source>
-        <translation type="vanished">&lt;P&gt;একটি লাবেল  এর ওপর  ক্লিক করুন  পরবর্তী একটি পিনযে পিন  নতুন নামকরন করা </translation>
-    </message>
-    <message>
-        <source>You can use the tab key to move through the labels in order.&lt;/p&gt;</source>
-        <translation type="vanished">আপনি লাবেল মাধ্যম সরাতে ট্যাব কী ব্যবহার করতেপারেন &lt;/P&gt;</translation>
     </message>
     <message>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="81"/>
@@ -8349,10 +8100,6 @@ is already there, we won&apos;t add it again, right?</source>
         <translation>সংযোগকারী এর বিবরণ সেট</translation>
     </message>
     <message>
-        <source>files</source>
-        <translation type="vanished">ফাইল গুলি</translation>
-    </message>
-    <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="96"/>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="148"/>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="165"/>
@@ -9319,10 +9066,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
 <context>
     <name>Resistor</name>
     <message>
-        <source>Resistor</source>
-        <translation type="vanished">রোধ</translation>
-    </message>
-    <message>
         <location filename="../src/items/resistor.cpp" line="121"/>
         <source>%1 %2 Resistor</source>
         <translation type="unfinished"></translation>
@@ -9447,11 +9190,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>Ruler</name>
-    <message>
-        <source>width</source>
-        <translatorcomment>প্রস্থ  </translatorcomment>
-        <translation type="vanished">প্রশস্ততা</translation>
-    </message>
     <message>
         <location filename="../src/items/ruler.cpp" line="198"/>
         <source>inch</source>
@@ -9836,10 +9574,6 @@ Netlist:
         <translation>এবং তারের সাথেসংযোগ তৈরি করতে </translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">ফ্রিটজিং</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="4140"/>
         <source>This seems like an attempt to create a trace across layers. This circumstance should not arise: please contact the developers.</source>
         <translation>মনে হয় layeerজুড়ে ট্রেসতৈরি করতে এই circulamstanceআবশ্যক।কোন developper সাথে যোগাযোগ করুন.</translation>
@@ -9861,10 +9595,6 @@ Netlist:
         <source>trace</source>
         <translatorcomment>গমনপথ </translatorcomment>
         <translation>ট্রেস</translation>
-    </message>
-    <message>
-        <source>Rotate %2 (%1)</source>
-        <translation type="vanished">আবর্তিত%2 (%1)</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="5094"/>
@@ -9925,19 +9655,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="7667"/>
         <source>Move label &apos;%1&apos;</source>
         <translation>লেভেলটি সরাতে %1</translation>
-    </message>
-    <message>
-        <source>%1 label &apos;%2&apos;</source>
-        <translation type="vanished">%1লেভেলটি%2</translation>
-    </message>
-    <message>
-        <source>Rotate</source>
-        <translation type="vanished">চক্রাকার</translation>
-    </message>
-    <message>
-        <source>Flip</source>
-        <translatorcomment>ফ্লীপ</translatorcomment>
-        <translation type="vanished">টোকা</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/sketch/sketchwidget.cpp" line="7720"/>
@@ -10084,10 +9801,6 @@ The parts will be moved automatically. You can use the Undo History to review th
         <translation>এখানে কোন unrouted সংযোগ নাই </translation>
     </message>
     <message>
-        <source>Unrouted connections</source>
-        <translation type="vanished">Unrouted সংযোগটি</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="10049"/>
         <source>%1
 
@@ -10195,10 +9908,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="40"/>
         <source>Fritzing Tips and Tricks</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tips and Tricks</source>
-        <translation type="vanished">টিপস এবং ট্রিকস</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="76"/>

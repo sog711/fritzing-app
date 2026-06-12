@@ -1119,10 +1119,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/autoroute/drc.cpp" line="284"/>
         <source>Fritzing</source>
         <comment>dialog title</comment>
@@ -1383,10 +1379,6 @@ Would you like to regenerate the parts database?
         <translation type="unfinished">Fritzing</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/fabuploaddialog.cpp" line="161"/>
         <source>Error: </source>
         <translation type="unfinished"></translation>
@@ -1394,10 +1386,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FabUploadProgress</name>
-    <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
     <message>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="181"/>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="211"/>
@@ -1466,17 +1454,9 @@ Would you like to regenerate the parts database?
         <translation type="unfinished">Simpan &quot;%1&quot;</translation>
     </message>
     <message>
-        <source>%1 - %2</source>
-        <translation type="vanished">%1 - %2</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="132"/>
         <source>Specify a file name</source>
         <translation>Tentukan nama file</translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">Simpan &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="238"/>
@@ -1787,10 +1767,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
 <context>
     <name>ItemBase</name>
     <message>
-        <source>family</source>
-        <translation type="vanished">keluarga</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="223"/>
         <source>type</source>
         <translation>tipe</translation>
@@ -2026,14 +2002,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="2065"/>
         <source>This part is obsolete and has been replaced.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>top</source>
-        <translation type="vanished">atas</translation>
-    </message>
-    <message>
-        <source>bottom</source>
-        <translation type="vanished">bawah</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="263"/>
@@ -2290,10 +2258,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <source>Unrouted connections</source>
         <comment>dialog title</comment>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save %1</source>
-        <translation type="vanished">Simpan %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1571"/>
@@ -5405,10 +5369,6 @@ Reason: %2 (errcode %3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="257"/>
         <source>Your sketch does not have a board yet! Please add a PCB to use this selection operation.</source>
         <translation type="unfinished"></translation>
@@ -6193,10 +6153,6 @@ Go ahead and save?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="obsolete">Simpan &quot;%1&quot;</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2753"/>
         <source>Do you want to save the changes you made in the part &quot;%1&quot;?</source>
         <translation type="unfinished"></translation>
@@ -6586,10 +6542,6 @@ Go ahead and save?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/items/paletteitem.cpp" line="620"/>
         <location filename="../src/items/paletteitem.cpp" line="631"/>
         <location filename="../src/items/paletteitem.cpp" line="655"/>
@@ -6877,10 +6829,6 @@ Go ahead and save?</source>
         <source>Add to bin</source>
         <comment>dialog title</comment>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="457"/>
@@ -9069,10 +9017,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 <context>
     <name>Ruler</name>
     <message>
-        <source>width</source>
-        <translation type="vanished">lebar</translation>
-    </message>
-    <message>
         <location filename="../src/items/ruler.cpp" line="198"/>
         <source>inch</source>
         <translation type="unfinished"></translation>
@@ -9444,10 +9388,6 @@ Netlist:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="4140"/>
         <source>This seems like an attempt to create a trace across layers. This circumstance should not arise: please contact the developers.</source>
         <translation type="unfinished"></translation>
@@ -9537,14 +9477,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="7667"/>
         <source>Move label &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rotate</source>
-        <translation type="obsolete">Putar</translation>
-    </message>
-    <message>
-        <source>Flip</source>
-        <translation type="obsolete">Balikkan</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/sketch/sketchwidget.cpp" line="7720"/>

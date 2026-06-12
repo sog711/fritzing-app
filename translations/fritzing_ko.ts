@@ -69,10 +69,6 @@
         <translation>Jan Sieber, Yaniv Steiner, Olaf Val, </translation>
     </message>
     <message>
-        <source>Michaela Vieser and Julia Werner.</source>
-        <translation type="vanished">Michaela Vieser and Julia Werner.</translation>
-    </message>
-    <message>
         <location filename="../src/help/aboutbox.cpp" line="116"/>
         <source>Thanks for the translations go out to: </source>
         <translation type="unfinished"></translation>
@@ -561,17 +557,9 @@
         <translation type="unfinished">저장소 삭제</translation>
     </message>
     <message>
-        <source>Delete bin</source>
-        <translation type="vanished">저장소 삭제</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1166"/>
         <source>Do you really want to delete bin &apos;%1&apos;?  This action cannot be undone.</source>
         <translation>저장소 &apos;%1&apos;를 삭제하시겠습니까?  이 작업은 실행 취소할 수 없습니다.</translation>
-    </message>
-    <message>
-        <source>Read-only bin</source>
-        <translation type="vanished">읽기 전용 저장소</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1218"/>
@@ -772,10 +760,6 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
         <location filename="../src/items/resizableboard.cpp" line="451"/>
         <source>&lt;br/&gt;However, the cutouts may not be formatted correctly.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to load</source>
-        <translation type="obsolete">불러올 수 없습니다</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="522"/>
@@ -1135,10 +1119,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/autoroute/drc.cpp" line="284"/>
         <source>Fritzing</source>
         <comment>dialog title</comment>
@@ -1210,10 +1190,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 <context>
     <name>DebugDialog</name>
     <message>
-        <source>for debugging</source>
-        <translation type="vanished">디버깅</translation>
-    </message>
-    <message>
         <location filename="../src/debugdialog.cpp" line="138"/>
         <source>for debugging</source>
         <comment>dialog title</comment>
@@ -1272,10 +1248,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>FApplication</name>
-    <message>
-        <source>Fritzing failure</source>
-        <translation type="vanished">Fritzing 에러</translation>
-    </message>
     <message>
         <location filename="../src/fapplication.cpp" line="1860"/>
         <location filename="../src/fapplication.cpp" line="1868"/>
@@ -1407,10 +1379,6 @@ Would you like to regenerate the parts database?
         <translation type="unfinished">Fritzing</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/fabuploaddialog.cpp" line="161"/>
         <source>Error: </source>
         <translation type="unfinished"></translation>
@@ -1418,10 +1386,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FabUploadProgress</name>
-    <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
     <message>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="181"/>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="211"/>
@@ -1444,10 +1408,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FirstTimeHelpDialog</name>
-    <message>
-        <source>First Time Help</source>
-        <translation type="obsolete">첫번째 도움말</translation>
-    </message>
     <message>
         <location filename="../src/help/firsttimehelpdialog.cpp" line="37"/>
         <source>First Time Help</source>
@@ -1494,17 +1454,9 @@ Would you like to regenerate the parts database?
         <translation type="unfinished">저장 &quot;%1&quot;</translation>
     </message>
     <message>
-        <source>%1 - %2</source>
-        <translation type="vanished">%1 - %2</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="132"/>
         <source>Specify a file name</source>
         <translation>파일이름을 지정하세요</translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">저장 &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="238"/>
@@ -1787,10 +1739,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>와이어</translation>
     </message>
     <message>
-        <source>Trace wire %1</source>
-        <translation type="vanished">트레이스 와이어 %1</translation>
-    </message>
-    <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="792"/>
         <source>v. %1 %2</source>
         <translation type="unfinished">v. %1 %2</translation>
@@ -1819,10 +1767,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
 <context>
     <name>ItemBase</name>
     <message>
-        <source>family</source>
-        <translation type="vanished">패밀리</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="223"/>
         <source>type</source>
         <translation>종류</translation>
@@ -1841,10 +1785,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="226"/>
         <source>color</source>
         <translation>색상</translation>
-    </message>
-    <message>
-        <source>resistance</source>
-        <translation type="vanished">저항값</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="228"/>
@@ -1875,10 +1815,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="233"/>
         <source>pin spacing</source>
         <translation>핀 간격</translation>
-    </message>
-    <message>
-        <source>rated power</source>
-        <translation type="vanished">정격 출력</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="222"/>
@@ -2076,10 +2012,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="264"/>
         <source>silkscreen top</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Part</source>
-        <translation type="vanished">부품</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="1336"/>
@@ -2333,10 +2265,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <source>Unrouted connections</source>
         <comment>dialog title</comment>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save %1</source>
-        <translation type="vanished">%1 저장</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1571"/>
@@ -2865,10 +2793,6 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4157"/>
         <source>Cancel</source>
         <translation>취소</translation>
-    </message>
-    <message>
-        <source>Choose a folder for exporting</source>
-        <translation type="vanished">내보낼 폴더 선택</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="340"/>
@@ -5123,14 +5047,6 @@ Please check all views for potential side-effects.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Inspector</source>
-        <translation type="obsolete">인스펙터</translation>
-    </message>
-    <message>
-        <source>Undo History</source>
-        <translation type="obsolete">실행취소 이력</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="581"/>
         <source>Breadboard</source>
         <translation type="unfinished">브레드보드</translation>
@@ -5144,14 +5060,6 @@ Please check all views for potential side-effects.</source>
         <location filename="../src/mainwindow/mainwindow.cpp" line="599"/>
         <source>PCB</source>
         <translation type="unfinished">PCB</translation>
-    </message>
-    <message>
-        <source>Layers</source>
-        <translation type="obsolete">레이어</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t get the dock widget</source>
-        <translation type="obsolete">독 위젯을 열 수 없습니다</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="64"/>
@@ -5293,16 +5201,6 @@ Please check all views for potential side-effects.</source>
 </context>
 <context>
     <name>ModelBase</name>
-    <message numerus="yes">
-        <source>Unable to find the following %n part(s):</source>
-        <translation type="vanished">
-            <numerusform>다음의 %n 부품(들)을 찾을 수 없습니다:</numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>at</source>
-        <translation type="vanished">at</translation>
-    </message>
     <message numerus="yes">
         <location filename="../src/model/modelbase.cpp" line="421"/>
         <source>Unable to find %n part(s). Click &apos;Show Details&apos; for a list of missing parts.</source>
@@ -5485,10 +5383,6 @@ Reason: %2 (errcode %3)</source>
         <translation>트레이스층을 변경하기</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="257"/>
         <source>Your sketch does not have a board yet! Please add a PCB to use this selection operation.</source>
         <translation type="unfinished"></translation>
@@ -5660,10 +5554,6 @@ Enter keepout value:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ground Fill</source>
-        <translation type="obsolete">그라운드 필</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1767"/>
         <source>Unable to create copper fill--probably the part wasn&apos;t dropped onto the PCB.</source>
         <translation>Copper fill을 생성할 수 없습니다--아마도 부품이 PCB위에 있지 않은 것 같습니다.</translation>
@@ -5734,10 +5624,6 @@ Enter keepout value:</source>
 </context>
 <context>
     <name>PEMainWindow</name>
-    <message>
-        <source>Parts Editor</source>
-        <translation type="obsolete">부품 편집기</translation>
-    </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="524"/>
         <source>SVG</source>
@@ -6017,10 +5903,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Conversion problem</source>
-        <translation type="obsolete">변환 문제</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="949"/>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2959"/>
         <source>Fritzing (New) Parts Editor</source>
@@ -6283,10 +6165,6 @@ Go ahead and save?</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2734"/>
         <source>Remove %1 connectors</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="obsolete">저장 &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2753"/>
@@ -6678,10 +6556,6 @@ Go ahead and save?</source>
         <translation>핀 라벨 편집</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/items/paletteitem.cpp" line="620"/>
         <location filename="../src/items/paletteitem.cpp" line="631"/>
         <location filename="../src/items/paletteitem.cpp" line="655"/>
@@ -6924,10 +6798,6 @@ Go ahead and save?</source>
         <translation type="unfinished">%1의 라벨 설정</translation>
     </message>
     <message>
-        <source>Set label for %1</source>
-        <translation type="vanished">%1의 라벨 설정</translation>
-    </message>
-    <message>
         <location filename="../src/items/partlabel.cpp" line="760"/>
         <source>Label text:</source>
         <translation>라벨 텍스트:</translation>
@@ -6975,10 +6845,6 @@ Go ahead and save?</source>
         <translation type="unfinished">저장소에 추가</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="457"/>
         <source>Cannot find file %1.</source>
         <translation>%1 파일을 찾을 수 없습니다.</translation>
@@ -7001,10 +6867,6 @@ Go ahead and save?</source>
         <translation>저장소 불러오기 &apos;%1&apos;</translation>
     </message>
     <message>
-        <source>Save bin &quot;%1&quot;</source>
-        <translation type="vanished">저장소 저장 &quot;%1&quot;</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="584"/>
         <source>Do you want to save the changes you made in the bin &quot;%1&quot;?</source>
         <translation>수정사항을 저장소 &quot;%1&quot;에 저장을 원하십니까?</translation>
@@ -7018,10 +6880,6 @@ Go ahead and save?</source>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="590"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
-    </message>
-    <message>
-        <source>Add to bin</source>
-        <translation type="vanished">저장소에 추가</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="697"/>
@@ -7091,14 +6949,6 @@ Note: this warning will not be repeated during this session.</source>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="80"/>
         <source>&lt;p&gt;&lt;h2&gt;Pin Label Editor&lt;/h2&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;h2&gt;핀 라벨 편집기&lt;/h2&gt;&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Click on a label next to a pin number to rename that pin.</source>
-        <translation type="vanished">&lt;p&gt;이름을 변경할 핀 번호옆의 라벨을 클릭하세요.</translation>
-    </message>
-    <message>
-        <source>You can use the tab key to move through the labels in order.&lt;/p&gt;</source>
-        <translation type="vanished">탭 키를 누르면 순서대로 라벨들을 이동할 수 있습니다.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="81"/>
@@ -8029,10 +7879,6 @@ is already there, we won&apos;t add it again, right?</source>
         <translation>선택 %1</translation>
     </message>
     <message>
-        <source>files</source>
-        <translation type="vanished">파일</translation>
-    </message>
-    <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="96"/>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="148"/>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="165"/>
@@ -8476,10 +8322,6 @@ Fritzing은 여전히 ​​작동하지만 부품 속성을 변경할 수 없�
         <location filename="../src/svg/x2svg.cpp" line="71"/>
         <source>failure in svg conversion 2</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>failure in svg conversion 2: %1 %2 %3</source>
-        <translation type="vanished">svg 변환 실패 2: %1 %2 %3</translation>
     </message>
     <message>
         <location filename="../src/utils/fileprogressdialog.cpp" line="68"/>
@@ -9197,10 +9039,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 <context>
     <name>Ruler</name>
     <message>
-        <source>width</source>
-        <translation type="vanished">폭</translation>
-    </message>
-    <message>
         <location filename="../src/items/ruler.cpp" line="198"/>
         <source>inch</source>
         <translation type="unfinished"></translation>
@@ -9572,10 +9410,6 @@ Netlist:
         <translation>와이어를 생성 및 연결</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="4140"/>
         <source>This seems like an attempt to create a trace across layers. This circumstance should not arise: please contact the developers.</source>
         <translation type="unfinished">다른 레이어로 트레이스를 생성하려고 한 것 같습니다. 이런 상황은 발생해서는 안됩니다. 개발자에게 연락바랍니다.</translation>
@@ -9594,10 +9428,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="4147"/>
         <source>trace</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rotate %2 (%1)</source>
-        <translation type="vanished">%2를 회전 (%1)</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="5094"/>
@@ -9658,18 +9488,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="7667"/>
         <source>Move label &apos;%1&apos;</source>
         <translation>&apos;%1&apos;라벨 이동</translation>
-    </message>
-    <message>
-        <source>%1 label &apos;%2&apos;</source>
-        <translation type="vanished">%1 라벨 &apos;%2&apos;</translation>
-    </message>
-    <message>
-        <source>Rotate</source>
-        <translation type="vanished">회전</translation>
-    </message>
-    <message>
-        <source>Flip</source>
-        <translation type="vanished">뒤집기</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/sketch/sketchwidget.cpp" line="7720"/>
@@ -9918,10 +9736,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="40"/>
         <source>Fritzing Tips and Tricks</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tips and Tricks</source>
-        <translation type="vanished">팁과 트릭</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="76"/>

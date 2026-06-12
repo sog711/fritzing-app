@@ -69,10 +69,6 @@
         <translation>Jan Sieber, Yaniv Steiner, Olaf Val, </translation>
     </message>
     <message>
-        <source>Michaela Vieser and Julia Werner.</source>
-        <translation type="vanished">Michaela Vieser и Julia Werner.</translation>
-    </message>
-    <message>
         <location filename="../src/help/aboutbox.cpp" line="116"/>
         <source>Thanks for the translations go out to: </source>
         <translation>Благодаря за преводите на: </translation>
@@ -551,17 +547,9 @@
         <translation>Търсене на част в схимата</translation>
     </message>
     <message>
-        <source>Delete bin</source>
-        <translation type="vanished">Изтриване на набора</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1166"/>
         <source>Do you really want to delete bin &apos;%1&apos;?  This action cannot be undone.</source>
         <translation>Наистина ли искате да изтриете набора „%1“?  Това действие е необратимо.</translation>
-    </message>
-    <message>
-        <source>Read-only bin</source>
-        <translation type="vanished">Набор позволяващ само четене</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1218"/>
@@ -583,10 +571,6 @@
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1226"/>
         <source>Please choose a name for the bin:</source>
         <translation>Моля, изберете име за набора:</translation>
-    </message>
-    <message>
-        <source>Remove from Bin</source>
-        <translation type="vanished">Премахване от набора</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1296"/>
@@ -629,23 +613,6 @@
 </context>
 <context>
     <name>Board</name>
-    <message>
-        <source>
-
-A custom board svg typically has one or two silkscreen layers and one board layer.
-</source>
-        <translation type="vanished">
-
-Потребителски зададена платка във формат „svg“ обикновено има един или два слоя ситопечат и един слой с формата на самата платка.
-</translation>
-    </message>
-    <message>
-        <source>Have a look at the circle_pcb.svg file in your Fritzing installation folder at parts/svg/core/pcb/.
-
-</source>
-        <translation type="vanished">Погледнете файла „circle_pcb.svg“ в инсталационната папка на Fritzing – в „parts/svg/core/pcb“.
-</translation>
-    </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="84"/>
         <source>
@@ -764,10 +731,6 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
         <translation type="unfinished">Зареждането е възможно, но</translation>
     </message>
     <message>
-        <source>Before actual PCB production we recommend that you test your custom shape by using the &apos;File &gt; Export for Production &gt; Extended Gerber&apos; option. </source>
-        <translation type="vanished">Преди реалната изработка на платката Ви препоръчваме да изпробвате персонализираната си форма като използвате командата „Файл &gt; Изнасяне &gt; За изработка &gt; Разширен формат Gerber“. </translation>
-    </message>
-    <message>
         <location filename="../src/items/resizableboard.cpp" line="436"/>
         <source>Check the resulting contour file with a Gerber-viewer application to make sure the shape came out as expected.&lt;br/&gt;&lt;br/&gt;</source>
         <translation>Проверете създадения контурен файл програма за преглед на файлове „Gerber“, за да се уверите, че форамата се е получила според очакванията Ви.&lt;br/&gt;&lt;br/&gt;</translation>
@@ -801,25 +764,9 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
         <translation>&lt;br/&gt;Въпреки това, контурите може да не са форматирани правилно.</translation>
     </message>
     <message>
-        <source>&lt;br/&gt;&lt;br/&gt;If you intended your custom shape to have cutouts and you did not get the expected result, </source>
-        <translation type="vanished">&lt;br/&gt;&lt;br/&gt;Ако сте искали песронализираната форма на платката да има и контури за изрязване, а не сте получили очаквания резултат, </translation>
-    </message>
-    <message>
-        <source>it is because Fritzing requires that you make cutouts using a shape &apos;subtraction&apos; or &apos;difference&apos; operation in your vector graphics editor.</source>
-        <translation type="vanished">то това е така, защото Fritzing изисква да контурите за изрязване да са зададени чрез функциите за „изваждане“ или „разлика“ на използваната от Вас програма за редактиране на векторни изображения.</translation>
-    </message>
-    <message>
-        <source>Unable to load</source>
-        <translation type="vanished">Зареждането е невъзможно</translation>
-    </message>
-    <message>
         <location filename="../src/items/resizableboard.cpp" line="522"/>
         <source>Unable to load image from %1 %2</source>
         <translation>Изображението не може да бъде заредено от %1 %2</translation>
-    </message>
-    <message>
-        <source>Can load, but</source>
-        <translation type="vanished">Зареждането е възможно, но</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="530"/>
@@ -1122,10 +1069,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <translation>Свързан с %1 : %2, %3, %4, %5, %6</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="vanished">Грешка</translation>
-    </message>
-    <message>
         <location filename="../src/program/consolewindow.cpp" line="153"/>
         <source>Error</source>
         <comment>dialog title</comment>
@@ -1157,10 +1100,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <comment>dialog title</comment>
         <translation type="unfinished">Критична грешка</translation>
     </message>
-    <message>
-        <source>Critical Error</source>
-        <translation type="vanished">Критична грешка</translation>
-    </message>
 </context>
 <context>
     <name>DRC</name>
@@ -1183,10 +1122,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <location filename="../src/autoroute/drc.cpp" line="269"/>
         <source>Reposition them and run the DRC again to find more problems</source>
         <translation>Наместете ги и пуснете отново проверката, за да видите дали има още проблеми</translation>
-    </message>
-    <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
     </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="284"/>
@@ -1233,10 +1168,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 <context>
     <name>DRCResultsDialog</name>
     <message>
-        <source>DRC Results</source>
-        <translation type="vanished">Резултати от проверката</translation>
-    </message>
-    <message>
         <location filename="../src/autoroute/drc.cpp" line="138"/>
         <source>DRC Results</source>
         <comment>dialog title</comment>
@@ -1263,10 +1194,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>DebugDialog</name>
-    <message>
-        <source>for debugging</source>
-        <translation type="vanished">за отстраняване на грешки</translation>
-    </message>
     <message>
         <location filename="../src/debugdialog.cpp" line="138"/>
         <source>for debugging</source>
@@ -1327,10 +1254,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 <context>
     <name>FApplication</name>
     <message>
-        <source>Fritzing failure</source>
-        <translation type="vanished">Грешка във Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/fapplication.cpp" line="1860"/>
         <location filename="../src/fapplication.cpp" line="1868"/>
         <location filename="../src/fapplication.cpp" line="1871"/>
@@ -1376,24 +1299,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 Would you like to regenerate the parts database?
 </source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Regenerate parts database?</source>
-        <translation type="vanished">Пресъздаване на базата данни с частите?</translation>
-    </message>
-    <message>
-        <source>Regenerating the parts database will take some minutes and you will have to restart Fritzing
-
-</source>
-        <translation type="vanished">Повторното създаване на базата данни с частите ще отнеме няколко минути, след което ще трябва да рестатирате Fritzing
-
-</translation>
-    </message>
-    <message>
-        <source>Would you like to regenerate the parts database?
-</source>
-        <translation type="vanished">Искате ли базата данни с частите да бъде създадена отново?
-</translation>
     </message>
     <message>
         <location filename="../src/fapplication.cpp" line="2277"/>
@@ -1479,10 +1384,6 @@ Would you like to regenerate the parts database?
         <translation type="unfinished">Fritzing</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/fabuploaddialog.cpp" line="161"/>
         <source>Error: </source>
         <translation type="unfinished"></translation>
@@ -1490,10 +1391,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FabUploadProgress</name>
-    <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
     <message>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="181"/>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="211"/>
@@ -1516,10 +1413,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FirstTimeHelpDialog</name>
-    <message>
-        <source>First Time Help</source>
-        <translation type="vanished">Първоначална помощ</translation>
-    </message>
     <message>
         <location filename="../src/help/firsttimehelpdialog.cpp" line="37"/>
         <source>First Time Help</source>
@@ -1566,17 +1459,9 @@ Would you like to regenerate the parts database?
         <translation type="unfinished">Запазване на „%1“</translation>
     </message>
     <message>
-        <source>%1 - %2</source>
-        <translation type="vanished">%1 – %2</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="132"/>
         <source>Specify a file name</source>
         <translation>Задайте име на файла</translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">Запазване на „%1“</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="238"/>
@@ -1607,10 +1492,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FzpInfo</name>
-    <message>
-        <source>Error</source>
-        <translation type="obsolete">Грешка</translation>
-    </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="64"/>
         <source>Cannot open file &apos;%1&apos;.</source>
@@ -1870,14 +1751,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>Проводник</translation>
     </message>
     <message>
-        <source>Ratsnest line</source>
-        <translation type="vanished">Свързваща линия</translation>
-    </message>
-    <message>
-        <source>Trace wire %1</source>
-        <translation type="vanished">Писта %1</translation>
-    </message>
-    <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="792"/>
         <source>v. %1 %2</source>
         <translation>версия %1 %2</translation>
@@ -1906,10 +1779,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
 <context>
     <name>ItemBase</name>
     <message>
-        <source>family</source>
-        <translation type="vanished">семейство</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="223"/>
         <source>type</source>
         <translation>тип</translation>
@@ -1928,10 +1797,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="226"/>
         <source>color</source>
         <translation>цвят</translation>
-    </message>
-    <message>
-        <source>resistance</source>
-        <translation type="vanished">съпротивление</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="228"/>
@@ -1962,10 +1827,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="233"/>
         <source>pin spacing</source>
         <translation>разстояние между крачетата</translation>
-    </message>
-    <message>
-        <source>rated power</source>
-        <translation type="vanished">обозначена мощност</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="222"/>
@@ -2155,26 +2016,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>banded</source>
-        <translation type="vanished">обединяване</translation>
-    </message>
-    <message>
-        <source>top</source>
-        <translation type="vanished">горен слой</translation>
-    </message>
-    <message>
-        <source>bottom</source>
-        <translation type="vanished">долен слой</translation>
-    </message>
-    <message>
-        <source>copper bottom</source>
-        <translation type="vanished">долен меден слой</translation>
-    </message>
-    <message>
-        <source>copper top</source>
-        <translation type="vanished">горен меден слой</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="263"/>
         <source>silkscreen bottom</source>
         <translation>долен слой на ситопечат</translation>
@@ -2183,18 +2024,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="264"/>
         <source>silkscreen top</source>
         <translation>горен слой на ситопечат</translation>
-    </message>
-    <message>
-        <source>mn</source>
-        <translation type="vanished">mn</translation>
-    </message>
-    <message>
-        <source>mpn</source>
-        <translation type="vanished">mpn</translation>
-    </message>
-    <message>
-        <source>Part</source>
-        <translation type="vanished">Част</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="1336"/>
@@ -2483,10 +2312,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <source>Unrouted connections</source>
         <comment>dialog title</comment>
         <translation type="unfinished">Неопроводени връзки</translation>
-    </message>
-    <message>
-        <source>Save %1</source>
-        <translation type="vanished">Запазване на „%1“</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1571"/>
@@ -2806,10 +2631,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>%1 – [%2]</translation>
     </message>
     <message>
-        <source>No copper top layer</source>
-        <translation type="vanished">Няма горен меден слой</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2598"/>
         <source>The copper top (copper 1) layer is not available on a one-sided board.  Please switch the board to double-sided or choose the copper bottom (copper 0) layer.</source>
         <translation>Горният меден слой (copper 1) не е наличен при ползване на еднослойна платка. Моля, превключете платката в режим с два слоя или изберете долния слой (copper 0).</translation>
@@ -2872,10 +2693,6 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <translation>нова схема</translation>
     </message>
     <message>
-        <source>Schematic conversion</source>
-        <translation type="vanished">Преобразуване на схемата</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2963"/>
         <source>Saving this sketch will convert it to the new schematic graphics standard. Go ahead and convert?</source>
         <translation>При запазването си схемата ще бъде преобразувана в новия стандарт за схематични графики. Искате ли да продължите и да разрешите преобразуването?</translation>
@@ -2889,10 +2706,6 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <location filename="../src/mainwindow/mainwindow.cpp" line="3169"/>
         <source>Fritzing uncompressed (*%1)</source>
         <translation>Некомпресирани файлове на Fritzing (*%1)</translation>
-    </message>
-    <message>
-        <source>Unrouted connections</source>
-        <translation type="vanished">Неопроводени връзки</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3225"/>
@@ -2995,10 +2808,6 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4157"/>
         <source>Cancel</source>
         <translation>Отказ</translation>
-    </message>
-    <message>
-        <source>Choose a folder for exporting</source>
-        <translation type="vanished">Изберете папка за изнасянето</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="340"/>
@@ -3808,10 +3617,6 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <translation>Завъртане на избраните части на 45 градуса по часовниковата стрелка</translation>
     </message>
     <message>
-        <source>Revert?</source>
-        <translation type="vanished">Отмяна?</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="274"/>
         <source>This operation can not be undone--you will lose all of your changes.
 
@@ -4569,10 +4374,6 @@ Go ahead and revert?</source>
         <translation>Запълване с медна писта (%1)</translation>
     </message>
     <message>
-        <source>Actual Size</source>
-        <translation type="vanished">Реален размер</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2312"/>
         <source>It doesn&apos;t seem to be possible to automatically determine the actual physical size of the monitor, so &apos;actual size&apos; as currently implemented is only a guess. Your best bet would be to drag out a ruler part, then place a real (physical) ruler on top and zoom until they match up.</source>
         <translation>Изглежда реалният размер на екрана Ви не може да бъде определен автоматично, така че „реалният размер“, както го виждате, е само предполагаем. Най-добре би било да изтеглите на схемата част „линия“ и след което да поставите истинска линия върху екрана и да променяте мащаба, докато разделенията не съвпаднат.</translation>
@@ -4695,24 +4496,6 @@ Go ahead and revert?</source>
         <translation>Shift+Ctrl+1</translation>
     </message>
     <message>
-        <source>Schematic view update</source>
-        <translation type="vanished">Обновяване на схематичния изглед</translation>
-    </message>
-    <message>
-        <source>There is a new graphics standard for schematic-view part images, beginning with version 0.8.6.
-
-</source>
-        <translation type="vanished">Считано от версия 0.8.6, вече има нов графичен стандарт за изображенията на частите в схематичния изглед.
-
-</translation>
-    </message>
-    <message>
-        <source>Would you like to convert &apos;%1&apos; to the new standard now or open the file read-only?
-</source>
-        <translation type="vanished">Искате ли да преобразувате „%1“ в новия стандарт сега, или предпочитате да отворите файла в режим само за четене?
-</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3698"/>
         <source>The conversion process will not modify &apos;%1&apos;, until you save the file. </source>
         <translation>Процесът на преобразуване няма да промени „%1“, докато файлът не бъде запазен. </translation>
@@ -4770,10 +4553,6 @@ Continue upload?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fritzing Fab Upload</source>
-        <translation type="vanished">Fritzing Fab качване</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4518"/>
         <source>Please first save your project in order to upload it.</source>
         <translation>Моля, първо запазете проекта си, за да го качите.</translation>
@@ -4784,17 +4563,9 @@ Continue upload?</source>
         <translation>%1 фон</translation>
     </message>
     <message>
-        <source>Enter Text</source>
-        <translation type="vanished">Въведете текст</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4650"/>
         <source>Text will match part label, description, title, etc. Enter text to search for:</source>
         <translation>Текстът ще бъде съпоставен с етикета, описанието, заглавието и т.н. на частите. Въведете текст за търсене:</translation>
-    </message>
-    <message>
-        <source>Search</source>
-        <translation type="vanished">Търсене</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4696"/>
@@ -5301,14 +5072,6 @@ Please check all views for potential side-effects.</source>
 Моля, проверете всички изгледи за възможни странични ефекти.</translation>
     </message>
     <message>
-        <source>Inspector</source>
-        <translation type="vanished">Инспектор</translation>
-    </message>
-    <message>
-        <source>Undo History</source>
-        <translation type="vanished">История на действията за отмяна</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="581"/>
         <source>Breadboard</source>
         <translation>Прототипна платка</translation>
@@ -5322,14 +5085,6 @@ Please check all views for potential side-effects.</source>
         <location filename="../src/mainwindow/mainwindow.cpp" line="599"/>
         <source>PCB</source>
         <translation>Печатна платка</translation>
-    </message>
-    <message>
-        <source>Layers</source>
-        <translation type="vanished">Слоеве</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t get the dock widget</source>
-        <translation type="vanished">Прикаченият елемент не може да бъде открит</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="64"/>
@@ -5472,17 +5227,6 @@ Please check all views for potential side-effects.</source>
 </context>
 <context>
     <name>ModelBase</name>
-    <message numerus="yes">
-        <source>Unable to find the following %n part(s):</source>
-        <translation type="vanished">
-            <numerusform>Следната част не може да бъде открита:</numerusform>
-            <numerusform>Следните %n части не могат да бъдат октрити:</numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>at</source>
-        <translation type="vanished">в</translation>
-    </message>
     <message numerus="yes">
         <location filename="../src/model/modelbase.cpp" line="421"/>
         <source>Unable to find %n part(s). Click &apos;Show Details&apos; for a list of missing parts.</source>
@@ -5666,10 +5410,6 @@ Reason: %2 (errcode %3)</source>
         <translation>Промяна на слоя на пистата</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="257"/>
         <source>Your sketch does not have a board yet! Please add a PCB to use this selection operation.</source>
         <translation>Схемата все още няма платка! Моля, добавете печатна платка, за да можете да използвате тази функционалност за избор.</translation>
@@ -5845,10 +5585,6 @@ Enter keepout value:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ground Fill</source>
-        <translation type="obsolete">Запълване със заземяваща писта</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1767"/>
         <source>Unable to create copper fill--probably the part wasn&apos;t dropped onto the PCB.</source>
         <translation>Запълването с медна писта не може да бъде извършено – възможно е частта да не е била поставена на печатната платка.</translation>
@@ -5889,55 +5625,9 @@ Enter keepout value:</source>
         <translation>Скриване на ситопечата на частта</translation>
     </message>
     <message>
-        <source>Fritzing Fab Quote</source>
-        <translation type="vanished">Квота за изработка на платка от Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2888"/>
         <source>Your sketch does not have a board yet. You cannot fabricate this sketch without a PCB part.</source>
         <translation>Схемата все още няма платка! Не можете да изработите схемата без печатна платка.</translation>
-    </message>
-    <message>
-        <source>Sorry, http://fab.fritzing.org is not responding to the quote request. Please check your network connection and/or try again later.</source>
-        <translation type="vanished">Съжаляваме, но http://fab.fritzing.org не отговаря на заявката за квота .Моля, проверете връзката си с мрежата и/или опитайте отново по-късно.</translation>
-    </message>
-    <message>
-        <source>Enter Keepout</source>
-        <translation type="vanished">Въведете отстояние</translation>
-    </message>
-    <message>
-        <source>Keepout is in mils (.001 inches).
-
-</source>
-        <translation type="vanished">Отстоянието е в милове (хилядни от инча).
-
-</translation>
-    </message>
-    <message>
-        <source>Note that due to aliasing, distances may be too short by up to 2 mils
-</source>
-        <translation type="vanished">Имайте предвид, че поради остротата на ръбовете, разстоянията може да са твърде къси с до 2 мила,
-</translation>
-    </message>
-    <message>
-        <source>so you may want to increase the keepout value by that much.
-
-</source>
-        <translation type="vanished">така че може да се наложи да увеличите стойността на отстоянието с толкова.
-
-</translation>
-    </message>
-    <message>
-        <source>10 mils is a good default choice.
-
-</source>
-        <translation type="vanished">10 мила е добра стойност по подразбиране.
-
-</translation>
-    </message>
-    <message>
-        <source>Enter keepout value:</source>
-        <translation type="vanished">Въведете стойност за отстоянието:</translation>
     </message>
 </context>
 <context>
@@ -5966,10 +5656,6 @@ Enter keepout value:</source>
 <context>
     <name>PEMainWindow</name>
     <message>
-        <source>Parts Editor</source>
-        <translation type="vanished">Редактор на части</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="524"/>
         <source>SVG</source>
         <translation>SVG</translation>
@@ -5990,10 +5676,6 @@ Enter keepout value:</source>
         <translation>Дублирането на свойството „вариант“ не е позволено</translation>
     </message>
     <message>
-        <source>Close without saving?</source>
-        <translation type="vanished">Затваряне без запазване на файла?</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="396"/>
         <source>Close without saving</source>
         <translation>Затваряне без запазване на файла</translation>
@@ -6002,10 +5684,6 @@ Enter keepout value:</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="397"/>
         <source>Keep working</source>
         <translation>Продължаване на работата</translation>
-    </message>
-    <message>
-        <source>Exiting the Parts Editor now is fine, as long as you remember to finish the assignments later.</source>
-        <translation type="vanished">Спокойно можете да затворите редактора на части ,на не забравяйте да довършите задачите по късно.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="436"/>
@@ -6220,33 +5898,9 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Copy problem</source>
-        <translation type="vanished">Копиране на проблема</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1609"/>
         <source>Unable to make a local copy of: &apos;%1&apos;</source>
         <translation>Не може да се създаде локално копие на: „%1“</translation>
-    </message>
-    <message>
-        <source>You may use a PNG or JPG image to construct your part, but it is better to use an SVG. </source>
-        <translation type="vanished">Може да използвате изображение във формат PNG или JPEG , за да създадете частта, но е по-добре да използвате файл SVG.</translation>
-    </message>
-    <message>
-        <source>PNG and JPG images retain their nature as bitmaps and do not look good when scaled--</source>
-        <translation type="vanished">Изображенията във формат PNG и JPEG запазват своите свойства на пикселни изображения и не изглеждат добре когато бъдат уголемени, </translation>
-    </message>
-    <message>
-        <source>so for Fritzing parts it is best to use PNG and JPG only as placeholders.</source>
-        <translation type="vanished">така че частите на Fritzing е по-добре да използвате форматите PNG и JPG само за преглед.</translation>
-    </message>
-    <message>
-        <source>Use of PNG and JPG discouraged</source>
-        <translation type="vanished">Употребата на форматите PNG и JPG е непрепоръчителна</translation>
-    </message>
-    <message>
-        <source>Conversion problem</source>
-        <translation type="vanished">Проблем при преобразуването</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="949"/>
@@ -6265,10 +5919,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>Показване на свойствата на изводите като списък</translation>
     </message>
     <message>
-        <source>Blank not allowed</source>
-        <translation type="vanished">Това не може да бъде празно</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1032"/>
         <source>The value of &apos;%1&apos; can not be blank.</source>
         <translation>Стойността на „%1“ не може да бъде празна.</translation>
@@ -6279,17 +5929,9 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>Промяна на „%1“ на „%2“</translation>
     </message>
     <message>
-        <source>Must be unique</source>
-        <translation type="vanished">Изисква се уникалност</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1069"/>
         <source>Variant &apos;%1&apos; is in use. The variant name must be unique.</source>
         <translation>Вече съществува вариант с име „%1“. Името на варианта трябва да бъде уникално.</translation>
-    </message>
-    <message>
-        <source>Duplicate problem</source>
-        <translation type="vanished">Проблем с дублирането</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1523"/>
@@ -6307,10 +5949,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>Моля, изнесете отново файла като използвате тази настройка и опитайте да го заредите отново.</translation>
     </message>
     <message>
-        <source>Fonts</source>
-        <translation type="vanished">Шрифтове</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1550"/>
         <source>Fritzing currently only supports OCRA and Droid fonts--these have been substituted in for the fonts in &apos;%1&apos;</source>
         <translation>В момента Fritzing поддържа само шрифтовете „OCRA“ и „Droid“ – те бяха заменени с шрифтовете в „%1“</translation>
@@ -6324,10 +5962,6 @@ This warning will not be repeated in this session of Fritzing</source>
 
 %2
 </translation>
-    </message>
-    <message>
-        <source>SVG problem</source>
-        <translation type="vanished">Проблем със SVG</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="365"/>
@@ -6366,31 +6000,9 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>&lt;p&gt;Моля, въведете представка, която да Ви помогне да разпознавате файловете на частта.&lt;br/&gt;Имената на файловете ще имат следния вид: „ПРЕДСТАВКА_%1“.&lt;br/&gt;(Не е задължително да променяте предложената представка, тъй като винаги се добавя уникална наставка.)&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>Parts Editor Error</source>
-        <translation type="vanished">Грешка на редактора на части</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2352"/>
         <source>The file %2 with prefix %1 was not saved.</source>
         <translation>Файлът %2 с префикс %1 не е запазен.</translation>
-    </message>
-    <message numerus="yes">
-        <source>This part has %n unassigned connectors </source>
-        <translation type="vanished">
-            <numerusform>Частта има необозначен извод </numerusform>
-            <numerusform>Частта има %n необозначени извода</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>across %n views. </source>
-        <translation type="vanished">
-            <numerusform>в един изглед. </numerusform>
-            <numerusform>в %n изгледа. </numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>Until all connectors are assigned to SVG elements, the part will not work correctly. </source>
-        <translation type="vanished">Докато не бъдат свързани всички изводи с елементи на векторната графика, частта няма да може да работи правилно. </translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="537"/>
@@ -6479,22 +6091,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>Не може да се анализира файлът „%1“: %2 ред: %3, колона: %4</translation>
     </message>
     <message>
-        <source>There are no copper layers defined in: %1. </source>
-        <translation type="vanished">В „%1“ липсват определения на медни слоеве. </translation>
-    </message>
-    <message>
-        <source>See &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;this explanation&lt;/a&gt;.</source>
-        <translation type="vanished">Вижте &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;това обяснение &lt;/a&gt;.</translation>
-    </message>
-    <message>
-        <source>&lt;br/&gt;&lt;br/&gt;This will not be a problem in the next release of the Parts Editor, </source>
-        <translation type="vanished">&lt;br/&gt;&lt;br/&gt;Това няма да бъде проблем в следващото издание на редактора на части, </translation>
-    </message>
-    <message>
-        <source>but for now please modify the file according to the instructions in the link.</source>
-        <translation type="vanished">но засега, моля, променете файла според инструкциите достъпни чрез връзката.</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1636"/>
         <source>no schematics found in %1</source>
         <translation>не са открити схеми в „%1“</translation>
@@ -6565,34 +6161,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>&amp;Редактиране</translation>
     </message>
     <message>
-        <source>This part has bendable legs. </source>
-        <translation type="vanished">Тази части има огъваеми крачета. </translation>
-    </message>
-    <message>
-        <source>This version of the Parts Editor does not yet support editing bendable legs, and the legs may not be displayed correctly in breadboard view . </source>
-        <translation type="vanished">Тази версия на редактора на части все още не поддържа редактиране на огъваеми крачета, поради което крачетата може да не бъдат изобразени правилно в изгледа като прототипна платка.</translation>
-    </message>
-    <message>
-        <source>If you make changes to breadboard view, or change connector metadata, the legs may no longer work. </source>
-        <translation type="vanished">Ако направите промени в изгледа като прототипна платка или промените свойствата на изводите, крачетата може да не работят.</translation>
-    </message>
-    <message>
-        <source>You can safely make changes to Schematic or PCB view.
-
-</source>
-        <translation type="vanished">Можете без притеснения да правите промени в схематичния изглед и изледа като печатна платка.
-
-</translation>
-    </message>
-    <message>
-        <source>This warning will not be repeated in this session of Fritzing</source>
-        <translation type="vanished">Това предупреждение няма да бъде показано отново в тази сесия на Fritzing</translation>
-    </message>
-    <message>
-        <source>Unable to load &apos;%1&apos;. Please close the parts editor without saving and try again.</source>
-        <translation type="vanished">„%1“ не може да се зареди. Моля, затворете редактора на части без да запазвате и опитайте отново.</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1575"/>
         <source>Unable to load image file &apos;%1&apos;</source>
         <translation>Файлът с изображение „%1“ не може да бъде зареден</translation>
@@ -6603,10 +6171,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>Представка за името на файла</translation>
     </message>
     <message>
-        <source>Sketch Change Warning</source>
-        <translation type="vanished">Предупрежение при промяна на схемата</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2147"/>
         <source>The open sketch &apos;%1&apos; uses the part you are editing. </source>
         <translation>Отворената схема „%1“ използва частта, която редактирате. </translation>
@@ -6615,22 +6179,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2148"/>
         <source>Saving this part will make a change to the sketch that cannot be undone.</source>
         <translation>Ако запазите частта, това ще направи необратими промени по схемата.</translation>
-    </message>
-    <message>
-        <source>The open sketches </source>
-        <translation type="vanished">Отворените схеми </translation>
-    </message>
-    <message>
-        <source>&apos;%1&apos;, </source>
-        <translation type="vanished">„%1“, </translation>
-    </message>
-    <message>
-        <source>and &apos;%1&apos; </source>
-        <translation type="vanished">и „%1“ </translation>
-    </message>
-    <message>
-        <source>Saving this part will make a change to these sketches that cannot be undone.</source>
-        <translation type="vanished">Ако запазите частта, това ще направи необратими промени по тези схеми.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2166"/>
@@ -6655,10 +6203,6 @@ Go ahead and save?</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2734"/>
         <source>Remove %1 connectors</source>
         <translation>Премахване на %1 извода</translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">Запазване на „%1“</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2753"/>
@@ -7050,10 +6594,6 @@ Go ahead and save?</source>
         <translation>Промяна на етикетите на крачетата</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/items/paletteitem.cpp" line="620"/>
         <location filename="../src/items/paletteitem.cpp" line="631"/>
         <location filename="../src/items/paletteitem.cpp" line="655"/>
@@ -7296,10 +6836,6 @@ Go ahead and save?</source>
         <translation type="unfinished">Задаване на етикет за „%1“</translation>
     </message>
     <message>
-        <source>Set label for %1</source>
-        <translation type="vanished">Задаване на етикет за „%1“</translation>
-    </message>
-    <message>
         <location filename="../src/items/partlabel.cpp" line="760"/>
         <source>Label text:</source>
         <translation>Текст на етикета: </translation>
@@ -7326,10 +6862,6 @@ Go ahead and save?</source>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="415"/>
         <source>Fritzing Bin (*%1)</source>
         <translation>Файл с набор на Fritzing (*%1)</translation>
-    </message>
-    <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="456"/>
@@ -7373,10 +6905,6 @@ Go ahead and save?</source>
         <translation type="unfinished">Добавяне в набора части</translation>
     </message>
     <message>
-        <source>Save bin &quot;%1&quot;</source>
-        <translation type="vanished">Запазване на набор „%1“</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="584"/>
         <source>Do you want to save the changes you made in the bin &quot;%1&quot;?</source>
         <translation>Искате ли промените, които направихте по набора „%1“, да бъдат запазени?</translation>
@@ -7390,10 +6918,6 @@ Go ahead and save?</source>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="590"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
-    </message>
-    <message>
-        <source>Add to bin</source>
-        <translation type="vanished">Добавяне в набора части</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="697"/>
@@ -7427,10 +6951,6 @@ Go ahead and save?</source>
         <location filename="../src/items/perfboard.cpp" line="253"/>
         <source>set board size</source>
         <translation>задаване на размера на платката</translation>
-    </message>
-    <message>
-        <source>Performance Warning</source>
-        <translation type="vanished">Предупреждение относно производителността</translation>
     </message>
     <message>
         <location filename="../src/items/perfboard.cpp" line="296"/>
@@ -7469,14 +6989,6 @@ Note: this warning will not be repeated during this session.</source>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="80"/>
         <source>&lt;p&gt;&lt;h2&gt;Pin Label Editor&lt;/h2&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;h2&gt;Редактор на етикетите на крачетата&lt;/h2&gt;&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Click on a label next to a pin number to rename that pin.</source>
-        <translation type="vanished">&lt;p&gt;Щракнете върху етикета до крачето, за да го преименувате.</translation>
-    </message>
-    <message>
-        <source>You can use the tab key to move through the labels in order.&lt;/p&gt;</source>
-        <translation type="vanished">Можете да използвате клавиша TAB, за да преминавате последователно през етикетите.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="81"/>
@@ -8035,14 +7547,6 @@ This feature is enabled by default. If you need to maintain compatibility with o
         <translation type="unfinished">Прозорец с код – %1</translation>
     </message>
     <message>
-        <source>Code Window</source>
-        <translation type="vanished">Прозорец с код</translation>
-    </message>
-    <message>
-        <source>Code Window - %1</source>
-        <translation type="vanished">Прозорец с код – %1</translation>
-    </message>
-    <message>
         <location filename="../src/program/programwindow.cpp" line="499"/>
         <source>%1%2</source>
         <translation>%1%2</translation>
@@ -8410,10 +7914,6 @@ is already there, we won&apos;t add it again, right?</source>
         <translation>Изберете %1</translation>
     </message>
     <message>
-        <source>files</source>
-        <translation type="vanished">файлове</translation>
-    </message>
-    <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="96"/>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="148"/>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="165"/>
@@ -8734,10 +8234,6 @@ Fritzing все още работи ,но няма да можете да про
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>failure in svg conversion 2: %1 %2 %3</source>
-        <translation type="vanished">грешка при преобразуването на векторната графика 2: %1 %2 %3</translation>
-    </message>
-    <message>
         <location filename="../src/utils/fileprogressdialog.cpp" line="68"/>
         <source>File Progress...</source>
         <translation>Напредък на файла…</translation>
@@ -8983,26 +8479,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
         <location filename="../src/svg/gerbergenerator.cpp" line="132"/>
         <source>outline is empty</source>
         <translation>контурът е празно</translation>
-    </message>
-    <message>
-        <source>the board outline layer, </source>
-        <translation type="vanished">слоя с контур на дъската, </translation>
-    </message>
-    <message>
-        <source>copper layer(s), </source>
-        <translation type="vanished">меден слой(и), </translation>
-    </message>
-    <message>
-        <source>mask layer(s), </source>
-        <translation type="vanished">маскиран слой(и), </translation>
-    </message>
-    <message>
-        <source>paste mask layer(s), </source>
-        <translation type="vanished">поставяне на слой(и) маска, </translation>
-    </message>
-    <message>
-        <source>Unable to translate svg curves in %1</source>
-        <translation type="vanished">Невъзможност за превод на svg криви в %1</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="152"/>
@@ -9349,10 +8825,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
 <context>
     <name>QuoteDialog</name>
     <message>
-        <source>Fritzing Fab Quote</source>
-        <translation type="vanished">Квота за изработка на платка от Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/quotedialog.cpp" line="175"/>
         <source>Order your PCB from Fritzing Fab</source>
         <translation>Поръчка на печатна платка от фабриката на Fritzing</translation>
@@ -9465,14 +8937,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
 <context>
     <name>RegenerateDatabaseThread</name>
     <message>
-        <source>Unable to open temporary file</source>
-        <translation type="vanished">Временният файл не може да бъде отворен</translation>
-    </message>
-    <message>
-        <source>Database failure</source>
-        <translation type="vanished">Проблем в базата данни</translation>
-    </message>
-    <message>
         <location filename="../src/fapplication.cpp" line="333"/>
         <source>Unable to open temporary file (%1)</source>
         <translation type="unfinished"></translation>
@@ -9496,10 +8960,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
 </context>
 <context>
     <name>Resistor</name>
-    <message>
-        <source>Resistor</source>
-        <translation type="vanished">Резистор</translation>
-    </message>
     <message>
         <location filename="../src/items/resistor.cpp" line="121"/>
         <source>%1 %2 Resistor</source>
@@ -9626,10 +9086,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>Ruler</name>
-    <message>
-        <source>width</source>
-        <translation type="vanished">ширина</translation>
-    </message>
     <message>
         <location filename="../src/items/ruler.cpp" line="198"/>
         <source>inch</source>
@@ -9767,10 +9223,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 <context>
     <name>SetColorDialog</name>
     <message>
-        <source>%1 Color...</source>
-        <translation type="vanished">Цвят за %1…</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/setcolordialog.cpp" line="49"/>
         <source>%1 Color...</source>
         <comment>dialog title</comment>
@@ -9824,10 +9276,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>Simulator</name>
-    <message>
-        <source>Simulator Error</source>
-        <translation type="vanished">Грешка на симулатора</translation>
-    </message>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="197"/>
         <source>An error occurred when starting the simulation.</source>
@@ -10010,10 +9458,6 @@ Netlist:
         <translation>Създаване и свързване на проводник</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="4140"/>
         <source>This seems like an attempt to create a trace across layers. This circumstance should not arise: please contact the developers.</source>
         <translation>Това прилича на опит за създаване на писта между слоевете. Такова нещо не би трябвало да се получава – моля, свържете се с разработчиците.</translation>
@@ -10032,10 +9476,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="4147"/>
         <source>trace</source>
         <translation>писта</translation>
-    </message>
-    <message>
-        <source>Rotate %2 (%1)</source>
-        <translation type="vanished">Завъртане на %2 (%1)</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="5094"/>
@@ -10096,18 +9536,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="7667"/>
         <source>Move label &apos;%1&apos;</source>
         <translation>Преместване на етикета „%1“</translation>
-    </message>
-    <message>
-        <source>%1 label &apos;%2&apos;</source>
-        <translation type="vanished">%1 етикет „%2“</translation>
-    </message>
-    <message>
-        <source>Rotate</source>
-        <translation type="vanished">Завъртане на</translation>
-    </message>
-    <message>
-        <source>Flip</source>
-        <translation type="vanished">Обръщане на</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/sketch/sketchwidget.cpp" line="7720"/>
@@ -10238,10 +9666,6 @@ The parts will be moved automatically. You can use the Undo History to review th
         <translation>Има неопроводени връзки</translation>
     </message>
     <message>
-        <source>Unrouted connections</source>
-        <translation type="vanished">Неопроводени връзки</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="10049"/>
         <source>%1
 
@@ -10277,14 +9701,6 @@ Note: you can also trigger this display by mousing down on the routing status te
         <translation>Механизъмът за размяна е изключен за:
 
 </translation>
-    </message>
-    <message>
-        <source>and %1 other parts</source>
-        <translation type="vanished">и още %1 други части</translation>
-    </message>
-    <message>
-        <source>and %1 other properties</source>
-        <translation type="vanished">и още %1 други свойства</translation>
     </message>
     <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="146"/>
@@ -10364,10 +9780,6 @@ and %1 other properties</source>
         <translation type="unfinished">Мрежови етикети</translation>
     </message>
     <message>
-        <source>Net labels</source>
-        <translation type="vanished">Мрежови етикети</translation>
-    </message>
-    <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="471"/>
         <source>Net labels cannot be blank</source>
         <translation>Мрежовите етикети не могат да бъдат празни</translation>
@@ -10379,10 +9791,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="40"/>
         <source>Fritzing Tips and Tricks</source>
         <translation>Съвети и хитрости за Fritzing</translation>
-    </message>
-    <message>
-        <source>Tips and Tricks</source>
-        <translation type="vanished">Съвети и хитрости</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="76"/>
@@ -10398,18 +9806,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="81"/>
         <source>parts</source>
         <translation>части</translation>
-    </message>
-    <message>
-        <source>Can&apos;t find your part? Search for it by clicking the magnifier icon in the Parts Bin and type in some keywords</source>
-        <translation type="vanished">Не можете да откриете определена част? Потърсете я като натиснете иконката с лупичка при списъка с части и въведете някаква ключова дума</translation>
-    </message>
-    <message>
-        <source>If you can&apos;t find a part in the Parts Bin, the Generic IC is your friend.  Drag it onto your sketch, then use the widgets in the Inspector to: choose from among 25 different through-hole and SMD packages; change the pin label; and--for DIPs and SIPs--change the number of pins.  You can also change the pin names with the Pin Label editor</source>
-        <translation type="vanished">Ако не можете да откриете част в списъка, можете да използвате общата интегрална схема. Завлачете я в схемата си и използвайте инспектора, за да изберете измежду 25 различни корпуса и променете броя на крачетата и етикетите им. Можете да промените и имената на крачетата с редактора на етикети на крачетата</translation>
-    </message>
-    <message>
-        <source>An icon in the parts bin may actually represent multiple related parts.  So when you drag an icon from the parts bin into a sketch, make sure you look at the inspector.  The inspector will display the range of choices available for you to modify a part, or swap it for a related part. The parts bin icon will also be a little &apos;stack&apos; and not just a flat icon.</source>
-        <translation type="vanished">Една иконка в списъка с части може да представлява няколко свързани части. Така че, когато завлачите иконка от списъка в схемата си, погледнете и в инспектора. Инспекторът ще покаже различните възможности, от които можете да изберете, за да модифицитате частта, или да я подмените с друга подобна. Иконката в списъка с части също така ще прилича на купчинка, а не на обикновена иконка.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="85"/>
@@ -10540,10 +9936,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="145"/>
         <source>In the Parts Editor, to select a graphic underneath another graphic, use the mouse wheel while holding down the shift key.</source>
         <translation>За да изберете графика намираща се под друга графика в редактора на части, използвайте колелцето на мишката, задържайки клавиша SHIFT натиснат.</translation>
-    </message>
-    <message>
-        <source>You can use the Parts Editor to find the SVG file for a part&apos;s image for a given view. In the Parts Editor, click on the tab for that view, then use &lt;b&gt;Show in Folder&lt;/b&gt; under the &lt;b&gt;File&lt;/b&gt; Menu</source>
-        <translation type="vanished">Можете да използвате редактора на части, за да отриете файла SVG с изображението на частта за определен изглед. Отидате в раздела за изгледа в редактора на части и изберете командата &lt;b&gt;Показване в папката&lt;/b&gt; от менюто &lt;b&gt;Файл&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="148"/>
@@ -10682,10 +10074,6 @@ and %1 other properties</source>
         <translation>Работата е по-лесна, ако пистите от едната страна на печатната платка вървят само хоризонтално, а от другата – само вертикално.</translation>
     </message>
     <message>
-        <source>Route traces in 45-degree angles to reduce noise.</source>
-        <translation type="vanished">Прокарвайте пистите в 45-градусови ъгли, за да намалите шума.</translation>
-    </message>
-    <message>
         <location filename="../src/help/tipsandtricks.cpp" line="157"/>
         <source>If Fritzing is missing a particular part and you don&apos;t want to build one yourself, then use pin headers as connectors and the grid to align them.</source>
         <translation>Ако смятате, че във Fritzing липсва важна за Вас час и не искате да я създадете, използвайте накрайници за крачетата вместо изводи и ги подравнете по решетката.</translation>
@@ -10701,17 +10089,9 @@ and %1 other properties</source>
         <translation>За да придадете персонализирана форма на печатната платка, внесете файл SVG.</translation>
     </message>
     <message>
-        <source>To make a stylish Arduino shield in no time, switch the shape of the PCB from a rectangle to the Arduino</source>
-        <translation type="vanished">За да направите стилен щит за Ардуино без излишна работа, променете формата на печатната платка от правоъгълник на Ардуино</translation>
-    </message>
-    <message>
         <location filename="../src/help/tipsandtricks.cpp" line="166"/>
         <source>pcb production</source>
         <translation>изработка на печатни платки</translation>
-    </message>
-    <message>
-        <source>Smaller PCBs are more affortable than larger ones. Save space and money.</source>
-        <translation type="vanished">Малките печатни платки са по-евтини от големите. Спестете място и пари.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="169"/>
@@ -10722,10 +10102,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="159"/>
         <source>Use copper-blocker parts to mask out areas that you want free of copper fill.</source>
         <translation>Използвайте части за блокиране на медта, за да обозначите местата, които не искате да бъдат запълнени с медна писта.</translation>
-    </message>
-    <message>
-        <source>A ratsnest line (very thin &apos;wire&apos;) between connections in one view means that those connections are somehow connected in another view.</source>
-        <translation type="vanished">Свързващите линии (много тънките „проводници“) между изводите в даден изглед показват, че тези изводи са свързани по някакъв начин в друг изглед.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="160"/>

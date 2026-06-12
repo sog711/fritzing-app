@@ -69,10 +69,6 @@
         <translation>Jan Sieber, Yaniv Steiner, Olaf Val,</translation>
     </message>
     <message>
-        <source>Michaela Vieser and Julia Werner.</source>
-        <translation type="vanished">Michaela Vieser and Julia Werner.</translation>
-    </message>
-    <message>
         <location filename="../src/help/aboutbox.cpp" line="116"/>
         <source>Thanks for the translations go out to: </source>
         <translation type="unfinished"></translation>
@@ -556,17 +552,9 @@
         <translation type="unfinished">Διαγραφή Δοχείου</translation>
     </message>
     <message>
-        <source>Delete bin</source>
-        <translation type="vanished">Διαγραφή Δοχείου</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1166"/>
         <source>Do you really want to delete bin &apos;%1&apos;?  This action cannot be undone.</source>
         <translation>Θέλετε πραγματικά να διαγράψετε το δοχείο &apos;%1&apos;;  Αυτή η ενέργεια δεν αναιρείται.</translation>
-    </message>
-    <message>
-        <source>Read-only bin</source>
-        <translation type="vanished">Δοχείο μόνο για ανάγνωση</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1218"/>
@@ -588,10 +576,6 @@
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1226"/>
         <source>Please choose a name for the bin:</source>
         <translation>Παρακαλώ επιλέξτε ένα όνομα για το δοχείο:</translation>
-    </message>
-    <message>
-        <source>Remove from Bin</source>
-        <translation type="vanished">Αφαίρεση από το Δοχείο</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1296"/>
@@ -628,12 +612,6 @@
 </context>
 <context>
     <name>Board</name>
-    <message>
-        <source>Have a look at the circle_pcb.svg file in your Fritzing installation folder at parts/svg/core/pcb/.
-
-</source>
-        <translation type="vanished">Ρίξτε μία ματιά στο αρχείο circle_pcb.svg στον κατάλογο εγκατάστασης του Fritzing, parts/svg/core/pcb/. </translation>
-    </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="121"/>
         <source>one layer (single-sided)</source>
@@ -785,17 +763,9 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to load</source>
-        <translation type="vanished">Αδυναμία φόρτωσης</translation>
-    </message>
-    <message>
         <location filename="../src/items/resizableboard.cpp" line="522"/>
         <source>Unable to load image from %1 %2</source>
         <translation>Αδυναμία φόρτωσης εικόνας από %1 %2</translation>
-    </message>
-    <message>
-        <source>Can load, but</source>
-        <translation type="vanished">Μπορεί να φορτωθεί, αλλά</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="530"/>
@@ -1151,10 +1121,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <translation>Επανατοποθετήστε και εκτελέστε το DRC για να βρείτε άλλα προβλήματα</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/autoroute/drc.cpp" line="284"/>
         <source>Fritzing</source>
         <comment>dialog title</comment>
@@ -1199,10 +1165,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 <context>
     <name>DRCResultsDialog</name>
     <message>
-        <source>DRC Results</source>
-        <translation type="vanished">Αποτελέσματα του DRC</translation>
-    </message>
-    <message>
         <location filename="../src/autoroute/drc.cpp" line="138"/>
         <source>DRC Results</source>
         <comment>dialog title</comment>
@@ -1229,10 +1191,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>DebugDialog</name>
-    <message>
-        <source>for debugging</source>
-        <translation type="vanished">για αποσφαλμάτωση</translation>
-    </message>
     <message>
         <location filename="../src/debugdialog.cpp" line="138"/>
         <source>for debugging</source>
@@ -1292,10 +1250,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>FApplication</name>
-    <message>
-        <source>Fritzing failure</source>
-        <translation type="vanished">Αποτυχία του Fritzing</translation>
-    </message>
     <message>
         <location filename="../src/fapplication.cpp" line="1860"/>
         <location filename="../src/fapplication.cpp" line="1868"/>
@@ -1427,10 +1381,6 @@ Would you like to regenerate the parts database?
         <translation type="unfinished">Fritzing</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/fabuploaddialog.cpp" line="161"/>
         <source>Error: </source>
         <translation type="unfinished"></translation>
@@ -1438,10 +1388,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FabUploadProgress</name>
-    <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
     <message>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="181"/>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="211"/>
@@ -1464,10 +1410,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FirstTimeHelpDialog</name>
-    <message>
-        <source>First Time Help</source>
-        <translation type="obsolete">Βοήθεια Πρώτης Φοράς</translation>
-    </message>
     <message>
         <location filename="../src/help/firsttimehelpdialog.cpp" line="37"/>
         <source>First Time Help</source>
@@ -1514,17 +1456,9 @@ Would you like to regenerate the parts database?
         <translation type="unfinished">Αποθήκευση &quot;%1&quot;</translation>
     </message>
     <message>
-        <source>%1 - %2</source>
-        <translation type="vanished">%1 - %2</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="132"/>
         <source>Specify a file name</source>
         <translation>Προσδιορίστε ένα όνομα αρχείου</translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">Αποθήκευση &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="238"/>
@@ -1814,11 +1748,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>Καλώδιο</translation>
     </message>
     <message>
-        <source>Ratsnest line</source>
-        <translatorcomment>Ratsnest ???</translatorcomment>
-        <translation type="vanished">Ratsnest καλώδιο</translation>
-    </message>
-    <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="792"/>
         <source>v. %1 %2</source>
         <translation>εκ. %1 %2</translation>
@@ -1847,10 +1776,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
 <context>
     <name>ItemBase</name>
     <message>
-        <source>family</source>
-        <translation type="vanished">οικογένεια</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="223"/>
         <source>type</source>
         <translation>τύπος</translation>
@@ -1869,10 +1794,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="226"/>
         <source>color</source>
         <translation>χρώμα</translation>
-    </message>
-    <message>
-        <source>resistance</source>
-        <translation type="vanished">αντίσταση</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="228"/>
@@ -1903,10 +1824,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="233"/>
         <source>pin spacing</source>
         <translation>κενό ακίδων</translation>
-    </message>
-    <message>
-        <source>rated power</source>
-        <translation type="vanished">ονομαστική ισχύς</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="222"/>
@@ -2097,14 +2014,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>top</source>
-        <translation type="obsolete">πάνω μέρος</translation>
-    </message>
-    <message>
-        <source>bottom</source>
-        <translation type="obsolete">κάτω μέρος</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="263"/>
         <source>silkscreen bottom</source>
         <translation type="unfinished"></translation>
@@ -2113,10 +2022,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="264"/>
         <source>silkscreen top</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Part</source>
-        <translation type="vanished">Εξάρτημα</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="1336"/>
@@ -2405,10 +2310,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <source>Unrouted connections</source>
         <comment>dialog title</comment>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save %1</source>
-        <translation type="vanished">Αποθήκευση %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1571"/>
@@ -2733,10 +2634,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>%1 - [%2]</translation>
     </message>
     <message>
-        <source>No copper top layer</source>
-        <translation type="vanished">Δεν υπάρχει πάνω επίπεδο χαλκού</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2598"/>
         <source>The copper top (copper 1) layer is not available on a one-sided board.  Please switch the board to double-sided or choose the copper bottom (copper 0) layer.</source>
         <translation>Το πανω επίπεδο χαλκού (copper 1) δεν είναι διαθέσιμο σε μία μονής όψης πλακέτα.  Παρακαλώ αλλάξτε την πλακέτα σε διπλής όψης ή επιλέξτε το κάτω επίπεδο (copper 0) χαλκού.</translation>
@@ -2807,10 +2704,6 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <location filename="../src/mainwindow/mainwindow.cpp" line="3169"/>
         <source>Fritzing uncompressed (*%1)</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unrouted connections</source>
-        <translation type="vanished">Μη δρομολογημένες συνδέσεις</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3225"/>
@@ -2913,10 +2806,6 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4157"/>
         <source>Cancel</source>
         <translation>Ακύρωση</translation>
-    </message>
-    <message>
-        <source>Choose a folder for exporting</source>
-        <translation type="vanished">Επιλογή φακέλου για την εξαγωγή</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="340"/>
@@ -4201,10 +4090,6 @@ Do you want to update now?</source>
         <translation>Αρχεία Fritzing (*%1 *%2 *%3 *%4 *%5);;Fritzing (*%1);;Διαμοιραζόμενα Fritzing (*%2);;Εξαρτήματα Fritzing (*%3);;Δοχεία Fritzing (*%4);;Διαμοιραζόμενα Δοχεία Fritzing (*%5)</translation>
     </message>
     <message>
-        <source>Revert?</source>
-        <translation type="vanished">Αναίρεση;</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="274"/>
         <source>This operation can not be undone--you will lose all of your changes.
 
@@ -4694,10 +4579,6 @@ Go ahead and revert?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Actual Size</source>
-        <translation type="vanished">Φυσικό Μέγεθος</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2312"/>
         <source>It doesn&apos;t seem to be possible to automatically determine the actual physical size of the monitor, so &apos;actual size&apos; as currently implemented is only a guess. Your best bet would be to drag out a ruler part, then place a real (physical) ruler on top and zoom until they match up.</source>
         <translation>Δεν μοιάζει να είναι εφικτό να καθοριστεί αυτόματα το φυσικό μέγεθος της οθόνης, έτσι το &apos;Φυσικό Μέγεθος&apos; είναι απλά μια εκτίμηση. Η καλύτερη λύση θα ήταν να τοποθετήσετε έναν κανόνα και μετά έναν πραγματικό κανόνα από πάνω να μεγεθύνεται μέχρι να υπάρξει ταύτιση.</translation>
@@ -4853,17 +4734,9 @@ Continue upload?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enter Text</source>
-        <translation type="vanished">QInputDialog::getText()</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4650"/>
         <source>Text will match part label, description, title, etc. Enter text to search for:</source>
         <translation>Το κείμενο θα ταιριάξει με την ετικέτα του εξαρτήματος, περιγραφή, τίτλο, κτλ. Εισάγετε κείμενο προς αναζήτηση:</translation>
-    </message>
-    <message>
-        <source>Search</source>
-        <translation type="vanished">Αναζήτηση</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4696"/>
@@ -5190,14 +5063,6 @@ Please check all views for potential side-effects.</source>
 Παρακαλώ ελέξτε όλες τις προβολές για τυχόν λάθη.</translation>
     </message>
     <message>
-        <source>Inspector</source>
-        <translation type="vanished">Ελεγκτής</translation>
-    </message>
-    <message>
-        <source>Undo History</source>
-        <translation type="vanished">Ιστορία Αναίρεσης</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="581"/>
         <source>Breadboard</source>
         <translation>Breadboard</translation>
@@ -5211,14 +5076,6 @@ Please check all views for potential side-effects.</source>
         <location filename="../src/mainwindow/mainwindow.cpp" line="599"/>
         <source>PCB</source>
         <translation>Τυπωμένο (PCB)</translation>
-    </message>
-    <message>
-        <source>Layers</source>
-        <translation type="vanished">Επίπεδα</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t get the dock widget</source>
-        <translation type="vanished">Δεν μπόρεσε να γίνει λήψη του widget απόθεσης</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="64"/>
@@ -5361,17 +5218,6 @@ Please check all views for potential side-effects.</source>
 </context>
 <context>
     <name>ModelBase</name>
-    <message numerus="yes">
-        <source>Unable to find the following %n part(s):</source>
-        <translation type="vanished">
-            <numerusform>Αδυναμία εύρεσης των ακόλουθων %n εξαρτημάτων:</numerusform>
-            <numerusform>Αδυναμία εύρεσης των ακόλουθων %n εξαρτημάτων:</numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>at</source>
-        <translation type="vanished">στο</translation>
-    </message>
     <message numerus="yes">
         <location filename="../src/model/modelbase.cpp" line="421"/>
         <source>Unable to find %n part(s). Click &apos;Show Details&apos; for a list of missing parts.</source>
@@ -5592,10 +5438,6 @@ Reason: %2 (errcode %3)</source>
         <translation>Αλλαγή επιπέδου ίχνους</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="262"/>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2384"/>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2412"/>
@@ -5727,10 +5569,6 @@ Enter keepout value:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ground Fill</source>
-        <translation type="obsolete">Γέμισμα Γείωσης</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1761"/>
         <source>Copper fill: please select only the board you want to fill.</source>
         <translation>Γέμισμα χαλκού: παρακαλώ επιλέξτε μόνο την πλακέτα που θέλετε να γεμίσετε.</translation>
@@ -5780,43 +5618,6 @@ Enter keepout value:</source>
         <source>Your sketch does not have a board yet. You cannot fabricate this sketch without a PCB part.</source>
         <translation>Το σχέδιο σας δεν έχει πλακέτα ακόμη. Δεν μπορείτε να κατασκευάσετε αυτό το σχέδιο χωρίς τυπωμένο (PCB).</translation>
     </message>
-    <message>
-        <source>Enter Keepout</source>
-        <translation type="vanished">Εισαγωγή Ορίου Ασφαλείας</translation>
-    </message>
-    <message>
-        <source>Keepout is in mils (.001 inches).
-
-</source>
-        <translation type="vanished">Όριο Ασφαλείας σε mil (.0001 ίντσες).
-
-</translation>
-    </message>
-    <message>
-        <source>Note that due to aliasing, distances may be too short by up to 2 mils
-</source>
-        <translation type="vanished">Σημείωστε πως λόγο της ομαλοποίησης (aliasing), οι αποστάσεις μπορεί να είναι μικρότερες μέχρι και 2 mils</translation>
-    </message>
-    <message>
-        <source>so you may want to increase the keepout value by that much.
-
-</source>
-        <translation type="vanished">οπότε ίσως θέλετε να αυξήσετε το όριο ασφαλείας κατά αυτό το ποσό.
-
-</translation>
-    </message>
-    <message>
-        <source>10 mils is a good default choice.
-
-</source>
-        <translation type="vanished">10 mils είναι μία καλή προεπιλογή.
-
-</translation>
-    </message>
-    <message>
-        <source>Enter keepout value:</source>
-        <translation type="vanished">Εισάγετε την τιμή του ορίου ασφαλείας:</translation>
-    </message>
 </context>
 <context>
     <name>PEConnectorsView</name>
@@ -5844,10 +5645,6 @@ Enter keepout value:</source>
 <context>
     <name>PEMainWindow</name>
     <message>
-        <source>Parts Editor</source>
-        <translation type="vanished">Επεξεργαστής Εξαρτημάτων</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="524"/>
         <source>SVG</source>
         <translation>SVG</translation>
@@ -5868,10 +5665,6 @@ Enter keepout value:</source>
         <translation>Δεν επιτρέπεται διπλότυπη ιδιότητα &apos;παραλλαγή&apos;</translation>
     </message>
     <message>
-        <source>Close without saving?</source>
-        <translation type="vanished">Κλείσιμο χωρίς αποθήκευση;</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="396"/>
         <source>Close without saving</source>
         <translation>Κλείσιμο χωρίς αποθήκευση</translation>
@@ -5880,10 +5673,6 @@ Enter keepout value:</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="397"/>
         <source>Keep working</source>
         <translation>Συνέχιση εργασίας</translation>
-    </message>
-    <message>
-        <source>Exiting the Parts Editor now is fine, as long as you remember to finish the assignments later.</source>
-        <translation type="vanished">Η έξοδος από τον επεξεργαστή Εξαρτημάτων είναι εντάξει, αρκεί να θυμηθείτε να τελειώσετε την εργασία αργότερα.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="436"/>
@@ -6098,33 +5887,9 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Copy problem</source>
-        <translation type="vanished">Πρόβλημα αντιγραφής</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1609"/>
         <source>Unable to make a local copy of: &apos;%1&apos;</source>
         <translation>Αδυναμία δημιουργίας τοπικού αντιγράφου του &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>You may use a PNG or JPG image to construct your part, but it is better to use an SVG. </source>
-        <translation type="vanished">Μπορείτε να χρησιμοποιήσετε ένα αρχείο PNG ή JPG για να κατασκευάσετε το εξάρτημά σας, αλλά είναι καλύτερα να χρησιμοποιήσετε ένα SVG. </translation>
-    </message>
-    <message>
-        <source>PNG and JPG images retain their nature as bitmaps and do not look good when scaled--</source>
-        <translation type="vanished">Οι PNG και JPG εικόνες δεν εμφανίζονται όμορφα όταν αλλάζουν διαστάσεις--</translation>
-    </message>
-    <message>
-        <source>so for Fritzing parts it is best to use PNG and JPG only as placeholders.</source>
-        <translation type="vanished">έτσι για εξαρτήματα του Fritzing είναι καλύτερα να χρησιμοποιείτε PNG και JPG μόνο ως δείκτες τοποθέτησης.</translation>
-    </message>
-    <message>
-        <source>Use of PNG and JPG discouraged</source>
-        <translation type="vanished">Η χρήση PNG και JPG δεν ενδείκνυται</translation>
-    </message>
-    <message>
-        <source>Conversion problem</source>
-        <translation type="vanished">Πρόβλημα Μετατροπής</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="949"/>
@@ -6143,10 +5908,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>Εμφάνιση μεταδεδομένων του συνδετήρα σε μορφή λίστας</translation>
     </message>
     <message>
-        <source>Blank not allowed</source>
-        <translation type="vanished">Δεν επιτρέπονται τα κενά</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1032"/>
         <source>The value of &apos;%1&apos; can not be blank.</source>
         <translation>Η τιμή του &apos;%1&apos; δεν μπορεί να είναι κενή.</translation>
@@ -6157,17 +5918,9 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>Αλλαγή του %1 σε %2</translation>
     </message>
     <message>
-        <source>Must be unique</source>
-        <translation type="vanished">Πρέπει να είναι μοναδικό</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1069"/>
         <source>Variant &apos;%1&apos; is in use. The variant name must be unique.</source>
         <translation>Η παραλλαγή &apos;%1&apos; είναι σε χρήση. Το όνομα πρέπει να είναι μοναδικό.</translation>
-    </message>
-    <message>
-        <source>Duplicate problem</source>
-        <translation type="vanished">Πρόβλημα διπλότυπου</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1523"/>
@@ -6185,10 +5938,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>Παρακαλώ ξανα εξάγετε το SVG αρχείο χρησιμοποιώντας την ρύθμιση αυτή.</translation>
     </message>
     <message>
-        <source>Fonts</source>
-        <translation type="vanished">Γραμματοσειρά</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1550"/>
         <source>Fritzing currently only supports OCRA and Droid fonts--these have been substituted in for the fonts in &apos;%1&apos;</source>
         <translation>Το Fritzing αυτή την στιγμή υποστηρίζει μόνο OCRA και Droid γραμματοσειρές--αυτέςέχουν υποκαθίσταθεί για τις γραμματοσειρές στο &apos;%1&apos;</translation>
@@ -6200,10 +5949,6 @@ This warning will not be repeated in this session of Fritzing</source>
 %2</source>
         <translation>Αδυναμία φόρτωσης του αρχείου εικόνας &apos;%1&apos;:
 %2</translation>
-    </message>
-    <message>
-        <source>SVG problem</source>
-        <translation type="vanished">Πρόβλημα SVG</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="365"/>
@@ -6245,24 +5990,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2352"/>
         <source>The file %2 with prefix %1 was not saved.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message numerus="yes">
-        <source>This part has %n unassigned connectors </source>
-        <translation type="vanished">
-            <numerusform>Αυτό το εξάρτημα έχει %n ασύνδετους συνδετήρες </numerusform>
-            <numerusform>Αυτό το εξάρτημα έχει %n ασύνδετους συνδετήρες </numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>across %n views. </source>
-        <translation type="vanished">
-            <numerusform>διά μέσου %n προβολών. </numerusform>
-            <numerusform>διά μέσου %n προβολών.</numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>Until all connectors are assigned to SVG elements, the part will not work correctly. </source>
-        <translation type="vanished">Μέχρι όλοι οι συνδετήρες να ανατεθούν σε SVG στοιχεία, το εξάρτημα δεν θα λειτουργεί σωστά. </translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="537"/>
@@ -6351,22 +6078,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>Αδυναμία ανάλυσης &apos;%1&apos;: %2 γραμμή:%3 στήλη:%4</translation>
     </message>
     <message>
-        <source>There are no copper layers defined in: %1. </source>
-        <translation type="vanished">Δεν υπάρχουν καθορισμένα επίπεδα χαλκού στο: %1. </translation>
-    </message>
-    <message>
-        <source>See &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;this explanation&lt;/a&gt;.</source>
-        <translation type="vanished">Δείτε &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;αυτή την εξήγηση&lt;/a&gt;.</translation>
-    </message>
-    <message>
-        <source>&lt;br/&gt;&lt;br/&gt;This will not be a problem in the next release of the Parts Editor, </source>
-        <translation type="vanished">&lt;br/&gt;&lt;br/&gt;Αυτό δεν θα είναι πρόβλημα στην επόμενη έκδοση του Επεξεργαστή Εξαρτημάτων, </translation>
-    </message>
-    <message>
-        <source>but for now please modify the file according to the instructions in the link.</source>
-        <translation type="vanished">αλλά για τώρα παρακαλώ τροποποιήστε το αρχείο σύμφωνα με τις οδηγίες στον σύνδεσμο.</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1636"/>
         <source>no schematics found in %1</source>
         <translation>δεν βρέθηκε σχηματικό στο %1</translation>
@@ -6437,34 +6148,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>&amp;Επεξεργασία</translation>
     </message>
     <message>
-        <source>This part has bendable legs. </source>
-        <translation type="vanished">Αυτό το εξάρτημα έχει εύκαμπτα πόδια. </translation>
-    </message>
-    <message>
-        <source>This version of the Parts Editor does not yet support editing bendable legs, and the legs may not be displayed correctly in breadboard view . </source>
-        <translation type="vanished">Αυτή η έκδοση του Επεξεργαστή Εξαρτημάτων δεν υποστηρίζει ακόμη επεξεργασία εύκαμπτων ποδιών, και τα πόδια ίσως να μην προβάλλονται σωστά στην προβολή breadboard . </translation>
-    </message>
-    <message>
-        <source>If you make changes to breadboard view, or change connector metadata, the legs may no longer work. </source>
-        <translation type="vanished">Αν πραγματοποιήσετε αλλαγές στην προβολή breadboard, ή αλλάξετε τα μεταδεδομένα, τα πόδια ίσως πλέον δεν λειτουργούν. </translation>
-    </message>
-    <message>
-        <source>You can safely make changes to Schematic or PCB view.
-
-</source>
-        <translation type="vanished">Μπορείτε με ασφάλεια να πραγματοποιήσετε αλλαγές στην προβολή Σχηματικού ή PCB.
-
-</translation>
-    </message>
-    <message>
-        <source>This warning will not be repeated in this session of Fritzing</source>
-        <translation type="vanished">Αυτή η προειδοποίηση δεν θα επαναληφθεί σε αυτή την συνεδρία του Fritzing</translation>
-    </message>
-    <message>
-        <source>Unable to load &apos;%1&apos;. Please close the parts editor without saving and try again.</source>
-        <translation type="vanished">Αδυναμία φόρτωσης &apos;%1&apos;. Παρακαλώ κλείστε τον επεξεργαστή εξαρτημάτων χωρίς αποθήκευση και προσπαθήστε πάλι.</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1575"/>
         <source>Unable to load image file &apos;%1&apos;</source>
         <translation>Αδυναμία φόρτωσης του αρχείου εικόνας %1</translation>
@@ -6475,10 +6158,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sketch Change Warning</source>
-        <translation type="vanished">Προειδοποίηση Αλλαγής Σχεδίου</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2147"/>
         <source>The open sketch &apos;%1&apos; uses the part you are editing. </source>
         <translation>Το ανοικτό σχέδιο &apos;%1&apos; χρησιμοποιεί τα εξαρτήματα που επεξεργάζεστε. </translation>
@@ -6487,22 +6166,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2148"/>
         <source>Saving this part will make a change to the sketch that cannot be undone.</source>
         <translation>Η αποθήκευση αυτού του εξαρτήματος θα δημιουργήσει αλλαγές στο σχέδιο που δεν μπορούν να αναιρεθούν.</translation>
-    </message>
-    <message>
-        <source>The open sketches </source>
-        <translation type="vanished">Τα ανοικτά σχέδια </translation>
-    </message>
-    <message>
-        <source>&apos;%1&apos;, </source>
-        <translation type="vanished">&apos;%1&apos;, </translation>
-    </message>
-    <message>
-        <source>and &apos;%1&apos; </source>
-        <translation type="vanished">και &apos;%1&apos; </translation>
-    </message>
-    <message>
-        <source>Saving this part will make a change to these sketches that cannot be undone.</source>
-        <translation type="vanished">Η αποθήκευση αυτού του εξαρτήματος θα δημιουργήσει αλλαγές σε αυτλα τα σχέδια που δεν μπορούν να αναιρεθούν.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2166"/>
@@ -6527,10 +6190,6 @@ Go ahead and save?</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2734"/>
         <source>Remove %1 connectors</source>
         <translation>Αφαίρεση %1 συνδετήρων</translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">Αποθήκευση &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2753"/>
@@ -6922,10 +6581,6 @@ Go ahead and save?</source>
         <translation>Επεξεργασία Ετικέτας Ακίδων</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/items/paletteitem.cpp" line="620"/>
         <location filename="../src/items/paletteitem.cpp" line="631"/>
         <location filename="../src/items/paletteitem.cpp" line="655"/>
@@ -7168,10 +6823,6 @@ Go ahead and save?</source>
         <translation type="unfinished">Ρύθμιση τιμής για %1</translation>
     </message>
     <message>
-        <source>Set label for %1</source>
-        <translation type="vanished">Ρύθμιση τιμής για %1</translation>
-    </message>
-    <message>
         <location filename="../src/items/partlabel.cpp" line="760"/>
         <source>Label text:</source>
         <translation>Κείμενο ετικέτας:</translation>
@@ -7198,10 +6849,6 @@ Go ahead and save?</source>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="415"/>
         <source>Fritzing Bin (*%1)</source>
         <translation>Δοχείο Fritzing (*%1)</translation>
-    </message>
-    <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="456"/>
@@ -7245,10 +6892,6 @@ Go ahead and save?</source>
         <translation type="unfinished">Προσθήκη στο δοχείο</translation>
     </message>
     <message>
-        <source>Save bin &quot;%1&quot;</source>
-        <translation type="vanished">Αποθήκευση δοχείου &quot;%1&quot;</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="584"/>
         <source>Do you want to save the changes you made in the bin &quot;%1&quot;?</source>
         <translation>Θέλετε να αποθηκεύσετε τις αλλαγές που κάνατε στο δοχείο &quot;%1&quot;;</translation>
@@ -7262,10 +6905,6 @@ Go ahead and save?</source>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="590"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
-    </message>
-    <message>
-        <source>Add to bin</source>
-        <translation type="vanished">Προσθήκη στο δοχείο</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="697"/>
@@ -7299,10 +6938,6 @@ Go ahead and save?</source>
         <location filename="../src/items/perfboard.cpp" line="253"/>
         <source>set board size</source>
         <translation>ρύθμιση μεγέθους της πλακέτας</translation>
-    </message>
-    <message>
-        <source>Performance Warning</source>
-        <translation type="vanished">Προειδοποίηση Επίδοσης</translation>
     </message>
     <message>
         <location filename="../src/items/perfboard.cpp" line="296"/>
@@ -7341,14 +6976,6 @@ Note: this warning will not be repeated during this session.</source>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="80"/>
         <source>&lt;p&gt;&lt;h2&gt;Pin Label Editor&lt;/h2&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;h2&gt;Επεξεργαστής Ετικετών Ακίδων&lt;/h2&gt;&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Click on a label next to a pin number to rename that pin.</source>
-        <translation type="vanished">&lt;p&gt;Κάντε &quot;κλικ&quot; σε μία ετικέτα δίπλα στον αριθμό κάποιας ακίδα για να μετονομάσετε την ακίδα.</translation>
-    </message>
-    <message>
-        <source>You can use the tab key to move through the labels in order.&lt;/p&gt;</source>
-        <translation type="vanished">Μπορείτε να χρησιμοποιήσετε το πλήκτρο tab για να αλλάζετε μεταξύ των ετικετών με σειρά.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="81"/>
@@ -7907,14 +7534,6 @@ This feature is enabled by default. If you need to maintain compatibility with o
         <translation type="unfinished">Παράθυρο Κώδικα - %1</translation>
     </message>
     <message>
-        <source>Code Window</source>
-        <translation type="vanished">Παράθυρο Κώδικα</translation>
-    </message>
-    <message>
-        <source>Code Window - %1</source>
-        <translation type="vanished">Παράθυρο Κώδικα - %1</translation>
-    </message>
-    <message>
         <location filename="../src/program/programwindow.cpp" line="499"/>
         <source>%1%2</source>
         <translation type="unfinished">%1%2</translation>
@@ -8282,10 +7901,6 @@ is already there, we won&apos;t add it again, right?</source>
         <translation>Επιλογή %1</translation>
     </message>
     <message>
-        <source>files</source>
-        <translation type="vanished">αρχεία</translation>
-    </message>
-    <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="96"/>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="148"/>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="165"/>
@@ -8603,10 +8218,6 @@ Fritzing still works, but you won&apos;t be able to change parts properties.</so
         <location filename="../src/svg/x2svg.cpp" line="71"/>
         <source>failure in svg conversion 2</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>failure in svg conversion 2: %1 %2 %3</source>
-        <translation type="vanished">σφάλμα στην svg μετατροπή 2: %1 %2 %3</translation>
     </message>
     <message>
         <location filename="../src/utils/fileprogressdialog.cpp" line="68"/>
@@ -9336,10 +8947,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
 <context>
     <name>Resistor</name>
     <message>
-        <source>Resistor</source>
-        <translation type="vanished">Αντίσταση</translation>
-    </message>
-    <message>
         <location filename="../src/items/resistor.cpp" line="121"/>
         <source>%1 %2 Resistor</source>
         <translation type="unfinished"></translation>
@@ -9463,10 +9070,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>Ruler</name>
-    <message>
-        <source>width</source>
-        <translation type="vanished">πλάτος</translation>
-    </message>
     <message>
         <location filename="../src/items/ruler.cpp" line="198"/>
         <source>inch</source>
@@ -9839,10 +9442,6 @@ Netlist:
         <translation>Δημιουργία και σύνδεση καλωδίου</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="4140"/>
         <source>This seems like an attempt to create a trace across layers. This circumstance should not arise: please contact the developers.</source>
         <translation>Αυτό μοιάζει με προσπάθεια για την δημιουργία ενός ίχνους διαμέσου επιπέδων. Αυτό δεν έπρεπε να συμβεί: παρακαλώ ειδοποιείστε τους προγραμματιστές.</translation>
@@ -9861,10 +9460,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="4147"/>
         <source>trace</source>
         <translation>ίχνους</translation>
-    </message>
-    <message>
-        <source>Rotate %2 (%1)</source>
-        <translation type="vanished">Περιστροφή %2 (%1)</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="5094"/>
@@ -9925,18 +9520,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="7667"/>
         <source>Move label &apos;%1&apos;</source>
         <translation>Μετακίνηση ετικέτας &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>%1 label &apos;%2&apos;</source>
-        <translation type="vanished">%1 ετικέτα %2</translation>
-    </message>
-    <message>
-        <source>Rotate</source>
-        <translation type="vanished">Περιστροφή</translation>
-    </message>
-    <message>
-        <source>Flip</source>
-        <translation type="vanished">Αναστροφή</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/sketch/sketchwidget.cpp" line="7720"/>
@@ -10067,10 +9650,6 @@ The parts will be moved automatically. You can use the Undo History to review th
         <translation>Δεν υπάρχουν μη δρομολογημένες συνδέσεις</translation>
     </message>
     <message>
-        <source>Unrouted connections</source>
-        <translation type="vanished">Μη δρομολογημένς συνδέσεις</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="10049"/>
         <source>%1
 
@@ -10106,14 +9685,6 @@ Note: you can also trigger this display by mousing down on the routing status te
         <translation>Ο μηχανισμός εναλλαγής είναι απενεργοποιημένος για:
 
 </translation>
-    </message>
-    <message>
-        <source>and %1 other parts</source>
-        <translation type="vanished">και %1 άλλα εξαρτήματα</translation>
-    </message>
-    <message>
-        <source>and %1 other properties</source>
-        <translation type="vanished">και %1 άλλες ιδιότητες</translation>
     </message>
     <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="146"/>
@@ -10193,10 +9764,6 @@ and %1 other properties</source>
         <translation type="unfinished">Ετικέτες Δικτύων</translation>
     </message>
     <message>
-        <source>Net labels</source>
-        <translation type="vanished">Ετικέτες Δικτύων</translation>
-    </message>
-    <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="471"/>
         <source>Net labels cannot be blank</source>
         <translation>Οι ετικέτες δικτύων δεν μπορεί να είναι κενές</translation>
@@ -10208,10 +9775,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="40"/>
         <source>Fritzing Tips and Tricks</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tips and Tricks</source>
-        <translation type="vanished">Πληροφορίες και Κόλπα</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="76"/>

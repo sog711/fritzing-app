@@ -69,10 +69,6 @@
         <translation>Janu Sieberovi, Yaniv Steinerovi, Olafu Vaolovi, </translation>
     </message>
     <message>
-        <source>Michaela Vieser and Julia Werner.</source>
-        <translation type="vanished">Michaele Vieserové a Julii Wernerové.</translation>
-    </message>
-    <message>
         <location filename="../src/help/aboutbox.cpp" line="116"/>
         <source>Thanks for the translations go out to: </source>
         <translation type="unfinished"></translation>
@@ -556,17 +552,9 @@
         <translation type="unfinished">Vymazat zásobník</translation>
     </message>
     <message>
-        <source>Delete bin</source>
-        <translation type="vanished">Vymazat zásobník</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1166"/>
         <source>Do you really want to delete bin &apos;%1&apos;?  This action cannot be undone.</source>
         <translation>Opravdu chcete vymazat zásobník &apos;%1&apos;?  Tuto akci nelze vrátit.</translation>
-    </message>
-    <message>
-        <source>Read-only bin</source>
-        <translation type="vanished">Zásobník pouze pro čtení</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1218"/>
@@ -588,10 +576,6 @@
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1226"/>
         <source>Please choose a name for the bin:</source>
         <translation>Zvolte název pro zásobník:</translation>
-    </message>
-    <message>
-        <source>Remove from Bin</source>
-        <translation type="vanished">Odstranit ze zásobníku</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1296"/>
@@ -780,17 +764,9 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to load</source>
-        <translation type="vanished">Nelze načíst</translation>
-    </message>
-    <message>
         <location filename="../src/items/resizableboard.cpp" line="522"/>
         <source>Unable to load image from %1 %2</source>
         <translation>Nelze načíst obrázek z %1 %2</translation>
-    </message>
-    <message>
-        <source>Can load, but</source>
-        <translation type="vanished">Lze načíst ale</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="530"/>
@@ -1091,10 +1067,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <translation>Připojeno k %1 : %2, %3, %4, %5, %6</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="vanished">Chyba</translation>
-    </message>
-    <message>
         <location filename="../src/program/consolewindow.cpp" line="153"/>
         <source>Error</source>
         <comment>dialog title</comment>
@@ -1126,10 +1098,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <comment>dialog title</comment>
         <translation type="unfinished">Kritická chyba</translation>
     </message>
-    <message>
-        <source>Critical Error</source>
-        <translation type="vanished">Kritická chyba</translation>
-    </message>
 </context>
 <context>
     <name>DRC</name>
@@ -1152,10 +1120,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <location filename="../src/autoroute/drc.cpp" line="269"/>
         <source>Reposition them and run the DRC again to find more problems</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
     </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="284"/>
@@ -1229,10 +1193,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 <context>
     <name>DebugDialog</name>
     <message>
-        <source>for debugging</source>
-        <translation type="vanished">pro debugging</translation>
-    </message>
-    <message>
         <location filename="../src/debugdialog.cpp" line="138"/>
         <source>for debugging</source>
         <comment>dialog title</comment>
@@ -1292,10 +1252,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 <context>
     <name>FApplication</name>
     <message>
-        <source>Fritzing failure</source>
-        <translation type="vanished">Aplikace Fritzing selhala</translation>
-    </message>
-    <message>
         <location filename="../src/fapplication.cpp" line="1860"/>
         <location filename="../src/fapplication.cpp" line="1868"/>
         <location filename="../src/fapplication.cpp" line="1871"/>
@@ -1341,24 +1297,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 Would you like to regenerate the parts database?
 </source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Regenerate parts database?</source>
-        <translation type="vanished">Obnovit databázi součástek ?</translation>
-    </message>
-    <message>
-        <source>Regenerating the parts database will take some minutes and you will have to restart Fritzing
-
-</source>
-        <translation type="vanished">Obnovení databáze součástek může trvat několik minut.
-Poté bude nutné restartovat Fritzing
-
-</translation>
-    </message>
-    <message>
-        <source>Would you like to regenerate the parts database?
-</source>
-        <translation type="vanished">Opravdu chcete obnovit databázi součástek?</translation>
     </message>
     <message>
         <location filename="../src/fapplication.cpp" line="2277"/>
@@ -1444,10 +1382,6 @@ Poté bude nutné restartovat Fritzing
         <translation type="unfinished">Fritzing</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/fabuploaddialog.cpp" line="161"/>
         <source>Error: </source>
         <translation type="unfinished"></translation>
@@ -1455,10 +1389,6 @@ Poté bude nutné restartovat Fritzing
 </context>
 <context>
     <name>FabUploadProgress</name>
-    <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
     <message>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="181"/>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="211"/>
@@ -1481,10 +1411,6 @@ Poté bude nutné restartovat Fritzing
 </context>
 <context>
     <name>FirstTimeHelpDialog</name>
-    <message>
-        <source>First Time Help</source>
-        <translation type="vanished">První nápověda</translation>
-    </message>
     <message>
         <location filename="../src/help/firsttimehelpdialog.cpp" line="37"/>
         <source>First Time Help</source>
@@ -1531,17 +1457,9 @@ Poté bude nutné restartovat Fritzing
         <translation type="unfinished">Uložit &quot;%1&quot;</translation>
     </message>
     <message>
-        <source>%1 - %2</source>
-        <translation type="vanished">%1 - %2</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="132"/>
         <source>Specify a file name</source>
         <translation>Zadejte název souboru</translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">Uložit &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="238"/>
@@ -1572,10 +1490,6 @@ Poté bude nutné restartovat Fritzing
 </context>
 <context>
     <name>FzpInfo</name>
-    <message>
-        <source>Error</source>
-        <translation type="obsolete">Chyba</translation>
-    </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="64"/>
         <source>Cannot open file &apos;%1&apos;.</source>
@@ -1836,14 +1750,6 @@ Je také možné zvolit konektory jako výplň země kliknutím pravým tlačít
         <translation>Propojka</translation>
     </message>
     <message>
-        <source>Ratsnest line</source>
-        <translation type="vanished">Propojovací síť</translation>
-    </message>
-    <message>
-        <source>Trace wire %1</source>
-        <translation type="vanished">Plošný spoj %1</translation>
-    </message>
-    <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="792"/>
         <source>v. %1 %2</source>
         <translation>v. %1 %2</translation>
@@ -1872,10 +1778,6 @@ Je také možné zvolit konektory jako výplň země kliknutím pravým tlačít
 <context>
     <name>ItemBase</name>
     <message>
-        <source>family</source>
-        <translation type="vanished">rodina</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="223"/>
         <source>type</source>
         <translation>typ</translation>
@@ -1894,10 +1796,6 @@ Je také možné zvolit konektory jako výplň země kliknutím pravým tlačít
         <location filename="../src/items/itembase.cpp" line="226"/>
         <source>color</source>
         <translation>barva</translation>
-    </message>
-    <message>
-        <source>resistance</source>
-        <translation type="vanished">odpor</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="228"/>
@@ -1928,10 +1826,6 @@ Je také možné zvolit konektory jako výplň země kliknutím pravým tlačít
         <location filename="../src/items/itembase.cpp" line="233"/>
         <source>pin spacing</source>
         <translation>odstup pinů</translation>
-    </message>
-    <message>
-        <source>rated power</source>
-        <translation type="vanished">jmenovité napájení</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="222"/>
@@ -2121,26 +2015,6 @@ Je také možné zvolit konektory jako výplň země kliknutím pravým tlačít
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>banded</source>
-        <translation type="vanished">pruhovaný</translation>
-    </message>
-    <message>
-        <source>top</source>
-        <translation type="vanished">vrchní</translation>
-    </message>
-    <message>
-        <source>bottom</source>
-        <translation type="vanished">spodní</translation>
-    </message>
-    <message>
-        <source>copper bottom</source>
-        <translation type="vanished">měděná spodní</translation>
-    </message>
-    <message>
-        <source>copper top</source>
-        <translation type="vanished">měděná vrchní</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="263"/>
         <source>silkscreen bottom</source>
         <translation>popisková spodní</translation>
@@ -2149,10 +2023,6 @@ Je také možné zvolit konektory jako výplň země kliknutím pravým tlačít
         <location filename="../src/items/itembase.cpp" line="264"/>
         <source>silkscreen top</source>
         <translation>popisková vrchní</translation>
-    </message>
-    <message>
-        <source>Part</source>
-        <translation type="vanished">Součástka</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="1336"/>
@@ -2333,10 +2203,6 @@ Je také možné zvolit konektory jako výplň země kliknutím pravým tlačít
         <translation>Připraven</translation>
     </message>
     <message>
-        <source>Save %1</source>
-        <translation type="vanished">Uložit %1</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1571"/>
         <source>Unable to open &apos;%1&apos;: %2</source>
         <translation>Nelze otevřít &apos;%1&apos;:%2</translation>
@@ -2508,10 +2374,6 @@ Je také možné zvolit konektory jako výplň země kliknutím pravým tlačít
             <numerusform>Routing dokončen s použitím %n propojek</numerusform>
             <numerusform>Routing dokončen s použitím %n propojek</numerusform>
         </translation>
-    </message>
-    <message>
-        <source>Unrouted connections</source>
-        <translation type="vanished">Nezroutované propojky</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3225"/>
@@ -2763,10 +2625,6 @@ Je také možné zvolit konektory jako výplň země kliknutím pravým tlačít
         <translation>%1 - [%2]</translation>
     </message>
     <message>
-        <source>No copper top layer</source>
-        <translation type="vanished">Žádná měděná horní vrstva</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2598"/>
         <source>The copper top (copper 1) layer is not available on a one-sided board.  Please switch the board to double-sided or choose the copper bottom (copper 0) layer.</source>
         <translation>Na jednostranné desce není horní měděná vrstva (měď 1) k dispozici.  Přepněte desku na oboustrannou, nebo zvolte spodní měděnou vrstvu (měď 0).</translation>
@@ -2829,10 +2687,6 @@ Pracujeme na potlačení této zprávy a nyní Vám nezbývá, než zvolit mezi 
         <translation>nový návrh</translation>
     </message>
     <message>
-        <source>Schematic conversion</source>
-        <translation type="vanished">Konverze schématu</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2963"/>
         <source>Saving this sketch will convert it to the new schematic graphics standard. Go ahead and convert?</source>
         <translation>Uložení tohoto návrhu, jej převede na nový grafický standart (schématu). Pokračovat a převést ?</translation>
@@ -2877,10 +2731,6 @@ Pracujeme na potlačení této zprávy a nyní Vám nezbývá, než zvolit mezi 
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1865"/>
         <source>Your sketch does not have a board yet!  Please add a PCB in order to export to Gerber.</source>
         <translation>Váš návrh dosud neobsahuje desku! Pro úspěšný export do Gerber přidejte PCB.</translation>
-    </message>
-    <message>
-        <source>Choose a folder for exporting</source>
-        <translation type="vanished">Vybrat složku pro export</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="120"/>
@@ -4198,10 +4048,6 @@ Go ahead and revert?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Actual Size</source>
-        <translation type="vanished">Aktuální velikost</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2312"/>
         <source>It doesn&apos;t seem to be possible to automatically determine the actual physical size of the monitor, so &apos;actual size&apos; as currently implemented is only a guess. Your best bet would be to drag out a ruler part, then place a real (physical) ruler on top and zoom until they match up.</source>
         <translation>Zdá se, že není možné automaticky určit skutečnou, fyzickou velikost monitoru, takže současně implementovaná &apos;aktuální velikost&apos; je pouhý odhad. Nejlepší by bylo použít funkci pravítka, poté  přes něj umístit skutečné pravítko (fyzické) a  měnit velikost, dokud se neshodují.</translation>
@@ -5215,14 +5061,6 @@ Zkontrolujte, všechny pohledy pro potenciální vedlejší účinky.</translati
         <translation>Aktualizace %1 součástek</translation>
     </message>
     <message>
-        <source>Inspector</source>
-        <translation type="vanished">Inspektor</translation>
-    </message>
-    <message>
-        <source>Undo History</source>
-        <translation type="vanished">Historie Zpět</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="581"/>
         <source>Breadboard</source>
         <translation>Montážní deska</translation>
@@ -5236,14 +5074,6 @@ Zkontrolujte, všechny pohledy pro potenciální vedlejší účinky.</translati
         <location filename="../src/mainwindow/mainwindow.cpp" line="599"/>
         <source>PCB</source>
         <translation>DPS</translation>
-    </message>
-    <message>
-        <source>Layers</source>
-        <translation type="vanished">Vrstvy</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t get the dock widget</source>
-        <translation type="obsolete">Nelze zadokovat widget</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="64"/>
@@ -5387,18 +5217,6 @@ Zkontrolujte, všechny pohledy pro potenciální vedlejší účinky.</translati
 </context>
 <context>
     <name>ModelBase</name>
-    <message numerus="yes">
-        <source>Unable to find the following %n part(s):</source>
-        <translation type="vanished">
-            <numerusform>Nelze nalézt následující %n součástku:</numerusform>
-            <numerusform>Nelze nalézt následující %n součástky:</numerusform>
-            <numerusform>Nelze nalézt následujících %n součástek:</numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>at</source>
-        <translation type="vanished">v</translation>
-    </message>
     <message numerus="yes">
         <location filename="../src/model/modelbase.cpp" line="421"/>
         <source>Unable to find %n part(s). Click &apos;Show Details&apos; for a list of missing parts.</source>
@@ -5583,10 +5401,6 @@ Důvod: %2 (chyb.kód %3)</translation>
         <translation>Změnit vrstvu spoje</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="257"/>
         <source>Your sketch does not have a board yet! Please add a PCB to use this selection operation.</source>
         <translation type="unfinished"></translation>
@@ -5760,10 +5574,6 @@ Enter keepout value:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ground Fill</source>
-        <translation type="obsolete">Zemnící výplň</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1767"/>
         <source>Unable to create copper fill--probably the part wasn&apos;t dropped onto the PCB.</source>
         <translation>Nelze vytvořit měděnou výplň - pravděpodobně součástka nebyla vloženal na PCB.</translation>
@@ -5834,10 +5644,6 @@ Enter keepout value:</source>
 </context>
 <context>
     <name>PEMainWindow</name>
-    <message>
-        <source>Parts Editor</source>
-        <translation type="obsolete">Editor součástek</translation>
-    </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="524"/>
         <source>SVG</source>
@@ -6121,10 +5927,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Conversion problem</source>
-        <translation type="obsolete">Problém konverze</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="949"/>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2959"/>
         <source>Fritzing (New) Parts Editor</source>
@@ -6387,10 +6189,6 @@ Go ahead and save?</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2734"/>
         <source>Remove %1 connectors</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="obsolete">Uložit &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2753"/>
@@ -6782,10 +6580,6 @@ Go ahead and save?</source>
         <translation>Upravit popisku pinu</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/items/paletteitem.cpp" line="620"/>
         <location filename="../src/items/paletteitem.cpp" line="631"/>
         <location filename="../src/items/paletteitem.cpp" line="655"/>
@@ -7028,10 +6822,6 @@ Go ahead and save?</source>
         <translation type="unfinished">Nastaví popisek pro %1</translation>
     </message>
     <message>
-        <source>Set label for %1</source>
-        <translation type="vanished">Nastaví popisek pro %1</translation>
-    </message>
-    <message>
         <location filename="../src/items/partlabel.cpp" line="760"/>
         <source>Label text:</source>
         <translation>Text popisku:</translation>
@@ -7058,10 +6848,6 @@ Go ahead and save?</source>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="415"/>
         <source>Fritzing Bin (*%1)</source>
         <translation>Fritzing zásobník (*%1)</translation>
-    </message>
-    <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="456"/>
@@ -7105,10 +6891,6 @@ Go ahead and save?</source>
         <translation type="unfinished">Přidat do zásobníku</translation>
     </message>
     <message>
-        <source>Save bin &quot;%1&quot;</source>
-        <translation type="vanished">Uložit zásobník &quot;%1&quot;</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="584"/>
         <source>Do you want to save the changes you made in the bin &quot;%1&quot;?</source>
         <translation>Přejete si uložit změny provedené v zásobníku &quot;%1&quot;?</translation>
@@ -7122,10 +6904,6 @@ Go ahead and save?</source>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="590"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
-    </message>
-    <message>
-        <source>Add to bin</source>
-        <translation type="vanished">Přidat do zásobníku</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="697"/>
@@ -7154,10 +6932,6 @@ Go ahead and save?</source>
         <location filename="../src/items/perfboard.cpp" line="186"/>
         <source>size</source>
         <translation>velikost</translation>
-    </message>
-    <message>
-        <source>Performance Warning</source>
-        <translation type="vanished">Upozornění výkonu</translation>
     </message>
     <message>
         <location filename="../src/items/perfboard.cpp" line="296"/>
@@ -7201,14 +6975,6 @@ Poznámka: Během této relace se již toto varování nebude opakovat.</transla
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="80"/>
         <source>&lt;p&gt;&lt;h2&gt;Pin Label Editor&lt;/h2&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;h2&gt;Editor popisku pinu&lt;/h2&gt;&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Click on a label next to a pin number to rename that pin.</source>
-        <translation type="vanished">&lt;p&gt;Klikněte na popisek vedle čísla pinu pro přejmenování tohoto pinu.</translation>
-    </message>
-    <message>
-        <source>You can use the tab key to move through the labels in order.&lt;/p&gt;</source>
-        <translation type="vanished">Můžete použít klávesu Tab k posunu přes popisky.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="81"/>
@@ -7767,14 +7533,6 @@ This feature is enabled by default. If you need to maintain compatibility with o
         <translation type="unfinished">Okno s Kódem - %1</translation>
     </message>
     <message>
-        <source>Code Window</source>
-        <translation type="vanished">Okno s Kódem</translation>
-    </message>
-    <message>
-        <source>Code Window - %1</source>
-        <translation type="vanished">Okno s Kódem - %1</translation>
-    </message>
-    <message>
         <location filename="../src/program/programwindow.cpp" line="499"/>
         <source>%1%2</source>
         <translation>%1%2</translation>
@@ -8119,10 +7877,6 @@ je již v zásobníku. Chcete ji přidat znovu?</translation>
         <translation>hodnota</translation>
     </message>
     <message>
-        <source>files</source>
-        <translation type="vanished">soubory</translation>
-    </message>
-    <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="96"/>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="148"/>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="165"/>
@@ -8431,10 +8185,6 @@ Fritzing stále funguje, ale nebudete moci změnit vlastnosti Součástek.</tran
         <location filename="../src/svg/x2svg.cpp" line="71"/>
         <source>failure in svg conversion 2</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>failure in svg conversion 2: %1 %2 %3</source>
-        <translation type="vanished">selhání v SVG konverzi 2: %1 %2 %3</translation>
     </message>
     <message>
         <location filename="../src/utils/fileprogressdialog.cpp" line="68"/>
@@ -9177,14 +8927,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
 <context>
     <name>RegenerateDatabaseThread</name>
     <message>
-        <source>Unable to open temporary file</source>
-        <translation type="vanished">Nelze otevřít dočasný soubor</translation>
-    </message>
-    <message>
-        <source>Database failure</source>
-        <translation type="vanished">Chyba databáze</translation>
-    </message>
-    <message>
         <location filename="../src/fapplication.cpp" line="333"/>
         <source>Unable to open temporary file (%1)</source>
         <translation type="unfinished"></translation>
@@ -9208,10 +8950,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
 </context>
 <context>
     <name>Resistor</name>
-    <message>
-        <source>Resistor</source>
-        <translation type="vanished">Odpor</translation>
-    </message>
     <message>
         <location filename="../src/items/resistor.cpp" line="121"/>
         <source>%1 %2 Resistor</source>
@@ -9336,10 +9074,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>Ruler</name>
-    <message>
-        <source>width</source>
-        <translation type="vanished">šířka</translation>
-    </message>
     <message>
         <location filename="../src/items/ruler.cpp" line="198"/>
         <source>inch</source>
@@ -9476,10 +9210,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>SetColorDialog</name>
-    <message>
-        <source>%1 Color...</source>
-        <translation type="vanished">%1 Barva...</translation>
-    </message>
     <message>
         <location filename="../src/dialogs/setcolordialog.cpp" line="49"/>
         <source>%1 Color...</source>
@@ -9691,21 +9421,9 @@ Netlist:
         <translation>Vytvořit a připojit propojku</translation>
     </message>
     <message>
-        <source>Rotate %2 (%1)</source>
-        <translation type="vanished">Otočit %2 (%1)</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="6302"/>
         <source>Note text change</source>
         <translation>Text poznámky pozměněn</translation>
-    </message>
-    <message>
-        <source>Rotate</source>
-        <translation type="vanished">Otočit</translation>
-    </message>
-    <message>
-        <source>Flip</source>
-        <translation type="vanished">Překlopit</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="6174"/>
@@ -9736,10 +9454,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="3838"/>
         <source>Change leg bendpoint for %1.</source>
         <translation>Změnit zlomový bod pinu pro %1.</translation>
-    </message>
-    <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="4140"/>
@@ -9821,10 +9535,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="7667"/>
         <source>Move label &apos;%1&apos;</source>
         <translation>Posunout popisku &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>%1 label &apos;%2&apos;</source>
-        <translation type="vanished">popiska %1 &apos;%2&apos;</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/sketch/sketchwidget.cpp" line="7720"/>
@@ -9944,10 +9654,6 @@ The parts will be moved automatically. You can use the Undo History to review th
         <location filename="../src/sketch/sketchwidget.cpp" line="10047"/>
         <source>There are no unrouted connections</source>
         <translation>Žádné nezroutované propojky</translation>
-    </message>
-    <message>
-        <source>Unrouted connections</source>
-        <translation type="vanished">Nezroutované propojky</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="10049"/>
@@ -10076,10 +9782,6 @@ and %1 other properties</source>
         <translation>Fritzing Tipy a Triky</translation>
     </message>
     <message>
-        <source>Tips and Tricks</source>
-        <translation type="vanished">Tipy a Triky</translation>
-    </message>
-    <message>
         <location filename="../src/help/tipsandtricks.cpp" line="76"/>
         <source>examples</source>
         <translation>Příklady</translation>
@@ -10093,18 +9795,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="81"/>
         <source>parts</source>
         <translation>Součástky</translation>
-    </message>
-    <message>
-        <source>Can&apos;t find your part? Search for it by clicking the magnifier icon in the Parts Bin and type in some keywords</source>
-        <translation type="vanished">Nemůžete nalézt nějakou součástku? Vyhledejte ji kliknutím na ikonu lupy v panelu součástek a začněte psát její název</translation>
-    </message>
-    <message>
-        <source>If you can&apos;t find a part in the Parts Bin, the Generic IC is your friend.  Drag it onto your sketch, then use the widgets in the Inspector to: choose from among 25 different through-hole and SMD packages; change the pin label; and--for DIPs and SIPs--change the number of pins.  You can also change the pin names with the Pin Label editor</source>
-        <translation type="vanished">Jestliže nemůžete najít svoji součástku v panelu součástek, obecné tvary součástek vám pomohou (v angličtině Generic IC). Přesuňte je do vašeho návrhu, poté použijte možnosti přizpůsobení v panelu Inspektor. Máte tyto možnosti: výběr z 25 různých standartních a SMD pouzder; Změnit popisek pinu; pro pouzdra DIP a SIP měnit počet pinů; Změnit názvy pinů můžete také přes editor popisků pinů</translation>
-    </message>
-    <message>
-        <source>An icon in the parts bin may actually represent multiple related parts.  So when you drag an icon from the parts bin into a sketch, make sure you look at the inspector.  The inspector will display the range of choices available for you to modify a part, or swap it for a related part. The parts bin icon will also be a little &apos;stack&apos; and not just a flat icon.</source>
-        <translation type="vanished">Ikona v panelu součástek může reprezentovat vícero typů obdobných součástek.Z tohoto důvodu pokud přesunete součástku do vašeho návrhu, by jste měli zkontrolovat panel Inspektor. Panel inspektor zobrazuje mnoho možných variací dané součástky a dává vám možnost upravit podrobné parametry dané součástky.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="85"/>
@@ -10236,10 +9926,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="145"/>
         <source>In the Parts Editor, to select a graphic underneath another graphic, use the mouse wheel while holding down the shift key.</source>
         <translation>V editoru součástek pokud potřebuje zobrazit grafiku spod jiné grafiky, použijte kolečko myši se stisknutým tlačítkem Shift.</translation>
-    </message>
-    <message>
-        <source>You can use the Parts Editor to find the SVG file for a part&apos;s image for a given view. In the Parts Editor, click on the tab for that view, then use &lt;b&gt;Show in Folder&lt;/b&gt; under the &lt;b&gt;File&lt;/b&gt; Menu</source>
-        <translation type="vanished">Můžete použít &quot;editor součástek&quot; k nalezení SVG souboru s obrázkem z daného pohledu. V editoru součástek klikněte na záložku daného pohledu a poté použijte &quot;&lt;b&gt;Zobrazit ve Složce&lt;/b&gt;&quot; v menu &quot;&lt;b&gt;Soubor&lt;/b&gt;&quot;</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="148"/>
@@ -10378,10 +10064,6 @@ and %1 other properties</source>
         <translation>Je jednodušší trasovat propoje mezi součástkami na jedné straně DPS horizontálně a na druhé straně DPS vertikálně.</translation>
     </message>
     <message>
-        <source>Route traces in 45-degree angles to reduce noise.</source>
-        <translation type="vanished">Vytvářejte propoje (na desce DPS) v úhlu 45 stupňů, snížíte tím riziko vytváření šumu.</translation>
-    </message>
-    <message>
         <location filename="../src/help/tipsandtricks.cpp" line="157"/>
         <source>If Fritzing is missing a particular part and you don&apos;t want to build one yourself, then use pin headers as connectors and the grid to align them.</source>
         <translation>Pokud v programu Fritzing chybí nějaká speciální součástka a nechcete se s ní vyrábět v &quot;editoru součástek&quot;, poté použijte &quot;Pinheadery&quot; jako konektory a mřížku k jejich uspořádání.</translation>
@@ -10397,17 +10079,9 @@ and %1 other properties</source>
         <translation>Pokud chcete vytvořit vlastní křivku na vaší desce DPS, vložte vlastní soubor SVG.</translation>
     </message>
     <message>
-        <source>To make a stylish Arduino shield in no time, switch the shape of the PCB from a rectangle to the Arduino</source>
-        <translation type="vanished">K vytvoření přehledného Arduino Shieldu, přepněte tvar DPS desky z tvaru obdelník na tvar Arduina</translation>
-    </message>
-    <message>
         <location filename="../src/help/tipsandtricks.cpp" line="166"/>
         <source>pcb production</source>
         <translation>Výroba DPS</translation>
-    </message>
-    <message>
-        <source>Smaller PCBs are more affortable than larger ones. Save space and money.</source>
-        <translation type="vanished">Menší desky DPS jsou levnější než ty větší. Šetřete místo a peníze.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="169"/>
@@ -10418,10 +10092,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="159"/>
         <source>Use copper-blocker parts to mask out areas that you want free of copper fill.</source>
         <translation>Používejte součástky &quot;Copper Fill blocker&quot; k zakrytí oblastí ve kterých nechcete aby se nacházela měď.</translation>
-    </message>
-    <message>
-        <source>A ratsnest line (very thin &apos;wire&apos;) between connections in one view means that those connections are somehow connected in another view.</source>
-        <translation type="vanished">Slabé linky (u velmi malých propojek) mezi propojkami v jednom pohledu znamenají, že jsou tyto spoje nějakým způsobem spojeny v jiném pohledu.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="160"/>

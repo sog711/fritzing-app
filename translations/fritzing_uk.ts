@@ -69,10 +69,6 @@
         <translation>Jan Sieber, Yaniv Steiner, Olaf Val, </translation>
     </message>
     <message>
-        <source>Michaela Vieser and Julia Werner.</source>
-        <translation type="vanished">Michaela Vieser та Julia Werner.</translation>
-    </message>
-    <message>
         <location filename="../src/help/aboutbox.cpp" line="116"/>
         <source>Thanks for the translations go out to: </source>
         <translation>Подяка за переклад: </translation>
@@ -555,17 +551,9 @@
         <translation>Знайти деталь на схемі</translation>
     </message>
     <message>
-        <source>Delete bin</source>
-        <translation type="vanished">Видалити набір</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1166"/>
         <source>Do you really want to delete bin &apos;%1&apos;?  This action cannot be undone.</source>
         <translation>Ви справді бажаєте видалити набір &apos;%1&apos;? Цю дію неможливо скасувати.</translation>
-    </message>
-    <message>
-        <source>Read-only bin</source>
-        <translation type="vanished">Набір лише для читання</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1218"/>
@@ -587,10 +575,6 @@
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1226"/>
         <source>Please choose a name for the bin:</source>
         <translation>Будь ласка, введіть назву набору:</translation>
-    </message>
-    <message>
-        <source>Remove from Bin</source>
-        <translation type="vanished">Видалити з набору</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1296"/>
@@ -628,24 +612,6 @@
 </context>
 <context>
     <name>Board</name>
-    <message>
-        <source>
-
-A custom board svg typically has one or two silkscreen layers and one board layer.
-</source>
-        <translation type="vanished">
-
-Користувацька плата у форматі SVG зазвичай містить один або два шари позначок, та один шар плати.
-</translation>
-    </message>
-    <message>
-        <source>Have a look at the circle_pcb.svg file in your Fritzing installation folder at parts/svg/core/pcb/.
-
-</source>
-        <translation type="vanished">Подивіться файл circle_pcb.svg у папці, де знаходиться Fritzing: parts/svg/core/pcb .
-
-</translation>
-    </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="84"/>
         <source>
@@ -764,10 +730,6 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
         <translation type="unfinished">Можна завантажити, але</translation>
     </message>
     <message>
-        <source>Before actual PCB production we recommend that you test your custom shape by using the &apos;File &gt; Export for Production &gt; Extended Gerber&apos; option. </source>
-        <translation type="vanished">Перед виготовленням друкованої плати ми рекомендуємо перевірити створений обрис за допомогою опції &apos;Файл &gt; Експорт для виготовлення &gt; опція Extended Gerber&apos;. </translation>
-    </message>
-    <message>
         <location filename="../src/items/resizableboard.cpp" line="436"/>
         <source>Check the resulting contour file with a Gerber-viewer application to make sure the shape came out as expected.&lt;br/&gt;&lt;br/&gt;</source>
         <translation>Перевірте отриманий обрис плати за допомогою Gerber-переглядача, і переконайтесь, що все вийшло як очікувалось.&lt;br/&gt;&lt;br/&gt;</translation>
@@ -802,25 +764,9 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
         <translation>&lt;br/&gt;Проте, вирізи неможливо правильно сформувати.</translation>
     </message>
     <message>
-        <source>&lt;br/&gt;&lt;br/&gt;If you intended your custom shape to have cutouts and you did not get the expected result, </source>
-        <translation type="vanished">&lt;br/&gt;&lt;br/&gt;Якщо ви хотіли додати вирізи до зробленого обрису, і не отримали бажаного результату, </translation>
-    </message>
-    <message>
-        <source>it is because Fritzing requires that you make cutouts using a shape &apos;subtraction&apos; or &apos;difference&apos; operation in your vector graphics editor.</source>
-        <translation type="vanished">то це через те, що Fritzing для створення вирізів вимагає використовувати операції &apos;віднімання&apos; або &apos;вирізання&apos; у вашому редакторі векторної графіки.</translation>
-    </message>
-    <message>
-        <source>Unable to load</source>
-        <translation type="vanished">Не вдалось завантажити</translation>
-    </message>
-    <message>
         <location filename="../src/items/resizableboard.cpp" line="522"/>
         <source>Unable to load image from %1 %2</source>
         <translation>Не вдалось завантажити зображення з %1 %2</translation>
-    </message>
-    <message>
-        <source>Can load, but</source>
-        <translation type="vanished">Можна завантажити, але</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="530"/>
@@ -1123,10 +1069,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <translation>Під&apos;єднатися до %1 : %2, %3, %4, %5, %6</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="vanished">Помилка</translation>
-    </message>
-    <message>
         <location filename="../src/program/consolewindow.cpp" line="153"/>
         <source>Error</source>
         <comment>dialog title</comment>
@@ -1158,10 +1100,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <comment>dialog title</comment>
         <translation type="unfinished">Критична помилка</translation>
     </message>
-    <message>
-        <source>Critical Error</source>
-        <translation type="vanished">Критична помилка</translation>
-    </message>
 </context>
 <context>
     <name>DRC</name>
@@ -1184,10 +1122,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <location filename="../src/autoroute/drc.cpp" line="269"/>
         <source>Reposition them and run the DRC again to find more problems</source>
         <translation>Перевстановіть їх, та запустіть ППМ ще раз, щоб знайти інші проблеми</translation>
-    </message>
-    <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
     </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="284"/>
@@ -1234,11 +1168,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 <context>
     <name>DRCResultsDialog</name>
     <message>
-        <source>DRC Results</source>
-        <translatorcomment>КПМ - контроль проектних норм</translatorcomment>
-        <translation type="vanished">Результати КПМ</translation>
-    </message>
-    <message>
         <location filename="../src/autoroute/drc.cpp" line="138"/>
         <source>DRC Results</source>
         <comment>dialog title</comment>
@@ -1265,10 +1194,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>DebugDialog</name>
-    <message>
-        <source>for debugging</source>
-        <translation type="vanished">для налагодження</translation>
-    </message>
     <message>
         <location filename="../src/debugdialog.cpp" line="138"/>
         <source>for debugging</source>
@@ -1329,10 +1254,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 <context>
     <name>FApplication</name>
     <message>
-        <source>Fritzing failure</source>
-        <translation type="vanished">Помилка Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/fapplication.cpp" line="1860"/>
         <location filename="../src/fapplication.cpp" line="1868"/>
         <location filename="../src/fapplication.cpp" line="1871"/>
@@ -1378,24 +1299,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 Would you like to regenerate the parts database?
 </source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Regenerate parts database?</source>
-        <translation type="vanished">Відновити базу даних деталей?</translation>
-    </message>
-    <message>
-        <source>Regenerating the parts database will take some minutes and you will have to restart Fritzing
-
-</source>
-        <translation type="vanished">Відновлення бази даних деталей займе кілька хвилин, і вам доведеться перезапустити Fritzing
-
-</translation>
-    </message>
-    <message>
-        <source>Would you like to regenerate the parts database?
-</source>
-        <translation type="vanished">Бажаєте відновити базу даних деталей?
-</translation>
     </message>
     <message>
         <location filename="../src/fapplication.cpp" line="2277"/>
@@ -1481,10 +1384,6 @@ Would you like to regenerate the parts database?
         <translation type="unfinished">Fritzing</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="obsolete">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/fabuploaddialog.cpp" line="161"/>
         <source>Error: </source>
         <translation type="unfinished"></translation>
@@ -1492,10 +1391,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FabUploadProgress</name>
-    <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
     <message>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="181"/>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="211"/>
@@ -1518,10 +1413,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FirstTimeHelpDialog</name>
-    <message>
-        <source>First Time Help</source>
-        <translation type="vanished">Перша допомога</translation>
-    </message>
     <message>
         <location filename="../src/help/firsttimehelpdialog.cpp" line="37"/>
         <source>First Time Help</source>
@@ -1574,10 +1465,6 @@ Would you like to regenerate the parts database?
         <translation type="unfinished">Зберегти &quot;%1&quot;</translation>
     </message>
     <message>
-        <source>%1 - %2</source>
-        <translation type="vanished">%1 — %2</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="132"/>
         <source>Specify a file name</source>
         <translation>Вкажіть ім’я файлу</translation>
@@ -1593,10 +1480,6 @@ Would you like to regenerate the parts database?
         <translation>Ctrl+D</translation>
     </message>
     <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">Зберегти &quot;%1&quot;</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="238"/>
         <source>Do you want to save the changes you made in the document &quot;%1&quot;?</source>
         <translation>Ви бажаєте зберегти зроблені зміни у документі &quot;%1&quot;?</translation>
@@ -1609,10 +1492,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FzpInfo</name>
-    <message>
-        <source>Error</source>
-        <translation type="obsolete">Помилка</translation>
-    </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="64"/>
         <source>Cannot open file &apos;%1&apos;.</source>
@@ -1848,14 +1727,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation type="unfinished">Розведення доріжки %1</translation>
     </message>
     <message>
-        <source>Ratsnest line</source>
-        <translation type="vanished">Навісний монтаж</translation>
-    </message>
-    <message>
-        <source>Trace wire %1</source>
-        <translation type="vanished">Розведення доріжки %1</translation>
-    </message>
-    <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="746"/>
         <source>No SPICE information. This part will not be simulated.</source>
         <translation>Немає інформації про SPICE. Ця частина не буде симулюватися.</translation>
@@ -1909,10 +1780,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
 <context>
     <name>ItemBase</name>
     <message>
-        <source>family</source>
-        <translation type="vanished">сімейство</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="223"/>
         <source>type</source>
         <translation>тип</translation>
@@ -1931,10 +1798,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="226"/>
         <source>color</source>
         <translation>колір</translation>
-    </message>
-    <message>
-        <source>resistance</source>
-        <translation type="vanished">опір</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="228"/>
@@ -1965,10 +1828,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="233"/>
         <source>pin spacing</source>
         <translation>відстань між штирками</translation>
-    </message>
-    <message>
-        <source>rated power</source>
-        <translation type="vanished">номінальна потужність</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="222"/>
@@ -2158,26 +2017,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>banded</source>
-        <translation type="vanished">смугастий</translation>
-    </message>
-    <message>
-        <source>top</source>
-        <translation type="vanished">верх</translation>
-    </message>
-    <message>
-        <source>bottom</source>
-        <translation type="vanished">низ</translation>
-    </message>
-    <message>
-        <source>copper bottom</source>
-        <translation type="vanished">мідний низ</translation>
-    </message>
-    <message>
-        <source>copper top</source>
-        <translation type="vanished">мідний верх</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="263"/>
         <source>silkscreen bottom</source>
         <translation>шар позначок знизу</translation>
@@ -2186,18 +2025,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="264"/>
         <source>silkscreen top</source>
         <translation>шар позначок зверху</translation>
-    </message>
-    <message>
-        <source>mn</source>
-        <translation type="vanished">мн</translation>
-    </message>
-    <message>
-        <source>mpn</source>
-        <translation type="vanished">mpn</translation>
-    </message>
-    <message>
-        <source>Part</source>
-        <translation type="vanished">Деталь</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="1336"/>
@@ -2521,10 +2348,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation type="unfinished">Нерозведені з’єднання</translation>
     </message>
     <message>
-        <source>Save %1</source>
-        <translation type="vanished">Зберегти %1</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1570"/>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1588"/>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1652"/>
@@ -2782,10 +2605,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <translation>%1 — [%2]</translation>
     </message>
     <message>
-        <source>No copper top layer</source>
-        <translation type="vanished">Верхній шар не мідний</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2598"/>
         <source>The copper top (copper 1) layer is not available on a one-sided board.  Please switch the board to double-sided or choose the copper bottom (copper 0) layer.</source>
         <translation>Верхній мідний шар (copper 1) неможливий на односторонній платі. Будь ласка, зробіть плату двосторонньою, або оберіть нижній мідний шар (copper 0).</translation>
@@ -2887,10 +2706,6 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <translation>новий нарис</translation>
     </message>
     <message>
-        <source>Schematic conversion</source>
-        <translation type="vanished">Схема перетворення</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2963"/>
         <source>Saving this sketch will convert it to the new schematic graphics standard. Go ahead and convert?</source>
         <translation>Збереження цього нарису потребує його перетворення у новий графічний стандарт схем. Продовжити перетворення?</translation>
@@ -2910,10 +2725,6 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <location filename="../src/mainwindow/mainwindow.cpp" line="3169"/>
         <source>Fritzing uncompressed (*%1)</source>
         <translation>Нестисненний Fritzing (*%1)</translation>
-    </message>
-    <message>
-        <source>Unrouted connections</source>
-        <translation type="vanished">Нерозведені з’єднання</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3225"/>
@@ -2939,22 +2750,6 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <location filename="../src/mainwindow/mainwindow.cpp" line="3654"/>
         <source>Welcome</source>
         <translation>Ласкаво просимо</translation>
-    </message>
-    <message>
-        <source>Inspector</source>
-        <translation type="vanished">Інспектор</translation>
-    </message>
-    <message>
-        <source>Undo History</source>
-        <translation type="vanished">Очистити Історію</translation>
-    </message>
-    <message>
-        <source>Layers</source>
-        <translation type="vanished">Шари</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t get the dock widget</source>
-        <translation type="vanished">Не вдалось отримати пристосунок</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="120"/>
@@ -3027,10 +2822,6 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4157"/>
         <source>Cancel</source>
         <translation>Скасувати</translation>
-    </message>
-    <message>
-        <source>Choose a folder for exporting</source>
-        <translation type="vanished">Обрати теку для експорту</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="340"/>
@@ -3351,21 +3142,9 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <translation>Експорт IPC-D-356...</translation>
     </message>
     <message>
-        <source>Unable to save IPC file.</source>
-        <translation type="vanished">Не вдалося зберегти IPC-файл.</translation>
-    </message>
-    <message>
-        <source>But the content was copied to the clipboard.</source>
-        <translation type="vanished">Але вміст було скопійовано в буфер обміну.</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1808"/>
         <source>Export Netlist...</source>
         <translation>Експорт Netlist...</translation>
-    </message>
-    <message>
-        <source>Unable to save netlist file.</source>
-        <translation type="vanished">Не вдалося зберегти файл списку мереж.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1865"/>
@@ -3398,10 +3177,6 @@ We&apos;re working to avoid this message, and only let you choose between proper
 %2.</source>
         <translation>Неможливо прочитати файл 1 %1:
 %2.</translation>
-    </message>
-    <message>
-        <source>Revert?</source>
-        <translation type="vanished">Повернути?</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="274"/>
@@ -4656,10 +4431,6 @@ Would you like to convert &apos;%1&apos; to the new standard now or open the fil
         <translation>Мідне заповнення (%1)</translation>
     </message>
     <message>
-        <source>Actual Size</source>
-        <translation type="vanished">Дійсний розмір</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2312"/>
         <source>It doesn&apos;t seem to be possible to automatically determine the actual physical size of the monitor, so &apos;actual size&apos; as currently implemented is only a guess. Your best bet would be to drag out a ruler part, then place a real (physical) ruler on top and zoom until they match up.</source>
         <translation>Немає можливості автоматично визначити дійсний розмір монітора, тому &apos;дійсний розмір&apos; є лише припущенням. Але ви можете розмістити справжню лінійку поверх віртуальної, і скорегувати розмір останньої.</translation>
@@ -5127,24 +4898,6 @@ Would you like to convert &apos;%1&apos; to the new standard now or open the fil
         <translation type="unfinished">Пошук</translation>
     </message>
     <message>
-        <source>Schematic view update</source>
-        <translation type="vanished">Оновити вид схеми</translation>
-    </message>
-    <message>
-        <source>There is a new graphics standard for schematic-view part images, beginning with version 0.8.6.
-
-</source>
-        <translation type="vanished">Існує новий графічний стандарт для зображень деталей виду схеми, введений у версії 0.8.6.
-
-</translation>
-    </message>
-    <message>
-        <source>Would you like to convert &apos;%1&apos; to the new standard now or open the file read-only?
-</source>
-        <translation type="vanished">Ви бажаєте перетворити &apos;%1&apos; у новий стандарт зараз, чи відкрити файл лише для читання?
-</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3698"/>
         <source>The conversion process will not modify &apos;%1&apos;, until you save the file. </source>
         <translation>Перетворення не змінить &apos;%1&apos;, доки ви не збережете файл. </translation>
@@ -5300,10 +5053,6 @@ Continue upload?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Fritzing Fab Upload</source>
-        <translation type="vanished">Fritzing Fab Upload</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4518"/>
         <source>Please first save your project in order to upload it.</source>
         <translation>Будь ласка, спочатку збережіть свій проект, щоб завантажити його.</translation>
@@ -5332,17 +5081,9 @@ Continue upload?</source>
         <translation>%1, тло</translation>
     </message>
     <message>
-        <source>Enter Text</source>
-        <translation type="vanished">Введіть текст</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4650"/>
         <source>Text will match part label, description, title, etc. Enter text to search for:</source>
         <translation>Текст має відповідати позначці деталі, опису, назві тощо. Введіть текст для пошуку за:</translation>
-    </message>
-    <message>
-        <source>Search</source>
-        <translation type="vanished">Пошук</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4696"/>
@@ -5491,18 +5232,6 @@ Continue upload?</source>
 </context>
 <context>
     <name>ModelBase</name>
-    <message numerus="yes">
-        <source>Unable to find the following %n part(s):</source>
-        <translation type="vanished">
-            <numerusform>Не вдалося знайти наступну %n деталь:</numerusform>
-            <numerusform>Не вдалося знайти наступні %n деталі:</numerusform>
-            <numerusform>Не вдалося знайти наступних %n деталей:</numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>at</source>
-        <translation type="vanished">в</translation>
-    </message>
     <message numerus="yes">
         <location filename="../src/model/modelbase.cpp" line="421"/>
         <source>Unable to find %n part(s). Click &apos;Show Details&apos; for a list of missing parts.</source>
@@ -5675,10 +5404,6 @@ Reason: %2 (errcode %3)</source>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="202"/>
         <source>Create Trace from Ratsnest</source>
         <translation>Створити доріжки за допомогою підвісного монтажу</translation>
-    </message>
-    <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="256"/>
@@ -5859,10 +5584,6 @@ Enter keepout value:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ground Fill</source>
-        <translation type="obsolete">Заповнення</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1761"/>
         <source>Copper fill: please select only the board you want to fill.</source>
         <translation>Мідне заповнення: будь ласка, оберіть плату яку ви бажаєте заповнити.</translation>
@@ -5908,55 +5629,9 @@ Enter keepout value:</source>
         <translation>Приховати деталі на шарі позначок</translation>
     </message>
     <message>
-        <source>Fritzing Fab Quote</source>
-        <translation type="vanished">Поради Fritzing Fab</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2888"/>
         <source>Your sketch does not have a board yet. You cannot fabricate this sketch without a PCB part.</source>
         <translation>Ваш нарис не містить плати! Ви не можете створити цей нарис без ДП.</translation>
-    </message>
-    <message>
-        <source>Sorry, http://fab.fritzing.org is not responding to the quote request. Please check your network connection and/or try again later.</source>
-        <translation type="vanished">На жаль, http://fab.fritzing.org не відповідає на запит. Будь ласка, перевірте ваше підключення до мережі, та спробуйте ще раз.</translation>
-    </message>
-    <message>
-        <source>Enter Keepout</source>
-        <translation type="vanished">Введіть проміжок</translation>
-    </message>
-    <message>
-        <source>Keepout is in mils (.001 inches).
-
-</source>
-        <translation type="vanished">Проміжок у мілах (0,0254 мм, .001 дюйма).
-
-</translation>
-    </message>
-    <message>
-        <source>Note that due to aliasing, distances may be too short by up to 2 mils
-</source>
-        <translation type="vanished">Зверніть увагу на те, що відстані до 2 мілів (0,05 мм) можуть призвести до накладання,
-</translation>
-    </message>
-    <message>
-        <source>so you may want to increase the keepout value by that much.
-
-</source>
-        <translation type="vanished">так що краще збільшити значення проміжку.
-
-</translation>
-    </message>
-    <message>
-        <source>10 mils is a good default choice.
-
-</source>
-        <translation type="vanished">10 мілів (0,254 мм) є гарним значенням по замовчанню.
-
-</translation>
-    </message>
-    <message>
-        <source>Enter keepout value:</source>
-        <translation type="vanished">Введіть значення проміжку:</translation>
     </message>
 </context>
 <context>
@@ -6004,10 +5679,6 @@ Enter keepout value:</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="375"/>
         <source>A duplicate &apos;variant&apos; property is not allowed</source>
         <translation>Не допускається дублювання властивості &apos;варіант&apos;</translation>
-    </message>
-    <message>
-        <source>Close without saving?</source>
-        <translation type="vanished">Закрити без збереження?</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="383"/>
@@ -6208,38 +5879,6 @@ Enter keepout value:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Parts Editor</source>
-        <translation type="vanished">Редактор деталей</translation>
-    </message>
-    <message>
-        <source>This part has bendable legs. </source>
-        <translation type="vanished">Деталь має гнучкі ніжки. </translation>
-    </message>
-    <message>
-        <source>This version of the Parts Editor does not yet support editing bendable legs, and the legs may not be displayed correctly in breadboard view . </source>
-        <translation type="vanished">Ця версія Редактору деталей поки що не підтримує редагування гнучких ніжок, тому ніжки можуть відображатись неправильно у виді Монтажної плати. </translation>
-    </message>
-    <message>
-        <source>If you make changes to breadboard view, or change connector metadata, the legs may no longer work. </source>
-        <translation type="vanished">Якщо ви вносите зміни у виді Макетної плати, або змінюєте метадані з’єднувачів — ніжки можуть перестати працювати. </translation>
-    </message>
-    <message>
-        <source>You can safely make changes to Schematic or PCB view.
-
-</source>
-        <translation type="vanished">Ви можете спокійно вносити зміни у видах Схема або Друкована плата.
-
-</translation>
-    </message>
-    <message>
-        <source>This warning will not be repeated in this session of Fritzing</source>
-        <translation type="vanished">Це попередження не буде повторюватись до перезапуску Fritzing</translation>
-    </message>
-    <message>
-        <source>Unable to load &apos;%1&apos;. Please close the parts editor without saving and try again.</source>
-        <translation type="vanished">Не вдалось завантажити &apos;%1&apos;. Будь ласка, закрийте редактор деталей без збереження, і спробуйте ще раз.</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="905"/>
         <source>Unable to write svg to  %1</source>
         <translation>Не вдалось записати SVG до %1</translation>
@@ -6326,10 +5965,6 @@ Enter keepout value:</source>
         <translation>Деталь буде видно лише в цьому виді і у виді значків</translation>
     </message>
     <message>
-        <source>Blank not allowed</source>
-        <translation type="vanished">Пустота не допускається</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1032"/>
         <source>The value of &apos;%1&apos; can not be blank.</source>
         <translation>Значення &apos;%1&apos; не може бути порожнім.</translation>
@@ -6338,10 +5973,6 @@ Enter keepout value:</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1045"/>
         <source>Change %1 to %2</source>
         <translation>Змінити %1 на %2</translation>
-    </message>
-    <message>
-        <source>Must be unique</source>
-        <translation type="vanished">Має бути унікальним</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1069"/>
@@ -6364,10 +5995,6 @@ Enter keepout value:</source>
         <translation>Змінити ключові слова</translation>
     </message>
     <message>
-        <source>Duplicate problem</source>
-        <translation type="vanished">Проблема дублювання</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1152"/>
         <source>Duplicate &apos;family&apos; property not allowed</source>
         <translation>Не допускається дублювання властивості &apos;сімейство&apos;</translation>
@@ -6386,10 +6013,6 @@ Enter keepout value:</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1229"/>
         <source>Change connector %1</source>
         <translation>Змінити з’єднувач %1</translation>
-    </message>
-    <message>
-        <source>SVG problem</source>
-        <translation type="vanished">Проблема з SVG</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1311"/>
@@ -6417,10 +6040,6 @@ Enter keepout value:</source>
         <translation>Відкрити зображення</translation>
     </message>
     <message>
-        <source>Conversion problem</source>
-        <translation type="vanished">Проблема перетворення</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1523"/>
         <source>Unable to load &apos;%1&apos;</source>
         <translation>Не вдалось завантажити &apos;%1&apos;</translation>
@@ -6436,33 +6055,9 @@ Enter keepout value:</source>
         <translation>Будь ласка, ще раз експортуйте SVG файл, використовуючи це налаштування, і спробуйте завантажити його знову.</translation>
     </message>
     <message>
-        <source>Fonts</source>
-        <translation type="vanished">Шрифти</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1550"/>
         <source>Fritzing currently only supports OCRA and Droid fonts--these have been substituted in for the fonts in &apos;%1&apos;</source>
         <translation>На даний момент Fritzing підтримує лише OCRA та Droid шрифти — вони були замінені в &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>You may use a PNG or JPG image to construct your part, but it is better to use an SVG. </source>
-        <translation type="vanished">Ви можете використовувати PNG або JPG зображення для побудови своєї деталі, але краще використовувати SVG. </translation>
-    </message>
-    <message>
-        <source>PNG and JPG images retain their nature as bitmaps and do not look good when scaled--</source>
-        <translation type="vanished">PNG та JPG є растровими зображеннями, і будуть не дуже добре виглядати при зміні розміру--</translation>
-    </message>
-    <message>
-        <source>so for Fritzing parts it is best to use PNG and JPG only as placeholders.</source>
-        <translation type="vanished">тому для деталей Fritzing краще використовувати PNG та JPG лише як заповнювачі.</translation>
-    </message>
-    <message>
-        <source>Use of PNG and JPG discouraged</source>
-        <translation type="vanished">Використання PNG та JPG бентежить</translation>
-    </message>
-    <message>
-        <source>Parts Editor Error</source>
-        <translation type="vanished">Помилка редактора деталей</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2352"/>
@@ -6568,26 +6163,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>Не вдалось розібрати &apos;%1&apos;: %2 рядок:%3 стовпчик:%4</translation>
     </message>
     <message>
-        <source>There are no copper layers defined in: %1. </source>
-        <translation type="vanished">Немає мідних шарів у: %1. </translation>
-    </message>
-    <message>
-        <source>See &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;this explanation&lt;/a&gt;.</source>
-        <translation type="vanished">Дивіться &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;це пояснення&lt;/a&gt;.</translation>
-    </message>
-    <message>
-        <source>&lt;br/&gt;&lt;br/&gt;This will not be a problem in the next release of the Parts Editor, </source>
-        <translation type="vanished">&lt;br/&gt;&lt;br/&gt;Це не буде проблемою в наступному випуску Редактора деталей, </translation>
-    </message>
-    <message>
-        <source>but for now please modify the file according to the instructions in the link.</source>
-        <translation type="vanished">але зараз, будь ласка, змініть файл відповідно до інструкції за посиланням.</translation>
-    </message>
-    <message>
-        <source>Copy problem</source>
-        <translation type="vanished">Проблема копіювання</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1609"/>
         <source>Unable to make a local copy of: &apos;%1&apos;</source>
         <translation>Не вдалось створити локальну копію: &apos;%1&apos;</translation>
@@ -6629,10 +6204,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>&lt;p&gt;Будь ласка, введіть приросток, який допоможе вам ідентифікувати файли деталей.&lt;br/&gt;Імена файлів матимуть форму &apos;PREFIX_%1&apos;.&lt;br/&gt;(Не потрібно змінювати запропонований приросток, оскільки унікальний суфікс завжди додається.)&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>Sketch Change Warning</source>
-        <translation type="vanished">Попередження зміни нариса</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2147"/>
         <source>The open sketch &apos;%1&apos; uses the part you are editing. </source>
         <translation>Відкритий нарис &apos;%1&apos; використовує редаговану деталь. </translation>
@@ -6641,22 +6212,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2148"/>
         <source>Saving this part will make a change to the sketch that cannot be undone.</source>
         <translation>Збереження цієї деталі внесе у нарис зміни, які неможливо буде скасувати.</translation>
-    </message>
-    <message>
-        <source>The open sketches </source>
-        <translation type="vanished">Відкритий нарис </translation>
-    </message>
-    <message>
-        <source>&apos;%1&apos;, </source>
-        <translation type="vanished">&apos;%1&apos;, </translation>
-    </message>
-    <message>
-        <source>and &apos;%1&apos; </source>
-        <translation type="vanished">та &apos;%1&apos; </translation>
-    </message>
-    <message>
-        <source>Saving this part will make a change to these sketches that cannot be undone.</source>
-        <translation type="vanished">Збереження цієї деталі внесе у нариси зміни, які неможливо буде скасувати.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2166"/>
@@ -6687,10 +6242,6 @@ Go ahead and save?</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2734"/>
         <source>Remove %1 connectors</source>
         <translation>Видалити %1 з’єднувачів</translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">Зберегти &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2753"/>
@@ -6761,30 +6312,6 @@ Go ahead and save?</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="3759"/>
         <source>Make only %1 view visible</source>
         <translation>Зробити видимим лише вид %1</translation>
-    </message>
-    <message numerus="yes">
-        <source>This part has %n unassigned connectors </source>
-        <translation type="vanished">
-            <numerusform>Деталь має %n непризначений з’єднувач </numerusform>
-            <numerusform>Деталь має %n непризначених з’єднувачі </numerusform>
-            <numerusform>Деталь має %n непризначених з’єднувачів </numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>across %n views. </source>
-        <translation type="vanished">
-            <numerusform>через %n вид. </numerusform>
-            <numerusform>через %n види. </numerusform>
-            <numerusform>через %n видів. </numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>Until all connectors are assigned to SVG elements, the part will not work correctly. </source>
-        <translation type="vanished">Доки всі з’єднувачі не призначені до елементів SVG, деталь не буде працювати правильно. </translation>
-    </message>
-    <message>
-        <source>Exiting the Parts Editor now is fine, as long as you remember to finish the assignments later.</source>
-        <translation type="vanished">Можете спокійно вийти з Редактора деталей, просто не забудьте закінчити роботу пізніше.</translation>
     </message>
 </context>
 <context>
@@ -7073,10 +6600,6 @@ Go ahead and save?</source>
         <translation>Редагувати позначки штирка</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/items/paletteitem.cpp" line="620"/>
         <location filename="../src/items/paletteitem.cpp" line="631"/>
         <location filename="../src/items/paletteitem.cpp" line="655"/>
@@ -7319,10 +6842,6 @@ Go ahead and save?</source>
         <translation type="unfinished">Задати позначку для %1</translation>
     </message>
     <message>
-        <source>Set label for %1</source>
-        <translation type="vanished">Задати позначку для %1</translation>
-    </message>
-    <message>
         <location filename="../src/items/partlabel.cpp" line="760"/>
         <source>Label text:</source>
         <translation>Текст позначки:</translation>
@@ -7370,10 +6889,6 @@ Go ahead and save?</source>
         <translation type="unfinished">Додати до набору</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="457"/>
         <source>Cannot find file %1.</source>
         <translation>Не вдається знайти файл %1.</translation>
@@ -7396,10 +6911,6 @@ Go ahead and save?</source>
         <translation>завантажується набір &apos;%1&apos;</translation>
     </message>
     <message>
-        <source>Save bin &quot;%1&quot;</source>
-        <translation type="vanished">Зберегти набір &quot;%1&quot;</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="584"/>
         <source>Do you want to save the changes you made in the bin &quot;%1&quot;?</source>
         <translation>Ви бажаєте зберегти внесені зміни у наборі &quot;%1&quot;?</translation>
@@ -7413,10 +6924,6 @@ Go ahead and save?</source>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="590"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
-    </message>
-    <message>
-        <source>Add to bin</source>
-        <translation type="vanished">Додати до набору</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="697"/>
@@ -7450,10 +6957,6 @@ Go ahead and save?</source>
         <location filename="../src/items/perfboard.cpp" line="253"/>
         <source>set board size</source>
         <translation>задати розмір плати</translation>
-    </message>
-    <message>
-        <source>Performance Warning</source>
-        <translation type="vanished">Попередження щодо продуктивності</translation>
     </message>
     <message>
         <location filename="../src/items/perfboard.cpp" line="296"/>
@@ -7492,14 +6995,6 @@ Note: this warning will not be repeated during this session.</source>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="80"/>
         <source>&lt;p&gt;&lt;h2&gt;Pin Label Editor&lt;/h2&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;h2&gt;Редактор позначок штирків&lt;/h2&gt;&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Click on a label next to a pin number to rename that pin.</source>
-        <translation type="vanished">&lt;p&gt;Натисніть на позначці штирка для його перейменування.</translation>
-    </message>
-    <message>
-        <source>You can use the tab key to move through the labels in order.&lt;/p&gt;</source>
-        <translation type="vanished">Ви можете використовувати клавіш табуляції для переміщення по позначках.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="81"/>
@@ -7638,38 +7133,6 @@ This feature is enabled by default. If you need to maintain compatibility with o
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;b&gt;Scroll priority&lt;/b&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;b&gt;Пріоритет прокручування&lt;/b&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>no keys down = scroll&lt;br/&gt;&lt;kbd&gt;Shift&lt;/kbd&gt; key swaps scroll axis&lt;br/&gt;&lt;kbd&gt;Alt&lt;/kbd&gt; or &lt;kbd&gt;%1&lt;/kbd&gt; = zoom</source>
-        <translation type="vanished">немає клавіш вниз = прокрутка&lt;br/&gt;&lt;kbd&gt;Shift&lt;/kbd&gt; клавіші перемикають вісь прокрутки&lt;br/&gt;&lt;kbd&gt;Alt&lt;/kbd&gt; або &lt;kbd&gt;%1&lt;/kbd&gt; = масштабування</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Zoom priority&lt;/b&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;b&gt;Пріоритет масштабування&lt;/b&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>no keys down = zoom&lt;br/&gt;&lt;kbd&gt;Alt&lt;/kbd&gt; or &lt;kbd&gt;%1&lt;/kbd&gt; = scroll&lt;br/&gt;&lt;kbd&gt;Shift&lt;/kbd&gt; key swaps scroll axis</source>
-        <translation type="vanished">немає клавіш вниз = збільшення &lt;br/&gt;&lt;kbd&gt;Alt&lt;/kbd&gt; або &lt;kbd&gt;%1&lt;/kbd&gt; = прокручування&lt;br/&gt;&lt;kbd&gt;Shift&lt;/kbd&gt; клавіша змінює вісь прокручування</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Guess&lt;/b&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;b&gt;Вгадай&lt;/b&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>Let Fritzing guess if the input is from a wheel or a touchpad. &lt;kbd&gt;Alt&lt;/kbd&gt; or &lt;kbd&gt;%1&lt;/kbd&gt; modify scrolling. &lt;kbd&gt;Shift&lt;/kbd&gt; can modify the axis or the speed.</source>
-        <translation type="vanished">Дозвольте Fritzing вгадати, чи вводиться вхід із коліщатка чи сенсорної панелі. &lt;kbd&gt;Alt&lt;/kbd&gt; або &lt;kbd&gt;%1&lt;/kbd&gt; змінює прокручування. &lt;kbd&gt;Shift&lt;/kbd&gt; може змінювати вісь або швидкість.</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Pure&lt;/b&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;b&gt;Чистий&lt;/b&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>Use system defaults to interpret the wheel input. Don&apos;t try anything fancy. Recommended when using a touchpad with pinch gestures.</source>
-        <translation type="vanished">Fritzing використовує системні стандарти для інтерпретації вхідних даних колеса. Він не спробує нічого незвичайного. Рекомендовано під час використання сенсорної панелі з жестами зведення.</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="280"/>
         <location filename="../src/dialogs/prefsdialog.cpp" line="302"/>
         <source>%1 (click to change...)</source>
@@ -7714,14 +7177,6 @@ This feature is enabled by default. If you need to maintain compatibility with o
         <location filename="../src/dialogs/prefsdialog.cpp" line="442"/>
         <source>Gerber</source>
         <translation>Gerber</translation>
-    </message>
-    <message>
-        <source>The gerber file generator will use six decimals precision instead of three.
-Some deprecated gerber commands are removed or replaced.
-We recommend enabling this. Only to avoid surprises with processes that are optimized for earlier Fritzing versions, this is currently off by default.</source>
-        <translation type="vanished">Генератор gerber-файлів використовуватиме шість знаків після коми замість трьох.
-Деякі застарілі команди gerber буде вилучено або замінено.
-Ми рекомендуємо увімкнути їх. Щоб уникнути несподіванок з процесами, оптимізованими для попередніх версій Fritzing, наразі цей параметр вимкнено за замовчуванням.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="455"/>
@@ -8112,14 +7567,6 @@ We recommend enabling this. Only to avoid surprises with processes that are opti
         <location filename="../src/program/programwindow.cpp" line="371"/>
         <source>File &apos;%1&apos; was restored from the .fzz file; save a local copy to work with an external editor.</source>
         <translation>Файл &apos;%1&apos; відновлено з файлу .fzz; збережіть локальну копію для роботи у зовнішньому редакторі.</translation>
-    </message>
-    <message>
-        <source>Code Window</source>
-        <translation type="vanished">Вікно коду</translation>
-    </message>
-    <message>
-        <source>Code Window - %1</source>
-        <translation type="vanished">Вікно коду - %1</translation>
     </message>
     <message>
         <location filename="../src/program/programwindow.cpp" line="499"/>
@@ -8579,10 +8026,6 @@ is already there, we won&apos;t add it again, right?</source>
         <translation>&lt;b&gt;тип:&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>files</source>
-        <translation type="vanished">файли</translation>
-    </message>
-    <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="96"/>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="148"/>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="165"/>
@@ -8751,30 +8194,6 @@ Fritzing продовжує роботу, але ви не зможете змі
         <location filename="../src/svg/gerbergenerator.cpp" line="132"/>
         <source>outline is empty</source>
         <translation>контур порожній</translation>
-    </message>
-    <message>
-        <source>the board outline layer, </source>
-        <translation type="vanished">контурний шар дошки, </translation>
-    </message>
-    <message>
-        <source>silkscreen layer(s), </source>
-        <translation type="vanished">шар(и) позначок знизу, </translation>
-    </message>
-    <message>
-        <source>copper layer(s), </source>
-        <translation type="vanished">мідний шар(и), </translation>
-    </message>
-    <message>
-        <source>mask layer(s), </source>
-        <translation type="vanished">шар(и) маски, </translation>
-    </message>
-    <message>
-        <source>paste mask layer(s), </source>
-        <translation type="vanished">ввести шар(и) маски, </translation>
-    </message>
-    <message>
-        <source>Unable to translate svg curves in %1</source>
-        <translation type="vanished">Неможливо перевести svg криві у%1</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="152"/>
@@ -9061,10 +8480,6 @@ Fritzing продовжує роботу, але ви не зможете змі
         <location filename="../src/svg/x2svg.cpp" line="71"/>
         <source>failure in svg conversion 2</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>failure in svg conversion 2: %1 %2 %3</source>
-        <translation type="vanished">збій перетворення SVG 2: %1 %2 %3</translation>
     </message>
     <message>
         <location filename="../src/utils/fileprogressdialog.cpp" line="68"/>
@@ -9425,10 +8840,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
 <context>
     <name>QuoteDialog</name>
     <message>
-        <source>Fritzing Fab Quote</source>
-        <translation type="vanished">Пропозиції виробництва Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/quotedialog.cpp" line="175"/>
         <source>Order your PCB from Fritzing Fab</source>
         <translation>Замовте вашу друковану плату на виробництві Fritzing</translation>
@@ -9541,14 +8952,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
 <context>
     <name>RegenerateDatabaseThread</name>
     <message>
-        <source>Unable to open temporary file</source>
-        <translation type="vanished">Неможливо відкрити тимчасовий файл</translation>
-    </message>
-    <message>
-        <source>Database failure</source>
-        <translation type="vanished">Помилка бази даних</translation>
-    </message>
-    <message>
         <location filename="../src/fapplication.cpp" line="333"/>
         <source>Unable to open temporary file (%1)</source>
         <translation type="unfinished"></translation>
@@ -9572,10 +8975,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
 </context>
 <context>
     <name>Resistor</name>
-    <message>
-        <source>Resistor</source>
-        <translation type="vanished">Резистор</translation>
-    </message>
     <message>
         <location filename="../src/items/resistor.cpp" line="121"/>
         <source>%1 %2 Resistor</source>
@@ -9700,10 +9099,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>Ruler</name>
-    <message>
-        <source>width</source>
-        <translation type="vanished">ширина</translation>
-    </message>
     <message>
         <location filename="../src/items/ruler.cpp" line="198"/>
         <source>inch</source>
@@ -9841,10 +9236,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 <context>
     <name>SetColorDialog</name>
     <message>
-        <source>%1 Color...</source>
-        <translation type="vanished">%1 Колір...</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/setcolordialog.cpp" line="49"/>
         <source>%1 Color...</source>
         <comment>dialog title</comment>
@@ -9898,10 +9289,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 </context>
 <context>
     <name>Simulator</name>
-    <message>
-        <source>Simulator Error</source>
-        <translation type="vanished">Помилка симулятора</translation>
-    </message>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="197"/>
         <source>An error occurred when starting the simulation.</source>
@@ -9959,10 +9346,6 @@ Netlist:
         <location filename="../src/simulation/simulator.cpp" line="512"/>
         <source>The simulator gave an error when running the simulation of this circuit. Please, check the error. This probably has been caused by big modifications of the circuit during the simulation. Please, try again without deleting big parts of your circuit.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Simulator Timeout</source>
-        <translation type="vanished">Час очікування симультора</translation>
     </message>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="437"/>
@@ -10094,10 +9477,6 @@ Netlist:
         <translation type="unfinished">Нерозведені з’єднання</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="4140"/>
         <source>This seems like an attempt to create a trace across layers. This circumstance should not arise: please contact the developers.</source>
         <translation>Це схоже на спробу провести доріжку між шарами. Так не має бути: будь ласка, зв’яжіться із розробниками.</translation>
@@ -10116,10 +9495,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="4147"/>
         <source>trace</source>
         <translation>доріжка</translation>
-    </message>
-    <message>
-        <source>Rotate %2 (%1)</source>
-        <translation type="vanished">Повернути %2 (%1)</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="5094"/>
@@ -10180,18 +9555,6 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="7667"/>
         <source>Move label &apos;%1&apos;</source>
         <translation>Перемістити позначку &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>%1 label &apos;%2&apos;</source>
-        <translation type="vanished">%1 позначка &apos;%2&apos;</translation>
-    </message>
-    <message>
-        <source>Rotate</source>
-        <translation type="vanished">Обернути</translation>
-    </message>
-    <message>
-        <source>Flip</source>
-        <translation type="vanished">Віддзеркалити</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/sketch/sketchwidget.cpp" line="7720"/>
@@ -10313,10 +9676,6 @@ The parts will be moved automatically. You can use the Undo History to review th
         <translation>Тут немає нерозведених з’єднань</translation>
     </message>
     <message>
-        <source>Unrouted connections</source>
-        <translation type="vanished">Нерозведені з’єднання</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="10049"/>
         <source>%1
 
@@ -10357,14 +9716,6 @@ Note: you can also trigger this display by mousing down on the routing status te
         <translation>Механізм обміну відключено для:
 
 </translation>
-    </message>
-    <message>
-        <source>and %1 other parts</source>
-        <translation type="vanished">та %1 інших деталей</translation>
-    </message>
-    <message>
-        <source>and %1 other properties</source>
-        <translation type="vanished">та %1 інших властивостей</translation>
     </message>
     <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="146"/>
@@ -10445,10 +9796,6 @@ and %1 other properties</source>
         <translation type="unfinished">Позначка ланцюжка</translation>
     </message>
     <message>
-        <source>Net labels</source>
-        <translation type="vanished">Позначка ланцюжка</translation>
-    </message>
-    <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="471"/>
         <source>Net labels cannot be blank</source>
         <translation>Позначки ланцюжка не можуть бути пустими</translation>
@@ -10460,10 +9807,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="40"/>
         <source>Fritzing Tips and Tricks</source>
         <translation>Поради та хитрощі Fritzing</translation>
-    </message>
-    <message>
-        <source>Tips and Tricks</source>
-        <translation type="vanished">Поради та хитрощі</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="76"/>
@@ -10479,18 +9822,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="81"/>
         <source>parts</source>
         <translation>деталі</translation>
-    </message>
-    <message>
-        <source>Can&apos;t find your part? Search for it by clicking the magnifier icon in the Parts Bin and type in some keywords</source>
-        <translation type="vanished">Не можете знайти свою деталь? Натисніть на значок лупи у Наборі деталей, і введіть кілька ключових слів</translation>
-    </message>
-    <message>
-        <source>If you can&apos;t find a part in the Parts Bin, the Generic IC is your friend.  Drag it onto your sketch, then use the widgets in the Inspector to: choose from among 25 different through-hole and SMD packages; change the pin label; and--for DIPs and SIPs--change the number of pins.  You can also change the pin names with the Pin Label editor</source>
-        <translation type="vanished">Якщо ви не можете знайти деталь у Наборі деталей, вам допоможе Узагальнена IC (Generic IC). Перетягніть її до свого нарису, а потім використайте віджет у Інспекторі для того щоб: обрати з 25 отворів та плат поверхневого монтажу; змінити позначку штирка; для DIP та SIP корпусів — змінити номери штирків. Також ви можете змінити назви штирків у Редакторі позначок штирків</translation>
-    </message>
-    <message>
-        <source>An icon in the parts bin may actually represent multiple related parts.  So when you drag an icon from the parts bin into a sketch, make sure you look at the inspector.  The inspector will display the range of choices available for you to modify a part, or swap it for a related part. The parts bin icon will also be a little &apos;stack&apos; and not just a flat icon.</source>
-        <translation type="vanished">Значки набору деталей можуть представляти декілька пов’язаних деталей. Тому, коли ви перетягуєте значок з набору деталей у нарис, переконайтесь, що ви подивились до Інспектора. Інспектор покаже всі доступні для заміни деталі, і дозволить замінити деталь на потрібну. Також, значок набору деталей буде у вигляді невеликої стопки, а не плоским, як звичайно.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="85"/>
@@ -10699,10 +10030,6 @@ and %1 other properties</source>
         <translation>Щоб побачити всі роз’єми, під’єднані до даного роз’єма, тримайте мишу на цьому роз’ємі — всі з’єднання буде виділено.</translation>
     </message>
     <message>
-        <source>A ratsnest line (very thin &apos;wire&apos;) between connections in one view means that those connections are somehow connected in another view.</source>
-        <translation type="vanished">Навісний монтаж (дуже тонкі дроти) між з’єднаннями в одному виді означає, що в іншому виді ці з’єднання так чи інакше поєднані.</translation>
-    </message>
-    <message>
         <location filename="../src/help/tipsandtricks.cpp" line="142"/>
         <source>parts editor</source>
         <translation>редактор деталей</translation>
@@ -10722,10 +10049,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="145"/>
         <source>In the Parts Editor, to select a graphic underneath another graphic, use the mouse wheel while holding down the shift key.</source>
         <translation>Щоб вибрати зображення під іншим зображенням у Редакторі деталей, використовуйте коліщатко миші з клавішем Shift.</translation>
-    </message>
-    <message>
-        <source>You can use the Parts Editor to find the SVG file for a part&apos;s image for a given view. In the Parts Editor, click on the tab for that view, then use &lt;b&gt;Show in Folder&lt;/b&gt; under the &lt;b&gt;File&lt;/b&gt; Menu</source>
-        <translation type="vanished">Ви можете використовувати Редактор деталей для пошуку файлів SVG із зображенням деталей для даного виду. У Редакторі деталей клацніть по закладці цього виду, потім натисніть &lt;b&gt;Показати у теці&lt;/b&gt; у меню &lt;b&gt;Файл&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="148"/>
@@ -10753,10 +10076,6 @@ and %1 other properties</source>
         <translation>Якщо з одного боку ДП розвести доріжки горизонтально, а з другого вертикально — це може полегшити життя.</translation>
     </message>
     <message>
-        <source>Route traces in 45-degree angles to reduce noise.</source>
-        <translation type="vanished">Для зменшення шуму розводьте доріжки під кутом 45 градусів.</translation>
-    </message>
-    <message>
         <location filename="../src/help/tipsandtricks.cpp" line="157"/>
         <source>If Fritzing is missing a particular part and you don&apos;t want to build one yourself, then use pin headers as connectors and the grid to align them.</source>
         <translation>Якщо у Fritzing відсутня потрібна вам деталь, і ви не хочете робити її самостійно — використовуйте штирковий з’єднувач як з’єднувачі, і сітку для вирівнювання.</translation>
@@ -10782,17 +10101,9 @@ and %1 other properties</source>
         <translation>Для створення обрису вашої ДП імпортуйте SVG файл.</translation>
     </message>
     <message>
-        <source>To make a stylish Arduino shield in no time, switch the shape of the PCB from a rectangle to the Arduino</source>
-        <translation type="vanished">Щоб миттєво створити накладку (shield) у стилі Arduiono, замініть обрис друкованої плати на прямокутник Arduino</translation>
-    </message>
-    <message>
         <location filename="../src/help/tipsandtricks.cpp" line="166"/>
         <source>pcb production</source>
         <translation>вигодовлення ДП</translation>
-    </message>
-    <message>
-        <source>Smaller PCBs are more affortable than larger ones. Save space and money.</source>
-        <translation type="vanished">Маленькі друковані плати доступніші за великі. Заощаджуйте місце та гроші.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="168"/>

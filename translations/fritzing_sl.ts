@@ -1067,10 +1067,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <translation>Povezan z %1 : %2, %3, %4, %5, %6</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="vanished">Napaka</translation>
-    </message>
-    <message>
         <location filename="../src/program/consolewindow.cpp" line="153"/>
         <source>Error</source>
         <comment>dialog title</comment>
@@ -1101,10 +1097,6 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <source>Critical Error</source>
         <comment>dialog title</comment>
         <translation type="unfinished">Kritična napaka</translation>
-    </message>
-    <message>
-        <source>Critical Error</source>
-        <translation type="vanished">Kritična napaka</translation>
     </message>
 </context>
 <context>
@@ -1498,10 +1490,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FzpInfo</name>
-    <message>
-        <source>Error</source>
-        <translation type="obsolete">Napaka</translation>
-    </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="64"/>
         <source>Cannot open file &apos;%1&apos;.</source>
@@ -5619,10 +5607,6 @@ Enter keepout value:</source>
         <translation>Skrivni del sitotisk</translation>
     </message>
     <message>
-        <source>Fritzing Fab Quote</source>
-        <translation type="vanished">Fritzing Fab Citat</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2888"/>
         <source>Your sketch does not have a board yet. You cannot fabricate this sketch without a PCB part.</source>
         <translation type="unfinished"></translation>
@@ -8880,10 +8864,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
         <location filename="../src/dialogs/quotedialog.cpp" line="273"/>
         <source>The dimensions of the selected PCB (title: %1) are %2 cm x %3 cm (%4 in x %5 in).&lt;br /&gt;</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fritzing Fab Quote</source>
-        <translation type="obsolete">Fritzing Fab Citat</translation>
     </message>
     <message>
         <location filename="../src/dialogs/quotedialog.cpp" line="198"/>

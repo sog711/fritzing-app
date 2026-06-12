@@ -119,10 +119,6 @@
         <translation>Jan Sieber, Yaniv Steiner, Olaf Val, </translation>
     </message>
     <message>
-        <source>Michaela Vieser and Julia Werner.</source>
-        <translation type="vanished">Michaela Vieser e Julia Werner.</translation>
-    </message>
-    <message>
         <location filename="../src/help/aboutbox.cpp" line="101"/>
         <source>Jenny Chowdhury, Lionel Michel, Fabian Althaus, Jannis Leidel, </source>
         <translation>Jenny Chowdhury, Lionel Michel, Fabian Althaus, Jannis Leidel, </translation>
@@ -510,17 +506,9 @@
         <translation>Remover Componente</translation>
     </message>
     <message>
-        <source>Delete bin</source>
-        <translation type="vanished">Eliminar Pacote</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1166"/>
         <source>Do you really want to delete bin &apos;%1&apos;?  This action cannot be undone.</source>
         <translation>Quer realmente eliminar o pacote &apos;%1&apos;?  Esta acção não pode ser desfeita.</translation>
-    </message>
-    <message>
-        <source>Read-only bin</source>
-        <translation type="vanished">Pacote apenas de leitura</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1218"/>
@@ -590,10 +578,6 @@
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1122"/>
         <source>Find Part in Sketch</source>
         <translation>Encontrar Componentes no Esboço</translation>
-    </message>
-    <message>
-        <source>Remove from Bin</source>
-        <translation type="vanished">Remover do Binário</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1296"/>
@@ -736,17 +720,9 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
         <translation type="unfinished">Pode carregar, mas</translation>
     </message>
     <message>
-        <source>Unable to load</source>
-        <translation type="vanished">Não foi possível carregar</translation>
-    </message>
-    <message>
         <location filename="../src/items/resizableboard.cpp" line="522"/>
         <source>Unable to load image from %1 %2</source>
         <translation>Não foi possível carregar a imagem do %1 %2</translation>
-    </message>
-    <message>
-        <source>Can load, but</source>
-        <translation type="vanished">Pode carregar, mas</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="530"/>
@@ -754,16 +730,6 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
 Use the file?</source>
         <translation>A imagem de %1 pode ser carregada, mas %2
 Usar o ficheiro?</translation>
-    </message>
-    <message>
-        <source>
-
-A custom board svg typically has one or two silkscreen layers and one board layer.
-</source>
-        <translation type="vanished">
-
-Uma placa habitual svg tipicamente tem uma ou duas camadas de serigrafia e uma camada de placa
-</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="381"/>
@@ -774,10 +740,6 @@ Uma placa habitual svg tipicamente tem uma ou duas camadas de serigrafia e uma c
         <location filename="../src/items/resizableboard.cpp" line="430"/>
         <source>&lt;b&gt;The custom shape has been loaded, and you will see the new board shortly.&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;A forma habitual foi carregada, e pode em breve ver a nova placa.&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>Before actual PCB production we recommend that you test your custom shape by using the &apos;File &gt; Export for Production &gt; Extended Gerber&apos; option. </source>
-        <translation type="vanished">Antes da produção PCB atual nós recomendamos que teste a forma personalizada usando a opção &apos; Ficheiro &gt; Exportar para Produção &gt; Gerber Extendido&apos; </translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="436"/>
@@ -811,22 +773,6 @@ Uma placa habitual svg tipicamente tem uma ou duas camadas de serigrafia e uma c
         <location filename="../src/items/resizableboard.cpp" line="451"/>
         <source>&lt;br/&gt;However, the cutouts may not be formatted correctly.</source>
         <translation>&lt;br/&gt;No entanto, os recortes podem não estar formatados corretamente.</translation>
-    </message>
-    <message>
-        <source>&lt;br/&gt;&lt;br/&gt;If you intended your custom shape to have cutouts and you did not get the expected result, </source>
-        <translation type="vanished">&lt;br/&gt;&lt;br/&gt;Se você pretendia que o seu formato personalizado tivesse recortes e não obtivesse o resultado esperado, </translation>
-    </message>
-    <message>
-        <source>it is because Fritzing requires that you make cutouts using a shape &apos;subtraction&apos; or &apos;difference&apos; operation in your vector graphics editor.</source>
-        <translation type="vanished">é porque o Fritzing requer que você faça recortes utiilizando uma forma &apos;subtraction&apos; ou &apos;difference&apos; operação no seu editor de gráficos vetoriais.</translation>
-    </message>
-    <message>
-        <source>Have a look at the circle_pcb.svg file in your Fritzing installation folder at parts/svg/core/pcb/.
-
-</source>
-        <translation type="vanished">Verifique o ficheiro circle_pcb.svg na sua pasta de instalação Fritzing em parts/svg/core/pcb/.
-
-</translation>
     </message>
 </context>
 <context>
@@ -1122,10 +1068,6 @@ Fundo: Verde = ok, Vermelho = valor incorreto, Cinzento = valor atual</translati
         <translation>Ligado a %1 : %2, %3, %4, %5, %6</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="vanished">Erro</translation>
-    </message>
-    <message>
         <location filename="../src/program/consolewindow.cpp" line="153"/>
         <source>Error</source>
         <comment>dialog title</comment>
@@ -1146,10 +1088,6 @@ Fundo: Verde = ok, Vermelho = valor incorreto, Cinzento = valor atual</translati
         <source>Critical Error</source>
         <comment>dialog title</comment>
         <translation type="unfinished">Erro Crítico</translation>
-    </message>
-    <message>
-        <source>Critical Error</source>
-        <translation type="vanished">Erro Crítico</translation>
     </message>
     <message>
         <location filename="../src/program/consolewindow.cpp" line="181"/>
@@ -1206,10 +1144,6 @@ Fundo: Verde = ok, Vermelho = valor incorreto, Cinzento = valor atual</translati
         <translation>Falha inesperada na renderização SVG--contacte fritzing.org</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/autoroute/drc.cpp" line="549"/>
         <source>%1 is overlapping (%2 layer)</source>
         <translation>%1 sobrepõe (%2 layer)</translation>
@@ -1232,10 +1166,6 @@ Fundo: Verde = ok, Vermelho = valor incorreto, Cinzento = valor atual</translati
 </context>
 <context>
     <name>DRCResultsDialog</name>
-    <message>
-        <source>DRC Results</source>
-        <translation type="vanished">Resultados DRC</translation>
-    </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="138"/>
         <source>DRC Results</source>
@@ -1263,10 +1193,6 @@ Fundo: Verde = ok, Vermelho = valor incorreto, Cinzento = valor atual</translati
 </context>
 <context>
     <name>DebugDialog</name>
-    <message>
-        <source>for debugging</source>
-        <translation type="vanished">Para Depurar</translation>
-    </message>
     <message>
         <location filename="../src/debugdialog.cpp" line="138"/>
         <source>for debugging</source>
@@ -1327,10 +1253,6 @@ Fundo: Verde = ok, Vermelho = valor incorreto, Cinzento = valor atual</translati
 <context>
     <name>FApplication</name>
     <message>
-        <source>Fritzing failure</source>
-        <translation type="vanished">Falha no Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/fapplication.cpp" line="1871"/>
         <source>Fritzing caught an exception from %1 in event %2</source>
         <translation>Fritzing gerou uma excessão de %1 no evento %2</translation>
@@ -1376,24 +1298,6 @@ Would you like to regenerate the parts database?
         <location filename="../src/fapplication.cpp" line="1868"/>
         <source>Fritzing caught an exception from %1 in event %2: %3</source>
         <translation>Fritzing encontrou uma exceção de %1 no evento %2: %3</translation>
-    </message>
-    <message>
-        <source>Regenerate parts database?</source>
-        <translation type="vanished">Regenerar a base de dados dos componentes?</translation>
-    </message>
-    <message>
-        <source>Regenerating the parts database will take some minutes and you will have to restart Fritzing
-
-</source>
-        <translation type="vanished">Regenerando a base de dados irá levar alguns minutos e você terá que reiniciar o Fritzing
-
-</translation>
-    </message>
-    <message>
-        <source>Would you like to regenerate the parts database?
-</source>
-        <translation type="vanished">Deseja regenerar a base de dados dos componentes?
-</translation>
     </message>
     <message>
         <location filename="../src/fapplication.cpp" line="2283"/>
@@ -1479,10 +1383,6 @@ Would you like to regenerate the parts database?
         <translation type="unfinished">Fritzing</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/fabuploaddialog.cpp" line="161"/>
         <source>Error: </source>
         <translation>Erro: </translation>
@@ -1490,10 +1390,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FabUploadProgress</name>
-    <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
     <message>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="181"/>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="211"/>
@@ -1516,10 +1412,6 @@ Would you like to regenerate the parts database?
 </context>
 <context>
     <name>FirstTimeHelpDialog</name>
-    <message>
-        <source>First Time Help</source>
-        <translation type="vanished">Ajuda na primeira vez</translation>
-    </message>
     <message>
         <location filename="../src/help/firsttimehelpdialog.cpp" line="37"/>
         <source>First Time Help</source>
@@ -1560,17 +1452,9 @@ Would you like to regenerate the parts database?
         <translation>Fechar o sketch atual</translation>
     </message>
     <message>
-        <source>%1 - %2</source>
-        <translation type="vanished">%1 - %2</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="132"/>
         <source>Specify a file name</source>
         <translation>Especifique um nome de ficheiro</translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">Guardar &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="238"/>
@@ -1608,14 +1492,6 @@ Would you like to regenerate the parts database?
 <context>
     <name>FzpInfo</name>
     <message>
-        <source>Error</source>
-        <translation type="obsolete">Erro</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="obsolete">Aviso</translation>
-    </message>
-    <message>
         <location filename="../src/model/fzpinfo.cpp" line="64"/>
         <source>Cannot open file &apos;%1&apos;.</source>
         <translation type="unfinished"></translation>
@@ -1637,10 +1513,6 @@ All parts must have a title tag.</source>
         <source>The fritzing version &apos;%1&apos; is invalid.
 The part might not work properly.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Version Mismatch</source>
-        <translation type="obsolete">Incompatibilidade de Versão</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="17"/>
@@ -1806,10 +1678,6 @@ Também é possível escolher um conector como uma semente de aterramento clican
         <translation>Fio</translation>
     </message>
     <message>
-        <source>Trace wire %1</source>
-        <translation type="vanished">Traçar fio %1</translation>
-    </message>
-    <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="217"/>
         <source>Properties</source>
         <translation>Propriedades</translation>
@@ -1833,10 +1701,6 @@ Também é possível escolher um conector como uma semente de aterramento clican
         <location filename="../src/infoview/htmlinfoview.cpp" line="1024"/>
         <source>Locked</source>
         <translation>Bloqueado</translation>
-    </message>
-    <message>
-        <source>Ratsnest line</source>
-        <translation type="vanished">Fio ninho-de-ratos</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="1026"/>
@@ -1914,21 +1778,9 @@ Também é possível escolher um conector como uma semente de aterramento clican
 <context>
     <name>ItemBase</name>
     <message>
-        <source>Part</source>
-        <translation type="vanished">Componente</translation>
-    </message>
-    <message>
-        <source>family</source>
-        <translation type="vanished">família</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="226"/>
         <source>color</source>
         <translation>cor</translation>
-    </message>
-    <message>
-        <source>resistance</source>
-        <translation type="vanished">resistência</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="230"/>
@@ -1939,10 +1791,6 @@ Também é possível escolher um conector como uma semente de aterramento clican
         <location filename="../src/items/itembase.cpp" line="233"/>
         <source>pin spacing</source>
         <translation>Espaço entre pinos</translation>
-    </message>
-    <message>
-        <source>rated power</source>
-        <translation type="vanished">potência nominal</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="235"/>
@@ -2182,26 +2030,6 @@ Também é possível escolher um conector como uma semente de aterramento clican
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>banded</source>
-        <translation type="vanished">unido</translation>
-    </message>
-    <message>
-        <source>top</source>
-        <translation type="vanished">superior</translation>
-    </message>
-    <message>
-        <source>bottom</source>
-        <translation type="vanished">inferior</translation>
-    </message>
-    <message>
-        <source>copper bottom</source>
-        <translation type="vanished">cobre inferior</translation>
-    </message>
-    <message>
-        <source>copper top</source>
-        <translation type="vanished">cobre superior</translation>
-    </message>
-    <message>
         <location filename="../src/items/itembase.cpp" line="263"/>
         <source>silkscreen bottom</source>
         <translation>serigrafia inferior</translation>
@@ -2210,14 +2038,6 @@ Também é possível escolher um conector como uma semente de aterramento clican
         <location filename="../src/items/itembase.cpp" line="264"/>
         <source>silkscreen top</source>
         <translation>serigrafia superior</translation>
-    </message>
-    <message>
-        <source>mn</source>
-        <translation type="vanished">mn</translation>
-    </message>
-    <message>
-        <source>mpn</source>
-        <translation type="vanished">mpn</translation>
     </message>
 </context>
 <context>
@@ -2383,10 +2203,6 @@ Também é possível escolher um conector como uma semente de aterramento clican
         <translation>Pronto</translation>
     </message>
     <message>
-        <source>Save %1</source>
-        <translation type="vanished">Guardar %1</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1653"/>
         <source>unable to parse fzp in %1. line: %2 column: %3 error: %4</source>
         <translation>impossível analisar fzp em %1. linha: %2 coluna: %3 erro: %4</translation>
@@ -2466,14 +2282,6 @@ Também é possível escolher um conector como uma semente de aterramento clican
         <location filename="../src/mainwindow/mainwindow.cpp" line="2230"/>
         <source>Failed to process part file: %1</source>
         <translation>Falhou ao processar ficheiro de componente: %1</translation>
-    </message>
-    <message>
-        <source>Critical Issues</source>
-        <translation type="vanished">Problemas críticos</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="vanished">Aviso</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2323"/>
@@ -2649,14 +2457,6 @@ Também é possível escolher um conector como uma semente de aterramento clican
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1810"/>
         <source>Unable to save netlist file. But the content was copied to the clipboard.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to export %1 as shareable. Save failed. Please check if home and save dir are writeable and not full. </source>
-        <translation type="vanished">Incapaz de exportar %1 como partilhável. Falha ao guardar. Por favor verifique se a pasta inicial e guardar dir são graváveis e têm espaço. </translation>
-    </message>
-    <message>
-        <source>Unable to save netlist file.</source>
-        <translation type="vanished">Impossível guardar o ficheiro netlist.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="161"/>
@@ -3403,10 +3203,6 @@ Estamos a trabalhar para evitar esta mensagem, e apenas deixar escolher entre pr
         <translation>O seu sketch ainda não tem uma placa! Por favor adicione uma PCB (Placa de Circuito Impresso) para exportar para o &quot;Gerber&quot;.</translation>
     </message>
     <message>
-        <source>Choose a folder for exporting</source>
-        <translation type="vanished">Escolha uma pasta para exportar</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="988"/>
         <source>Unable to export %1 as shareable.</source>
         <translation type="unfinished"></translation>
@@ -3552,14 +3348,6 @@ Estamos a trabalhar para evitar esta mensagem, e apenas deixar escolher entre pr
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1725"/>
         <source>Export IPC-D-356...</source>
         <translation>Exportar IPC-D-356...</translation>
-    </message>
-    <message>
-        <source>Unable to save IPC file.</source>
-        <translation type="vanished">Impossível guardar o ficheiro IPC.</translation>
-    </message>
-    <message>
-        <source>But the content was copied to the clipboard.</source>
-        <translation type="vanished">Mas o conteúdo foi copiado para a área de transferência.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1808"/>
@@ -4116,10 +3904,6 @@ Por favor verifique em todos os modos de visualização para verificar alguma mo
         <translation>Preencher as regiões livres da camada de cobre--preenchimento não vai incluir todas as pistas ligadas à MASSA</translation>
     </message>
     <message>
-        <source>No copper top layer</source>
-        <translation type="vanished">Nenhuma camada superior de cobre</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2598"/>
         <source>The copper top (copper 1) layer is not available on a one-sided board.  Please switch the board to double-sided or choose the copper bottom (copper 0) layer.</source>
         <translation>O cobre na camada superior (cobre 1) não está disponível numa placa unilateral. Mude a placa para frente e verso ou escolha o cobre da camada inferior (cobre 0).</translation>
@@ -4233,10 +4017,6 @@ Por favor verifique em todos os modos de visualização para verificar alguma mo
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1203"/>
         <source>Show the grid</source>
         <translation>Mostrar a grelha</translation>
-    </message>
-    <message>
-        <source>Actual Size</source>
-        <translation type="vanished">Tamanho Real</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2312"/>
@@ -4434,10 +4214,6 @@ Would you like to convert &apos;%1&apos; to the new standard now or open the fil
         <translation>Não mostrar isto novamente.</translation>
     </message>
     <message>
-        <source>Missing copper fill</source>
-        <translation type="vanished">Falta o preenchimento de cobre</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4486"/>
         <source>It is recommended to add copper/ground fill to your circuit to reduce acid usage during production.
 
@@ -4479,10 +4255,6 @@ Continuar o upload?</translation>
         <translation>Converter via para um bendpoint</translation>
     </message>
     <message>
-        <source>Revert?</source>
-        <translation type="vanished">Reverter?</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="274"/>
         <source>This operation can not be undone--you will lose all of your changes.
 
@@ -4505,10 +4277,6 @@ Continuar em reverter?</translation>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="662"/>
         <source>Reload the sketch</source>
         <translation>Recarregar o esboço</translation>
-    </message>
-    <message>
-        <source>Unrouted connections</source>
-        <translation type="vanished">Ligações sem Rota</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3225"/>
@@ -4536,14 +4304,6 @@ Continuar em reverter?</translation>
         <translation>Destaque todos os conectores sem rota</translation>
     </message>
     <message>
-        <source>Inspector</source>
-        <translation type="vanished">Inspector</translation>
-    </message>
-    <message>
-        <source>Undo History</source>
-        <translation type="vanished">Anular Histórico</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="581"/>
         <source>Breadboard</source>
         <translation>Breadboard</translation>
@@ -4557,14 +4317,6 @@ Continuar em reverter?</translation>
         <location filename="../src/mainwindow/mainwindow.cpp" line="599"/>
         <source>PCB</source>
         <translation>PCB</translation>
-    </message>
-    <message>
-        <source>Layers</source>
-        <translation type="vanished">Camadas</translation>
-    </message>
-    <message>
-        <source>Couldn&apos;t get the dock widget</source>
-        <translation type="vanished">Impossível de obter o dock widget</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="949"/>
@@ -4694,10 +4446,6 @@ Continuar em reverter?</translation>
         <translation>Texto irá coincidir etiqueta do componente, descrição, título, etc. Introduza texto a procurar por:</translation>
     </message>
     <message>
-        <source>Search</source>
-        <translation type="vanished">Procurar</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4696"/>
         <source>No parts matched search term &apos;%1&apos;.</source>
         <translation>Sem componentes coincidentes na procura &apos;%1&apos;.</translation>
@@ -4747,10 +4495,6 @@ Continuar em reverter?</translation>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2903"/>
         <source>Set the minimum distance between ground fill and traces or connectors</source>
         <translation>Definir uma distância mínima entre preenchimento de terra e rastos ou conectores</translation>
-    </message>
-    <message>
-        <source>Enter Text</source>
-        <translation type="vanished">Introduzir Texto</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1078"/>
@@ -4900,22 +4644,6 @@ Continuar em reverter?</translation>
         <translation>Preenchimento de Cobre (%1)</translation>
     </message>
     <message>
-        <source>Old Ground Fill (%1)</source>
-        <translation type="vanished">Antigo Preenchimento Terra (%1)</translation>
-    </message>
-    <message>
-        <source>Old Copper Fill (%1)</source>
-        <translation type="vanished">Antigo Preenchimento Cobre (%1)</translation>
-    </message>
-    <message>
-        <source>Old Ground Fill</source>
-        <translation type="vanished">Antigo Preenchimento Terra</translation>
-    </message>
-    <message>
-        <source>Old Copper Fill</source>
-        <translation type="vanished">Antigo Preenchimento Cobre</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3994"/>
         <source>
 
@@ -5023,10 +4751,6 @@ Nota: se você deseja atualizar mais tarde, existem opções no menu &apos;Compo
         <translation>%1 fundo</translation>
     </message>
     <message>
-        <source>Schematic conversion</source>
-        <translation type="vanished">Conversão Esquemática</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2963"/>
         <source>Saving this sketch will convert it to the new schematic graphics standard. Go ahead and convert?</source>
         <translation>Guardar este esboço o converterá no novo padrão de gráficos esquemáticos. Realizar a conversão?</translation>
@@ -5040,24 +4764,6 @@ Nota: se você deseja atualizar mais tarde, existem opções no menu &apos;Compo
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1005"/>
         <source>Connect all connectors to a single test part</source>
         <translation>Ligar todos os conectores para um único componente teste</translation>
-    </message>
-    <message>
-        <source>Schematic view update</source>
-        <translation type="vanished">Atualizar vista de esquema</translation>
-    </message>
-    <message>
-        <source>There is a new graphics standard for schematic-view part images, beginning with version 0.8.6.
-
-</source>
-        <translation type="vanished">Há um novo padrão de gráficos para imagens de componentes em vista de esquema, começando com a versão 0.8.6
-
-</translation>
-    </message>
-    <message>
-        <source>Would you like to convert &apos;%1&apos; to the new standard now or open the file read-only?
-</source>
-        <translation type="vanished">Gostaria de converter &apos;%1&apos; para o novo padrão agora ou abrir o ficheiro apenas de leitura?
-</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3698"/>
@@ -5327,10 +5033,6 @@ Nota: se você deseja atualizar mais tarde, existem opções no menu &apos;Compo
         <translation>Roteiro</translation>
     </message>
     <message>
-        <source>Fritzing Fab Upload</source>
-        <translation type="vanished">Fritzing Fab Upload</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4518"/>
         <source>Please first save your project in order to upload it.</source>
         <translation>Por favor, primeiro salve seu projeto para poder carregá-lo.</translation>
@@ -5541,17 +5243,6 @@ Reason: %2 (errcode %3)</source>
         <translation>Não foi possível reescrever ficheiro &apos;%1&apos;.
 Razão: %2 (errcode %3)</translation>
     </message>
-    <message numerus="yes">
-        <source>Unable to find the following %n part(s):</source>
-        <translation type="vanished">
-            <numerusform>Incapaz de encontrar o seguinte componente %n:</numerusform>
-            <numerusform>Incapaz de encontrar os seguintes componentes %n:</numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>at</source>
-        <translation type="vanished">em</translation>
-    </message>
 </context>
 <context>
     <name>MysteryPart</name>
@@ -5708,10 +5399,6 @@ Razão: %2 (errcode %3)</translation>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="960"/>
         <source>Change trace layer</source>
         <translation>Mudar a camada do traço</translation>
-    </message>
-    <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1422"/>
@@ -5894,10 +5581,6 @@ Enter keepout value:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ground Fill</source>
-        <translation type="obsolete">Preenchimento isolante</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2407"/>
         <source>Your sketch does not have a board yet!  Please add a PCB in order to use this selection operation.</source>
         <translation>O seu esboço ainda não tem uma placa!  Por favor adicione um PCB em ordem de utilizar esta operação.</translation>
@@ -5929,56 +5612,6 @@ Enter keepout value:</source>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2888"/>
         <source>Your sketch does not have a board yet. You cannot fabricate this sketch without a PCB part.</source>
         <translation>O seu esboço ainda não tem uma placa. Não pode fabricar este esboço sem um componente de PCB.</translation>
-    </message>
-    <message>
-        <source>You need to select one board if you have multiple PCB boards.</source>
-        <translation type="vanished">Você precisa de selecionar uma placa se você tiver múltiplas placas PCB.</translation>
-    </message>
-    <message>
-        <source>Enter Keepout</source>
-        <translation type="vanished">Introduzir Margem de Distância</translation>
-    </message>
-    <message>
-        <source>Keepout is in mils (.001 inches).
-
-</source>
-        <translation type="vanished">Margem de Distância em mils (.001 polegadas).
-
-</translation>
-    </message>
-    <message>
-        <source>Note that due to aliasing, distances may be too short by up to 2 mils
-</source>
-        <translation type="vanished">Nota que devido ao aliasing, as distâncias podem ser mais pequenas por 2 mils
-</translation>
-    </message>
-    <message>
-        <source>so you may want to increase the keepout value by that much.
-
-</source>
-        <translation type="vanished">então deve querer aumentar o valor da margem de distância um pouco
-
-</translation>
-    </message>
-    <message>
-        <source>10 mils is a good default choice.
-
-</source>
-        <translation type="vanished">10 mils é uma boa escolha padrão
-
-</translation>
-    </message>
-    <message>
-        <source>Enter keepout value:</source>
-        <translation type="vanished">Introduzir valor da margem de distância:</translation>
-    </message>
-    <message>
-        <source>Fritzing Fab Quote</source>
-        <translation type="vanished">Fritzing Fab Quota</translation>
-    </message>
-    <message>
-        <source>Sorry, http://fab.fritzing.org is not responding to the quote request. Please check your network connection and/or try again later.</source>
-        <translation type="vanished">Desculpe, http://fab.fritzing.org não está a responder com o pedido de quota. Por favor verifique a sua ligação à rede e/ou tente de novo.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="257"/>
@@ -6016,10 +5649,6 @@ Enter keepout value:</source>
 </context>
 <context>
     <name>PEMainWindow</name>
-    <message>
-        <source>Parts Editor</source>
-        <translation type="vanished">Editor de Componentes</translation>
-    </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="964"/>
         <source>Show Icon</source>
@@ -6216,58 +5845,14 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Copy problem</source>
-        <translation type="vanished">Copiar problema</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1609"/>
         <source>Unable to make a local copy of: &apos;%1&apos;</source>
         <translation>Incapaz de fazer uma cópia local de: &apos;%1&apos;</translation>
     </message>
     <message>
-        <source>You may use a PNG or JPG image to construct your part, but it is better to use an SVG. </source>
-        <translation type="vanished">Pode utilizar uma imagem PNG ou JPG para construir o seu componente, mas é melhor utilizar SVG. </translation>
-    </message>
-    <message>
-        <source>PNG and JPG images retain their nature as bitmaps and do not look good when scaled--</source>
-        <translation type="vanished">Imagens PNG e JPG retêm a sua natureza como bitmaps e não têm bom aspecto quando à escala--</translation>
-    </message>
-    <message>
-        <source>so for Fritzing parts it is best to use PNG and JPG only as placeholders.</source>
-        <translation type="vanished">portanto para componentes Fritzing é melhor utilizar PNG ou JPG como espaços reservados.</translation>
-    </message>
-    <message>
-        <source>Use of PNG and JPG discouraged</source>
-        <translation type="vanished">Uso de PNG e JPG desaconselhado</translation>
-    </message>
-    <message>
-        <source>Conversion problem</source>
-        <translation type="vanished">Problema de conversão</translation>
-    </message>
-    <message>
-        <source>SVG problem</source>
-        <translation type="vanished">Problema de SVG</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1582"/>
         <source>Unable to parse &apos;%1&apos;: %2 line:%3 column:%4</source>
         <translation>Incapaz de analisar &apos;%1&apos;: %2 linha:%3 coluna:%4</translation>
-    </message>
-    <message>
-        <source>There are no copper layers defined in: %1. </source>
-        <translation type="vanished">Não há camadas de cobre definidas em: %1. </translation>
-    </message>
-    <message>
-        <source>See &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;this explanation&lt;/a&gt;.</source>
-        <translation type="vanished">Ver &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;this explanation&lt;/a&gt;.</translation>
-    </message>
-    <message>
-        <source>&lt;br/&gt;&lt;br/&gt;This will not be a problem in the next release of the Parts Editor, </source>
-        <translation type="vanished">&lt;br/&gt;&lt;br/&gt;Isto não irá ser um problema no próximo lançamento do Editor de Componentes, </translation>
-    </message>
-    <message>
-        <source>but for now please modify the file according to the instructions in the link.</source>
-        <translation type="vanished">mas por agora modifique o ficheiro de acordo com as instruções no link.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1636"/>
@@ -6295,10 +5880,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <translation>&amp;Ficheiro</translation>
     </message>
     <message>
-        <source>Sketch Change Warning</source>
-        <translation type="vanished">Aviso de Mudança de Esboço</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2147"/>
         <source>The open sketch &apos;%1&apos; uses the part you are editing. </source>
         <translation>O esboço aberto &apos;%1&apos; utiliza o componente que está a editar. </translation>
@@ -6307,22 +5888,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2148"/>
         <source>Saving this part will make a change to the sketch that cannot be undone.</source>
         <translation>Guardar este componente irá fazer uma alteração ao esboço que não pode ser desfeita.</translation>
-    </message>
-    <message>
-        <source>The open sketches </source>
-        <translation type="vanished">Os esboços abertos </translation>
-    </message>
-    <message>
-        <source>&apos;%1&apos;, </source>
-        <translation type="vanished">&apos;%1&apos;, </translation>
-    </message>
-    <message>
-        <source>and &apos;%1&apos; </source>
-        <translation type="vanished">e &apos;%1&apos; </translation>
-    </message>
-    <message>
-        <source>Saving this part will make a change to these sketches that cannot be undone.</source>
-        <translation type="vanished">Guardar este componente irá fazer uma alteração a estes esboços que não pode ser desfeito.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2166"/>
@@ -6347,10 +5912,6 @@ Prosseguir e guardar?</translation>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2734"/>
         <source>Remove %1 connectors</source>
         <translation>Remover %1 conectores</translation>
-    </message>
-    <message>
-        <source>Save &quot;%1&quot;</source>
-        <translation type="vanished">Guardar &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2753"/>
@@ -6391,10 +5952,6 @@ Prosseguir e guardar?</translation>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1157"/>
         <source>Duplicate &apos;variant&apos; property not allowed</source>
         <translation>Duplicar propriedade &apos;variante&apos; não permitido</translation>
-    </message>
-    <message>
-        <source>Close without saving?</source>
-        <translation type="vanished">Fechar sem guardar?</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="383"/>
@@ -6447,10 +6004,6 @@ Prosseguir e guardar?</translation>
         <translation>Mostrar os metadados do conector numa vista de listas</translation>
     </message>
     <message>
-        <source>Blank not allowed</source>
-        <translation type="vanished">Em branco não permitido</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1032"/>
         <source>The value of &apos;%1&apos; can not be blank.</source>
         <translation>O valor de &apos;%1&apos; não pode ficar em branco.</translation>
@@ -6461,17 +6014,9 @@ Prosseguir e guardar?</translation>
         <translation>Mudar %1 para %2</translation>
     </message>
     <message>
-        <source>Must be unique</source>
-        <translation type="vanished">Tem de ser único</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1069"/>
         <source>Variant &apos;%1&apos; is in use. The variant name must be unique.</source>
         <translation>Variante &apos;%1&apos; está em uso. A variante tem de ser única.</translation>
-    </message>
-    <message>
-        <source>Duplicate problem</source>
-        <translation type="vanished">Duplicar problema</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1523"/>
@@ -6487,10 +6032,6 @@ Prosseguir e guardar?</translation>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1532"/>
         <source>Please re-export the SVG file using that setting, and try loading again.</source>
         <translation>Por favor re-exporte o ficheiro SVG utilizando essa definição, e tente carregar de novo.</translation>
-    </message>
-    <message>
-        <source>Fonts</source>
-        <translation type="vanished">Fontes</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1550"/>
@@ -6531,24 +6072,6 @@ Prosseguir e guardar?</translation>
         <location filename="../src/partseditor/pemainwindow.cpp" line="390"/>
         <source>Do you want to keep working or close without saving?</source>
         <translation>Você quer continuar a trabalhar ou fechar sem guardar?</translation>
-    </message>
-    <message numerus="yes">
-        <source>This part has %n unassigned connectors </source>
-        <translation type="vanished">
-            <numerusform>Este componente tem %n conector não assinado </numerusform>
-            <numerusform>Estes componentes têm %n conectores não assinados </numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>across %n views. </source>
-        <translation type="vanished">
-            <numerusform>em %n vista. </numerusform>
-            <numerusform>em %n vistas. </numerusform>
-        </translation>
-    </message>
-    <message>
-        <source>Until all connectors are assigned to SVG elements, the part will not work correctly. </source>
-        <translation type="vanished">Até que todos os conectores sejam atribuídos a elementos SVG, o componente não funcionará corretamente. </translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="537"/>
@@ -6701,10 +6224,6 @@ Prosseguir e guardar?</translation>
         <translation>Fazer apenas %1 vista visível</translation>
     </message>
     <message>
-        <source>Exiting the Parts Editor now is fine, as long as you remember to finish the assignments later.</source>
-        <translation type="vanished">Saíndo do Editor de Componentes agora está ótimo, desde que se lembre de terminar as tarefas mais tarde.</translation>
-    </message>
-    <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="565"/>
         <source>Load image for view...</source>
         <translation>Carregar imagem para vista...</translation>
@@ -6728,34 +6247,6 @@ Prosseguir e guardar?</translation>
         <location filename="../src/partseditor/pemainwindow.cpp" line="632"/>
         <source>&amp;Edit</source>
         <translation>&amp;Editar</translation>
-    </message>
-    <message>
-        <source>This part has bendable legs. </source>
-        <translation type="vanished">Este componente tem pernas dobráveis. </translation>
-    </message>
-    <message>
-        <source>This version of the Parts Editor does not yet support editing bendable legs, and the legs may not be displayed correctly in breadboard view . </source>
-        <translation type="vanished">Esta versão do Editor de Componentes não suporta ainda editar as pernas dobráveis, e as pernas podem não se mostrar corretamente na vista de breadboard . </translation>
-    </message>
-    <message>
-        <source>If you make changes to breadboard view, or change connector metadata, the legs may no longer work. </source>
-        <translation type="vanished">Se você fizer alterações na vista de breadboard, ou mudar metadados do conector, as pernas podem deixar de funcionar. </translation>
-    </message>
-    <message>
-        <source>You can safely make changes to Schematic or PCB view.
-
-</source>
-        <translation type="vanished">Pode agora fazer alterações para vista de Esquema ou PCB.
-
-</translation>
-    </message>
-    <message>
-        <source>This warning will not be repeated in this session of Fritzing</source>
-        <translation type="vanished">Este aviso não irá ser repetido nesta sessão do Fritzing</translation>
-    </message>
-    <message>
-        <source>Unable to load &apos;%1&apos;. Please close the parts editor without saving and try again.</source>
-        <translation type="vanished">Incapaz de carregar &apos;%1&apos;. Por favor feche o editor de componentes sem guardar e tente de novo.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1575"/>
@@ -6805,10 +6296,6 @@ Prosseguir e guardar?</translation>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2114"/>
         <source>&lt;p&gt;Please enter a prefix to help you identify the part files.&lt;br/&gt;The file names will have the form &apos;PREFIX_%1&apos;.&lt;br/&gt;(It is not necessary to change the proposed prefix, since a unique suffix is always added.)&lt;/p&gt;</source>
         <translation>&lt;p&gt;Por favor introduza um prefixo para ajudá-lo a identificar os ficheiros dos componentes.&lt;br/&gt;Os nomes do ficheiro irão ter a forma &apos;PREFIX_%1&apos;.&lt;br/&gt;(Não é necessário mudar o prefixo proposto, desde que um sufixo único é sempre adicionado.)&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>Parts Editor Error</source>
-        <translation type="vanished">Erro do Editor de Peças</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2352"/>
@@ -7102,10 +6589,6 @@ Prosseguir e guardar?</translation>
         <translation>Eitar Etiquetas dos Pinos</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/items/paletteitem.cpp" line="620"/>
         <location filename="../src/items/paletteitem.cpp" line="631"/>
         <location filename="../src/items/paletteitem.cpp" line="655"/>
@@ -7273,10 +6756,6 @@ Prosseguir e guardar?</translation>
         <translation type="unfinished">Definir etiqueta para %1</translation>
     </message>
     <message>
-        <source>Set label for %1</source>
-        <translation type="vanished">Definir etiqueta para %1</translation>
-    </message>
-    <message>
         <location filename="../src/items/partlabel.cpp" line="760"/>
         <source>Label text:</source>
         <translation>Texto da etiqueta:</translation>
@@ -7370,10 +6849,6 @@ Prosseguir e guardar?</translation>
         <translation>Especifique um nome de ficheiro</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="457"/>
         <source>Cannot find file %1.</source>
         <translation>Não foi possível encontrar o ficheiro %1.</translation>
@@ -7408,10 +6883,6 @@ Prosseguir e guardar?</translation>
         <translation>As suas modificações vão ser perdidas se não as guardar.</translation>
     </message>
     <message>
-        <source>Add to bin</source>
-        <translation type="vanished">Adicionar ao pacote</translation>
-    </message>
-    <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="697"/>
         <source>Do you really want to add the selected part to the bin?</source>
         <translation>Você realmente quer adicionar o componente selecionado ao pacote?</translation>
@@ -7420,10 +6891,6 @@ Prosseguir e guardar?</translation>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="584"/>
         <source>Do you want to save the changes you made in the bin &quot;%1&quot;?</source>
         <translation>Quer gravar as alterações efectuadas no pacote &quot;%1&quot;?</translation>
-    </message>
-    <message>
-        <source>Save bin &quot;%1&quot;</source>
-        <translation type="vanished">Guardar pacote &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="513"/>
@@ -7497,10 +6964,6 @@ Prosseguir e guardar?</translation>
         <translation>colunas</translation>
     </message>
     <message>
-        <source>Performance Warning</source>
-        <translation type="vanished">Aviso de Performance</translation>
-    </message>
-    <message>
         <location filename="../src/items/perfboard.cpp" line="297"/>
         <source>Performance of perfboards and stripboards with more than approximately 2000 holes can be slow. Are you sure ?
 
@@ -7521,14 +6984,6 @@ Nota: este aviso não irá ser repetido durante esta sessão.</translation>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="80"/>
         <source>&lt;p&gt;&lt;h2&gt;Pin Label Editor&lt;/h2&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;h2&gt;Pin Label Editor&lt;/h2&gt;&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Click on a label next to a pin number to rename that pin.</source>
-        <translation type="vanished">&lt;p&gt;Clique numa etiqueta próxima ao número de pinos para renomear esse pino.</translation>
-    </message>
-    <message>
-        <source>You can use the tab key to move through the labels in order.&lt;/p&gt;</source>
-        <translation type="vanished">Pode utilizar a tecla tab para mover sobre as etiquetas em ordem.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="81"/>
@@ -7604,14 +7059,6 @@ Nota: este aviso não irá ser repetido durante esta sessão.</translation>
         <location filename="../src/dialogs/prefsdialog.cpp" line="442"/>
         <source>Gerber</source>
         <translation>Gerber</translation>
-    </message>
-    <message>
-        <source>The gerber file generator will use six decimals precision instead of three.
-Some deprecated gerber commands are removed or replaced.
-We recommend enabling this. Only to avoid surprises with processes that are optimized for earlier Fritzing versions, this is currently off by default.</source>
-        <translation type="vanished">O gerador de ficheiros gerber utilizará uma precisão de seis decimais ao invés de três.
-Certos comandos gerber obsoletos são removidos ou substituídos.
-Nós recomendamos ativar esta opção. Apenas para evitar surpresas com processos optimizados por versões anteriores do Fritzing, isto está desativado por padrão.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="455"/>
@@ -7739,38 +7186,6 @@ This feature is enabled by default. If you need to maintain compatibility with o
         <location filename="../src/dialogs/prefsdialog.cpp" line="518"/>
         <source>Animation time for the transitory simulation (s): </source>
         <translation>Tempo de animação para a simulação transitória (s): </translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Scroll priority&lt;/b&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;b&gt;Prioridade deslocação&lt;/b&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>no keys down = scroll&lt;br/&gt;&lt;kbd&gt;Shift&lt;/kbd&gt; key swaps scroll axis&lt;br/&gt;&lt;kbd&gt;Alt&lt;/kbd&gt; or &lt;kbd&gt;%1&lt;/kbd&gt; = zoom</source>
-        <translation type="vanished">sem teclas pressionadas = deslocar&lt;br/&gt;&lt;kbd&gt;Shift&lt;/kbd&gt; troca de teclas muda deslocação&lt;br/&gt;&lt;kbd&gt;Alt&lt;/kbd&gt; ou &lt;kbd&gt;%1&lt;/kbd&gt; = zoom</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Zoom priority&lt;/b&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;b&gt;Prioridade zoom&lt;/b&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>no keys down = zoom&lt;br/&gt;&lt;kbd&gt;Alt&lt;/kbd&gt; or &lt;kbd&gt;%1&lt;/kbd&gt; = scroll&lt;br/&gt;&lt;kbd&gt;Shift&lt;/kbd&gt; key swaps scroll axis</source>
-        <translation type="vanished">sem teclas pressionadas = zoom&lt;br/&gt;&lt;kbd&gt;Alt&lt;/kbd&gt; ou &lt;kbd&gt;%1&lt;/kbd&gt; = deslocar&lt;br/&gt;&lt;kbd&gt;Shift&lt;/kbd&gt; troca de teclas permite eixo de deslocação</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Guess&lt;/b&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;b&gt;Adivinhar&lt;/b&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>Let Fritzing guess if the input is from a wheel or a touchpad. &lt;kbd&gt;Alt&lt;/kbd&gt; or &lt;kbd&gt;%1&lt;/kbd&gt; modify scrolling. &lt;kbd&gt;Shift&lt;/kbd&gt; can modify the axis or the speed.</source>
-        <translation type="vanished">Deixar o Fritzing adivinhar se a entrada é de uma roda ou de um touchpad. &lt;kbd&gt;Alt&lt;/kbd&gt; ou &lt;kbd&gt;%1&lt;/kbd&gt; modifica a deslocação. &lt;kbd&gt;Shift&lt;/kbd&gt; pode modificar o eixo ou a velocidade.</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Pure&lt;/b&gt;&lt;br/&gt;</source>
-        <translation type="vanished">&lt;b&gt;Puro&lt;/b&gt;&lt;br/&gt;</translation>
-    </message>
-    <message>
-        <source>Use system defaults to interpret the wheel input. Don&apos;t try anything fancy. Recommended when using a touchpad with pinch gestures.</source>
-        <translation type="vanished">Utilizar os valores de sistema pré-definidos para a entrada da roda. Não tente nada extravagante. Recomendado quando utilizar um touchpad com gestos de pinça.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="687"/>
@@ -7994,14 +7409,6 @@ This feature is enabled by default. If you need to maintain compatibility with o
         <location filename="../src/program/programwindow.cpp" line="339"/>
         <source>&amp;View</source>
         <translation>&amp;Vista</translation>
-    </message>
-    <message>
-        <source>Code Window</source>
-        <translation type="vanished">Janela de Código</translation>
-    </message>
-    <message>
-        <source>Code Window - %1</source>
-        <translation type="vanished">Janela de Código - %1</translation>
     </message>
     <message>
         <location filename="../src/program/programwindow.cpp" line="741"/>
@@ -8566,10 +7973,6 @@ já se encontrava lá, não vai adicionar outra vez, certo?</translation>
         <translation>Selecione os componentes desatualizados</translation>
     </message>
     <message>
-        <source>files</source>
-        <translation type="vanished">ficheiros</translation>
-    </message>
-    <message>
         <location filename="../src/svg/gedaelement2svg.cpp" line="51"/>
         <location filename="../src/svg/kicadmodule2svg.cpp" line="97"/>
         <location filename="../src/svg/kicadschematic2svg.cpp" line="69"/>
@@ -8703,10 +8106,6 @@ já se encontrava lá, não vai adicionar outra vez, certo?</translation>
         <location filename="../src/svg/x2svg.cpp" line="71"/>
         <source>failure in svg conversion 2</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>failure in svg conversion 2: %1 %2 %3</source>
-        <translation type="vanished">falha na conversão svg 2: %1 %2 %3</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="372"/>
@@ -8969,26 +8368,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
         <translation>rebordo está vazio</translation>
     </message>
     <message>
-        <source>the board outline layer, </source>
-        <translation type="vanished">Camada do rebordo da placa, </translation>
-    </message>
-    <message>
-        <source>silkscreen layer(s), </source>
-        <translation type="vanished">camada(s) silkscreen, </translation>
-    </message>
-    <message>
-        <source>copper layer(s), </source>
-        <translation type="vanished">camada(s) de cobre, </translation>
-    </message>
-    <message>
-        <source>mask layer(s), </source>
-        <translation type="vanished">camada(s) de máscara, </translation>
-    </message>
-    <message>
-        <source>Unable to translate svg curves in %1</source>
-        <translation type="vanished">Incapaz de traduzir as curvas SVG em %1</translation>
-    </message>
-    <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="218"/>
         <source>silk export failure</source>
         <translation>falha ao exportar silk</translation>
@@ -9150,10 +8529,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
         <location filename="../src/fapplication.cpp" line="1301"/>
         <source>%1 wires moved from their saved position in %2.</source>
         <translation>%1 fios movidos para a sua posição guardada em %2.</translation>
-    </message>
-    <message>
-        <source>paste mask layer(s), </source>
-        <translation type="vanished">colar camada(s) de máscara, </translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="279"/>
@@ -9501,10 +8876,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
         <translation>As dimensões do PCB selecionado (título: %1) são %2 cm x %3 cm (%4 in x %5 in).&lt;br /&gt;</translation>
     </message>
     <message>
-        <source>Fritzing Fab Quote</source>
-        <translation type="vanished">Fritzing Fab Quota</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/quotedialog.cpp" line="280"/>
         <source>Use Fritzing Fab to produce a PCB from your sketch.&lt;br /&gt;</source>
         <translation>Utilizar Fritzing Fab para produzir um PCB do seu esboço.&lt;br /&gt;</translation>
@@ -9582,14 +8953,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
 <context>
     <name>RegenerateDatabaseThread</name>
     <message>
-        <source>Unable to open temporary file</source>
-        <translation type="vanished">Impossível abrir ficheiro temporário</translation>
-    </message>
-    <message>
-        <source>Database failure</source>
-        <translation type="vanished">Falha na Base de Dados</translation>
-    </message>
-    <message>
         <location filename="../src/fapplication.cpp" line="333"/>
         <source>Unable to open temporary file (%1)</source>
         <translation type="unfinished"></translation>
@@ -9622,10 +8985,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
         <location filename="../src/items/resistor.cpp" line="249"/>
         <source>resistance</source>
         <translation>resistência</translation>
-    </message>
-    <message>
-        <source>Resistor</source>
-        <translation type="vanished">Resistência</translation>
     </message>
     <message>
         <location filename="../src/items/resistor.cpp" line="267"/>
@@ -9743,10 +9102,6 @@ Fundo: Verde = ok, Vermelho = valor incorreto, Cinzento = valor atual</translati
 </context>
 <context>
     <name>Ruler</name>
-    <message>
-        <source>width</source>
-        <translation type="vanished">largura</translation>
-    </message>
     <message>
         <location filename="../src/items/ruler.cpp" line="198"/>
         <source>inch</source>
@@ -9899,10 +9254,6 @@ Fundo: Verde = ok, Vermelho = valor incorreto, Cinzento = valor atual</translati
         <translation>OK</translation>
     </message>
     <message>
-        <source>%1 Color...</source>
-        <translation type="vanished">%1 Cor...</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/setcolordialog.cpp" line="49"/>
         <source>%1 Color...</source>
         <comment>dialog title</comment>
@@ -9941,10 +9292,6 @@ Fundo: Verde = ok, Vermelho = valor incorreto, Cinzento = valor atual</translati
 </context>
 <context>
     <name>Simulator</name>
-    <message>
-        <source>Simulator Error</source>
-        <translation type="vanished">Erro de simulador</translation>
-    </message>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="197"/>
         <source>An error occurred when starting the simulation.</source>
@@ -9994,10 +9341,6 @@ Netlist:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Simulator Timeout</source>
-        <translation type="vanished">Tempo esgotado do Simulador</translation>
-    </message>
-    <message>
         <location filename="../src/simulation/simulator.cpp" line="437"/>
         <source>The spice simulator did not finish after %1 ms. Aborting simulation.</source>
         <translation>O simulador de especiarias não acabou depois de %1 ms. Abortar simulação.</translation>
@@ -10012,12 +9355,6 @@ Netlist:
         <location filename="../src/simulation/simulator.cpp" line="449"/>
         <source>The simulator gave an error when trying to simulate this circuit. Please, check the wiring and try again.</source>
         <translation>O simulador deu um erro ao tentar simular o circuito. Por favor, verifique os fios e tente de novo.</translation>
-    </message>
-    <message>
-        <source>Errors:
-</source>
-        <translation type="vanished">Erros:
-</translation>
     </message>
 </context>
 <context>
@@ -10113,14 +9450,6 @@ Netlist:
         <translation>Criar e conectar fio</translation>
     </message>
     <message>
-        <source>Rotate</source>
-        <translation type="vanished">Rodar</translation>
-    </message>
-    <message>
-        <source>Flip</source>
-        <translation type="vanished">Inverter</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="6328"/>
         <source>Change %1 label to &apos;%2&apos;</source>
         <translation>Mudar a etiquetal de %1 para &apos;%2&apos;</translation>
@@ -10151,17 +9480,9 @@ Netlist:
         <translation>Mover etiqueta &apos;%1&apos;</translation>
     </message>
     <message>
-        <source>%1 label &apos;%2&apos;</source>
-        <translation type="vanished">%1 etiquetal &apos;%2&apos;</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="7737"/>
         <source>Resize Note</source>
         <translation>Redimensionar Nota</translation>
-    </message>
-    <message>
-        <source>Rotate %2 (%1)</source>
-        <translation type="vanished">Rodar %2 (%1)</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="6240"/>
@@ -10246,10 +9567,6 @@ Netlist:
         <translation>Apagar emaranhado</translation>
     </message>
     <message>
-        <source>Fritzing</source>
-        <translation type="vanished">Fritzing</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="4140"/>
         <source>This seems like an attempt to create a trace across layers. This circumstance should not arise: please contact the developers.</source>
         <translation>Isto parece uma tentativa de criar um traço sobre as camadas. Esta circunstância não deve surgir: por favor contacte os programadores.</translation>
@@ -10306,18 +9623,6 @@ Netlist:
         <translation>Anotar mudança de texto</translation>
     </message>
     <message>
-        <source>Part Movement Notice</source>
-        <translation type="vanished">Aviso de Movimentação de Peças</translation>
-    </message>
-    <message>
-        <source>To delete this connection, some parts need to be moved from their current positions.
-The parts will be moved automatically. To see changes clearly use undo then redo.
-</source>
-        <translation type="vanished">Para eliminar esta ligação, alguns componentes precisam de ser movidos das suas posições atuais.
-Os componentes serão movidos automaticamente. Para ver alterações claramente use anular e repor.
-</translation>
-    </message>
-    <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="10046"/>
         <source>Unrouted connections are highlighted in yellow.</source>
         <translation>Ligações sem rota estão realçadas em amarelo.</translation>
@@ -10326,10 +9631,6 @@ Os componentes serão movidos automaticamente. Para ver alterações claramente 
         <location filename="../src/sketch/sketchwidget.cpp" line="10047"/>
         <source>There are no unrouted connections</source>
         <translation>Aqui não há ligações sem rota</translation>
-    </message>
-    <message>
-        <source>Unrouted connections</source>
-        <translation type="vanished">Ligações sem rota</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="10049"/>
@@ -10419,14 +9720,6 @@ The parts will be moved automatically. You can use the Undo History to review th
 </translation>
     </message>
     <message>
-        <source>and %1 other parts</source>
-        <translation type="vanished">e outros %1 componentes</translation>
-    </message>
-    <message>
-        <source>and %1 other properties</source>
-        <translation type="vanished">e outras %1 propriedades</translation>
-    </message>
-    <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="146"/>
         <source>
 and %1 other parts</source>
@@ -10504,10 +9797,6 @@ and %1 other properties</source>
         <translation type="unfinished">Etiqueta de Rede</translation>
     </message>
     <message>
-        <source>Net labels</source>
-        <translation type="vanished">Etiqueta de Rede</translation>
-    </message>
-    <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="471"/>
         <source>Net labels cannot be blank</source>
         <translation>Etiquetas de rede não podem ficar em branco</translation>
@@ -10515,10 +9804,6 @@ and %1 other properties</source>
 </context>
 <context>
     <name>TipsAndTricks</name>
-    <message>
-        <source>Tips and Tricks</source>
-        <translation type="vanished">Truques e Dicas</translation>
-    </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="40"/>
         <source>Fritzing Tips and Tricks</source>
@@ -10533,14 +9818,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="81"/>
         <source>parts</source>
         <translation>componentes</translation>
-    </message>
-    <message>
-        <source>If you can&apos;t find a part in the Parts Bin, the Generic IC is your friend.  Drag it onto your sketch, then use the widgets in the Inspector to: choose from among 25 different through-hole and SMD packages; change the pin label; and--for DIPs and SIPs--change the number of pins.  You can also change the pin names with the Pin Label editor</source>
-        <translation type="vanished">Se não consegue encontrar um componente no Pacote de Componentes, o IC Genérico é o seu amigo.  Arraste-o para o seu esboço e use os widgets no Inspector para: escolher entre 25 pacotes de furos passantes e SMD diferentes; mude a etiqueta do pino; e - para DIPs e SIPs - altere o número de pinos. Você também pode alterar os nomes dos pinos com o editor Pin Label</translation>
-    </message>
-    <message>
-        <source>An icon in the parts bin may actually represent multiple related parts.  So when you drag an icon from the parts bin into a sketch, make sure you look at the inspector.  The inspector will display the range of choices available for you to modify a part, or swap it for a related part. The parts bin icon will also be a little &apos;stack&apos; and not just a flat icon.</source>
-        <translation type="vanished">Um ícone no pacote de componentes pode realmente representar vários componentes relacionados. Portanto, ao arrastar um ícone da bandeja de componentes para um esboço, verifique o inspetor. O inspetor exibirá o leque de opções disponíveis para você modificar um componente ou trocá-lo por um componente relacionado. O ícone do pacote de componentes irá também ser um pouco &apos;stack&apos; e não um ícone plano.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="85"/>
@@ -10653,10 +9930,6 @@ and %1 other properties</source>
         <translation>Para ver todos os conectores ligados a um determinado conector, mantenha o rato pressionado no conector - todas as ligações serão destacadas.</translation>
     </message>
     <message>
-        <source>A virtual wire between connections in one view means that those connections are somehow connected in another view.</source>
-        <translation type="vanished">Um fio virtual entre ligações numa vista significa que essas ligações estão de algum modo ligadas noutra vista.</translation>
-    </message>
-    <message>
         <location filename="../src/help/tipsandtricks.cpp" line="137"/>
         <source>Therefore, virtual wires are sometimes also called &apos;Ratsnest lines&apos;.</source>
         <translation>Por isso, fios virtuais são às vezes também chamados &apos;linhas Ratsnest&apos;.</translation>
@@ -10687,10 +9960,6 @@ and %1 other properties</source>
         <translation>Facilita a vida a rotear traços horizontalmente num lado de uma PCB e verticalmente no outro lado.</translation>
     </message>
     <message>
-        <source>Route traces in 45-degree angles to reduce noise.</source>
-        <translation type="vanished">Rota traça ângulos de 45-graus para reduzir ruído.</translation>
-    </message>
-    <message>
         <location filename="../src/help/tipsandtricks.cpp" line="157"/>
         <source>If Fritzing is missing a particular part and you don&apos;t want to build one yourself, then use pin headers as connectors and the grid to align them.</source>
         <translation>Se o Fritzing estiver com falta do seu componente especial e você não quiser construir um por conta própria, use cabeçalhos como conectores e a grelha para alinhá-los.</translation>
@@ -10699,10 +9968,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="158"/>
         <source>You can put your own Logo in the silkscreen of your PCB. Just use the Logo part of the core library and select your own file. SVG is the best format.</source>
         <translation>Você pode colocar o seu próprio logotipo na serigrafia da sua PCB. Basta usar a parte Logotipo da biblioteca principal e selecionar o seu próprio ficheiro. SVG é o melhor formato.</translation>
-    </message>
-    <message>
-        <source>Smaller PCBs are more affortable than larger ones. Save space and money.</source>
-        <translation type="vanished">PCBs menores são mais acessíveis que os maiores. Economize espaço e dinheiro.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="159"/>
@@ -10730,21 +9995,9 @@ and %1 other properties</source>
         <translation>Comece bem a olhar para os circuitos de exemplo em Ficheiro &gt; Exemplos.</translation>
     </message>
     <message>
-        <source>Can&apos;t find your part? Search for it by clicking the magnifier icon in the Parts Bin and type in some keywords</source>
-        <translation type="vanished">Não consegue encontrar o seu componente? Procure-o clicando no ícone da lupa no Pacote de Componentes e escreva algumas palavras</translation>
-    </message>
-    <message>
-        <source>A ratsnest line (very thin &apos;wire&apos;) between connections in one view means that those connections are somehow connected in another view.</source>
-        <translation type="vanished">Uma linha de emaranhamento (&apos;wire&apos; muito espessa) entre ligações numa visualização significa que essas ligações estão algures ligadas noutra visualização.</translation>
-    </message>
-    <message>
         <location filename="../src/help/tipsandtricks.cpp" line="161"/>
         <source>To create a custom shape for your PCB, import an SVG file.</source>
         <translation>Para criar uma forma personalizada para o seu PCB, importe um ficheiro SVG.</translation>
-    </message>
-    <message>
-        <source>To make a stylish Arduino shield in no time, switch the shape of the PCB from a rectangle to the Arduino</source>
-        <translation type="vanished">Para fazer um shield Arduino com estilo em pouco tempo, mude a forma do PCB de um retângulo para o Arduino</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="166"/>
@@ -10780,10 +10033,6 @@ and %1 other properties</source>
         <location filename="../src/help/tipsandtricks.cpp" line="145"/>
         <source>In the Parts Editor, to select a graphic underneath another graphic, use the mouse wheel while holding down the shift key.</source>
         <translation>No Editor de Componentes, para selecionar um gráfico abaixo de outro gráfico, use a roda do rato enquanto mantém pressionada a tecla Shift.</translation>
-    </message>
-    <message>
-        <source>You can use the Parts Editor to find the SVG file for a part&apos;s image for a given view. In the Parts Editor, click on the tab for that view, then use &lt;b&gt;Show in Folder&lt;/b&gt; under the &lt;b&gt;File&lt;/b&gt; Menu</source>
-        <translation type="vanished">Você pode utilizar o Editor de Componentes para encontrar o ficheiro SVG para uma imagem de componente para uma visualização diferente. No Editor de Componentes, clique no separador para essa visualização, e utilize &lt;b&gt;Mostrar no Diretório&lt;/b&gt; sobre o Menu &lt;b&gt;Ficheiro&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="148"/>

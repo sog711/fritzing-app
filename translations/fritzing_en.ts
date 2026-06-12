@@ -5197,13 +5197,6 @@ We&apos;re working to avoid this message, and only let you choose between proper
 <context>
     <name>ModelBase</name>
     <message numerus="yes">
-        <source>Unable to find the following %n part(s):</source>
-        <translation type="vanished">
-            <numerusform>Unable to find the following  part:</numerusform>
-            <numerusform>Unable to find the following %n parts:</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
         <location filename="../src/model/modelbase.cpp" line="421"/>
         <source>Unable to find %n part(s). Click &apos;Show Details&apos; for a list of missing parts.</source>
         <translation type="unfinished">
@@ -5997,20 +5990,6 @@ This warning will not be repeated in this session of Fritzing</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2352"/>
         <source>The file %2 with prefix %1 was not saved.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message numerus="yes">
-        <source>This part has %n unassigned connectors </source>
-        <translation type="obsolete">
-            <numerusform>This part has %n unassigned connector </numerusform>
-            <numerusform>This part has %n unassigned connectors </numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <source>across %n views. </source>
-        <translation type="obsolete">
-            <numerusform>in %n view. </numerusform>
-            <numerusform>across %n views. </numerusform>
-        </translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="537"/>
