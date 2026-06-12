@@ -22,6 +22,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #define ITEMBASE_H
 
 #include "bugannotation.h"
+#include "itemdecorations.h"
 
 #include <QXmlStreamWriter>
 #include <QPointF>
@@ -66,31 +67,6 @@ class FSvgRenderer;
 class LayerAttributes;
 class Connector;
 class ReferenceModel;
-class ItemBase;
-
-// Clickable padlock shown on locked parts (and always on boards, as an open lock
-// when unlocked). Double-click toggles the owner's move lock. Deliberately no
-// Q_OBJECT: identified via dynamic_cast in mouse-press scans.
-class LockSymbolItem : public QGraphicsSvgItem
-{
-public:
-	explicit LockSymbolItem(ItemBase * owner);
-
-	void setLockedAppearance(bool locked);
-	void setFlashing(bool flashing);
-
-protected:
-	void mousePressEvent(QGraphicsSceneMouseEvent *event);
-	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
-	void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
-
-private:
-	ItemBase * m_owner = nullptr;
-	QPointF m_basePos;
-	double m_baseScale = 1.0;
-	double m_baseZ = 0.0;
-	bool m_flashing = false;
-};
 
 class ItemBase : public QGraphicsSvgItem
 {
@@ -390,8 +366,6 @@ protected:
 	void saveLocAndTransform(QXmlStreamWriter & streamWriter);
 
 	virtual bool makeLocalModifications(QByteArray & svg, const QString & filename);
-	QPointF lockSymbolPosition();
-	bool lockSymbolCollidesWithConnectors(const QRectF & localRect);
 	void updateHidden();
 	virtual void createShape(LayerAttributes & layerAttributes);
 
@@ -429,11 +403,7 @@ protected:
 	bool m_moveLock = false;
 	bool m_hasRubberBandLeg = false;
 	QList<ConnectorItem *> m_cachedConnectorItems;
-	// QPointer: during a flash the symbol floats on the scene (not a child), so scene
-	// teardown may delete it before its owner
-	QPointer<LockSymbolItem> m_moveLockItem;
-	QTimer * m_lockFlashTimer = nullptr;
-	QGraphicsSvgItem * m_stickyItem = nullptr;
+	ItemDecorations m_decorations;
 	BugAnnotation m_bugAnnotation;
 	FSvgRenderer * m_fsvgRenderer = nullptr;
 	bool m_acceptsMousePressLegEvent = true;

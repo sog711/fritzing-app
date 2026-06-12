@@ -54,7 +54,6 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QBitmap>
 #include <QApplication>
 #include <QGuiApplication>
-#include <QGraphicsColorizeEffect>
 #include <QClipboard>
 #include <qmath.h>
 #include <algorithm>
@@ -71,12 +70,6 @@ bool numberValueLessThan(QString v1, QString v2)
 	return NumberMatcherValues.value(v1, 0) < NumberMatcherValues.value(v2, 0);
 }
 
-static QSvgRenderer MoveLockRenderer;
-static QSvgRenderer MoveLockOpenRenderer;
-static QSvgRenderer StickyRenderer;
-
-// keeps the lock symbol (and the sticky symbol chained to its right) off the part's corner
-static constexpr double LockSymbolInset = 1.5;
 
 /////////////////////////////////
 
@@ -113,86 +106,6 @@ static QHash<QString, QStringList> CachedValues;
 
 ///////////////////////////////////////////////////
 
-LockSymbolItem::LockSymbolItem(ItemBase * owner)
-	: QGraphicsSvgItem(owner),
-	  m_owner(owner)
-{
-	setAcceptedMouseButtons(Qt::LeftButton);
-	setCursor(Qt::PointingHandCursor);
-}
-
-void LockSymbolItem::setLockedAppearance(bool locked)
-{
-	if (locked) {
-		if (!MoveLockRenderer.isValid()) {
-			QString fn(":resources/images/part_lock.svg");
-			bool success = MoveLockRenderer.load(fn);
-			DebugDialog::debug(QString("movelock load success %1").arg(static_cast<int>(success)));
-		}
-		setSharedRenderer(&MoveLockRenderer);
-	}
-	else {
-		if (!MoveLockOpenRenderer.isValid()) {
-			QString fn(":resources/images/part_lock_open.svg");
-			bool success = MoveLockOpenRenderer.load(fn);
-			DebugDialog::debug(QString("movelock open load success %1").arg(static_cast<int>(success)));
-		}
-		setSharedRenderer(&MoveLockOpenRenderer);
-	}
-}
-
-void LockSymbolItem::setFlashing(bool flashing)
-{
-	if (flashing == m_flashing) return;
-
-	m_flashing = flashing;
-	if (flashing) {
-		m_basePos = pos();
-		m_baseScale = scale();
-		m_baseZ = zValue();
-		// a child item can never rise above its parent's z-plane (the part's other layer
-		// kin and overlapping parts would hide it), so float on top of the scene while
-		// flashing; anchor so the doubled symbol keeps the resting symbol's center
-		QPointF sceneTopLeft = m_owner->mapToScene(m_basePos);
-		QSizeF half = boundingRect().size() * m_baseScale / 2;
-		setParentItem(nullptr);
-		setPos(sceneTopLeft - QPointF(half.width(), half.height()));
-		setScale(m_baseScale * 2);
-		setZValue(999999);
-		auto * colorize = new QGraphicsColorizeEffect();
-		colorize->setColor(QColor(221, 0, 0));
-		colorize->setStrength(1.0);
-		setGraphicsEffect(colorize);		// deletes any previous effect
-	}
-	else {
-		setGraphicsEffect(nullptr);
-		setParentItem(m_owner);
-		setPos(m_basePos);
-		setScale(m_baseScale);
-		setZValue(m_baseZ);
-	}
-}
-
-void LockSymbolItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
-{
-	// no base call: clicking the symbol must not select, move, or deselect anything
-	event->accept();
-}
-
-void LockSymbolItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-{
-	event->accept();
-}
-
-void LockSymbolItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
-{
-	m_owner->toggleMoveLockFromSymbol();		// may schedule this symbol for deletion
-	event->accept();
-	// do not touch any member of this after the toggle
-}
-
-///////////////////////////////////////////////////
-
 ItemBase::ItemBase( ModelPart* modelPart, ViewLayer::ViewID viewID, const ViewGeometry & viewGeometry, long id, QMenu * itemMenu )
 	: QGraphicsSvgItem(),
 	  m_id(id),
@@ -200,6 +113,7 @@ ItemBase::ItemBase( ModelPart* modelPart, ViewLayer::ViewID viewID, const ViewGe
 	  m_modelPart(modelPart),
 	  m_viewID(viewID),
 	  m_itemMenu(itemMenu),
+	  m_decorations(this),
 	  m_bugAnnotation(this)
 {
 	//DebugDialog::debug(QString("itembase %1 %2").arg(id).arg((long) static_cast<QGraphicsItem *>(this), 0, 16));
@@ -217,12 +131,6 @@ ItemBase::~ItemBase() {
 	if (m_partLabel != nullptr) {
 		delete m_partLabel;
 		m_partLabel = nullptr;
-	}
-
-	if (m_moveLockItem) {
-		// delete explicitly: during a flash the symbol floats on the scene and would
-		// not be cleaned up as a child
-		delete m_moveLockItem.data();
 	}
 
 	Q_FOREACH (ConnectorItem * connectorItem, cachedConnectorItems()) {
@@ -959,31 +867,7 @@ void ItemBase::setLocalSticky(bool s)
 
 	modelPart()->setLocalProp("sticky", s ? "true" : "false");
 
-	if (s) {
-		if (m_stickyItem == nullptr) {
-			if (!StickyRenderer.isValid()) {
-				QString fn(":resources/images/part_sticky.svg");
-				/* bool success = */ (void)StickyRenderer.load(fn);
-				//DebugDialog::debug(QString("sticky load success %1").arg(success));
-			}
-
-			m_stickyItem = new QGraphicsSvgItem();
-			m_stickyItem->setAcceptHoverEvents(false);
-			m_stickyItem->setAcceptedMouseButtons(Qt::NoButton);
-			m_stickyItem->setSharedRenderer(&StickyRenderer);
-			m_stickyItem->setPos(m_moveLockItem == nullptr ? 0 : LockSymbolInset + m_moveLockItem->boundingRect().width() + 1,
-			                     m_moveLockItem == nullptr ? 0 : LockSymbolInset);
-			m_stickyItem->setZValue(-99999);
-			m_stickyItem->setParentItem(this);
-			m_stickyItem->setVisible(true);
-		}
-	}
-	else {
-		if (m_stickyItem != nullptr) {
-			delete m_stickyItem;
-			m_stickyItem = nullptr;
-		}
-	}
+	m_decorations.setStickyVisible(s);
 
 	update();
 }
@@ -2137,103 +2021,12 @@ bool ItemBase::lockSymbolAlwaysVisible()
 
 void ItemBase::updateLockSymbol()
 {
-	bool show = m_moveLock || lockSymbolAlwaysVisible();
-	if (!show) {
-		if (m_moveLockItem != nullptr) {
-			m_moveLockItem->hide();
-			// deleteLater: this call may originate from the symbol's own double-click handler
-			m_moveLockItem->deleteLater();
-			m_moveLockItem = nullptr;
-		}
-	}
-	else {
-		if (m_moveLockItem == nullptr) {
-			m_moveLockItem = new LockSymbolItem(this);
-		}
-		m_moveLockItem->setFlashing(false);
-		m_moveLockItem->setLockedAppearance(m_moveLock);
-		m_moveLockItem->setScale(1.0);
-		// boards draw the symbol above their opaque graphic; other parts keep the
-		// legacy placement behind the part
-		m_moveLockItem->setZValue(lockSymbolAlwaysVisible() ? 99999 : -99999);
-		m_moveLockItem->setPos(lockSymbolPosition());
-		m_moveLockItem->setToolTip(m_moveLock
-			? tr("Locked. The part cannot be moved or selected. Double-click to unlock.")
-			: tr("Double-click to lock the board in place."));
-		m_moveLockItem->setVisible(true);
-	}
-
-	if (m_stickyItem != nullptr) {
-		m_stickyItem->setPos(m_moveLockItem == nullptr ? 0 : LockSymbolInset + m_moveLockItem->boundingRect().width() + 1,
-		                     m_moveLockItem == nullptr ? 0 : LockSymbolInset);
-	}
-
-	update();
-}
-
-// Connector pads draw in layers above the symbol and would hide it. Try the home corner
-// first, then the four sides of the part label (whether or not the label is shown),
-// preferring the side that points toward the part center; if everything collides, give up
-// and use the home corner anyway.
-QPointF ItemBase::lockSymbolPosition()
-{
-	QPointF home(LockSymbolInset, LockSymbolInset);
-	if (m_moveLockItem == nullptr || scene() == nullptr) return home;
-
-	QSizeF size = m_moveLockItem->boundingRect().size();
-	if (!lockSymbolCollidesWithConnectors(QRectF(home, size))) return home;
-
-	PartLabel * label = partLabel();
-	if (label == nullptr || !label->initialized()) return home;
-
-	QRectF labelRect = mapRectFromScene(label->sceneBoundingRect());
-	QPointF toCenter = boundingRect().center() - labelRect.center();
-
-	QList<QPair<double, QPointF>> candidates;
-	candidates.append({ -toCenter.x(), QPointF(labelRect.left() - LockSymbolInset - size.width(), labelRect.center().y() - size.height() / 2) });
-	candidates.append({  toCenter.x(), QPointF(labelRect.right() + LockSymbolInset, labelRect.center().y() - size.height() / 2) });
-	candidates.append({ -toCenter.y(), QPointF(labelRect.center().x() - size.width() / 2, labelRect.top() - LockSymbolInset - size.height()) });
-	candidates.append({  toCenter.y(), QPointF(labelRect.center().x() - size.width() / 2, labelRect.bottom() + LockSymbolInset) });
-	std::sort(candidates.begin(), candidates.end(),
-	          [](const QPair<double, QPointF> & a, const QPair<double, QPointF> & b) { return a.first > b.first; });
-
-	for (const QPair<double, QPointF> & candidate : candidates) {
-		if (!lockSymbolCollidesWithConnectors(QRectF(candidate.second, size))) {
-			return candidate.second;
-		}
-	}
-
-	return home;
-}
-
-bool ItemBase::lockSymbolCollidesWithConnectors(const QRectF & localRect)
-{
-	const QList<QGraphicsItem *> itemsInRect = scene()->items(mapRectToScene(localRect));
-	for (QGraphicsItem * gitem : itemsInRect) {
-		auto * connectorItem = dynamic_cast<ConnectorItem *>(gitem);
-		if (connectorItem && connectorItem->isVisible()) return true;
-	}
-	return false;
+	m_decorations.updateLockSymbol();
 }
 
 void ItemBase::flashLockSymbol()
 {
-	if (!m_moveLock) return;
-
-	updateLockSymbol();
-	if (m_moveLockItem == nullptr) return;
-
-	if (m_lockFlashTimer == nullptr) {
-		m_lockFlashTimer = new QTimer(this);
-		m_lockFlashTimer->setSingleShot(true);
-		m_lockFlashTimer->setInterval(1200);
-		connect(m_lockFlashTimer, &QTimer::timeout, this, [this]() {
-			if (m_moveLockItem) m_moveLockItem->setFlashing(false);
-		});
-	}
-
-	m_moveLockItem->setFlashing(true);
-	m_lockFlashTimer->start();
+	m_decorations.flashLockSymbol();
 }
 
 void ItemBase::toggleMoveLockFromSymbol()
