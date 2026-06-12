@@ -2139,15 +2139,10 @@ void ItemBase::updateLockSymbol()
 		}
 		m_moveLockItem->setFlashing(false);
 		m_moveLockItem->setLockedAppearance(m_moveLock);
-		if (lockSymbolAlwaysVisible()) {
-			// boards: enlarged and above the opaque board graphic, scaling with the view
-			m_moveLockItem->setScale(3.0);
-			m_moveLockItem->setZValue(99999);
-		}
-		else {
-			m_moveLockItem->setScale(1.0);
-			m_moveLockItem->setZValue(-99999);
-		}
+		m_moveLockItem->setScale(1.0);
+		// boards draw the symbol above their opaque graphic; other parts keep the
+		// legacy placement behind the part
+		m_moveLockItem->setZValue(lockSymbolAlwaysVisible() ? 99999 : -99999);
 		m_moveLockItem->setPos(0, 0);
 		m_moveLockItem->setToolTip(m_moveLock
 			? tr("Locked. The part cannot be moved or selected. Double-click to unlock.")
