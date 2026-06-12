@@ -232,6 +232,12 @@ bool PaletteItemBase::mousePressEventK(PaletteItemBase * originalItem, QGraphics
 {
 	Q_UNUSED(originalItem);
 
+	if (layerKinChief()->moveLock()) {
+		// locked: let the press fall through to items beneath or to the scene background
+		event->ignore();
+		return false;
+	}
+
 	setInRotation(false);
 
 	QPointF corner;

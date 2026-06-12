@@ -53,6 +53,8 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QSignalBlocker>
 #include <QBitmap>
 #include <QApplication>
+#include <QGuiApplication>
+#include <QGraphicsColorizeEffect>
 #include <QClipboard>
 #include <qmath.h>
 
@@ -69,6 +71,7 @@ bool numberValueLessThan(QString v1, QString v2)
 }
 
 static QSvgRenderer MoveLockRenderer;
+static QSvgRenderer MoveLockOpenRenderer;
 static QSvgRenderer StickyRenderer;
 
 /////////////////////////////////
@@ -103,6 +106,77 @@ QBrush ItemBase::ChosenBrush(QColor(255,0,0));
 QBrush ItemBase::EqualPotentialBrush(QColor(255,255,0));
 
 static QHash<QString, QStringList> CachedValues;
+
+///////////////////////////////////////////////////
+
+LockSymbolItem::LockSymbolItem(ItemBase * owner)
+	: QGraphicsSvgItem(owner),
+	  m_owner(owner)
+{
+	setAcceptedMouseButtons(Qt::LeftButton);
+	setCursor(Qt::PointingHandCursor);
+}
+
+void LockSymbolItem::setLockedAppearance(bool locked)
+{
+	if (locked) {
+		if (!MoveLockRenderer.isValid()) {
+			QString fn(":resources/images/part_lock.svg");
+			bool success = MoveLockRenderer.load(fn);
+			DebugDialog::debug(QString("movelock load success %1").arg(static_cast<int>(success)));
+		}
+		setSharedRenderer(&MoveLockRenderer);
+	}
+	else {
+		if (!MoveLockOpenRenderer.isValid()) {
+			QString fn(":resources/images/part_lock_open.svg");
+			bool success = MoveLockOpenRenderer.load(fn);
+			DebugDialog::debug(QString("movelock open load success %1").arg(static_cast<int>(success)));
+		}
+		setSharedRenderer(&MoveLockOpenRenderer);
+	}
+}
+
+void LockSymbolItem::setFlashing(bool flashing)
+{
+	if (flashing == m_flashing) return;
+
+	m_flashing = flashing;
+	if (flashing) {
+		m_baseScale = scale();
+		m_baseZ = zValue();
+		setTransformOriginPoint(boundingRect().center());
+		setScale(m_baseScale * 2);
+		setZValue(99999);
+		auto * colorize = new QGraphicsColorizeEffect();
+		colorize->setColor(QColor(221, 0, 0));
+		colorize->setStrength(1.0);
+		setGraphicsEffect(colorize);		// deletes any previous effect
+	}
+	else {
+		setScale(m_baseScale);
+		setZValue(m_baseZ);
+		setGraphicsEffect(nullptr);
+	}
+}
+
+void LockSymbolItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+	// no base call: clicking the symbol must not select, move, or deselect anything
+	event->accept();
+}
+
+void LockSymbolItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+	event->accept();
+}
+
+void LockSymbolItem::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
+{
+	m_owner->toggleMoveLockFromSymbol();		// may schedule this symbol for deletion
+	event->accept();
+	// do not touch any member of this after the toggle
+}
 
 ///////////////////////////////////////////////////
 
@@ -791,6 +865,12 @@ void ItemBase::mousePressEvent(QGraphicsSceneMouseEvent *event) {
 		return;
 	}
 
+	if (layerKinChief()->moveLock()) {
+		// locked: let the press fall through to items beneath or to the scene background
+		event->ignore();
+		return;
+	}
+
 	//scene()->setItemIndexMethod(QGraphicsScene::NoIndex);
 	//setCacheMode(QGraphicsItem::DeviceCoordinateCache);
 	QGraphicsSvgItem::mousePressEvent(event);
@@ -1212,6 +1292,8 @@ void ItemBase::ensureUniqueTitle(const QString & title, bool force) {
 
 QVariant ItemBase::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant & value)
 {
+	if (change == QGraphicsItem::ItemSelectedChange && moveLockBlocksSelection(value.toBool())) return false;
+
 	if (change == QGraphicsItem::ItemSelectedChange) {
 		if (m_partLabel) {
 			m_partLabel->ownerSelected(value.toBool());
@@ -2009,30 +2091,58 @@ bool ItemBase::moveLock() {
 void ItemBase::setMoveLock(bool moveLock)
 {
 	m_moveLock = moveLock;
-	if (moveLock) {
-		if (m_moveLockItem == nullptr) {
-			if (!MoveLockRenderer.isValid()) {
-				QString fn(":resources/images/part_lock.svg");
-				bool success = MoveLockRenderer.load(fn);
-				DebugDialog::debug(QString("movelock load success %1").arg(static_cast<int>(success)));
-			}
+	updateLockSymbol();
+}
 
-			m_moveLockItem = new QGraphicsSvgItem();
-			m_moveLockItem->setAcceptHoverEvents(false);
-			m_moveLockItem->setAcceptedMouseButtons(Qt::NoButton);
-			m_moveLockItem->setSharedRenderer(&MoveLockRenderer);
-			m_moveLockItem->setPos(0,0);
-			m_moveLockItem->setZValue(-99999);
-			m_moveLockItem->setParentItem(this);
-			m_moveLockItem->setVisible(true);
-		}
+bool ItemBase::moveLockBlocksSelection(bool becomingSelected)
+{
+	// deselection is never vetoed; programmatic selection (context menu, Select All,
+	// undo replay) proceeds because the physical left button is not down then
+	if (!becomingSelected) return false;
 
-	}
-	else {
+	ItemBase * chief = layerKinChief();
+	return (chief != nullptr) && chief->moveLock()
+	       && ((QGuiApplication::mouseButtons() & Qt::LeftButton) != 0);
+}
+
+bool ItemBase::lockSymbolAlwaysVisible()
+{
+	return false;
+}
+
+void ItemBase::updateLockSymbol()
+{
+	bool show = m_moveLock || lockSymbolAlwaysVisible();
+	if (!show) {
 		if (m_moveLockItem != nullptr) {
-			delete m_moveLockItem;
+			m_moveLockItem->hide();
+			// deleteLater: this call may originate from the symbol's own double-click handler
+			m_moveLockItem->deleteLater();
 			m_moveLockItem = nullptr;
 		}
+	}
+	else {
+		if (m_moveLockItem == nullptr) {
+			m_moveLockItem = new LockSymbolItem(this);
+		}
+		m_moveLockItem->setFlashing(false);
+		m_moveLockItem->setLockedAppearance(m_moveLock);
+		if (lockSymbolAlwaysVisible()) {
+			// boards: constant ~19px screen size above the opaque board, clickable at any zoom
+			m_moveLockItem->setFlag(QGraphicsItem::ItemIgnoresTransformations, true);
+			m_moveLockItem->setScale(3.0);
+			m_moveLockItem->setZValue(99999);
+		}
+		else {
+			m_moveLockItem->setFlag(QGraphicsItem::ItemIgnoresTransformations, false);
+			m_moveLockItem->setScale(1.0);
+			m_moveLockItem->setZValue(-99999);
+		}
+		m_moveLockItem->setPos(0, 0);
+		m_moveLockItem->setToolTip(m_moveLock
+			? tr("Locked. The part cannot be moved or selected. Double-click to unlock.")
+			: tr("Double-click to lock the board in place."));
+		m_moveLockItem->setVisible(true);
 	}
 
 	if (m_stickyItem != nullptr) {
@@ -2040,6 +2150,34 @@ void ItemBase::setMoveLock(bool moveLock)
 	}
 
 	update();
+}
+
+void ItemBase::flashLockSymbol()
+{
+	if (!m_moveLock) return;
+
+	updateLockSymbol();
+	if (m_moveLockItem == nullptr) return;
+
+	if (m_lockFlashTimer == nullptr) {
+		m_lockFlashTimer = new QTimer(this);
+		m_lockFlashTimer->setSingleShot(true);
+		m_lockFlashTimer->setInterval(1200);
+		connect(m_lockFlashTimer, &QTimer::timeout, this, [this]() {
+			if (m_moveLockItem) m_moveLockItem->setFlashing(false);
+		});
+	}
+
+	m_moveLockItem->setFlashing(true);
+	m_lockFlashTimer->start();
+}
+
+void ItemBase::toggleMoveLockFromSymbol()
+{
+	// parity with MainWindow::moveLock: direct set plus Inspector refresh, no undo command
+	setMoveLock(!moveLock());
+	InfoGraphicsView * igv = InfoGraphicsView::getInfoGraphicsView(this);
+	if (igv != nullptr) igv->viewItemInfo(this);
 }
 
 void ItemBase::debugInfo(const QString & msg) const
@@ -2087,6 +2225,10 @@ void ItemBase::addedToScene(bool temporary) {
 	if (!temporary && isObsolete()) {
 		showBug(QStringLiteral("obsolete"),
 				QStringList() << tr("This part is obsolete and has been replaced."));
+	}
+	if (!temporary) {
+		// boards show their open-lock symbol as soon as they exist in a view
+		updateLockSymbol();
 	}
 }
 

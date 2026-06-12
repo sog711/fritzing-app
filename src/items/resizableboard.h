@@ -49,6 +49,7 @@ public:
 	bool stickyEnabled();
 	PluralType isPlural();
 	bool canFindConnectorsUnder();
+	bool lockSymbolAlwaysVisible();
 	bool collectExtraInfo(QWidget * parent, const QString & family, const QString & prop, const QString & value, bool swappingEnabled, QString & returnProp, QString & returnValue, QWidget * & returnWidget, bool & hide);
 
 protected:

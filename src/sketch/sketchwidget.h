@@ -480,6 +480,7 @@ protected:
 	bool resizingBoardRelease();
 	void resizeBoard();
 	void resizeWithHandle(ItemBase * itemBase, double mmW, double mmH);
+	void flashLockedSelectedItems();
 	virtual bool acceptsTrace(const ViewGeometry &);
 	virtual ItemBase * placePartDroppedInOtherView(ModelPart *, ViewLayer::ViewLayerPlacement, const ViewGeometry & viewGeometry, long id, SketchWidget * dropOrigin);
 	void showPartLabelsAux(bool show, QList<ItemBase *> & itemBases);
@@ -753,6 +754,10 @@ protected:
 	// the toggle.
 	QPointer<ItemBase> m_modifierClickItem;
 	bool m_modifierClickWasSelected = false;
+	// The locked layerKinChief a left-press landed on (with no unlocked item beneath to take
+	// the press); its lock symbol is flashed on long-press or once a real drag starts.
+	QPointer<ItemBase> m_lockFlashCandidate;
+	QTimer m_lockLongPressTimer;
 	QPointer<QSvgRenderer> m_movingSVGRenderer;
 	QPointF m_movingSVGOffset;
 	QPointer<QGraphicsSvgItem> m_movingItem;

@@ -597,6 +597,12 @@ void PCBSketchWidget::resizeBoard(double mmW, double mmH, bool doEmit)
 	PaletteItem * item = getSelectedPart();
 	if (item == nullptr) return;
 
+	ItemBase * chief = item->layerKinChief();
+	if (chief->moveLock()) {
+		chief->flashLockSymbol();
+		return;
+	}
+
 	bool handle = false;
 	switch (item->itemType()) {
 	case ModelPart::ResizableBoard:

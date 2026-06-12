@@ -247,6 +247,8 @@ void PaletteItem::syncKinSelection(bool selected, PaletteItemBase * originator) 
 
 QVariant PaletteItem::itemChange(GraphicsItemChange change, const QVariant &value)
 {
+	if (change == ItemSelectedChange && moveLockBlocksSelection(value.toBool())) return false;
+
 	//DebugDialog::debug(QString("chief item change %1 %2").arg(this->id()).arg(change));
 	if (m_layerKin.count() > 0) {
 		if (change == ItemSelectedChange) {

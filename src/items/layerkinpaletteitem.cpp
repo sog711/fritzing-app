@@ -45,6 +45,8 @@ void LayerKinPaletteItem::initLKPI(LayerAttributes & layerAttributes, const Laye
 
 QVariant LayerKinPaletteItem::itemChange(GraphicsItemChange change, const QVariant &value)
 {
+	if (change == ItemSelectedChange && moveLockBlocksSelection(value.toBool())) return false;
+
 	//DebugDialog::debug(QString("lk item change %1 %2").arg(this->id()).arg(change));
 	if (m_layerKinChief != nullptr) {
 		if (change == ItemSelectedChange) {

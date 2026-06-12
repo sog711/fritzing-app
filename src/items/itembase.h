@@ -66,6 +66,31 @@ class FSvgRenderer;
 class LayerAttributes;
 class Connector;
 class ReferenceModel;
+class ItemBase;
+
+// Clickable padlock shown on locked parts (and always on boards, as an open lock
+// when unlocked). Double-click toggles the owner's move lock. Deliberately no
+// Q_OBJECT: identified via dynamic_cast in mouse-press scans.
+class LockSymbolItem : public QGraphicsSvgItem
+{
+public:
+	explicit LockSymbolItem(ItemBase * owner);
+
+	void setLockedAppearance(bool locked);
+	void setFlashing(bool flashing);
+
+protected:
+	void mousePressEvent(QGraphicsSceneMouseEvent *event);
+	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+	void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
+
+private:
+	ItemBase * m_owner = nullptr;
+	double m_baseScale = 1.0;
+	double m_baseZ = 0.0;
+	bool m_flashing = false;
+};
+
 class ItemBase : public QGraphicsSvgItem
 {
 	Q_OBJECT
@@ -210,6 +235,11 @@ public:
 	const QString & moduleID();
 	bool moveLock();
 	virtual void setMoveLock(bool);
+	bool moveLockBlocksSelection(bool becomingSelected);
+	void updateLockSymbol();
+	virtual bool lockSymbolAlwaysVisible();
+	void flashLockSymbol();
+	void toggleMoveLockFromSymbol();
 	void debugInfo(const QString & msg) const;
 	void debugInfo2(const QString & msg) const;
 	virtual void addedToScene(bool temporary);
@@ -396,7 +426,8 @@ protected:
 	bool m_moveLock = false;
 	bool m_hasRubberBandLeg = false;
 	QList<ConnectorItem *> m_cachedConnectorItems;
-	QGraphicsSvgItem * m_moveLockItem = nullptr;
+	LockSymbolItem * m_moveLockItem = nullptr;
+	QTimer * m_lockFlashTimer = nullptr;
 	QGraphicsSvgItem * m_stickyItem = nullptr;
 	BugAnnotation m_bugAnnotation;
 	FSvgRenderer * m_fsvgRenderer = nullptr;

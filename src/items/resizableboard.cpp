@@ -173,6 +173,11 @@ bool Board::canFindConnectorsUnder() {
 	return false;
 }
 
+bool Board::lockSymbolAlwaysVisible() {
+	// not simply true: Pad, SchematicFrame and non-pcb logos also inherit Board
+	return isBoard(modelPart());
+}
+
 
 bool Board::isBoard(ItemBase * itemBase) {
 	if (qobject_cast<Board *>(itemBase) == NULL) return false;
@@ -1051,6 +1056,11 @@ void ResizableBoard::paperSizeChanged(int index) {
 	auto * comboBox = qobject_cast<QComboBox *>(sender());
 	if (comboBox == nullptr) return;
 
+	if (moveLock()) {
+		flashLockSymbol();
+		return;
+	}
+
 	QModelIndex modelIndex = comboBox->model()->index(index,0);
 	QSizeF size = comboBox->model()->data(modelIndex, Qt::UserRole).toSizeF();
 	InfoGraphicsView * infoGraphicsView = InfoGraphicsView::getInfoGraphicsView(this);
@@ -1070,6 +1080,11 @@ void ResizableBoard::widthEntry() {
 	double oldW = m_modelPart->localProp("width").toDouble();
 	if (w == oldW) return;
 
+	if (moveLock()) {
+		flashLockSymbol();
+		return;
+	}
+
 	double h =  m_modelPart->localProp("height").toDouble();
 
 	InfoGraphicsView * infoGraphicsView = InfoGraphicsView::getInfoGraphicsView(this);
@@ -1088,6 +1103,11 @@ void ResizableBoard::heightEntry() {
 	double h = text.toDouble();
 	double oldH =  m_modelPart->localProp("height").toDouble();
 	if (h == oldH) return;
+
+	if (moveLock()) {
+		flashLockSymbol();
+		return;
+	}
 
 	double w =  m_modelPart->localProp("width").toDouble();
 
@@ -1468,6 +1488,11 @@ void ResizableBoard::keepAspectRatio(bool checkState) {
 }
 
 void ResizableBoard::revertSize(bool) {
+	if (moveLock()) {
+		flashLockSymbol();
+		return;
+	}
+
 	double ow = modelPart()->localProp("originalWidth").toDouble();
 	double oh = modelPart()->localProp("originalHeight").toDouble();
 

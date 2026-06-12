@@ -38,6 +38,7 @@
         <file>resources/images/helpImagePCB.png</file>
         <file>resources/images/splitterHandle.png</file>
         <file>resources/images/part_lock.svg</file>
+        <file>resources/images/part_lock_open.svg</file>
         <file>resources/images/part_sticky.svg</file>
         <file>resources/images/part_bug.svg</file>
         <file>resources/images/icons/Toolbar_Icon_Order.png</file>

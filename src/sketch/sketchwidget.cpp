@@ -33,6 +33,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QGraphicsItem>
 #include <QMainWindow>
 #include <QApplication>
+#include <QStyleHints>
 #include <QDomElement>
 #include <QSettings>
 #include <QClipboard>
@@ -146,6 +147,14 @@ SketchWidget::SketchWidget(ViewLayer::ViewID viewID, QWidget *parent, int size, 
 	m_arrowTimer.setTimerType(Qt::PreciseTimer);
 	m_autoScrollTimer.setTimerType(Qt::PreciseTimer);
 	connect(&m_arrowTimer, SIGNAL(timeout()), this, SLOT(arrowTimerTimeout()));
+	m_lockLongPressTimer.setSingleShot(true);
+	m_lockLongPressTimer.setInterval(QGuiApplication::styleHints()->mousePressAndHoldInterval());
+	connect(&m_lockLongPressTimer, &QTimer::timeout, this, [this]() {
+		if (m_lockFlashCandidate) {
+			m_lockFlashCandidate->flashLockSymbol();
+			m_lockFlashCandidate = nullptr;
+		}
+	});
 	//setAlignment(Qt::AlignLeft | Qt::AlignTop);
 	setDragMode(QGraphicsView::RubberBandDrag);
 	setFrameStyle(QFrame::Sunken | QFrame::StyledPanel);
@@ -2269,7 +2278,11 @@ bool SketchWidget::moveByArrow(double dx, double dy, QKeyEvent * event, bool isR
 			rubberBandLegEnabled = (event) && ((event->modifiers() & altOrMetaModifier()) != 0);
 			prepMove(nullptr, rubberBandLegEnabled, true);
 		}
-		if (m_savedItems.count() == 0) return false;
+		if (m_savedItems.count() == 0) {
+			// nothing movable: if the selection consists of locked items, tell the user why
+			flashLockedSelectedItems();
+			return false;
+		}
 
 		m_mousePressScenePos = this->mapToScene(this->rect().center());
 		m_movingByArrow = true;
@@ -2350,6 +2363,38 @@ void SketchWidget::mousePressEvent(QMouseEvent *event)
 	squashShapes(m_mousePressScenePos);
 	QList<QGraphicsItem *> items = this->items(event->pos());
 	QGraphicsItem* wasItem = getClickedItem(items);
+
+	m_lockLongPressTimer.stop();
+	m_lockFlashCandidate = nullptr;
+	if (event->button() == Qt::LeftButton) {
+		// a press on a locked item falls through (the item ignores it); arm the topmost locked
+		// chief for a lock-symbol flash on long-press or drag, unless some accepting item
+		// beneath takes the press instead
+		for (QGraphicsItem * gitem : items) {
+			if (dynamic_cast<LockSymbolItem *>(gitem)) {
+				// the lock symbol handles its own clicks
+				m_lockFlashCandidate = nullptr;
+				break;
+			}
+			if (!(gitem->acceptedMouseButtons() & Qt::LeftButton)) continue;
+			if (!gitem->isEnabled() || !gitem->isVisible()) continue;
+
+			auto * pressTarget = dynamic_cast<ItemBase *>(gitem);
+			if (pressTarget && pressTarget->layerKinChief()->moveLock()) {
+				if (!m_lockFlashCandidate) {
+					m_lockFlashCandidate = pressTarget->layerKinChief();
+				}
+				continue;	// locked items ignore the press; keep looking for whoever takes it
+			}
+
+			// an unlocked item (or connector, part label, ...) takes the press
+			m_lockFlashCandidate = nullptr;
+			break;
+		}
+		if (m_lockFlashCandidate) {
+			m_lockLongPressTimer.start();
+		}
+	}
 
 	m_anyInRotation = false;
 	// mouse event gets passed through to individual QGraphicsItems
@@ -3082,6 +3127,14 @@ void SketchWidget::mouseMoveEvent(QMouseEvent *event) {
 	// if its just dragging a wire end do default
 	// otherwise handle all move action here
 
+	if (m_lockFlashCandidate && (event->buttons() & Qt::LeftButton)
+	        && (event->globalPosition().toPoint() - m_mousePressGlobalPos).manhattanLength() >= QApplication::startDragDistance()) {
+		// a real drag gesture started on a locked item: flash its lock symbol once
+		m_lockLongPressTimer.stop();
+		m_lockFlashCandidate->flashLockSymbol();
+		m_lockFlashCandidate = nullptr;
+	}
+
 	if (m_movingByArrow) return;
 
 	QPointF scenePos = mapToScene(event->pos());
@@ -3220,6 +3273,23 @@ void SketchWidget::moveItemsScene(QPointF scenePos, bool checkAutoScrollFlag, bo
 	moveItemsAux(scenePos, globalPos, checkAutoScrollFlag, rubberBandLegEnabled);
 }
 
+void SketchWidget::flashLockedSelectedItems() {
+	QSet<ItemBase *> lockedChiefs;
+	const QList<QGraphicsItem *> selectedItems = scene()->selectedItems();
+	for (QGraphicsItem * gitem : selectedItems) {
+		auto * itemBase = dynamic_cast<ItemBase *>(gitem);
+		if (!itemBase) continue;
+
+		ItemBase * chief = itemBase->layerKinChief();
+		if (chief->moveLock()) {
+			lockedChiefs.insert(chief);
+		}
+	}
+	for (ItemBase * chief : lockedChiefs) {
+		chief->flashLockSymbol();
+	}
+}
+
 void SketchWidget::moveItemsAux(QPointF scenePos, QPointF globalPos, bool checkAutoScrollFlag, bool rubberBandLegEnabled)
 {
 	if (checkAutoScrollFlag) {
@@ -3249,6 +3319,9 @@ void SketchWidget::moveItemsAux(QPointF scenePos, QPointF globalPos, bool checkA
 			//DebugDialog::debug(QString("disconnecting from female %1").arg(item->instanceTitle()));
 			disconnectFromFemale(item, m_savedItems, m_moveDisconnectedFromFemale, false, rubberBandLegEnabled, nullptr);
 		}
+
+		// selected items that prepMove left behind because they are locked: flash once per gesture
+		flashLockedSelectedItems();
 	}
 
 	Q_FOREACH (ItemBase * itemBase, m_savedItems) {
@@ -3303,6 +3376,9 @@ void SketchWidget::mouseReleaseEvent(QMouseEvent *event) {
 	//setRenderHint(QPainter::Antialiasing, true);
 
 	//DebugDialog::debug("sketch mouse release event");
+
+	m_lockLongPressTimer.stop();
+	m_lockFlashCandidate = nullptr;
 
 	m_draggingBendpoint = false;
 	if (m_movingByArrow) return;
@@ -3361,7 +3437,11 @@ void SketchWidget::mouseReleaseEvent(QMouseEvent *event) {
 		bool wasClick = (event->globalPosition().toPoint() - m_mousePressGlobalPos).manhattanLength()
 		                < QApplication::startDragDistance();
 		bool shouldBeSelected = !m_modifierClickWasSelected;
-		if (wasClick && m_modifierClickItem->isSelected() != shouldBeSelected) {
+		// the left button is already up here, so the moveLock selection veto in
+		// ItemBase::itemChange no longer applies: block selecting (not deselecting)
+		// a locked item by pointer explicitly
+		bool blocked = shouldBeSelected && m_modifierClickItem->moveLock();
+		if (wasClick && !blocked && m_modifierClickItem->isSelected() != shouldBeSelected) {
 			m_modifierClickItem->setSelected(shouldBeSelected);
 		}
 	}
@@ -8312,6 +8392,12 @@ void SketchWidget::resizeBoard(double mmW, double mmH, bool doEmit)
 		return InfoGraphicsView::resizeBoard(mmW, mmH, doEmit);
 	}
 
+	ItemBase * chief = item->layerKinChief();
+	if (chief->moveLock()) {
+		chief->flashLockSymbol();
+		return;
+	}
+
 	switch (item->itemType()) {
 	case ModelPart::Ruler:
 		break;
@@ -9242,6 +9328,12 @@ bool SketchWidget::resizingBoardRelease() {
 }
 
 void SketchWidget::resizeBoard() {
+	if (m_resizingBoard && m_resizingBoard->moveLock()) {
+		m_resizingBoard->flashLockSymbol();
+		m_resizingBoard = nullptr;
+		return;
+	}
+
 	QSizeF oldSize;
 	QPointF oldPos;
 	m_resizingBoard->getParams(oldPos, oldSize);
