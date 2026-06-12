@@ -145,18 +145,24 @@ void LockSymbolItem::setFlashing(bool flashing)
 	if (flashing) {
 		m_baseScale = scale();
 		m_baseZ = zValue();
-		setTransformOriginPoint(boundingRect().center());
+		// a child item can never rise above its parent's z-plane (the part's other layer
+		// kin and overlapping parts would hide it), so float on top of the scene while flashing
+		QPointF sceneAnchor = m_owner->mapToScene(QPointF(0, 0));
+		setParentItem(nullptr);
+		setPos(sceneAnchor);
 		setScale(m_baseScale * 2);
-		setZValue(99999);
+		setZValue(999999);
 		auto * colorize = new QGraphicsColorizeEffect();
 		colorize->setColor(QColor(221, 0, 0));
 		colorize->setStrength(1.0);
 		setGraphicsEffect(colorize);		// deletes any previous effect
 	}
 	else {
+		setGraphicsEffect(nullptr);
+		setParentItem(m_owner);
+		setPos(0, 0);
 		setScale(m_baseScale);
 		setZValue(m_baseZ);
-		setGraphicsEffect(nullptr);
 	}
 }
 
@@ -204,6 +210,12 @@ ItemBase::~ItemBase() {
 	if (m_partLabel != nullptr) {
 		delete m_partLabel;
 		m_partLabel = nullptr;
+	}
+
+	if (m_moveLockItem) {
+		// delete explicitly: during a flash the symbol floats on the scene and would
+		// not be cleaned up as a child
+		delete m_moveLockItem.data();
 	}
 
 	Q_FOREACH (ConnectorItem * connectorItem, cachedConnectorItems()) {
@@ -2128,13 +2140,11 @@ void ItemBase::updateLockSymbol()
 		m_moveLockItem->setFlashing(false);
 		m_moveLockItem->setLockedAppearance(m_moveLock);
 		if (lockSymbolAlwaysVisible()) {
-			// boards: constant ~19px screen size above the opaque board, clickable at any zoom
-			m_moveLockItem->setFlag(QGraphicsItem::ItemIgnoresTransformations, true);
+			// boards: enlarged and above the opaque board graphic, scaling with the view
 			m_moveLockItem->setScale(3.0);
 			m_moveLockItem->setZValue(99999);
 		}
 		else {
-			m_moveLockItem->setFlag(QGraphicsItem::ItemIgnoresTransformations, false);
 			m_moveLockItem->setScale(1.0);
 			m_moveLockItem->setZValue(-99999);
 		}

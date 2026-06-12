@@ -2423,13 +2423,21 @@ void SketchWidget::mousePressEvent(QMouseEvent *event)
 	unsquashShapes();
 
 	if (!item) {
-		if (items.length() == 1) {
-			// if we unambiguously click on a partlabel whose owner is unselected, go ahead and activate it
-			auto * partLabel =  dynamic_cast<PartLabel *>(items[0]);
-			if (partLabel) {
-				partLabel->owner()->setSelected(true);
-				return;
-			}
+		// if we unambiguously click on a partlabel whose owner is unselected, go ahead and
+		// activate it; locked items beneath the label don't count, they yield the press
+		PartLabel * partLabel = nullptr;
+		for (QGraphicsItem * gitem : items) {
+			partLabel = dynamic_cast<PartLabel *>(gitem);
+			if (partLabel) break;
+
+			auto * itemBase = dynamic_cast<ItemBase *>(gitem);
+			if (itemBase && itemBase->layerKinChief()->moveLock()) continue;
+
+			break;	// some other item is in the way: not unambiguous
+		}
+		if (partLabel) {
+			partLabel->owner()->setSelected(true);
+			return;
 		}
 
 		clickBackground(event);
@@ -10285,6 +10293,11 @@ void SketchWidget::selectItems(QList<ItemBase *> startingItemBases) {
 QGraphicsItem * SketchWidget::getClickedItem(QList<QGraphicsItem *> & items) {
 	Q_FOREACH (QGraphicsItem * gitem, items) {
 		if (gitem->acceptedMouseButtons() != Qt::NoButton) {
+			auto * itemBase = dynamic_cast<ItemBase *>(gitem);
+			if (itemBase && itemBase->layerKinChief()->moveLock()) {
+				// locked items yield the click to whatever lies beneath
+				continue;
+			}
 			bool ok = true;
 			Q_EMIT clickedItemCandidateSignal(gitem, ok);
 			if (ok) {

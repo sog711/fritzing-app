@@ -426,7 +426,9 @@ protected:
 	bool m_moveLock = false;
 	bool m_hasRubberBandLeg = false;
 	QList<ConnectorItem *> m_cachedConnectorItems;
-	LockSymbolItem * m_moveLockItem = nullptr;
+	// QPointer: during a flash the symbol floats on the scene (not a child), so scene
+	// teardown may delete it before its owner
+	QPointer<LockSymbolItem> m_moveLockItem;
 	QTimer * m_lockFlashTimer = nullptr;
 	QGraphicsSvgItem * m_stickyItem = nullptr;
 	BugAnnotation m_bugAnnotation;
