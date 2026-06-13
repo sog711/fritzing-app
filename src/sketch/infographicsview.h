@@ -55,6 +55,7 @@ public:
 	virtual void hidePartLabel(ItemBase * item);
 	virtual void partLabelMoved(ItemBase *, QPointF oldPos, QPointF oldOffset, QPointF newPos, QPointF newOffset);
 	virtual void rotateFlipPartLabelForCommand(ItemBase *, double degrees, Qt::Orientations flipDirection);
+	virtual class PartLabelContextMenu * partLabelContextMenu() { return nullptr; }
 	virtual void noteSizeChanged(ItemBase * itemBase, const QSizeF & oldSize, const QSizeF & newSize);
 
 	virtual bool spaceBarIsPressed();

@@ -23,6 +23,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "sketch/sketchwidget.h"
 #include "items/itembase.h"
 #include "items/partlabel.h"
+#include "items/partlabelcontextmenu.h"
 #include "debugdialog.h"
 
 #include <QJsonDocument>
@@ -31,32 +32,6 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QSet>
 
 #include <cmath>
-
-namespace {
-
-struct LabelAction {
-	const char *name;
-	double degrees;
-	Qt::Orientations orientation;
-	bool pcbOnly;
-};
-
-// Mirrors the entries of the label's Flip/Rotate context menu, including
-// the 45-degree variants only being available in PCB view (see
-// PartLabel::initMenu and PartLabel::rotateFlip).
-constexpr LabelAction labelActions[] = {
-	{"Rotate 45° Clockwise", 45, {}, true},
-	{"Rotate 90° Clockwise", 90, {}, false},
-	{"Rotate 135° Clockwise", 135, {}, true},
-	{"Rotate 180°", 180, {}, false},
-	{"Rotate 135° Counter Clockwise", 225, {}, true},
-	{"Rotate 90° Counter Clockwise", 270, {}, false},
-	{"Rotate 45° Counter Clockwise", 315, {}, true},
-	{"Flip Horizontal", 0, Qt::Horizontal, false},
-	{"Flip Vertical", 0, Qt::Vertical, false},
-};
-
-}
 
 FProbeSelectedPartLabel::FProbeSelectedPartLabel(MainWindow *mainWindow)
 	: QObject(mainWindow)
@@ -95,11 +70,13 @@ FProbeSelectedPartLabel::FProbeSelectedPartLabel(MainWindow *mainWindow)
 			boundsObj["height"] = bounds.height();
 			result["bounds"] = boundsObj;
 
-			bool isPCB = view->viewID() == ViewLayer::PCBView;
+			// The available actions come from the real shared menu (single
+			// source of truth; the 45/135 degree steps are PCB-only there).
 			QJsonArray actions;
-			for (const LabelAction &action : labelActions) {
-				if (action.pcbOnly && !isPCB) continue;
-				actions.append(QString::fromUtf8(action.name));
+			if (PartLabelContextMenu * menu = view->partLabelContextMenu()) {
+				for (const QString & name : menu->rotateFlipActionNames()) {
+					actions.append(name);
+				}
 			}
 			result["actions"] = actions;
 		}
@@ -111,26 +88,16 @@ FProbeSelectedPartLabel::FProbeSelectedPartLabel(MainWindow *mainWindow)
 		SketchWidget *view = nullptr;
 		PartLabel *partLabel = findSelectedPartLabel(view, result);
 		if (partLabel) {
-			bool isPCB = view->viewID() == ViewLayer::PCBView;
-			bool done = false;
-			for (const LabelAction &action : labelActions) {
-				if (actionName != QString::fromUtf8(action.name)) continue;
-				if (action.pcbOnly && !isPCB) {
-					result["found"] = false;
-					result["reason"] = QString("action '%1' is not available in this view").arg(actionName);
-				}
-				else {
-					// Same code path as the label's context menu, see
-					// PartLabel::rotateFlip; goes through the undo stack.
-					partLabel->owner()->rotateFlipPartLabel(action.degrees, action.orientation);
-					result["found"] = true;
-				}
-				done = true;
-				break;
+			// Drive the real shared menu: triggering the action fires the same
+			// connected slot the GUI uses, which rotates the selected label
+			// through the undo stack.
+			PartLabelContextMenu * menu = view->partLabelContextMenu();
+			if (menu != nullptr && menu->triggerRotateFlip(actionName)) {
+				result["found"] = true;
 			}
-			if (!done) {
+			else {
 				result["found"] = false;
-				result["reason"] = QString("unknown action '%1'").arg(actionName);
+				result["reason"] = QString("action '%1' is not available in this view").arg(actionName);
 			}
 		}
 		if (!result["found"].toBool()) {

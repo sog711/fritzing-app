@@ -153,6 +153,8 @@ public:
 	QColor standardBackground();
 	void setItemMenu(QMenu*);
 	void setWireMenu(QMenu*);
+	void setPartLabelMenu(class PartLabelContextMenu*);
+	class PartLabelContextMenu * partLabelContextMenu() override;
 	virtual void changeConnection(long fromID,
 	                              const QString & fromConnectorID,
 	                              long toID, const QString & toConnectorID,
@@ -707,6 +709,7 @@ protected:
 	// Part Menu
 	QMenu *m_itemMenu = nullptr;
 	QMenu *m_wireMenu = nullptr;
+	class PartLabelContextMenu *m_partLabelMenu = nullptr;
 
 	bool m_infoViewOnHover;
 

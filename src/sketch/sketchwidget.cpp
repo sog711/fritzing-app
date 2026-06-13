@@ -5315,6 +5315,14 @@ void SketchWidget::setWireMenu(QMenu* wireMenu) {
 	m_wireMenu = wireMenu;
 }
 
+void SketchWidget::setPartLabelMenu(PartLabelContextMenu* partLabelMenu) {
+	m_partLabelMenu = partLabelMenu;
+}
+
+PartLabelContextMenu * SketchWidget::partLabelContextMenu() {
+	return m_partLabelMenu;
+}
+
 void SketchWidget::wireConnectedSlot(long fromID, QString fromConnectorID, long toID, QString toConnectorID) {
 	ItemBase * fromItem = findItem(fromID);
 	if (!fromItem) return;

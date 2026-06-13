@@ -91,6 +91,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "testing/FProbeWire.h"
 #include "testing/FProbePart.h"
 #include "testing/FProbeSelectedPartLabel.h"
+#include "items/partlabelcontextmenu.h"
 
 #include "servicelistfetcher.h"
 #include "utils/uploadpair.h"
@@ -464,12 +465,15 @@ void MainWindow::init(ReferenceModel *referenceModel, bool lockFiles) {
 
 	m_breadboardGraphicsView->setItemMenu(breadboardItemMenu());
 	m_breadboardGraphicsView->setWireMenu(breadboardWireMenu());
+	m_breadboardGraphicsView->setPartLabelMenu(new PartLabelContextMenu(m_breadboardGraphicsView));
 
 	m_pcbGraphicsView->setWireMenu(pcbWireMenu());
 	m_pcbGraphicsView->setItemMenu(pcbItemMenu());
+	m_pcbGraphicsView->setPartLabelMenu(new PartLabelContextMenu(m_pcbGraphicsView));
 
 	m_schematicGraphicsView->setItemMenu(schematicItemMenu());
 	m_schematicGraphicsView->setWireMenu(schematicWireMenu());
+	m_schematicGraphicsView->setPartLabelMenu(new PartLabelContextMenu(m_schematicGraphicsView));
 
 	if (m_infoView != nullptr) {
 		m_breadboardGraphicsView->setInfoView(m_infoView);

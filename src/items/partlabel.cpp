@@ -20,6 +20,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "partlabel.h"
 #include "items/itembase.h"
+#include "items/partlabelcontextmenu.h"
 #include "sketch/infographicsview.h"
 #include "model/modelpart.h"
 #include "utils/graphicsutils.h"
@@ -28,7 +29,6 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "utils/misc.h"
 
 #include <QGraphicsScene>
-#include <QMenu>
 #include <QApplication>
 #include <QInputDialog>
 #include <QStringList>
@@ -73,25 +73,6 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 //		-- export to svg for export diy (silkscreen layer is not exported)
 
 
-enum PartLabelAction {
-	PartLabelRotate45CW = 1,
-	PartLabelRotate90CW,
-	PartLabelRotate135CW,
-	PartLabelRotate180,
-	PartLabelRotate45CCW,
-	PartLabelRotate90CCW,
-	PartLabelRotate135CCW,
-	PartLabelFlipHorizontal,
-	PartLabelFlipVertical,
-	PartLabelEdit,
-	PartLabelFontSizeTiny,
-	PartLabelFontSizeSmall,
-	PartLabelFontSizeMedium,
-	PartLabelFontSizeLarge,
-	PartLabelDisplayLabelText,
-	PartLabelHide
-};
-
 /////////////////////////////////////////////
 
 static QMultiHash<long, PartLabel *> AllPartLabels;
@@ -100,11 +81,9 @@ static constexpr double InactiveOpacity = 0.4;
 
 ///////////////////////////////////////////
 
-PartLabel::PartLabel(ItemBase * owner, QWidget *parentWidget, QGraphicsItem * parent)
+PartLabel::PartLabel(ItemBase * owner, QWidget * /* parentWidget */, QGraphicsItem * parent)
 	: QGraphicsSvgItem(parent),
-	  m_owner(owner),
-	  m_parentWidget(parentWidget)
-
+	  m_owner(owner)
 {
 	m_displayKeys.append(LabelTextKey);
 	if (m_owner->hasPartNumberProperty() && m_owner->viewID() != ViewLayer::PCBView) {
@@ -119,10 +98,8 @@ PartLabel::PartLabel(ItemBase * owner, QWidget *parentWidget, QGraphicsItem * pa
 	setVisible(false);
 	setAcceptHoverEvents(true);
 	AllPartLabels.insert(m_owner->id(), this);
-	// No translation needed, the menu title is only shown if the menu is added
-	// to a menu bar
-	//	m_menu = new QMenu(QObject::tr("PartLabel"), m_parentWidget);
-	m_menu = new QMenu("PartLabel", m_parentWidget);
+	// The context menu is a shared per-view object (PartLabelContextMenu),
+	// owned by the view, reached at right-click via InfoGraphicsView.
 }
 
 PartLabel::~PartLabel()
@@ -456,113 +433,6 @@ ItemBase * PartLabel::owner() {
 	return m_owner;
 }
 
-void PartLabel::initMenu()
-{
-	// todo: make this a static var?
-	QAction *editAct = m_menu->addAction(tr("Edit"));
-	editAct->setData(QVariant(PartLabelEdit));
-	editAct->setStatusTip(tr("Edit label text"));
-
-	QAction *hideAct = m_menu->addAction(tr("Hide"));
-	hideAct->setData(QVariant(PartLabelHide));
-	hideAct->setStatusTip(tr("Hide part label"));
-
-	m_menu->addSeparator();
-
-	QMenu * dvmenu = m_menu->addMenu(tr("Display Values"));
-	QMenu * rlmenu = m_menu->addMenu(tr("Flip/Rotate"));
-	QMenu * fsmenu = m_menu->addMenu(tr("Font Size"));
-
-	bool include45 = ((m_owner) != nullptr) && (m_owner->viewID() == ViewLayer::PCBView);
-
-	if (include45) {
-		QAction *rotate45cwAct = rlmenu->addAction(tr("Rotate 45° Clockwise"));
-		rotate45cwAct->setData(QVariant(PartLabelRotate45CW));
-		rotate45cwAct->setStatusTip(tr("Rotate the label by 45 degrees clockwise"));
-	}
-
-	QAction *rotate90cwAct = rlmenu->addAction(tr("Rotate 90° Clockwise"));
-	rotate90cwAct->setData(QVariant(PartLabelRotate90CW));
-	rotate90cwAct->setStatusTip(tr("Rotate the label by 90 degrees clockwise"));
-
-	if (include45) {
-		QAction *rotate135cwAct = rlmenu->addAction(tr("Rotate 135° Clockwise"));
-		rotate135cwAct->setData(QVariant(PartLabelRotate135CW));
-		rotate135cwAct->setStatusTip(tr("Rotate the label by 135 degrees clockwise"));
-	}
-
-	QAction *rotate180Act = rlmenu->addAction(tr("Rotate 180°"));
-	rotate180Act->setData(QVariant(PartLabelRotate180));
-	rotate180Act->setStatusTip(tr("Rotate the label by 180 degrees"));
-
-	if (include45) {
-		QAction *rotate135ccwAct = rlmenu->addAction(tr("Rotate 135° Counter Clockwise"));
-		rotate135ccwAct->setData(QVariant(PartLabelRotate135CCW));
-		rotate135ccwAct->setStatusTip(tr("Rotate the label by 135 degrees counter clockwise"));
-	}
-
-	QAction *rotate90ccwAct = rlmenu->addAction(tr("Rotate 90° Counter Clockwise"));
-	rotate90ccwAct->setData(QVariant(PartLabelRotate90CCW));
-	rotate90ccwAct->setStatusTip(tr("Rotate current selection 90 degrees counter clockwise"));
-
-	if (include45) {
-		QAction *rotate45ccwAct = rlmenu->addAction(tr("Rotate 45° Counter Clockwise"));
-		rotate45ccwAct->setData(QVariant(PartLabelRotate45CCW));
-		rotate45ccwAct->setStatusTip(tr("Rotate the label by 45 degrees counter clockwise"));
-	}
-
-	QAction *flipHorizontalAct = rlmenu->addAction(tr("Flip Horizontal"));
-	flipHorizontalAct->setData(QVariant(PartLabelFlipHorizontal));
-	flipHorizontalAct->setStatusTip(tr("Flip label horizontally"));
-
-	QAction *flipVerticalAct = rlmenu->addAction(tr("Flip Vertical"));
-	flipVerticalAct->setData(QVariant(PartLabelFlipVertical));
-	flipVerticalAct->setStatusTip(tr("Flip label vertically"));
-
-	m_tinyAct = fsmenu->addAction(tr("Tiny"));
-	m_tinyAct->setData(QVariant(PartLabelFontSizeTiny));
-	m_tinyAct->setStatusTip(tr("Set font size to tiny"));
-	m_tinyAct->setCheckable(true);
-	m_tinyAct->setChecked(false);
-
-	m_smallAct = fsmenu->addAction(tr("Small"));
-	m_smallAct->setData(QVariant(PartLabelFontSizeSmall));
-	m_smallAct->setStatusTip(tr("Set font size to small"));
-	m_smallAct->setCheckable(true);
-	m_smallAct->setChecked(false);
-
-	m_mediumAct = fsmenu->addAction(tr("Medium"));
-	m_mediumAct->setData(QVariant(PartLabelFontSizeMedium));
-	m_mediumAct->setStatusTip(tr("Set font size to medium"));
-	m_mediumAct->setCheckable(true);
-	m_mediumAct->setChecked(false);
-
-	m_largeAct = fsmenu->addAction(tr("Large"));
-	m_largeAct->setData(QVariant(PartLabelFontSizeLarge));
-	m_largeAct->setStatusTip(tr("Set font size to large"));
-	m_largeAct->setCheckable(true);
-	m_largeAct->setChecked(false);
-
-	m_labelAct = dvmenu->addAction(tr("Label text"));
-	m_labelAct->setData(QVariant(PartLabelDisplayLabelText));
-	m_labelAct->setCheckable(true);
-	m_labelAct->setChecked(true);
-	m_labelAct->setStatusTip(tr("Display the text of the label"));
-
-	dvmenu->addSeparator();
-
-	QHash<QString,QString> properties = m_owner->modelPart()->properties();
-	Q_FOREACH (QString key, properties.keys()) {
-		QString translatedName = ItemBase::translatePropertyName(key);
-		QAction * action = dvmenu->addAction(translatedName);
-		action->setData(QVariant(key));
-		action->setCheckable(true);
-		action->setChecked(false);
-		action->setStatusTip(tr("Display the value of property %1").arg(translatedName));
-		m_displayActs.append(action);
-	}
-}
-
 void PartLabel::rotateFlipLabel(double degrees, Qt::Orientations orientation) {
 	if (degrees != 0) {
 		transformLabel(QTransform().rotate(degrees));
@@ -635,116 +505,27 @@ void PartLabel::ownerSelected(bool selected)
 
 void PartLabel::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-	if (m_hidden || m_inactive || !m_owner->isSelected()) {
+	if (m_hidden || m_inactive || m_owner == nullptr || !m_owner->isSelected()) {
 		event->ignore();
 		return;
 	}
 
-	if (m_menu->isEmpty()) {
-		initMenu();
+	InfoGraphicsView * infographics = InfoGraphicsView::getInfoGraphicsView(this);
+	PartLabelContextMenu * menu = (infographics != nullptr) ? infographics->partLabelContextMenu() : nullptr;
+	if (menu == nullptr) {
+		event->ignore();
+		return;
 	}
 
-	m_labelAct->setChecked(m_displayKeys.contains(LabelTextKey));
-	Q_FOREACH (QAction * displayAct, m_displayActs) {
-		QString data = displayAct->data().toString();
-		displayAct->setChecked(m_displayKeys.contains(data));
+	// Match the part menu: a right-click selects only this part, then the shared
+	// per-view menu acts on the current selection.
+	if (m_owner->scene() != nullptr) {
+		m_owner->scene()->clearSelection();
 	}
+	m_owner->setSelected(true);
 
-	m_tinyAct->setChecked(false);
-	m_smallAct->setChecked(false);
-	m_mediumAct->setChecked(false);
-	m_largeAct->setChecked(false);
-	InfoGraphicsView *infographics = InfoGraphicsView::getInfoGraphicsView(this);
-	if (infographics != nullptr) {
-		int fs = m_font.pointSize();
-		if (fs == infographics->getLabelFontSizeTiny()) {
-			m_tinyAct->setChecked(true);
-		}
-		else if (fs == infographics->getLabelFontSizeSmall()) {
-			m_smallAct->setChecked(true);
-		}
-		else if (fs == infographics->getLabelFontSizeMedium()) {
-			m_mediumAct->setChecked(true);
-		}
-		else if (fs == infographics->getLabelFontSizeLarge()) {
-			m_largeAct->setChecked(true);
-		}
-	}
-
-	QAction *selectedAction = m_menu->exec(event->screenPos());
-	if (selectedAction == nullptr) return;
-
-	PartLabelAction action = (PartLabelAction) selectedAction->data().toInt();
-	switch (action) {
-	case PartLabelRotate45CW:
-	case PartLabelRotate45CCW:
-	case PartLabelRotate90CW:
-	case PartLabelRotate90CCW:
-	case PartLabelRotate135CW:
-	case PartLabelRotate135CCW:
-	case PartLabelRotate180:
-	case PartLabelFlipHorizontal:
-	case PartLabelFlipVertical:
-		rotateFlip(action);
-		break;
-	case PartLabelEdit:
-		partLabelEdit();
-		break;
-	case PartLabelHide:
-		partLabelHide();
-		break;
-	case PartLabelFontSizeTiny:
-	case PartLabelFontSizeSmall:
-	case PartLabelFontSizeMedium:
-	case PartLabelFontSizeLarge:
-		setFontSize(action);
-		resetSvg();
-		break;
-	case PartLabelDisplayLabelText:
-		setLabelDisplay(LabelTextKey);
-		break;
-	default:
-		setLabelDisplay(selectedAction->data().toString());
-		break;
-	}
-}
-
-void PartLabel::rotateFlip(int action) {
-	double degrees = 0;
-	Qt::Orientations orientation = QFlags<Qt::Orientation>();
-	switch (action) {
-	case PartLabelRotate45CW:
-		degrees = 45;
-		break;
-	case PartLabelRotate90CW:
-		degrees = 90;
-		break;
-	case PartLabelRotate135CW:
-		degrees = 135;
-		break;
-	case PartLabelRotate90CCW:
-		degrees = 270;
-		break;
-	case PartLabelRotate135CCW:
-		degrees = 225;
-		break;
-	case PartLabelRotate180:
-		degrees = 180;
-		break;
-	case PartLabelRotate45CCW:
-		degrees = 315;
-		break;
-	case PartLabelFlipHorizontal:
-		orientation = Qt::Horizontal;
-		break;
-	case PartLabelFlipVertical:
-		orientation = Qt::Vertical;
-		break;
-	default:
-		break;
-	}
-
-	m_owner->rotateFlipPartLabel(degrees, orientation);
+	menu->popup(event->screenPos());
+	event->accept();
 }
 
 
@@ -756,11 +537,6 @@ void PartLabel::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) {
 
 	m_doDrag = false;
 	partLabelEdit();
-}
-
-void PartLabel::partLabelHide()
-{
-	m_owner->hidePartLabel();
 }
 
 void PartLabel::partLabelEdit()
@@ -799,36 +575,12 @@ void PartLabel::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 	}
 }
 
-void PartLabel::setFontSize(int action) {
-	InfoGraphicsView *infographics = InfoGraphicsView::getInfoGraphicsView(this);
-	if (infographics == nullptr) return;
-
-	double fs = 0;
-	switch (action) {
-	case PartLabelFontSizeTiny:
-		fs = infographics->getLabelFontSizeTiny();
-		break;
-	case PartLabelFontSizeSmall:
-		fs = infographics->getLabelFontSizeSmall();
-		break;
-	case PartLabelFontSizeMedium:
-		fs = infographics->getLabelFontSizeMedium();
-		break;
-	case PartLabelFontSizeLarge:
-		fs = infographics->getLabelFontSizeLarge();
-		break;
-	default:
-		return;
-	}
-	m_font.setPointSize(fs);
-}
-
 void PartLabel::setFontPointSize(double pointSize) {
 	m_font.setPointSize(pointSize);
 	resetSvg();
 }
 
-void PartLabel::setLabelDisplay(const QString & key) {
+void PartLabel::toggleDisplayKey(const QString & key) {
 	if (m_displayKeys.contains(key)) {
 		m_displayKeys.removeOne(key);
 	}

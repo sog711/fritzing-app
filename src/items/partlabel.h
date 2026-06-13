@@ -32,7 +32,6 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QKeyEvent>
 #include <QPointer>
 #include <QTimer>
-#include <QMenu>
 
 #include "viewlayer.h"
 
@@ -71,6 +70,13 @@ public:
 	void setFontPointSize(double pointSize);
 	bool migrateLabelOffset();
 
+	// The label's context-menu verbs. PartLabelContextMenu dispatches to these;
+	// partLabelEdit is also invoked on double-click.
+	void partLabelEdit();
+	void toggleDisplayKey(const QString & key);
+	const QStringList & displayKeys() const { return m_displayKeys; }
+	const QFont & labelFont() const { return m_font; }
+
 protected:
 	void mousePressEvent(QGraphicsSceneMouseEvent *event);
 	void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
@@ -79,19 +85,12 @@ protected:
 	void transformLabel(QTransform currTransf);
 	void setUpText();
 	void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
-	void initMenu();
-	void partLabelEdit();
-	void setFontSize(int action);
-	void rotateFlip(int action);
-	void setLabelDisplay(const QString & key);
 	void setHiddenOrInactive();
-	void partLabelHide();
 	void resetSvg();
 	QString makeSvgAux(bool blackOnly, double dpi, double printerScale, double & w, double & h);
 
 protected:
 	QPointer<ItemBase> m_owner;
-	QWidget *m_parentWidget;
 	bool m_initialized = false;
 	bool m_initializedPos = false;
 	bool m_spaceBarWasPressed = false;
@@ -102,16 +101,9 @@ protected:
 	ViewLayer::ViewLayerID m_viewLayerID = ViewLayer::UnknownLayer;
 	bool m_hidden = false;
 	bool m_inactive = false;
-	QMenu * m_menu = nullptr;
 	QString m_text;
 	QString m_displayText;
 	QStringList m_displayKeys;
-	QAction * m_tinyAct = nullptr;
-	QAction * m_smallAct = nullptr;
-	QAction * m_mediumAct = nullptr;
-	QAction * m_largeAct = nullptr;
-	QAction * m_labelAct = nullptr;
-	QList<QAction *> m_displayActs;
 	QColor m_color;
 	QFont m_font;
 	QSvgRenderer * m_renderer = nullptr;
