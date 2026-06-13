@@ -3386,7 +3386,14 @@ void SketchWidget::mouseReleaseEvent(QMouseEvent *event) {
 	//DebugDialog::debug("sketch mouse release event");
 
 	m_lockLongPressTimer.stop();
-	m_lockFlashCandidate = nullptr;
+	if (m_lockFlashCandidate) {
+		// a click that would have selected a locked part: flash the lock to say why
+		// nothing got selected. A drag would have flashed earlier via mouseMoveEvent,
+		// and a long hold via m_lockLongPressTimer; each consumes the candidate, so
+		// the candidate surviving to release means the gesture was a plain click.
+		m_lockFlashCandidate->flashLockSymbol();
+		m_lockFlashCandidate = nullptr;
+	}
 
 	m_draggingBendpoint = false;
 	if (m_movingByArrow) return;
