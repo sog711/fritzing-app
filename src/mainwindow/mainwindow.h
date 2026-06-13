@@ -151,6 +151,7 @@ struct TraceMenuThing {
 
 class FProbeWire;
 class FProbePart;
+class FProbeSelectedPartLabel;
 
 class MainWindow : public FritzingWindow
 {
@@ -158,6 +159,7 @@ class MainWindow : public FritzingWindow
 
 	friend class FProbeWire;
 	friend class FProbePart;
+	friend class FProbeSelectedPartLabel;
 
 	class SketchWidget * currentGraphicsView();
 
