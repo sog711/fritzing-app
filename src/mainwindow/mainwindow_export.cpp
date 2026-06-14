@@ -39,6 +39,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "dialogs/exportparametersdialog.h"
 #include "eagle/fritzing2eagle.h"
 #include "items/partfactory.h"
+#include "items/itemdecorations.h"
 #include "infoview/htmlinfoview.h"
 #include "ipc/ipc_d_356.h"
 #include "program/programwindow.h"
@@ -732,6 +733,17 @@ QRectF MainWindow::prepareExport(bool removeBackground)
 		item->setSelected(false);
 	}
 
+	// The lock padlock is an on-screen affordance, not part of the design: hide it (and
+	// restore it in afterExport) so it never lands in an exported image. Done before the
+	// bounding-rect pass below so a hidden lock cannot enlarge the exported area.
+	m_hiddenForExport.clear();
+	Q_FOREACH(QGraphicsItem *item, m_currentGraphicsView->scene()->items()) {
+		if ((dynamic_cast<LockSymbolItem *>(item) != nullptr) && item->isVisible()) {
+			item->setVisible(false);
+			m_hiddenForExport.append(item);
+		}
+	}
+
 	QRectF itemsBoundingRect;
 	Q_FOREACH(QGraphicsItem *item,  m_currentGraphicsView->scene()->items()) {
 		if (!item->isVisible()) continue;
@@ -767,6 +779,11 @@ void MainWindow::afterExport(bool removeBackground)
 	Q_FOREACH(QGraphicsItem *item, m_selectedItems) {
 		item->setSelected(true);
 	}
+
+	Q_FOREACH(QGraphicsItem *item, m_hiddenForExport) {
+		item->setVisible(true);
+	}
+	m_hiddenForExport.clear();
 
 	if (removeBackground) {
 		m_currentGraphicsView->setBackground(m_bgColor);

@@ -990,6 +990,7 @@ protected:
 	// exporting
 	QGraphicsItem * m_watermark;
 	QList<QGraphicsItem*> m_selectedItems;
+	QList<QGraphicsItem*> m_hiddenForExport;
 	QColor m_bgColor;
 	QSharedPointer<ProjectProperties> m_projectProperties;
 	QSharedPointer<ServiceListFetcher> m_serviceListFetcher;
