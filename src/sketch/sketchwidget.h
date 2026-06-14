@@ -245,6 +245,7 @@ public:
 	long createWire(ConnectorItem * from, ConnectorItem * to, ViewGeometry::WireFlags, bool dontUpdate, BaseCommand::CrossViewType, QUndoCommand * parentCommand);
 	virtual void newWire(Wire *);
 	QList<ItemBase *> selectAllObsolete();
+	QList<ItemBase *> collectObsolete();
 	int selectAllMoveLock();
 	void setMoveLockForCommand(long id, bool lock);
 	void changeMoveLock(ItemBase * itemBase, bool moveLock);

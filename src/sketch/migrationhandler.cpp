@@ -70,7 +70,11 @@ void MigrationHandler::queueMigration(ItemBase* itemBase, ModelPart* oldPart,
 ItemBase* MigrationHandler::currentItem(int index) const
 {
 	if (index < 0 || index >= m_pendingMigrations.size()) return nullptr;
-	return m_sketchWidget->findItem(m_pendingMigrations[index].itemId);
+	// The part may live in any view (it isn't necessarily present in PCB), so
+	// resolve it across all views by its shared cross-view id.
+	MainWindow* mainWindow = findMainWindow();
+	if (mainWindow == nullptr) return nullptr;
+	return mainWindow->findItemInAnyView(m_pendingMigrations[index].itemId);
 }
 
 ItemBase* MigrationHandler::currentItem() const
@@ -310,15 +314,24 @@ void MigrationHandler::updateDialogForCurrentMigration()
 
 void MigrationHandler::centerAndZoomOnItem(ItemBase* item)
 {
-	if (!item || !m_sketchWidget) return;
+	if (!item) return;
+
+	MainWindow* mainWindow = findMainWindow();
+	if (mainWindow == nullptr) return;
+
+	// Bring the view that actually contains this part to the front, then zoom it
+	// so the user sees the part being migrated regardless of which view they were on.
+	mainWindow->setCurrentView(item->viewID());
+	SketchWidget* view = mainWindow->sketchWidgetForView(item->viewID());
+	if (view == nullptr) return;
 
 	QPointF itemPos = item->pos();
 	QRectF focusRect(itemPos.x() - 200, itemPos.y() - 200, 400, 400);
 
-	m_sketchWidget->fitInView(focusRect, Qt::KeepAspectRatio);
-	m_sketchWidget->updateZoomFromCurrentTransform();
+	view->fitInView(focusRect, Qt::KeepAspectRatio);
+	view->updateZoomFromCurrentTransform();
 
-	m_sketchWidget->scene()->clearSelection();
+	view->scene()->clearSelection();
 	item->setSelected(true);
 }
 
@@ -335,7 +348,8 @@ void MigrationHandler::swapCurrentPart()
 	}
 
 	if (info.isSwapped) {
-		// Currently showing new part, undo to get back to old
+		// Currently showing new part, undo to get back to old.
+		// The undo stack is shared across all views, so undoing here is view-independent.
 		if (m_sketchWidget->undoStack()) {
 			m_sketchWidget->undoStack()->undo();
 		}
@@ -349,16 +363,20 @@ void MigrationHandler::swapCurrentPart()
 			return;
 		}
 
+		// Work in the view that actually contains the part (it may not be PCB).
+		SketchWidget* view = mainWindow->sketchWidgetForView(item->viewID());
+		if (view == nullptr) return;
+
 		// Select the item before swap (swapSelectedAux works on selection)
-		m_sketchWidget->scene()->clearSelection();
+		view->scene()->clearSelection();
 		item->setSelected(true);
 
 		QMap<QString, QString> propsMap;
 		mainWindow->swapSelectedAux(item, info.newModuleID, false,
 		                            item->viewLayerPlacement(), propsMap);
 
-		// After swap, the new item should be selected - get its ID
-		QList<QGraphicsItem*> selected = m_sketchWidget->scene()->selectedItems();
+		// After swap, the new item should be selected - get its ID (same view)
+		QList<QGraphicsItem*> selected = view->scene()->selectedItems();
 		for (QGraphicsItem* gi : selected) {
 			ItemBase* newItem = dynamic_cast<ItemBase*>(gi);
 			if (newItem && newItem->instanceTitle() == info.instanceTitle) {

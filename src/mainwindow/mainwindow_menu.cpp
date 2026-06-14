@@ -489,48 +489,61 @@ bool MainWindow::mainLoad(const QString & fileName, const QString & displayName,
 	disconnect(migratePartLabelOffsetConnection);
 
 	if (!m_useOldSchematic && checkObsolete) {
-		if (m_pcbGraphicsView) {
-			QList<ItemBase *> items = m_pcbGraphicsView->selectAllObsolete();
-			if (items.count() > 0) {
-				// Separate items into soft migration candidates and legacy obsolete
-				QList<ItemBase *> legacyObsoleteItems;
-				MigrationHandler* migrationHandler = m_pcbGraphicsView->migrationHandler();
+		// Collect obsolete parts across all views, deduped by their shared cross-view id,
+		// so parts present only in breadboard or schematic are migrated too, not just PCB.
+		QList<SketchWidget *> views;
+		if (m_breadboardGraphicsView) views << m_breadboardGraphicsView;
+		if (m_schematicGraphicsView) views << m_schematicGraphicsView;
+		if (m_pcbGraphicsView) views << m_pcbGraphicsView;
 
-				for (ItemBase* item : items) {
-					ModelPart* oldPart = item->modelPart();
-					ModelPart* newPart = findReplacedby(oldPart);
+		QHash<qint64, ItemBase *> obsoleteById;
+		Q_FOREACH (SketchWidget * view, views) {
+			Q_FOREACH (ItemBase * item, view->collectObsolete()) {
+				obsoleteById.insert(item->id(), item);
+			}
+		}
 
-					if (newPart) {
-						// Try to load history from file if not already loaded
-						if (!newPart->hasHistory()) {
-							newPart->loadHistoryFromFile();
-						}
+		QList<ItemBase *> items = obsoleteById.values();
+		if (items.count() > 0 && !views.isEmpty()) {
+			// Separate items into soft migration candidates and legacy obsolete.
+			// Any view's handler works: it resolves each part's view dynamically.
+			QList<ItemBase *> legacyObsoleteItems;
+			MigrationHandler* migrationHandler = views.first()->migrationHandler();
 
-						if (newPart->hasHistory()) {
-							// Check for relevant history entries
-							QList<HistoryEntry> relevantHistory =
-							    MigrationHandler::getRelevantHistory(oldPart, newPart->history());
+			for (ItemBase* item : items) {
+				ModelPart* oldPart = item->modelPart();
+				ModelPart* newPart = findReplacedby(oldPart);
 
-							if (!relevantHistory.isEmpty()) {
-								// Queue for soft migration
-								migrationHandler->queueMigration(item, oldPart, newPart, relevantHistory);
-								continue;
-							}
+				if (newPart) {
+					// Try to load history from file if not already loaded
+					if (!newPart->hasHistory()) {
+						newPart->loadHistoryFromFile();
+					}
+
+					if (newPart->hasHistory()) {
+						// Check for relevant history entries
+						QList<HistoryEntry> relevantHistory =
+						    MigrationHandler::getRelevantHistory(oldPart, newPart->history());
+
+						if (!relevantHistory.isEmpty()) {
+							// Queue for soft migration
+							migrationHandler->queueMigration(item, oldPart, newPart, relevantHistory);
+							continue;
 						}
 					}
-					// No history or all entries filtered out - use legacy flow
-					legacyObsoleteItems.append(item);
 				}
+				// No history or all entries filtered out - use legacy flow
+				legacyObsoleteItems.append(item);
+			}
 
-				// Process soft migrations if any
-				if (migrationHandler->hasPendingMigrations()) {
-					migrationHandler->processMigrations();
-				}
+			// Process soft migrations if any
+			if (migrationHandler->hasPendingMigrations()) {
+				migrationHandler->processMigrations();
+			}
 
-				// Handle legacy obsolete items with the old dialog
-				if (legacyObsoleteItems.count() > 0) {
-					checkSwapObsolete(legacyObsoleteItems, true);
-				}
+			// Handle legacy obsolete items with the old dialog
+			if (legacyObsoleteItems.count() > 0) {
+				checkSwapObsolete(legacyObsoleteItems, true);
 			}
 		}
 	}

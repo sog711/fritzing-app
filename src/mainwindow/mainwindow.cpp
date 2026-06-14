@@ -1263,6 +1263,36 @@ SketchWidget *MainWindow::currentGraphicsView() {
 	return m_currentGraphicsView;
 }
 
+SketchWidget *MainWindow::sketchWidgetForView(ViewLayer::ViewID viewID) {
+	switch (viewID) {
+	case ViewLayer::BreadboardView:
+		return m_breadboardGraphicsView;
+	case ViewLayer::SchematicView:
+		return m_schematicGraphicsView;
+	case ViewLayer::PCBView:
+		return m_pcbGraphicsView;
+	default:
+		return nullptr;
+	}
+}
+
+ItemBase *MainWindow::findItemInAnyView(qint64 id) {
+	// Cross-view items share the same id, but each view only knows its own items.
+	// Prefer the current view (so the part shows where the user is already looking),
+	// then fall back to the others.
+	QList<SketchWidget *> views;
+	if (m_currentGraphicsView) views << m_currentGraphicsView;
+	if (m_pcbGraphicsView) views << m_pcbGraphicsView;
+	if (m_schematicGraphicsView) views << m_schematicGraphicsView;
+	if (m_breadboardGraphicsView) views << m_breadboardGraphicsView;
+
+	Q_FOREACH (SketchWidget * view, views) {
+		ItemBase * item = view->findItem(id);
+		if (item != nullptr) return item;
+	}
+	return nullptr;
+}
+
 SketchAreaWidget *MainWindow::currentSketchArea() {
 	if (m_currentGraphicsView == nullptr) return nullptr;
 

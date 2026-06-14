@@ -205,6 +205,8 @@ public:
 	void setCurrentFile(const QString &fileName, bool addToRecent, bool setAsLastOpened);
 	void setReportMissingModules(bool);
 	QList<class SketchWidget *> sketchWidgets();
+	class SketchWidget * sketchWidgetForView(ViewLayer::ViewID viewID);
+	ItemBase * findItemInAnyView(qint64 id);
 	ProgramWindow * programmingWidget();
 	void setCloseSilently(bool);
 	class PCBSketchWidget * pcbView();
