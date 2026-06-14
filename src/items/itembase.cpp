@@ -1289,6 +1289,7 @@ void ItemBase::transformItem(const QTransform & currTransf, bool includeRatsnest
 	//trns = getViewGeometry().transform();
 	//debugInfo("\t" + TextUtils::svgMatrix(trns));
 
+	m_decorations.reorientLockSymbol();		// a visible lock (e.g. on a board) stays upright through rotation/flip
 	update();
 }
 

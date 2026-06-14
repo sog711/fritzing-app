@@ -43,6 +43,7 @@ public:
 
 	void setLockedAppearance(bool locked);
 	void setFlashing(bool flashing);
+	void applyUprightOrientation();
 
 protected:
 	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
@@ -70,6 +71,7 @@ public:
 
 	void updateLockSymbol();
 	void flashLockSymbol();
+	void reorientLockSymbol();
 	void setStickyVisible(bool visible);
 
 private:

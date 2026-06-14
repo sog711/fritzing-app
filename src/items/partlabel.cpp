@@ -590,6 +590,10 @@ void PartLabel::transformLabel(QTransform currTransf)
 	double y = rect.height() / 2.0;
 	QTransform transf = transform() * QTransform().translate(-x, -y) * currTransf * QTransform().translate(x, y);
 	setTransform(transf);
+	if (m_owner) {
+		// the lock dodges connectors using the label as anchor: follow the label's rotation/flip
+		m_owner->updateLockSymbol();
+	}
 }
 
 void PartLabel::setUpText() {

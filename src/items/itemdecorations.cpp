@@ -101,6 +101,32 @@ void LockSymbolItem::setFlashing(bool flashing)
 		setScale(m_baseScale);
 		setZValue(m_baseZ);
 	}
+	applyUprightOrientation();		// parent changed (scene<->owner), so recompute
+}
+
+void LockSymbolItem::applyUprightOrientation()
+{
+	// The symbol is a child of the part and so inherits the part's rotation/flip, which
+	// may have been applied before the part was locked. Cancel that linear transform -
+	// rotating about the symbol's own center so it stays anchored where it sits - so the
+	// padlock always renders upright and readable. While flashing the symbol floats on the
+	// scene with no parent transform to cancel, so upright simply means no transform.
+	if (m_flashing || m_owner == nullptr) {
+		setTransform(QTransform());
+		return;
+	}
+
+	QTransform t = m_owner->transform();
+	QTransform linear(t.m11(), t.m12(), t.m21(), t.m22(), 0, 0);
+	bool invertible = false;
+	QTransform inverse = linear.inverted(&invertible);
+	if (!invertible) {
+		setTransform(QTransform());
+		return;
+	}
+
+	QPointF c = boundingRect().center();
+	setTransform(QTransform().translate(-c.x(), -c.y()) * inverse * QTransform().translate(c.x(), c.y()));
 }
 
 void LockSymbolItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -161,6 +187,7 @@ void ItemDecorations::updateLockSymbol()
 		// legacy placement behind the part
 		m_lockItem->setZValue(m_owner->lockSymbolAlwaysVisible() ? 99999 : -99999);
 		m_lockItem->setPos(lockSymbolPosition());
+		m_lockItem->applyUprightOrientation();		// keep upright even if the part was rotated before locking
 		m_lockItem->setToolTip(m_owner->moveLock()
 			? tr("Locked. The part cannot be moved or selected. Double-click to unlock.")
 			: tr("Double-click to lock the board in place."));
@@ -189,6 +216,13 @@ void ItemDecorations::flashLockSymbol()
 
 	m_lockItem->setFlashing(true);
 	m_flashTimer->start();
+}
+
+void ItemDecorations::reorientLockSymbol()
+{
+	// cheap: only touches the symbol's own transform. Used after the owner is rotated or
+	// flipped (e.g. a board, whose lock is always shown) to keep the padlock upright.
+	if (m_lockItem) m_lockItem->applyUprightOrientation();
 }
 
 void ItemDecorations::setStickyVisible(bool visible)
