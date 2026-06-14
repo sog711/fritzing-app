@@ -82,17 +82,32 @@ void MigrationHandler::processMigrations()
 {
 	if (m_pendingMigrations.isEmpty()) return;
 
-	// Process silent migrations immediately
+	// Collect silent migrations to auto-apply now; keep the rest for the dialog.
 	QList<MigrationInfo> nonSilentMigrations;
+	QList<ItemBase*> silentItems;
 	for (const MigrationInfo& info : m_pendingMigrations) {
 		if (info.effectiveMode == "silent") {
-			// Auto-apply silent migrations
-			DebugDialog::debug(QString("Auto-applying silent migration for %1")
-			                       .arg(info.instanceTitle));
-			// TODO: Implement silent swap when needed
-			// For now, just skip silent ones (no implementation yet)
+			ItemBase* item = m_sketchWidget->findItem(info.itemId);
+			if (item != nullptr) {
+				DebugDialog::debug(QString("Auto-applying silent migration for %1")
+				                       .arg(info.instanceTitle));
+				silentItems.append(item);
+			}
 		} else {
 			nonSilentMigrations.append(info);
+		}
+	}
+
+	// Auto-apply all silent migrations as a single undoable command, with no dialog
+	// and no feedback popup. swapObsolete() swaps each item to its replacedby target
+	// and ports the special-cased properties (resistance, LED color), reusing the
+	// exact logic of the legacy obsolete-part flow.
+	if (!silentItems.isEmpty()) {
+		MainWindow* mainWindow = findMainWindow();
+		if (mainWindow != nullptr) {
+			mainWindow->swapObsolete(false, silentItems);
+		} else {
+			DebugDialog::debug("MigrationHandler: Could not find MainWindow for silent migration");
 		}
 	}
 
