@@ -1535,9 +1535,33 @@ bool TextUtils::noUseAux(QDomDocument & svgDom)
 		QString refid = use.attribute("href");
 		QString id = use.attribute("id");
 
+		// honour <use> x/y as a supplemental translate (SVG semantics), appended to any transform
+		QString x = use.attribute("x");
+		QString y = use.attribute("y");
+		if (!x.isEmpty() || !y.isEmpty()) {
+			transform += QString(" translate(%1,%2)").arg(x.isEmpty() ? QString("0") : x, y.isEmpty() ? QString("0") : y);
+		}
+
+		// preserve faction markers (e.g. faction="lock") onto the <g> so a later DOM pass can
+		// still find them after flattening; capture the attribute handle before the node is detached
+		bool isFaction = use.hasAttribute("faction");
+		QDomNamedNodeMap useAttributes = use.attributes();
+
 		QDomElement g = svgDom.createElement("g");
 		use.parentNode().replaceChild(g, use);
 		g.setAttribute("transform", transform);
+
+		for (int a = 0; a < useAttributes.count(); a++) {
+			QDomAttr attr = useAttributes.item(a).toAttr();
+			if (!attr.isNull() && (attr.name() == "faction" || attr.name().startsWith("faction-"))) {
+				g.setAttribute(attr.name(), attr.value());
+			}
+		}
+		// a faction marker keeps its id on the <g> (not the clone, to avoid a duplicate id), since
+		// it is matched and removed by the renderer rather than rendered
+		if (isFaction) {
+			g.setAttribute("id", id);
+		}
 
 		if (refid.startsWith("#")) {
 			refid.remove(0, 1);
@@ -1549,7 +1573,9 @@ bool TextUtils::noUseAux(QDomDocument & svgDom)
 
 		QDomElement copy = toCopy.cloneNode(true).toElement();
 		g.appendChild(copy);
-		copy.setAttribute("id", id);
+		if (!isFaction) {
+			copy.setAttribute("id", id);
+		}
 	}
 
 	return true;
