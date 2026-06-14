@@ -77,6 +77,7 @@ public:
 	QByteArray finalLoad(QByteArray & cleanContents, const QString & filename);
 	constexpr const QString & filename() const noexcept { return m_filename; }
 	QSizeF defaultSizeF();
+	QList<QPointF> lockAnchorsItem() const;		// faction="lock" positions, converted to item-local coords, ordered by id
 	bool setUpConnector(class SvgIdLayer * svgIdLayer, bool ignoreTerminalPoint, ViewLayer::ViewLayerPlacement);
 	QList<SvgIdLayer *> setUpNonConnectors(ViewLayer::ViewLayerPlacement);
 
@@ -96,6 +97,7 @@ protected:
 	bool initConnectorInfoPath(QDomElement & element, ConnectorInfo * connectorInfo, const QString & filename);
 	void initNonConnectorInfo(QDomDocument & domDocument, const QString & filename);
 	void initNonConnectorInfoAux(QDomElement & element, const QString & filename);
+	bool initLockInfo(QDomDocument & domDocument);		// extract + remove faction="lock" position markers
 	void initTerminalInfoAux(QDomElement & element, const LoadInfo &);
 	void initLegInfoAux(QDomElement & element, const LoadInfo &, bool & gotOne);
 	void initConnectorInfoAux(QDomElement & element, const LoadInfo &);
@@ -110,6 +112,7 @@ protected:
 	QSizeF m_defaultSizeF;
 	QHash<QString, ConnectorInfo *> m_connectorInfoHash;
 	QHash<QString, ConnectorInfo *> m_nonConnectorInfoHash;
+	QList<QPointF> m_lockAnchorsSvg;		// faction="lock" anchor points in viewBox units, ordered by id
 
 public:
 	static QString NonConnectorName;

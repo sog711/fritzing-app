@@ -34,6 +34,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QtSvgWidgets/QGraphicsSvgItem>
 
 #include <qnumeric.h>
+#include <algorithm>
 
 /////////////////////////////////////////////
 
@@ -156,6 +157,11 @@ QByteArray FSvgRenderer::loadAux(const QByteArray & theContents, const LoadInfo 
 		initNonConnectorInfo(doc, loadInfo.filename);
 	}
 
+	if (cleanContents.contains("faction")) {
+		bool lockChanged = initLockInfo(doc);
+		resetContents = resetContents || lockChanged;
+	}
+
 	if (resetContents) {
 		cleanContents = TextUtils::removeXMLEntities(doc.toString()).toUtf8();
 	}
@@ -176,6 +182,58 @@ QByteArray FSvgRenderer::loadAux(const QByteArray & theContents, const LoadInfo 
 	//DebugDialog::debug(cleanContents.data());
 
 	return finalLoad(cleanContents, loadInfo.filename);
+}
+
+bool FSvgRenderer::initLockInfo(QDomDocument & domDocument)
+{
+	m_lockAnchorsSvg.clear();
+	QDomElement root = domDocument.documentElement();
+	if (root.isNull()) return false;
+
+	QList<QDomElement> factionElements;
+	TextUtils::findElementsWithAttribute(root, "faction", factionElements);
+
+	QList<QDomElement> lockElements;
+	for (const QDomElement & element : factionElements) {
+		if (element.attribute("faction") == "lock") lockElements.append(element);
+	}
+	if (lockElements.isEmpty()) return false;
+
+	// candidate order is the element id (lock1, lock2, ...)
+	std::sort(lockElements.begin(), lockElements.end(),
+	          [](const QDomElement & a, const QDomElement & b) { return a.attribute("id") < b.attribute("id"); });
+
+	for (QDomElement & element : lockElements) {
+		// the anchor is the element's origin mapped through its accumulated transform (viewBox units);
+		// the referenced #lock symbol is authored centred on its origin, so this is the lock's centre
+		QTransform accumulated;
+		QDomElement node = element;
+		while (!node.isNull()) {
+			QString transform = node.attribute("transform");
+			if (!transform.isEmpty()) accumulated = accumulated * TextUtils::transformStringToTransform(transform);
+			QDomNode parent = node.parentNode();
+			node = parent.isElement() ? parent.toElement() : QDomElement();
+		}
+		m_lockAnchorsSvg.append(accumulated.map(QPointF(0, 0)));
+
+		// remove the marker so it is never rendered: the C++ overlay draws the lock instead
+		element.parentNode().removeChild(element);
+	}
+
+	return true;
+}
+
+QList<QPointF> FSvgRenderer::lockAnchorsItem() const
+{
+	// convert the viewBox-unit anchors to item-local pixels (the same scale connectors use)
+	QList<QPointF> result;
+	QRectF viewBox = viewBoxF();
+	if (viewBox.width() <= 0 || viewBox.height() <= 0) return result;
+	for (const QPointF & p : m_lockAnchorsSvg) {
+		result.append(QPointF(p.x() * m_defaultSizeF.width()  / viewBox.width(),
+		                      p.y() * m_defaultSizeF.height() / viewBox.height()));
+	}
+	return result;
 }
 
 QByteArray FSvgRenderer::finalLoad(QByteArray & cleanContents, const QString & filename) {
