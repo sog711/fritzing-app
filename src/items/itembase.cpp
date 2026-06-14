@@ -1044,12 +1044,16 @@ bool ItemBase::hasNonConnectors() {
 }
 
 bool ItemBase::canFlip(Qt::Orientations orientations) {
+	// go through the accessors, not the raw m_canFlip* members, so a locked part is
+	// reported unflippable here too (canFlipHorizontal/Vertical fold in !m_moveLock).
+	// Otherwise a right-click selects the locked part and flipX would flip it, because
+	// the context menu can be shown before updateTransformationActions disables flip.
 	bool result = true;
 	if (orientations & Qt::Horizontal) {
-		result = result && m_canFlipHorizontal;
+		result = result && canFlipHorizontal();
 	}
 	if (orientations & Qt::Vertical) {
-		result = result && m_canFlipVertical;
+		result = result && canFlipVertical();
 	}
 	return result;
 }
