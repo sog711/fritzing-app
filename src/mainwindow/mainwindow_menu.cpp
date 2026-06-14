@@ -497,9 +497,16 @@ bool MainWindow::mainLoad(const QString & fileName, const QString & displayName,
 		if (m_pcbGraphicsView) views << m_pcbGraphicsView;
 
 		QHash<qint64, ItemBase *> obsoleteById;
+		QSet<QString> modulesInSketch;
 		Q_FOREACH (SketchWidget * view, views) {
 			Q_FOREACH (ItemBase * item, view->collectObsolete()) {
 				obsoleteById.insert(item->id(), item);
+			}
+			// Track every module present, so we can tell when an obsolete part and its
+			// replacement are mixed in the same sketch (the only case we prompt about).
+			Q_FOREACH (QGraphicsItem * gi, view->scene()->items()) {
+				ItemBase * ib = dynamic_cast<ItemBase *>(gi);
+				if (ib != nullptr) modulesInSketch.insert(ib->moduleID());
 			}
 		}
 
@@ -521,18 +528,22 @@ bool MainWindow::mainLoad(const QString & fileName, const QString & displayName,
 					}
 
 					if (newPart->hasHistory()) {
-						// Check for relevant history entries
+						// History-bearing obsolete parts use the gentle soft-migration flow,
+						// never the destructive legacy "update all?" dialog. We only actually
+						// prompt when the sketch mixes this obsolete part with its replacement;
+						// otherwise the old parts are internally consistent, so leave them be
+						// (the obsolete part is already hidden from the bin). Staying out of the
+						// legacy list here also means a silenced part won't be nagged about later.
 						QList<HistoryEntry> relevantHistory =
 						    MigrationHandler::getRelevantHistory(oldPart, newPart->history());
 
-						if (!relevantHistory.isEmpty()) {
-							// Queue for soft migration
+						if (!relevantHistory.isEmpty() && modulesInSketch.contains(newPart->moduleID())) {
 							migrationHandler->queueMigration(item, oldPart, newPart, relevantHistory);
-							continue;
 						}
+						continue;
 					}
 				}
-				// No history or all entries filtered out - use legacy flow
+				// No replacement, or replacement carries no history: legacy obsolete flow.
 				legacyObsoleteItems.append(item);
 			}
 
