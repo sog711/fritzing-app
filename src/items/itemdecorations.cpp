@@ -21,6 +21,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "itemdecorations.h"
 #include "itembase.h"
 #include "partlabel.h"
+#include "../fsvgrenderer.h"
 #include "../connectors/connectoritem.h"
 #include "../debugdialog.h"
 
@@ -247,39 +248,62 @@ void ItemDecorations::setStickyVisible(bool visible)
 	}
 }
 
-// Connector pads draw in layers above the symbol and would hide it. Try the home corner
-// first, then the four sides of the part label (whether or not the label is shown),
-// preferring the side that points toward the part center; if everything collides, give up
-// and use the home corner anyway.
+// Position the lock symbol. SVG-declared positions (faction="lock" markers, ordered by id) replace
+// the top-left home corner as the primary candidates; if those collide with connector pads (which
+// draw above the symbol), fall back to the four sides of the part label, preferring the side that
+// points toward the part center; if everything collides, use the first declared position (or the
+// home corner when none were declared).
 QPointF ItemDecorations::lockSymbolPosition() const
 {
 	QPointF home(LockSymbolInset, LockSymbolInset);
 	if (m_lockItem == nullptr || m_owner->scene() == nullptr) return home;
 
 	QSizeF size = m_lockItem->boundingRect().size();
-	if (!collidesWithConnectors(QRectF(home, size))) return home;
 
-	PartLabel * label = m_owner->partLabel();
-	if (label == nullptr || !label->initialized()) return home;
-
-	QRectF labelRect = m_owner->mapRectFromScene(label->sceneBoundingRect());
-	QPointF toCenter = m_owner->boundingRect().center() - labelRect.center();
-
-	QList<QPair<double, QPointF>> candidates;
-	candidates.append({ -toCenter.x(), QPointF(labelRect.left() - LockSymbolInset - size.width(), labelRect.center().y() - size.height() / 2) });
-	candidates.append({  toCenter.x(), QPointF(labelRect.right() + LockSymbolInset, labelRect.center().y() - size.height() / 2) });
-	candidates.append({ -toCenter.y(), QPointF(labelRect.center().x() - size.width() / 2, labelRect.top() - LockSymbolInset - size.height()) });
-	candidates.append({  toCenter.y(), QPointF(labelRect.center().x() - size.width() / 2, labelRect.bottom() + LockSymbolInset) });
-	std::sort(candidates.begin(), candidates.end(),
-	          [](const QPair<double, QPointF> & a, const QPair<double, QPointF> & b) { return a.first > b.first; });
-
-	for (const QPair<double, QPointF> & candidate : candidates) {
-		if (!collidesWithConnectors(QRectF(candidate.second, size))) {
-			return candidate.second;
+	// primary tier: positions declared in the SVG. Each anchor is a center, so offset to the
+	// symbol's top-left; these replace the home corner when present.
+	QList<QPointF> anchors;
+	if (FSvgRenderer * renderer = m_owner->fsvgRenderer()) {
+		QPointF half(size.width() / 2, size.height() / 2);
+		const QList<QPointF> centers = renderer->lockAnchorsItem();
+		for (const QPointF & center : centers) {
+			anchors.append(center - half);
 		}
 	}
 
-	return home;
+	QPointF fallback = home;
+	if (!anchors.isEmpty()) {
+		fallback = anchors.first();		// ultimate fallback: the designer's first choice
+		for (const QPointF & topLeft : anchors) {
+			if (!collidesWithConnectors(QRectF(topLeft, size))) return topLeft;
+		}
+	}
+	else if (!collidesWithConnectors(QRectF(home, size))) {
+		return home;
+	}
+
+	// secondary tier: the four sides of the part label (whether or not the label is shown)
+	PartLabel * label = m_owner->partLabel();
+	if (label != nullptr && label->initialized()) {
+		QRectF labelRect = m_owner->mapRectFromScene(label->sceneBoundingRect());
+		QPointF toCenter = m_owner->boundingRect().center() - labelRect.center();
+
+		QList<QPair<double, QPointF>> candidates;
+		candidates.append({ -toCenter.x(), QPointF(labelRect.left() - LockSymbolInset - size.width(), labelRect.center().y() - size.height() / 2) });
+		candidates.append({  toCenter.x(), QPointF(labelRect.right() + LockSymbolInset, labelRect.center().y() - size.height() / 2) });
+		candidates.append({ -toCenter.y(), QPointF(labelRect.center().x() - size.width() / 2, labelRect.top() - LockSymbolInset - size.height()) });
+		candidates.append({  toCenter.y(), QPointF(labelRect.center().x() - size.width() / 2, labelRect.bottom() + LockSymbolInset) });
+		std::sort(candidates.begin(), candidates.end(),
+		          [](const QPair<double, QPointF> & a, const QPair<double, QPointF> & b) { return a.first > b.first; });
+
+		for (const QPair<double, QPointF> & candidate : candidates) {
+			if (!collidesWithConnectors(QRectF(candidate.second, size))) {
+				return candidate.second;
+			}
+		}
+	}
+
+	return fallback;
 }
 
 bool ItemDecorations::collidesWithConnectors(const QRectF & ownerRect) const
