@@ -241,6 +241,11 @@ void MigrationHandler::createMigrationDialog()
 	m_skipButton = new QPushButton(tr("Skip"), m_dialog);
 	m_silenceButton = new QPushButton(tr("Silence"), m_dialog);
 
+	// Tooltips (the swap button's is set per-state in updateDialogForCurrentMigration).
+	m_confirmButton->setToolTip(tr("Update to the new version and continue to the next part"));
+	m_skipButton->setToolTip(tr("Keep the old version for now and continue (you may be asked again later)"));
+	m_silenceButton->setToolTip(tr("Keep the old version and don't ask about these changes again"));
+
 	actionLayout->addStretch();
 	actionLayout->addWidget(m_swapButton);
 	actionLayout->addWidget(m_confirmButton);
@@ -273,10 +278,12 @@ void MigrationHandler::updateDialogForCurrentMigration()
 		return;
 	}
 
-	// Update counter
+	// Update counter. Don't repeat the window title ("Part Migration") in the content;
+	// only show a counter when there are several parts to step through.
 	if (m_pendingMigrations.size() == 1) {
-		m_counterLabel->setText(tr("Part Migration"));
+		m_counterLabel->setVisible(false);
 	} else {
+		m_counterLabel->setVisible(true);
 		m_counterLabel->setText(tr("Part %1 of %2")
 		                            .arg(m_currentIndex + 1)
 		                            .arg(m_pendingMigrations.size()));
@@ -311,6 +318,9 @@ void MigrationHandler::updateDialogForCurrentMigration()
 
 	// Update button states
 	m_swapButton->setText(info.isSwapped ? tr("Swap to Old") : tr("Swap to New"));
+	m_swapButton->setToolTip(info.isSwapped
+	                         ? tr("Revert the preview and show the old version again")
+	                         : tr("Preview the new version in the sketch (you can switch back)"));
 	m_silenceButton->setVisible(info.effectiveMode == "ask");
 
 	// Focus on the part
