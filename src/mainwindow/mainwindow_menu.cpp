@@ -511,6 +511,8 @@ bool MainWindow::mainLoad(const QString & fileName, const QString & displayName,
 		}
 
 		QList<ItemBase *> items = obsoleteById.values();
+		DebugDialog::debug(QString("[migration] obsolete parts in sketch: %1; distinct modules present: %2")
+		                   .arg(items.count()).arg(modulesInSketch.count()));
 		if (items.count() > 0 && !views.isEmpty()) {
 			// Separate items into soft migration candidates and legacy obsolete.
 			// Any view's handler works: it resolves each part's view dynamically.
@@ -521,10 +523,17 @@ bool MainWindow::mainLoad(const QString & fileName, const QString & displayName,
 				ModelPart* oldPart = item->modelPart();
 				ModelPart* newPart = findReplacedby(oldPart);
 
+				DebugDialog::debug(QString("[migration] obsolete '%1' module=%2 -> replacement=%3")
+				                   .arg(item->instanceTitle(),
+				                        oldPart ? oldPart->moduleID() : QString("<null modelPart>"),
+				                        newPart ? newPart->moduleID() : QString("<none: findReplacedby returned null>")));
+
 				if (newPart) {
 					// Try to load history from file if not already loaded
 					if (!newPart->hasHistory()) {
-						newPart->loadHistoryFromFile();
+						bool loaded = newPart->loadHistoryFromFile();
+						DebugDialog::debug(QString("[migration]   history not in model, loadHistoryFromFile()=%1 path=%2")
+						                   .arg(loaded ? "true" : "false", newPart->path()));
 					}
 
 					if (newPart->hasHistory()) {
@@ -536,14 +545,24 @@ bool MainWindow::mainLoad(const QString & fileName, const QString & displayName,
 						// legacy list here also means a silenced part won't be nagged about later.
 						QList<HistoryEntry> relevantHistory =
 						    MigrationHandler::getRelevantHistory(oldPart, newPart->history());
+						bool mixed = modulesInSketch.contains(newPart->moduleID());
 
-						if (!relevantHistory.isEmpty() && modulesInSketch.contains(newPart->moduleID())) {
+						DebugDialog::debug(QString("[migration]   history entries=%1 relevant=%2 replacement-in-sketch(mixed)=%3")
+						                   .arg(newPart->history().count()).arg(relevantHistory.count())
+						                   .arg(mixed ? "yes" : "no"));
+
+						if (!relevantHistory.isEmpty() && mixed) {
+							DebugDialog::debug("[migration]   -> queue soft migration (ask dialog)");
 							migrationHandler->queueMigration(item, oldPart, newPart, relevantHistory);
+						}
+						else {
+							DebugDialog::debug("[migration]   -> soft-handled, no prompt (no relevant history or not mixed)");
 						}
 						continue;
 					}
 				}
 				// No replacement, or replacement carries no history: legacy obsolete flow.
+				DebugDialog::debug("[migration]   -> LEGACY obsolete dialog (no replacement, or replacement carries no history)");
 				legacyObsoleteItems.append(item);
 			}
 

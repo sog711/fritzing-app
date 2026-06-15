@@ -154,6 +154,11 @@ QList<HistoryEntry> MigrationHandler::getRelevantHistory(ModelPart* instancePart
 			relevant.append(entry);
 		}
 	}
+
+	DebugDialog::debug(QString("[migration]   getRelevantHistory: baseline=%1 (silencedDate='%2' partDate=%3) -> %4 of %5 entries relevant")
+	                   .arg(baselineDate.toString(Qt::ISODate), silencedDateStr, instancePart->date().toString(Qt::ISODate))
+	                   .arg(relevant.count()).arg(allHistory.count()));
+
 	return relevant;
 }
 
