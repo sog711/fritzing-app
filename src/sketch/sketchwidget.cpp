@@ -10366,10 +10366,20 @@ void SketchWidget::selectItem(ItemBase * itemBase) {
 }
 
 void SketchWidget::selectItemsWithModuleID(ModelPart * modelPart) {
+	// Net labels are one logical part split across several moduleIDs (left/right facing,
+	// v4/v5), so match the whole family by suffix rather than the exact moduleID -- otherwise
+	// "Find Part in Sketch" on the bin's v5 net label never finds placed v4/left labels.
+	// This mirrors the family test used in PartFactory, PaletteModel and SymbolPaletteItem.
+	bool isNetLabel = modelPart->moduleID().endsWith(ModuleIDNames::NetLabelModuleIDName);
+
 	QSet<ItemBase *> itemBases;
 	Q_FOREACH (QGraphicsItem * item, scene()->items()) {
 		auto * itemBase = dynamic_cast<ItemBase *>(item);
-		if (itemBase && itemBase->moduleID() == modelPart->moduleID()) {
+		if (itemBase == nullptr) continue;
+		bool match = isNetLabel
+			? itemBase->moduleID().endsWith(ModuleIDNames::NetLabelModuleIDName)
+			: itemBase->moduleID() == modelPart->moduleID();
+		if (match) {
 			itemBases.insert(itemBase->layerKinChief());
 		}
 	}
