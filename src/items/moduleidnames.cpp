@@ -42,6 +42,7 @@ const QString ModuleIDNames::TwoPowerModuleIDName = "2PowerModuleID";
 const QString ModuleIDNames::NetLabelModuleIDName = "NetLabelModuleID";
 const QString ModuleIDNames::PowerLabelModuleIDName = "PowerLabelModuleID";
 const QString ModuleIDNames::LeftNetLabelModuleIDName = "LeftNetLabelModuleID";
+const QString ModuleIDNames::V5NetLabelModuleIDName = "v5NetLabelModuleID";
 const QString ModuleIDNames::JustPowerModuleIDName = "JustPowerModuleID";
 const QString ModuleIDNames::ResistorModuleIDName = "ResistorModuleID";
 const QString ModuleIDNames::PhotocellModuleIDName = "PhotocellModuleID";

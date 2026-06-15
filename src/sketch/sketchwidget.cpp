@@ -5850,6 +5850,22 @@ void SketchWidget::prepDeleteProps(ItemBase * itemBase, long id, const QString &
 
 void SketchWidget::prepDeleteOtherProps(ItemBase * itemBase, long id, const QString & newModuleID, QMap<QString, QString> & propsMap, QUndoCommand * parentCommand)
 {
+	if (itemBase->moduleID().endsWith(ModuleIDNames::NetLabelModuleIDName)) {
+		// A net-label swap (legacy <-> modern) creates a fresh part, so carry the net name and
+		// orientation across, and apply the chosen alignment -- the renderer reads these local
+		// props (instanceTitle alone does not drive the rendered text).
+		QString label = itemBase->modelPart()->localProp("label").toString();
+		if (label.isEmpty()) label = itemBase->instanceTitle();
+		QString direction = itemBase->modelPart()->localProp("direction").toString();
+		QString oldStyle = itemBase->modelPart()->localProp("style").toString();
+		QString newStyle = propsMap.value("style", oldStyle);
+		// Direction first (no re-render), then style and label (each re-renders using it).
+		if (!direction.isEmpty()) new SetPropCommand(this, id, "direction", direction, direction, true, parentCommand);
+		new SetPropCommand(this, id, "style", oldStyle, newStyle, true, parentCommand);
+		if (!label.isEmpty()) new SetPropCommand(this, id, "label", label, label, true, parentCommand);
+		return;
+	}
+
 	auto * capacitor = qobject_cast<Capacitor *>(itemBase);
 	if (capacitor) {
 		QHash<QString, QString> properties;
@@ -8458,32 +8474,6 @@ void SketchWidget::setHoleSizeForSelection(const QString & diameter, const QStri
 		vg.setLoc(p);
 		new MoveItemCommand(this, hole->id(), hole->getViewGeometry(), vg, false, parentCommand);
 		any = true;
-	}
-
-	if (any) {
-		m_undoStack->waitPush(parentCommand, PropChangeDelay);
-	} else {
-		delete parentCommand;
-	}
-}
-
-void SketchWidget::setNetLabelStyleForSelection(const QString & policy)
-{
-	QList<SymbolPaletteItem *> netLabels;
-	collectSelectedNetLabels(netLabels);
-	if (netLabels.isEmpty()) return;
-
-	auto * parentCommand = new QUndoCommand(tr("Align %n net label(s)", "", netLabels.count()));
-
-	bool any = false;
-	Q_FOREACH (SymbolPaletteItem * netLabel, netLabels) {
-		bool goLeft = (netLabel->getDirection() == "left");
-		QString newAlign = SymbolPaletteItem::alignForPolicy(policy, goLeft);
-		QString oldAlign = netLabel->modelPart()->localProp("style").toString();
-		if (newAlign != oldAlign) {
-			new SetPropCommand(this, netLabel->id(), "style", oldAlign, newAlign, true, parentCommand);
-			any = true;
-		}
 	}
 
 	if (any) {

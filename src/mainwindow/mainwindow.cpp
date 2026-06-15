@@ -62,6 +62,8 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../items/stripboard.h"
 #include "../items/partfactory.h"
 #include "../items/paletteitem.h"
+#include "../items/symbolpaletteitem.h"
+#include "../items/moduleidnames.h"
 #include "../items/virtualwire.h"
 #include "../processeventblocker.h"
 #include "../sketchtoolbutton.h"
@@ -2590,6 +2592,14 @@ void MainWindow::swapSelectedMap(const QString & family, const QString & prop, Q
 {
 	if (itemBase == nullptr) return;
 
+	// Net label "style" is not a DB-backed swap property: changing it between legacy and the
+	// aligned styles swaps the part (v4 <-> v5), and applies to the whole selection. Handle it
+	// here, before the generic family/property swap resolution.
+	if ((family.compare("net label", Qt::CaseInsensitive) == 0) && (prop.compare("style", Qt::CaseInsensitive) == 0)) {
+		swapNetLabelStyleForSelection(currPropsMap.value(prop));
+		return;
+	}
+
 	QString generatedModuleID = currPropsMap.value("moduleID");
 	bool logoPadBlocker = false;
 
@@ -2754,6 +2764,61 @@ void MainWindow::swapSelectionForProp(const QString & prop, const QString & valu
 		propsMap.insert(prop, value);
 		swapSelectedAuxAux(item, moduleID, item->viewLayerPlacement(), propsMap, parentCommand);
 		any = true;
+	}
+
+	new CleanUpRatsnestsCommand(m_breadboardGraphicsView, CleanUpWiresCommand::RedoOnly, parentCommand);
+	new CleanUpWiresCommand(m_breadboardGraphicsView, CleanUpWiresCommand::RedoOnly, parentCommand);
+
+	if (any) {
+		m_undoStack->push(parentCommand);
+	} else {
+		delete parentCommand;
+	}
+}
+
+void MainWindow::swapNetLabelStyleForSelection(const QString & picked)
+{
+	if ((m_currentGraphicsView == nullptr) || picked.isEmpty()) return;
+
+	// Unique selected net labels (deduped by layer-kin chief). The whole net-label family
+	// (left/right facing, v4/v5) is matched by suffix.
+	QList<ItemBase *> netLabels;
+	Q_FOREACH (QGraphicsItem * gItem, m_currentGraphicsView->scene()->selectedItems()) {
+		auto * ib = dynamic_cast<ItemBase *>(gItem);
+		if (ib == nullptr) continue;
+		ItemBase * chief = ib->layerKinChief();
+		if (chief->moduleID().endsWith(ModuleIDNames::NetLabelModuleIDName) && !netLabels.contains(chief)) {
+			netLabels.append(chief);
+		}
+	}
+	if (netLabels.isEmpty()) return;
+
+	auto * parentCommand = new QUndoCommand(tr("Change style of %n net label(s)", "", netLabels.count()));
+	new CleanUpWiresCommand(m_breadboardGraphicsView, CleanUpWiresCommand::UndoOnly, parentCommand);
+	new CleanUpRatsnestsCommand(m_breadboardGraphicsView, CleanUpWiresCommand::UndoOnly, parentCommand);
+
+	bool any = false;
+	Q_FOREACH (ItemBase * item, netLabels) {
+		if (item->modelPart() == nullptr) continue;
+
+		QString newStyle;
+		QString target = SymbolPaletteItem::resolveStyleSwap(item, picked, newStyle);
+		if (!target.isEmpty()) {
+			// Cross the legacy boundary: swap the part. prepDeleteProps carries the net name,
+			// orientation and the chosen style across to the replacement.
+			QMap<QString, QString> propsMap;
+			propsMap.insert("style", newStyle);
+			swapSelectedAuxAux(item, target, item->viewLayerPlacement(), propsMap, parentCommand);
+			any = true;
+		}
+		else {
+			// Same part: just change the alignment.
+			QString oldStyle = item->modelPart()->localProp("style").toString();
+			if (newStyle != oldStyle) {
+				new SetPropCommand(m_currentGraphicsView, item->id(), "style", oldStyle, newStyle, true, parentCommand);
+				any = true;
+			}
+		}
 	}
 
 	new CleanUpRatsnestsCommand(m_breadboardGraphicsView, CleanUpWiresCommand::RedoOnly, parentCommand);

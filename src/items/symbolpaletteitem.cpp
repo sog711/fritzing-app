@@ -330,7 +330,9 @@ void SymbolPaletteItem::refreshDefaultNetLabelStyle() {
 }
 
 QString SymbolPaletteItem::effectiveAlign() {
-	// Old (v4 and earlier) net labels render in the legacy Droid Sans style.
+	// Old (v4 and earlier) net labels render in the legacy Droid Sans style. Switching a
+	// label between legacy and the modern aligned styles is a part swap (v4 <-> v5), so the
+	// part version -- not a local prop -- is the source of truth for legacy-ness.
 	if (modelPart()->modelPartShared()->version().toInt() <= 4) {
 		return NetLabelStyleLegacy;
 	}
@@ -662,41 +664,64 @@ void SymbolPaletteItem::labelEntry() {
 void SymbolPaletteItem::styleEntry(int index) {
 	auto * comboBox = qobject_cast<QComboBox *>(sender());
 	if (comboBox == nullptr) return;
-
-	QString picked = comboBox->itemData(index).toString();   // actual on-screen choice: left/right/legacy
-
-	// Translate the picked ACTUAL alignment back into the label's local frame (the stored
-	// value), accounting for any x-axis mirror (horizontal flip OR 180° rotation, m11 < 0).
-	// Legacy passes through unchanged.
-	QString newValue = picked;
-	if (picked != NetLabelStyleLegacy) {
-		bool reversed = (this->transform().m11() < -0.5);   // m11 ≈ -1: horizontal flip or 180°
-		bool wantLeft = (picked == NetLabelAlignLeft);
-		bool localLeft = wantLeft != reversed;   // XOR
-		newValue = localLeft ? NetLabelAlignLeft : NetLabelAlignRight;
-	}
-
-	QString current = effectiveAlign();
-	if (newValue.compare(current) == 0) return;
-
-	InfoGraphicsView * infoGraphicsView = InfoGraphicsView::getInfoGraphicsView(this);
-	if (infoGraphicsView != nullptr) {
-		infoGraphicsView->setProp(this, "style", ItemBase::TranslatedPropertyNames.value("style"), current, newValue, true);
-	}
+	// Single-item combo values: NetLabelAlignLeft / NetLabelAlignRight / NetLabelStyleLegacy.
+	requestNetLabelStyle(comboBox->itemData(index).toString());
 }
 
 void SymbolPaletteItem::groupStyleEntry(int index) {
 	auto * comboBox = qobject_cast<QComboBox *>(sender());
 	if (comboBox == nullptr) return;
+	// Group combo values: NetLabelStyleOutside / NetLabelStyleConnector.
+	requestNetLabelStyle(comboBox->itemData(index).toString());
+}
 
-	QString policy = comboBox->itemData(index).toString();   // "outside" / "connector"
-	if (policy.isEmpty()) return;
+void SymbolPaletteItem::requestNetLabelStyle(const QString & picked) {
+	if (picked.isEmpty()) return;
 
-	// Apply the policy to every selected net label as one undoable action.
+	// Every net-label style change routes through the swap machinery. Crossing the legacy
+	// boundary swaps the part (v4 <-> v5); staying within the modern styles only changes the
+	// alignment. MainWindow::swapSelectedMap dispatches "net label"/"style" to
+	// swapNetLabelStyleForSelection, which applies the choice to every selected net label in
+	// one undo (resolving each item's target via resolveStyleSwap).
 	InfoGraphicsView * infoGraphicsView = InfoGraphicsView::getInfoGraphicsView(this);
-	if (infoGraphicsView != nullptr) {
-		infoGraphicsView->setNetLabelStyleForSelection(policy);
+	if (infoGraphicsView == nullptr) return;
+	QMap<QString, QString> propsMap;
+	propsMap.insert("style", picked);
+	infoGraphicsView->swap(modelPart()->family(), "style", propsMap, this);
+}
+
+QString SymbolPaletteItem::resolveStyleSwap(ItemBase * item, const QString & picked, QString & newStyle) {
+	// Decide what a net label should become when `picked` is chosen in the Inspector. Returns
+	// the moduleID to swap to (empty => no swap, just apply newStyle to the item) and sets
+	// newStyle to the alignment local-prop for the result.
+	newStyle.clear();
+	if ((item == nullptr) || (item->modelPart() == nullptr) || (item->modelPart()->modelPartShared() == nullptr)) {
+		return QString();
 	}
+
+	bool isV4 = item->modelPart()->modelPartShared()->version().toInt() <= 4;
+
+	if (picked == NetLabelStyleLegacy) {
+		// Modern -> legacy: swap back to the v4 part (which renders legacy). Orientation is
+		// carried over by the swap (preserved transform + the transferred direction prop).
+		return isV4 ? QString() : ModuleIDNames::NetLabelModuleIDName;
+	}
+
+	// Modern target: resolve the concrete left/right alignment in the label's own frame.
+	if (picked == NetLabelStyleOutside || picked == NetLabelStyleConnector) {
+		// Group policy: depends on which way this label faces.
+		bool goLeft = (item->modelPart()->localProp("direction").toString() == "left");
+		newStyle = alignForPolicy(picked, goLeft);
+	}
+	else {
+		// Single item: `picked` is the actual on-screen side; translate to the local frame,
+		// accounting for an x-axis mirror (horizontal flip or 180° rotation, m11 < 0).
+		bool reversed = (item->transform().m11() < -0.5);
+		bool wantLeft = (picked == NetLabelAlignLeft);
+		newStyle = (wantLeft != reversed) ? NetLabelAlignLeft : NetLabelAlignRight;
+	}
+	// Legacy (v4) -> modern is a swap to v5; an existing v5 just changes its alignment.
+	return isV4 ? ModuleIDNames::V5NetLabelModuleIDName : QString();
 }
 
 ItemBase::PluralType SymbolPaletteItem::isPlural() {

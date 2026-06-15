@@ -90,6 +90,10 @@ public:
 	// local alignment ("left"/"right"), given the label's arrow side (goLeft).
 	static QString alignForPolicy(const QString & policy, bool goLeft);
 	static QString policyForAlign(const QString & align, bool goLeft);
+	// Resolve a net label's target for an Inspector style choice ("left"/"right"/"legacy"
+	// single, "outside"/"connector" group): returns the moduleID to swap to (empty => no
+	// swap), and sets newStyle to the alignment local-prop to apply. Used by MainWindow.
+	static QString resolveStyleSwap(ItemBase * item, const QString & picked, QString & newStyle);
 
 public Q_SLOTS:
 	void voltageEntry(int index);
@@ -105,6 +109,8 @@ protected:
 	QString replaceTextElement(QString svg);
 	ViewLayer::ViewID useViewIDForPixmap(ViewLayer::ViewID, bool swappingEnabled);
 	void resetLayerKin();
+	// Route a net-label style choice to the swap machinery (see MainWindow::swapSelectedMap).
+	void requestNetLabelStyle(const QString & picked);
 
 protected:
 	double m_voltage;

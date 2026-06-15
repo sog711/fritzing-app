@@ -220,11 +220,6 @@ int InfoGraphicsView::collectSelectedNetLabels(QList<SymbolPaletteItem *> & netL
 	return 0;
 }
 
-void InfoGraphicsView::setNetLabelStyleForSelection(const QString & policy)
-{
-	Q_UNUSED(policy);
-}
-
 int InfoGraphicsView::collectSelectedWires(QList<Wire *> & wires)
 {
 	Q_UNUSED(wires);
