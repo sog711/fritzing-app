@@ -4070,6 +4070,11 @@ QList<ItemBase *> MainWindow::routeHistoryMigrations(const QList<ItemBase *> & o
 
 	MigrationHandler * migrationHandler = views.first()->migrationHandler();
 
+	// Explain to the user why the dialog appears.
+	QString reason = requireMix
+	    ? tr("This sketch contains both this part and a newer revision of it. Choose which one to use.")
+	    : tr("You chose to update this outdated part.");
+
 	Q_FOREACH (ItemBase * item, obsoleteItems) {
 		ModelPart * oldPart = item->modelPart();
 		ModelPart * newPart = findReplacedby(oldPart);
@@ -4099,7 +4104,7 @@ QList<ItemBase *> MainWindow::routeHistoryMigrations(const QList<ItemBase *> & o
 				                   .arg(mixed ? "yes" : "no").arg(prompt ? "yes" : "no"));
 
 				if (prompt) {
-					migrationHandler->queueMigration(item, oldPart, newPart, relevantHistory);
+					migrationHandler->queueMigration(item, oldPart, newPart, relevantHistory, reason);
 				}
 				// History-bearing parts never fall through to the legacy/direct-swap path.
 				continue;

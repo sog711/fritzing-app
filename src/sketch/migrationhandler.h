@@ -45,6 +45,9 @@ struct MigrationInfo {
 	QList<HistoryEntry> relevantHistory;
 	QString effectiveMode;  // "silent", "ask", or "forced"
 	bool isSwapped;         // currently showing new part?
+	QString reason;         // why the dialog is shown (e.g. mixed versions)
+	bool decided = false;   // user has already chosen for this part
+	bool silenced = false;  // user chose "silence"
 };
 
 class MigrationHandler : public QObject
@@ -56,7 +59,8 @@ public:
 
 	// Main interface
 	void queueMigration(ItemBase* itemBase, ModelPart* oldPart,
-	                    ModelPart* newPart, const QList<HistoryEntry>& history);
+	                    ModelPart* newPart, const QList<HistoryEntry>& history,
+	                    const QString& reason = QString());
 	void processMigrations();
 	bool hasPendingMigrations() const;
 	void clearPendingMigrations();
@@ -82,6 +86,9 @@ private:
 	void confirmCurrentMigration();
 	void skipCurrentMigration();
 	void silenceCurrentMigration();
+	void goToPreviousMigration();
+	void goToNextMigration();
+	void revertCurrentPreviewIfTransient();
 	void processNextMigration();
 	void closeDialog();
 
@@ -95,11 +102,14 @@ private:
 	QDialog* m_dialog;
 	QLabel* m_counterLabel;
 	QLabel* m_titleLabel;
+	QLabel* m_reasonLabel;
 	QLabel* m_historyLabel;
 	QPushButton* m_swapButton;
 	QPushButton* m_confirmButton;
 	QPushButton* m_skipButton;
 	QPushButton* m_silenceButton;
+	QPushButton* m_prevButton;
+	QPushButton* m_nextButton;
 };
 
 #endif // MIGRATIONHANDLER_H

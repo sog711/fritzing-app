@@ -43,16 +43,20 @@ MigrationHandler::MigrationHandler(SketchWidget* sketchWidget, QObject* parent)
 	, m_dialog(nullptr)
 	, m_counterLabel(nullptr)
 	, m_titleLabel(nullptr)
+	, m_reasonLabel(nullptr)
 	, m_historyLabel(nullptr)
 	, m_swapButton(nullptr)
 	, m_confirmButton(nullptr)
 	, m_skipButton(nullptr)
 	, m_silenceButton(nullptr)
+	, m_prevButton(nullptr)
+	, m_nextButton(nullptr)
 {
 }
 
 void MigrationHandler::queueMigration(ItemBase* itemBase, ModelPart* oldPart,
-                                      ModelPart* newPart, const QList<HistoryEntry>& history)
+                                      ModelPart* newPart, const QList<HistoryEntry>& history,
+                                      const QString& reason)
 {
 	MigrationInfo info;
 	info.itemId = itemBase->id();
@@ -63,6 +67,7 @@ void MigrationHandler::queueMigration(ItemBase* itemBase, ModelPart* oldPart,
 	info.relevantHistory = history;
 	info.effectiveMode = computeEffectiveMode(history);
 	info.isSwapped = false;
+	info.reason = reason;
 
 	m_pendingMigrations.append(info);
 }
@@ -220,6 +225,12 @@ void MigrationHandler::createMigrationDialog()
 	m_titleLabel->setAlignment(Qt::AlignTop);
 	layout->addWidget(m_titleLabel);
 
+	// Reason / explanation label (why this dialog is being shown)
+	m_reasonLabel = new QLabel(m_dialog);
+	m_reasonLabel->setWordWrap(true);
+	m_reasonLabel->setAlignment(Qt::AlignTop);
+	layout->addWidget(m_reasonLabel);
+
 	// History entries (scrollable)
 	QScrollArea* scrollArea = new QScrollArea(m_dialog);
 	scrollArea->setWidgetResizable(true);
@@ -255,11 +266,24 @@ void MigrationHandler::createMigrationDialog()
 
 	layout->addLayout(actionLayout);
 
+	// Navigation between parts (only shown when there are several)
+	QHBoxLayout* navLayout = new QHBoxLayout();
+	m_prevButton = new QPushButton(tr("Previous"), m_dialog);
+	m_nextButton = new QPushButton(tr("Next"), m_dialog);
+	m_prevButton->setToolTip(tr("Go back to the previous part"));
+	m_nextButton->setToolTip(tr("Go to the next part"));
+	navLayout->addWidget(m_prevButton);
+	navLayout->addStretch();
+	navLayout->addWidget(m_nextButton);
+	layout->addLayout(navLayout);
+
 	// Connect buttons
 	connect(m_swapButton, &QPushButton::clicked, this, &MigrationHandler::swapCurrentPart);
 	connect(m_confirmButton, &QPushButton::clicked, this, &MigrationHandler::confirmCurrentMigration);
 	connect(m_skipButton, &QPushButton::clicked, this, &MigrationHandler::skipCurrentMigration);
 	connect(m_silenceButton, &QPushButton::clicked, this, &MigrationHandler::silenceCurrentMigration);
+	connect(m_prevButton, &QPushButton::clicked, this, &MigrationHandler::goToPreviousMigration);
+	connect(m_nextButton, &QPushButton::clicked, this, &MigrationHandler::goToNextMigration);
 }
 
 void MigrationHandler::updateDialogForCurrentMigration()
@@ -274,6 +298,8 @@ void MigrationHandler::updateDialogForCurrentMigration()
 
 	if (!item) {
 		DebugDialog::debug("MigrationHandler: Could not find item for migration");
+		// Mark it decided so the wrap-around advance doesn't loop back to it.
+		m_pendingMigrations[m_currentIndex].decided = true;
 		processNextMigration();
 		return;
 	}
@@ -291,12 +317,21 @@ void MigrationHandler::updateDialogForCurrentMigration()
 
 	// Update title
 	QString title = QString("<b>%1</b>").arg(info.instanceTitle);
-	if (info.isSwapped) {
+	if (info.decided) {
+		QString outcome = info.silenced ? tr("silenced — keeping old version")
+		                  : info.isSwapped ? tr("updated to new version")
+		                  : tr("keeping old version");
+		title += QString(" — <i>%1</i>").arg(outcome);
+	} else if (info.isSwapped) {
 		title += QString(" <i>(%1)</i>").arg(tr("showing new version"));
 	} else {
 		title += QString(" <i>(%1)</i>").arg(tr("showing old version"));
 	}
 	m_titleLabel->setText(title);
+
+	// Explanation of why this dialog is being shown (e.g. mixed versions)
+	m_reasonLabel->setText(info.reason);
+	m_reasonLabel->setVisible(!info.reason.isEmpty());
 
 	// Update history entries
 	QString historyHtml = QString("<p><b>%1</b></p>").arg(tr("Changes since your version:"));
@@ -322,6 +357,21 @@ void MigrationHandler::updateDialogForCurrentMigration()
 	                         ? tr("Revert the preview and show the old version again")
 	                         : tr("Preview the new version in the sketch (you can switch back)"));
 	m_silenceButton->setVisible(info.effectiveMode == "ask");
+
+	// A part that has already been decided is shown read-only; navigate to an
+	// undecided part to act, or use Previous/Next to review earlier decisions.
+	bool actionable = !info.decided;
+	m_swapButton->setEnabled(actionable);
+	m_confirmButton->setEnabled(actionable);
+	m_skipButton->setEnabled(actionable);
+	m_silenceButton->setEnabled(actionable);
+
+	// Navigation between parts: only when there are several to step through.
+	int count = m_pendingMigrations.size();
+	m_prevButton->setVisible(count > 1);
+	m_nextButton->setVisible(count > 1);
+	m_prevButton->setEnabled(m_currentIndex > 0);
+	m_nextButton->setEnabled(m_currentIndex < count - 1);
 
 	// Focus on the part
 	centerAndZoomOnItem(item);
@@ -417,7 +467,8 @@ void MigrationHandler::confirmCurrentMigration()
 		swapCurrentPart();
 	}
 
-	// Move to next migration
+	info.decided = true;
+	// Move to the next undecided part (closes when all are decided)
 	processNextMigration();
 }
 
@@ -432,7 +483,8 @@ void MigrationHandler::skipCurrentMigration()
 		swapCurrentPart();
 	}
 
-	// Move to next migration
+	info.decided = true;
+	// Move to the next undecided part (closes when all are decided)
 	processNextMigration();
 }
 
@@ -468,18 +520,58 @@ void MigrationHandler::silenceCurrentMigration()
 		}
 	}
 
-	// Move to next migration
+	info.decided = true;
+	info.silenced = true;
+	// Move to the next undecided part (closes when all are decided)
 	processNextMigration();
 }
 
 void MigrationHandler::processNextMigration()
 {
-	m_currentIndex++;
-	if (m_currentIndex >= m_pendingMigrations.size()) {
-		closeDialog();
-	} else {
-		updateDialogForCurrentMigration();
+	// Advance to the next part the user hasn't decided yet (wrapping around); close
+	// the dialog once every part has a decision.
+	int count = m_pendingMigrations.size();
+	for (int step = 1; step <= count; ++step) {
+		int idx = (m_currentIndex + step) % count;
+		if (!m_pendingMigrations[idx].decided) {
+			m_currentIndex = idx;
+			updateDialogForCurrentMigration();
+			return;
+		}
 	}
+	closeDialog();
+}
+
+void MigrationHandler::revertCurrentPreviewIfTransient()
+{
+	if (m_currentIndex < 0 || m_currentIndex >= m_pendingMigrations.size()) return;
+
+	MigrationInfo& info = m_pendingMigrations[m_currentIndex];
+	// Only undo an undecided live preview (whose swap is the top undo command). A part
+	// that has been decided keeps its committed state.
+	if (info.isSwapped && !info.decided) {
+		if (m_sketchWidget->undoStack()) {
+			m_sketchWidget->undoStack()->undo();
+		}
+		info.itemId = info.originalItemId;
+		info.isSwapped = false;
+	}
+}
+
+void MigrationHandler::goToPreviousMigration()
+{
+	if (m_currentIndex <= 0) return;
+	revertCurrentPreviewIfTransient();
+	m_currentIndex--;
+	updateDialogForCurrentMigration();
+}
+
+void MigrationHandler::goToNextMigration()
+{
+	if (m_currentIndex >= m_pendingMigrations.size() - 1) return;
+	revertCurrentPreviewIfTransient();
+	m_currentIndex++;
+	updateDialogForCurrentMigration();
 }
 
 void MigrationHandler::closeDialog()
