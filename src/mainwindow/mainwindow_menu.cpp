@@ -20,6 +20,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QSvgGenerator>
 #include <QColor>
+#include <QTimer>
 #include <QImageWriter>
 #include <QInputDialog>
 #include <QApplication>
@@ -489,89 +490,13 @@ bool MainWindow::mainLoad(const QString & fileName, const QString & displayName,
 	disconnect(migratePartLabelOffsetConnection);
 
 	if (!m_useOldSchematic && checkObsolete) {
-		// Collect obsolete parts across all views, deduped by their shared cross-view id,
-		// so parts present only in breadboard or schematic are migrated too, not just PCB.
-		QList<SketchWidget *> views;
-		if (m_breadboardGraphicsView) views << m_breadboardGraphicsView;
-		if (m_schematicGraphicsView) views << m_schematicGraphicsView;
-		if (m_pcbGraphicsView) views << m_pcbGraphicsView;
-
-		QHash<qint64, ItemBase *> obsoleteById;
-		QSet<QString> modulesInSketch;
-		Q_FOREACH (SketchWidget * view, views) {
-			Q_FOREACH (ItemBase * item, view->collectObsolete()) {
-				obsoleteById.insert(item->id(), item);
-			}
-			// Track every module present, so we can tell when an obsolete part and its
-			// replacement are mixed in the same sketch (the only case we prompt about).
-			Q_FOREACH (QGraphicsItem * gi, view->scene()->items()) {
-				ItemBase * ib = dynamic_cast<ItemBase *>(gi);
-				if (ib != nullptr) modulesInSketch.insert(ib->moduleID());
-			}
-		}
-
-		QList<ItemBase *> items = obsoleteById.values();
-		DebugDialog::debug(QString("[migration] obsolete parts in sketch: %1; distinct modules present: %2")
-		                   .arg(items.count()).arg(modulesInSketch.count()));
-		if (items.count() > 0 && !views.isEmpty()) {
-			// Separate items into soft migration candidates and legacy obsolete.
-			// Any view's handler works: it resolves each part's view dynamically.
-			QList<ItemBase *> legacyObsoleteItems;
-			MigrationHandler* migrationHandler = views.first()->migrationHandler();
-
-			for (ItemBase* item : items) {
-				ModelPart* oldPart = item->modelPart();
-				ModelPart* newPart = findReplacedby(oldPart);
-
-				DebugDialog::debug(QString("[migration] obsolete '%1' module=%2 -> replacement=%3")
-				                   .arg(item->instanceTitle(),
-				                        oldPart ? oldPart->moduleID() : QString("<null modelPart>"),
-				                        newPart ? newPart->moduleID() : QString("<none: findReplacedby returned null>")));
-
-				if (newPart) {
-					// Try to load history from file if not already loaded
-					if (!newPart->hasHistory()) {
-						bool loaded = newPart->loadHistoryFromFile();
-						DebugDialog::debug(QString("[migration]   history not in model, loadHistoryFromFile()=%1 path=%2")
-						                   .arg(loaded ? "true" : "false", newPart->path()));
-					}
-
-					if (newPart->hasHistory()) {
-						// History-bearing obsolete parts use the gentle soft-migration flow,
-						// never the destructive legacy "update all?" dialog. We only actually
-						// prompt when the sketch mixes this obsolete part with its replacement;
-						// otherwise the old parts are internally consistent, so leave them be
-						// (the obsolete part is already hidden from the bin). Staying out of the
-						// legacy list here also means a silenced part won't be nagged about later.
-						QList<HistoryEntry> relevantHistory =
-						    MigrationHandler::getRelevantHistory(oldPart, newPart->history());
-						bool mixed = modulesInSketch.contains(newPart->moduleID());
-
-						DebugDialog::debug(QString("[migration]   history entries=%1 relevant=%2 replacement-in-sketch(mixed)=%3")
-						                   .arg(newPart->history().count()).arg(relevantHistory.count())
-						                   .arg(mixed ? "yes" : "no"));
-
-						if (!relevantHistory.isEmpty() && mixed) {
-							DebugDialog::debug("[migration]   -> queue soft migration (ask dialog)");
-							migrationHandler->queueMigration(item, oldPart, newPart, relevantHistory);
-						}
-						else {
-							DebugDialog::debug("[migration]   -> soft-handled, no prompt (no relevant history or not mixed)");
-						}
-						continue;
-					}
-				}
-				// No replacement, or replacement carries no history: legacy obsolete flow.
-				DebugDialog::debug("[migration]   -> LEGACY obsolete dialog (no replacement, or replacement carries no history)");
-				legacyObsoleteItems.append(item);
-			}
-
-			// Process soft migrations if any
-			if (migrationHandler->hasPendingMigrations()) {
-				migrationHandler->processMigrations();
-			}
-
-			// Handle legacy obsolete items with the old dialog
+		// On load, route history-bearing obsolete parts to the soft "Part Migration" dialog,
+		// but only when the obsolete part and its replacement are actually mixed in the sketch
+		// (requireMix) so we don't nag. Everything else falls through to the legacy dialog.
+		QList<ItemBase *> items = collectObsoleteAcrossViews();
+		DebugDialog::debug(QString("[migration] (load) obsolete parts in sketch: %1").arg(items.count()));
+		if (!items.isEmpty()) {
+			QList<ItemBase *> legacyObsoleteItems = routeHistoryMigrations(items, /* requireMix */ true);
 			if (legacyObsoleteItems.count() > 0) {
 				checkSwapObsolete(legacyObsoleteItems, true);
 			}
@@ -4104,6 +4029,127 @@ ModelPart * MainWindow::findReplacedby(ModelPart * originalModelPart) {
 	}
 }
 
+QList<ItemBase *> MainWindow::collectObsoleteAcrossViews() {
+	// Obsolete instances across all views, deduped by their shared cross-view id.
+	QHash<qint64, ItemBase *> obsoleteById;
+	QList<SketchWidget *> views;
+	if (m_breadboardGraphicsView) views << m_breadboardGraphicsView;
+	if (m_schematicGraphicsView) views << m_schematicGraphicsView;
+	if (m_pcbGraphicsView) views << m_pcbGraphicsView;
+	Q_FOREACH (SketchWidget * view, views) {
+		Q_FOREACH (ItemBase * item, view->collectObsolete()) {
+			obsoleteById.insert(item->id(), item);
+		}
+	}
+	return obsoleteById.values();
+}
+
+QList<ItemBase *> MainWindow::routeHistoryMigrations(const QList<ItemBase *> & obsoleteItems, bool requireMix) {
+	// History-bearing obsolete parts use the soft "Part Migration" dialog; the rest are
+	// returned so the caller can handle them (legacy dialog at load, direct swap on update).
+	// requireMix=true only prompts when the replacement is also present in the sketch (used by
+	// the automatic load/drop triggers, so we don't nag); false always prompts (user-initiated).
+	QList<ItemBase *> rest;
+	if (obsoleteItems.isEmpty()) return rest;
+
+	QList<SketchWidget *> views;
+	if (m_breadboardGraphicsView) views << m_breadboardGraphicsView;
+	if (m_schematicGraphicsView) views << m_schematicGraphicsView;
+	if (m_pcbGraphicsView) views << m_pcbGraphicsView;
+	if (views.isEmpty()) return obsoleteItems;
+
+	QSet<QString> modulesInSketch;
+	if (requireMix) {
+		Q_FOREACH (SketchWidget * view, views) {
+			Q_FOREACH (QGraphicsItem * gi, view->scene()->items()) {
+				ItemBase * ib = dynamic_cast<ItemBase *>(gi);
+				if (ib != nullptr) modulesInSketch.insert(ib->moduleID());
+			}
+		}
+	}
+
+	MigrationHandler * migrationHandler = views.first()->migrationHandler();
+
+	Q_FOREACH (ItemBase * item, obsoleteItems) {
+		ModelPart * oldPart = item->modelPart();
+		ModelPart * newPart = findReplacedby(oldPart);
+
+		DebugDialog::debug(QString("[migration] obsolete '%1' module=%2 -> replacement=%3 (requireMix=%4)")
+		                   .arg(item->instanceTitle(),
+		                        oldPart ? oldPart->moduleID() : QString("<null modelPart>"),
+		                        newPart ? newPart->moduleID() : QString("<none: findReplacedby returned null>"))
+		                   .arg(requireMix ? "yes" : "no"));
+
+		if (newPart != nullptr) {
+			if (!newPart->hasHistory()) {
+				bool loaded = newPart->loadHistoryFromFile();
+				DebugDialog::debug(QString("[migration]   history not in model, loadHistoryFromFile()=%1 path=%2")
+				                   .arg(loaded ? "true" : "false", newPart->path()));
+			}
+			if (newPart->hasHistory()) {
+				QList<HistoryEntry> relevantHistory =
+				    MigrationHandler::getRelevantHistory(oldPart, newPart->history());
+				bool mixed = !requireMix || modulesInSketch.contains(newPart->moduleID());
+				// Automatic triggers need relevant (unseen) entries; a user-initiated update
+				// always shows the dialog so the user can review and swap/skip/silence.
+				bool prompt = mixed && (!relevantHistory.isEmpty() || !requireMix);
+
+				DebugDialog::debug(QString("[migration]   history entries=%1 relevant=%2 mixed=%3 -> prompt=%4")
+				                   .arg(newPart->history().count()).arg(relevantHistory.count())
+				                   .arg(mixed ? "yes" : "no").arg(prompt ? "yes" : "no"));
+
+				if (prompt) {
+					migrationHandler->queueMigration(item, oldPart, newPart, relevantHistory);
+				}
+				// History-bearing parts never fall through to the legacy/direct-swap path.
+				continue;
+			}
+		}
+		rest << item;
+	}
+
+	if (migrationHandler->hasPendingMigrations()) {
+		migrationHandler->processMigrations();
+	}
+	return rest;
+}
+
+void MainWindow::onItemAddedToSketch(ModelPart *, ItemBase *, ViewLayer::ViewLayerPlacement, const ViewGeometry &, long, SketchWidget * dropOrigin) {
+	// dropOrigin is non-null only for user-initiated drops/pastes (not load, swap, undo or
+	// cross-view sync), so this is the safe place to react to a part the user just added.
+	if (dropOrigin != nullptr) scheduleDropMigrationCheck();
+}
+
+void MainWindow::scheduleDropMigrationCheck() {
+	// A single drop emits itemAddedSignal several times (once per view); coalesce into one
+	// deferred check that runs after the whole add (incl. cross-view sync) has settled.
+	if (m_migrationCheckPending) return;
+	m_migrationCheckPending = true;
+	QTimer::singleShot(0, this, [this]() {
+		m_migrationCheckPending = false;
+		checkDroppedPartMigration();
+	});
+}
+
+void MainWindow::checkDroppedPartMigration() {
+	if (m_useOldSchematic) return;
+
+	QList<SketchWidget *> views;
+	if (m_breadboardGraphicsView) views << m_breadboardGraphicsView;
+	if (m_schematicGraphicsView) views << m_schematicGraphicsView;
+	if (m_pcbGraphicsView) views << m_pcbGraphicsView;
+	if (views.isEmpty()) return;
+
+	// Don't pile onto an already-open migration dialog.
+	if (views.first()->migrationHandler()->hasPendingMigrations()) return;
+
+	QList<ItemBase *> obsolete = collectObsoleteAcrossViews();
+	if (obsolete.isEmpty()) return;
+
+	// Only prompt when an obsolete part and its replacement are now mixed in the sketch.
+	routeHistoryMigrations(obsolete, /* requireMix */ true);
+}
+
 void MainWindow::swapObsolete() {
 	QList<ItemBase *> items;
 	swapObsolete(true, items);
@@ -4127,6 +4173,12 @@ void MainWindow::swapObsolete(bool displayFeedback, QList<ItemBase *> & items) {
 	else {
 		Q_FOREACH (ItemBase * itemBase, items) itemBases.insert(itemBase);
 	}
+
+	// Route history-bearing obsolete parts to the soft Part Migration dialog (always prompt
+	// for a user-initiated update); only the rest are swapped directly below.
+	QList<ItemBase *> rest = routeHistoryMigrations(itemBases.values(), /* requireMix */ false);
+	itemBases = QSet<ItemBase *>(rest.begin(), rest.end());
+	if (itemBases.isEmpty()) return;
 
 	auto* parentCommand = new QUndoCommand();
 	int count = 0;

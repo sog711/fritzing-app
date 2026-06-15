@@ -709,6 +709,12 @@ void MainWindow::connectPairs() {
 	succeeded =  succeeded && (connect(m_pcbGraphicsView, SIGNAL(dropPasteSignal(SketchWidget *)),
 	                                  this, SLOT(dropPaste(SketchWidget *))) != nullptr);
 
+	// React when the user drops/pastes a part that creates a mix of two revisions of the
+	// same part (see onItemAddedToSketch, which filters to user-initiated drops via dropOrigin).
+	connect(m_breadboardGraphicsView, &SketchWidget::itemAddedSignal, this, &MainWindow::onItemAddedToSketch);
+	connect(m_schematicGraphicsView, &SketchWidget::itemAddedSignal, this, &MainWindow::onItemAddedToSketch);
+	connect(m_pcbGraphicsView, &SketchWidget::itemAddedSignal, this, &MainWindow::onItemAddedToSketch);
+
 	succeeded =  succeeded && (connect(m_pcbGraphicsView, SIGNAL(subSwapSignal(SketchWidget *, ItemBase *, const QString &, ViewLayer::ViewLayerPlacement, long &, QUndoCommand *)),
 	                                  this, SLOT(subSwapSlot(SketchWidget *, ItemBase *, const QString &, ViewLayer::ViewLayerPlacement, long &, QUndoCommand *)),
 	                                  Qt::DirectConnection) != nullptr);

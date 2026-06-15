@@ -666,6 +666,11 @@ protected:
 	virtual bool activeLayerWidgetAlwaysOn();
 	bool copySvg(const QString & path, QFileInfoList & svgEntryInfoList, const QString &moduleID = QString());
 	void checkSwapObsolete(QList<ItemBase *> &, bool includeUpdateLaterMessage);
+	QList<ItemBase *> collectObsoleteAcrossViews();
+	QList<ItemBase *> routeHistoryMigrations(const QList<ItemBase *> & obsoleteItems, bool requireMix);
+	void scheduleDropMigrationCheck();
+	void checkDroppedPartMigration();
+	void onItemAddedToSketch(ModelPart *, ItemBase *, ViewLayer::ViewLayerPlacement, const ViewGeometry &, long, class SketchWidget * dropOrigin);
 	QMessageBox::StandardButton oldSchematicMessage(const QString & filename);
 	MainWindow * revertAux();
 	void migratePartLabelOffset(QList<ModelPart*>);
@@ -694,6 +699,8 @@ protected:
 
 	QPointer<SketchAreaWidget> m_welcomeWidget;
 	class WelcomeView * m_welcomeView = nullptr;
+
+	bool m_migrationCheckPending = false;
 
 	QPointer<class BinManager> m_binManager;
 	QPointer<QWidget> m_tabWidget;
