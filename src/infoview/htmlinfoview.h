@@ -123,6 +123,7 @@ protected:
 	void addSpice(ModelPart * modelPart);
 	void addTags(ModelPart * modelPart);
 	void partTitle(const QString & title, const QString & version, const QString & url, bool obsolete);
+	void addRevisions(ModelPart * modelPart);
 	// Group-mode title: a read-only summary in the (same-size) title field plus a
 	// selection-count heading below the icons.
 	void showGroupTitle(const QString & summary, const QString & countText);
@@ -152,6 +153,7 @@ protected:
 	QLabel * m_partVersion;
 	QLabel * m_spiceTextLabel;
 	QLabel * m_tagsTextLabel;
+	QLabel * m_revisionsTextLabel;
 	QLabel * m_connDescr;
 	QLabel * m_connName;
 	QLabel * m_connType;
@@ -159,6 +161,7 @@ protected:
 	QLabel * m_placementLabel;
 	QLabel * m_spiceLabel;
 	QLabel * m_tagLabel;
+	QLabel * m_revisionsLabel;
 	QLabel * m_connLabel;
 	QLabel * m_layerLabel;
 	QLabel * m_lockLabel;
@@ -191,6 +194,7 @@ protected:
 	QString m_lastPartVersion;
 	ModelPart * m_lastSpiceModelPart;
 	ModelPart * m_lastTagsModelPart;
+	ModelPart * m_lastRevisionsModelPart;
 	int m_lastConnectorItemCount = 0;
 	ConnectorItem * m_lastConnectorItem;
 	ItemBase * m_lastIconItemBase;

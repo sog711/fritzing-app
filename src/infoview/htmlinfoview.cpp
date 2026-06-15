@@ -35,6 +35,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "htmlinfoview.h"
 #include "scalediconframe.h"
 #include "../sketch/infographicsview.h"
+#include "../model/modelpart.h"
 #include "../items/symbolpaletteitem.h"
 #include "../items/hole.h"
 #include "../utils/familypropertycombobox.h"
@@ -98,6 +99,7 @@ HtmlInfoView::HtmlInfoView(QWidget * parent) : QScrollArea(parent)
 	m_lastTitleItemBase = nullptr;
 	m_lastSpiceModelPart = nullptr;
 	m_lastTagsModelPart = nullptr;
+	m_lastRevisionsModelPart = nullptr;
 	m_lastConnectorItem = nullptr;
 	m_lastIconItemBase = nullptr;
 	m_lastPropsModelPart = nullptr;
@@ -113,6 +115,7 @@ HtmlInfoView::HtmlInfoView(QWidget * parent) : QScrollArea(parent)
 	m_connDescr = nullptr;
 	m_spiceTextLabel = nullptr;
 	m_tagsTextLabel = nullptr;
+	m_revisionsTextLabel = nullptr;
 	m_lastSwappingEnabled = false;
 	m_lastItemBase = nullptr;
 	m_setContentTimer.setSingleShot(true);
@@ -266,6 +269,19 @@ void HtmlInfoView::init(bool tinyMode) {
 	versionLayout->addStretch(1);
 	versionFrame->setLayout(versionLayout);
 	vlo->addWidget(versionFrame);
+
+	// Revisions section (the part's <history> entries), styled like the Tags/SPICE sections.
+	m_revisionsLabel = new QLabel(tr("Revisions"), NULL);
+	m_revisionsLabel->setObjectName("expandableViewLabel");
+	m_revisionsLabel->setVisible(false);
+	vlo->addWidget(m_revisionsLabel);
+
+	m_revisionsTextLabel = new TagLabel(this);
+	m_revisionsTextLabel->setWordWrap(true);
+	m_revisionsTextLabel->setObjectName("tagsValue");
+	m_revisionsTextLabel->setOpenExternalLinks(false);
+	m_revisionsTextLabel->setVisible(false);
+	vlo->addWidget(m_revisionsTextLabel);
 
 	m_connLabel = new QLabel(tr("Connections"), nullptr);
 	m_connLabel->setObjectName("expandableViewLabel");
@@ -574,6 +590,7 @@ void HtmlInfoView::appendWireStuff(Wire* wire, bool swappingEnabled) {
 	m_placementLabel->setVisible(hasLayer);
 
 	addTags(modelPart);
+	addRevisions(modelPart);
 }
 
 void HtmlInfoView::appendItemStuff(ItemBase* base, bool swappingEnabled) {
@@ -690,6 +707,7 @@ void HtmlInfoView::appendItemStuff(ItemBase * itemBase, ModelPart * modelPart, b
 	displayProps(modelPart, itemBase, swappingEnabled);
 	addSpice(modelPart);
 	addTags(modelPart);
+	addRevisions(modelPart);
 
 	m_placementLabel->setVisible(swappingEnabled);
 	m_placementFrame->setVisible(swappingEnabled);
@@ -828,6 +846,7 @@ void HtmlInfoView::setNullContent()
 	displayProps(nullptr, nullptr, false);
 	addSpice(NULL);
 	addTags(nullptr);
+	addRevisions(nullptr);
 	viewConnectorItemInfo(nullptr, nullptr);
 	m_connFrame->setVisible(false);
 	m_propFrame->setVisible(false);
@@ -1040,6 +1059,47 @@ void HtmlInfoView::partTitle(const QString & title, const QString & version, con
 		m_partVersion->setText(tr("v. %1 %2").arg(version).arg(isObsolete ? QString("<a href='x'>%1</a>").arg(tr("obsolete")) : ""));
 	}
 	else m_partVersion->setText("");
+}
+
+void HtmlInfoView::addRevisions(ModelPart * modelPart) {
+	if (m_revisionsTextLabel == nullptr) return;
+
+	if (m_lastRevisionsModelPart == modelPart) return;
+	m_lastRevisionsModelPart = modelPart;
+
+	QString html;
+	if (modelPart != nullptr) {
+		// History may not be loaded yet for parts that came from the parts database.
+		if (!modelPart->hasHistory()) modelPart->loadHistoryFromFile();
+
+		const QList<HistoryEntry> & history = modelPart->history();
+		// newest entry first
+		for (int i = history.count() - 1; i >= 0; --i) {
+			const HistoryEntry & entry = history.at(i);
+
+			QString modeTag;
+			if (entry.isForced()) modeTag = QString(" [%1]").arg(tr("required"));
+			else if (entry.isSilent()) modeTag = QString(" [%1]").arg(tr("auto"));
+
+			QString date = entry.date.trimmed();
+			QString author = entry.author.trimmed();
+			QString description = entry.description.trimmed();
+
+			if (!html.isEmpty()) html += "<br/>";
+			html += QString("<b>%1</b>%2%3")
+			        .arg(date.toHtmlEscaped(),
+			             author.isEmpty() ? QString() : QString(" (%1)").arg(author.toHtmlEscaped()),
+			             modeTag);
+			if (!description.isEmpty()) {
+				html += QString("<br/>%1").arg(description.toHtmlEscaped());
+			}
+		}
+	}
+
+	bool hasRevisions = !html.isEmpty() && !m_tinyMode;
+	m_revisionsTextLabel->setText(html);
+	m_revisionsTextLabel->setVisible(hasRevisions);
+	if (m_revisionsLabel != nullptr) m_revisionsLabel->setVisible(hasRevisions);
 }
 
 void HtmlInfoView::displayProps(ModelPart * modelPart, ItemBase * itemBase, bool swappingEnabled)
