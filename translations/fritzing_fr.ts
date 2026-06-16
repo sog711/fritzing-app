@@ -6290,7 +6290,7 @@ This warning will not be repeated in this session of Fritzing</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1593"/>
         <source>There are no copper layers defined in: %1. See &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;this explanation&lt;/a&gt;.&lt;br/&gt;&lt;br/&gt;This will not be a problem in the next release of the Parts Editor, but for now please modify the file according to the instructions in the link.</source>
-        <translation>Il n&apos;y a pas de couches de cuivre définies dans :%1. Consultez &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;cette explication&lt;/a&gt;.&lt;br/&gt;&lt;br/&gt;ce ne sera plus un problème dans la prochaine version de l&apos;éditeur de composants, mais pour l&apos;instant veuillez modifier le fichier en suivant les instructions accessibles via le lien.</translation>
+        <translation>Il n&apos;y a pas de couches de cuivre définies dans: %1. Consultez &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;cette explication&lt;/a&gt;.&lt;br/&gt;&lt;br/&gt;ce ne sera plus un problème dans la prochaine version de l&apos;éditeur de composants, mais pour l&apos;instant veuillez modifier le fichier en suivant les instructions accessibles via le lien.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1609"/>
