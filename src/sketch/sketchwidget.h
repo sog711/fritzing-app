@@ -651,6 +651,7 @@ public Q_SLOTS:
 	void setResistance(QString resistance, QString pinSpacing);
 	void setProp(long itemID, const QString & prop, const QString & value, bool redraw, bool doEmit);
 	virtual void setProp(ItemBase *, const QString & propName, const QString & translatedPropName, const QString & oldValue, const QString & newValue, bool redraw);
+	void setPropForSelection(const QString & prop, const QString & value);
 	int collectSelectedNetLabels(QList<class SymbolPaletteItem *> & netLabels);
 	int collectSelectedWires(QList<class Wire *> & wires);
 	int collectSelectedHoles(QList<class Hole *> & holes);

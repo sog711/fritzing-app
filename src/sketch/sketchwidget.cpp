@@ -8457,6 +8457,49 @@ void SketchWidget::setProp(ItemBase * item, const QString & prop, const QString 
 	m_undoStack->waitPush(cmd, PropChangeDelay);
 }
 
+void SketchWidget::setPropForSelection(const QString & prop, const QString & value)
+{
+	if (prop.isEmpty()) return;
+
+	// Apply `prop` = `value` to every selected part that exposes that property, in one
+	// undoable action (mirrors setResistance / setHoleSizeForSelection). The single-item
+	// setProp above only touches the part whose inspector combo was edited; this is the
+	// multi-selection counterpart. getSelectedPart() returns null on a multi-selection,
+	// so we walk the selection ourselves.
+	QList<ItemBase *> items;
+	Q_FOREACH (QGraphicsItem * gItem, scene()->selectedItems()) {
+		auto * itemBase = dynamic_cast<ItemBase *>(gItem);
+		if (itemBase == nullptr) continue;
+		itemBase = itemBase->layerKinChief();
+		// Skip co-selected parts of another family that don't have this property
+		// (e.g. a resistor has no "capacitance"), so we never write a bogus local prop.
+		if (itemBase->getProperty(prop).isEmpty()) continue;
+		if (!items.contains(itemBase)) items.append(itemBase);
+	}
+	if (items.isEmpty()) {
+		// Not a multi-selection: fall back to the single active part.
+		ItemBase * itemBase = getSelectedPart();
+		if ((itemBase != nullptr) && !itemBase->getProperty(prop).isEmpty()) items.append(itemBase);
+	}
+	if (items.isEmpty()) return;
+
+	auto * parentCommand = new QUndoCommand(tr("Change %1 of %n part(s)", "", items.count()).arg(prop));
+
+	bool any = false;
+	Q_FOREACH (ItemBase * itemBase, items) {
+		QString oldValue = itemBase->getProperty(prop);
+		if (oldValue == value) continue;
+		new SetPropCommand(this, itemBase->id(), prop, oldValue, value, true, parentCommand);
+		any = true;
+	}
+
+	if (any) {
+		m_undoStack->waitPush(parentCommand, PropChangeDelay);
+	} else {
+		delete parentCommand;
+	}
+}
+
 int SketchWidget::collectSelectedNetLabels(QList<SymbolPaletteItem *> & netLabels)
 {
 	Q_FOREACH (QGraphicsItem * gItem, scene()->selectedItems()) {

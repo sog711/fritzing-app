@@ -103,6 +103,7 @@ public:
 	virtual void noteChanged(ItemBase *, const QString &oldText, const QString & newText, QSizeF oldSize, QSizeF newSize);
 	virtual void setResistance(QString resistance, QString pinSpacing);
 	virtual void setProp(ItemBase *, const QString & propName, const QString & translatedPropName, const QString & oldValue, const QString & newValue, bool redraw);
+	virtual void setPropForSelection(const QString & prop, const QString & value);
 	virtual int collectSelectedNetLabels(QList<class SymbolPaletteItem *> & netLabels);
 	virtual int collectSelectedWires(QList<class Wire *> & wires);
 	virtual int collectSelectedHoles(QList<class Hole *> & holes);

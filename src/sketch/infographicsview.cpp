@@ -219,6 +219,12 @@ void InfoGraphicsView::setProp(ItemBase * item, const QString & prop, const QStr
 	Q_UNUSED(redraw);
 }
 
+void InfoGraphicsView::setPropForSelection(const QString & prop, const QString & value)
+{
+	Q_UNUSED(prop);
+	Q_UNUSED(value);
+}
+
 int InfoGraphicsView::collectSelectedNetLabels(QList<SymbolPaletteItem *> & netLabels)
 {
 	Q_UNUSED(netLabels);

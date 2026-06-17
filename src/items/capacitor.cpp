@@ -285,7 +285,9 @@ void Capacitor::propertyEntry(int index) {
 
 			InfoGraphicsView * infoGraphicsView = InfoGraphicsView::getInfoGraphicsView(this);
 			if (infoGraphicsView != nullptr) {
-				infoGraphicsView->setProp(this, propertyDef->name, "", m_propertyDefs.value(propertyDef, ""), utext, true);
+				// Apply to every selected part that has this property, not just this one
+				// (mirrors Resistor::resistanceEntry -> setResistance).
+				infoGraphicsView->setPropForSelection(propertyDef->name, utext);
 			}
 			break;
 		}
@@ -319,7 +321,8 @@ void Capacitor::simplePropertyEntry(int index) {
 		if (m_comboBoxes.value(propertyDef) == focusOutComboBox) {
 			InfoGraphicsView * infoGraphicsView = InfoGraphicsView::getInfoGraphicsView(this);
 			if (infoGraphicsView != nullptr) {
-				infoGraphicsView->setProp(this, propertyDef->name, "", m_propertyDefs.value(propertyDef, ""), text, true);
+				// Apply to every selected part that has this property, not just this one.
+				infoGraphicsView->setPropForSelection(propertyDef->name, text);
 			}
 			break;
 		}
