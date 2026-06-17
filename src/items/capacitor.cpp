@@ -30,10 +30,53 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 // TODO
 //	save into parts bin
 
+static bool isFaradCapacitance(const QString & prop, const QString & symbol)
+{
+	return symbol == "F" && prop.contains("capacitance", Qt::CaseInsensitive);
+}
+
+static QString formatPropertyDefValue(PropertyDef * propertyDef, double value)
+{
+	if (isFaradCapacitance(propertyDef->name, propertyDef->symbol)) {
+		return TextUtils::convertToPowerPrefixByThousands(value) + propertyDef->symbol;
+	}
+
+	return TextUtils::convertToPowerPrefix(value) + propertyDef->symbol;
+}
+
+static QString normalizeCapacitanceValue(const QString & value, const QString & symbol)
+{
+	QString temp = value.trimmed();
+	if (temp.isEmpty()) return temp;
+
+	temp.replace('u', TextUtils::MicroSymbol);
+	temp.replace(TextUtils::AltMicroSymbol, TextUtils::MicroSymbol);
+
+	QString symbolRegExp = symbol.isEmpty() ? "" : QString("%1?").arg(QRegularExpression::escape(symbol));
+	QString pattern = QString("^\\s*[-+]?(?:\\d+(?:\\.\\d*)?|\\.\\d+)\\s*[%1]?\\s*%2\\s*$").arg(
+		TextUtils::PowerPrefixesString,
+		symbolRegExp
+	);
+	if (!QRegularExpression(pattern).match(temp).hasMatch()) return value;
+
+	double q = TextUtils::convertFromPowerPrefixU(temp, symbol);
+	return TextUtils::convertToPowerPrefixByThousands(q) + symbol;
+}
+
 Capacitor::Capacitor( ModelPart * modelPart, ViewLayer::ViewID viewID, const ViewGeometry & viewGeometry, long id, QMenu * itemMenu, bool doLabel)
 	: PaletteItem(modelPart, viewID, viewGeometry, id, itemMenu, doLabel)
 {
 	PropertyDefMaster::initPropertyDefs(modelPart, m_propertyDefs);
+	Q_FOREACH (PropertyDef * propertyDef, m_propertyDefs.keys()) {
+		if (!isFaradCapacitance(propertyDef->name, propertyDef->symbol)) continue;
+
+		QString current = m_propertyDefs.value(propertyDef);
+		QString normalized = normalizeCapacitanceValue(current, propertyDef->symbol);
+		if (normalized == current) continue;
+
+		m_propertyDefs.insert(propertyDef, normalized);
+		modelPart->setLocalProp(propertyDef->name, normalized);
+	}
 }
 
 Capacitor::~Capacitor() {
@@ -58,8 +101,10 @@ bool Capacitor::collectExtraInfo(QWidget * parent, const QString & family, const
 			focusOutComboBox->setObjectName("infoViewComboBox");
 			QString current = m_propertyDefs.value(propertyDef);
 			if (current.isEmpty() && !propertyDef->defaultValue.isEmpty()) {
-				current = propertyDef->defaultValue + propertyDef->symbol;
-				setProp(propertyDef->name, propertyDef->defaultValue + propertyDef->symbol);
+				current = (propertyDef->numeric && isFaradCapacitance(propertyDef->name, propertyDef->symbol))
+						  ? formatPropertyDefValue(propertyDef, propertyDef->defaultValue.toDouble())
+						  : propertyDef->defaultValue + propertyDef->symbol;
+				setProp(propertyDef->name, current);
 			}
 			if (propertyDef->editable) {
 				focusOutComboBox->setToolTip(tr("Select from the dropdown, or type in a %1 value").arg(returnProp));
@@ -80,7 +125,7 @@ bool Capacitor::collectExtraInfo(QWidget * parent, const QString & family, const
 					}
 				}
 				Q_FOREACH(double q, propertyDef->menuItems) {
-					QString s = TextUtils::convertToPowerPrefix(q) + propertyDef->symbol;
+					QString s = formatPropertyDefValue(propertyDef, q);
 					focusOutComboBox->addItem(s);
 				}
 			}
@@ -180,6 +225,9 @@ void Capacitor::propertyEntry(int index) {
 					// info view is redrawn, so combobox is recreated, so the new item is added to the combo box menu
 					propertyDef->menuItems.append(val);
 				}
+				if (isFaradCapacitance(propertyDef->name, propertyDef->symbol)) {
+					utext = formatPropertyDefValue(propertyDef, val);
+				}
 			}
 			else {
 				if (!propertyDef->sMenuItems.contains(text)) {
@@ -200,8 +248,12 @@ void Capacitor::propertyEntry(int index) {
 void Capacitor::setProp(const QString & prop, const QString & value) {
 	Q_FOREACH (PropertyDef * propertyDef, m_propertyDefs.keys()) {
 		if (prop.compare(propertyDef->name, Qt::CaseInsensitive) == 0) {
-			m_propertyDefs.insert(propertyDef, value);
-			modelPart()->setLocalProp(propertyDef->name, value);
+			QString normalized = value;
+			if (isFaradCapacitance(propertyDef->name, propertyDef->symbol)) {
+				normalized = normalizeCapacitanceValue(value, propertyDef->symbol);
+			}
+			m_propertyDefs.insert(propertyDef, normalized);
+			modelPart()->setLocalProp(propertyDef->name, normalized);
 			if (m_partLabel != nullptr) m_partLabel->displayTextsIf();
 			return;
 		}

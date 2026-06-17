@@ -48,6 +48,7 @@ public:
 	static double roundDecimal(double value, int decimal);
 	static double roundDecimal(double value, double decimal);
 	static QString convertToPowerPrefix(double, char f='g', int prec=6);
+	static QString convertToPowerPrefixByThousands(double, char f='g', int prec=6);
 	static double convertFromPowerPrefix(const QString & val, const QString & symbol);
 	static double convertFromPowerPrefixU(QString & val, const QString & symbol);
 
@@ -160,6 +161,7 @@ public:
 
 protected:
 	static bool pxToInches(QDomElement &elem, const QString &attrName, bool isIllustrator);
+	static QString convertToPowerPrefix(double, double prefixThreshold, char f, int prec);
 	static void squashNotElement(QDomElement & element, const QString & elementName, const QString & attName, const QRegularExpression & matchContent, bool & result);
 	static void initPowerPrefixes();
 	static QDomElement copyText(QDomDocument & svgDom, QDomElement & parent, QDomElement & text, double defaultX, double defaultY, bool copyAttributes);

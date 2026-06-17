@@ -828,12 +828,20 @@ bool TextUtils::addCopper1(const QString & filename, QDomDocument & domDocument,
 }
 
 QString TextUtils::convertToPowerPrefix(double q, char format, int precision) {
+	return convertToPowerPrefix(q, 100, format, precision);
+}
+
+QString TextUtils::convertToPowerPrefixByThousands(double q, char format, int precision) {
+	return convertToPowerPrefix(q, 1000, format, precision);
+}
+
+QString TextUtils::convertToPowerPrefix(double q, double prefixThreshold, char format, int precision) {
 	initPowerPrefixes();
 
 	if (q == 0) return QString::number(q, format, precision);
 
 	for (int i = 0; i < PowerPrefixes.count(); i++) {
-		if (abs(q) < 100 * PowerPrefixValues[i]) {
+		if (abs(q) < prefixThreshold * PowerPrefixValues[i]) {
 			q /= PowerPrefixValues[i];
 			return QString::number(q, format, precision) + PowerPrefixes[i];
 		}
@@ -2401,4 +2409,3 @@ QFont TextUtils::textMetrics(const QDomElement & element) {
 	TextMetrics tm(element);
 	return tm.getFont();
 }
-
