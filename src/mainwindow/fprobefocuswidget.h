@@ -34,7 +34,7 @@ public:
 	void write(QVariant data) override;
 
 signals:
-	void focusWidget(const QString &objectName, int index);
+	void focusWidget(const QString &objectName, int index, const QString &property);
 };
 
 #endif // FPROBEFOCUSWIDGET_H

@@ -33,6 +33,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QPixmap>
 #include <QTimer>
 #include <QStackedWidget>
+#include <QScrollArea>
 #include <QXmlStreamReader>
 #include <QShortcut>
 #include <QStyle>
@@ -3935,13 +3936,65 @@ void MainWindow::putItemByModuleID(const QString & moduleID) {
 	}
 }
 
-void MainWindow::handleFocusWidget(const QString &objectName, int index)
+void MainWindow::handleFocusWidget(const QString &objectName, int index, const QString &property)
 {
 	QList<QWidget*> widgets = findChildren<QWidget*>(objectName);
-	if (index >= 0 && index < widgets.size()) {
-		QWidget *targetWidget = widgets[index];
-		targetWidget->setFocus();
+
+	// Debug: list every candidate so it is clear which editor the probe targets.
+	// Many inspector editors share the objectName "infoViewComboBox" (e.g. the
+	// package FamilyPropertyComboBox and the editable capacitance FocusOutComboBox),
+	// so plain index 0 can land on the wrong one.
+	DebugDialog::debug(QString("handleFocusWidget: objectName='%1' index=%2 property='%3' -> %4 candidate(s)")
+					   .arg(objectName).arg(index).arg(property).arg(widgets.size()));
+	for (int i = 0; i < widgets.size(); ++i) {
+		QWidget * w = widgets.at(i);
+		DebugDialog::debug(QString("  candidate[%1] class=%2 fProbeProperty='%3' visible=%4 rect=(%5,%6 %7x%8)")
+						   .arg(i)
+						   .arg(w->metaObject()->className())
+						   .arg(w->property("fProbeProperty").toString())
+						   .arg(w->isVisible())
+						   .arg(w->geometry().x()).arg(w->geometry().y())
+						   .arg(w->width()).arg(w->height()));
 	}
+
+	QWidget * targetWidget = nullptr;
+	if (!property.isEmpty()) {
+		// Disambiguate by the editor's fProbeProperty when several share an objectName.
+		for (QWidget * w : widgets) {
+			if (w->property("fProbeProperty").toString() == property) {
+				targetWidget = w;
+				break;
+			}
+		}
+		if (targetWidget == nullptr) {
+			DebugDialog::debug(QString("handleFocusWidget: no '%1' widget with fProbeProperty='%2' - focus unchanged").arg(objectName, property));
+			return;
+		}
+	} else if (index >= 0 && index < widgets.size()) {
+		targetWidget = widgets.at(index);
+	} else {
+		DebugDialog::debug(QString("handleFocusWidget: index %1 out of range (%2 candidate(s)) - focus unchanged").arg(index).arg(widgets.size()));
+		return;
+	}
+
+	// If the widget lives in a scroll area (e.g. an inspector editor below the fold),
+	// scroll it into view first; setFocus() on an off-screen widget does not reliably
+	// take the keyboard focus, so subsequent keystrokes (e.g. Ctrl+A) leak to the sketch.
+	for (QWidget * ancestor = targetWidget->parentWidget(); ancestor != nullptr; ancestor = ancestor->parentWidget()) {
+		if (auto * scrollArea = qobject_cast<QScrollArea *>(ancestor)) {
+			scrollArea->ensureWidgetVisible(targetWidget);
+			break;
+		}
+	}
+	targetWidget->setFocus(Qt::OtherFocusReason);
+
+	QWidget * focused = QApplication::focusWidget();
+	DebugDialog::debug(QString("handleFocusWidget: requested class=%1 fProbeProperty='%2'; actual focus class=%3 objectName='%4' fProbeProperty='%5'")
+					   .arg(targetWidget->metaObject()->className())
+					   .arg(targetWidget->property("fProbeProperty").toString())
+					   .arg(focused ? focused->metaObject()->className() : QString("(none)"))
+					   .arg(focused ? focused->objectName() : QString())
+					   .arg(focused ? focused->property("fProbeProperty").toString() : QString()));
 }
 
 bool MainWindow::isTransientSimulationEnabled() {

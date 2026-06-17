@@ -295,7 +295,7 @@ public Q_SLOTS:
 	void oldSchematicsSlot(const QString & filename, bool & useOldSchematics);
 	void showWelcomeView();
 	void putItemByModuleID(const QString & moduleID);
-	void handleFocusWidget(const QString &objectName, int index);
+	void handleFocusWidget(const QString &objectName, int index, const QString &property);
 	void onServicesFetched(const QStringList& services);
 
 protected Q_SLOTS:

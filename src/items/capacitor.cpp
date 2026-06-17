@@ -111,6 +111,9 @@ bool Capacitor::collectExtraInfo(QWidget * parent, const QString & family, const
 			focusOutComboBox->setEnabled(swappingEnabled);
 			focusOutComboBox->setEditable(propertyDef->editable);
 			focusOutComboBox->setObjectName("infoViewComboBox");
+			// Tag with the property so test probes can target this specific editor
+			// (many inspector editors share the objectName "infoViewComboBox").
+			focusOutComboBox->setProperty("fProbeProperty", propertyDef->name);
 			QString current = m_propertyDefs.value(propertyDef);
 			if (current.isEmpty() && !propertyDef->defaultValue.isEmpty()) {
 				current = propertyDef->defaultValue + propertyDef->symbol;

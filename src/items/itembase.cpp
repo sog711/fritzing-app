@@ -1747,6 +1747,9 @@ bool ItemBase::collectExtraInfo(QWidget * parent, const QString & family, const 
 		else {
 			comboBox = new FamilyPropertyComboBox(family, prop, parent);
 			comboBox->setObjectName("infoViewComboBox");
+			// Tag with the property so test probes can target this specific editor
+			// (many inspector editors share the objectName "infoViewComboBox").
+			comboBox->setProperty("fProbeProperty", prop);
 		}
 
 		int currentIndex = collection.count() - 1;
