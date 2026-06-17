@@ -292,14 +292,24 @@ MainWindow * MainWindow::revertAux()
 	MainWindow* mw = newMainWindow( m_referenceModel, fileName(), true, true, this->currentTabIndex());
 	mw->setGeometry(this->geometry());
 
+	bool loaded = true;
 	QFileInfo info(fileName());
 	if (info.exists() || !FolderUtils::isEmptyFileName(this->m_fwFilename, untitledFileName())) {
-		mw->loadWhich(fileName(), true, true, true, "");
+		loaded = mw->loadWhich(fileName(), true, true, true, "");
 	}
 	else {
 		mw->addDefaultParts();
 		mw->show();
 		mw->hideTempPartsBin();
+	}
+
+	if (!loaded) {
+		// The sketch could not be reloaded (e.g. the file is damaged). loadWhich
+		// has already told the user why. Keep the current window open and discard
+		// the empty replacement -- closing the last window here would quit
+		// Fritzing instead of just reporting the error (issue #1158).
+		mw->close();
+		return this;
 	}
 
 	mw->clearFileProgressDialog();
