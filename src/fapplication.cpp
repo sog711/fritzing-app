@@ -2001,6 +2001,7 @@ QList<MainWindow *> FApplication::recoverBackups()
 	DebugDialog::debug(QString("Recovering %1 files from recoveryDialog").arg(fileItems.size()));
 	Q_FOREACH (QTreeWidgetItem * item, fileItems) {
 		auto backupName = item->data(0, Qt::UserRole).value<QString>();
+		bool keepBackup = false;
 		if (result == QDialog::Accepted && item->isSelected()) {
 			QString originalBaseName = item->text(0);
 			DebugDialog::debug(QString("Loading recovered sketch %1").arg(originalBaseName));
@@ -2011,13 +2012,20 @@ QList<MainWindow *> FApplication::recoverBackups()
 			if (!bundledFileName.isEmpty()) {
 				MainWindow *currentRecoveredSketch = MainWindow::newMainWindow(m_referenceModel, originalBaseName, true, true, -1);
 				currentRecoveredSketch->mainLoad(backupName, bundledFileName, true);
-				currentRecoveredSketch->saveAsShareable(bundledFileName, true);
+				bool saved = currentRecoveredSketch->saveAsShareable(bundledFileName, true);
 				currentRecoveredSketch->setCurrentFile(bundledFileName, true, true);
 				recoveredSketches << currentRecoveredSketch;
+				// Keep the backup unless the recovery produced a real file on disk.
+				// A failed or empty save must not destroy the last copy (issue #1158).
+				keepBackup = !saved
+				             || !QFileInfo(bundledFileName).exists()
+				             || QFileInfo(bundledFileName).size() <= 22;  // 22 bytes = empty zip
 			}
 		}
 
-		QFile::remove(backupName);
+		if (!keepBackup) {
+			QFile::remove(backupName);
+		}
 	}
 
 	return recoveredSketches;
