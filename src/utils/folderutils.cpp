@@ -414,11 +414,12 @@ bool FolderUtils::createFZAndSaveTo(const QDir &dirToCompress, const QString &fi
 
 	QFileInfoList files=dirToCompress.entryInfoList();
 	QFile inFile;
+	QDir destDir = QFileInfo(filepath).dir();
 
 	QString currFolderBU = QDir::currentPath();
 	QDir::setCurrent(dirToCompress.path());
 	Q_FOREACH(QFileInfo file, files) {
-		if(!file.isFile()||file.fileName()==filepath) continue;
+		if(!file.isFile()) continue;
 		if (file.fileName().contains(LockManager::LockedFileName)) continue;
 
 		bool skip = false;
@@ -430,18 +431,28 @@ bool FolderUtils::createFZAndSaveTo(const QDir &dirToCompress, const QString &fi
 		}
 		if (skip) continue;
 
-		inFile.setFileName(file.fileName());
+		QString destination = destDir.absoluteFilePath(file.fileName());
+		// If dirToCompress already is the destination folder, source and
+		// destination are the same file. Copying it would mean removing the
+		// destination (= the source) and then failing the copy, silently
+		// destroying the bundle contents (issue #1158). Leave it in place.
+		if (destination == file.absoluteFilePath()) continue;
 
+		inFile.setFileName(file.fileName());
 		if(!inFile.open(QIODevice::ReadOnly)) {
 			qWarning("inFile.open(): %s", inFile.errorString().toLocal8Bit().constData());
+			QDir::setCurrent(currFolderBU);
 			return false;
 		}
-		QString destination = QFileInfo(filepath).dir().filePath(inFile.fileName());
 		if (QFileInfo(destination).exists())
 			QFile::remove(destination);
 		DebugDialog::debug("Destination " + destination);
-		inFile.copy(destination);
-
+		if (!inFile.copy(destination)) {
+			qWarning("inFile.copy(): %s", inFile.errorString().toLocal8Bit().constData());
+			inFile.close();
+			QDir::setCurrent(currFolderBU);
+			return false;
+		}
 		inFile.close();
 	}
 	QDir::setCurrent(currFolderBU);
