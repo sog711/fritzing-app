@@ -476,6 +476,7 @@ bool FolderUtils::createZipAndSaveTo(const QDir &dirToCompress, const QString &f
 	QFile inFile;
 	QuaZipFile outFile(&zip);
 	char c;
+	int entriesWritten = 0;
 
 	QString currFolderBU = QDir::currentPath();
 	QDir::setCurrent(dirToCompress.path());
@@ -518,9 +519,18 @@ bool FolderUtils::createZipAndSaveTo(const QDir &dirToCompress, const QString &f
 			return false;
 		}
 		inFile.close();
+		entriesWritten++;
 	}
 	zip.close();
 	QDir::setCurrent(currFolderBU);
+
+	if (entriesWritten < 1) {
+		// Refuse to overwrite the target with a 0-entry (empty) archive; doing so
+		// would silently destroy the user's file (issue #1158). Leave it intact.
+		qWarning() << "Saving failed. Refusing to write an empty bundle to" << filepath;
+		QFile::remove(tempZipFile);
+		return false;
+	}
 
 	QFile file(tempZipFile);
 	QString randSuffix = TextUtils::getRandText();
