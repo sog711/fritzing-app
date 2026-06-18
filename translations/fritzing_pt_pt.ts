@@ -1494,19 +1494,21 @@ Would you like to regenerate the parts database?
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="64"/>
         <source>Cannot open file &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não pode abrir o ficheiro &apos;%1&apos;.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="72"/>
         <source>File &apos;%1&apos; is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>O ficheiro &apos;%1&apos; está vazio.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="147"/>
         <source>The part is missing a title.
 
 All parts must have a title tag.</source>
-        <translation type="unfinished"></translation>
+        <translation>A peça tem o título em falta.
+
+Todas as peças devem ter um título de etiqueta.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="171"/>
