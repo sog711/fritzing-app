@@ -217,6 +217,7 @@ public:
 	void swapLayers(ItemBase * itemBase, int layers, const QString & msg);
 	bool saveAsAux(const QString & fileName);
 	void swapObsolete(bool displayFeedback, QList<ItemBase *> &);
+	int swapObsoleteDirect(const QList<ItemBase *> & items, bool displayFeedback);
 	QList<ItemBase *> selectAllObsolete(bool displayFeedback);
 	void hideTempPartsBin();
 	const QString & fritzingVersion();
@@ -667,7 +668,13 @@ protected:
 	bool copySvg(const QString & path, QFileInfoList & svgEntryInfoList, const QString &moduleID = QString());
 	void checkSwapObsolete(QList<ItemBase *> &, bool includeUpdateLaterMessage);
 	QList<ItemBase *> collectObsoleteAcrossViews();
-	QList<ItemBase *> routeHistoryMigrations(const QList<ItemBase *> & obsoleteItems, bool requireMix);
+	bool hasObsoleteParts();
+	// Where a migration check was triggered from. Governs the per-mode prompt policy:
+	// forced (classic) prompts on Load + ManualUpdate (not mid-Drop); ask (soft) prompts on
+	// ManualUpdate always, on Load/Drop only when mixed; silent always auto-swaps.
+	enum class TriggerContext { Load, Drop, ManualUpdate };
+	QList<ItemBase *> routeHistoryMigrations(const QList<ItemBase *> & obsoleteItems, TriggerContext context);
+	void portObsoleteSpecialProps(ItemBase * oldItem, ModelPart * newModelPart, long newID, QUndoCommand * parentCommand);
 	void scheduleDropMigrationCheck();
 	void checkDroppedPartMigration();
 	void onItemAddedToSketch(ModelPart *, ItemBase *, ViewLayer::ViewLayerPlacement, const ViewGeometry &, long, class SketchWidget * dropOrigin);

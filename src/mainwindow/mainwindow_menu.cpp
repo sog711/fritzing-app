@@ -490,16 +490,13 @@ bool MainWindow::mainLoad(const QString & fileName, const QString & displayName,
 	disconnect(migratePartLabelOffsetConnection);
 
 	if (!m_useOldSchematic && checkObsolete) {
-		// On load, route history-bearing obsolete parts to the soft "Part Migration" dialog,
-		// but only when the obsolete part and its replacement are actually mixed in the sketch
-		// (requireMix) so we don't nag. Everything else falls through to the legacy dialog.
+		// On load, route every obsolete part through the Part Migration dialog (or silent
+		// auto-swap). Classic (forced) parts prompt on every load; soft (ask) parts only when
+		// mixed with their replacement. Parts with no resolvable replacement are left as-is.
 		QList<ItemBase *> items = collectObsoleteAcrossViews();
 		DebugDialog::debug(QString("[migration] (load) obsolete parts in sketch: %1").arg(items.count()));
 		if (!items.isEmpty()) {
-			QList<ItemBase *> legacyObsoleteItems = routeHistoryMigrations(items, /* requireMix */ true);
-			if (legacyObsoleteItems.count() > 0) {
-				checkSwapObsolete(legacyObsoleteItems, true);
-			}
+			routeHistoryMigrations(items, TriggerContext::Load);
 		}
 	}
 
@@ -2035,7 +2032,10 @@ void MainWindow::updatePartMenu() {
 	m_convertToBendpointAct->setVisible(ctbpVisible);
 	m_convertToBendpointSeparator->setVisible(ctbpVisible);
 
-	m_selectAllObsoleteAct->setEnabled(itemCount.obsoleteCount > 0);
+	// "Select outdated parts" works on the whole sketch, so enable it whenever the sketch has
+	// any obsolete part (otherwise it's a catch-22: you can't select what you must select first).
+	// "Update selected parts" acts on the selection, so it stays selection-based.
+	m_selectAllObsoleteAct->setEnabled(hasObsoleteParts());
 	m_swapObsoleteAct->setEnabled(itemCount.obsoleteCount > 0);
 
 	m_findPartInSketchAct->setEnabled(m_currentGraphicsView);
@@ -4044,11 +4044,26 @@ QList<ItemBase *> MainWindow::collectObsoleteAcrossViews() {
 	return obsoleteById.values();
 }
 
-QList<ItemBase *> MainWindow::routeHistoryMigrations(const QList<ItemBase *> & obsoleteItems, bool requireMix) {
-	// History-bearing obsolete parts use the soft "Part Migration" dialog; the rest are
-	// returned so the caller can handle them (legacy dialog at load, direct swap on update).
-	// requireMix=true only prompts when the replacement is also present in the sketch (used by
-	// the automatic load/drop triggers, so we don't nag); false always prompts (user-initiated).
+bool MainWindow::hasObsoleteParts() {
+	// Whether the sketch contains any obsolete part, short-circuiting on the first view that
+	// has one. Used to enable "Select outdated parts" regardless of the current selection.
+	QList<SketchWidget *> views;
+	if (m_breadboardGraphicsView) views << m_breadboardGraphicsView;
+	if (m_schematicGraphicsView) views << m_schematicGraphicsView;
+	if (m_pcbGraphicsView) views << m_pcbGraphicsView;
+	Q_FOREACH (SketchWidget * view, views) {
+		if (!view->collectObsolete().isEmpty()) return true;
+	}
+	return false;
+}
+
+QList<ItemBase *> MainWindow::routeHistoryMigrations(const QList<ItemBase *> & obsoleteItems, TriggerContext context) {
+	// Every obsolete part is routed to the "Part Migration" dialog (or auto-swapped), keyed on
+	// the replacement's effective history mode:
+	//   forced (classic, incl. parts with no history) → prompt on Load + ManualUpdate, not Drop
+	//   ask    (soft)                                  → prompt on ManualUpdate always; on Load/Drop only when mixed + unseen history
+	//   silent (auto)                                  → queued and auto-applied with no dialog
+	// Only parts with no resolvable replacement are returned to the caller (to report/ignore).
 	QList<ItemBase *> rest;
 	if (obsoleteItems.isEmpty()) return rest;
 
@@ -4058,8 +4073,9 @@ QList<ItemBase *> MainWindow::routeHistoryMigrations(const QList<ItemBase *> & o
 	if (m_pcbGraphicsView) views << m_pcbGraphicsView;
 	if (views.isEmpty()) return obsoleteItems;
 
+	// "Mixed" detection is only needed for soft (ask) parts on the automatic triggers.
 	QSet<QString> modulesInSketch;
-	if (requireMix) {
+	if (context != TriggerContext::ManualUpdate) {
 		Q_FOREACH (SketchWidget * view, views) {
 			Q_FOREACH (QGraphicsItem * gi, view->scene()->items()) {
 				ItemBase * ib = dynamic_cast<ItemBase *>(gi);
@@ -4070,47 +4086,53 @@ QList<ItemBase *> MainWindow::routeHistoryMigrations(const QList<ItemBase *> & o
 
 	MigrationHandler * migrationHandler = views.first()->migrationHandler();
 
-	// Explain to the user why the dialog appears.
-	QString reason = requireMix
-	    ? tr("This sketch contains both this part and a newer revision of it. Choose which one to use.")
-	    : tr("You chose to update this outdated part.");
-
 	Q_FOREACH (ItemBase * item, obsoleteItems) {
 		ModelPart * oldPart = item->modelPart();
 		ModelPart * newPart = findReplacedby(oldPart);
 
-		DebugDialog::debug(QString("[migration] obsolete '%1' module=%2 -> replacement=%3 (requireMix=%4)")
-		                   .arg(item->instanceTitle(),
-		                        oldPart ? oldPart->moduleID() : QString("<null modelPart>"),
-		                        newPart ? newPart->moduleID() : QString("<none: findReplacedby returned null>"))
-		                   .arg(requireMix ? "yes" : "no"));
-
-		if (newPart != nullptr) {
-			if (!newPart->hasHistory()) {
-				bool loaded = newPart->loadHistoryFromFile();
-				DebugDialog::debug(QString("[migration]   history not in model, loadHistoryFromFile()=%1 path=%2")
-				                   .arg(loaded ? "true" : "false", newPart->path()));
-			}
-			if (newPart->hasHistory()) {
-				QList<HistoryEntry> relevantHistory =
-				    MigrationHandler::getRelevantHistory(oldPart, newPart->history());
-				bool mixed = !requireMix || modulesInSketch.contains(newPart->moduleID());
-				// Automatic triggers need relevant (unseen) entries; a user-initiated update
-				// always shows the dialog so the user can review and swap/skip/silence.
-				bool prompt = mixed && (!relevantHistory.isEmpty() || !requireMix);
-
-				DebugDialog::debug(QString("[migration]   history entries=%1 relevant=%2 mixed=%3 -> prompt=%4")
-				                   .arg(newPart->history().count()).arg(relevantHistory.count())
-				                   .arg(mixed ? "yes" : "no").arg(prompt ? "yes" : "no"));
-
-				if (prompt) {
-					migrationHandler->queueMigration(item, oldPart, newPart, relevantHistory, reason);
-				}
-				// History-bearing parts never fall through to the legacy/direct-swap path.
-				continue;
-			}
+		if (newPart == nullptr) {
+			DebugDialog::debug(QString("[migration] obsolete '%1' module=%2 -> no resolvable replacement")
+			                   .arg(item->instanceTitle(),
+			                        oldPart ? oldPart->moduleID() : QString("<null modelPart>")));
+			rest << item;
+			continue;
 		}
-		rest << item;
+
+		// History lives in the FZP for parts that came from the parts database.
+		if (!newPart->hasHistory()) newPart->loadHistoryFromFile();
+
+		QList<HistoryEntry> relevantHistory =
+		    MigrationHandler::getRelevantHistory(oldPart, newPart->history());
+		QString mode = MigrationHandler::computeEffectiveMode(newPart->history());
+		bool mixed = modulesInSketch.contains(newPart->moduleID());
+
+		bool queue = false;
+		if (mode == "silent") {
+			queue = true;                                   // auto-applied by processMigrations
+		}
+		else if (mode == "forced") {
+			queue = (context != TriggerContext::Drop);      // classic: every load + manual, not mid-drop
+		}
+		else {                                              // "ask" (soft)
+			queue = (context == TriggerContext::ManualUpdate) || (mixed && !relevantHistory.isEmpty());
+		}
+
+		DebugDialog::debug(QString("[migration] obsolete '%1' %2->%3 mode=%4 mixed=%5 relevant=%6 ctx=%7 -> queue=%8")
+		                   .arg(item->instanceTitle(), oldPart->moduleID(), newPart->moduleID(), mode)
+		                   .arg(mixed ? "yes" : "no").arg(relevantHistory.count())
+		                   .arg(int(context)).arg(queue ? "yes" : "no"));
+
+		if (queue) {
+			QString reason;
+			if (context == TriggerContext::ManualUpdate)
+				reason = tr("You chose to update this outdated part.");
+			else if (mode == "forced")
+				reason = tr("This part is outdated. We recommend updating it to the latest version.");
+			else
+				reason = tr("This sketch contains both this part and a newer revision of it. Choose which one to use.");
+
+			migrationHandler->queueMigration(item, oldPart, newPart, relevantHistory, reason);
+		}
 	}
 
 	if (migrationHandler->hasPendingMigrations()) {
@@ -4151,8 +4173,8 @@ void MainWindow::checkDroppedPartMigration() {
 	QList<ItemBase *> obsolete = collectObsoleteAcrossViews();
 	if (obsolete.isEmpty()) return;
 
-	// Only prompt when an obsolete part and its replacement are now mixed in the sketch.
-	routeHistoryMigrations(obsolete, /* requireMix */ true);
+	// Only soft parts mixed with their replacement prompt mid-edit; classic parts wait for the next load.
+	routeHistoryMigrations(obsolete, TriggerContext::Drop);
 }
 
 void MainWindow::swapObsolete() {
@@ -4179,16 +4201,24 @@ void MainWindow::swapObsolete(bool displayFeedback, QList<ItemBase *> & items) {
 		Q_FOREACH (ItemBase * itemBase, items) itemBases.insert(itemBase);
 	}
 
-	// Route history-bearing obsolete parts to the soft Part Migration dialog (always prompt
-	// for a user-initiated update); only the rest are swapped directly below.
-	QList<ItemBase *> rest = routeHistoryMigrations(itemBases.values(), /* requireMix */ false);
-	itemBases = QSet<ItemBase *>(rest.begin(), rest.end());
-	if (itemBases.isEmpty()) return;
+	// Route obsolete parts to the Part Migration dialog (forced/ask) or silent auto-swap;
+	// only parts with no resolvable replacement come back to be reported here.
+	QList<ItemBase *> rest = routeHistoryMigrations(itemBases.values(), TriggerContext::ManualUpdate);
+	if (rest.isEmpty()) return;
+	swapObsoleteDirect(rest, displayFeedback);
+}
+
+// Directly swap each obsolete item to its replacedby target as a single undoable command,
+// porting the special-cased properties (resistance, LED colour). Does NOT route through
+// routeHistoryMigrations, so it is safe to call from the silent auto-swap path without
+// re-queuing. Returns the number of parts updated.
+int MainWindow::swapObsoleteDirect(const QList<ItemBase *> & items, bool displayFeedback) {
+	if (items.isEmpty()) return 0;
 
 	auto* parentCommand = new QUndoCommand();
 	int count = 0;
 	QMap<QString, QString> propsMap;
-	Q_FOREACH (ItemBase * itemBase, itemBases) {
+	Q_FOREACH (ItemBase * itemBase, items) {
 		ModelPart * newModelPart = findReplacedby(itemBase->modelPart());
 		if (newModelPart == nullptr) {
 			FMessageBox::information(
@@ -4201,50 +4231,8 @@ void MainWindow::swapObsolete(bool displayFeedback, QList<ItemBase *> & items) {
 
 		count++;
 		long newID = swapSelectedAuxAux(itemBase, newModelPart->moduleID(), itemBase->viewLayerPlacement(), propsMap, parentCommand);
-		if (itemBase->modelPart()) {
-			// special case for swapping old resistors.
-			QString resistance = itemBase->modelPart()->properties().value("resistance", "");
-			if (!resistance.isEmpty()) {
-				QChar r = resistance.at(resistance.length() - 1);
-				ushort ohm = r.unicode();
-				if (ohm == 8486) {
-					// ends with the ohm symbol
-					resistance.chop(1);
-				}
-			}
-			QString footprint = itemBase->modelPart()->properties().value("footprint", "");
-			if (!resistance.isEmpty() && !footprint.isEmpty()) {
-				new SetResistanceCommand(m_currentGraphicsView, newID, resistance, resistance, footprint, footprint, parentCommand);
-			}
-
-			// special case for swapping LEDs
-			if (newModelPart->moduleID().contains(ModuleIDNames::ColorLEDModuleIDName)) {
-				QString oldColor = itemBase->modelPart()->properties().value("color");
-				QString newColor;
-				if (oldColor.contains("red", Qt::CaseInsensitive)) {
-					newColor = "Red (633nm)";
-				}
-				else if (oldColor.contains("blue", Qt::CaseInsensitive)) {
-					newColor = "Blue (430nm)";
-				}
-				else if (oldColor.contains("yellow", Qt::CaseInsensitive)) {
-					newColor = "Yellow (585nm)";
-				}
-				else if (oldColor.contains("green", Qt::CaseInsensitive)) {
-					newColor = "Green (555nm)";
-				}
-				else if (oldColor.contains("white", Qt::CaseInsensitive)) {
-					newColor = "White (4500K)";
-				}
-
-				if (newColor.length() > 0) {
-					new SetPropCommand(m_currentGraphicsView, newID, "color", newColor, newColor, true, parentCommand);
-				}
-			}
-
-		}
+		portObsoleteSpecialProps(itemBase, newModelPart, newID, parentCommand);
 	}
-
 
 	if (count == 0) {
 		delete parentCommand;
@@ -4254,11 +4242,58 @@ void MainWindow::swapObsolete(bool displayFeedback, QList<ItemBase *> & items) {
 		m_undoStack->push(parentCommand);
 	}
 
-	if (displayFeedback) {
+	if (displayFeedback && count > 0) {
 		FMessageBox::information(this, tr("Fritzing", "dialog title"), tr("Successfully updated %1 part(s).\n"
 		                         "Please check all views for potential side-effects.").arg(count) );
 	}
 	DebugDialog::debug(QString("updated %1 obsolete in %2").arg(count).arg(m_fwFilename));
+	return count;
+}
+
+// Port properties that don't carry over by module-ID swap alone, reusing the legacy
+// obsolete-part special cases. Shared by the direct swap and the Part Migration dialog.
+void MainWindow::portObsoleteSpecialProps(ItemBase * oldItem, ModelPart * newModelPart, long newID, QUndoCommand * parentCommand) {
+	if (oldItem == nullptr || oldItem->modelPart() == nullptr || newModelPart == nullptr) return;
+
+	// special case for swapping old resistors.
+	QString resistance = oldItem->modelPart()->properties().value("resistance", "");
+	if (!resistance.isEmpty()) {
+		QChar r = resistance.at(resistance.length() - 1);
+		ushort ohm = r.unicode();
+		if (ohm == 8486) {
+			// ends with the ohm symbol
+			resistance.chop(1);
+		}
+	}
+	QString footprint = oldItem->modelPart()->properties().value("footprint", "");
+	if (!resistance.isEmpty() && !footprint.isEmpty()) {
+		new SetResistanceCommand(m_currentGraphicsView, newID, resistance, resistance, footprint, footprint, parentCommand);
+	}
+
+	// special case for swapping LEDs
+	if (newModelPart->moduleID().contains(ModuleIDNames::ColorLEDModuleIDName)) {
+		QString oldColor = oldItem->modelPart()->properties().value("color");
+		QString newColor;
+		if (oldColor.contains("red", Qt::CaseInsensitive)) {
+			newColor = "Red (633nm)";
+		}
+		else if (oldColor.contains("blue", Qt::CaseInsensitive)) {
+			newColor = "Blue (430nm)";
+		}
+		else if (oldColor.contains("yellow", Qt::CaseInsensitive)) {
+			newColor = "Yellow (585nm)";
+		}
+		else if (oldColor.contains("green", Qt::CaseInsensitive)) {
+			newColor = "Green (555nm)";
+		}
+		else if (oldColor.contains("white", Qt::CaseInsensitive)) {
+			newColor = "White (4500K)";
+		}
+
+		if (newColor.length() > 0) {
+			new SetPropCommand(m_currentGraphicsView, newID, "color", newColor, newColor, true, parentCommand);
+		}
+	}
 }
 
 void MainWindow::throwFakeException() {

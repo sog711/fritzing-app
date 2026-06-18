@@ -25,6 +25,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QList>
 #include <QString>
 #include <QDate>
+#include <QPointer>
 
 #include "../model/modelpartshared.h"
 
@@ -48,6 +49,7 @@ struct MigrationInfo {
 	QString reason;         // why the dialog is shown (e.g. mixed versions)
 	bool decided = false;   // user has already chosen for this part
 	bool silenced = false;  // user chose "silence"
+	int swapStackIndex = -1; // undo-stack index right after this part's preview swap (-1 = none)
 };
 
 class MigrationHandler : public QObject
@@ -76,6 +78,7 @@ public:
 
 private Q_SLOTS:
 	void handlePendingMigrationDialog();
+	void onDialogClosed();
 
 private:
 	void createMigrationDialog();
@@ -83,9 +86,14 @@ private:
 	void centerAndZoomOnItem(ItemBase* item);
 
 	void swapCurrentPart();
+	void swapToNew(MigrationInfo& info);
+	void revertToOld(MigrationInfo& info);
+	bool canUndoOwnSwap(int swapStackIndex) const;
+	qint64 findSwappedItemId(SketchWidget* view, const QString& instanceTitle, qint64 fallback) const;
 	void confirmCurrentMigration();
 	void skipCurrentMigration();
 	void silenceCurrentMigration();
+	void updateAllMigrations();
 	void goToPreviousMigration();
 	void goToNextMigration();
 	void revertCurrentPreviewIfTransient();
@@ -99,7 +107,7 @@ private:
 	int m_currentIndex;
 
 	// Dialog widgets
-	QDialog* m_dialog;
+	QPointer<QDialog> m_dialog;
 	QLabel* m_counterLabel;
 	QLabel* m_titleLabel;
 	QLabel* m_reasonLabel;
@@ -108,6 +116,7 @@ private:
 	QPushButton* m_confirmButton;
 	QPushButton* m_skipButton;
 	QPushButton* m_silenceButton;
+	QPushButton* m_updateAllButton;
 	QPushButton* m_prevButton;
 	QPushButton* m_nextButton;
 };

@@ -2089,7 +2089,9 @@ void FApplication::runExampleService(QDir & dir) {
 		else {
 			QList<ItemBase *> items = mainWindow->selectAllObsolete(false);
 			if (items.count() > 0) {
-				mainWindow->swapObsolete(false, items);
+				// Batch conversion: swap directly (no Part Migration dialog, which would be
+				// deferred past the save below) and synchronously upgrade every obsolete part.
+				mainWindow->swapObsoleteDirect(items, false);
 			}
 			mainWindow->saveAsAux(path);    //   path + "z"
 			mainWindow->setCloseSilently(true);

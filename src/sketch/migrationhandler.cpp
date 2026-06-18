@@ -25,6 +25,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../mainwindow/mainwindow.h"
 #include "../debugdialog.h"
 #include "../waitpushundostack.h"
+#include "../commands.h"
 
 #include <QDialog>
 #include <QVBoxLayout>
@@ -65,7 +66,10 @@ void MigrationHandler::queueMigration(ItemBase* itemBase, ModelPart* oldPart,
 	info.newModuleID = newPart->moduleID();
 	info.instanceTitle = itemBase->instanceTitle();
 	info.relevantHistory = history;
-	info.effectiveMode = computeEffectiveMode(history);
+	// Classify from the full history (the part's nature), not just the unseen subset:
+	// an all-silent part with no unseen entries must still resolve to "silent", and a
+	// history-less part to "forced".
+	info.effectiveMode = computeEffectiveMode(newPart != nullptr ? newPart->history() : history);
 	info.isSwapped = false;
 	info.reason = reason;
 
@@ -107,14 +111,19 @@ void MigrationHandler::processMigrations()
 		}
 	}
 
-	// Auto-apply all silent migrations as a single undoable command, with no dialog
-	// and no feedback popup. swapObsolete() swaps each item to its replacedby target
-	// and ports the special-cased properties (resistance, LED color), reusing the
-	// exact logic of the legacy obsolete-part flow.
+	// Auto-apply all silent migrations as a single undoable command, with no dialog and no
+	// feedback popup. Use swapObsoleteDirect() (not swapObsolete()) so we don't re-enter
+	// routeHistoryMigrations and re-queue these same items. It ports the special-cased
+	// properties (resistance, LED colour), reusing the legacy obsolete-part flow.
 	if (!silentItems.isEmpty()) {
 		MainWindow* mainWindow = findMainWindow();
 		if (mainWindow != nullptr) {
-			mainWindow->swapObsolete(false, silentItems);
+			mainWindow->swapObsoleteDirect(silentItems, false);
+			// Silent swaps change the sketch without a dialog; tell the user non-modally.
+			// (The new part's history remains visible in the Inspector "Revisions" section.)
+			mainWindow->statusMessage(
+			    tr("%n part(s) were automatically updated to a newer version", "", silentItems.count()),
+			    5000);
 		} else {
 			DebugDialog::debug("MigrationHandler: Could not find MainWindow for silent migration");
 		}
@@ -141,14 +150,15 @@ void MigrationHandler::clearPendingMigrations()
 QList<HistoryEntry> MigrationHandler::getRelevantHistory(ModelPart* instancePart,
                                                          const QList<HistoryEntry>& allHistory)
 {
-	// Get silencedDate from instance if available
+	// Baseline = the part's stored silence date if present, else the part's own date. Guard the
+	// parse: an unparseable silencedDate must fall back to the part date, not leave the baseline
+	// invalid (which would make every entry look unseen and re-prompt forever).
 	QString silencedDateStr = instancePart->localProp("silencedDate").toString();
 	QDate baselineDate;
-
 	if (!silencedDateStr.isEmpty()) {
 		baselineDate = QDate::fromString(silencedDateStr, Qt::ISODate);
-	} else {
-		// Use old part's date as baseline
+	}
+	if (!baselineDate.isValid()) {
 		baselineDate = instancePart->date();
 	}
 
@@ -169,6 +179,10 @@ QList<HistoryEntry> MigrationHandler::getRelevantHistory(ModelPart* instancePart
 
 QString MigrationHandler::computeEffectiveMode(const QList<HistoryEntry>& history)
 {
+	// No migration notes at all → classic hard obsoletion: prompt on every load.
+	// (Only an explicit mode="silent" history entry opts a part into auto-swap.)
+	if (history.isEmpty()) return "forced";
+
 	// Most restrictive mode wins: forced > ask > silent
 	bool hasForced = false;
 	bool hasAsk = false;
@@ -190,23 +204,31 @@ void MigrationHandler::handlePendingMigrationDialog()
 	createMigrationDialog();
 	updateDialogForCurrentMigration();
 
-	m_dialog->show();
-	m_dialog->raise();
-	m_dialog->activateWindow();
+	if (m_dialog) {
+		m_dialog->show();
+		m_dialog->raise();
+		m_dialog->activateWindow();
+	}
 }
 
 void MigrationHandler::createMigrationDialog()
 {
+	// Defensive: if a previous dialog somehow lingers, tear it down without triggering our
+	// finished handler (which would wipe the fresh migration session we're about to show).
 	if (m_dialog) {
+		disconnect(m_dialog, nullptr, this, nullptr);
 		m_dialog->close();
-		m_dialog->deleteLater();
 	}
 
 	m_dialog = new QDialog(qobject_cast<QWidget*>(m_sketchWidget));
 	m_dialog->setWindowTitle(tr("Part Migration"));
+	m_dialog->setObjectName("partMigrationDialog");   // for GUI test probes
 	m_dialog->setModal(false);
 	m_dialog->resize(500, 400);
 	m_dialog->setAttribute(Qt::WA_DeleteOnClose);
+	// Closing by any means (ESC, window close, or completion) runs cleanup. m_dialog is a
+	// QPointer, so it auto-nulls when the dialog is deleted — no dangling reuse on the next open.
+	connect(m_dialog, &QDialog::finished, this, &MigrationHandler::onDialogClosed);
 
 	QVBoxLayout* layout = new QVBoxLayout(m_dialog);
 
@@ -252,6 +274,12 @@ void MigrationHandler::createMigrationDialog()
 	m_skipButton = new QPushButton(tr("Skip"), m_dialog);
 	m_silenceButton = new QPushButton(tr("Silence"), m_dialog);
 
+	// Stable object names so GUI tests can find these buttons regardless of label translation.
+	m_swapButton->setObjectName("migrationSwapButton");
+	m_confirmButton->setObjectName("migrationConfirmButton");
+	m_skipButton->setObjectName("migrationSkipButton");
+	m_silenceButton->setObjectName("migrationSilenceButton");
+
 	// Tooltips (the swap button's is set per-state in updateDialogForCurrentMigration).
 	m_confirmButton->setToolTip(tr("Update to the new version and continue to the next part"));
 	m_skipButton->setToolTip(tr("Keep the old version for now and continue (you may be asked again later)"));
@@ -266,13 +294,20 @@ void MigrationHandler::createMigrationDialog()
 
 	layout->addLayout(actionLayout);
 
-	// Navigation between parts (only shown when there are several)
+	// Navigation between parts (only shown when there are several), with a bulk "Update all".
 	QHBoxLayout* navLayout = new QHBoxLayout();
 	m_prevButton = new QPushButton(tr("Previous"), m_dialog);
 	m_nextButton = new QPushButton(tr("Next"), m_dialog);
+	m_updateAllButton = new QPushButton(tr("Update all"), m_dialog);
+	m_prevButton->setObjectName("migrationPrevButton");
+	m_nextButton->setObjectName("migrationNextButton");
+	m_updateAllButton->setObjectName("migrationUpdateAllButton");
 	m_prevButton->setToolTip(tr("Go back to the previous part"));
 	m_nextButton->setToolTip(tr("Go to the next part"));
+	m_updateAllButton->setToolTip(tr("Update every outdated part in this list to its newest version"));
 	navLayout->addWidget(m_prevButton);
+	navLayout->addStretch();
+	navLayout->addWidget(m_updateAllButton);
 	navLayout->addStretch();
 	navLayout->addWidget(m_nextButton);
 	layout->addLayout(navLayout);
@@ -282,6 +317,7 @@ void MigrationHandler::createMigrationDialog()
 	connect(m_confirmButton, &QPushButton::clicked, this, &MigrationHandler::confirmCurrentMigration);
 	connect(m_skipButton, &QPushButton::clicked, this, &MigrationHandler::skipCurrentMigration);
 	connect(m_silenceButton, &QPushButton::clicked, this, &MigrationHandler::silenceCurrentMigration);
+	connect(m_updateAllButton, &QPushButton::clicked, this, &MigrationHandler::updateAllMigrations);
 	connect(m_prevButton, &QPushButton::clicked, this, &MigrationHandler::goToPreviousMigration);
 	connect(m_nextButton, &QPushButton::clicked, this, &MigrationHandler::goToNextMigration);
 }
@@ -356,20 +392,23 @@ void MigrationHandler::updateDialogForCurrentMigration()
 	m_swapButton->setToolTip(info.isSwapped
 	                         ? tr("Revert the preview and show the old version again")
 	                         : tr("Preview the new version in the sketch (you can switch back)"));
+	// Silence (persistent "don't ask again") is offered only for soft "ask" migrations;
+	// classic "forced" parts must keep prompting, so they get Update/Skip only.
 	m_silenceButton->setVisible(info.effectiveMode == "ask");
 
-	// A part that has already been decided is shown read-only; navigate to an
-	// undecided part to act, or use Previous/Next to review earlier decisions.
-	bool actionable = !info.decided;
-	m_swapButton->setEnabled(actionable);
-	m_confirmButton->setEnabled(actionable);
-	m_skipButton->setEnabled(actionable);
-	m_silenceButton->setEnabled(actionable);
+	// Every part stays actionable, including ones already decided: revisiting a part and
+	// changing the choice is handled by the swap/revert logic (clean undo when possible,
+	// otherwise a fresh swap), so there is no read-only state.
+	m_swapButton->setEnabled(true);
+	m_confirmButton->setEnabled(true);
+	m_skipButton->setEnabled(true);
+	m_silenceButton->setEnabled(true);
 
 	// Navigation between parts: only when there are several to step through.
 	int count = m_pendingMigrations.size();
 	m_prevButton->setVisible(count > 1);
 	m_nextButton->setVisible(count > 1);
+	m_updateAllButton->setVisible(count > 1);
 	m_prevButton->setEnabled(m_currentIndex > 0);
 	m_nextButton->setEnabled(m_currentIndex < count - 1);
 
@@ -405,55 +444,100 @@ void MigrationHandler::swapCurrentPart()
 	if (m_currentIndex < 0 || m_currentIndex >= m_pendingMigrations.size()) return;
 
 	MigrationInfo& info = m_pendingMigrations[m_currentIndex];
+	if (info.isSwapped) revertToOld(info);
+	else swapToNew(info);
 
+	updateDialogForCurrentMigration();
+}
+
+qint64 MigrationHandler::findSwappedItemId(SketchWidget* view, const QString& instanceTitle, qint64 fallback) const
+{
+	// After a swap the new item is selected in its view; identify it by instance title.
+	Q_FOREACH (QGraphicsItem* gi, view->scene()->selectedItems()) {
+		ItemBase* it = dynamic_cast<ItemBase*>(gi);
+		if (it != nullptr && it->instanceTitle() == instanceTitle) return it->id();
+	}
+	return fallback;
+}
+
+void MigrationHandler::swapToNew(MigrationInfo& info)
+{
 	MainWindow* mainWindow = findMainWindow();
 	if (!mainWindow) {
 		DebugDialog::debug("MigrationHandler: Could not find MainWindow");
 		return;
 	}
+	ItemBase* item = currentItem();
+	if (!item) {
+		DebugDialog::debug("MigrationHandler: Could not find item for swap");
+		return;
+	}
+	// Work in the view that actually contains the part (it may not be PCB).
+	SketchWidget* view = mainWindow->sketchWidgetForView(item->viewID());
+	if (view == nullptr) return;
 
-	if (info.isSwapped) {
-		// Currently showing new part, undo to get back to old.
-		// The undo stack is shared across all views, so undoing here is view-independent.
-		if (m_sketchWidget->undoStack()) {
-			m_sketchWidget->undoStack()->undo();
-		}
-		info.itemId = info.originalItemId;  // Restore original item ID
-		info.isSwapped = false;
-	} else {
-		// Currently showing old part, swap to new
+	// Remember the old item so a clean undo can restore exactly it.
+	info.originalItemId = item->id();
+
+	// swapSelectedAux works on the current selection.
+	view->scene()->clearSelection();
+	item->setSelected(true);
+
+	QMap<QString, QString> propsMap;
+	mainWindow->swapSelectedAux(item, info.newModuleID, false, item->viewLayerPlacement(), propsMap);
+
+	// One top-level command was pushed; remember where, so we can tell later whether our swap
+	// is still safely undoable or whether the user has pushed real commands on top of it.
+	info.swapStackIndex = m_sketchWidget->undoStack() ? m_sketchWidget->undoStack()->index() : -1;
+	info.itemId = findSwappedItemId(view, info.instanceTitle, info.itemId);
+	info.isSwapped = true;
+}
+
+bool MigrationHandler::canUndoOwnSwap(int swapStackIndex) const
+{
+	// Our swap is safe to undo only if it's still effectively on top: nothing was pushed since,
+	// or the only commands pushed since are selection changes (no real edit). Anything else means
+	// the user made edits we must not rewind, so the caller should swap forward instead.
+	if (swapStackIndex < 0) return false;
+	WaitPushUndoStack* stack = m_sketchWidget->undoStack();
+	if (stack == nullptr) return false;
+	int idx = stack->index();
+	if (idx < swapStackIndex) return false;   // user already undid past our swap
+	for (int i = swapStackIndex; i < idx; ++i) {
+		if (dynamic_cast<const SelectItemCommand*>(stack->command(i)) == nullptr) return false;
+	}
+	return true;
+}
+
+void MigrationHandler::revertToOld(MigrationInfo& info)
+{
+	WaitPushUndoStack* stack = m_sketchWidget->undoStack();
+
+	if (canUndoOwnSwap(info.swapStackIndex) && stack != nullptr) {
+		// Undo any selection-only commands stacked on top of our swap, then the swap itself.
+		int steps = stack->index() - info.swapStackIndex + 1;
+		for (int i = 0; i < steps; ++i) stack->undo();
+		info.itemId = info.originalItemId;   // undo restores the original old item (same id)
+	}
+	else {
+		// Real commands intervened (or the swap is gone): don't rewind history. Swap the part
+		// forward from new back to old as a fresh, independent command.
+		MainWindow* mainWindow = findMainWindow();
 		ItemBase* item = currentItem();
-		if (!item) {
-			DebugDialog::debug("MigrationHandler: Could not find item for swap");
-			return;
-		}
-
-		// Work in the view that actually contains the part (it may not be PCB).
-		SketchWidget* view = mainWindow->sketchWidgetForView(item->viewID());
-		if (view == nullptr) return;
-
-		// Select the item before swap (swapSelectedAux works on selection)
-		view->scene()->clearSelection();
-		item->setSelected(true);
-
-		QMap<QString, QString> propsMap;
-		mainWindow->swapSelectedAux(item, info.newModuleID, false,
-		                            item->viewLayerPlacement(), propsMap);
-
-		// After swap, the new item should be selected - get its ID (same view)
-		QList<QGraphicsItem*> selected = view->scene()->selectedItems();
-		for (QGraphicsItem* gi : selected) {
-			ItemBase* newItem = dynamic_cast<ItemBase*>(gi);
-			if (newItem && newItem->instanceTitle() == info.instanceTitle) {
-				info.itemId = newItem->id();
-				break;
+		if (mainWindow != nullptr && item != nullptr) {
+			SketchWidget* view = mainWindow->sketchWidgetForView(item->viewID());
+			if (view != nullptr) {
+				view->scene()->clearSelection();
+				item->setSelected(true);
+				QMap<QString, QString> propsMap;
+				mainWindow->swapSelectedAux(item, info.oldModuleID, false, item->viewLayerPlacement(), propsMap);
+				info.itemId = findSwappedItemId(view, info.instanceTitle, info.itemId);
 			}
 		}
-
-		info.isSwapped = true;
 	}
 
-	updateDialogForCurrentMigration();
+	info.swapStackIndex = -1;
+	info.isSwapped = false;
 }
 
 void MigrationHandler::confirmCurrentMigration()
@@ -462,12 +546,13 @@ void MigrationHandler::confirmCurrentMigration()
 
 	MigrationInfo& info = m_pendingMigrations[m_currentIndex];
 
-	// If not already swapped, perform the swap first
+	// Commit the new version (swap now if the user didn't preview it first).
 	if (!info.isSwapped) {
-		swapCurrentPart();
+		swapToNew(info);
 	}
 
 	info.decided = true;
+	info.silenced = false;
 	// Move to the next undecided part (closes when all are decided)
 	processNextMigration();
 }
@@ -478,12 +563,13 @@ void MigrationHandler::skipCurrentMigration()
 
 	MigrationInfo& info = m_pendingMigrations[m_currentIndex];
 
-	// If currently showing new part, swap back to old
+	// If currently previewing the new part, revert to the old version.
 	if (info.isSwapped) {
-		swapCurrentPart();
+		revertToOld(info);
 	}
 
 	info.decided = true;
+	info.silenced = false;
 	// Move to the next undecided part (closes when all are decided)
 	processNextMigration();
 }
@@ -497,26 +583,36 @@ void MigrationHandler::silenceCurrentMigration()
 	// Can only silence "ask" mode
 	if (info.effectiveMode != "ask") return;
 
-	// If currently showing new part, swap back to old (silence means keep old)
+	// If currently previewing the new part, revert to the old version (silence means keep old).
 	if (info.isSwapped) {
-		swapCurrentPart();
+		revertToOld(info);
 	}
 
-	// Set silencedDate on the instance to the latest history entry date
-	QString latestDate;
+	// Baseline the silence at the newest relevant entry, stored ISO-normalised so it round-trips
+	// and parses back reliably in getRelevantHistory.
+	QDate latest;
 	for (const HistoryEntry& entry : info.relevantHistory) {
-		if (latestDate.isEmpty() || entry.date > latestDate) {
-			latestDate = entry.date;
-		}
+		QDate d = entry.parsedDate();
+		if (d.isValid() && (!latest.isValid() || d > latest)) latest = d;
 	}
 
-	if (!latestDate.isEmpty()) {
+	if (latest.isValid()) {
 		ItemBase* item = currentItem();
 		if (item && item->modelPart()) {
-			item->modelPart()->setLocalProp("silencedDate", latestDate);
-			DebugDialog::debug(QString("Set silencedDate to %1 for %2")
-			                       .arg(latestDate)
-			                       .arg(info.instanceTitle));
+			QString isoDate = latest.toString(Qt::ISODate);
+			QString oldDate = item->modelPart()->localProp("silencedDate").toString();
+			MainWindow* mainWindow = findMainWindow();
+			SketchWidget* view = (mainWindow != nullptr) ? mainWindow->sketchWidgetForView(item->viewID()) : nullptr;
+			if (view != nullptr && view->undoStack() != nullptr) {
+				// Push as a command so the sketch is marked modified (and prompts to save) and
+				// the choice is undoable. SetPropCommand routes to the same modelPart localProp.
+				auto* cmd = new SetPropCommand(view, item->id(), "silencedDate", oldDate, isoDate, false, nullptr);
+				cmd->setText(tr("Silence update reminder for %1").arg(info.instanceTitle));
+				view->undoStack()->push(cmd);
+			} else {
+				item->modelPart()->setLocalProp("silencedDate", isoDate);
+			}
+			DebugDialog::debug(QString("Set silencedDate to %1 for %2").arg(isoDate, info.instanceTitle));
 		}
 	}
 
@@ -547,14 +643,9 @@ void MigrationHandler::revertCurrentPreviewIfTransient()
 	if (m_currentIndex < 0 || m_currentIndex >= m_pendingMigrations.size()) return;
 
 	MigrationInfo& info = m_pendingMigrations[m_currentIndex];
-	// Only undo an undecided live preview (whose swap is the top undo command). A part
-	// that has been decided keeps its committed state.
+	// Only revert an undecided live preview. A part that has been decided keeps its committed state.
 	if (info.isSwapped && !info.decided) {
-		if (m_sketchWidget->undoStack()) {
-			m_sketchWidget->undoStack()->undo();
-		}
-		info.itemId = info.originalItemId;
-		info.isSwapped = false;
+		revertToOld(info);
 	}
 }
 
@@ -574,14 +665,64 @@ void MigrationHandler::goToNextMigration()
 	updateDialogForCurrentMigration();
 }
 
+void MigrationHandler::updateAllMigrations()
+{
+	MainWindow* mainWindow = findMainWindow();
+	if (mainWindow == nullptr) { closeDialog(); return; }
+
+	// Normalise every part back to its old version (reverting any live preview), then swap all
+	// that are still obsolete to their new version in a single undoable command.
+	QList<ItemBase*> toSwap;
+	for (int i = 0; i < m_pendingMigrations.size(); ++i) {
+		m_currentIndex = i;
+		MigrationInfo& info = m_pendingMigrations[i];
+		if (info.isSwapped && !info.decided) revertToOld(info);
+		ItemBase* item = currentItem(i);
+		if (item != nullptr && item->isObsolete()) toSwap << item;
+		info.decided = true;
+		info.silenced = false;
+	}
+
+	if (!toSwap.isEmpty()) {
+		mainWindow->swapObsoleteDirect(toSwap, false);
+	}
+	closeDialog();
+}
+
 void MigrationHandler::closeDialog()
 {
+	// Programmatic close (completion / Update all). A non-modal QDialog::close() doesn't reliably
+	// emit finished(), so disconnect our handler and run the cleanup ourselves. WA_DeleteOnClose
+	// still deletes the dialog; m_dialog (QPointer) auto-nulls afterwards.
 	if (m_dialog) {
+		disconnect(m_dialog, nullptr, this, nullptr);
 		m_dialog->close();
-		m_dialog = nullptr;
 	}
+	onDialogClosed();
+}
+
+void MigrationHandler::onDialogClosed()
+{
+	// The dialog closed (ESC, window close, "Update all", or normal completion). Revert any
+	// still-undecided live preview, then drop the session state. The dialog deletes itself
+	// (WA_DeleteOnClose) and m_dialog (a QPointer) auto-nulls, so a later open starts clean.
+	revertCurrentPreviewIfTransient();
 	m_pendingMigrations.clear();
 	m_currentIndex = 0;
+
+	// These widgets are children of the dialog and are being destroyed with it; drop the
+	// dangling raw pointers so nothing touches them before the next createMigrationDialog().
+	m_counterLabel = nullptr;
+	m_titleLabel = nullptr;
+	m_reasonLabel = nullptr;
+	m_historyLabel = nullptr;
+	m_swapButton = nullptr;
+	m_confirmButton = nullptr;
+	m_skipButton = nullptr;
+	m_silenceButton = nullptr;
+	m_updateAllButton = nullptr;
+	m_prevButton = nullptr;
+	m_nextButton = nullptr;
 }
 
 MainWindow* MigrationHandler::findMainWindow() const
