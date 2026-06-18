@@ -218,7 +218,8 @@ void MigrationHandler::handlePendingMigrationDialog()
 
 	if (m_dialog) {
 		m_dialog->show();
-		m_dialog->raise();   // on top for visibility, but no activateWindow(): don't steal focus
+		m_dialog->raise();
+		m_dialog->activateWindow();
 	}
 }
 
@@ -231,16 +232,17 @@ void MigrationHandler::createMigrationDialog()
 		m_dialog->close();
 	}
 
-	m_dialog = new QDialog(qobject_cast<QWidget*>(m_sketchWidget));
+	// Parent to the MainWindow (not the sketch view): Fritzing sets its stylesheet per-MainWindow
+	// rather than app-wide, so this makes the dialog inherit the app styling, and it centres on
+	// the main window. Fall back to the sketch widget if the window can't be resolved.
+	MainWindow* parentWindow = findMainWindow();
+	m_dialog = new QDialog(parentWindow != nullptr ? static_cast<QWidget*>(parentWindow)
+	                                               : qobject_cast<QWidget*>(m_sketchWidget));
 	m_dialog->setWindowTitle(tr("Part Migration"));
 	m_dialog->setObjectName("partMigrationDialog");   // for GUI test probes
 	m_dialog->setModal(false);
 	m_dialog->resize(500, 400);
 	m_dialog->setAttribute(Qt::WA_DeleteOnClose);
-	// Show on top but without stealing keyboard focus / the active-window state from the main
-	// window: it pops up on load and otherwise hijacks focus (and breaks automated startup that
-	// checks the active window's geometry). The user can still click it; it stays interactive.
-	m_dialog->setAttribute(Qt::WA_ShowWithoutActivating);
 	// Closing by any means (ESC, window close, or completion) runs cleanup. m_dialog is a
 	// QPointer, so it auto-nulls when the dialog is deleted — no dangling reuse on the next open.
 	connect(m_dialog, &QDialog::finished, this, &MigrationHandler::onDialogClosed);

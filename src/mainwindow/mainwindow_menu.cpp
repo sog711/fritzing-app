@@ -33,6 +33,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "mainwindow.h"
 #include "../debugdialog.h"
+#include "../testing/FTesting.h"
 #include "../waitpushundostack.h"
 #include "../commands.h"
 #include "../partseditor/pemainwindow.h"
@@ -489,7 +490,11 @@ bool MainWindow::mainLoad(const QString & fileName, const QString & displayName,
 	}
 	disconnect(migratePartLabelOffsetConnection);
 
-	if (!m_useOldSchematic && checkObsolete) {
+	// Skip the on-load auto-prompt under the GUI test harness (-ftesting): a dialog that pops up
+	// during startup races the harness's window setup. Tests drive migration explicitly instead
+	// (manual "Update selected parts" / the Inspector link); the manual and drop triggers, and
+	// real user runs, are unaffected.
+	if (!m_useOldSchematic && checkObsolete && !FTesting::getInstance()->enabled()) {
 		// On load, route every obsolete part through the Part Migration dialog (or silent
 		// auto-swap). Classic (forced) parts prompt on every load; soft (ask) parts only when
 		// mixed with their replacement. Parts with no resolvable replacement are left as-is.
