@@ -32,6 +32,10 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QPushButton>
+#include <QRadioButton>
+#include <QButtonGroup>
+#include <QGroupBox>
+#include <QSignalBlocker>
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QFont>
@@ -46,10 +50,11 @@ MigrationHandler::MigrationHandler(SketchWidget* sketchWidget, QObject* parent)
 	, m_titleLabel(nullptr)
 	, m_reasonLabel(nullptr)
 	, m_historyLabel(nullptr)
-	, m_swapButton(nullptr)
-	, m_confirmButton(nullptr)
-	, m_skipButton(nullptr)
+	, m_versionGroup(nullptr)
+	, m_oldRadio(nullptr)
+	, m_newRadio(nullptr)
 	, m_silenceButton(nullptr)
+	, m_updateAllButton(nullptr)
 	, m_prevButton(nullptr)
 	, m_nextButton(nullptr)
 {
@@ -65,6 +70,12 @@ void MigrationHandler::queueMigration(ItemBase* itemBase, ModelPart* oldPart,
 	info.oldModuleID = oldPart->moduleID();
 	info.newModuleID = newPart->moduleID();
 	info.instanceTitle = itemBase->instanceTitle();
+	info.oldTitle = oldPart->title();
+	info.oldVersion = oldPart->version();
+	if (newPart != nullptr) {
+		info.newTitle = newPart->title();
+		info.newVersion = newPart->version();
+	}
 	info.relevantHistory = history;
 	// Classify from the full history (the part's nature), not just the unseen subset:
 	// an all-silent part with no unseen entries must still resolve to "silent", and a
@@ -266,29 +277,30 @@ void MigrationHandler::createMigrationDialog()
 
 	layout->addStretch();
 
+	// Version chooser: two radios (old / new), each labelled with the part name + version.
+	// Toggling swaps the part live; it is preset to the currently active version per part.
+	auto* versionBox = new QGroupBox(tr("Version"), m_dialog);
+	auto* versionLayout = new QVBoxLayout(versionBox);
+	m_oldRadio = new QRadioButton(versionBox);
+	m_newRadio = new QRadioButton(versionBox);
+	m_oldRadio->setObjectName("migrationOldRadio");
+	m_newRadio->setObjectName("migrationNewRadio");
+	m_versionGroup = new QButtonGroup(versionBox);   // owned by the dialog, dies with it
+	m_versionGroup->setExclusive(true);
+	m_versionGroup->addButton(m_oldRadio);
+	m_versionGroup->addButton(m_newRadio);
+	versionLayout->addWidget(m_oldRadio);
+	versionLayout->addWidget(m_newRadio);
+	layout->addWidget(versionBox);
+
 	// Action buttons
 	QHBoxLayout* actionLayout = new QHBoxLayout();
 
-	m_swapButton = new QPushButton(tr("Swap to New"), m_dialog);
-	m_confirmButton = new QPushButton(tr("Confirm"), m_dialog);
-	m_skipButton = new QPushButton(tr("Skip"), m_dialog);
 	m_silenceButton = new QPushButton(tr("Silence"), m_dialog);
-
-	// Stable object names so GUI tests can find these buttons regardless of label translation.
-	m_swapButton->setObjectName("migrationSwapButton");
-	m_confirmButton->setObjectName("migrationConfirmButton");
-	m_skipButton->setObjectName("migrationSkipButton");
 	m_silenceButton->setObjectName("migrationSilenceButton");
-
-	// Tooltips (the swap button's is set per-state in updateDialogForCurrentMigration).
-	m_confirmButton->setToolTip(tr("Update to the new version and continue to the next part"));
-	m_skipButton->setToolTip(tr("Keep the old version for now and continue (you may be asked again later)"));
 	m_silenceButton->setToolTip(tr("Keep the old version and don't ask about these changes again"));
 
 	actionLayout->addStretch();
-	actionLayout->addWidget(m_swapButton);
-	actionLayout->addWidget(m_confirmButton);
-	actionLayout->addWidget(m_skipButton);
 	actionLayout->addWidget(m_silenceButton);
 	actionLayout->addStretch();
 
@@ -313,9 +325,7 @@ void MigrationHandler::createMigrationDialog()
 	layout->addLayout(navLayout);
 
 	// Connect buttons
-	connect(m_swapButton, &QPushButton::clicked, this, &MigrationHandler::swapCurrentPart);
-	connect(m_confirmButton, &QPushButton::clicked, this, &MigrationHandler::confirmCurrentMigration);
-	connect(m_skipButton, &QPushButton::clicked, this, &MigrationHandler::skipCurrentMigration);
+	connect(m_newRadio, &QRadioButton::toggled, this, &MigrationHandler::onVersionToggled);
 	connect(m_silenceButton, &QPushButton::clicked, this, &MigrationHandler::silenceCurrentMigration);
 	connect(m_updateAllButton, &QPushButton::clicked, this, &MigrationHandler::updateAllMigrations);
 	connect(m_prevButton, &QPushButton::clicked, this, &MigrationHandler::goToPreviousMigration);
@@ -329,13 +339,20 @@ void MigrationHandler::updateDialogForCurrentMigration()
 		return;
 	}
 
-	const MigrationInfo& info = m_pendingMigrations[m_currentIndex];
-	ItemBase* item = currentItem();
+	MigrationInfo& info = m_pendingMigrations[m_currentIndex];
 
+	// First time we land on a part, default to the new version (swap live). After that the part
+	// is "visited", so navigating away and back keeps whatever the user last chose.
+	if (!info.visited) {
+		info.visited = true;
+		if (currentItem() != nullptr) swapToNew(info);
+	}
+
+	ItemBase* item = currentItem();
 	if (!item) {
 		DebugDialog::debug("MigrationHandler: Could not find item for migration");
 		// Mark it decided so the wrap-around advance doesn't loop back to it.
-		m_pendingMigrations[m_currentIndex].decided = true;
+		info.decided = true;
 		processNextMigration();
 		return;
 	}
@@ -369,39 +386,54 @@ void MigrationHandler::updateDialogForCurrentMigration()
 	m_reasonLabel->setText(info.reason);
 	m_reasonLabel->setVisible(!info.reason.isEmpty());
 
-	// Update history entries
-	QString historyHtml = QString("<p><b>%1</b></p>").arg(tr("Changes since your version:"));
-	for (const HistoryEntry& entry : info.relevantHistory) {
-		QString modeTag;
-		if (entry.isForced()) {
-			modeTag = QString(" <span style='color: red;'>[%1]</span>").arg(tr("REQUIRED"));
-		} else if (entry.isSilent()) {
-			modeTag = QString(" <span style='color: gray;'>[%1]</span>").arg(tr("AUTO"));
+	// Content area: the change notes, or — when there are none — the names (if they differ)
+	// plus a hint to compare the two versions visually across the views.
+	QString contentHtml;
+	if (!info.relevantHistory.isEmpty()) {
+		contentHtml = QString("<p><b>%1</b></p>").arg(tr("Changes since your version:"));
+		for (const HistoryEntry& entry : info.relevantHistory) {
+			QString modeTag;
+			if (entry.isForced()) {
+				modeTag = QString(" <span style='color: red;'>[%1]</span>").arg(tr("REQUIRED"));
+			} else if (entry.isSilent()) {
+				modeTag = QString(" <span style='color: gray;'>[%1]</span>").arg(tr("AUTO"));
+			}
+
+			contentHtml += QString("<p><b>%1</b> (%2):%3<br/>%4</p>")
+			                   .arg(entry.date.toHtmlEscaped())
+			                   .arg(entry.author.toHtmlEscaped())
+			                   .arg(modeTag)
+			                   .arg(entry.description.toHtmlEscaped());
 		}
-
-		historyHtml += QString("<p><b>%1</b> (%2):%3<br/>%4</p>")
-		                   .arg(entry.date)
-		                   .arg(entry.author)
-		                   .arg(modeTag)
-		                   .arg(entry.description);
+	} else {
+		if (!info.newTitle.isEmpty() && info.newTitle != info.oldTitle) {
+			contentHtml += QString("<p>%1 &rarr; %2</p>")
+			                   .arg(info.oldTitle.toHtmlEscaped(), info.newTitle.toHtmlEscaped());
+		}
+		contentHtml += QString("<p><i>%1</i></p>").arg(
+		    tr("No change notes are available. Compare the old and new version visually in the "
+		       "Breadboard, Schematic and PCB views before deciding."));
 	}
-	m_historyLabel->setText(historyHtml);
+	m_historyLabel->setText(contentHtml);
 
-	// Update button states
-	m_swapButton->setText(info.isSwapped ? tr("Swap to Old") : tr("Swap to New"));
-	m_swapButton->setToolTip(info.isSwapped
-	                         ? tr("Revert the preview and show the old version again")
-	                         : tr("Preview the new version in the sketch (you can switch back)"));
+	// Version chooser: label each radio with the part name + version, and preset (without
+	// triggering a swap) to whichever version is currently active for this part.
+	{
+		QSignalBlocker blockOld(m_oldRadio);
+		QSignalBlocker blockNew(m_newRadio);
+		m_oldRadio->setText(info.oldVersion.isEmpty()
+		                    ? tr("Keep old: %1").arg(info.oldTitle)
+		                    : tr("Keep old: %1 (v. %2)").arg(info.oldTitle, info.oldVersion));
+		m_newRadio->setText(info.newVersion.isEmpty()
+		                    ? tr("Use new: %1").arg(info.newTitle)
+		                    : tr("Use new: %1 (v. %2)").arg(info.newTitle, info.newVersion));
+		m_oldRadio->setChecked(!info.isSwapped);
+		m_newRadio->setChecked(info.isSwapped);
+	}
+
 	// Silence (persistent "don't ask again") is offered only for soft "ask" migrations;
-	// classic "forced" parts must keep prompting, so they get Update/Skip only.
+	// classic "forced" parts must keep prompting, so they get the chooser + Skip only.
 	m_silenceButton->setVisible(info.effectiveMode == "ask");
-
-	// Every part stays actionable, including ones already decided: revisiting a part and
-	// changing the choice is handled by the swap/revert logic (clean undo when possible,
-	// otherwise a fresh swap), so there is no read-only state.
-	m_swapButton->setEnabled(true);
-	m_confirmButton->setEnabled(true);
-	m_skipButton->setEnabled(true);
 	m_silenceButton->setEnabled(true);
 
 	// Navigation between parts: only when there are several to step through.
@@ -439,13 +471,16 @@ void MigrationHandler::centerAndZoomOnItem(ItemBase* item)
 	item->setSelected(true);
 }
 
-void MigrationHandler::swapCurrentPart()
+void MigrationHandler::onVersionToggled(bool useNew)
 {
+	// Driven by the "new" radio. This is the only place a part is swapped/reverted, so navigating
+	// between parts never changes anything until the user actually flips the toggle here.
 	if (m_currentIndex < 0 || m_currentIndex >= m_pendingMigrations.size()) return;
 
 	MigrationInfo& info = m_pendingMigrations[m_currentIndex];
-	if (info.isSwapped) revertToOld(info);
-	else swapToNew(info);
+	if (useNew && !info.isSwapped) swapToNew(info);
+	else if (!useNew && info.isSwapped) revertToOld(info);
+	info.decided = true;
 
 	updateDialogForCurrentMigration();
 }
@@ -540,40 +575,6 @@ void MigrationHandler::revertToOld(MigrationInfo& info)
 	info.isSwapped = false;
 }
 
-void MigrationHandler::confirmCurrentMigration()
-{
-	if (m_currentIndex < 0 || m_currentIndex >= m_pendingMigrations.size()) return;
-
-	MigrationInfo& info = m_pendingMigrations[m_currentIndex];
-
-	// Commit the new version (swap now if the user didn't preview it first).
-	if (!info.isSwapped) {
-		swapToNew(info);
-	}
-
-	info.decided = true;
-	info.silenced = false;
-	// Move to the next undecided part (closes when all are decided)
-	processNextMigration();
-}
-
-void MigrationHandler::skipCurrentMigration()
-{
-	if (m_currentIndex < 0 || m_currentIndex >= m_pendingMigrations.size()) return;
-
-	MigrationInfo& info = m_pendingMigrations[m_currentIndex];
-
-	// If currently previewing the new part, revert to the old version.
-	if (info.isSwapped) {
-		revertToOld(info);
-	}
-
-	info.decided = true;
-	info.silenced = false;
-	// Move to the next undecided part (closes when all are decided)
-	processNextMigration();
-}
-
 void MigrationHandler::silenceCurrentMigration()
 {
 	if (m_currentIndex < 0 || m_currentIndex >= m_pendingMigrations.size()) return;
@@ -638,21 +639,11 @@ void MigrationHandler::processNextMigration()
 	closeDialog();
 }
 
-void MigrationHandler::revertCurrentPreviewIfTransient()
-{
-	if (m_currentIndex < 0 || m_currentIndex >= m_pendingMigrations.size()) return;
-
-	MigrationInfo& info = m_pendingMigrations[m_currentIndex];
-	// Only revert an undecided live preview. A part that has been decided keeps its committed state.
-	if (info.isSwapped && !info.decided) {
-		revertToOld(info);
-	}
-}
-
 void MigrationHandler::goToPreviousMigration()
 {
+	// Navigation never reverts; the current part keeps whichever version is showing. The only
+	// way to switch a part back to old is the version toggle (or Skip/Silence).
 	if (m_currentIndex <= 0) return;
-	revertCurrentPreviewIfTransient();
 	m_currentIndex--;
 	updateDialogForCurrentMigration();
 }
@@ -660,7 +651,6 @@ void MigrationHandler::goToPreviousMigration()
 void MigrationHandler::goToNextMigration()
 {
 	if (m_currentIndex >= m_pendingMigrations.size() - 1) return;
-	revertCurrentPreviewIfTransient();
 	m_currentIndex++;
 	updateDialogForCurrentMigration();
 }
@@ -670,17 +660,12 @@ void MigrationHandler::updateAllMigrations()
 	MainWindow* mainWindow = findMainWindow();
 	if (mainWindow == nullptr) { closeDialog(); return; }
 
-	// Normalise every part back to its old version (reverting any live preview), then swap all
-	// that are still obsolete to their new version in a single undoable command.
+	// Bring every part to its new version: swap the ones still showing old (toggled back, or
+	// never visited) in a single undoable command. Parts already on the new version are left as-is.
 	QList<ItemBase*> toSwap;
 	for (int i = 0; i < m_pendingMigrations.size(); ++i) {
-		m_currentIndex = i;
-		MigrationInfo& info = m_pendingMigrations[i];
-		if (info.isSwapped && !info.decided) revertToOld(info);
 		ItemBase* item = currentItem(i);
 		if (item != nullptr && item->isObsolete()) toSwap << item;
-		info.decided = true;
-		info.silenced = false;
 	}
 
 	if (!toSwap.isEmpty()) {
@@ -703,10 +688,10 @@ void MigrationHandler::closeDialog()
 
 void MigrationHandler::onDialogClosed()
 {
-	// The dialog closed (ESC, window close, "Update all", or normal completion). Revert any
-	// still-undecided live preview, then drop the session state. The dialog deletes itself
-	// (WA_DeleteOnClose) and m_dialog (a QPointer) auto-nulls, so a later open starts clean.
-	revertCurrentPreviewIfTransient();
+	// The dialog closed (ESC, window close, "Update all", or normal completion). Closing does NOT
+	// revert anything — whichever version each part is showing is the user's choice and is kept.
+	// Just drop the session state. The dialog deletes itself (WA_DeleteOnClose) and m_dialog
+	// (a QPointer) auto-nulls, so a later open starts clean.
 	m_pendingMigrations.clear();
 	m_currentIndex = 0;
 
@@ -716,9 +701,9 @@ void MigrationHandler::onDialogClosed()
 	m_titleLabel = nullptr;
 	m_reasonLabel = nullptr;
 	m_historyLabel = nullptr;
-	m_swapButton = nullptr;
-	m_confirmButton = nullptr;
-	m_skipButton = nullptr;
+	m_versionGroup = nullptr;
+	m_oldRadio = nullptr;
+	m_newRadio = nullptr;
 	m_silenceButton = nullptr;
 	m_updateAllButton = nullptr;
 	m_prevButton = nullptr;

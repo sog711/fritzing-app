@@ -36,6 +36,8 @@ class MainWindow;
 class QDialog;
 class QLabel;
 class QPushButton;
+class QRadioButton;
+class QButtonGroup;
 
 struct MigrationInfo {
 	qint64 itemId;          // current item ID (changes after swap)
@@ -43,11 +45,16 @@ struct MigrationInfo {
 	QString oldModuleID;    // module ID to swap back to old
 	QString newModuleID;    // module ID to swap to new
 	QString instanceTitle;  // for display purposes
+	QString oldTitle;       // old part's title (for the version chooser)
+	QString oldVersion;     // old part's version
+	QString newTitle;       // new part's title
+	QString newVersion;     // new part's version
 	QList<HistoryEntry> relevantHistory;
 	QString effectiveMode;  // "silent", "ask", or "forced"
 	bool isSwapped;         // currently showing new part?
 	QString reason;         // why the dialog is shown (e.g. mixed versions)
-	bool decided = false;   // user has already chosen for this part
+	bool visited = false;   // shown at least once (got the default "new" preset)
+	bool decided = false;   // user has explicitly chosen for this part
 	bool silenced = false;  // user chose "silence"
 	int swapStackIndex = -1; // undo-stack index right after this part's preview swap (-1 = none)
 };
@@ -79,24 +86,21 @@ public:
 private Q_SLOTS:
 	void handlePendingMigrationDialog();
 	void onDialogClosed();
+	void onVersionToggled(bool useNew);
 
 private:
 	void createMigrationDialog();
 	void updateDialogForCurrentMigration();
 	void centerAndZoomOnItem(ItemBase* item);
 
-	void swapCurrentPart();
 	void swapToNew(MigrationInfo& info);
 	void revertToOld(MigrationInfo& info);
 	bool canUndoOwnSwap(int swapStackIndex) const;
 	qint64 findSwappedItemId(SketchWidget* view, const QString& instanceTitle, qint64 fallback) const;
-	void confirmCurrentMigration();
-	void skipCurrentMigration();
 	void silenceCurrentMigration();
 	void updateAllMigrations();
 	void goToPreviousMigration();
 	void goToNextMigration();
-	void revertCurrentPreviewIfTransient();
 	void processNextMigration();
 	void closeDialog();
 
@@ -112,9 +116,9 @@ private:
 	QLabel* m_titleLabel;
 	QLabel* m_reasonLabel;
 	QLabel* m_historyLabel;
-	QPushButton* m_swapButton;
-	QPushButton* m_confirmButton;
-	QPushButton* m_skipButton;
+	QButtonGroup* m_versionGroup;
+	QRadioButton* m_oldRadio;
+	QRadioButton* m_newRadio;
 	QPushButton* m_silenceButton;
 	QPushButton* m_updateAllButton;
 	QPushButton* m_prevButton;
