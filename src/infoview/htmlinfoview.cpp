@@ -1394,7 +1394,8 @@ void HtmlInfoView::changeSticky(bool lockState)
 }
 
 void HtmlInfoView::clickObsolete(const QString &) {
-	Q_EMIT clickObsoleteSignal();
+	// Hand the currently inspected part to the migration flow (-1 if none is shown).
+	Q_EMIT clickObsoleteSignal(m_lastItemBase ? m_lastItemBase->id() : -1);
 }
 
 void HtmlInfoView::showLayers(bool show, ItemBase * itemBase, const QString & family, const QString & value, bool swappingEnabled) {

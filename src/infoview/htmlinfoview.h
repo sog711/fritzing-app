@@ -93,7 +93,7 @@ public:
 	static QHash<QString, QString> getPartProperties(ModelPart * modelPart, ItemBase * itemBase, bool wantDebug, QStringList & keys);
 
 Q_SIGNALS:
-	void clickObsoleteSignal();
+	void clickObsoleteSignal(qint64 itemId);
 
 protected Q_SLOTS:
 	void setContent();

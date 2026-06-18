@@ -3976,37 +3976,13 @@ void MainWindow::selectAllObsolete() {
 }
 
 QList<ItemBase *> MainWindow::selectAllObsolete(bool displayFeedback) {
+	// Select only — replacement is a separate, explicit action ("Update selected parts" or the
+	// Inspector's obsolete link, both routed through the Part Migration dialog).
 	QList<ItemBase *> items = m_pcbGraphicsView->selectAllObsolete();
-	if (!displayFeedback) return items;
-
-	if (items.count() <= 0) {
+	if (displayFeedback && items.isEmpty()) {
 		QMessageBox::information(this, tr("Fritzing", "dialog title"), tr("No outdated parts found.\nAll your parts are up-to-date.") );
 	}
-	else {
-		checkSwapObsolete(items, false);
-	}
-
 	return items;
-}
-
-void MainWindow::checkSwapObsolete(QList<ItemBase *> & items, bool includeUpdateLaterMessage) {
-	QString msg = includeUpdateLaterMessage ? tr("\n\nNote: if you want to update later, there are options under the 'Part' menu for dealing with outdated parts individually. ") : "";
-
-	QMessageBox::StandardButton answer = FMessageBox::question(
-	        this,
-	        tr("Outdated parts"),
-	        tr("There are %n outdated part(s) in this sketch. ", "", items.count()) +
-	        tr("We strongly recommend that you update these %n parts  to the latest version. ", "", items.count()) +
-	        tr("This may result in changes to your sketch, as parts or connectors may be shifted. ") +
-	        msg +
-	        tr("\n\nDo you want to update now?"),
-	        QMessageBox::Yes | QMessageBox::No,
-	        QMessageBox::Yes
-	                                     );
-	// TODO: make button texts translatable
-	if (answer == QMessageBox::Yes) {
-		swapObsolete(true, items);
-	}
 }
 
 
@@ -4179,6 +4155,16 @@ void MainWindow::checkDroppedPartMigration() {
 
 void MainWindow::swapObsolete() {
 	QList<ItemBase *> items;
+	swapObsolete(true, items);
+}
+
+void MainWindow::migrateObsoletePart(qint64 itemId) {
+	// Clicking the Inspector's "obsolete" link deals with that one part: route it to the Part
+	// Migration dialog (showing its history for soft parts), exactly like "Update selected parts".
+	ItemBase * item = findItemInAnyView(itemId);
+	if (item == nullptr || !item->isObsolete()) return;
+	QList<ItemBase *> items;
+	items << item->layerKinChief();
 	swapObsolete(true, items);
 }
 

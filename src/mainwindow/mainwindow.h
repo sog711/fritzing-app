@@ -271,6 +271,7 @@ public Q_SLOTS:
 	void changeBoardLayers(int layers, bool doEmit);
 	void selectAllObsolete();
 	void swapObsolete();
+	void migrateObsoletePart(qint64 itemId);
 	void swapBoardImageSlot(SketchWidget * sketchWidget, ItemBase * itemBase, const QString & filename, const QString & moduleID, bool addName);
 	void updateTraceMenu();
 	virtual void updateExportMenu();
@@ -666,7 +667,6 @@ protected:
 	virtual QWidget * currentTabWidget();
 	virtual bool activeLayerWidgetAlwaysOn();
 	bool copySvg(const QString & path, QFileInfoList & svgEntryInfoList, const QString &moduleID = QString());
-	void checkSwapObsolete(QList<ItemBase *> &, bool includeUpdateLaterMessage);
 	QList<ItemBase *> collectObsoleteAcrossViews();
 	bool hasObsoleteParts();
 	// Where a migration check was triggered from. Governs the per-mode prompt policy:

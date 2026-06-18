@@ -293,7 +293,7 @@ void MainWindow::initDock() {
 
 	m_infoView = new HtmlInfoView();
 	m_infoView->init(false);
-	connect(m_infoView, SIGNAL(clickObsoleteSignal()), this, SLOT(selectAllObsolete()));
+	connect(m_infoView, SIGNAL(clickObsoleteSignal(qint64)), this, SLOT(migrateObsoletePart(qint64)));
 
 	if (m_fileProgressDialog != nullptr) {
 		m_fileProgressDialog->setValue(49);
