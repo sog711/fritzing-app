@@ -2076,6 +2076,12 @@ void MainWindow::updateTransformationActions() {
 	Q_FOREACH(SketchToolButton* flipButton, m_flipButtons) {
 		flipButton->setEnabled(enable);
 	}
+
+	// Keep the obsolete-part actions in sync with the selection here (not only on the Part menu's
+	// aboutToShow): selecting a part should immediately enable "Update selected parts", including
+	// for programmatic/automated selections that never open the menu.
+	if (m_selectAllObsoleteAct != nullptr) m_selectAllObsoleteAct->setEnabled(hasObsoleteParts());
+	if (m_swapObsoleteAct != nullptr) m_swapObsoleteAct->setEnabled(itemCount.obsoleteCount > 0);
 }
 
 void MainWindow::updateItemMenu() {
