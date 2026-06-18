@@ -26,6 +26,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../debugdialog.h"
 #include "../waitpushundostack.h"
 #include "../commands.h"
+#include "../viewlayer.h"
 
 #include <QDialog>
 #include <QVBoxLayout>
@@ -245,6 +246,7 @@ void MigrationHandler::createMigrationDialog()
 
 	// Counter label
 	m_counterLabel = new QLabel(m_dialog);
+	m_counterLabel->setObjectName("migrationCounterLabel");
 	m_counterLabel->setAlignment(Qt::AlignCenter);
 	QFont titleFont = m_counterLabel->font();
 	titleFont.setBold(true);
@@ -254,12 +256,14 @@ void MigrationHandler::createMigrationDialog()
 
 	// Title/part name label
 	m_titleLabel = new QLabel(m_dialog);
+	m_titleLabel->setObjectName("migrationTitleLabel");
 	m_titleLabel->setWordWrap(true);
 	m_titleLabel->setAlignment(Qt::AlignTop);
 	layout->addWidget(m_titleLabel);
 
 	// Reason / explanation label (why this dialog is being shown)
 	m_reasonLabel = new QLabel(m_dialog);
+	m_reasonLabel->setObjectName("migrationReasonLabel");
 	m_reasonLabel->setWordWrap(true);
 	m_reasonLabel->setAlignment(Qt::AlignTop);
 	layout->addWidget(m_reasonLabel);
@@ -269,6 +273,7 @@ void MigrationHandler::createMigrationDialog()
 	scrollArea->setWidgetResizable(true);
 	scrollArea->setMinimumHeight(150);
 	m_historyLabel = new QLabel();
+	m_historyLabel->setObjectName("migrationHistoryLabel");
 	m_historyLabel->setWordWrap(true);
 	m_historyLabel->setAlignment(Qt::AlignTop);
 	m_historyLabel->setTextFormat(Qt::RichText);
@@ -478,6 +483,10 @@ void MigrationHandler::onVersionToggled(bool useNew)
 	if (m_currentIndex < 0 || m_currentIndex >= m_pendingMigrations.size()) return;
 
 	MigrationInfo& info = m_pendingMigrations[m_currentIndex];
+	DebugDialog::debug(QString("[migration-dbg] onVersionToggled idx=%1 '%2' useNew=%3 isSwapped=%4 visited=%5 itemId=%6")
+	                   .arg(m_currentIndex).arg(info.instanceTitle, useNew ? "yes" : "no",
+	                        info.isSwapped ? "yes" : "no", info.visited ? "yes" : "no")
+	                   .arg(info.itemId));
 	if (useNew && !info.isSwapped) swapToNew(info);
 	else if (!useNew && info.isSwapped) revertToOld(info);
 	info.decided = true;
@@ -488,11 +497,52 @@ void MigrationHandler::onVersionToggled(bool useNew)
 qint64 MigrationHandler::findSwappedItemId(SketchWidget* view, const QString& instanceTitle, qint64 fallback) const
 {
 	// After a swap the new item is selected in its view; identify it by instance title.
+	int selCount = view->scene()->selectedItems().count();
+	qint64 found = -1;
 	Q_FOREACH (QGraphicsItem* gi, view->scene()->selectedItems()) {
 		ItemBase* it = dynamic_cast<ItemBase*>(gi);
-		if (it != nullptr && it->instanceTitle() == instanceTitle) return it->id();
+		if (it == nullptr) continue;
+		DebugDialog::debug(QString("[migration-dbg]   selected id=%1 title='%2' module=%3 chiefId=%4")
+		                   .arg(it->id()).arg(it->instanceTitle(), it->moduleID())
+		                   .arg(it->layerKinChief() ? it->layerKinChief()->id() : -1));
+		if (found < 0 && it->instanceTitle() == instanceTitle) found = it->id();
 	}
-	return fallback;
+	if (found < 0) {
+		DebugDialog::debug(QString("[migration-dbg]   findSwappedItemId: NO match for '%1' among %2 selected -> FALLBACK to id=%3")
+		                   .arg(instanceTitle).arg(selCount).arg(fallback));
+		return fallback;
+	}
+	DebugDialog::debug(QString("[migration-dbg]   findSwappedItemId: matched '%1' -> id=%2 (of %3 selected)")
+	                   .arg(instanceTitle).arg(found).arg(selCount));
+	return found;
+}
+
+void MigrationHandler::debugDumpInstances(const QString& tag, const QString& instanceTitle) const
+{
+	MainWindow* mainWindow = findMainWindow();
+	if (mainWindow == nullptr) return;
+
+	const ViewLayer::ViewID viewIds[] = { ViewLayer::BreadboardView, ViewLayer::SchematicView, ViewLayer::PCBView };
+	const char* viewNames[] = { "bb", "schem", "pcb" };
+	for (int v = 0; v < 3; ++v) {
+		SketchWidget* view = mainWindow->sketchWidgetForView(viewIds[v]);
+		if (view == nullptr) continue;
+		int matchCount = 0;
+		Q_FOREACH (QGraphicsItem* gi, view->scene()->items()) {
+			ItemBase* ib = dynamic_cast<ItemBase*>(gi);
+			if (ib == nullptr || ib->instanceTitle() != instanceTitle) continue;
+			++matchCount;
+			ItemBase* chief = ib->layerKinChief();
+			DebugDialog::debug(QString("[migration-dbg]   [%1] %2 id=%3 module=%4 chiefId=%5 isChief=%6 selected=%7")
+			                   .arg(tag, QString::fromLatin1(viewNames[v]))
+			                   .arg(ib->id()).arg(ib->moduleID())
+			                   .arg(chief ? chief->id() : -1)
+			                   .arg(chief == ib ? "yes" : "no")
+			                   .arg(ib->isSelected() ? "yes" : "no"));
+		}
+		DebugDialog::debug(QString("[migration-dbg]   [%1] %2 matchCount=%3")
+		                   .arg(tag, QString::fromLatin1(viewNames[v])).arg(matchCount));
+	}
 }
 
 void MigrationHandler::swapToNew(MigrationInfo& info)
@@ -511,6 +561,12 @@ void MigrationHandler::swapToNew(MigrationInfo& info)
 	SketchWidget* view = mainWindow->sketchWidgetForView(item->viewID());
 	if (view == nullptr) return;
 
+	WaitPushUndoStack* stack = m_sketchWidget->undoStack();
+	DebugDialog::debug(QString("[migration-dbg] swapToNew '%1' old=%2 -> new=%3 viewItemId=%4 view=%5 undoIdx(before)=%6")
+	                   .arg(info.instanceTitle, info.oldModuleID, info.newModuleID)
+	                   .arg(item->id()).arg(int(item->viewID())).arg(stack ? stack->index() : -1));
+	debugDumpInstances("swapToNew:before", info.instanceTitle);
+
 	// Remember the old item so a clean undo can restore exactly it.
 	info.originalItemId = item->id();
 
@@ -523,9 +579,14 @@ void MigrationHandler::swapToNew(MigrationInfo& info)
 
 	// One top-level command was pushed; remember where, so we can tell later whether our swap
 	// is still safely undoable or whether the user has pushed real commands on top of it.
-	info.swapStackIndex = m_sketchWidget->undoStack() ? m_sketchWidget->undoStack()->index() : -1;
+	info.swapStackIndex = stack ? stack->index() : -1;
 	info.itemId = findSwappedItemId(view, info.instanceTitle, info.itemId);
 	info.isSwapped = true;
+
+	DebugDialog::debug(QString("[migration-dbg] swapToNew done '%1' newItemId=%2 swapStackIndex=%3 originalItemId=%4 undoIdx(after)=%5")
+	                   .arg(info.instanceTitle).arg(info.itemId).arg(info.swapStackIndex)
+	                   .arg(info.originalItemId).arg(stack ? stack->index() : -1));
+	debugDumpInstances("swapToNew:after", info.instanceTitle);
 }
 
 bool MigrationHandler::canUndoOwnSwap(int swapStackIndex) const
@@ -537,9 +598,17 @@ bool MigrationHandler::canUndoOwnSwap(int swapStackIndex) const
 	WaitPushUndoStack* stack = m_sketchWidget->undoStack();
 	if (stack == nullptr) return false;
 	int idx = stack->index();
-	if (idx < swapStackIndex) return false;   // user already undid past our swap
+	if (idx < swapStackIndex) {
+		DebugDialog::debug(QString("[migration-dbg]   canUndoOwnSwap: undoIdx=%1 < swapStackIndex=%2 (already undone past) -> false")
+		                   .arg(idx).arg(swapStackIndex));
+		return false;   // user already undid past our swap
+	}
 	for (int i = swapStackIndex; i < idx; ++i) {
-		if (dynamic_cast<const SelectItemCommand*>(stack->command(i)) == nullptr) return false;
+		const QUndoCommand* cmd = stack->command(i);
+		bool isSel = dynamic_cast<const SelectItemCommand*>(cmd) != nullptr;
+		DebugDialog::debug(QString("[migration-dbg]   canUndoOwnSwap: cmd[%1]='%2' isSelectItem=%3")
+		                   .arg(i).arg(cmd ? cmd->text() : QString("<null>"), isSel ? "yes" : "no"));
+		if (!isSel) return false;
 	}
 	return true;
 }
@@ -548,9 +617,18 @@ void MigrationHandler::revertToOld(MigrationInfo& info)
 {
 	WaitPushUndoStack* stack = m_sketchWidget->undoStack();
 
-	if (canUndoOwnSwap(info.swapStackIndex) && stack != nullptr) {
+	bool canUndo = canUndoOwnSwap(info.swapStackIndex);
+	DebugDialog::debug(QString("[migration-dbg] revertToOld '%1' new=%2 -> old=%3 itemId=%4 swapStackIndex=%5 undoIdx=%6 undoCount=%7 canUndoOwnSwap=%8")
+	                   .arg(info.instanceTitle, info.newModuleID, info.oldModuleID)
+	                   .arg(info.itemId).arg(info.swapStackIndex)
+	                   .arg(stack ? stack->index() : -1).arg(stack ? stack->count() : -1)
+	                   .arg(canUndo ? "yes" : "no"));
+	debugDumpInstances("revertToOld:before", info.instanceTitle);
+
+	if (canUndo && stack != nullptr) {
 		// Undo any selection-only commands stacked on top of our swap, then the swap itself.
 		int steps = stack->index() - info.swapStackIndex + 1;
+		DebugDialog::debug(QString("[migration-dbg]   revertToOld: CLEAN UNDO x%1, restoring originalItemId=%2").arg(steps).arg(info.originalItemId));
 		for (int i = 0; i < steps; ++i) stack->undo();
 		info.itemId = info.originalItemId;   // undo restores the original old item (same id)
 	}
@@ -559,6 +637,10 @@ void MigrationHandler::revertToOld(MigrationInfo& info)
 		// forward from new back to old as a fresh, independent command.
 		MainWindow* mainWindow = findMainWindow();
 		ItemBase* item = currentItem();
+		DebugDialog::debug(QString("[migration-dbg]   revertToOld: FORWARD SWAP. currentItem=%1 module=%2 view=%3")
+		                   .arg(item ? item->id() : -1)
+		                   .arg(item ? item->moduleID() : QString("<null>"))
+		                   .arg(item ? int(item->viewID()) : -1));
 		if (mainWindow != nullptr && item != nullptr) {
 			SketchWidget* view = mainWindow->sketchWidgetForView(item->viewID());
 			if (view != nullptr) {
@@ -573,6 +655,9 @@ void MigrationHandler::revertToOld(MigrationInfo& info)
 
 	info.swapStackIndex = -1;
 	info.isSwapped = false;
+
+	DebugDialog::debug(QString("[migration-dbg] revertToOld done '%1' itemId=%2 undoIdx=%3").arg(info.instanceTitle).arg(info.itemId).arg(stack ? stack->index() : -1));
+	debugDumpInstances("revertToOld:after", info.instanceTitle);
 }
 
 void MigrationHandler::silenceCurrentMigration()

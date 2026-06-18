@@ -18,7 +18,8 @@ HEADERS += \
     src/testing/FTestingServer.h \
     src/testing/FProbeWire.h \
     src/testing/FProbePart.h \
-    src/testing/FProbeSelectedPartLabel.h
+    src/testing/FProbeSelectedPartLabel.h \
+    src/testing/FProbeMigrationDialog.h
 
 
 SOURCES += \
@@ -27,7 +28,8 @@ SOURCES += \
     src/testing/FTestingServer.cpp \
     src/testing/FProbeWire.cpp \
     src/testing/FProbePart.cpp \
-    src/testing/FProbeSelectedPartLabel.cpp
+    src/testing/FProbeSelectedPartLabel.cpp \
+    src/testing/FProbeMigrationDialog.cpp
 
 
 INCLUDEPATH += src

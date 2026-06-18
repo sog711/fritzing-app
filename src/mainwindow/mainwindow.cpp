@@ -93,6 +93,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "testing/FProbeWire.h"
 #include "testing/FProbePart.h"
 #include "testing/FProbeSelectedPartLabel.h"
+#include "testing/FProbeMigrationDialog.h"
 #include "items/partlabelcontextmenu.h"
 
 #include "servicelistfetcher.h"
@@ -541,6 +542,7 @@ void MainWindow::init(ReferenceModel *referenceModel, bool lockFiles) {
 	new FProbeWire(this);
 	new FProbePart(this);
 	new FProbeSelectedPartLabel(this);
+	new FProbeMigrationDialog(this);
 
 	m_projectProperties = QSharedPointer<ProjectProperties>(new ProjectProperties());
 	m_serviceListFetcher = QSharedPointer<ServiceListFetcher>(new ServiceListFetcher());
