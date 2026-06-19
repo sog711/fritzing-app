@@ -112,6 +112,13 @@ bool BugAnnotation::isActive() const
 	return m_item != nullptr;
 }
 
+QString BugAnnotation::text() const
+{
+	QStringList all;
+	for (const QStringList & errs : m_errors) all << errs;
+	return all.join(QStringLiteral("\n"));
+}
+
 void BugAnnotation::updateTooltip()
 {
 	QStringList all;

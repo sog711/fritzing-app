@@ -52,6 +52,7 @@ FProbeBugAnnotations::FProbeBugAnnotations(MainWindow *mainWindow)
 				entry["title"] = ib->instanceTitle();
 				entry["module"] = ib->moduleID();
 				entry["view"] = QString::fromLatin1(viewNames[v]);
+				entry["text"] = ib->bugText();
 				items.append(entry);
 			}
 		}

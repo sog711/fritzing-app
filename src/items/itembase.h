@@ -203,6 +203,7 @@ public:
 	void clearBug(const QString & source);
 	void repositionBug();
 	bool hasBug() const;
+	QString bugText() const;
 	virtual QHash<QString, QString> prepareProps(ModelPart *, bool wantDebug, QStringList & keys);
 	void resetValues(const QString & family, const QString & prop);
 	const QString & filename();

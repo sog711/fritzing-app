@@ -43,6 +43,7 @@ public:
 	void clear(const QString & source);
 	void reposition();
 	bool isActive() const;
+	QString text() const;   // all current error messages joined, or empty if inactive
 
 private:
 	ItemBase * m_owner;

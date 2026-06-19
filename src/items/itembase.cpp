@@ -1641,6 +1641,11 @@ bool ItemBase::hasBug() const
 	return m_bugAnnotation.isActive();
 }
 
+QString ItemBase::bugText() const
+{
+	return m_bugAnnotation.text();
+}
+
 bool ItemBase::collectExtraInfo(QWidget * parent, const QString & family, const QString & prop, const QString & value, bool swappingEnabled, QString & returnProp, QString & returnValue, QWidget * & returnWidget, bool & hide)
 {
 	Q_UNUSED(hide);                 // assume this is set by the caller (HtmlInfoView)
