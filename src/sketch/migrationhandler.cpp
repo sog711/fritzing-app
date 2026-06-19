@@ -220,6 +220,15 @@ void MigrationHandler::handlePendingMigrationDialog()
 		m_dialog->show();
 		m_dialog->raise();
 		m_dialog->activateWindow();
+
+		// Park the dialog at the top-right of the main window. Navigating the dialog centres and
+		// zooms each part in the view, so a centred dialog would sit right on top of that part.
+		MainWindow* mainWindow = findMainWindow();
+		if (mainWindow != nullptr) {
+			const int margin = 16;
+			const QRect g = mainWindow->geometry();
+			m_dialog->move(g.right() - m_dialog->width() - margin, g.top() + margin);
+		}
 	}
 }
 
