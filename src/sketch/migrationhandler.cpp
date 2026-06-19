@@ -480,8 +480,14 @@ void MigrationHandler::centerAndZoomOnItem(ItemBase* item)
 	SketchWidget* view = mainWindow->sketchWidgetForView(item->viewID());
 	if (view == nullptr) return;
 
-	QPointF itemPos = item->pos();
-	QRectF focusRect(itemPos.x() - 200, itemPos.y() - 200, 400, 400);
+	// Fit the part's actual bounds (centred on the part) plus a margin proportional to its size, so
+	// small and large parts both fill a consistent fraction of the view. A fixed-size focus box
+	// (anchored at item->pos(), which is the origin not the centre) under-zoomed small parts and
+	// over-zoomed large ones.
+	QRectF bounds = item->sceneBoundingRect();
+	if (bounds.isEmpty()) bounds = QRectF(item->pos(), QSizeF(1, 1));
+	qreal margin = qMax(bounds.width(), bounds.height()) * 1.5;
+	QRectF focusRect = bounds.adjusted(-margin, -margin, margin, margin);
 
 	view->fitInView(focusRect, Qt::KeepAspectRatio);
 	view->updateZoomFromCurrentTransform();
