@@ -96,7 +96,6 @@ private:
 	void swapToNew(MigrationInfo& info);
 	void revertToOld(MigrationInfo& info);
 	bool canUndoOwnSwap(int swapStackIndex) const;
-	qint64 findSwappedItemId(SketchWidget* view, const QString& instanceTitle, qint64 fallback) const;
 	// Debug aid: dump every item across all views whose instanceTitle matches, so duplication /
 	// stale-id artifacts after a swap-back show up in the log.
 	void debugDumpInstances(const QString& tag, const QString& instanceTitle) const;

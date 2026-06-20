@@ -4248,6 +4248,30 @@ int MainWindow::swapObsoleteDirect(const QList<ItemBase *> & items, bool display
 	return count;
 }
 
+// Swap a single part to an explicit target module as one undoable command, reusing the same
+// machinery as the obsolete auto-swap (swapSelectedAuxAux + portObsoleteSpecialProps). Unlike
+// swapObsoleteDirect it takes an explicit moduleID rather than following replacedby, so the Part
+// Migration dialog can drive it in both directions (old->new preview and new->old revert).
+// Returns the new item's cross-view id directly, so callers never have to rediscover it from the
+// (non-deterministically ordered) selection. Returns 0 if the target module can't be resolved.
+long MainWindow::swapPartForMigration(ItemBase * itemBase, const QString & newModuleID) {
+	if (itemBase == nullptr) return 0;
+	itemBase = itemBase->layerKinChief();
+
+	ModelPart * newModelPart = m_referenceModel->retrieveModelPart(newModuleID);
+	if (newModelPart == nullptr) {
+		DebugDialog::debug(QString("swapPartForMigration: no model part for %1").arg(newModuleID));
+		return 0;
+	}
+
+	auto* parentCommand = new QUndoCommand(tr("Swapped %1 with module %2").arg(itemBase->instanceTitle(), newModuleID));
+	QMap<QString, QString> propsMap;
+	long newID = swapSelectedAuxAux(itemBase, newModuleID, itemBase->viewLayerPlacement(), propsMap, parentCommand);
+	portObsoleteSpecialProps(itemBase, newModelPart, newID, parentCommand);
+	m_undoStack->push(parentCommand);
+	return newID;
+}
+
 // Port properties that don't carry over by module-ID swap alone, reusing the legacy
 // obsolete-part special cases. Shared by the direct swap and the Part Migration dialog.
 void MainWindow::portObsoleteSpecialProps(ItemBase * oldItem, ModelPart * newModelPart, long newID, QUndoCommand * parentCommand) {

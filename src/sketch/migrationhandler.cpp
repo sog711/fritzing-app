@@ -42,6 +42,8 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QFont>
 #include <QScrollArea>
 
+#include <algorithm>
+
 MigrationHandler::MigrationHandler(SketchWidget* sketchWidget, QObject* parent)
 	: QObject(parent)
 	, m_sketchWidget(sketchWidget)
@@ -142,6 +144,15 @@ void MigrationHandler::processMigrations()
 	}
 
 	m_pendingMigrations = nonSilentMigrations;
+
+	// Present the dialog in a deterministic order: group by part type (the obsolete module id),
+	// then by instance title within each group. The collection order is otherwise undefined
+	// (it follows scene/view iteration), which made navigation and tests order-dependent.
+	std::sort(m_pendingMigrations.begin(), m_pendingMigrations.end(),
+	          [](const MigrationInfo& a, const MigrationInfo& b) {
+		if (a.oldModuleID != b.oldModuleID) return a.oldModuleID < b.oldModuleID;
+		return a.instanceTitle < b.instanceTitle;
+	});
 
 	if (!m_pendingMigrations.isEmpty()) {
 		m_currentIndex = 0;
@@ -400,6 +411,9 @@ void MigrationHandler::updateDialogForCurrentMigration()
 		title += QString(" <i>(%1)</i>").arg(tr("showing old version"));
 	}
 	m_titleLabel->setText(title);
+	// Expose the raw instance title (the <b>…</b> markup makes the label text awkward to parse)
+	// so tests can address the part with the Wire/Part probes by its exact title.
+	if (m_dialog != nullptr) m_dialog->setProperty("currentInstanceTitle", info.instanceTitle);
 
 	// Explanation of why this dialog is being shown (e.g. mixed versions)
 	m_reasonLabel->setText(info.reason);
@@ -514,29 +528,6 @@ void MigrationHandler::onVersionToggled(bool useNew)
 	updateDialogForCurrentMigration();
 }
 
-qint64 MigrationHandler::findSwappedItemId(SketchWidget* view, const QString& instanceTitle, qint64 fallback) const
-{
-	// After a swap the new item is selected in its view; identify it by instance title.
-	int selCount = view->scene()->selectedItems().count();
-	qint64 found = -1;
-	Q_FOREACH (QGraphicsItem* gi, view->scene()->selectedItems()) {
-		ItemBase* it = dynamic_cast<ItemBase*>(gi);
-		if (it == nullptr) continue;
-		DebugDialog::debug(QString("[migration-dbg]   selected id=%1 title='%2' module=%3 chiefId=%4")
-		                   .arg(it->id()).arg(it->instanceTitle(), it->moduleID())
-		                   .arg(it->layerKinChief() ? it->layerKinChief()->id() : -1));
-		if (found < 0 && it->instanceTitle() == instanceTitle) found = it->id();
-	}
-	if (found < 0) {
-		DebugDialog::debug(QString("[migration-dbg]   findSwappedItemId: NO match for '%1' among %2 selected -> FALLBACK to id=%3")
-		                   .arg(instanceTitle).arg(selCount).arg(fallback));
-		return fallback;
-	}
-	DebugDialog::debug(QString("[migration-dbg]   findSwappedItemId: matched '%1' -> id=%2 (of %3 selected)")
-	                   .arg(instanceTitle).arg(found).arg(selCount));
-	return found;
-}
-
 void MigrationHandler::debugDumpInstances(const QString& tag, const QString& instanceTitle) const
 {
 	MainWindow* mainWindow = findMainWindow();
@@ -577,9 +568,6 @@ void MigrationHandler::swapToNew(MigrationInfo& info)
 		DebugDialog::debug("MigrationHandler: Could not find item for swap");
 		return;
 	}
-	// Work in the view that actually contains the part (it may not be PCB).
-	SketchWidget* view = mainWindow->sketchWidgetForView(item->viewID());
-	if (view == nullptr) return;
 
 	WaitPushUndoStack* stack = m_sketchWidget->undoStack();
 	DebugDialog::debug(QString("[migration-dbg] swapToNew '%1' old=%2 -> new=%3 viewItemId=%4 view=%5 undoIdx(before)=%6")
@@ -587,20 +575,18 @@ void MigrationHandler::swapToNew(MigrationInfo& info)
 	                   .arg(item->id()).arg(int(item->viewID())).arg(stack ? stack->index() : -1));
 	debugDumpInstances("swapToNew:before", info.instanceTitle);
 
-	// Remember the old item so a clean undo can restore exactly it.
-	info.originalItemId = item->id();
+	// Remember the old item (its chief id) so a clean undo can restore exactly it.
+	info.originalItemId = item->layerKinChief()->id();
 
-	// swapSelectedAux works on the current selection.
-	view->scene()->clearSelection();
-	item->setSelected(true);
-
-	QMap<QString, QString> propsMap;
-	mainWindow->swapSelectedAux(item, info.newModuleID, false, item->viewLayerPlacement(), propsMap);
+	// Reuse the obsolete-swap machinery (swapSelectedAuxAux + portObsoleteSpecialProps). It pushes
+	// a single undoable command and returns the new item's id directly, so we never have to
+	// rediscover it from the (non-deterministically ordered) selection.
+	long newID = mainWindow->swapPartForMigration(item, info.newModuleID);
+	if (newID != 0) info.itemId = newID;
 
 	// One top-level command was pushed; remember where, so we can tell later whether our swap
-	// is still safely undoable or whether the user has pushed real commands on top of it.
+	// is still safely undoable or whether real commands have been pushed on top of it.
 	info.swapStackIndex = stack ? stack->index() : -1;
-	info.itemId = findSwappedItemId(view, info.instanceTitle, info.itemId);
 	info.isSwapped = true;
 
 	DebugDialog::debug(QString("[migration-dbg] swapToNew done '%1' newItemId=%2 swapStackIndex=%3 originalItemId=%4 undoIdx(after)=%5")
@@ -653,23 +639,16 @@ void MigrationHandler::revertToOld(MigrationInfo& info)
 		info.itemId = info.originalItemId;   // undo restores the original old item (same id)
 	}
 	else {
-		// Real commands intervened (or the swap is gone): don't rewind history. Swap the part
-		// forward from new back to old as a fresh, independent command.
+		// Our swap isn't on top (later parts' preview swaps sit above it), so we can't simply undo it.
+		// Swap the part forward from new back to old as a fresh, independent command.
 		MainWindow* mainWindow = findMainWindow();
 		ItemBase* item = currentItem();
-		DebugDialog::debug(QString("[migration-dbg]   revertToOld: FORWARD SWAP. currentItem=%1 module=%2 view=%3")
-		                   .arg(item ? item->id() : -1)
-		                   .arg(item ? item->moduleID() : QString("<null>"))
-		                   .arg(item ? int(item->viewID()) : -1));
+		if (item != nullptr) item = item->layerKinChief();
+		DebugDialog::debug(QString("[migration-dbg]   revertToOld: FORWARD SWAP. currentItem=%1 module=%2")
+		                   .arg(item ? item->id() : -1).arg(item ? item->moduleID() : QString("<null>")));
 		if (mainWindow != nullptr && item != nullptr) {
-			SketchWidget* view = mainWindow->sketchWidgetForView(item->viewID());
-			if (view != nullptr) {
-				view->scene()->clearSelection();
-				item->setSelected(true);
-				QMap<QString, QString> propsMap;
-				mainWindow->swapSelectedAux(item, info.oldModuleID, false, item->viewLayerPlacement(), propsMap);
-				info.itemId = findSwappedItemId(view, info.instanceTitle, info.itemId);
-			}
+			long newID = mainWindow->swapPartForMigration(item, info.oldModuleID);
+			if (newID != 0) info.itemId = newID;
 		}
 	}
 

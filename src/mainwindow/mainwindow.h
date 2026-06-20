@@ -218,6 +218,7 @@ public:
 	bool saveAsAux(const QString & fileName);
 	void swapObsolete(bool displayFeedback, QList<ItemBase *> &);
 	int swapObsoleteDirect(const QList<ItemBase *> & items, bool displayFeedback);
+	long swapPartForMigration(ItemBase * itemBase, const QString & newModuleID);
 	QList<ItemBase *> selectAllObsolete(bool displayFeedback);
 	void hideTempPartsBin();
 	const QString & fritzingVersion();
