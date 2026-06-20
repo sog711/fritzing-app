@@ -6636,6 +6636,15 @@ void SketchWidget::setUpSwapRenamePins(SwapThing & swapThing, ItemBase * itemBas
 	new RenamePinsCommand(this, swapThing.newID, oldLabels, newLabels, swapThing.parentCommand);
 }
 
+// An obsolete part and its declared replacement are linked by the `replacedby` attribute. A swap
+// between them can run in either direction (obsolete->replacement when updating, replacement->
+// obsolete on "keep old"), so accept the relation whichever part is the swap source.
+static bool isReplacedbyRelation(ModelPart * a, ModelPart * b)
+{
+	if (a == nullptr || b == nullptr) return false;
+	return a->replacedby() == b->moduleID() || b->replacedby() == a->moduleID();
+}
+
 void SketchWidget::setUpSwapReconnect(SwapThing & swapThing, QString newModuleID, ItemBase * itemBase, long newID, bool master)
 {
 	ModelPart * newModelPart = m_referenceModel->retrieveModelPart(newModuleID);
@@ -6755,7 +6764,11 @@ void SketchWidget::setUpSwapReconnect(SwapThing & swapThing, QString newModuleID
 
 	QHash<QString, QPolygonF> legs;
 	QHash<QString, ConnectorItem *> formerLegs;
-	if (m2f.count() > 0 && (m_viewID == ViewLayer::BreadboardView)) {
+	// Run the fit/align check for breadboard (by-wire holes) and, in any view, for an
+	// obsolete<->replacement swap (to re-align connectors so wiring doesn't drift). checkFit makes
+	// exactly one temp item per call -- never more than one per view, or the swap corrupts.
+	if ((m2f.count() > 0 && (m_viewID == ViewLayer::BreadboardView))
+	    || isReplacedbyRelation(itemBase->modelPart(), newModelPart)) {
 		checkFit(newModelPart, itemBase, newID, found, notFound, m2f, swapThing.byWire, legs, formerLegs, swapThing.parentCommand);
 	}
 
@@ -6902,15 +6915,6 @@ void SketchWidget::makeSwapWire(SketchWidget * bbView, ItemBase * itemBase, long
 	                            bbView, parentCommand);
 }
 
-// An obsolete part and its declared replacement are linked by the `replacedby` attribute. A swap
-// between them can run in either direction (obsolete->replacement when updating, replacement->
-// obsolete on "keep old"), so accept the relation whichever part is the swap source.
-static bool isReplacedbyRelation(ModelPart * a, ModelPart * b)
-{
-	if (a == nullptr || b == nullptr) return false;
-	return a->replacedby() == b->moduleID() || b->replacedby() == a->moduleID();
-}
-
 void SketchWidget::checkFit(ModelPart * newModelPart, ItemBase * itemBase, long newID,
                             QHash<ConnectorItem *, Connector *> & found, QList<ConnectorItem *> & notFound,
                             QHash<ConnectorItem *, ConnectorItem *> & m2f, QHash<ConnectorItem *, Connector *> & byWire,
@@ -6921,7 +6925,41 @@ void SketchWidget::checkFit(ModelPart * newModelPart, ItemBase * itemBase, long 
 	ItemBase * tempItemBase = addItemAuxTemp(newModelPart, itemBase->viewLayerPlacement(), itemBase->getViewGeometry(), newID, true, m_viewID, true);
 	if (!tempItemBase) return;			// we're really screwed
 
-	checkFitAux(tempItemBase, itemBase, newID, found, notFound, m2f, byWire, legs, formerLegs, parentCommand);
+	// The by-wire fitting logic (reconnecting around female breadboard holes) only applies in
+	// breadboard.
+	if (m_viewID == ViewLayer::BreadboardView) {
+		checkFitAux(tempItemBase, itemBase, newID, found, notFound, m2f, byWire, legs, formerLegs, parentCommand);
+	}
+
+	// For an obsolete<->replacement swap, record the shift that re-aligns the new part's anchor
+	// connector onto the old part's, so connectors -- and the wires/traces on them -- don't drift
+	// when the two versions have different connector offsets. Reuses this one temp item: creating a
+	// second temp item in the same view corrupts the swap, so do NOT add another.
+	if (isReplacedbyRelation(itemBase->modelPart(), newModelPart)) {
+		const qreal big = std::numeric_limits<int>::max();
+		QPointF oldAnchor(big, big), newAnchor(big, big);
+		bool any = false;
+		Q_FOREACH (ConnectorItem * fromConnectorItem, found.keys()) {
+			Connector * newConnector = found.value(fromConnectorItem);
+			ConnectorItem * newConnectorItem = nullptr;
+			Q_FOREACH (ConnectorItem * nci, tempItemBase->cachedConnectorItems()) {
+				if (nci->connector()->connectorShared() == newConnector->connectorShared()) {
+					newConnectorItem = nci;
+					break;
+				}
+			}
+			if (newConnectorItem == nullptr) continue;
+			QPointF op = fromConnectorItem->sceneAdjustedTerminalPoint(nullptr);
+			QPointF np = newConnectorItem->sceneAdjustedTerminalPoint(nullptr);
+			oldAnchor.setX(qMin(oldAnchor.x(), op.x()));
+			oldAnchor.setY(qMin(oldAnchor.y(), op.y()));
+			newAnchor.setX(qMin(newAnchor.x(), np.x()));
+			newAnchor.setY(qMin(newAnchor.y(), np.y()));
+			any = true;
+		}
+		if (any) m_swapAlignOffset = oldAnchor - newAnchor;
+	}
+
 	delete tempItemBase;
 }
 
@@ -6989,14 +7027,6 @@ void SketchWidget::checkFitAux(ItemBase * tempItemBase, ItemBase * itemBase, lon
 	// junction connector to a single bridge wire and dropping its other connections.
 	// For such swaps trust the connector correlation and reconnect directly.
 	bool sameLogicalPart = isReplacedbyRelation(itemBase->modelPart(), tempItemBase->modelPart());
-
-	// Keep connectors in place across the swap: shift the new part so its anchor connector lands on
-	// the old part's anchor connector, rather than at the new SVG's own offset. Without this the new
-	// connectors (and the wires attached to them) drift when the two versions differ (e.g. the
-	// obsolete part's broken terminal falls back to the connector-rect centre). #1070.
-	if (sameLogicalPart && !foundNews.isEmpty()) {
-		m_swapAlignOffset = foundAnchor - newAnchor;
-	}
 
 	bool allCorrespond = true;
 	if (!sameLogicalPart) {
