@@ -111,6 +111,9 @@ private:
 	// Part size (max bound dimension) at which the view was last zoomed; -1 until the dialog opens.
 	// Drives "zoom once, then only re-zoom when a part is >=2x / <=0.5x that size".
 	qreal m_focusPartSize = -1.0;
+	// Queue position the view is currently focused on; -1 until the dialog opens. The view is left
+	// untouched while this stays the same (i.e. when only the old/new version of a part changes).
+	int m_focusIndex = -1;
 
 	// Dialog widgets
 	QPointer<QDialog> m_dialog;

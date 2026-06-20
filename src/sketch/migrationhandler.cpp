@@ -27,7 +27,6 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../waitpushundostack.h"
 #include "../commands.h"
 #include "../viewlayer.h"
-#include "../connectors/connectoritem.h"
 
 #include <QDialog>
 #include <QVBoxLayout>
@@ -254,8 +253,9 @@ void MigrationHandler::createMigrationDialog()
 		m_dialog->close();
 	}
 
-	// New session: zoom afresh on the first part shown (see centerAndZoomOnItem).
+	// New session: zoom afresh on the first part shown, and treat it as a fresh focus.
 	m_focusPartSize = -1.0;
+	m_focusIndex = -1;
 
 	// Parent to the MainWindow (not the sketch view): Fritzing sets its stylesheet per-MainWindow
 	// rather than app-wide, so this makes the dialog inherit the app styling, and it centres on
@@ -500,44 +500,40 @@ void MigrationHandler::centerAndZoomOnItem(ItemBase* item)
 
 	MainWindow* mainWindow = findMainWindow();
 	if (mainWindow == nullptr) return;
-
-	// Bring the view that actually contains this part to the front, then zoom it
-	// so the user sees the part being migrated regardless of which view they were on.
-	mainWindow->setCurrentView(item->viewID());
 	SketchWidget* view = mainWindow->sketchWidgetForView(item->viewID());
 	if (view == nullptr) return;
 
-	QRectF bounds = item->sceneBoundingRect();
-	if (bounds.isEmpty()) bounds = QRectF(item->pos(), QSizeF(1, 1));
+	// Only move/zoom the view when stepping to a DIFFERENT part. Toggling the current part
+	// old<->new (same queue position) must not disturb the view at all -- the swap itself keeps the
+	// connectors in place (see SketchWidget::computeSwapAlignOffset), and the user shouldn't see the
+	// canvas jump just because they compared the two versions.
+	if (m_currentIndex != m_focusIndex) {
+		// Bring the view that actually contains this part to the front so the user sees it.
+		mainWindow->setCurrentView(item->viewID());
 
-	// Centre on the part's first connector (the one the swap aligns on) rather than its
-	// bounding-box centre: the connector terminal sits on the fixed pin row, so the view stays put
-	// when a part's bounding box changes between its old and new version (the body height differs).
-	QPointF anchor = bounds.center();
-	Q_FOREACH (ConnectorItem* connectorItem, item->cachedConnectorItems()) {
-		if (connectorItem != nullptr) {
-			anchor = connectorItem->sceneAdjustedTerminalPoint(nullptr);
-			break;
+		QRectF bounds = item->sceneBoundingRect();
+		if (bounds.isEmpty()) bounds = QRectF(item->pos(), QSizeF(1, 1));
+
+		// Zoom once (the first part shown), then keep that zoom while navigating -- only re-zoom
+		// when the next/previous part differs in size by >= 2x (or <= 0.5x) so very different parts
+		// still fit. Otherwise just recentre (pan) on the part, which is far less jarring.
+		qreal partSize = qMax(bounds.width(), bounds.height());
+		bool rezoom = (m_focusPartSize <= 0.0)
+		           || (partSize >= m_focusPartSize * 2.0)
+		           || (partSize <= m_focusPartSize * 0.5);
+		if (rezoom) {
+			// Fit the part's bounds plus a margin proportional to its size, so small and large parts
+			// both fill a consistent fraction of the view.
+			qreal margin = partSize * 2.5;
+			view->fitInView(bounds.adjusted(-margin, -margin, margin, margin), Qt::KeepAspectRatio);
+			view->updateZoomFromCurrentTransform();
+			m_focusPartSize = partSize;
 		}
+		else {
+			view->centerOn(bounds.center());
+		}
+		m_focusIndex = m_currentIndex;
 	}
-
-	// Zoom once, when the dialog opens, then keep that zoom while navigating -- only re-zoom when
-	// the next/previous part differs in size by >= 2x (or <= 0.5x) so very different parts still
-	// fit. Otherwise just recentre (pan) on the connector, which is far less jarring.
-	qreal partSize = qMax(bounds.width(), bounds.height());
-	bool rezoom = (m_focusPartSize <= 0.0)
-	           || (partSize >= m_focusPartSize * 2.0)
-	           || (partSize <= m_focusPartSize * 0.5);
-	if (rezoom) {
-		// Fit the part's bounds plus a margin proportional to its size, so small and large parts
-		// both fill a consistent fraction of the view.
-		qreal margin = partSize * 2.5;
-		QRectF focusRect = bounds.adjusted(-margin, -margin, margin, margin);
-		view->fitInView(focusRect, Qt::KeepAspectRatio);
-		view->updateZoomFromCurrentTransform();
-		m_focusPartSize = partSize;
-	}
-	view->centerOn(anchor);
 
 	view->scene()->clearSelection();
 	item->setSelected(true);
@@ -767,6 +763,7 @@ void MigrationHandler::onDialogClosed()
 	m_pendingMigrations.clear();
 	m_currentIndex = 0;
 	m_focusPartSize = -1.0;
+	m_focusIndex = -1;
 
 	// These widgets are children of the dialog and are being destroyed with it; drop the
 	// dangling raw pointers so nothing touches them before the next createMigrationDialog().
