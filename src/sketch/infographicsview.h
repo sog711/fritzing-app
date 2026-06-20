@@ -49,6 +49,10 @@ public:
 	void setInfoView(class HtmlInfoView *);
 	class HtmlInfoView * infoView();
 
+	// Ask the host window to open the Part Migration dialog for one obsolete part (the obsolete
+	// "bug" badge on a part is a clickable shortcut to this). Emits migrateObsoletePartSignal.
+	void requestObsoleteMigration(ItemBase * itemBase);
+
 	virtual void mousePressConnectorEvent(ConnectorItem *, QGraphicsSceneMouseEvent *);
 
 
@@ -130,6 +134,7 @@ Q_SIGNALS:
 	void setActiveWireSignal(Wire *);
 	void setActiveConnectorItemSignal(ConnectorItem *);
 	void newWireSignal(Wire *);
+	void migrateObsoletePartSignal(qint64 itemId);
 
 public:
 	static InfoGraphicsView * getInfoGraphicsView(QGraphicsItem *);

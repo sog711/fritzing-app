@@ -643,6 +643,19 @@ void MigrationHandler::silenceCurrentMigration()
 		}
 	}
 
+	// The "outdated part" badge should disappear now this instance is silenced; refresh it in
+	// every view that holds the part.
+	MainWindow* mainWindow = findMainWindow();
+	if (mainWindow != nullptr) {
+		const ViewLayer::ViewID viewIDs[] = { ViewLayer::BreadboardView, ViewLayer::SchematicView, ViewLayer::PCBView };
+		for (ViewLayer::ViewID viewID : viewIDs) {
+			SketchWidget* view = mainWindow->sketchWidgetForView(viewID);
+			if (view == nullptr) continue;
+			ItemBase* viewItem = view->findItem(info.itemId);
+			if (viewItem != nullptr) viewItem->layerKinChief()->updateObsoleteAnnotation();
+		}
+	}
+
 	info.decided = true;
 	info.silenced = true;
 	// Move to the next undecided part (closes when all are decided)

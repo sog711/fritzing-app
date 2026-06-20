@@ -719,6 +719,11 @@ void MainWindow::connectPairs() {
 	connect(m_schematicGraphicsView, &SketchWidget::itemAddedSignal, this, &MainWindow::onItemAddedToSketch);
 	connect(m_pcbGraphicsView, &SketchWidget::itemAddedSignal, this, &MainWindow::onItemAddedToSketch);
 
+	// The obsolete "bug" badge on a part is a clickable shortcut to update that one part.
+	connect(m_breadboardGraphicsView, &InfoGraphicsView::migrateObsoletePartSignal, this, &MainWindow::migrateObsoletePart);
+	connect(m_schematicGraphicsView, &InfoGraphicsView::migrateObsoletePartSignal, this, &MainWindow::migrateObsoletePart);
+	connect(m_pcbGraphicsView, &InfoGraphicsView::migrateObsoletePartSignal, this, &MainWindow::migrateObsoletePart);
+
 	succeeded =  succeeded && (connect(m_pcbGraphicsView, SIGNAL(subSwapSignal(SketchWidget *, ItemBase *, const QString &, ViewLayer::ViewLayerPlacement, long &, QUndoCommand *)),
 	                                  this, SLOT(subSwapSlot(SketchWidget *, ItemBase *, const QString &, ViewLayer::ViewLayerPlacement, long &, QUndoCommand *)),
 	                                  Qt::DirectConnection) != nullptr);

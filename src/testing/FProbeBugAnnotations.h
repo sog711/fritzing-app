@@ -31,7 +31,9 @@ class MainWindow;
 // Reports the bug annotations (the red error markers ItemBase::hasBug() drives) currently shown
 // across all views, so tests can detect stray/duplicated annotations -- e.g. an artifact left
 // behind by a part swap-back.
-//   read() -> JSON: { "count": N, "items": [ {id, title, module, view}, ... ] }
+//   read()  -> JSON: { "count": N, "items": [ {id, title, module, view}, ... ] }
+//   write() -> action "click:<instanceTitle>" simulates clicking that part's obsolete badge
+//             (the shortcut to the Part Migration dialog); result JSON: { ok, [reason] }.
 class FProbeBugAnnotations : public QObject, public FProbe {
 	Q_OBJECT
 public:
@@ -43,6 +45,7 @@ public:
 
 Q_SIGNALS:
 	void requestInfo();
+	void requestAction(const QString &action);
 
 private:
 	MainWindow *m_mainWindow;

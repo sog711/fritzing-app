@@ -32,7 +32,14 @@ class BugItem : public QGraphicsSvgItem {
 public:
     using QGraphicsSvgItem::QGraphicsSvgItem;
 protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent *) override {
+    void mousePressEvent(QGraphicsSceneMouseEvent * event) override {
+        // An obsolete part's badge is a shortcut to update it: let the owner handle the click
+        // (open the Part Migration dialog). Otherwise just select the part, as before.
+        auto * owner = dynamic_cast<ItemBase *>(parentItem());
+        if (owner != nullptr && owner->bugAnnotationClicked()) {
+            event->accept();
+            return;
+        }
         if (scene()) scene()->clearSelection();
         if (parentItem()) parentItem()->setSelected(true);
     }

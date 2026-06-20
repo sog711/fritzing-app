@@ -60,6 +60,42 @@ FProbeBugAnnotations::FProbeBugAnnotations(MainWindow *mainWindow)
 		result["items"] = items;
 		m_lastResult = QVariant(QString(QJsonDocument(result).toJson(QJsonDocument::Compact)));
 	}, Qt::BlockingQueuedConnection);
+
+	// "click:<instanceTitle>" simulates a user clicking that part's obsolete badge, exercising the
+	// same path as BugItem::mousePressEvent -> ItemBase::bugAnnotationClicked (open the migration
+	// dialog). Hops to the GUI thread for scene access.
+	connect(this, &FProbeBugAnnotations::requestAction, mainWindow, [this](const QString &action) {
+		QJsonObject result;
+		QString title = action.startsWith("click:") ? action.mid(6) : QString();
+		if (title.isEmpty()) {
+			result["ok"] = false;
+			result["reason"] = QString("unknown action '%1'").arg(action);
+			m_lastResult = QVariant(QString(QJsonDocument(result).toJson(QJsonDocument::Compact)));
+			return;
+		}
+
+		ItemBase *target = nullptr;
+		const ViewLayer::ViewID viewIds[] = { ViewLayer::BreadboardView, ViewLayer::SchematicView, ViewLayer::PCBView };
+		for (int v = 0; v < 3 && target == nullptr; ++v) {
+			SketchWidget *view = m_mainWindow->sketchWidgetForView(viewIds[v]);
+			if (view == nullptr) continue;
+			Q_FOREACH (QGraphicsItem *gi, view->scene()->items()) {
+				ItemBase *ib = dynamic_cast<ItemBase *>(gi);
+				if (ib != nullptr && ib->hasBug() && ib->instanceTitle() == title) {
+					target = ib->layerKinChief();
+					break;
+				}
+			}
+		}
+
+		if (target == nullptr) {
+			result["ok"] = false;
+			result["reason"] = QString("no part with a bug badge titled '%1'").arg(title);
+		} else {
+			result["ok"] = target->bugAnnotationClicked();
+		}
+		m_lastResult = QVariant(QString(QJsonDocument(result).toJson(QJsonDocument::Compact)));
+	}, Qt::BlockingQueuedConnection);
 }
 
 QVariant FProbeBugAnnotations::read()
@@ -68,7 +104,7 @@ QVariant FProbeBugAnnotations::read()
 	return m_lastResult;
 }
 
-void FProbeBugAnnotations::write(QVariant)
+void FProbeBugAnnotations::write(QVariant var)
 {
-	// read-only probe
+	Q_EMIT requestAction(var.toString());
 }

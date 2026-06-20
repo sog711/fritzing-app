@@ -42,6 +42,11 @@ void InfoGraphicsView::viewItemInfo(ItemBase * item) {
 	m_infoView->viewItemInfo(this, item != nullptr ? item->layerKinChief() : item, swappingEnabled(item));
 }
 
+void InfoGraphicsView::requestObsoleteMigration(ItemBase * itemBase) {
+	if (itemBase == nullptr) return;
+	Q_EMIT migrateObsoletePartSignal(itemBase->layerKinChief()->id());
+}
+
 void InfoGraphicsView::hoverEnterItem(QGraphicsSceneHoverEvent * event, ItemBase * itemBase) {
 	if (m_infoView == nullptr) return;
 

@@ -204,6 +204,8 @@ public:
 	void repositionBug();
 	bool hasBug() const;
 	QString bugText() const;
+	void updateObsoleteAnnotation();   // show/hide the "outdated part" badge per obsolete + silence state
+	bool bugAnnotationClicked();       // handle a click on the badge (returns true if it triggered migration)
 	virtual QHash<QString, QString> prepareProps(ModelPart *, bool wantDebug, QStringList & keys);
 	void resetValues(const QString & family, const QString & prop);
 	const QString & filename();

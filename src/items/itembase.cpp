@@ -1646,6 +1646,32 @@ QString ItemBase::bugText() const
 	return m_bugAnnotation.text();
 }
 
+void ItemBase::updateObsoleteAnnotation()
+{
+	// Show the "outdated part" badge on obsolete parts, unless the user has silenced this
+	// instance (soft "ask" parts store a silencedDate when silenced). The badge doubles as a
+	// clickable shortcut to the Part Migration dialog (see bugAnnotationClicked()).
+	bool silenced = (modelPart() != nullptr) && !modelPart()->localProp("silencedDate").toString().isEmpty();
+	if (isObsolete() && !silenced) {
+		showBug(QStringLiteral("obsolete"),
+				QStringList() << tr("This part is outdated. Click to update it."));
+	}
+	else {
+		clearBug(QStringLiteral("obsolete"));
+	}
+}
+
+bool ItemBase::bugAnnotationClicked()
+{
+	// The obsolete badge doubles as an "update me" button: route this one part to the Part
+	// Migration dialog (the same flow as the Inspector's obsolete link). Returns true if handled.
+	if (!isObsolete()) return false;
+	InfoGraphicsView * infoGraphicsView = InfoGraphicsView::getInfoGraphicsView(this);
+	if (infoGraphicsView == nullptr) return false;
+	infoGraphicsView->requestObsoleteMigration(this);
+	return true;
+}
+
 bool ItemBase::collectExtraInfo(QWidget * parent, const QString & family, const QString & prop, const QString & value, bool swappingEnabled, QString & returnProp, QString & returnValue, QWidget * & returnWidget, bool & hide)
 {
 	Q_UNUSED(hide);                 // assume this is set by the caller (HtmlInfoView)
@@ -2098,11 +2124,8 @@ void ItemBase::addedToScene(bool temporary) {
 			setLocalSticky(true);
 		}
 	}
-	if (!temporary && isObsolete()) {
-		showBug(QStringLiteral("obsolete"),
-				QStringList() << tr("This part is obsolete and has been replaced."));
-	}
 	if (!temporary) {
+		updateObsoleteAnnotation();
 		// boards show their open-lock symbol as soon as they exist in a view
 		updateLockSymbol();
 	}
