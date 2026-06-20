@@ -108,6 +108,9 @@ private:
 	SketchWidget* m_sketchWidget;
 	QList<MigrationInfo> m_pendingMigrations;
 	int m_currentIndex;
+	// Part size (max bound dimension) at which the view was last zoomed; -1 until the dialog opens.
+	// Drives "zoom once, then only re-zoom when a part is >=2x / <=0.5x that size".
+	qreal m_focusPartSize = -1.0;
 
 	// Dialog widgets
 	QPointer<QDialog> m_dialog;
