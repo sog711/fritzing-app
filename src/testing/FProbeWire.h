@@ -51,6 +51,7 @@ private:
 	ConnectorItem * findConnector(ItemBase *part, const QString &connectorId);
 
 	QJsonObject handleGetWires(SketchWidget *view, const QJsonObject &params);
+	QJsonObject handleGetConnections(SketchWidget *view, const QJsonObject &params);
 	QJsonObject handleGetWireInfo(SketchWidget *view, const QJsonObject &params);
 	QJsonObject handleGetWirePos(SketchWidget *view, const QJsonObject &params, bool start);
 	QJsonObject handleGetConnectorScenePos(SketchWidget *view, const QJsonObject &params);

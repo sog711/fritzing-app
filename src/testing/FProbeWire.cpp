@@ -33,6 +33,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QGraphicsScene>
+#include <QSet>
 
 FProbeWire::FProbeWire(MainWindow *mainWindow)
 	: QObject(mainWindow)
@@ -54,6 +55,8 @@ FProbeWire::FProbeWire(MainWindow *mainWindow)
 
 		if (cmd == "getWires") {
 			result = handleGetWires(view, params);
+		} else if (cmd == "getConnections") {
+			result = handleGetConnections(view, params);
 		} else if (cmd == "getWireInfo") {
 			result = handleGetWireInfo(view, params);
 		} else if (cmd == "getWireStartPos") {
@@ -168,6 +171,83 @@ QJsonObject FProbeWire::handleGetWires(SketchWidget *view, const QJsonObject &pa
 
 	result["ok"] = true;
 	result["wireIds"] = wireIds;
+	return result;
+}
+
+QJsonObject FProbeWire::handleGetConnections(SketchWidget *currentViewArg, const QJsonObject &params)
+{
+	// Raw ground-truth dump of a part's per-view connections: for each connector, every item it is
+	// connected to (breadboard pins, other part pins, wires), with ratsnest/wire flags. Unlike
+	// getWires this includes non-wire connections and ratsnest, and unlike the DebugConnectors
+	// "differing QSets" report it is the direct connectedToItems() set, not a derived comparison.
+	QJsonObject result;
+	QString partTitle = params["part"].toString();
+	QString connId = params["connector"].toString();   // optional; empty = all connectors
+	QString viewName = params["view"].toString();       // optional; empty = current view
+
+	// Resolve the requested view directly so a query neither depends on nor disturbs the active
+	// view (the migration dialog moves the active view around as it navigates).
+	SketchWidget *view = currentViewArg;
+	if (viewName == "breadboard") view = m_mainWindow->sketchWidgetForView(ViewLayer::BreadboardView);
+	else if (viewName == "schematic") view = m_mainWindow->sketchWidgetForView(ViewLayer::SchematicView);
+	else if (viewName == "pcb") view = m_mainWindow->sketchWidgetForView(ViewLayer::PCBView);
+	if (!view) {
+		result["ok"] = false;
+		result["error"] = QString("view '%1' not found").arg(viewName);
+		return result;
+	}
+
+	result["ok"] = true;
+	result["view"] = ViewLayer::viewIDNaturalName(view->viewID());
+
+	ItemBase *part = findPartByTitle(view, partTitle);
+	if (!part) {
+		// Absence in a view is itself ground-truth data, not an error.
+		result["found"] = false;
+		result["connectors"] = QJsonArray();
+		return result;
+	}
+	part = part->layerKinChief();
+	result["found"] = true;
+
+	QJsonArray connectors;
+	for (ConnectorItem *ci : part->cachedConnectorItems()) {
+		if (ci == nullptr) continue;
+		if (!connId.isEmpty() && ci->connectorSharedID() != connId) continue;
+
+		// In PCB a connector is split across copper layer-kin (Copper0 / Copper1); a trace attaches
+		// to one layer's item, so cachedConnectorItems() alone misses connections on the other
+		// layer. Aggregate this connector item and its cross-layer twin, deduped by target.
+		QList<ConnectorItem *> sources;
+		sources << ci;
+		ConnectorItem *cross = ci->getCrossLayerConnectorItem();
+		if (cross != nullptr && cross != ci) sources << cross;
+
+		QSet<ConnectorItem *> seen;
+		QJsonArray connectedTo;
+		for (ConnectorItem *src : sources) {
+			for (ConnectorItem *to : src->connectedToItems()) {
+				if (to == nullptr || seen.contains(to)) continue;
+				seen.insert(to);
+				ItemBase *toItem = to->attachedTo();
+				if (toItem == nullptr) continue;
+				Wire *w = qobject_cast<Wire *>(toItem);
+				QJsonObject e;
+				e["title"] = to->attachedToInstanceTitle();
+				e["connector"] = to->connectorSharedID();
+				e["isWire"] = (w != nullptr);
+				e["ratsnest"] = (w != nullptr && w->getRatsnest());
+				connectedTo.append(e);
+			}
+		}
+
+		QJsonObject centry;
+		centry["connector"] = ci->connectorSharedID();
+		centry["count"] = connectedTo.size();
+		centry["connectedTo"] = connectedTo;
+		connectors.append(centry);
+	}
+	result["connectors"] = connectors;
 	return result;
 }
 

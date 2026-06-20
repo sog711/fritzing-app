@@ -53,6 +53,7 @@ FProbeMigrationDialog::FProbeMigrationDialog(MainWindow *mainWindow)
 			QPushButton *prev = dialog->findChild<QPushButton *>("migrationPrevButton");
 			QPushButton *next = dialog->findChild<QPushButton *>("migrationNextButton");
 
+			result["instanceTitle"] = dialog->property("currentInstanceTitle").toString();
 			result["selected"] = QString((newRadio && newRadio->isChecked()) ? "new" : "old");
 			result["oldText"] = oldRadio ? oldRadio->text() : QString();
 			result["newText"] = newRadio ? newRadio->text() : QString();
