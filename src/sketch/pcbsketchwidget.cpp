@@ -1374,8 +1374,19 @@ void PCBSketchWidget::deleteItem(ItemBase * itemBase, bool deleteModelPart, bool
 	}
 }
 
+static void applyNewBoardDefaults(ItemBase * itemBase, long modelIndex) {
+	if (modelIndex >= 0) return;
+	if (!Board::isBoard(itemBase)) return;
+
+	itemBase->setMoveLock(true);
+	if (itemBase->isBaseSticky()) {
+		itemBase->setLocalSticky(true);
+	}
+}
+
 ItemBase * PCBSketchWidget::addItem(ModelPart * modelPart, ViewLayer::ViewLayerPlacement viewLayerPlacement, BaseCommand::CrossViewType crossViewType, const ViewGeometry & viewGeometry, long id, long modelIndex, AddDeleteItemCommand * originatingCommand) {
 	ItemBase * itemBase = SketchWidget::addItem(modelPart, viewLayerPlacement, crossViewType, viewGeometry, id, modelIndex, originatingCommand);
+	applyNewBoardDefaults(itemBase, modelIndex);
 	if (Board::isBoard(itemBase)) {
 		if (findBoard().count() == 1) {
 			Q_EMIT boardReaddedSignal();
