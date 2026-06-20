@@ -317,9 +317,9 @@ void SymbolPaletteItem::setLabel(const QString & label) {
 QString SymbolPaletteItem::defaultNetLabelStyle() {
 	if (!NetLabelDefaultStyleLoaded) {
 		QSettings settings;
-		QString value = settings.value("schemNetLabelStyle", NetLabelStyleConnector).toString();
+		QString value = settings.value("schemNetLabelStyle", NetLabelStyleOutside).toString();
 		// Legacy is only ever the initial state of old parts, never a configurable default.
-		NetLabelDefaultStyle = (value == NetLabelStyleOutside) ? NetLabelStyleOutside : NetLabelStyleConnector;
+		NetLabelDefaultStyle = (value == NetLabelStyleConnector) ? NetLabelStyleConnector : NetLabelStyleOutside;
 		NetLabelDefaultStyleLoaded = true;
 	}
 	return NetLabelDefaultStyle;

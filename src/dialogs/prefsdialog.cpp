@@ -735,12 +735,12 @@ QWidget* PrefsDialog::createNetLabelStyleForm()
 	layout->addSpacing(10);
 
 	QSettings settings;
-	QString current = settings.value("schemNetLabelStyle", "connector").toString();
+	QString current = settings.value("schemNetLabelStyle", "outside").toString();
 
 	// "legacy" is intentionally not offered as a global default (it can still be selected
 	// per item in the Inspector).
-	const QString policies[2] = { "connector", "outside" };
-	const QString texts[2] = { tr("Connector aligned"), tr("Outside aligned") };
+	const QString policies[2] = { "outside", "connector" };
+	const QString texts[2] = { tr("Outside aligned"), tr("Connector aligned") };
 	const QSize iconSize(56, 22);
 
 	// A grid keeps the two preview columns vertically aligned regardless of the (differing)
