@@ -6641,6 +6641,9 @@ void SketchWidget::setUpSwapReconnect(SwapThing & swapThing, QString newModuleID
 	ModelPart * newModelPart = m_referenceModel->retrieveModelPart(newModuleID);
 	if (!newModelPart) return;
 
+	// Reset per swap/view; checkFitAux may set it (below) to keep connectors in place on a swap.
+	m_swapAlignOffset = QPointF(0, 0);
+
 	QList<ConnectorItem *> fromConnectorItems(itemBase->cachedConnectorItems());
 
 	newModelPart->initConnectors();			//  make sure the connectors are set up
@@ -6849,8 +6852,10 @@ void SketchWidget::setUpSwapReconnect(SwapThing & swapThing, QString newModuleID
 
 
 	// changeConnection calls PaletteItemBase::connectedMoved which repositions the new part
-	// so slam in the desired position
-	QPointF p = itemBase->getViewGeometry().loc();
+	// so slam in the desired position. m_swapAlignOffset (usually zero) shifts the new part so its
+	// alignment connector lands exactly where the old part's was, so connectors -- and the wires on
+	// them -- don't drift when the two versions have different connector offsets (#1070).
+	QPointF p = itemBase->getViewGeometry().loc() + m_swapAlignOffset;
 	new SimpleMoveItemCommand(this, newID, p, p, swapThing.parentCommand);
 
 	Q_FOREACH (QString connectorID, legs.keys()) {
@@ -6984,6 +6989,14 @@ void SketchWidget::checkFitAux(ItemBase * tempItemBase, ItemBase * itemBase, lon
 	// junction connector to a single bridge wire and dropping its other connections.
 	// For such swaps trust the connector correlation and reconnect directly.
 	bool sameLogicalPart = isReplacedbyRelation(itemBase->modelPart(), tempItemBase->modelPart());
+
+	// Keep connectors in place across the swap: shift the new part so its anchor connector lands on
+	// the old part's anchor connector, rather than at the new SVG's own offset. Without this the new
+	// connectors (and the wires attached to them) drift when the two versions differ (e.g. the
+	// obsolete part's broken terminal falls back to the connector-rect centre). #1070.
+	if (sameLogicalPart && !foundNews.isEmpty()) {
+		m_swapAlignOffset = foundAnchor - newAnchor;
+	}
 
 	bool allCorrespond = true;
 	if (!sameLogicalPart) {

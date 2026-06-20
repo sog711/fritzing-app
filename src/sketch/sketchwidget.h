@@ -680,6 +680,9 @@ protected:
 	QPointer<SketchModel> m_sketchModel;
 	OutlierHandler* m_outlierHandler;
 	MigrationHandler* m_migrationHandler;
+	// Offset applied to a swapped-in part's position so its alignment connector lands on the old
+	// part's connector (set by checkFitAux for replacedby swaps; (0,0) otherwise).
+	QPointF m_swapAlignOffset;
 	ViewLayer::ViewID m_viewID;
 	class WaitPushUndoStack * m_undoStack = nullptr;
 	class SelectItemCommand * m_holdingSelectItemCommand = nullptr;
