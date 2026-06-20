@@ -54,9 +54,16 @@ void FTesting::addProbe(FProbe * probe)
 	m_probeMap[probe->name()] = probe;
 }
 
-void FTesting::removeProbe(std::string name)
+void FTesting::removeProbe(const std::string & name, FProbe * probe)
 {
-	m_probeMap.erase(name);
+	// Only drop the entry if it still points at this probe. When a MainWindow is recreated (e.g.
+	// "Revert"), the new window registers same-named probes before the old window's probe children
+	// are destroyed; without this guard the old probe's destructor would erase the new probe's
+	// entry, 404-ing every MainWindow-scoped probe after a revert.
+	auto it = m_probeMap.find(name);
+	if (it != m_probeMap.end() && it->second == probe) {
+		m_probeMap.erase(it);
+	}
 }
 
 std::optional<QVariant> FTesting::readProbe(std::string name)

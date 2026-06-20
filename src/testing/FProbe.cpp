@@ -30,7 +30,7 @@ FProbe::FProbe(std::string name) :
 
 FProbe::~FProbe() {
 	std::shared_ptr<FTesting> fTesting = FTesting::getInstance();
-	fTesting->removeProbe(m_name);
+	fTesting->removeProbe(m_name, this);
 };
 
 std::string FProbe::name() {
