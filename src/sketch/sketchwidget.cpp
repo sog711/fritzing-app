@@ -6960,6 +6960,10 @@ void SketchWidget::checkFit(ModelPart * newModelPart, ItemBase * itemBase, long 
 		if (any) m_swapAlignOffset = oldAnchor - newAnchor;
 	}
 
+	// Delete the temp item's layer-kin (PCB copper layers) too, not just the chief -- a plain
+	// `delete` leaves the kin dangling in the scene, and a stray kin crashes overSticky's sticky
+	// check during the swap. Breadboard parts have no kin, so this is a no-op there.
+	tempItemBase->removeLayerKin();
 	delete tempItemBase;
 }
 
