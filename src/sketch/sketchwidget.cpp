@@ -6897,6 +6897,15 @@ void SketchWidget::makeSwapWire(SketchWidget * bbView, ItemBase * itemBase, long
 	                            bbView, parentCommand);
 }
 
+// An obsolete part and its declared replacement are linked by the `replacedby` attribute. A swap
+// between them can run in either direction (obsolete->replacement when updating, replacement->
+// obsolete on "keep old"), so accept the relation whichever part is the swap source.
+static bool isReplacedbyRelation(ModelPart * a, ModelPart * b)
+{
+	if (a == nullptr || b == nullptr) return false;
+	return a->replacedby() == b->moduleID() || b->replacedby() == a->moduleID();
+}
+
 void SketchWidget::checkFit(ModelPart * newModelPart, ItemBase * itemBase, long newID,
                             QHash<ConnectorItem *, Connector *> & found, QList<ConnectorItem *> & notFound,
                             QHash<ConnectorItem *, ConnectorItem *> & m2f, QHash<ConnectorItem *, Connector *> & byWire,
@@ -6967,16 +6976,27 @@ void SketchWidget::checkFitAux(ItemBase * tempItemBase, ItemBase * itemBase, lon
 	}
 
 
+	// An obsolete part and its declared replacement (linked by `replacedby`, in either swap
+	// direction) are the same logical part: their connectors are correlated by name/replacedby,
+	// not by exact geometry. A broken/zero-width terminal element in one of the two SVGs shifts its
+	// fallback terminal point to the connector-rect centre (see FSvgRenderer::calcTerminalPoint),
+	// which can fail the position check below and wrongly route the swap by wires — collapsing any
+	// junction connector to a single bridge wire and dropping its other connections.
+	// For such swaps trust the connector correlation and reconnect directly.
+	bool sameLogicalPart = isReplacedbyRelation(itemBase->modelPart(), tempItemBase->modelPart());
+
 	bool allCorrespond = true;
-	Q_FOREACH (ConnectorItem * foundConnectorItem, foundNews.keys()) {
-		QPointF fp = foundPoints.value(foundConnectorItem) - foundAnchor;
-		ConnectorItem * newConnectorItem = foundNews.value(foundConnectorItem);
-		QPointF np = newPoints.value(newConnectorItem) - newAnchor;
-		if (!newConnectorItem->hasRubberBandLeg() && (qAbs(fp.x() - np.x()) >= CloseEnough || qAbs(fp.y() - np.y()) >= CloseEnough)) {
-			// pins can be off by a little
-			// but if even one connector is out of place, hook everything up by wires
-			allCorrespond = false;
-			break;
+	if (!sameLogicalPart) {
+		Q_FOREACH (ConnectorItem * foundConnectorItem, foundNews.keys()) {
+			QPointF fp = foundPoints.value(foundConnectorItem) - foundAnchor;
+			ConnectorItem * newConnectorItem = foundNews.value(foundConnectorItem);
+			QPointF np = newPoints.value(newConnectorItem) - newAnchor;
+			if (!newConnectorItem->hasRubberBandLeg() && (qAbs(fp.x() - np.x()) >= CloseEnough || qAbs(fp.y() - np.y()) >= CloseEnough)) {
+				// pins can be off by a little
+				// but if even one connector is out of place, hook everything up by wires
+				allCorrespond = false;
+				break;
+			}
 		}
 	}
 
