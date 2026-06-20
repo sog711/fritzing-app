@@ -119,6 +119,7 @@ private:
 	QRadioButton* m_oldRadio;
 	QRadioButton* m_newRadio;
 	QPushButton* m_silenceButton;
+	QPushButton* m_doneButton;
 	QPushButton* m_updateAllButton;
 	QPushButton* m_prevButton;
 	QPushButton* m_nextButton;

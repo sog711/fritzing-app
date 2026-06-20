@@ -57,6 +57,7 @@ MigrationHandler::MigrationHandler(SketchWidget* sketchWidget, QObject* parent)
 	, m_oldRadio(nullptr)
 	, m_newRadio(nullptr)
 	, m_silenceButton(nullptr)
+	, m_doneButton(nullptr)
 	, m_updateAllButton(nullptr)
 	, m_prevButton(nullptr)
 	, m_nextButton(nullptr)
@@ -330,8 +331,15 @@ void MigrationHandler::createMigrationDialog()
 	m_silenceButton->setObjectName("migrationSilenceButton");
 	m_silenceButton->setToolTip(tr("Keep the old version and don't ask about these changes again"));
 
+	// "Done" simply closes the dialog (each part keeps whatever version it is showing). Always
+	// available, so there is an obvious way to finish even when Silence is hidden (forced parts).
+	m_doneButton = new QPushButton(tr("Done"), m_dialog);
+	m_doneButton->setObjectName("migrationDoneButton");
+	m_doneButton->setToolTip(tr("Close this dialog; your choices are kept"));
+
 	actionLayout->addStretch();
 	actionLayout->addWidget(m_silenceButton);
+	actionLayout->addWidget(m_doneButton);
 	actionLayout->addStretch();
 
 	layout->addLayout(actionLayout);
@@ -357,6 +365,7 @@ void MigrationHandler::createMigrationDialog()
 	// Connect buttons
 	connect(m_newRadio, &QRadioButton::toggled, this, &MigrationHandler::onVersionToggled);
 	connect(m_silenceButton, &QPushButton::clicked, this, &MigrationHandler::silenceCurrentMigration);
+	connect(m_doneButton, &QPushButton::clicked, this, &MigrationHandler::closeDialog);
 	connect(m_updateAllButton, &QPushButton::clicked, this, &MigrationHandler::updateAllMigrations);
 	connect(m_prevButton, &QPushButton::clicked, this, &MigrationHandler::goToPreviousMigration);
 	connect(m_nextButton, &QPushButton::clicked, this, &MigrationHandler::goToNextMigration);
@@ -744,6 +753,7 @@ void MigrationHandler::onDialogClosed()
 	m_oldRadio = nullptr;
 	m_newRadio = nullptr;
 	m_silenceButton = nullptr;
+	m_doneButton = nullptr;
 	m_updateAllButton = nullptr;
 	m_prevButton = nullptr;
 	m_nextButton = nullptr;

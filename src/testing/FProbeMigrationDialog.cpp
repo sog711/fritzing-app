@@ -49,6 +49,7 @@ FProbeMigrationDialog::FProbeMigrationDialog(MainWindow *mainWindow)
 			QRadioButton *oldRadio = dialog->findChild<QRadioButton *>("migrationOldRadio");
 			QRadioButton *newRadio = dialog->findChild<QRadioButton *>("migrationNewRadio");
 			QPushButton *silence = dialog->findChild<QPushButton *>("migrationSilenceButton");
+			QPushButton *done = dialog->findChild<QPushButton *>("migrationDoneButton");
 			QPushButton *updateAll = dialog->findChild<QPushButton *>("migrationUpdateAllButton");
 			QPushButton *prev = dialog->findChild<QPushButton *>("migrationPrevButton");
 			QPushButton *next = dialog->findChild<QPushButton *>("migrationNextButton");
@@ -62,6 +63,7 @@ FProbeMigrationDialog::FProbeMigrationDialog(MainWindow *mainWindow)
 			result["reason"] = labelText("migrationReasonLabel");
 			result["history"] = labelText("migrationHistoryLabel");
 			result["silenceVisible"] = (silence != nullptr && silence->isVisible());
+			result["doneVisible"] = (done != nullptr && done->isVisible());
 			result["updateAllVisible"] = (updateAll != nullptr && updateAll->isVisible());
 			result["prevEnabled"] = (prev != nullptr && prev->isEnabled());
 			result["nextEnabled"] = (next != nullptr && next->isEnabled());
@@ -86,6 +88,7 @@ FProbeMigrationDialog::FProbeMigrationDialog(MainWindow *mainWindow)
 			if (action == "new") clickButton("migrationNewRadio");
 			else if (action == "old") clickButton("migrationOldRadio");
 			else if (action == "silence") clickButton("migrationSilenceButton");
+			else if (action == "done") clickButton("migrationDoneButton");
 			else if (action == "updateAll") clickButton("migrationUpdateAllButton");
 			else if (action == "next") clickButton("migrationNextButton");
 			else if (action == "previous") clickButton("migrationPrevButton");
