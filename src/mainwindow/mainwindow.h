@@ -668,6 +668,7 @@ protected:
 	virtual QWidget * currentTabWidget();
 	virtual bool activeLayerWidgetAlwaysOn();
 	bool copySvg(const QString & path, QFileInfoList & svgEntryInfoList, const QString &moduleID = QString());
+	QList<class SketchWidget *> migrationScanViews();   // the non-null breadboard/schematic/pcb views
 	QList<ItemBase *> collectObsoleteAcrossViews();
 	bool hasObsoleteParts();
 	// Where a migration check was triggered from. Governs the per-mode prompt policy:

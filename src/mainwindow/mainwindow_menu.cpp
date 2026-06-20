@@ -4017,14 +4017,20 @@ ModelPart * MainWindow::findReplacedby(ModelPart * originalModelPart) {
 	}
 }
 
-QList<ItemBase *> MainWindow::collectObsoleteAcrossViews() {
-	// Obsolete instances across all views, deduped by their shared cross-view id.
-	QHash<qint64, ItemBase *> obsoleteById;
+QList<SketchWidget *> MainWindow::migrationScanViews() {
+	// The non-null breadboard/schematic/pcb views the migration logic iterates. (sketchWidgets()
+	// can contain nulls; the migration code wants the present ones only.)
 	QList<SketchWidget *> views;
 	if (m_breadboardGraphicsView) views << m_breadboardGraphicsView;
 	if (m_schematicGraphicsView) views << m_schematicGraphicsView;
 	if (m_pcbGraphicsView) views << m_pcbGraphicsView;
-	Q_FOREACH (SketchWidget * view, views) {
+	return views;
+}
+
+QList<ItemBase *> MainWindow::collectObsoleteAcrossViews() {
+	// Obsolete instances across all views, deduped by their shared cross-view id.
+	QHash<qint64, ItemBase *> obsoleteById;
+	Q_FOREACH (SketchWidget * view, migrationScanViews()) {
 		Q_FOREACH (ItemBase * item, view->collectObsolete()) {
 			obsoleteById.insert(item->id(), item);
 		}
@@ -4035,11 +4041,7 @@ QList<ItemBase *> MainWindow::collectObsoleteAcrossViews() {
 bool MainWindow::hasObsoleteParts() {
 	// Whether the sketch contains any obsolete part, short-circuiting on the first view that
 	// has one. Used to enable "Select outdated parts" regardless of the current selection.
-	QList<SketchWidget *> views;
-	if (m_breadboardGraphicsView) views << m_breadboardGraphicsView;
-	if (m_schematicGraphicsView) views << m_schematicGraphicsView;
-	if (m_pcbGraphicsView) views << m_pcbGraphicsView;
-	Q_FOREACH (SketchWidget * view, views) {
+	Q_FOREACH (SketchWidget * view, migrationScanViews()) {
 		if (!view->collectObsolete().isEmpty()) return true;
 	}
 	return false;
@@ -4055,10 +4057,7 @@ QList<ItemBase *> MainWindow::routeHistoryMigrations(const QList<ItemBase *> & o
 	QList<ItemBase *> rest;
 	if (obsoleteItems.isEmpty()) return rest;
 
-	QList<SketchWidget *> views;
-	if (m_breadboardGraphicsView) views << m_breadboardGraphicsView;
-	if (m_schematicGraphicsView) views << m_schematicGraphicsView;
-	if (m_pcbGraphicsView) views << m_pcbGraphicsView;
+	QList<SketchWidget *> views = migrationScanViews();
 	if (views.isEmpty()) return obsoleteItems;
 
 	// "Mixed" detection is only needed for soft (ask) parts on the automatic triggers.
@@ -4149,10 +4148,7 @@ void MainWindow::scheduleDropMigrationCheck() {
 void MainWindow::checkDroppedPartMigration() {
 	if (m_useOldSchematic) return;
 
-	QList<SketchWidget *> views;
-	if (m_breadboardGraphicsView) views << m_breadboardGraphicsView;
-	if (m_schematicGraphicsView) views << m_schematicGraphicsView;
-	if (m_pcbGraphicsView) views << m_pcbGraphicsView;
+	QList<SketchWidget *> views = migrationScanViews();
 	if (views.isEmpty()) return;
 
 	// Don't pile onto an already-open migration dialog.
