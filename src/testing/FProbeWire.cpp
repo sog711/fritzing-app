@@ -151,14 +151,26 @@ QJsonObject FProbeWire::handleGetWires(SketchWidget *view, const QJsonObject &pa
 		return result;
 	}
 
+	// In PCB a connector is split across copper layer-kin (copper0 / copper1); a trace attaches to
+	// one layer's item, so connectedToItems() on a single item misses traces on the other layer.
+	// Aggregate this connector item and its cross-layer twin (like getConnections does), deduped by
+	// wire id -- otherwise a part wired only on the far copper layer looks like it has no wires.
 	QJsonArray wireIds;
 	QList<Wire *> matchedWires;
-	for (const auto &connected : ci->connectedToItems()) {
-		if (!connected) continue;
-		Wire *w = qobject_cast<Wire *>(connected->attachedTo());
-		if (w && !w->getRatsnest()) {
-			wireIds.append(static_cast<qint64>(w->id()));
-			matchedWires.append(w);
+	QSet<long> seenWireIds;
+	QList<ConnectorItem *> sources;
+	sources << ci;
+	ConnectorItem *cross = ci->getCrossLayerConnectorItem();
+	if (cross != nullptr && cross != ci) sources << cross;
+	for (ConnectorItem *src : sources) {
+		for (const auto &connected : src->connectedToItems()) {
+			if (!connected) continue;
+			Wire *w = qobject_cast<Wire *>(connected->attachedTo());
+			if (w && !w->getRatsnest() && !seenWireIds.contains(w->id())) {
+				seenWireIds.insert(w->id());
+				wireIds.append(static_cast<qint64>(w->id()));
+				matchedWires.append(w);
+			}
 		}
 	}
 
