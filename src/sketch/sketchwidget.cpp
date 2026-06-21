@@ -6772,6 +6772,14 @@ void SketchWidget::setUpSwapReconnect(SwapThing & swapThing, QString newModuleID
 		checkFit(newModelPart, itemBase, newID, found, notFound, m2f, swapThing.byWire, legs, formerLegs, swapThing.parentCommand);
 	}
 
+	// Place the swapped-in part at its final position BEFORE reconnecting its wires, so the wires
+	// snap to the final connector positions. Applying the alignment offset only afterwards (the move
+	// at the end of this function) leaves the wires/traces at the pre-offset spot -- stranded -- in
+	// any view where the offset is non-zero (e.g. PCB). m_swapAlignOffset is zero except for
+	// replacedby swaps that need re-aligning.
+	QPointF p = itemBase->getViewGeometry().loc() + m_swapAlignOffset;
+	new SimpleMoveItemCommand(this, newID, p, p, swapThing.parentCommand);
+
 	fromConnectorItems.append(other);
 	Q_FOREACH (ConnectorItem * fromConnectorItem, fromConnectorItems) {
 		//fromConnectorItem->debugInfo("from");
@@ -6864,11 +6872,9 @@ void SketchWidget::setUpSwapReconnect(SwapThing & swapThing, QString newModuleID
 	}
 
 
-	// changeConnection calls PaletteItemBase::connectedMoved which repositions the new part
-	// so slam in the desired position. m_swapAlignOffset (usually zero) shifts the new part so its
-	// alignment connector lands exactly where the old part's was, so connectors -- and the wires on
-	// them -- don't drift when the two versions have different connector offsets (#1070).
-	QPointF p = itemBase->getViewGeometry().loc() + m_swapAlignOffset;
+	// changeConnection calls PaletteItemBase::connectedMoved which can reposition the new part, so
+	// re-affirm the desired position. It was already set before the reconnect loop (above), so the
+	// wires snapped to the final connector spots; this just keeps the part there.
 	new SimpleMoveItemCommand(this, newID, p, p, swapThing.parentCommand);
 
 	Q_FOREACH (QString connectorID, legs.keys()) {
