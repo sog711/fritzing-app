@@ -30,6 +30,8 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QClipboard>
 #include <QApplication>
 
+#include <cmath>
+
 #include "mainwindow.h"
 #include "debugdialog.h"
 #include "waitpushundostack.h"
@@ -76,6 +78,22 @@ static QHash<QString, QString> fileExtFormats;
 
 static QRegularExpression AaCc("[aAcC]");
 static QRegularExpression LabelNumber("([^\\d]+)(.*)");
+
+namespace {
+
+constexpr qreal NearIntegerExportDimensionEpsilon = 1.0e-6;
+
+int exportImageDimension(qreal scaledDimension)
+{
+	const qreal rounded = std::round(scaledDimension);
+	if (std::abs(scaledDimension - rounded) < NearIntegerExportDimensionEpsilon) {
+		return static_cast<int>(rounded);
+	}
+
+	return static_cast<int>(scaledDimension);
+}
+
+}
 
 static constexpr double InchesPerMeter = 39.3700787;
 
@@ -588,7 +606,8 @@ void MainWindow::exportAux(QString fileName, QImage::Format format, int quality,
 
 	double resMultiplier = dpi / GraphicsUtils::SVGDPI;
 
-	QSize imgSize(source.width() * resMultiplier, source.height() * resMultiplier);
+	QSize imgSize(exportImageDimension(source.width() * resMultiplier),
+	              exportImageDimension(source.height() * resMultiplier));
 	QImage image(imgSize, format);
 	image.setDotsPerMeterX(InchesPerMeter * dpi);
 	image.setDotsPerMeterY(InchesPerMeter * dpi);
