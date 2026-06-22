@@ -33,6 +33,7 @@ class ItemBase;
 class ModelPart;
 class SketchWidget;
 class MainWindow;
+class QUndoCommand;
 class QDialog;
 class QLabel;
 class QPushButton;
@@ -78,6 +79,14 @@ public:
 	static QList<HistoryEntry> getRelevantHistory(ModelPart* instancePart,
 	                                              const QList<HistoryEntry>& allHistory);
 	static QString computeEffectiveMode(const QList<HistoryEntry>& history);
+
+	// Port the special-cased properties an obsolete part needs carried onto its replacement
+	// (resistance, LED colour). Migration-specific knowledge, shared by the direct swap and the
+	// Part Migration dialog; static and view-parameterised so MainWindow's swap helpers can call it
+	// without this handler holding extra state.
+	static void portObsoleteSpecialProps(SketchWidget* view, ItemBase* oldItem,
+	                                      ModelPart* newModelPart, long newID,
+	                                      QUndoCommand* parentCommand);
 
 	// Get current item for a migration (may change after swaps)
 	ItemBase* currentItem(int index) const;

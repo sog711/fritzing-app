@@ -21,6 +21,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "migrationhandler.h"
 #include "sketchwidget.h"
 #include "../items/itembase.h"
+#include "../items/moduleidnames.h"
 #include "../model/modelpart.h"
 #include "../mainwindow/mainwindow.h"
 #include "../debugdialog.h"
@@ -219,6 +220,64 @@ QString MigrationHandler::computeEffectiveMode(const QList<HistoryEntry>& histor
 	if (hasForced) return "forced";
 	if (hasAsk) return "ask";
 	return "silent";
+}
+
+// Port properties that don't carry over by a module-ID swap alone, reusing the legacy obsolete-part
+// special cases (resistance, LED colour). Migration-specific knowledge shared by the direct swap
+// and the Part Migration dialog; static and view-parameterised so MainWindow's swap helpers can
+// call it without this handler needing any extra state.
+void MigrationHandler::portObsoleteSpecialProps(SketchWidget* view, ItemBase* oldItem,
+                                                ModelPart* newModelPart, long newID,
+                                                QUndoCommand* parentCommand)
+{
+	if (view == nullptr || oldItem == nullptr || oldItem->modelPart() == nullptr || newModelPart == nullptr) return;
+
+	// Read the OLD part's *instance* values, not the shared part defaults. A user-chosen resistance
+	// or LED colour is stored as a local prop on the instance; modelPart()->properties() only holds
+	// the part's FZP defaults. Reading the default discarded the user's choice -- e.g. a Yellow LED
+	// migrated to the LED part's default Red. ItemBase::getProperty() prefers the instance's local
+	// prop and falls back to the default, so an unedited part still ports its default (the obsolete
+	// fixed-value resistors carry their resistance this way).
+
+	// special case for swapping old resistors.
+	QString resistance = oldItem->getProperty("resistance");
+	if (!resistance.isEmpty()) {
+		QChar r = resistance.at(resistance.length() - 1);
+		ushort ohm = r.unicode();
+		if (ohm == 8486) {
+			// ends with the ohm symbol
+			resistance.chop(1);
+		}
+	}
+	QString footprint = oldItem->getProperty("footprint");
+	if (!resistance.isEmpty() && !footprint.isEmpty()) {
+		new SetResistanceCommand(view, newID, resistance, resistance, footprint, footprint, parentCommand);
+	}
+
+	// special case for swapping LEDs
+	if (newModelPart->moduleID().contains(ModuleIDNames::ColorLEDModuleIDName)) {
+		QString oldColor = oldItem->getProperty("color");
+		QString newColor;
+		if (oldColor.contains("red", Qt::CaseInsensitive)) {
+			newColor = "Red (633nm)";
+		}
+		else if (oldColor.contains("blue", Qt::CaseInsensitive)) {
+			newColor = "Blue (430nm)";
+		}
+		else if (oldColor.contains("yellow", Qt::CaseInsensitive)) {
+			newColor = "Yellow (585nm)";
+		}
+		else if (oldColor.contains("green", Qt::CaseInsensitive)) {
+			newColor = "Green (555nm)";
+		}
+		else if (oldColor.contains("white", Qt::CaseInsensitive)) {
+			newColor = "White (4500K)";
+		}
+
+		if (newColor.length() > 0) {
+			new SetPropCommand(view, newID, "color", newColor, newColor, true, parentCommand);
+		}
+	}
 }
 
 void MigrationHandler::handlePendingMigrationDialog()

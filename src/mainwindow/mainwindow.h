@@ -676,7 +676,6 @@ protected:
 	// ManualUpdate always, on Load/Drop only when mixed; silent always auto-swaps.
 	enum class TriggerContext { Load, Drop, ManualUpdate };
 	QList<ItemBase *> routeHistoryMigrations(const QList<ItemBase *> & obsoleteItems, TriggerContext context);
-	void portObsoleteSpecialProps(ItemBase * oldItem, ModelPart * newModelPart, long newID, QUndoCommand * parentCommand);
 	void scheduleDropMigrationCheck();
 	void checkDroppedPartMigration();
 	void onItemAddedToSketch(ModelPart *, ItemBase *, ViewLayer::ViewLayerPlacement, const ViewGeometry &, long, class SketchWidget * dropOrigin);
