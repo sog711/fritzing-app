@@ -30,7 +30,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 class DebugConnectors : public QObject {
 	Q_OBJECT
 public:
-	DebugConnectors(SketchWidget *breadboardGraphicsView, SketchWidget *schematicGraphicsView, SketchWidget *pcbGraphicsView);
+	DebugConnectors(SketchWidget *breadboardGraphicsView, SketchWidget *schematicGraphicsView, SketchWidget *pcbGraphicsView, QObject *parent = nullptr);
 
 
 
@@ -50,9 +50,12 @@ private:
 	QSet<ItemBase *> doRoutingCheck();
 	QSet<ItemBase *> doWireCheck();
 
-	SketchWidget *m_breadboardGraphicsView;
-	SketchWidget *m_schematicGraphicsView;
-	SketchWidget *m_pcbGraphicsView;
+	// Guarded so a deferred check (the timer fires from the global event loop, e.g. while the
+	// headless example service is tearing one sketch window down and loading the next) can detect
+	// that a view has been destroyed instead of dereferencing freed memory.
+	QPointer<SketchWidget> m_breadboardGraphicsView;
+	QPointer<SketchWidget> m_schematicGraphicsView;
+	QPointer<SketchWidget> m_pcbGraphicsView;
 
 	QSet<QString> getItemConnectorSet(ConnectorItem *connectorItem);
 	QList<ItemBase *> toSortedItembases(const QList<QGraphicsItem *> &graphicsItems);

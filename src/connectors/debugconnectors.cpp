@@ -31,8 +31,9 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QEventLoop>
 #include <QLineF>
 
-DebugConnectors::DebugConnectors(SketchWidget *breadboardGraphicsView, SketchWidget *schematicGraphicsView, SketchWidget *pcbGraphicsView)
-	: m_breadboardGraphicsView(breadboardGraphicsView),
+DebugConnectors::DebugConnectors(SketchWidget *breadboardGraphicsView, SketchWidget *schematicGraphicsView, SketchWidget *pcbGraphicsView, QObject *parent)
+	: QObject(parent),
+	  m_breadboardGraphicsView(breadboardGraphicsView),
 	  m_schematicGraphicsView(schematicGraphicsView),
 	  m_pcbGraphicsView(pcbGraphicsView),
 	  timer(new QTimer(this))
@@ -40,15 +41,15 @@ DebugConnectors::DebugConnectors(SketchWidget *breadboardGraphicsView, SketchWid
 	monitorConnections(false);
 	timer->setSingleShot(true);
 	connect(timer, &QTimer::timeout, this, &DebugConnectors::performCheck);
-	connect(m_breadboardGraphicsView,
+	connect(breadboardGraphicsView,
 			&SketchWidget::routingCheckSignal,
 			this,
 			&DebugConnectors::onChangeConnection);
-	connect(m_schematicGraphicsView,
+	connect(schematicGraphicsView,
 			&SketchWidget::routingCheckSignal,
 			this,
 			&DebugConnectors::onChangeConnection);
-	connect(m_pcbGraphicsView,
+	connect(pcbGraphicsView,
 			&SketchWidget::routingCheckSignal,
 			this,
 			&DebugConnectors::onChangeConnection);
@@ -152,6 +153,17 @@ void DebugConnectors::performCheck()
 	if (!m_monitorEnabled) {
 		return;
 	}
+	// This runs from a single-shot timer, so the views (or their scenes) may have been torn down
+	// since it was armed -- e.g. the example service closes one sketch window and pumps the event
+	// loop while loading the next. The QPointers null out on destruction; bail instead of crashing.
+	if (m_breadboardGraphicsView.isNull() || m_schematicGraphicsView.isNull() || m_pcbGraphicsView.isNull()) {
+		return;
+	}
+	if (m_breadboardGraphicsView->scene() == nullptr
+	        || m_schematicGraphicsView->scene() == nullptr
+	        || m_pcbGraphicsView->scene() == nullptr) {
+		return;
+	}
 	QSet<ItemBase *> errors;
 	errors = doRoutingCheck();
 	errors += doWireCheck();
@@ -175,7 +187,7 @@ void DebugConnectors::onRepairErrors()
 
 	stack->waitForTimers();
 	int index = stack->index();
-	auto views = {m_breadboardGraphicsView, m_schematicGraphicsView, m_pcbGraphicsView};
+	auto views = {m_breadboardGraphicsView.data(), m_schematicGraphicsView.data(), m_pcbGraphicsView.data()};
 	for(SketchWidget * view: views) {
 		stack->waitForTimers();
 		QSet<ItemBase *> errors = doRoutingCheck();

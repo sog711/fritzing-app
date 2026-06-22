@@ -533,7 +533,10 @@ void MainWindow::init(ReferenceModel *referenceModel, bool lockFiles) {
 	connect(focusWidgetProbe, &FProbeFocusWidget::focusWidget, this, &MainWindow::handleFocusWidget);
 
 #ifndef QT_NO_DEBUG
-	m_debugConnectors = new DebugConnectors(m_breadboardGraphicsView, m_schematicGraphicsView, m_pcbGraphicsView);
+	// Parent to the MainWindow so it (and its single-shot timer) is destroyed when the window
+	// closes. Otherwise the orphaned checker outlives its views and a still-pending timer fires
+	// against freed memory -- the crash the headless example service ("-e") hit between sketches.
+	m_debugConnectors = new DebugConnectors(m_breadboardGraphicsView, m_schematicGraphicsView, m_pcbGraphicsView, this);
 #endif
 	new DebugConnectorsProbe(m_breadboardGraphicsView, m_schematicGraphicsView, m_pcbGraphicsView);
 
