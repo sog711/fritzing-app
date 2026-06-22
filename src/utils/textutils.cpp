@@ -862,6 +862,7 @@ double TextUtils::convertFromPowerPrefix(const QString & val, const QString & sy
 
 	double multiplier = 1;
 	QString temp = val;
+	temp.replace(',', '.');   // accept comma as a decimal separator (e.g. de_DE locale)
 	if (temp.endsWith(symbol)) {
 		temp.chop(symbol.length());
 	}

@@ -24,6 +24,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../utils/textutils.h"
 #include "../utils/focusoutcombobox.h"
 #include "../utils/boundedregexpvalidator.h"
+#include "../utils/fmessagebox.h"
 #include "../sketch/infographicsview.h"
 #include "partlabel.h"
 
@@ -54,6 +55,28 @@ static QString normalizeCapacitanceValue(const QString & value, const QString & 
 	double q = TextUtils::convertFromPowerPrefixU(temp, symbol);
 	if (q == 0) return value;   // not a parseable magnitude; leave it unchanged
 	return TextUtils::convertToPowerPrefixByThousands(q) + symbol;
+}
+
+// Returns the standard (E-series) table value closest to `value` by ratio, or -1 if the
+// table is empty. Sets `matches` when `value` already equals a table value (within a small
+// tolerance that absorbs floating-point noise but stays well below E-series spacing).
+static double nearestStandardValue(const QList<double> & items, double value, bool & matches)
+{
+	matches = false;
+	if (value <= 0) return -1;
+
+	double best = -1;
+	double bestRatio = 0;
+	for (double item : items) {
+		if (item <= 0) continue;
+		double ratio = (value > item) ? value / item : item / value;
+		if (best < 0 || ratio < bestRatio) {
+			bestRatio = ratio;
+			best = item;
+		}
+	}
+	if (best > 0 && bestRatio <= 1.0001) matches = true;
+	return best;
 }
 
 Capacitor::Capacitor( ModelPart * modelPart, ViewLayer::ViewID viewID, const ViewGeometry & viewGeometry, long id, QMenu * itemMenu, bool doLabel)
@@ -143,7 +166,7 @@ bool Capacitor::collectExtraInfo(QWidget * parent, const QString & family, const
                 QString symbolRegExp = propertyDef->symbol.isEmpty() ? "" : QString("[%1]{0,1}").arg(propertyDef->symbol);
 
     //			QString pattern = QString("((\\d{0,10})|(\\d{0,10}\\.)|(\\d{0,10}\\.\\d{1,10}))[%1]{0,1}%2")
-                QString pattern = QString("((-?\\d{1,3})|(-?\\d{1,3}\\.)|(-?\\d{1,3}\\.\\d{1,2}))[%1]{0,1}%2").arg(
+                QString pattern = QString("(-?(?:\\d{1,7}(?:[.,]\\d{0,3})?|[.,]\\d{1,3}))[%1]{0,1}%2").arg(
     //			QString pattern = QString("((\\d{0,3})|(\\d{0,3}\\.)|(\\d{0,3}\\.\\d{1,3}))[%1]{0,1}%2")
 					TextUtils::PowerPrefixesString,
                     symbolRegExp
@@ -208,6 +231,43 @@ void Capacitor::propertyEntry(int index) {
 			QString utext = text;
 			if (propertyDef->numeric) {
 				double val = TextUtils::convertFromPowerPrefixU(utext, propertyDef->symbol);
+
+				if (isFaradCapacitance(propertyDef->name, propertyDef->symbol) && val >= propertyDef->minValue && val <= propertyDef->maxValue) {
+					// What the user typed (with the unit) and how that value will actually be shown.
+					QString entered = utext;
+					if (!entered.endsWith(propertyDef->symbol)) entered.append(propertyDef->symbol);
+					QString canonical = formatPropertyDefValue(propertyDef, val);
+
+					bool matches = false;
+					double nearest = nearestStandardValue(propertyDef->menuItems, val, matches);
+					if (matches) {
+						// Standard value: snap to the exact table value (avoids floating-point
+						// near-duplicates), and note any change of representation (e.g. 0.022mF -> 22µF).
+						val = nearest;
+						utext = canonical;
+						if (entered != canonical) {
+							FMessageBox::information(nullptr, tr("Capacitance", "dialog title"),
+								tr("%1 will be displayed as %2.").arg(entered, canonical));
+						}
+					}
+					else if (nearest > 0) {
+						// Not a standard value: offer the nearest one, showing what the user typed.
+						QString nearestStr = formatPropertyDefValue(propertyDef, nearest);
+						auto answer = FMessageBox::question(nullptr, tr("Capacitance", "dialog title"),
+							tr("Replace %1 with the nearest standard value %2?").arg(entered, nearestStr),
+							FMessageBox::Yes | FMessageBox::No, FMessageBox::Yes);
+						if (answer == FMessageBox::Yes) {
+							val = nearest;
+							utext = nearestStr;
+						}
+						else if (entered != canonical) {
+							// Kept their value: still note how it will be shown (e.g. 0.02mF -> 20µF).
+							FMessageBox::information(nullptr, tr("Capacitance", "dialog title"),
+								tr("%1 will be displayed as %2.").arg(entered, canonical));
+						}
+					}
+				}
+
 				if (!propertyDef->menuItems.contains(val)) {
 					// info view is redrawn, so combobox is recreated, so the new item is added to the combo box menu
 					propertyDef->menuItems.append(val);
