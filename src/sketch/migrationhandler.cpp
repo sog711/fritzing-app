@@ -581,6 +581,19 @@ void MigrationHandler::swapToNew(MigrationInfo& info)
 	// is still safely undoable or whether real commands have been pushed on top of it.
 	info.swapStackIndex = stack ? stack->index() : -1;
 	info.isSwapped = true;
+
+	// The replacement part's *default* title was captured when the migration was queued, but that
+	// can misrepresent the migrated instance: the modern resistor defaults to "220 Ω Resistor",
+	// yet porting keeps the old 330k. Re-read the actual swapped-in part's title (which reflects the
+	// ported resistance/colour) so the "Use new" radio and the change-notes line show the real
+	// post-migration value, not the replacement's default.
+	if (newID != 0) {
+		ItemBase* newItem = mainWindow->findItemInAnyView(newID);
+		if (newItem != nullptr && newItem->modelPart() != nullptr) {
+			QString actualTitle = newItem->modelPart()->title();
+			if (!actualTitle.isEmpty()) info.newTitle = actualTitle;
+		}
+	}
 }
 
 bool MigrationHandler::canUndoOwnSwap(int swapStackIndex) const
