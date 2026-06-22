@@ -68,6 +68,7 @@ public:
 	QPointF terminalPoint();
 	QPointF adjustedTerminalPoint();
 	QPointF sceneAdjustedTerminalPoint(ConnectorItem * anchor);
+	QPointF scenePinPoint();
 	bool connectedTo(ConnectorItem *);
 	const QList< QPointer<ConnectorItem> > & connectedToItems();
 	void setHidden(bool hidden);

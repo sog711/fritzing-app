@@ -6955,8 +6955,12 @@ void SketchWidget::checkFit(ModelPart * newModelPart, ItemBase * itemBase, long 
 				}
 			}
 			if (newConnectorItem == nullptr) continue;
-			QPointF op = fromConnectorItem->sceneAdjustedTerminalPoint(nullptr);
-			QPointF np = newConnectorItem->sceneAdjustedTerminalPoint(nullptr);
+			// Align by the connector's pin (body) point, NOT its leg tip: the temp item carries the
+			// new part's DEFAULT (often long) leg, so aligning leg tips would shove the body off by the
+			// leg length and the swapped-in leg would then be stretched to reach its hole. The
+			// old leg is re-applied below, so aligning the pins keeps the tip where it was.
+			QPointF op = fromConnectorItem->scenePinPoint();
+			QPointF np = newConnectorItem->scenePinPoint();
 			oldAnchor.setX(qMin(oldAnchor.x(), op.x()));
 			oldAnchor.setY(qMin(oldAnchor.y(), op.y()));
 			newAnchor.setX(qMin(newAnchor.x(), np.x()));

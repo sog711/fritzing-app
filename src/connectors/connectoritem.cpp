@@ -970,6 +970,14 @@ QPointF ConnectorItem::sceneAdjustedTerminalPoint(ConnectorItem * connectee) {
 	return this->mapToScene(adjustedTerminalPoint());
 }
 
+// The connector's pin point in scene coordinates, IGNORING any rubber-band leg -- i.e. the point on
+// the part body, not the leg tip. sceneAdjustedTerminalPoint() returns the leg tip for leg parts;
+// this returns the pin (matching adjustedTerminalPoint()'s no-leg case), so a swap can align the new
+// part's body without the new part's default leg length skewing the offset.
+QPointF ConnectorItem::scenePinPoint() {
+	return mapToScene(m_terminalPoint + rect().topLeft());
+}
+
 bool ConnectorItem::connectedTo(ConnectorItem * connectorItem) {
 	return this->m_connectedTo.contains(connectorItem);
 }
