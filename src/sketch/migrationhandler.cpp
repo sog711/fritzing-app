@@ -258,7 +258,16 @@ void MigrationHandler::portObsoleteSpecialProps(SketchWidget* view, ItemBase* ol
 	if (newModelPart->moduleID().contains(ModuleIDNames::ColorLEDModuleIDName)) {
 		QString oldColor = oldItem->getProperty("color");
 		QString newColor;
-		if (oldColor.contains("red", Qt::CaseInsensitive)) {
+		// The obsolete and replacement LEDs share the same colour menu (both end in
+		// ColorLEDModuleID), and modern menu values carry a wavelength/spec in parentheses --
+		// "Yellow (592nm)", "Red (633nm)", "White (4500K)". If the instance already holds such a
+		// value, preserve it verbatim; collapsing every "yellow" to one hard-coded wavelength changed
+		// e.g. Yellow (592nm) -> Yellow (585nm). Only the legacy bare names ("yellow", "red", ...),
+		// which are not menu values, still need mapping.
+		if (oldColor.contains('(')) {
+			newColor = oldColor;
+		}
+		else if (oldColor.contains("red", Qt::CaseInsensitive)) {
 			newColor = "Red (633nm)";
 		}
 		else if (oldColor.contains("blue", Qt::CaseInsensitive)) {
