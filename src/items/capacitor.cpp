@@ -49,17 +49,10 @@ static QString normalizeCapacitanceValue(const QString & value, const QString & 
 	QString temp = value.trimmed();
 	if (temp.isEmpty()) return temp;
 
-	temp.replace('u', TextUtils::MicroSymbol);
 	temp.replace(TextUtils::AltMicroSymbol, TextUtils::MicroSymbol);
 
-	QString symbolRegExp = symbol.isEmpty() ? "" : QString("%1?").arg(QRegularExpression::escape(symbol));
-	QString pattern = QString("^\\s*[-+]?(?:\\d+(?:\\.\\d*)?|\\.\\d+)\\s*[%1]?\\s*%2\\s*$").arg(
-		TextUtils::PowerPrefixesString,
-		symbolRegExp
-	);
-	if (!QRegularExpression(pattern).match(temp).hasMatch()) return value;
-
 	double q = TextUtils::convertFromPowerPrefixU(temp, symbol);
+	if (q == 0) return value;   // not a parseable magnitude; leave it unchanged
 	return TextUtils::convertToPowerPrefixByThousands(q) + symbol;
 }
 
@@ -67,15 +60,11 @@ Capacitor::Capacitor( ModelPart * modelPart, ViewLayer::ViewID viewID, const Vie
 	: PaletteItem(modelPart, viewID, viewGeometry, id, itemMenu, doLabel)
 {
 	PropertyDefMaster::initPropertyDefs(modelPart, m_propertyDefs);
+	// Normalize stored farad values (including any loaded from older sketches)
 	Q_FOREACH (PropertyDef * propertyDef, m_propertyDefs.keys()) {
-		if (!isFaradCapacitance(propertyDef->name, propertyDef->symbol)) continue;
-
-		QString current = m_propertyDefs.value(propertyDef);
-		QString normalized = normalizeCapacitanceValue(current, propertyDef->symbol);
-		if (normalized == current) continue;
-
-		m_propertyDefs.insert(propertyDef, normalized);
-		modelPart->setLocalProp(propertyDef->name, normalized);
+		if (isFaradCapacitance(propertyDef->name, propertyDef->symbol)) {
+			setProp(propertyDef->name, m_propertyDefs.value(propertyDef));
+		}
 	}
 }
 
@@ -101,9 +90,7 @@ bool Capacitor::collectExtraInfo(QWidget * parent, const QString & family, const
 			focusOutComboBox->setObjectName("infoViewComboBox");
 			QString current = m_propertyDefs.value(propertyDef);
 			if (current.isEmpty() && !propertyDef->defaultValue.isEmpty()) {
-				current = (propertyDef->numeric && isFaradCapacitance(propertyDef->name, propertyDef->symbol))
-						  ? formatPropertyDefValue(propertyDef, propertyDef->defaultValue.toDouble())
-						  : propertyDef->defaultValue + propertyDef->symbol;
+				current = propertyDef->defaultValue + propertyDef->symbol;
 				setProp(propertyDef->name, current);
 			}
 			if (propertyDef->editable) {
@@ -224,9 +211,6 @@ void Capacitor::propertyEntry(int index) {
 				if (!propertyDef->menuItems.contains(val)) {
 					// info view is redrawn, so combobox is recreated, so the new item is added to the combo box menu
 					propertyDef->menuItems.append(val);
-				}
-				if (isFaradCapacitance(propertyDef->name, propertyDef->symbol)) {
-					utext = formatPropertyDefValue(propertyDef, val);
 				}
 			}
 			else {
