@@ -4273,8 +4273,15 @@ long MainWindow::swapPartForMigration(ItemBase * itemBase, const QString & newMo
 void MainWindow::portObsoleteSpecialProps(ItemBase * oldItem, ModelPart * newModelPart, long newID, QUndoCommand * parentCommand) {
 	if (oldItem == nullptr || oldItem->modelPart() == nullptr || newModelPart == nullptr) return;
 
+	// Read the OLD part's *instance* values, not the shared part defaults. A user-chosen
+	// resistance or LED colour is stored as a local prop on the instance; modelPart()->properties()
+	// only holds the part's FZP defaults. Reading the default discarded the user's choice -- e.g. a
+	// Yellow LED migrated to the LED part's default Red. ItemBase::getProperty() prefers the
+	// instance's local prop and falls back to the default, so an unedited part still ports its
+	// default (the obsolete fixed-value resistors carry their resistance this way). (#1070)
+
 	// special case for swapping old resistors.
-	QString resistance = oldItem->modelPart()->properties().value("resistance", "");
+	QString resistance = oldItem->getProperty("resistance");
 	if (!resistance.isEmpty()) {
 		QChar r = resistance.at(resistance.length() - 1);
 		ushort ohm = r.unicode();
@@ -4283,14 +4290,14 @@ void MainWindow::portObsoleteSpecialProps(ItemBase * oldItem, ModelPart * newMod
 			resistance.chop(1);
 		}
 	}
-	QString footprint = oldItem->modelPart()->properties().value("footprint", "");
+	QString footprint = oldItem->getProperty("footprint");
 	if (!resistance.isEmpty() && !footprint.isEmpty()) {
 		new SetResistanceCommand(m_currentGraphicsView, newID, resistance, resistance, footprint, footprint, parentCommand);
 	}
 
 	// special case for swapping LEDs
 	if (newModelPart->moduleID().contains(ModuleIDNames::ColorLEDModuleIDName)) {
-		QString oldColor = oldItem->modelPart()->properties().value("color");
+		QString oldColor = oldItem->getProperty("color");
 		QString newColor;
 		if (oldColor.contains("red", Qt::CaseInsensitive)) {
 			newColor = "Red (633nm)";
