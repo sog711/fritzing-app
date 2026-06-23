@@ -232,7 +232,10 @@ void Capacitor::propertyEntry(int index) {
 			if (propertyDef->numeric) {
 				double val = TextUtils::convertFromPowerPrefixU(utext, propertyDef->symbol);
 
-				if (isFaradCapacitance(propertyDef->name, propertyDef->symbol) && val >= propertyDef->minValue && val <= propertyDef->maxValue) {
+				if (isFaradCapacitance(propertyDef->name, propertyDef->symbol) && val > 0) {
+					// Prompt for any positive value, including out-of-range ones: fixup no longer
+					// rescales the input, so the dialog can show what the user actually typed and
+					// offer the nearest standard value.
 					// What the user typed (with the unit) and how that value will actually be shown.
 					QString entered = utext;
 					if (!entered.endsWith(propertyDef->symbol)) entered.append(propertyDef->symbol);

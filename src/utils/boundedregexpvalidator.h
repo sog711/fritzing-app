@@ -74,26 +74,11 @@ public:
 	}
 
 	virtual void fixup ( QString& input) const override {
-		if (m_converter == NULL) {
-			if (!input.endsWith(m_symbol)) input.append(m_symbol);
-			return;
-		}
-		double divider = 10;
-		if (m_max - m_min > 1000)
-			divider = 1000;
-
-		double converted = m_converter(input, m_symbol);
-		for (int i = 0; i < 10; i++) {
-			if (converted > m_max) {
-				converted /= divider;
-			} else if (converted < m_min) {
-				converted *= divider;
-			} else {
-				break;
-			}
-		}
-		input = TextUtils::convertToPowerPrefix(converted);
-		input.append(m_symbol);
+		// Don't rescale out-of-range input (e.g. "5" -> "0.5mF" by dividing by 10 until it
+		// fits): that silently changes what the user typed before the item's commit handler /
+		// dialog sees it. Just ensure the unit symbol; range checks and any prompts happen on
+		// commit in the item.
+		if (!input.endsWith(m_symbol)) input.append(m_symbol);
 	}
 
 protected:
