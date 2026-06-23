@@ -544,13 +544,18 @@ void MigrationHandler::updateDialogForCurrentMigration()
 	m_silenceButton->setVisible(info.effectiveMode == "ask");
 	m_silenceButton->setEnabled(true);
 
-	// Navigation between parts: only when there are several to step through.
+	// Navigation between parts: only when there are several to step through. Hide Previous on the
+	// first part and Next on the last, rather than leaving a dead greyed-out button there. Keep the
+	// enabled state in sync too: it's moot for a hidden button, but it drives the test probe's
+	// prev/nextEnabled (which tests use to know when to stop stepping).
 	int count = m_pendingMigrations.size();
-	m_prevButton->setVisible(count > 1);
-	m_nextButton->setVisible(count > 1);
+	bool hasPrev = m_currentIndex > 0;
+	bool hasNext = m_currentIndex < count - 1;
 	m_updateAllButton->setVisible(count > 1);
-	m_prevButton->setEnabled(m_currentIndex > 0);
-	m_nextButton->setEnabled(m_currentIndex < count - 1);
+	m_prevButton->setVisible(count > 1 && hasPrev);
+	m_nextButton->setVisible(count > 1 && hasNext);
+	m_prevButton->setEnabled(hasPrev);
+	m_nextButton->setEnabled(hasNext);
 
 	// Focus on the part
 	centerAndZoomOnItem(item);
