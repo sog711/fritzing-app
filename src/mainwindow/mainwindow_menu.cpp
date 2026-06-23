@@ -4167,13 +4167,21 @@ void MainWindow::swapObsolete() {
 }
 
 void MainWindow::migrateObsoletePart(qint64 itemId) {
-	// Clicking the Inspector's "obsolete" link deals with that one part: route it to the Part
-	// Migration dialog (showing its history for soft parts), exactly like "Update selected parts".
-	ItemBase * item = findItemInAnyView(itemId);
-	if (item == nullptr || !item->isObsolete()) return;
-	QList<ItemBase *> items;
-	items << item->layerKinChief();
-	swapObsolete(true, items);
+	// Both triggers -- the obsolete "bug" badge and the Inspector's "obsolete" link -- fire from
+	// inside a mouse-press / event handler. Running the swap synchronously deletes the clicked part
+	// mid-event, leaving the originating handler (e.g. SketchWidget::mousePressEvent) holding a
+	// dangling item pointer -> crash. Defer to the next event-loop turn so the originating event
+	// finishes first; we re-resolve the part by id then, so it stays safe. (This matches the menu
+	// "Update selected parts" path, which already runs the swap after the click.)
+	QTimer::singleShot(0, this, [this, itemId]() {
+		// Route this one part to the Part Migration dialog (showing its history for soft parts),
+		// exactly like "Update selected parts".
+		ItemBase * item = findItemInAnyView(itemId);
+		if (item == nullptr || !item->isObsolete()) return;
+		QList<ItemBase *> items;
+		items << item->layerKinChief();
+		swapObsolete(true, items);
+	});
 }
 
 void MainWindow::swapObsolete(bool displayFeedback, QList<ItemBase *> & items) {
