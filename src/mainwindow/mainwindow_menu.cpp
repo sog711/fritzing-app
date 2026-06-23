@@ -4078,9 +4078,6 @@ QList<ItemBase *> MainWindow::routeHistoryMigrations(const QList<ItemBase *> & o
 		ModelPart * newPart = findReplacedby(oldPart);
 
 		if (newPart == nullptr) {
-			DebugDialog::debug(QString("[migration] obsolete '%1' module=%2 -> no resolvable replacement")
-			                   .arg(item->instanceTitle(),
-			                        oldPart ? oldPart->moduleID() : QString("<null modelPart>")));
 			rest << item;
 			continue;
 		}
@@ -4103,11 +4100,6 @@ QList<ItemBase *> MainWindow::routeHistoryMigrations(const QList<ItemBase *> & o
 		else {                                              // "ask" (soft)
 			queue = (context == TriggerContext::ManualUpdate) || (mixed && !relevantHistory.isEmpty());
 		}
-
-		DebugDialog::debug(QString("[migration] obsolete '%1' %2->%3 mode=%4 mixed=%5 relevant=%6 ctx=%7 -> queue=%8")
-		                   .arg(item->instanceTitle(), oldPart->moduleID(), newPart->moduleID(), mode)
-		                   .arg(mixed ? "yes" : "no").arg(relevantHistory.count())
-		                   .arg(int(context)).arg(queue ? "yes" : "no"));
 
 		if (queue) {
 			QString reason;

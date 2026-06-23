@@ -118,8 +118,6 @@ void MigrationHandler::processMigrations()
 		if (info.effectiveMode == "silent") {
 			ItemBase* item = m_sketchWidget->findItem(info.itemId);
 			if (item != nullptr) {
-				DebugDialog::debug(QString("Auto-applying silent migration for %1")
-				                       .arg(info.instanceTitle));
 				silentItems.append(item);
 			}
 		} else {
@@ -194,10 +192,6 @@ QList<HistoryEntry> MigrationHandler::getRelevantHistory(ModelPart* instancePart
 			relevant.append(entry);
 		}
 	}
-
-	DebugDialog::debug(QString("[migration]   getRelevantHistory: baseline=%1 (silencedDate='%2' partDate=%3) -> %4 of %5 entries relevant")
-	                   .arg(baselineDate.toString(Qt::ISODate), silencedDateStr, instancePart->date().toString(Qt::ISODate))
-	                   .arg(relevant.count()).arg(allHistory.count()));
 
 	return relevant;
 }
@@ -756,7 +750,6 @@ void MigrationHandler::silenceCurrentMigration()
 			} else {
 				item->modelPart()->setLocalProp("silencedDate", isoDate);
 			}
-			DebugDialog::debug(QString("Set silencedDate to %1 for %2").arg(isoDate, info.instanceTitle));
 		}
 	}
 
