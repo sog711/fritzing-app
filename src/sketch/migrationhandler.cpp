@@ -605,6 +605,13 @@ void MigrationHandler::centerAndZoomOnItem(ItemBase* item)
 
 	view->scene()->clearSelection();
 	item->setSelected(true);
+
+	// Refresh the Inspector for the now-current part. A programmatic setSelected() does not update it
+	// (selectionChangedSlot only calls viewItemInfo during a rubber-band drag), and reverting via undo
+	// ("Keep old") deletes the previewed new part without re-showing the restored old one -- so the
+	// Inspector would go blank. A forward swap happens to refresh it; do it explicitly here so swap,
+	// revert and navigation all keep the Inspector in sync.
+	view->viewItemInfo(item);
 }
 
 void MigrationHandler::onVersionToggled(bool useNew)
