@@ -250,6 +250,12 @@ public:
 	static void setAutosavePeriod(int);
 	static void setAutosaveEnabled(bool);
 
+	// The shared Undo/Redo actions (they act on the active undo stack). Exposed so non-main-window
+	// widgets — e.g. the non-modal Part Migration dialog — can add them and let their keyboard
+	// shortcuts reach the sketch while that widget has focus.
+	QAction *undoAction() const { return m_undoAct; }
+	QAction *redoAction() const { return m_redoAct; }
+
 Q_SIGNALS:
 	void alienPartsDismissed();
 	void mainWindowMoved(QWidget *);

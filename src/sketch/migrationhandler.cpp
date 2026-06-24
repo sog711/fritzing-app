@@ -44,6 +44,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QFont>
 #include <QPalette>
 #include <QScrollArea>
+#include <QAction>
 
 #include <algorithm>
 
@@ -336,6 +337,16 @@ void MigrationHandler::createMigrationDialog()
 	// Closing by any means (ESC, window close, or completion) runs cleanup. m_dialog is a
 	// QPointer, so it auto-nulls when the dialog is deleted — no dangling reuse on the next open.
 	connect(m_dialog, &QDialog::finished, this, &MigrationHandler::onDialogClosed);
+
+	// Let the sketch's Undo/Redo keyboard shortcuts keep working while this non-modal dialog has
+	// focus (so a preview swap can be undone/redone without first clicking back into the main
+	// window). The actions live on the MainWindow and act on the shared, active undo stack; adding
+	// them to the dialog just extends their WindowShortcut context to it. The same QAction may be
+	// attached to several widgets, so this doesn't disturb the main window's own shortcuts.
+	if (parentWindow != nullptr) {
+		if (QAction* undoAct = parentWindow->undoAction()) m_dialog->addAction(undoAct);
+		if (QAction* redoAct = parentWindow->redoAction()) m_dialog->addAction(redoAct);
+	}
 
 	QVBoxLayout* layout = new QVBoxLayout(m_dialog);
 
