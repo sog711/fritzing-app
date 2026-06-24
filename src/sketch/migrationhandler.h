@@ -112,6 +112,8 @@ private:
 	// sketch (it can change behind our back via a manual Undo/Redo), so the radios reflect reality.
 	void reconcileStateFromSketch(MigrationInfo& info);
 	bool isSilenceActive(ItemBase* item, const MigrationInfo& info) const;
+	// Index of the pending migration for a part (by its cross-view chief id, across swaps), or -1.
+	int indexForItem(qint64 chiefId) const;
 	void applySilence(MigrationInfo& info);
 	void clearSilence(MigrationInfo& info);
 	void refreshObsoleteAnnotation(const MigrationInfo& info);
@@ -135,6 +137,9 @@ private:
 	// True while the handler is applying its own swap/silence (which push undo commands), so the
 	// undo-stack listener ignores those self-inflicted changes and only reacts to external Undo/Redo.
 	bool m_applyingChange = false;
+	// Chief id of the part the most recent queueMigration() was about; lets an already-open dialog
+	// jump straight to (focus) that part instead of rebuilding the session.
+	qint64 m_pendingFocusId = 0;
 
 	// Dialog widgets
 	QPointer<QDialog> m_dialog;

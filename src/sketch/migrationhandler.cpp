@@ -74,9 +74,19 @@ void MigrationHandler::queueMigration(ItemBase* itemBase, ModelPart* oldPart,
                                       ModelPart* newPart, const QList<HistoryEntry>& history,
                                       const QString& reason)
 {
+	// Identify the part by its cross-view chief id (shared across views; tracked across swaps).
+	qint64 chiefId = itemBase->layerKinChief()->id();
+
+	// Remember which part this request is about, so an already-open dialog can focus it.
+	m_pendingFocusId = chiefId;
+
+	// Keep the set unique: a part already queued must not be added a second time -- e.g. the user
+	// clicked its badge again, or the same logical part was collected from several views.
+	if (indexForItem(chiefId) >= 0) return;
+
 	MigrationInfo info;
-	info.itemId = itemBase->id();
-	info.originalItemId = itemBase->id();
+	info.itemId = chiefId;
+	info.originalItemId = chiefId;
 	info.oldModuleID = oldPart->moduleID();
 	info.newModuleID = newPart->moduleID();
 	info.instanceTitle = itemBase->instanceTitle();
@@ -115,6 +125,23 @@ ItemBase* MigrationHandler::currentItem() const
 void MigrationHandler::processMigrations()
 {
 	if (m_pendingMigrations.isEmpty()) return;
+
+	// A dialog is already showing: queueMigration() just appended (and deduped) parts into the live
+	// session. Don't rebuild/reorder/reopen it -- simply focus the part the request was about (the
+	// most recently queued one, whether newly added or already present). A part reached here mid-
+	// session via a badge/Inspector click, which only fires on a still-obsolete (non-silent) part,
+	// so there is nothing to auto-apply. A direct jump to any index is safe: each part's swap state
+	// is independent and navigation never reverts.
+	if (!m_dialog.isNull()) {
+		int idx = indexForItem(m_pendingFocusId);
+		if (idx >= 0) {
+			m_currentIndex = idx;
+			updateDialogForCurrentMigration();
+		}
+		m_dialog->raise();
+		m_dialog->activateWindow();
+		return;
+	}
 
 	// Collect silent migrations to auto-apply now; keep the rest for the dialog.
 	QList<MigrationInfo> nonSilentMigrations;
@@ -858,6 +885,20 @@ void MigrationHandler::refreshObsoleteAnnotation(const MigrationInfo& info)
 	}
 }
 
+int MigrationHandler::indexForItem(qint64 chiefId) const
+{
+	// Match a part across swaps: itemId is the live id, originalItemId/newItemId are the old/new
+	// anchors. The clicked badge sits on the currently-obsolete (old) instance, so any of these
+	// catches an already-queued part regardless of its preview state.
+	if (chiefId == 0) return -1;
+	for (int i = 0; i < m_pendingMigrations.size(); ++i) {
+		const MigrationInfo& info = m_pendingMigrations[i];
+		if (info.itemId == chiefId || info.originalItemId == chiefId || info.newItemId == chiefId)
+			return i;
+	}
+	return -1;
+}
+
 void MigrationHandler::reconcileStateFromSketch(MigrationInfo& info)
 {
 	// A manual Undo/Redo (reachable while the dialog is focused) can swap the current part old<->new
@@ -994,6 +1035,7 @@ void MigrationHandler::onDialogClosed()
 	m_currentIndex = 0;
 	m_focusPartSize = -1.0;
 	m_focusIndex = -1;
+	m_pendingFocusId = 0;
 
 	// These widgets are children of the dialog and are being destroyed with it; drop the
 	// dangling raw pointers so nothing touches them before the next createMigrationDialog().
