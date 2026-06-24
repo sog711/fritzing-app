@@ -47,22 +47,30 @@ FProbeMigrationDialog::FProbeMigrationDialog(MainWindow *mainWindow)
 				return l ? l->text() : QString();
 			};
 			QRadioButton *oldRadio = dialog->findChild<QRadioButton *>("migrationOldRadio");
+			QRadioButton *keepRadio = dialog->findChild<QRadioButton *>("migrationKeepRadio");
 			QRadioButton *newRadio = dialog->findChild<QRadioButton *>("migrationNewRadio");
-			QPushButton *silence = dialog->findChild<QPushButton *>("migrationSilenceButton");
 			QPushButton *done = dialog->findChild<QPushButton *>("migrationDoneButton");
 			QPushButton *updateAll = dialog->findChild<QPushButton *>("migrationUpdateAllButton");
 			QPushButton *prev = dialog->findChild<QPushButton *>("migrationPrevButton");
 			QPushButton *next = dialog->findChild<QPushButton *>("migrationNextButton");
 
 			result["instanceTitle"] = dialog->property("currentInstanceTitle").toString();
-			result["selected"] = QString((newRadio && newRadio->isChecked()) ? "new" : "old");
+			result["selected"] = QString(
+			    (newRadio && newRadio->isChecked()) ? "new"
+			    : (keepRadio && keepRadio->isChecked()) ? "keep"
+			    : "old");
 			result["oldText"] = oldRadio ? oldRadio->text() : QString();
+			result["keepText"] = keepRadio ? keepRadio->text() : QString();
 			result["newText"] = newRadio ? newRadio->text() : QString();
 			result["counter"] = labelText("migrationCounterLabel");
 			result["partTitle"] = labelText("migrationTitleLabel");
 			result["reason"] = labelText("migrationReasonLabel");
 			result["history"] = labelText("migrationHistoryLabel");
-			result["silenceVisible"] = (silence != nullptr && silence->isVisible());
+			// The "Keep … and don't ask again" radio replaced the old Silence button; expose its
+			// visibility under both the new name and the legacy "silenceVisible" for compatibility.
+			bool keepVisible = (keepRadio != nullptr && keepRadio->isVisible());
+			result["keepVisible"] = keepVisible;
+			result["silenceVisible"] = keepVisible;
 			result["doneVisible"] = (done != nullptr && done->isVisible());
 			result["updateAllVisible"] = (updateAll != nullptr && updateAll->isVisible());
 			result["prevEnabled"] = (prev != nullptr && prev->isEnabled());
@@ -87,7 +95,8 @@ FProbeMigrationDialog::FProbeMigrationDialog(MainWindow *mainWindow)
 			};
 			if (action == "new") clickButton("migrationNewRadio");
 			else if (action == "old") clickButton("migrationOldRadio");
-			else if (action == "silence") clickButton("migrationSilenceButton");
+			// "keep" is the new persistent-silence radio; "silence" is kept as a legacy alias.
+			else if (action == "keep" || action == "silence") clickButton("migrationKeepRadio");
 			else if (action == "done") clickButton("migrationDoneButton");
 			else if (action == "updateAll") clickButton("migrationUpdateAllButton");
 			else if (action == "next") clickButton("migrationNextButton");

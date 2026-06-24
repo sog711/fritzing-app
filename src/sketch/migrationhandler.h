@@ -39,6 +39,7 @@ class QLabel;
 class QPushButton;
 class QRadioButton;
 class QButtonGroup;
+class QAbstractButton;
 
 struct MigrationInfo {
 	qint64 itemId;          // current item ID (changes after swap)
@@ -54,9 +55,8 @@ struct MigrationInfo {
 	QString effectiveMode;  // "silent", "ask", or "forced"
 	bool isSwapped;         // currently showing new part?
 	QString reason;         // why the dialog is shown (e.g. mixed versions)
-	bool visited = false;   // shown at least once (got the default "new" preset)
 	bool decided = false;   // user has explicitly chosen for this part
-	bool silenced = false;  // user chose "silence"
+	bool silenced = false;  // user chose "keep and don't ask again"
 	int swapStackIndex = -1; // undo-stack index right after this part's preview swap (-1 = none)
 };
 
@@ -95,7 +95,7 @@ public:
 private Q_SLOTS:
 	void handlePendingMigrationDialog();
 	void onDialogClosed();
-	void onVersionToggled(bool useNew);
+	void onVersionChosen(QAbstractButton* button);
 
 private:
 	void createMigrationDialog();
@@ -105,7 +105,9 @@ private:
 	void swapToNew(MigrationInfo& info);
 	void revertToOld(MigrationInfo& info);
 	bool canUndoOwnSwap(int swapStackIndex) const;
-	void silenceCurrentMigration();
+	void applySilence(MigrationInfo& info);
+	void clearSilence(MigrationInfo& info);
+	void refreshObsoleteAnnotation(const MigrationInfo& info);
 	void updateAllMigrations();
 	void goToPreviousMigration();
 	void goToNextMigration();
@@ -132,8 +134,9 @@ private:
 	QLabel* m_historyLabel;
 	QButtonGroup* m_versionGroup;
 	QRadioButton* m_oldRadio;
+	QRadioButton* m_keepRadio;
 	QRadioButton* m_newRadio;
-	QPushButton* m_silenceButton;
+	QLabel* m_keepNote;
 	QPushButton* m_doneButton;
 	QPushButton* m_updateAllButton;
 	QPushButton* m_prevButton;

@@ -36,11 +36,13 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QPushButton>
 #include <QRadioButton>
 #include <QButtonGroup>
+#include <QAbstractButton>
 #include <QGroupBox>
 #include <QSignalBlocker>
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QFont>
+#include <QPalette>
 #include <QScrollArea>
 
 #include <algorithm>
@@ -56,8 +58,9 @@ MigrationHandler::MigrationHandler(SketchWidget* sketchWidget, QObject* parent)
 	, m_historyLabel(nullptr)
 	, m_versionGroup(nullptr)
 	, m_oldRadio(nullptr)
+	, m_keepRadio(nullptr)
 	, m_newRadio(nullptr)
-	, m_silenceButton(nullptr)
+	, m_keepNote(nullptr)
 	, m_doneButton(nullptr)
 	, m_updateAllButton(nullptr)
 	, m_prevButton(nullptr)
@@ -374,64 +377,79 @@ void MigrationHandler::createMigrationDialog()
 
 	layout->addStretch();
 
-	// Version chooser: two radios (old / new), each labelled with the part name + version.
-	// Toggling swaps the part live; it is preset to the currently active version per part.
+	// Version chooser: three radios (old / keep-and-don't-ask / new), each labelled with the part
+	// name + version. Picking one swaps the part live; it is preset to the currently active version
+	// per part. The middle "keep and don't ask again" radio replaces the former Silence button -- it
+	// keeps the old version and persists a silence so this change won't prompt again. Silence is only
+	// meaningful for soft "ask" parts, so that radio (and its note) is hidden for "forced" parts.
 	auto* versionBox = new QGroupBox(tr("Version"), m_dialog);
 	auto* versionLayout = new QVBoxLayout(versionBox);
 	m_oldRadio = new QRadioButton(versionBox);
+	m_keepRadio = new QRadioButton(versionBox);
 	m_newRadio = new QRadioButton(versionBox);
 	m_oldRadio->setObjectName("migrationOldRadio");
+	m_keepRadio->setObjectName("migrationKeepRadio");
 	m_newRadio->setObjectName("migrationNewRadio");
+	m_keepRadio->setToolTip(tr("Keep the old version and don't ask about these changes again"));
 	m_versionGroup = new QButtonGroup(versionBox);   // owned by the dialog, dies with it
 	m_versionGroup->setExclusive(true);
 	m_versionGroup->addButton(m_oldRadio);
+	m_versionGroup->addButton(m_keepRadio);
 	m_versionGroup->addButton(m_newRadio);
+
+	// QRadioButton doesn't word-wrap, so the keep option's explanatory sentence lives in a separate
+	// wrapped, indented note beneath it (the radio carries the short "Keep … and don't ask again.").
+	m_keepNote = new QLabel(versionBox);
+	m_keepNote->setObjectName("migrationKeepNote");
+	m_keepNote->setWordWrap(true);
+	m_keepNote->setText(tr("The part can still be migrated via the Inspector later."));
+	m_keepNote->setContentsMargins(24, 0, 0, 0);
+	QPalette notePalette = m_keepNote->palette();
+	notePalette.setColor(QPalette::WindowText, notePalette.color(QPalette::Disabled, QPalette::WindowText));
+	m_keepNote->setPalette(notePalette);
+
 	versionLayout->addWidget(m_oldRadio);
+	versionLayout->addWidget(m_keepRadio);
+	versionLayout->addWidget(m_keepNote);
 	versionLayout->addWidget(m_newRadio);
 	layout->addWidget(versionBox);
 
-	// Action buttons
-	QHBoxLayout* actionLayout = new QHBoxLayout();
+	// Action + navigation buttons, all on a single row: [Close] [Update all] ..... [Previous] [Next].
+	QHBoxLayout* buttonLayout = new QHBoxLayout();
 
-	m_silenceButton = new QPushButton(tr("Silence"), m_dialog);
-	m_silenceButton->setObjectName("migrationSilenceButton");
-	m_silenceButton->setToolTip(tr("Keep the old version and don't ask about these changes again"));
-
-	// "Done" simply closes the dialog (each part keeps whatever version it is showing). Always
-	// available, so there is an obvious way to finish even when Silence is hidden (forced parts).
-	m_doneButton = new QPushButton(tr("Done"), m_dialog);
+	// "Close" simply closes the dialog (each part keeps whatever version it is showing). On macOS the
+	// window's title-bar close button / Cmd-W is the platform-native way to dismiss it, so the
+	// explicit button is shown only on Windows and Linux.
+#ifndef Q_OS_MACOS
+	m_doneButton = new QPushButton(tr("Close"), m_dialog);
 	m_doneButton->setObjectName("migrationDoneButton");
 	m_doneButton->setToolTip(tr("Close this dialog; your choices are kept"));
+	buttonLayout->addWidget(m_doneButton);
+#endif
 
-	actionLayout->addStretch();
-	actionLayout->addWidget(m_silenceButton);
-	actionLayout->addWidget(m_doneButton);
-	actionLayout->addStretch();
+	m_updateAllButton = new QPushButton(tr("Update all"), m_dialog);
+	m_updateAllButton->setObjectName("migrationUpdateAllButton");
+	m_updateAllButton->setToolTip(tr("Update every outdated part in this list to its newest version"));
+	buttonLayout->addWidget(m_updateAllButton);
 
-	layout->addLayout(actionLayout);
+	buttonLayout->addStretch();
 
-	// Navigation between parts (only shown when there are several), with a bulk "Update all".
-	QHBoxLayout* navLayout = new QHBoxLayout();
 	m_prevButton = new QPushButton(tr("Previous"), m_dialog);
 	m_nextButton = new QPushButton(tr("Next"), m_dialog);
-	m_updateAllButton = new QPushButton(tr("Update all"), m_dialog);
 	m_prevButton->setObjectName("migrationPrevButton");
 	m_nextButton->setObjectName("migrationNextButton");
-	m_updateAllButton->setObjectName("migrationUpdateAllButton");
 	m_prevButton->setToolTip(tr("Go back to the previous part"));
 	m_nextButton->setToolTip(tr("Go to the next part"));
-	m_updateAllButton->setToolTip(tr("Update every outdated part in this list to its newest version"));
-	navLayout->addWidget(m_prevButton);
-	navLayout->addStretch();
-	navLayout->addWidget(m_updateAllButton);
-	navLayout->addStretch();
-	navLayout->addWidget(m_nextButton);
-	layout->addLayout(navLayout);
+	buttonLayout->addWidget(m_prevButton);
+	buttonLayout->addWidget(m_nextButton);
+	layout->addLayout(buttonLayout);
 
-	// Connect buttons
-	connect(m_newRadio, &QRadioButton::toggled, this, &MigrationHandler::onVersionToggled);
-	connect(m_silenceButton, &QPushButton::clicked, this, &MigrationHandler::silenceCurrentMigration);
+	// Connect controls. buttonClicked fires only on real user interaction, so the programmatic
+	// setChecked() in updateDialogForCurrentMigration() never re-triggers a swap.
+	connect(m_versionGroup, &QButtonGroup::buttonClicked, this, &MigrationHandler::onVersionChosen);
+#ifndef Q_OS_MACOS
 	connect(m_doneButton, &QPushButton::clicked, this, &MigrationHandler::closeDialog);
+#endif
 	connect(m_updateAllButton, &QPushButton::clicked, this, &MigrationHandler::updateAllMigrations);
 	connect(m_prevButton, &QPushButton::clicked, this, &MigrationHandler::goToPreviousMigration);
 	connect(m_nextButton, &QPushButton::clicked, this, &MigrationHandler::goToNextMigration);
@@ -446,12 +464,8 @@ void MigrationHandler::updateDialogForCurrentMigration()
 
 	MigrationInfo& info = m_pendingMigrations[m_currentIndex];
 
-	// First time we land on a part, default to the new version (swap live). After that the part
-	// is "visited", so navigating away and back keeps whatever the user last chose.
-	if (!info.visited) {
-		info.visited = true;
-		if (currentItem() != nullptr) swapToNew(info);
-	}
+	// Default is "Old": a part keeps the version it loaded with until the user picks a radio here.
+	// (No first-visit preview swap; navigating between parts never changes anything on its own.)
 
 	ItemBase* item = currentItem();
 	if (!item) {
@@ -476,7 +490,7 @@ void MigrationHandler::updateDialogForCurrentMigration()
 	// Update title
 	QString title = QString("<b>%1</b>").arg(info.instanceTitle);
 	if (info.decided) {
-		QString outcome = info.silenced ? tr("silenced — keeping old version")
+		QString outcome = info.silenced ? tr("keeping old version — won't ask again")
 		                  : info.isSwapped ? tr("updated to new version")
 		                  : tr("keeping old version");
 		title += QString(" — <i>%1</i>").arg(outcome);
@@ -525,24 +539,30 @@ void MigrationHandler::updateDialogForCurrentMigration()
 	m_historyLabel->setText(contentHtml);
 
 	// Version chooser: label each radio with the part name + version, and preset (without
-	// triggering a swap) to whichever version is currently active for this part.
+	// triggering a swap) to whichever choice currently applies for this part.
 	{
 		QSignalBlocker blockOld(m_oldRadio);
+		QSignalBlocker blockKeep(m_keepRadio);
 		QSignalBlocker blockNew(m_newRadio);
 		m_oldRadio->setText(info.oldVersion.isEmpty()
-		                    ? tr("Keep old: %1").arg(info.oldTitle)
-		                    : tr("Keep old: %1 (v. %2)").arg(info.oldTitle, info.oldVersion));
+		                    ? tr("Old: %1").arg(info.oldTitle)
+		                    : tr("Old: %1 (v. %2)").arg(info.oldTitle, info.oldVersion));
+		m_keepRadio->setText(info.oldVersion.isEmpty()
+		                    ? tr("Keep this version and don't ask again.")
+		                    : tr("Keep v. %1 and don't ask again.").arg(info.oldVersion));
 		m_newRadio->setText(info.newVersion.isEmpty()
-		                    ? tr("Use new: %1").arg(info.newTitle)
-		                    : tr("Use new: %1 (v. %2)").arg(info.newTitle, info.newVersion));
-		m_oldRadio->setChecked(!info.isSwapped);
-		m_newRadio->setChecked(info.isSwapped);
+		                    ? tr("New: %1").arg(info.newTitle)
+		                    : tr("New: %1 (v. %2)").arg(info.newTitle, info.newVersion));
+		if (info.isSwapped) m_newRadio->setChecked(true);
+		else if (info.silenced) m_keepRadio->setChecked(true);
+		else m_oldRadio->setChecked(true);
 	}
 
-	// Silence (persistent "don't ask again") is offered only for soft "ask" migrations;
-	// classic "forced" parts must keep prompting, so they get the chooser + Skip only.
-	m_silenceButton->setVisible(info.effectiveMode == "ask");
-	m_silenceButton->setEnabled(true);
+	// "Keep … and don't ask again" (persistent silence) is offered only for soft "ask" migrations;
+	// classic "forced" parts must keep prompting, so they get Old / New only.
+	bool canSilence = (info.effectiveMode == "ask");
+	m_keepRadio->setVisible(canSilence);
+	m_keepNote->setVisible(canSilence);
 
 	// Navigation between parts: only when there are several to step through. Hide Previous on the
 	// first part and Next on the last, rather than leaving a dead greyed-out button there. Keep the
@@ -613,15 +633,30 @@ void MigrationHandler::centerAndZoomOnItem(ItemBase* item)
 	view->viewItemInfo(item);
 }
 
-void MigrationHandler::onVersionToggled(bool useNew)
+void MigrationHandler::onVersionChosen(QAbstractButton* button)
 {
-	// Driven by the "new" radio. This is the only place a part is swapped/reverted, so navigating
-	// between parts never changes anything until the user actually flips the toggle here.
+	// The only place a part is swapped/reverted or (un)silenced, so navigating between parts never
+	// changes anything until the user actually picks a radio here. Old and "keep … don't ask again"
+	// both show the old version; they differ only in whether a persistent silence is written.
 	if (m_currentIndex < 0 || m_currentIndex >= m_pendingMigrations.size()) return;
 
 	MigrationInfo& info = m_pendingMigrations[m_currentIndex];
-	if (useNew && !info.isSwapped) swapToNew(info);
-	else if (!useNew && info.isSwapped) revertToOld(info);
+
+	if (button == m_newRadio) {
+		if (!info.isSwapped) swapToNew(info);
+		clearSilence(info);
+		info.silenced = false;
+	}
+	else if (button == m_keepRadio) {
+		if (info.isSwapped) revertToOld(info);
+		applySilence(info);
+		info.silenced = true;
+	}
+	else {   // m_oldRadio
+		if (info.isSwapped) revertToOld(info);
+		clearSilence(info);
+		info.silenced = false;
+	}
 	info.decided = true;
 
 	updateDialogForCurrentMigration();
@@ -717,19 +752,11 @@ void MigrationHandler::revertToOld(MigrationInfo& info)
 	info.isSwapped = false;
 }
 
-void MigrationHandler::silenceCurrentMigration()
+void MigrationHandler::applySilence(MigrationInfo& info)
 {
-	if (m_currentIndex < 0 || m_currentIndex >= m_pendingMigrations.size()) return;
-
-	MigrationInfo& info = m_pendingMigrations[m_currentIndex];
-
-	// Can only silence "ask" mode
+	// Persist a "don't ask again" silence for this instance. Only "ask" parts can be silenced;
+	// "forced" parts never expose the keep radio. The caller has already reverted to the old version.
 	if (info.effectiveMode != "ask") return;
-
-	// If currently previewing the new part, revert to the old version (silence means keep old).
-	if (info.isSwapped) {
-		revertToOld(info);
-	}
 
 	// Baseline the silence at the newest relevant entry, stored ISO-normalised so it round-trips
 	// and parses back reliably in getRelevantHistory.
@@ -738,43 +765,67 @@ void MigrationHandler::silenceCurrentMigration()
 		QDate d = entry.parsedDate();
 		if (d.isValid() && (!latest.isValid() || d > latest)) latest = d;
 	}
+	if (!latest.isValid()) return;
 
-	if (latest.isValid()) {
-		ItemBase* item = currentItem();
-		if (item && item->modelPart()) {
-			QString isoDate = latest.toString(Qt::ISODate);
-			QString oldDate = item->modelPart()->localProp("silencedDate").toString();
-			MainWindow* mainWindow = findMainWindow();
-			SketchWidget* view = (mainWindow != nullptr) ? mainWindow->sketchWidgetForView(item->viewID()) : nullptr;
-			if (view != nullptr && view->undoStack() != nullptr) {
-				// Push as a command so the sketch is marked modified (and prompts to save) and
-				// the choice is undoable. SetPropCommand routes to the same modelPart localProp.
-				auto* cmd = new SetPropCommand(view, item->id(), "silencedDate", oldDate, isoDate, false, nullptr);
-				cmd->setText(tr("Silence update reminder for %1").arg(info.instanceTitle));
-				view->undoStack()->push(cmd);
-			} else {
-				item->modelPart()->setLocalProp("silencedDate", isoDate);
-			}
-		}
-	}
+	ItemBase* item = currentItem();
+	if (item == nullptr || item->modelPart() == nullptr) return;
 
-	// The "outdated part" badge should disappear now this instance is silenced; refresh it in
-	// every view that holds the part.
+	QString isoDate = latest.toString(Qt::ISODate);
+	QString oldDate = item->modelPart()->localProp("silencedDate").toString();
+	if (oldDate == isoDate) return;   // already silenced at this baseline
+
 	MainWindow* mainWindow = findMainWindow();
-	if (mainWindow != nullptr) {
-		const ViewLayer::ViewID viewIDs[] = { ViewLayer::BreadboardView, ViewLayer::SchematicView, ViewLayer::PCBView };
-		for (ViewLayer::ViewID viewID : viewIDs) {
-			SketchWidget* view = mainWindow->sketchWidgetForView(viewID);
-			if (view == nullptr) continue;
-			ItemBase* viewItem = view->findItem(info.itemId);
-			if (viewItem != nullptr) viewItem->layerKinChief()->updateObsoleteAnnotation();
-		}
+	SketchWidget* view = (mainWindow != nullptr) ? mainWindow->sketchWidgetForView(item->viewID()) : nullptr;
+	if (view != nullptr && view->undoStack() != nullptr) {
+		// Push as a command so the sketch is marked modified (and prompts to save) and the choice is
+		// undoable. SetPropCommand routes to the same modelPart localProp.
+		auto* cmd = new SetPropCommand(view, item->id(), "silencedDate", oldDate, isoDate, false, nullptr);
+		cmd->setText(tr("Silence update reminder for %1").arg(info.instanceTitle));
+		view->undoStack()->push(cmd);
+	} else {
+		item->modelPart()->setLocalProp("silencedDate", isoDate);
 	}
 
-	info.decided = true;
-	info.silenced = true;
-	// Move to the next undecided part (closes when all are decided)
-	processNextMigration();
+	// The "outdated part" badge should disappear now this instance is silenced.
+	refreshObsoleteAnnotation(info);
+}
+
+void MigrationHandler::clearSilence(MigrationInfo& info)
+{
+	// Undo a previously-applied silence (the user moved off "keep … don't ask again" back to Old or
+	// New), so the update reminder applies again. No-op when nothing was silenced.
+	ItemBase* item = currentItem();
+	if (item == nullptr || item->modelPart() == nullptr) return;
+
+	QString oldDate = item->modelPart()->localProp("silencedDate").toString();
+	if (oldDate.isEmpty()) return;
+
+	MainWindow* mainWindow = findMainWindow();
+	SketchWidget* view = (mainWindow != nullptr) ? mainWindow->sketchWidgetForView(item->viewID()) : nullptr;
+	if (view != nullptr && view->undoStack() != nullptr) {
+		auto* cmd = new SetPropCommand(view, item->id(), "silencedDate", oldDate, QString(), false, nullptr);
+		cmd->setText(tr("Re-enable update reminder for %1").arg(info.instanceTitle));
+		view->undoStack()->push(cmd);
+	} else {
+		item->modelPart()->setLocalProp("silencedDate", QString());
+	}
+
+	// The "outdated part" badge should reappear now this instance is no longer silenced.
+	refreshObsoleteAnnotation(info);
+}
+
+void MigrationHandler::refreshObsoleteAnnotation(const MigrationInfo& info)
+{
+	// Refresh the "outdated part" badge in every view that holds the part.
+	MainWindow* mainWindow = findMainWindow();
+	if (mainWindow == nullptr) return;
+	const ViewLayer::ViewID viewIDs[] = { ViewLayer::BreadboardView, ViewLayer::SchematicView, ViewLayer::PCBView };
+	for (ViewLayer::ViewID viewID : viewIDs) {
+		SketchWidget* view = mainWindow->sketchWidgetForView(viewID);
+		if (view == nullptr) continue;
+		ItemBase* viewItem = view->findItem(info.itemId);
+		if (viewItem != nullptr) viewItem->layerKinChief()->updateObsoleteAnnotation();
+	}
 }
 
 void MigrationHandler::processNextMigration()
@@ -859,8 +910,9 @@ void MigrationHandler::onDialogClosed()
 	m_historyLabel = nullptr;
 	m_versionGroup = nullptr;
 	m_oldRadio = nullptr;
+	m_keepRadio = nullptr;
 	m_newRadio = nullptr;
-	m_silenceButton = nullptr;
+	m_keepNote = nullptr;
 	m_doneButton = nullptr;
 	m_updateAllButton = nullptr;
 	m_prevButton = nullptr;
