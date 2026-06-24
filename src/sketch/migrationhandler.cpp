@@ -45,6 +45,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QPalette>
 #include <QScrollArea>
 #include <QAction>
+#include <QUndoStack>
 
 #include <algorithm>
 
@@ -348,6 +349,14 @@ void MigrationHandler::createMigrationDialog()
 		if (QAction* redoAct = parentWindow->redoAction()) m_dialog->addAction(redoAct);
 	}
 
+	// Watch the (shared) undo stack so an external Undo/Redo that flips the current part old<->new is
+	// reflected in the radios live. UniqueConnection keeps re-opening the dialog from stacking up
+	// duplicate connections; the slot is a no-op while the dialog is closed.
+	if (m_sketchWidget != nullptr && m_sketchWidget->undoStack() != nullptr) {
+		connect(m_sketchWidget->undoStack(), &QUndoStack::indexChanged,
+		        this, &MigrationHandler::onUndoStackChanged, Qt::UniqueConnection);
+	}
+
 	QVBoxLayout* layout = new QVBoxLayout(m_dialog);
 
 	// Counter label
@@ -477,6 +486,10 @@ void MigrationHandler::updateDialogForCurrentMigration()
 
 	// Default is "Old": a part keeps the version it loaded with until the user picks a radio here.
 	// (No first-visit preview swap; navigating between parts never changes anything on its own.)
+
+	// Sync our tracked state with the part actually in the sketch before reading it: a manual
+	// Undo/Redo may have flipped it old<->new (and changed its item id) behind our back.
+	reconcileStateFromSketch(info);
 
 	ItemBase* item = currentItem();
 	if (!item) {
@@ -653,6 +666,8 @@ void MigrationHandler::onVersionChosen(QAbstractButton* button)
 
 	MigrationInfo& info = m_pendingMigrations[m_currentIndex];
 
+	// Mark these as our own changes so the undo-stack listener ignores the commands they push.
+	m_applyingChange = true;
 	if (button == m_newRadio) {
 		if (!info.isSwapped) swapToNew(info);
 		clearSilence(info);
@@ -669,6 +684,7 @@ void MigrationHandler::onVersionChosen(QAbstractButton* button)
 		info.silenced = false;
 	}
 	info.decided = true;
+	m_applyingChange = false;
 
 	updateDialogForCurrentMigration();
 }
@@ -695,7 +711,10 @@ void MigrationHandler::swapToNew(MigrationInfo& info)
 	// a single undoable command and returns the new item's id directly, so we never have to
 	// rediscover it from the (non-deterministically ordered) selection.
 	long newID = mainWindow->swapPartForMigration(item, info.newModuleID);
-	if (newID != 0) info.itemId = newID;
+	if (newID != 0) {
+		info.itemId = newID;
+		info.newItemId = newID;   // anchor for re-finding the part after a manual undo/redo
+	}
 
 	// One top-level command was pushed; remember where, so we can tell later whether our swap
 	// is still safely undoable or whether real commands have been pushed on top of it.
@@ -839,6 +858,66 @@ void MigrationHandler::refreshObsoleteAnnotation(const MigrationInfo& info)
 	}
 }
 
+void MigrationHandler::reconcileStateFromSketch(MigrationInfo& info)
+{
+	// A manual Undo/Redo (reachable while the dialog is focused) can swap the current part old<->new
+	// behind our back, which also changes its item id. Probe the ids this migration has used and
+	// adopt whichever still resolves, deriving isSwapped/silenced from the live part so the radios
+	// match reality. If none resolve (e.g. the part was deleted) leave the tracked state untouched;
+	// callers already guard on a null currentItem().
+	MainWindow* mainWindow = findMainWindow();
+	if (mainWindow == nullptr) return;
+
+	const qint64 candidates[] = { info.itemId, info.newItemId, info.originalItemId };
+	for (qint64 id : candidates) {
+		if (id == 0) continue;
+		ItemBase* item = mainWindow->findItemInAnyView(id);
+		if (item == nullptr || item->modelPart() == nullptr) continue;
+
+		QString liveModule = item->modelPart()->moduleID();
+		if (liveModule == info.newModuleID) {
+			info.isSwapped = true;
+			info.itemId = id;
+			info.newItemId = id;
+			info.silenced = false;        // the new version is never "silenced"
+			return;
+		}
+		if (liveModule == info.oldModuleID) {
+			info.isSwapped = false;
+			info.itemId = id;
+			info.originalItemId = id;
+			info.silenced = isSilenceActive(item, info);
+			return;
+		}
+		// Some unrelated module at this id -- not this migration's part; keep looking.
+	}
+}
+
+bool MigrationHandler::isSilenceActive(ItemBase* item, const MigrationInfo& info) const
+{
+	// "Keep … and don't ask again" writes the newest relevant entry's date as silencedDate (see
+	// applySilence). The silence is in effect iff that exact baseline is still stored -- so undoing
+	// the silence command (now possible via Ctrl+Z) flips the keep radio back off.
+	if (item == nullptr || item->modelPart() == nullptr) return false;
+	QDate latest;
+	for (const HistoryEntry& entry : info.relevantHistory) {
+		QDate d = entry.parsedDate();
+		if (d.isValid() && (!latest.isValid() || d > latest)) latest = d;
+	}
+	if (!latest.isValid()) return false;
+	return item->modelPart()->localProp("silencedDate").toString() == latest.toString(Qt::ISODate);
+}
+
+void MigrationHandler::onUndoStackChanged()
+{
+	// The shared undo stack moved. Ignore our own swap/silence commands (m_applyingChange) and any
+	// change while the dialog is closed; otherwise re-sync the dialog to the part now in the sketch
+	// so an external Undo/Redo updates the radios (and the focused part) live.
+	if (m_applyingChange || m_dialog.isNull()) return;
+	if (m_currentIndex < 0 || m_currentIndex >= m_pendingMigrations.size()) return;
+	updateDialogForCurrentMigration();
+}
+
 void MigrationHandler::processNextMigration()
 {
 	// Advance to the next part the user hasn't decided yet (wrapping around); close
@@ -876,8 +955,8 @@ void MigrationHandler::updateAllMigrations()
 	MainWindow* mainWindow = findMainWindow();
 	if (mainWindow == nullptr) { closeDialog(); return; }
 
-	// Bring every part to its new version: swap the ones still showing old (toggled back, or
-	// never visited) in a single undoable command. Parts already on the new version are left as-is.
+	// Bring every part to its new version: swap the ones still showing old (toggled back, or never
+	// swapped) in a single undoable command. Parts already on the new version are left as-is.
 	QList<ItemBase*> toSwap;
 	for (int i = 0; i < m_pendingMigrations.size(); ++i) {
 		ItemBase* item = currentItem(i);
@@ -885,7 +964,10 @@ void MigrationHandler::updateAllMigrations()
 	}
 
 	if (!toSwap.isEmpty()) {
+		// Our own change; keep the undo-stack listener from reacting to the command it pushes.
+		m_applyingChange = true;
 		mainWindow->swapObsoleteDirect(toSwap, false);
+		m_applyingChange = false;
 	}
 	closeDialog();
 }

@@ -44,6 +44,8 @@ class QAbstractButton;
 struct MigrationInfo {
 	qint64 itemId;          // current item ID (changes after swap)
 	qint64 originalItemId;  // original item ID (for restoring after undo)
+	qint64 newItemId = 0;   // most recent swapped-in (new) item ID; lets the dialog re-find the part
+	                        // after a manual undo/redo flips it old<->new behind the handler's back
 	QString oldModuleID;    // module ID to swap back to old
 	QString newModuleID;    // module ID to swap to new
 	QString instanceTitle;  // for display purposes
@@ -96,6 +98,7 @@ private Q_SLOTS:
 	void handlePendingMigrationDialog();
 	void onDialogClosed();
 	void onVersionChosen(QAbstractButton* button);
+	void onUndoStackChanged();
 
 private:
 	void createMigrationDialog();
@@ -105,6 +108,10 @@ private:
 	void swapToNew(MigrationInfo& info);
 	void revertToOld(MigrationInfo& info);
 	bool canUndoOwnSwap(int swapStackIndex) const;
+	// Bring the tracked swap/silence state back in line with the part actually present in the
+	// sketch (it can change behind our back via a manual Undo/Redo), so the radios reflect reality.
+	void reconcileStateFromSketch(MigrationInfo& info);
+	bool isSilenceActive(ItemBase* item, const MigrationInfo& info) const;
 	void applySilence(MigrationInfo& info);
 	void clearSilence(MigrationInfo& info);
 	void refreshObsoleteAnnotation(const MigrationInfo& info);
@@ -125,6 +132,9 @@ private:
 	// Queue position the view is currently focused on; -1 until the dialog opens. The view is left
 	// untouched while this stays the same (i.e. when only the old/new version of a part changes).
 	int m_focusIndex = -1;
+	// True while the handler is applying its own swap/silence (which push undo commands), so the
+	// undo-stack listener ignores those self-inflicted changes and only reacts to external Undo/Redo.
+	bool m_applyingChange = false;
 
 	// Dialog widgets
 	QPointer<QDialog> m_dialog;
