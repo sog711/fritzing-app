@@ -553,7 +553,12 @@ void MigrationHandler::updateDialogForCurrentMigration()
 	m_titleLabel->setText(title);
 	// Expose the raw instance title (the <b>…</b> markup makes the label text awkward to parse)
 	// so tests can address the part with the Wire/Part probes by its exact title.
-	if (m_dialog != nullptr) m_dialog->setProperty("currentInstanceTitle", info.instanceTitle);
+	if (m_dialog != nullptr) {
+		m_dialog->setProperty("currentInstanceTitle", info.instanceTitle);
+		// Number of parts in this session, exposed for GUI tests (the visible "Part X of Y" counter
+		// is hidden for a single-part dialog, so a label can't be parsed in that case).
+		m_dialog->setProperty("migrationPartCount", m_pendingMigrations.size());
+	}
 
 	// Explanation of why this dialog is being shown (e.g. mixed versions)
 	m_reasonLabel->setText(info.reason);

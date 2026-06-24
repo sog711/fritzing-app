@@ -55,6 +55,7 @@ FProbeMigrationDialog::FProbeMigrationDialog(MainWindow *mainWindow)
 			QPushButton *next = dialog->findChild<QPushButton *>("migrationNextButton");
 
 			result["instanceTitle"] = dialog->property("currentInstanceTitle").toString();
+			result["partCount"] = dialog->property("migrationPartCount").toInt();
 			result["selected"] = QString(
 			    (newRadio && newRadio->isChecked()) ? "new"
 			    : (keepRadio && keepRadio->isChecked()) ? "keep"
@@ -102,6 +103,9 @@ FProbeMigrationDialog::FProbeMigrationDialog(MainWindow *mainWindow)
 			else if (action == "next") clickButton("migrationNextButton");
 			else if (action == "previous") clickButton("migrationPrevButton");
 			else if (action == "close") dialog->close();
+			// Give the (non-modal) dialog keyboard focus so a following real key event (e.g. Ctrl+Z)
+			// is delivered to it -- exercises the undo/redo-while-focused wiring.
+			else if (action == "activate") { dialog->raise(); dialog->activateWindow(); }
 			else { ok = false; reason = QString("unknown action '%1'").arg(action); }
 			result["ok"] = ok;
 			if (!ok) {
