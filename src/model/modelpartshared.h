@@ -31,6 +31,11 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "../viewlayer.h"
 
+// DEV-ONLY: while rolling out the renamed migration modes, refuse any part FZP whose
+// <history> still uses a legacy/invalid mode token (silent/forced/ask, or a typo) instead of
+// required/recommended/optional. Set to 0 (or delete the guarded blocks) before release.
+#define FRITZING_DEV_REJECT_LEGACY_MODES 1
+
 struct ViewImage {
 	ViewLayer::ViewID viewID;
 	qulonglong layers;
@@ -150,6 +155,12 @@ public:
 	const QList<HistoryEntry> & history() const;
 	bool hasHistory() const;
 	bool loadHistoryFromFile();
+#if FRITZING_DEV_REJECT_LEGACY_MODES
+	// Scan a <module> root's <history> for a non-canonical migration mode token. Returns true when
+	// all are valid; on a bad token it reports the part (modal interactively, log under -ftesting)
+	// and returns false so the caller refuses the part. See the .cpp.
+	static bool checkMigrationModesForDev(const QDomElement & moduleRoot, const QString & path);
+#endif
 
 	void flipSMDAnd();
 	void setFlippedSMD(bool);
@@ -176,6 +187,9 @@ protected:
 	LayerList viewLayersAux(ViewLayer::ViewID viewID, qulonglong (*accessor)(ViewImage *)) const;
 	void addSchematicText(ViewImage *);
 	bool setDomDocument(QDomDocument &);
+	// Parse the <history> children of `root` into m_history (shared by setDomDocument and
+	// loadHistoryFromFile).
+	void parseHistory(const QDomElement & root);
 
 protected Q_SLOTS:
 	void removeOwner();

@@ -30,6 +30,12 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QMessageBox>
 #include <QFile>
 
+#if FRITZING_DEV_REJECT_LEGACY_MODES
+// DEV-ONLY — reject legacy migration-mode tokens; remove before release.
+#include "../utils/fmessagebox.h"
+#include "../testing/FTesting.h"
+#endif
+
 void copyPinAttributes(QDomElement & from, QDomElement & to)
 {
 	to.setAttribute("svgId", from.attribute("svgId"));
@@ -147,17 +153,9 @@ bool ModelPartShared::setDomDocument(QDomDocument & domDocument) {
 		m_replacedby = version.attribute("replacedby");
 	}
 
-	// Parse history entries for soft migration
-	QDomElement historyElement = root.firstChildElement("history");
-	while (!historyElement.isNull()) {
-		HistoryEntry entry;
-		entry.date = historyElement.attribute("date");
-		entry.author = historyElement.attribute("author");
-		entry.mode = historyElement.attribute("mode", "optional");   // default when mode= omitted
-		entry.description = historyElement.text().trimmed();
-		m_history.append(entry);
-		historyElement = historyElement.nextSiblingElement("history");
-	}
+	// Parse history entries for soft migration. (parseHistory may drop them in a dev build if they
+	// use a legacy mode token; we keep parsing the rest of the part regardless.)
+	parseHistory(root);
 
 	QDomElement spice = root.firstChildElement("spice");
 	QDomElement line = spice.firstChildElement("line");
@@ -552,7 +550,16 @@ bool ModelPartShared::loadHistoryFromFile() {
 		return false;
 	}
 
-	// Parse history entries
+#if FRITZING_DEV_REJECT_LEGACY_MODES
+	if (!checkMigrationModesForDev(root, m_path)) return false;   // refuse legacy/invalid mode (dev)
+#endif
+
+	parseHistory(root);
+
+	return !m_history.isEmpty();
+}
+
+void ModelPartShared::parseHistory(const QDomElement & root) {
 	QDomElement historyElement = root.firstChildElement("history");
 	while (!historyElement.isNull()) {
 		HistoryEntry entry;
@@ -563,9 +570,32 @@ bool ModelPartShared::loadHistoryFromFile() {
 		m_history.append(entry);
 		historyElement = historyElement.nextSiblingElement("history");
 	}
-
-	return !m_history.isEmpty();
 }
+
+#if FRITZING_DEV_REJECT_LEGACY_MODES
+// DEV-ONLY — remove before release. Scan a <module> root's <history> for a non-canonical
+// migration mode token (the legacy silent/forced/ask, or a typo) instead of
+// required/recommended/optional. On a bad token, report it and return false so the caller refuses
+// the part outright (loadPart -> nullptr, loadHistoryFromFile -> false). Interactive runs get a
+// blocking dialog; under -ftesting we only log (a modal would hang the headless suite -- the refused
+// load then fails the affected test loudly instead).
+bool ModelPartShared::checkMigrationModesForDev(const QDomElement & moduleRoot, const QString & path) {
+	for (QDomElement h = moduleRoot.firstChildElement("history"); !h.isNull();
+	     h = h.nextSiblingElement("history")) {
+		const QString mode = h.attribute("mode");
+		if (mode.isEmpty() || mode == "required" || mode == "recommended" || mode == "optional") continue;
+		QString msg = tr("Part FZP uses the unsupported migration mode “%1”.\n"
+		                 "Re-tag its <history> with required / recommended / optional.\n%2")
+		                  .arg(mode, path);
+		DebugDialog::debug("DEV: refusing part -- " + msg);
+		if (!FTesting::getInstance()->enabled()) {
+			FMessageBox::critical(nullptr, tr("Unsupported migration mode"), msg);
+		}
+		return false;   // refuse the part
+	}
+	return true;
+}
+#endif
 
 void ModelPartShared::setFlippedSMD(bool f) {
 	m_flippedSMD = f;
