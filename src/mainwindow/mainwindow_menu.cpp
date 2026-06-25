@@ -4050,8 +4050,8 @@ bool MainWindow::hasObsoleteParts() {
 QList<ItemBase *> MainWindow::routeHistoryMigrations(const QList<ItemBase *> & obsoleteItems, TriggerContext context) {
 	// Every obsolete part is routed to the "Part Migration" dialog (or auto-swapped), keyed on
 	// the replacement's effective history mode:
-	//   recommended (classic, incl. parts with no history) → prompt on Load + ManualUpdate, not Drop
-	//   optional    (soft)                                  → prompt on ManualUpdate always; on Load/Drop only when mixed + unseen history
+	//   recommended (classic, incl. parts with no history) → prompt on Load + ManualUpdate always; on Drop when mixed + unseen
+	//   optional    (soft, silenceable)                    → prompt on ManualUpdate always; on Load when unseen (until silenced); on Drop when mixed + unseen
 	//   required    (auto)                                  → queued and auto-applied with no dialog
 	// Only parts with no resolvable replacement are returned to the caller (to report/ignore).
 	QList<ItemBase *> rest;
@@ -4089,16 +4089,23 @@ QList<ItemBase *> MainWindow::routeHistoryMigrations(const QList<ItemBase *> & o
 		    MigrationHandler::getRelevantHistory(oldPart, newPart->history());
 		QString mode = MigrationHandler::computeEffectiveMode(newPart->history());
 		bool mixed = modulesInSketch.contains(newPart->moduleID());
+		bool unseen = !relevantHistory.isEmpty();
 
 		bool queue = false;
 		if (mode == "required") {
 			queue = true;                                   // auto-applied by processMigrations
 		}
 		else if (mode == "recommended") {
-			queue = (context != TriggerContext::Drop);      // classic: every load + manual, not mid-drop
+			// classic: always prompt on load + manual; on drop only when its replacement is already
+			// mixed in and there's an unseen revision.
+			queue = (context != TriggerContext::Drop) || (mixed && unseen);
 		}
 		else {                                              // "optional"
-			queue = (context == TriggerContext::ManualUpdate) || (mixed && !relevantHistory.isEmpty());
+			// silenceable: prompt on manual; on load whenever there's an unseen change (so it nudges
+			// like recommended, but stops once silenced); on drop only when mixed + unseen.
+			queue = (context == TriggerContext::ManualUpdate)
+			     || (context == TriggerContext::Load && unseen)
+			     || (context == TriggerContext::Drop && mixed && unseen);
 		}
 
 		if (queue) {
