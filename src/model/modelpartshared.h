@@ -46,13 +46,15 @@ struct ViewImage {
 struct HistoryEntry {
 	QString date;        // ISO date string "2026-01-01"
 	QString author;
-	QString mode;        // "silent", "ask", "forced"
+	QString mode;        // "required", "recommended", "optional"
 	QString description;
 
 	QDate parsedDate() const { return QDate::fromString(date, Qt::ISODate); }
-	bool isSilent() const { return mode == "silent"; }
-	bool isAsk() const { return mode == "ask"; }
-	bool isForced() const { return mode == "forced"; }
+	// Migration insistence of this change. The legacy tokens silent/forced/ask are accepted as
+	// aliases of required/recommended/optional so part FZPs written before the rename still parse.
+	bool isRequired() const { return mode == "required" || mode == "silent"; }          // auto-apply, no choice
+	bool isRecommended() const { return mode == "recommended" || mode == "forced"; }    // prompt every load, can't mute
+	bool isOptional() const { return mode == "optional" || mode == "ask"; }             // prompt when relevant, mutable
 };
 
 class ModelPartShared : public QObject

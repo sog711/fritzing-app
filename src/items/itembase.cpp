@@ -1649,7 +1649,7 @@ QString ItemBase::bugText() const
 void ItemBase::updateObsoleteAnnotation()
 {
 	// Show the "outdated part" badge on obsolete parts, unless the user has silenced this
-	// instance (soft "ask" parts store a silencedDate when silenced). The badge doubles as a
+	// instance ("optional" parts store a silencedDate when silenced). The badge doubles as a
 	// clickable shortcut to the Part Migration dialog (see bugAnnotationClicked()).
 	bool silenced = (modelPart() != nullptr) && !modelPart()->localProp("silencedDate").toString().isEmpty();
 	if (isObsolete() && !silenced) {

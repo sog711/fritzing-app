@@ -153,7 +153,7 @@ bool ModelPartShared::setDomDocument(QDomDocument & domDocument) {
 		HistoryEntry entry;
 		entry.date = historyElement.attribute("date");
 		entry.author = historyElement.attribute("author");
-		entry.mode = historyElement.attribute("mode", "ask");
+		entry.mode = historyElement.attribute("mode", "optional");   // default when mode= omitted
 		entry.description = historyElement.text().trimmed();
 		m_history.append(entry);
 		historyElement = historyElement.nextSiblingElement("history");
@@ -558,7 +558,7 @@ bool ModelPartShared::loadHistoryFromFile() {
 		HistoryEntry entry;
 		entry.date = historyElement.attribute("date");
 		entry.author = historyElement.attribute("author");
-		entry.mode = historyElement.attribute("mode", "ask");
+		entry.mode = historyElement.attribute("mode", "optional");   // default when mode= omitted
 		entry.description = historyElement.text().trimmed();
 		m_history.append(entry);
 		historyElement = historyElement.nextSiblingElement("history");

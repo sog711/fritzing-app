@@ -4050,9 +4050,9 @@ bool MainWindow::hasObsoleteParts() {
 QList<ItemBase *> MainWindow::routeHistoryMigrations(const QList<ItemBase *> & obsoleteItems, TriggerContext context) {
 	// Every obsolete part is routed to the "Part Migration" dialog (or auto-swapped), keyed on
 	// the replacement's effective history mode:
-	//   forced (classic, incl. parts with no history) → prompt on Load + ManualUpdate, not Drop
-	//   ask    (soft)                                  → prompt on ManualUpdate always; on Load/Drop only when mixed + unseen history
-	//   silent (auto)                                  → queued and auto-applied with no dialog
+	//   recommended (classic, incl. parts with no history) → prompt on Load + ManualUpdate, not Drop
+	//   optional    (soft)                                  → prompt on ManualUpdate always; on Load/Drop only when mixed + unseen history
+	//   required    (auto)                                  → queued and auto-applied with no dialog
 	// Only parts with no resolvable replacement are returned to the caller (to report/ignore).
 	QList<ItemBase *> rest;
 	if (obsoleteItems.isEmpty()) return rest;
@@ -4091,13 +4091,13 @@ QList<ItemBase *> MainWindow::routeHistoryMigrations(const QList<ItemBase *> & o
 		bool mixed = modulesInSketch.contains(newPart->moduleID());
 
 		bool queue = false;
-		if (mode == "silent") {
+		if (mode == "required") {
 			queue = true;                                   // auto-applied by processMigrations
 		}
-		else if (mode == "forced") {
+		else if (mode == "recommended") {
 			queue = (context != TriggerContext::Drop);      // classic: every load + manual, not mid-drop
 		}
-		else {                                              // "ask" (soft)
+		else {                                              // "optional"
 			queue = (context == TriggerContext::ManualUpdate) || (mixed && !relevantHistory.isEmpty());
 		}
 
@@ -4105,7 +4105,7 @@ QList<ItemBase *> MainWindow::routeHistoryMigrations(const QList<ItemBase *> & o
 			QString reason;
 			if (context == TriggerContext::ManualUpdate)
 				reason = tr("You chose to update this outdated part.");
-			else if (mode == "forced")
+			else if (mode == "recommended")
 				reason = tr("This part is outdated. We recommend updating it to the latest version.");
 			else
 				reason = tr("This sketch contains both this part and a newer revision of it. Choose which one to use.");

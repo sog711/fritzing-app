@@ -98,8 +98,8 @@ void MigrationHandler::queueMigration(ItemBase* itemBase, ModelPart* oldPart,
 	}
 	info.relevantHistory = history;
 	// Classify from the full history (the part's nature), not just the unseen subset:
-	// an all-silent part with no unseen entries must still resolve to "silent", and a
-	// history-less part to "forced".
+	// an all-"required" part with no unseen entries must still resolve to "required", and a
+	// history-less part to "recommended".
 	info.effectiveMode = computeEffectiveMode(newPart != nullptr ? newPart->history() : history);
 	info.isSwapped = false;
 	info.reason = reason;
@@ -143,11 +143,11 @@ void MigrationHandler::processMigrations()
 		return;
 	}
 
-	// Collect silent migrations to auto-apply now; keep the rest for the dialog.
+	// Collect "required" migrations to auto-apply now; keep the rest for the dialog.
 	QList<MigrationInfo> nonSilentMigrations;
 	QList<ItemBase*> silentItems;
 	for (const MigrationInfo& info : m_pendingMigrations) {
-		if (info.effectiveMode == "silent") {
+		if (info.effectiveMode == "required") {
 			ItemBase* item = m_sketchWidget->findItem(info.itemId);
 			if (item != nullptr) {
 				silentItems.append(item);
@@ -230,22 +230,23 @@ QList<HistoryEntry> MigrationHandler::getRelevantHistory(ModelPart* instancePart
 
 QString MigrationHandler::computeEffectiveMode(const QList<HistoryEntry>& history)
 {
-	// No migration notes at all → classic hard obsoletion: prompt on every load.
-	// (Only an explicit mode="silent" history entry opts a part into auto-swap.)
-	if (history.isEmpty()) return "forced";
+	// No migration notes at all → classic obsoletion: "recommended" (prompt on every load).
+	// (Only an explicit mode="required" history entry opts a part into auto-swap.)
+	if (history.isEmpty()) return "recommended";
 
-	// Most restrictive mode wins: forced > ask > silent
-	bool hasForced = false;
-	bool hasAsk = false;
+	// Most insistent mode wins: recommended > optional > required. A change that needs review
+	// (recommended) must not be auto-applied even if another entry is "required".
+	bool hasRecommended = false;
+	bool hasOptional = false;
 
 	for (const HistoryEntry& entry : history) {
-		if (entry.isForced()) hasForced = true;
-		if (entry.isAsk()) hasAsk = true;
+		if (entry.isRecommended()) hasRecommended = true;
+		if (entry.isOptional()) hasOptional = true;
 	}
 
-	if (hasForced) return "forced";
-	if (hasAsk) return "ask";
-	return "silent";
+	if (hasRecommended) return "recommended";
+	if (hasOptional) return "optional";
+	return "required";
 }
 
 // Port properties that don't carry over by a module-ID swap alone, reusing the legacy obsolete-part
@@ -428,7 +429,7 @@ void MigrationHandler::createMigrationDialog()
 	// name + version. Picking one swaps the part live; it is preset to the currently active version
 	// per part. The middle "keep and don't ask again" radio replaces the former Silence button -- it
 	// keeps the old version and persists a silence so this change won't prompt again. Silence is only
-	// meaningful for soft "ask" parts, so that radio (and its note) is hidden for "forced" parts.
+	// meaningful for "optional" parts, so that radio (and its note) is hidden for "recommended" parts.
 	auto* versionBox = new QGroupBox(tr("Version"), m_dialog);
 	auto* versionLayout = new QVBoxLayout(versionBox);
 	m_oldRadio = new QRadioButton(versionBox);
@@ -571,10 +572,10 @@ void MigrationHandler::updateDialogForCurrentMigration()
 		contentHtml = QString("<p><b>%1</b></p>").arg(tr("Changes since your version:"));
 		for (const HistoryEntry& entry : info.relevantHistory) {
 			QString modeTag;
-			if (entry.isForced()) {
-				modeTag = QString(" <span style='color: red;'>[%1]</span>").arg(tr("REQUIRED"));
-			} else if (entry.isSilent()) {
-				modeTag = QString(" <span style='color: gray;'>[%1]</span>").arg(tr("AUTO"));
+			if (entry.isRecommended()) {
+				modeTag = QString(" <span style='color: red;'>[%1]</span>").arg(tr("RECOMMENDED"));
+			} else if (entry.isRequired()) {
+				modeTag = QString(" <span style='color: gray;'>[%1]</span>").arg(tr("AUTOMATIC"));
 			}
 
 			contentHtml += QString("<p><b>%1</b> (%2):%3<br/>%4</p>")
@@ -614,9 +615,9 @@ void MigrationHandler::updateDialogForCurrentMigration()
 		else m_oldRadio->setChecked(true);
 	}
 
-	// "Keep … and don't ask again" (persistent silence) is offered only for soft "ask" migrations;
-	// classic "forced" parts must keep prompting, so they get Old / New only.
-	bool canSilence = (info.effectiveMode == "ask");
+	// "Keep … and don't ask again" (persistent silence) is offered only for "optional" migrations;
+	// "recommended" parts must keep prompting, so they get Old / New only.
+	bool canSilence = (info.effectiveMode == "optional");
 	m_keepRadio->setVisible(canSilence);
 	m_keepNote->setVisible(canSilence);
 
@@ -816,9 +817,9 @@ void MigrationHandler::revertToOld(MigrationInfo& info)
 
 void MigrationHandler::applySilence(MigrationInfo& info)
 {
-	// Persist a "don't ask again" silence for this instance. Only "ask" parts can be silenced;
-	// "forced" parts never expose the keep radio. The caller has already reverted to the old version.
-	if (info.effectiveMode != "ask") return;
+	// Persist a "don't ask again" silence for this instance. Only "optional" parts can be silenced;
+	// "recommended" parts never expose the keep radio. The caller has already reverted to the old version.
+	if (info.effectiveMode != "optional") return;
 
 	// Baseline the silence at the newest relevant entry, stored ISO-normalised so it round-trips
 	// and parses back reliably in getRelevantHistory.

@@ -1078,8 +1078,8 @@ void HtmlInfoView::addRevisions(ModelPart * modelPart) {
 			const HistoryEntry & entry = history.at(i);
 
 			QString modeTag;
-			if (entry.isForced()) modeTag = QString(" [%1]").arg(tr("required"));
-			else if (entry.isSilent()) modeTag = QString(" [%1]").arg(tr("auto"));
+			if (entry.isRecommended()) modeTag = QString(" [%1]").arg(tr("recommended"));
+			else if (entry.isRequired()) modeTag = QString(" [%1]").arg(tr("automatic"));
 
 			QString date = entry.date.trimmed();
 			QString author = entry.author.trimmed();

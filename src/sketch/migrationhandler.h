@@ -54,7 +54,7 @@ struct MigrationInfo {
 	QString newTitle;       // new part's title
 	QString newVersion;     // new part's version
 	QList<HistoryEntry> relevantHistory;
-	QString effectiveMode;  // "silent", "ask", or "forced"
+	QString effectiveMode;  // "required", "recommended", or "optional"
 	bool isSwapped;         // currently showing new part?
 	QString reason;         // why the dialog is shown (e.g. mixed versions)
 	bool decided = false;   // user has explicitly chosen for this part
