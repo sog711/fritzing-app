@@ -36,7 +36,9 @@ class MainWindow;
 //              "selected" is "old" | "keep" | "new"; "keepVisible" (alias "silenceVisible") reports
 //              the persistent "keep and don't ask again" radio, offered only for "optional" parts.
 //   write() -> an action string: "new", "old", "keep" (alias "silence"), "updateAll", "next",
-//              "previous", "done", "close"
+//              "previous", "done", "close", "activate" (focus the dialog), or "undo"/"redo"
+//              (trigger the app's Undo/Redo while the dialog is open -- a focus-independent
+//              stand-in for Ctrl+Z/Ctrl+Y that exercises the dialog's reconcile-on-undo).
 class FProbeMigrationDialog : public QObject, public FProbe {
 	Q_OBJECT
 public:

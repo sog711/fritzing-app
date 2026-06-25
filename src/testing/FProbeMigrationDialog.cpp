@@ -26,6 +26,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QRadioButton>
 #include <QPushButton>
 #include <QAbstractButton>
+#include <QAction>
 #include <QLabel>
 #include <QJsonObject>
 #include <QJsonDocument>
@@ -106,6 +107,12 @@ FProbeMigrationDialog::FProbeMigrationDialog(MainWindow *mainWindow)
 			// Give the (non-modal) dialog keyboard focus so a following real key event (e.g. Ctrl+Z)
 			// is delivered to it -- exercises the undo/redo-while-focused wiring.
 			else if (action == "activate") { dialog->raise(); dialog->activateWindow(); }
+			// Trigger the app's real Undo/Redo (the same actions added to the dialog for the keyboard
+			// shortcut) while it's open -- a focus-independent stand-in for Ctrl+Z/Ctrl+Y, since a
+			// synthetic keystroke can't be reliably delivered to the dialog in headless Xvfb. Goes
+			// through the shared undo stack, so the dialog's reconcile runs exactly as for a keystroke.
+			else if (action == "undo") { if (QAction* a = m_mainWindow->undoAction()) a->trigger(); }
+			else if (action == "redo") { if (QAction* a = m_mainWindow->redoAction()) a->trigger(); }
 			else { ok = false; reason = QString("unknown action '%1'").arg(action); }
 			result["ok"] = ok;
 			if (!ok) {
