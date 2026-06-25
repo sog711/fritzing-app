@@ -34,7 +34,7 @@ class MainWindow;
 // labels), so the probe needs no access to MigrationHandler internals.
 //   read()  -> JSON describing the current dialog state (open, selected version, labels, buttons).
 //              "selected" is "old" | "keep" | "new"; "keepVisible" (alias "silenceVisible") reports
-//              the persistent "keep and don't ask again" radio, offered only for soft "ask" parts.
+//              the persistent "keep and don't ask again" radio, offered only for "optional" parts.
 //   write() -> an action string: "new", "old", "keep" (alias "silence"), "updateAll", "next",
 //              "previous", "done", "close"
 class FProbeMigrationDialog : public QObject, public FProbe {
