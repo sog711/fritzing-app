@@ -72,7 +72,7 @@ MigrationHandler::MigrationHandler(SketchWidget* sketchWidget, QObject* parent)
 
 void MigrationHandler::queueMigration(ItemBase* itemBase, ModelPart* oldPart,
                                       ModelPart* newPart, const QList<HistoryEntry>& history,
-                                      const QString& reason)
+                                      const QString& reason, bool hasFurtherRevision)
 {
 	// Identify the part by its cross-view chief id (shared across views; tracked across swaps).
 	qint64 chiefId = itemBase->layerKinChief()->id();
@@ -103,6 +103,7 @@ void MigrationHandler::queueMigration(ItemBase* itemBase, ModelPart* oldPart,
 	info.effectiveMode = computeEffectiveMode(newPart != nullptr ? newPart->history() : history);
 	info.isSwapped = false;
 	info.reason = reason;
+	info.hasFurtherRevision = hasFurtherRevision;
 
 	m_pendingMigrations.append(info);
 }
@@ -592,6 +593,12 @@ void MigrationHandler::updateDialogForCurrentMigration()
 		contentHtml += QString("<p><i>%1</i></p>").arg(
 		    tr("No change notes are available. Compare the old and new version visually in the "
 		       "Breadboard, Schematic and PCB views before deciding."));
+	}
+	// Stepwise migration: this part is replaced one version at a time. If the new target is itself
+	// outdated, tell the user the next revision will be offered after they take this step.
+	if (info.hasFurtherRevision) {
+		contentHtml += QString("<p><i>%1</i></p>").arg(
+		    tr("A further revision is available; it will be offered after you update to this one."));
 	}
 	m_historyLabel->setText(contentHtml);
 

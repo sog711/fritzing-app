@@ -53,6 +53,7 @@ struct MigrationInfo {
 	QString oldVersion;     // old part's version
 	QString newTitle;       // new part's title
 	QString newVersion;     // new part's version
+	bool hasFurtherRevision = false; // the new target is itself replaced by a later revision (chain)
 	QList<HistoryEntry> relevantHistory;
 	QString effectiveMode;  // "required", "recommended", or "optional"
 	bool isSwapped;         // currently showing new part?
@@ -72,7 +73,7 @@ public:
 	// Main interface
 	void queueMigration(ItemBase* itemBase, ModelPart* oldPart,
 	                    ModelPart* newPart, const QList<HistoryEntry>& history,
-	                    const QString& reason = QString());
+	                    const QString& reason = QString(), bool hasFurtherRevision = false);
 	void processMigrations();
 	bool hasPendingMigrations() const;
 	void clearPendingMigrations();

@@ -4000,21 +4000,15 @@ QList<ItemBase *> MainWindow::selectAllObsolete(bool displayFeedback) {
 
 
 ModelPart * MainWindow::findReplacedby(ModelPart * originalModelPart) {
-	ModelPart * newModelPart = originalModelPart;
-	while (true) {
-		QString newModuleID = newModelPart->replacedby();
-		if (newModuleID.isEmpty()) {
-			return ((newModelPart == originalModelPart) ? nullptr : newModelPart);
-		}
-
-		ModelPart * tempModelPart = this->m_referenceModel->retrieveModelPart(newModuleID);
-		if (tempModelPart == nullptr) {
-			// something's screwy
-			return nullptr;
-		}
-
-		newModelPart = tempModelPart;
-	}
+	// One hop along the replacedby chain (stepwise migration): the part `originalModelPart` is
+	// *immediately* replaced by, or nullptr if it isn't replaced (or the target isn't installed).
+	// Migrating one version at a time lets each step keep its own history mode -- e.g. for a
+	// v1->v2->v3 chain a v1 instance is offered v2 (with v1->v2's mode), and v2->v3 only surfaces
+	// after the user is on v2. (Previously this chased to the end of the chain, jumping v1->v3 and
+	// collapsing every step's mode into the final part's history.)
+	QString newModuleID = originalModelPart->replacedby();
+	if (newModuleID.isEmpty()) return nullptr;
+	return m_referenceModel->retrieveModelPart(newModuleID);
 }
 
 QList<SketchWidget *> MainWindow::migrationScanViews() {
@@ -4117,7 +4111,10 @@ QList<ItemBase *> MainWindow::routeHistoryMigrations(const QList<ItemBase *> & o
 			else
 				reason = tr("This sketch contains both this part and a newer revision of it. Choose which one to use.");
 
-			migrationHandler->queueMigration(item, oldPart, newPart, relevantHistory, reason);
+			// Stepwise: if the immediate replacement is itself replaced by a later revision, the
+			// dialog hints that another step will follow once the user takes this one.
+			bool hasFurtherRevision = (findReplacedby(newPart) != nullptr);
+			migrationHandler->queueMigration(item, oldPart, newPart, relevantHistory, reason, hasFurtherRevision);
 		}
 	}
 
