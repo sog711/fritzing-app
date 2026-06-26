@@ -45,7 +45,7 @@ class PEMetadataView : public QScrollArea
 {
 	Q_OBJECT
 public:
-	PEMetadataView(QWidget * parent = 0);
+	PEMetadataView(ReferenceModel * referenceModel = nullptr, QWidget * parent = 0);
 	~PEMetadataView();
 
 	void initMetadata(const QDomDocument &);
@@ -84,11 +84,14 @@ protected:
 	QPointer<QLineEdit> m_urlEdit;
 	QPointer<QTextEdit> m_descriptionEdit;
 	QPointer<class HashPopulateWidget> m_propertiesEdit;
-	QPointer<class HashPopulateWidget> m_tagsEdit;
+	QPointer<class TagEditorWidget> m_tagsEdit;
 	QPointer<class QTableWidget> m_historyTable;
 	QList<HistoryEntry> m_history;
 	QString m_defaultAuthor;
 	QPointer<QFrame> m_mainFrame;
+	QPointer<ReferenceModel> m_referenceModel;
+	QStringList m_tagPool;
+	bool m_tagPoolLoaded = false;
 };
 
 

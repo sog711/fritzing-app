@@ -49,6 +49,7 @@ public:
 																	 const QString &propName)
 		= 0;
 	virtual QStringList propValues(const QString &family, const QString &propName, bool distinct) = 0;
+	virtual QStringList allTags() = 0;
 	virtual QMultiHash<QString, QString> allPropValues(const QString &family, const QString &propName) = 0;
 	virtual bool lastWasExactMatch() = 0;
 	virtual void setSha(const QString & sha) = 0;

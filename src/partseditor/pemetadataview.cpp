@@ -39,6 +39,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "pemetadataview.h"
 #include "pehistoryentrydialog.h"
 #include "hashpopulatewidget.h"
+#include "tageditorwidget.h"
 
 //////////////////////////////////////
 
@@ -97,9 +98,10 @@ static QList<HistoryEntry> readHistoryFromDom(const QDomElement & root) {
 	return history;
 }
 
-PEMetadataView::PEMetadataView(QWidget * parent) : QScrollArea(parent)
+PEMetadataView::PEMetadataView(ReferenceModel * referenceModel, QWidget * parent) : QScrollArea(parent)
 {
 	m_mainFrame = nullptr;
+	m_referenceModel = referenceModel;
 	this->setWidgetResizable(true);
 	this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
@@ -159,9 +161,7 @@ const QHash<QString, QString> & PEMetadataView::properties() {
 }
 
 void PEMetadataView::tagsEntry() {
-	static QStringList keys;
-	keys = m_tagsEdit->hash().keys();
-	Q_EMIT tagsChanged(keys);
+	Q_EMIT tagsChanged(m_tagsEdit->tags());
 }
 
 void PEMetadataView::initMetadata(const QDomDocument & doc)
@@ -188,12 +188,20 @@ void PEMetadataView::initMetadata(const QDomDocument & doc)
 	QDomElement url = root.firstChildElement("url");
 
 	QStringList readOnlyKeys;
-	QHash<QString, QString> tagHash;
+	QStringList tagList;            // order-preserving, unlike the old QHash
 	QDomElement tags = root.firstChildElement("tags");
 	QDomElement tag = tags.firstChildElement("tag");
 	while (!tag.isNull()) {
-		tagHash.insert(tag.text(), "");
+		QString t = tag.text().trimmed();
+		if (!t.isEmpty()) tagList << t;
 		tag = tag.nextSiblingElement("tag");
+	}
+
+	// Autocomplete pool = every tag used across the library. Cached after the first build
+	// (initMetadata reruns on every edit/undo, but the pool only needs assembling once).
+	if (!m_tagPoolLoaded && m_referenceModel) {
+		m_tagPool = m_referenceModel->allTags();
+		m_tagPoolLoaded = true;
 	}
 
 	QString family;
@@ -315,8 +323,8 @@ void PEMetadataView::initMetadata(const QDomDocument & doc)
 	connect(m_propertiesEdit, SIGNAL(changed()), this, SLOT(propertiesEntry()));
 	formLayout->addRow(tr("Properties"), m_propertiesEdit);
 
-	m_tagsEdit = new HashPopulateWidget("", tagHash, readOnlyKeys, true, this);
-	m_tagsEdit->setObjectName("PartsEditorPropertiesEdit");
+	m_tagsEdit = new TagEditorWidget(tagList, m_tagPool, this);
+	m_tagsEdit->setObjectName("PartsEditorTagEditor");
 	m_tagsEdit->setStatusTip(tr("Set the part's tags"));
 	connect(m_tagsEdit, SIGNAL(changed()), this, SLOT(tagsEntry()));
 	formLayout->addRow(tr("Tags"), m_tagsEdit);

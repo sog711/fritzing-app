@@ -469,7 +469,7 @@ void PEMainWindow::initSketchWidgets(bool whatever)
 
 	}
 
-	m_metadataView = new PEMetadataView(this);
+	m_metadataView = new PEMetadataView(m_referenceModel, this);
 	auto * sketchAreaWidget = new SketchAreaWidget(m_metadataView, this, false, false);
 	addTab(sketchAreaWidget, tr("Metadata"));
 	connect(m_metadataView, SIGNAL(metadataChanged(const QString &, const QString &)), this, SLOT(metadataChanged(const QString &, const QString &)), Qt::DirectConnection);

@@ -51,6 +51,7 @@ public:
 
 	QString partTitle(const QString & moduleID);
 	QStringList propValues(const QString &family, const QString &propName, bool distinct);
+	QStringList allTags();
 	QList<QPair<QString, QString> > allPartsOfFamilyWithProp(const QString &family,
 																		 const QString &propName);
 
