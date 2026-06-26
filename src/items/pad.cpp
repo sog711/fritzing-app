@@ -28,6 +28,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../sketch/infographicsview.h"
 #include "moduleidnames.h"
 #include "utils/misc.h"
+#include "../debugdialog.h"
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -312,8 +313,41 @@ void Pad::setInitialSize() {
 }
 
 void Pad::resizeMMAux(double mmW, double mmH) {
+	// Diagnostic logging for the mouse-resize size jump. When this is reached
+	// from a mouse resize, mmW/mmH arrive as pixels2mm(m_size), where m_size is
+	// the SVG canvas (logical size + TheOffset), so they are larger than the
+	// current logical localProp width/height. From the inspector, mmW/mmH equal
+	// the logical props. Comparing the two columns exposes the +TheOffset drift.
+	QRectF canvasBefore = boundingRect();
+	DebugDialog::debug(QString("PAD-RESIZE resizeMMAux IN  requested mm=(%1,%2)  current localProp mm=(%3,%4)  canvas px=(%5,%6)  TheOffset px=%7")
+	                   .arg(mmW).arg(mmH)
+	                   .arg(m_modelPart->localProp("width").toDouble())
+	                   .arg(m_modelPart->localProp("height").toDouble())
+	                   .arg(canvasBefore.width()).arg(canvasBefore.height())
+	                   .arg(TheOffset));
+
 	ResizableBoard::resizeMMAux(mmW, mmH);
 	resetConnectors(nullptr, nullptr);
+
+	QRectF canvasAfter = boundingRect();
+	DebugDialog::debug(QString("PAD-RESIZE resizeMMAux OUT new localProp mm=(%1,%2)  canvas px=(%3,%4)")
+	                   .arg(m_modelPart->localProp("width").toDouble())
+	                   .arg(m_modelPart->localProp("height").toDouble())
+	                   .arg(canvasAfter.width()).arg(canvasAfter.height()));
+}
+
+void Pad::resizePixels(double w, double h, const LayerHash & viewLayers) {
+	// The mouse-resize path (ResizableBoard::mouseMoveEvent) sizes from m_size,
+	// which for a Pad is the SVG canvas = copper + TheOffset. That margin is
+	// deliberate: it keeps the resize handles (ResizableBoard::findCorner) clear
+	// of the connector terminal, which fills the whole copper. But the canvas-
+	// sized value was then written back as the *copper* size, so every gesture
+	// inflated the pad by TheOffset (see PAD-RESIZE log: m_resizeStartSize is the
+	// canvas, not the logical size). Strip the margin here so the copper grows by
+	// exactly the dragged amount; makeLayerSvg re-adds it, leaving m_size (the
+	// canvas) consistent. The inspector path goes straight to resizeMMAux with
+	// logical mm and is unaffected.
+	ResizableBoard::resizePixels(qMax(w - TheOffset, 1.0), qMax(h - TheOffset, 1.0), viewLayers);
 }
 
 void Pad::addedToScene(bool temporary)

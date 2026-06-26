@@ -100,7 +100,7 @@ public:
 	~ResizableBoard();
 
 	virtual bool resizeMM(double w, double h, const LayerHash & viewLayers);
-	void resizePixels(double w, double h, const LayerHash & viewLayers);
+	virtual void resizePixels(double w, double h, const LayerHash & viewLayers);
 	void loadLayerKin(const LayerHash & viewLayers, ViewLayer::ViewLayerPlacement);
 	virtual void setInitialSize();
 	QString retrieveSvg(ViewLayer::ViewLayerID, QHash<QString, QString> & svgHash, bool blackOnly, double dpi, double & factor);
