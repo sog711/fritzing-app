@@ -832,7 +832,26 @@ QString TextUtils::convertToPowerPrefix(double q, char format, int precision) {
 }
 
 QString TextUtils::convertToPowerPrefixByThousands(double q, char format, int precision) {
-	return convertToPowerPrefix(q, 1000, format, precision);
+	initPowerPrefixes();
+
+	if (q == 0) return QString::number(q, format, precision);
+
+	// Like convertToPowerPrefix, but keeps the mantissa in [1, 1000) so farad
+	// values avoid decimal prefixes. The range test is made against the rounded,
+	// to-be-displayed mantissa instead of a (1000 * PowerPrefixValues[i]) product:
+	// 1000 * 1e-9 evaluates to 1.0000000000000002e-6, which is greater than 1e-6,
+	// so a clean 1µF fell into the nano bucket and its mantissa rounded up to a
+	// spurious "1000n" (1µF was shown as 1000nF). Testing the displayed mantissa
+	// instead rolls such a value over to the next prefix, and is self-consistent
+	// because it can never emit a "1000" mantissa.
+	for (int i = 0; i < PowerPrefixes.count(); i++) {
+		QString mantissa = QString::number(q / PowerPrefixValues[i], format, precision);
+		if (qAbs(mantissa.toDouble()) < 1000.0) {
+			return mantissa + PowerPrefixes[i];
+		}
+	}
+
+	return QString::number(q, format, precision);
 }
 
 QString TextUtils::convertToPowerPrefix(double q, double prefixThreshold, char format, int precision) {
