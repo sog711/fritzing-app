@@ -655,16 +655,6 @@ void ResizableBoard::mousePressEvent(QGraphicsSceneMouseEvent * event)
 		break;
 	}
 
-	// Diagnostic: the resize seeds from m_size (the renderer's default size). For a
-	// Pad that is the SVG canvas = logical size + TheOffset, so m_resizeStartSize is
-	// already larger than the logical localProp size; feeding it back through
-	// resizeMMAux re-adds the offset and the pad jumps wider as the drag starts.
-	DebugDialog::debug(QString("PAD-RESIZE mousePress start corner=%1  m_resizeStartSize px=(%2,%3)  localProp mm=(%4,%5)")
-	                   .arg(int(m_corner))
-	                   .arg(m_resizeStartSize.width()).arg(m_resizeStartSize.height())
-	                   .arg(modelPart()->localProp("width").toDouble())
-	                   .arg(modelPart()->localProp("height").toDouble()));
-
 	InfoGraphicsView * infoGraphicsView = InfoGraphicsView::getInfoGraphicsView(this);
 	if (infoGraphicsView != nullptr) {
 		setInitialSize();
