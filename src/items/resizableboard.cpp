@@ -727,6 +727,22 @@ void ResizableBoard::mouseMoveEvent(QGraphicsSceneMouseEvent * event) {
 		}
 	}
 
+	// Grid-align the resize, toggled off by Ctrl just like a move (shouldAlignToGrid).
+	// Snap the actual (logical) size to a multiple of half the grid size -- not the
+	// position: the anchored corner stays put and only the size lands on the grid.
+	// sizeOffset() discounts the Pad's non-logical canvas margin so the copper, not
+	// the canvas, is what gets aligned. Done before resizePixels so the changePos
+	// anchoring below uses the snapped size too.
+	InfoGraphicsView * gridView = InfoGraphicsView::getInfoGraphicsView(this);
+	if (gridView != nullptr && gridView->shouldAlignToGrid()) {
+		double step = gridView->gridSizeInches() * GraphicsUtils::SVGDPI / 2.0;
+		if (step > 0) {
+			double off = sizeOffset();
+			size.setWidth(qMax(GraphicsUtils::getNearestOrdinate(size.width() - off, step) + off, off + step));
+			size.setHeight(qMax(GraphicsUtils::getNearestOrdinate(size.height() - off, step) + off, off + step));
+		}
+	}
+
 	bool changePos = (m_corner != ResizableBoard::BOTTOM_RIGHT);
 	bool changeTransform = !this->transform().isIdentity();
 

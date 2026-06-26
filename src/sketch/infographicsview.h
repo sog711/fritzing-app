@@ -99,6 +99,11 @@ public:
 	virtual ViewGeometry::WireFlag getTraceFlag();
 	virtual void setAnyInRotation();
 
+	// Grid alignment, queried by resizable items to snap a mouse resize. Default
+	// off / no grid; SketchWidget overrides with the view's actual settings.
+	virtual bool shouldAlignToGrid() const { return false; }
+	virtual double gridSizeInches() { return 0.0; }
+
 	virtual void partLabelChanged(ItemBase *, const QString &oldText, const QString & newText);
 	virtual void noteChanged(ItemBase *, const QString &oldText, const QString & newText, QSizeF oldSize, QSizeF newSize);
 	virtual void setResistance(QString resistance, QString pinSpacing);

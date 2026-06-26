@@ -71,6 +71,7 @@ protected:
 	QString makeNextLayerSvg(ViewLayer::ViewLayerID, double mmW, double mmH, double milsW, double milsH);
 	void resizeMMAux(double w, double h);
 	void resizePixels(double w, double h, const LayerHash & viewLayers) override;
+	double sizeOffset() const override;
 	ResizableBoard::Corner findCorner(QPointF, Qt::KeyboardModifiers);
 	QStringList collectValues(const QString & family, const QString & prop, QString & value);
 

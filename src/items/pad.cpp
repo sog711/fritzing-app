@@ -326,7 +326,11 @@ void Pad::resizePixels(double w, double h, const LayerHash & viewLayers) {
 	// TheOffset. Strip the margin here so the copper grows by exactly the dragged
 	// amount; makeLayerSvg re-adds it, leaving m_size (the canvas) consistent. The
 	// inspector path goes straight to resizeMMAux with logical mm and is unaffected.
-	ResizableBoard::resizePixels(qMax(w - TheOffset, 1.0), qMax(h - TheOffset, 1.0), viewLayers);
+	ResizableBoard::resizePixels(qMax(w - sizeOffset(), 1.0), qMax(h - sizeOffset(), 1.0), viewLayers);
+}
+
+double Pad::sizeOffset() const {
+	return TheOffset;
 }
 
 void Pad::addedToScene(bool temporary)

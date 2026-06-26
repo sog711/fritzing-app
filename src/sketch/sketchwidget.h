@@ -224,7 +224,7 @@ public:
 	QString renderToSVGForSVGExport(RenderThing &, QGraphicsItem * board, const LayerList &);
 
 	bool spaceBarIsPressed() noexcept;
-	bool shouldAlignToGrid() const;
+	bool shouldAlignToGrid() const override;
 	virtual long setUpSwap(SwapThing &, bool master);
 	void setUpSwapMiddle(SwapThing &, QString newModuleID, ItemBase * itemBase, long newID, bool master);
 	void setUpSwapFinal(SwapThing &, QString newModuleID, ItemBase * itemBase, long newID, bool master);
@@ -464,7 +464,7 @@ protected:
 	                                   bool updateInfoView, long modelIndex, bool addSubparts, QUndoCommand *parent);
 	int selectAllItems(QSet<ItemBase *> & itemBases, const QString & msg);
 	bool moveByArrow(double dx, double dy, QKeyEvent * , bool isRepeat = false);
-	double gridSizeInches();
+	double gridSizeInches() override;
 	virtual bool canAlignToTopLeft(ItemBase *);
 	virtual bool canAlignToCenter(ItemBase *);
 	virtual void findAlignmentAnchor(ItemBase * originatingItem, QHash<long, ItemBase *> & savedItems, QHash<Wire *, ConnectorItem *> & savedWires);
