@@ -22,12 +22,15 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "mainwindow/mainwindow.h"
 #include "sketch/sketchwidget.h"
 #include "items/itembase.h"
+#include "model/modelpart.h"
 #include "commands.h"
 #include "waitpushundostack.h"
 #include "debugdialog.h"
 
 #include <QJsonDocument>
 #include <QGraphicsScene>
+#include <QRectF>
+#include <QPointF>
 
 FProbePart::FProbePart(MainWindow *mainWindow)
 	: QObject(mainWindow)
@@ -53,6 +56,12 @@ FProbePart::FProbePart(MainWindow *mainWindow)
 			result = handleMovePart(view, params);
 		} else if (cmd == "movePartRelative") {
 			result = handleMovePartRelative(view, params);
+		} else if (cmd == "getSize") {
+			result = handleGetSize(view, params);
+		} else if (cmd == "getResizeHandlePos") {
+			result = handleGetResizeHandlePos(view, params);
+		} else if (cmd == "sceneToScreen") {
+			result = handleSceneToScreen(view, params);
 		} else {
 			result["ok"] = false;
 			result["error"] = QString("unknown command '%1'").arg(cmd);
@@ -86,6 +95,28 @@ ItemBase * FProbePart::findPartByTitle(SketchWidget *view, const QString &title)
 		if (base->instanceTitle() != title) continue;
 		if (base->viewID() != view->viewID()) continue;
 		return base;
+	}
+	return nullptr;
+}
+
+// Resolve a part from either a "part" instance title or, when no title is known
+// (e.g. straight after a drop), the first item matching a "moduleID".
+ItemBase * FProbePart::resolvePart(SketchWidget *view, const QJsonObject &params)
+{
+	QString title = params["part"].toString();
+	if (!title.isEmpty()) {
+		return findPartByTitle(view, title);
+	}
+
+	QString moduleID = params["moduleID"].toString();
+	if (!moduleID.isEmpty()) {
+		for (QGraphicsItem *item : view->scene()->items()) {
+			auto *base = dynamic_cast<ItemBase *>(item);
+			if (!base) continue;
+			if (base->viewID() != view->viewID()) continue;
+			if (base->moduleID() != moduleID) continue;
+			return base;
+		}
 	}
 	return nullptr;
 }
@@ -160,5 +191,80 @@ QJsonObject FProbePart::handleMovePartRelative(SketchWidget *view, const QJsonOb
 	view->undoStack()->push(parentCommand);
 
 	result["ok"] = true;
+	return result;
+}
+
+QJsonObject FProbePart::handleGetSize(SketchWidget *view, const QJsonObject &params)
+{
+	QJsonObject result;
+	ItemBase *part = resolvePart(view, params);
+	if (!part) {
+		result["ok"] = false;
+		result["error"] = QString("part not found");
+		return result;
+	}
+
+	if (params["select"].toBool()) {
+		view->scene()->clearSelection();
+		part->setSelected(true);
+	}
+
+	QRectF sbr = part->sceneBoundingRect();
+	result["ok"] = true;
+	// Logical size as stored on the model part, in mm. 0 for non-resizable parts.
+	result["width"] = part->modelPart()->localProp("width").toDouble();
+	result["height"] = part->modelPart()->localProp("height").toDouble();
+	// Scene bounding box (scene units == SVG px at 90 dpi); includes any canvas margin.
+	result["sceneWidth"] = sbr.width();
+	result["sceneHeight"] = sbr.height();
+	result["title"] = part->instanceTitle();
+	return result;
+}
+
+QJsonObject FProbePart::handleGetResizeHandlePos(SketchWidget *view, const QJsonObject &params)
+{
+	QJsonObject result;
+	ItemBase *part = resolvePart(view, params);
+	if (!part) {
+		result["ok"] = false;
+		result["error"] = QString("part not found");
+		return result;
+	}
+
+	// The resize handles sit at the corners of the item's bounding box (see
+	// ResizableBoard::findCorner, which tests mapToScene(0,0) .. mapToScene(m_size)).
+	// sceneBoundingRect() gives exactly those corners in scene coordinates.
+	QRectF r = part->sceneBoundingRect();
+	QString corner = params["corner"].toString();
+	QPointF p;
+	if (corner == "topLeft")          p = r.topLeft();
+	else if (corner == "topRight")    p = r.topRight();
+	else if (corner == "bottomLeft")  p = r.bottomLeft();
+	else if (corner == "bottomRight") p = r.bottomRight();
+	else if (corner == "center")      p = r.center();
+	else {
+		result["ok"] = false;
+		result["error"] = QString("unknown corner '%1'").arg(corner);
+		return result;
+	}
+
+	result["ok"] = true;
+	result["x"] = p.x();
+	result["y"] = p.y();
+	return result;
+}
+
+QJsonObject FProbePart::handleSceneToScreen(SketchWidget *view, const QJsonObject &params)
+{
+	QJsonObject result;
+	double x = params["x"].toDouble();
+	double y = params["y"].toDouble();
+
+	QPoint viewPoint = view->mapFromScene(QPointF(x, y));
+	QPoint screenPoint = view->viewport()->mapToGlobal(viewPoint);
+
+	result["ok"] = true;
+	result["x"] = screenPoint.x();
+	result["y"] = screenPoint.y();
 	return result;
 }

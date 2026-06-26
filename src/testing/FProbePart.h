@@ -46,10 +46,14 @@ Q_SIGNALS:
 private:
 	SketchWidget * currentView();
 	ItemBase * findPartByTitle(SketchWidget *view, const QString &title);
+	ItemBase * resolvePart(SketchWidget *view, const QJsonObject &params);
 
 	QJsonObject handleGetPosition(SketchWidget *view, const QJsonObject &params);
 	QJsonObject handleMovePart(SketchWidget *view, const QJsonObject &params);
 	QJsonObject handleMovePartRelative(SketchWidget *view, const QJsonObject &params);
+	QJsonObject handleGetSize(SketchWidget *view, const QJsonObject &params);
+	QJsonObject handleGetResizeHandlePos(SketchWidget *view, const QJsonObject &params);
+	QJsonObject handleSceneToScreen(SketchWidget *view, const QJsonObject &params);
 
 	MainWindow *m_mainWindow;
 	QVariant m_lastResult;
