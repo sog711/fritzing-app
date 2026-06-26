@@ -27,8 +27,17 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QMessageBox>
 #include <QtDebug>
 #include <QApplication>
+#include <QTableWidget>
+#include <QHeaderView>
+#include <QPushButton>
+#include <QDate>
+#include <QColor>
+#include <QBrush>
+#include <QTimer>
+#include <algorithm>
 
 #include "pemetadataview.h"
+#include "pehistoryentrydialog.h"
 #include "hashpopulatewidget.h"
 
 //////////////////////////////////////
@@ -52,6 +61,42 @@ void FocusOutTextEdit::focusOutEvent(QFocusEvent * e) {
 
 //////////////////////////////////////
 
+static bool isHistoryEntryEditable(const HistoryEntry & e) {
+	// Only entries from the last three months can be edited/deleted; older ones are read-only.
+	QDate d = e.parsedDate();
+	return d.isValid() && d >= QDate::currentDate().addMonths(-3);
+}
+
+// Display copy of the part's <history> (PEMainWindow::readHistory is the authoritative write path).
+// Parses the flat <history> children; for a legacy part with <date>/<author> but no history yet,
+// synthesizes a single oldest entry. Returns oldest -> newest.
+static QList<HistoryEntry> readHistoryFromDom(const QDomElement & root) {
+	QList<HistoryEntry> history;
+	for (QDomElement h = root.firstChildElement("history"); !h.isNull(); h = h.nextSiblingElement("history")) {
+		HistoryEntry entry;
+		entry.date = h.attribute("date");
+		entry.author = h.attribute("author");
+		entry.mode = h.attribute("mode", "optional");
+		entry.description = h.text().trimmed();
+		history.append(entry);
+	}
+	if (history.isEmpty()) {
+		QString d = root.firstChildElement("date").text().trimmed();
+		QString a = root.firstChildElement("author").text().trimmed();
+		if (!d.isEmpty() || !a.isEmpty()) {
+			HistoryEntry entry;
+			entry.date = d;
+			entry.author = a;
+			entry.mode = "optional";
+			history.append(entry);
+		}
+	}
+	std::stable_sort(history.begin(), history.end(), [](const HistoryEntry & a, const HistoryEntry & b) {
+		return a.parsedDate() < b.parsedDate();
+	});
+	return history;
+}
+
 PEMetadataView::PEMetadataView(QWidget * parent) : QScrollArea(parent)
 {
 	m_mainFrame = nullptr;
@@ -67,13 +112,6 @@ void PEMetadataView::titleEntry() {
 	if (m_titleEdit->isModified()) {
 		Q_EMIT metadataChanged("title", m_titleEdit->text());
 		m_titleEdit->setModified(false);
-	}
-}
-
-void PEMetadataView::authorEntry() {
-	if (m_authorEdit->isModified()) {
-		Q_EMIT metadataChanged("author", m_authorEdit->text());
-		m_authorEdit->setModified(false);
 	}
 }
 
@@ -112,9 +150,6 @@ void PEMetadataView::variantEntry() {
 	}
 }
 
-void PEMetadataView::dateEntry() {
-}
-
 void PEMetadataView::propertiesEntry() {
 	Q_EMIT propertiesChanged(m_propertiesEdit->hash());
 }
@@ -150,7 +185,6 @@ void PEMetadataView::initMetadata(const QDomDocument & doc)
 	QDomElement author = root.firstChildElement("author");
 	QDomElement descr = root.firstChildElement("description");
 	QDomElement title = root.firstChildElement("title");
-	QDomElement date = root.firstChildElement("date");
 	QDomElement url = root.firstChildElement("url");
 
 	QStringList readOnlyKeys;
@@ -204,20 +238,40 @@ void PEMetadataView::initMetadata(const QDomDocument & doc)
 	m_titleEdit->setStatusTip(tr("Set the part's title"));
 	formLayout->addRow(tr("Title"), m_titleEdit);
 
-	m_dateEdit = new QLineEdit();
-	m_dateEdit->setText(date.text());
-	connect(m_dateEdit, SIGNAL(editingFinished()), this, SLOT(dateEntry()));
-	m_dateEdit->setObjectName("PartsEditorLineEdit");
-	m_dateEdit->setStatusTip(tr("Set the part's date"));
-	m_dateEdit->setEnabled(false);
-	formLayout->addRow(tr("Date"), m_dateEdit);
+	// History table replaces the old standalone Date + Author rows: each part revision is a
+	// <history> entry, and the newest entry's date/author are mirrored back into the top-level
+	// <date>/<author> on write (PEMainWindow::writeHistory).
+	m_history = readHistoryFromDom(root);
+	m_defaultAuthor = author.text().trimmed();
 
-	m_authorEdit = new QLineEdit();
-	m_authorEdit->setText(author.text());
-	connect(m_authorEdit, SIGNAL(editingFinished()), this, SLOT(authorEntry()));
-	m_authorEdit->setObjectName("PartsEditorLineEdit");
-	m_authorEdit->setStatusTip(tr("Set the part's author"));
-	formLayout->addRow(tr("Author"), m_authorEdit);
+	m_historyTable = new QTableWidget();
+	m_historyTable->setObjectName("PartsEditorHistoryTable");
+	m_historyTable->setColumnCount(5);
+	m_historyTable->setHorizontalHeaderLabels(QStringList() << tr("Date") << tr("Author") << tr("Changes") << tr("Mode") << QString());
+	m_historyTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
+	m_historyTable->setSelectionMode(QAbstractItemView::NoSelection);
+	m_historyTable->verticalHeader()->setVisible(false);
+	m_historyTable->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+	m_historyTable->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);   // "Changes" takes the slack
+	m_historyTable->setStatusTip(tr("The part's revision history. Entries from the last three months can be edited or deleted (double-click / ×); older ones are read-only."));
+	connect(m_historyTable, SIGNAL(cellDoubleClicked(int, int)), this, SLOT(historyCellDoubleClicked(int, int)));
+
+	auto * historyContainer = new QWidget();
+	auto * historyVLayout = new QVBoxLayout(historyContainer);
+	historyVLayout->setContentsMargins(0, 0, 0, 0);
+	historyVLayout->addWidget(m_historyTable);
+	auto * addHistoryButton = new QPushButton(tr("+"));
+	addHistoryButton->setObjectName("PartsEditorHistoryAdd");
+	addHistoryButton->setToolTip(tr("Add a revision entry"));
+	addHistoryButton->setStatusTip(tr("Add a revision entry"));
+	connect(addHistoryButton, SIGNAL(clicked()), this, SLOT(addHistoryEntry()));
+	auto * addHistoryRow = new QHBoxLayout();
+	addHistoryRow->addWidget(addHistoryButton);
+	addHistoryRow->addStretch(1);
+	historyVLayout->addLayout(addHistoryRow);
+	formLayout->addRow(tr("History"), historyContainer);
+
+	populateHistoryTable();
 
 	m_descriptionEdit = new FocusOutTextEdit();
 	m_descriptionEdit->setText(descr.text());
@@ -285,4 +339,93 @@ QString PEMetadataView::family() {
 
 QString PEMetadataView::variant() {
 	return m_variantEdit->text();
+}
+
+void PEMetadataView::populateHistoryTable() {
+	if (m_historyTable == nullptr) return;
+	m_historyTable->setRowCount(m_history.count());
+	for (int i = 0; i < m_history.count(); ++i) {
+		const HistoryEntry & e = m_history.at(i);
+
+		auto * dateItem = new QTableWidgetItem(e.date);
+		auto * authorItem = new QTableWidgetItem(e.author);
+		QString preview = e.description;
+		preview.replace('\n', ' ');                  // single-line preview; full text in the tooltip
+		auto * changesItem = new QTableWidgetItem(preview);
+		changesItem->setToolTip(e.description);
+
+		QString modeText;
+		QColor modeColor;
+		if (e.isRequired()) { modeText = tr("required"); modeColor = QColor(0xb5, 0x34, 0x1f); }       // red
+		else if (e.isRecommended()) { modeText = tr("recommended"); modeColor = QColor(0x1f, 0x5f, 0xb5); }  // blue
+		else { modeText = tr("optional"); modeColor = QColor(0x80, 0x80, 0x80); }                       // grey
+		auto * modeItem = new QTableWidgetItem(modeText);
+		modeItem->setForeground(modeColor);
+
+		m_historyTable->setItem(i, 0, dateItem);
+		m_historyTable->setItem(i, 1, authorItem);
+		m_historyTable->setItem(i, 2, changesItem);
+		m_historyTable->setItem(i, 3, modeItem);
+
+		if (isHistoryEntryEditable(e)) {
+			// recent entries (<= 3 months) get Edit + delete buttons; older ones stay read-only
+			auto * actions = new QWidget();
+			auto * actionsLayout = new QHBoxLayout(actions);
+			actionsLayout->setContentsMargins(0, 0, 0, 0);
+			actionsLayout->setSpacing(2);
+
+			auto * editButton = new QPushButton(tr("Edit"));
+			editButton->setObjectName("PartsEditorHistoryEdit");
+			editButton->setToolTip(tr("Edit this revision"));
+			connect(editButton, &QPushButton::clicked, this, [this, i]() { editHistoryRow(i); });
+
+			auto * del = new QPushButton(QString(QChar(ushort(0x00D7))));   // × U+00D7 multiplication sign
+			del->setObjectName("PartsEditorHistoryDelete");
+			del->setToolTip(tr("Delete this revision"));
+			connect(del, &QPushButton::clicked, this, [this, i]() {
+				if (i < 0 || i >= m_history.count()) return;
+				m_history.removeAt(i);
+				commitHistory();
+			});
+
+			actionsLayout->addWidget(editButton);
+			actionsLayout->addWidget(del);
+			m_historyTable->setCellWidget(i, 4, actions);
+		}
+	}
+}
+
+void PEMetadataView::addHistoryEntry() {
+	HistoryEntry entry;
+	entry.date = QDate::currentDate().toString(Qt::ISODate);
+	entry.author = m_defaultAuthor;
+	entry.mode = "optional";
+	PEHistoryEntryDialog dialog(entry, false, QString(), this);
+	dialog.setWindowTitle(tr("Add revision"));
+	if (dialog.exec() != QDialog::Accepted) return;
+	m_history.append(dialog.entry());
+	commitHistory();
+}
+
+void PEMetadataView::historyCellDoubleClicked(int row, int column) {
+	Q_UNUSED(column);
+	editHistoryRow(row);          // bonus affordance; the per-row Edit button is the primary one
+}
+
+void PEMetadataView::editHistoryRow(int row) {
+	if (row < 0 || row >= m_history.count()) return;
+	const HistoryEntry & e = m_history.at(row);
+	if (!isHistoryEntryEditable(e)) return;          // older than three months: read-only
+	PEHistoryEntryDialog dialog(e, false, QString(), this);
+	dialog.setWindowTitle(tr("Edit revision"));
+	if (dialog.exec() != QDialog::Accepted) return;
+	m_history[row] = dialog.entry();
+	commitHistory();
+}
+
+void PEMetadataView::commitHistory() {
+	// Defer one event-loop tick: applying the change rebuilds this whole metadata frame (via
+	// PEMainWindow::changeHistory -> initMetadata), deleting the +/x/table widget whose signal we
+	// are still inside -- emitting synchronously would free the sender mid-emission.
+	QTimer::singleShot(0, this, [this]() { Q_EMIT historyChanged(m_history); });
 }

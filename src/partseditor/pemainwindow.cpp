@@ -149,6 +149,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "pemetadataview.h"
 #include "peconnectorsview.h"
 #include "pecommands.h"
+#include "pehistoryentrydialog.h"
 #include "petoolview.h"
 #include "pesvgview.h"
 #include "pegraphicsitem.h"
@@ -474,6 +475,7 @@ void PEMainWindow::initSketchWidgets(bool whatever)
 	connect(m_metadataView, SIGNAL(metadataChanged(const QString &, const QString &)), this, SLOT(metadataChanged(const QString &, const QString &)), Qt::DirectConnection);
 	connect(m_metadataView, SIGNAL(tagsChanged(const QStringList &)), this, SLOT(tagsChanged(const QStringList &)), Qt::DirectConnection);
 	connect(m_metadataView, SIGNAL(propertiesChanged(const QHash<QString, QString> &)), this, SLOT(propertiesChanged(const QHash<QString, QString> &)), Qt::DirectConnection);
+	connect(m_metadataView, SIGNAL(historyChanged(const QList<HistoryEntry> &)), this, SLOT(historyChanged(const QList<HistoryEntry> &)), Qt::DirectConnection);
 
 	m_connectorsView = new PEConnectorsView(this);
 	sketchAreaWidget = new SketchAreaWidget(m_connectorsView, this, false, false);
@@ -1140,6 +1142,111 @@ void PEMainWindow::changeTags(const QStringList & newTags, bool updateDisplay)
 
 	if (updateDisplay) {
 		m_metadataView->initMetadata(m_fzpDocument);
+	}
+}
+
+void PEMainWindow::historyChanged(const QList<HistoryEntry> & newHistory)
+{
+	// called from metadataView (mirrors tagsChanged)
+	QDomElement root = m_fzpDocument.documentElement();
+	QList<HistoryEntry> oldHistory = readHistory(root);
+
+	auto * chc = new ChangeHistoryCommand(this, oldHistory, newHistory, nullptr);
+	chc->setText(tr("Change revision history"));
+	chc->setSkipFirstRedo();
+	// updateDisplay=true: the edit came from a modal dialog, so the table must be rebuilt to show it
+	// (unlike tags/properties, whose inline widget already reflects the user's change).
+	changeHistory(newHistory, true);
+	m_undoStack->waitPush(chc, SketchWidget::PropChangeDelay);
+}
+
+void PEMainWindow::changeHistory(const QList<HistoryEntry> & history, bool updateDisplay)
+{
+	// called from command object
+	QDomElement root = m_fzpDocument.documentElement();
+	writeHistory(root, history);
+
+	if (updateDisplay) {
+		m_metadataView->initMetadata(m_fzpDocument);
+	}
+}
+
+QList<HistoryEntry> PEMainWindow::readHistory(const QDomElement & root)
+{
+	QList<HistoryEntry> history;
+	for (QDomElement h = root.firstChildElement("history"); !h.isNull(); h = h.nextSiblingElement("history")) {
+		HistoryEntry entry;
+		entry.date = h.attribute("date");
+		entry.author = h.attribute("author");
+		entry.mode = h.attribute("mode", "optional");   // default when mode= omitted
+		entry.description = h.text().trimmed();
+		history.append(entry);
+	}
+
+	// Legacy parts carry a top-level <date>/<author> but no <history> yet. Synthesize a single
+	// oldest entry (empty text is allowed for this auto-generated one) so the table isn't empty;
+	// writeHistory materializes it into a real <history> element when the history is next written.
+	if (history.isEmpty()) {
+		QString date = root.firstChildElement("date").text().trimmed();
+		QString author = root.firstChildElement("author").text().trimmed();
+		if (!date.isEmpty() || !author.isEmpty()) {
+			HistoryEntry entry;
+			entry.date = date;
+			entry.author = author;
+			entry.mode = "optional";
+			history.append(entry);
+		}
+	}
+
+	// oldest -> newest; null (undated) dates sort first
+	std::stable_sort(history.begin(), history.end(), [](const HistoryEntry & a, const HistoryEntry & b) {
+		return a.parsedDate() < b.parsedDate();
+	});
+	return history;
+}
+
+void PEMainWindow::writeHistory(QDomElement & root, const QList<HistoryEntry> & history)
+{
+	QDomDocument doc = root.ownerDocument();
+
+	// drop the existing <history> children
+	QDomElement h = root.firstChildElement("history");
+	while (!h.isNull()) {
+		QDomElement next = h.nextSiblingElement("history");
+		root.removeChild(h);
+		h = next;
+	}
+
+	QList<HistoryEntry> sorted = history;
+	std::stable_sort(sorted.begin(), sorted.end(), [](const HistoryEntry & a, const HistoryEntry & b) {
+		return a.parsedDate() < b.parsedDate();
+	});
+
+	// re-insert oldest -> newest, grouped just after the part's metadata so re-saving an existing
+	// part doesn't shove <history> to the bottom of the file
+	QDomElement anchor = root.firstChildElement("date");
+	if (anchor.isNull()) anchor = root.firstChildElement("author");
+	if (anchor.isNull()) anchor = root.firstChildElement("title");
+	if (anchor.isNull()) anchor = root.firstChildElement("version");
+	QDomNode after = anchor;
+	for (const HistoryEntry & entry : sorted) {
+		QDomElement he = doc.createElement("history");
+		he.setAttribute("date", entry.date);
+		he.setAttribute("author", entry.author);
+		he.setAttribute("mode", entry.mode.isEmpty() ? QString("optional") : entry.mode);
+		if (!entry.description.isEmpty()) {
+			he.appendChild(doc.createTextNode(entry.description));
+		}
+		if (after.isNull()) root.insertBefore(he, root.firstChild());
+		else root.insertAfter(he, after);
+		after = he;
+	}
+
+	// mirror the newest entry into the top-level <author>/<date> for backward compat
+	if (!sorted.isEmpty()) {
+		const HistoryEntry & newest = sorted.last();
+		TextUtils::replaceElementChildText(root, "author", newest.author);
+		TextUtils::replaceElementChildText(root, "date", newest.date);
 	}
 }
 
@@ -2102,9 +2209,72 @@ bool PEMainWindow::saveAs() {
 	return saveAs(false);
 }
 
+// Next version for the save-gate "bump" checkbox: integer "4" -> "5"; dotted "1.1" -> "1.2" (bump the
+// last numeric run); empty -> "1"; otherwise unchanged.
+static QString bumpedVersion(const QString & current) {
+	QString v = current.trimmed();
+	if (v.isEmpty()) return QStringLiteral("1");
+	bool ok = false;
+	int n = v.toInt(&ok);
+	if (ok) return QString::number(n + 1);
+	int i = v.length() - 1;
+	while (i >= 0 && v.at(i).isDigit()) --i;
+	bool tailOk = false;
+	int tn = v.mid(i + 1).toInt(&tailOk);
+	if (tailOk) return v.left(i + 1) + QString::number(tn + 1);
+	return v;
+}
+
 bool PEMainWindow::saveAs(bool overWrite)
 {
 	QStringList peAlienFiles;
+
+	// Save gate: when the part has unsaved changes, offer to record what changed in this
+	// revision (and optionally bump the version) before the file is written. A clean part saves with
+	// no gate; Cancel aborts the save. Reuses the shared history-entry dialog.
+	{
+		QDomElement gateRoot = m_fzpDocument.documentElement();
+		if (!m_undoStack->isClean()) {
+			QString nextVersion = bumpedVersion(gateRoot.firstChildElement("version").text().trimmed());
+
+			QList<HistoryEntry> history = readHistory(gateRoot);
+			QString today = QDate::currentDate().toString(Qt::ISODate);
+			int todayRow = -1;
+			for (int i = history.count() - 1; i >= 0; --i) {
+				if (history.at(i).date == today) { todayRow = i; break; }
+			}
+			HistoryEntry seed;
+			if (todayRow >= 0) {
+				seed = history.at(todayRow);     // amend today's entry rather than add a duplicate
+			} else {
+				seed.date = today;
+				seed.author = gateRoot.firstChildElement("author").text().trimmed();
+				seed.mode = "optional";
+			}
+
+			PEHistoryEntryDialog gate(seed, false, nextVersion, this);
+			gate.setWindowTitle(tr("Save part"));
+			gate.setHeaderText(tr("You haven't recorded what changed in this revision."));
+			gate.setSaveGateButtons();
+			if (gate.exec() != QDialog::Accepted) return false;   // Cancel: abort the save
+
+			bool domChanged = false;
+			if (!gate.skipped() && gate.hasText()) {
+				QList<HistoryEntry> newHistory = history;
+				if (todayRow >= 0) newHistory[todayRow] = gate.entry();
+				else newHistory.append(gate.entry());
+				writeHistory(gateRoot, newHistory);    // also mirrors the newest entry into <author>/<date>
+				domChanged = true;
+			}
+			if (gate.bumpVersion()) {
+				QDomElement v = gateRoot.firstChildElement("version");
+				if (v.isNull()) { v = m_fzpDocument.createElement("version"); gateRoot.appendChild(v); }
+				TextUtils::replaceChildText(v, nextVersion);   // preserves the replacedby attribute
+				domChanged = true;
+			}
+			if (domChanged) m_metadataView->initMetadata(m_fzpDocument);
+		}
+	}
 
 	if (!overWrite) {
 		bool ok = false;

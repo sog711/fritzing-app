@@ -108,6 +108,38 @@ QString ChangeTagsCommand::getParamString() const {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+ChangeHistoryCommand::ChangeHistoryCommand(PEMainWindow * peMainWindow, const QList<HistoryEntry>  & oldHistory, const QList<HistoryEntry> & newHistory, QUndoCommand *parent)
+	: PEBaseCommand(peMainWindow, parent)
+{
+	m_old = oldHistory;
+	m_new = newHistory;
+}
+
+void ChangeHistoryCommand::undo()
+{
+	m_peMainWindow->changeHistory(m_old, true);
+}
+
+void ChangeHistoryCommand::redo()
+{
+	if (m_skipFirstRedo) {
+		m_skipFirstRedo = false;
+	}
+	else {
+		m_peMainWindow->changeHistory(m_new, true);
+	}
+}
+
+QString ChangeHistoryCommand::getParamString() const {
+	return "ChangeHistoryCommand " +
+	       QString(" old:%1, new:%2")
+	       .arg(m_old.count())
+	       .arg(m_new.count())
+	       ;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 ChangePropertiesCommand::ChangePropertiesCommand(PEMainWindow * peMainWindow, const QHash<QString, QString> & oldProps, const QHash<QString, QString> & newProps, QUndoCommand *parent)
 	: PEBaseCommand(peMainWindow, parent)
 {

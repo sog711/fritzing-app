@@ -38,6 +38,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include "../items/wire.h"
 #include "../connectors/connectoritem.h"
 #include "../referencemodel/referencemodel.h"
+#include "../model/modelpartshared.h"   // HistoryEntry
 
 
 class PEMetadataView : public QScrollArea
@@ -57,23 +58,26 @@ Q_SIGNALS:
 	void metadataChanged(const QString & name, const QString & value);
 	void propertiesChanged(const QHash<QString, QString> &);
 	void tagsChanged(const QStringList &);
+	void historyChanged(const QList<HistoryEntry> &);
 
 protected Q_SLOTS:
 	void titleEntry();
-	void authorEntry();
 	void descriptionEntry();
 	void labelEntry();
 	void familyEntry();
 	void variantEntry();
-	void dateEntry();
 	void urlEntry();
 	void propertiesEntry();
 	void tagsEntry();
+	void addHistoryEntry();
+	void historyCellDoubleClicked(int row, int column);
 
 protected:
+	void populateHistoryTable();
+	void editHistoryRow(int row);
+	void commitHistory();
+
 	QPointer<QLineEdit> m_titleEdit;
-	QPointer<QLineEdit> m_dateEdit;
-	QPointer<QLineEdit> m_authorEdit;
 	QPointer<QLineEdit> m_familyEdit;
 	QPointer<QLineEdit> m_variantEdit;
 	QPointer<QLineEdit> m_labelEdit;
@@ -81,6 +85,9 @@ protected:
 	QPointer<QTextEdit> m_descriptionEdit;
 	QPointer<class HashPopulateWidget> m_propertiesEdit;
 	QPointer<class HashPopulateWidget> m_tagsEdit;
+	QPointer<class QTableWidget> m_historyTable;
+	QList<HistoryEntry> m_history;
+	QString m_defaultAuthor;
 	QPointer<QFrame> m_mainFrame;
 };
 

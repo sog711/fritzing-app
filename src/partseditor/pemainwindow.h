@@ -70,6 +70,7 @@ public:
 
 	bool setInitialItem(PaletteItem *);
 	void changeTags(const QStringList &, bool updateDisplay);
+	void changeHistory(const QList<HistoryEntry> &, bool updateDisplay);
 	void changeProperties(const QHash<QString, QString> &, bool updateDisplay);
 	void changeMetadata(const QString & name, const QString & value, bool updateDisplay);
 	void changeConnectorMetadata(ConnectorMetadata *, bool updateDisplay);
@@ -91,6 +92,7 @@ public Q_SLOTS:
 	void metadataChanged(const QString & name, const QString & value);
 	void propertiesChanged(const QHash<QString, QString> &);
 	void tagsChanged(const QStringList &);
+	void historyChanged(const QList<HistoryEntry> &);
 	void connectorMetadataChanged(struct ConnectorMetadata *);
 	void removedConnectors(QList<ConnectorMetadata *> &);
 	void highlightSlot(PEGraphicsItem *);
@@ -140,6 +142,12 @@ protected:
 	void createViewMenu();
 	void createEditMenu();
 	QHash<QString, QString> getOldProperties();
+	// Read/write the flat <history> children of an FZP module root. readHistory synthesizes
+	// a single oldest entry from <date>/<author> for legacy parts that have no <history> yet;
+	// writeHistory rewrites the <history> children sorted oldest->newest and mirrors the newest entry
+	// into the top-level <author>/<date> for backward compat.
+	static QList<HistoryEntry> readHistory(const QDomElement & root);
+	static void writeHistory(QDomElement & root, const QList<HistoryEntry> & history);
 	QDomElement findConnector(const QString & id, int & index);
 	void changeConnectorElement(QDomElement & connector, ConnectorMetadata *);
 	void initSvgTree(SketchWidget *, ItemBase *, QDomDocument &);

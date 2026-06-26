@@ -46,6 +46,7 @@ HEADERS += \
     \
     src/partseditor/pemainwindow.h \
     src/partseditor/pemetadataview.h \
+    src/partseditor/pehistoryentrydialog.h \
     src/partseditor/pecommands.h \
     src/partseditor/peconnectorsview.h \
     src/partseditor/pesvgview.h \
@@ -81,6 +82,7 @@ SOURCES += \
      \
     src/partseditor/pemainwindow.cpp \
     src/partseditor/pemetadataview.cpp \
+    src/partseditor/pehistoryentrydialog.cpp \
     src/partseditor/pecommands.cpp \
     src/partseditor/peconnectorsview.cpp \
     src/partseditor/pesvgview.cpp \
