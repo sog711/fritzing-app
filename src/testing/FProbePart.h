@@ -54,6 +54,7 @@ private:
 	QJsonObject handleGetSize(SketchWidget *view, const QJsonObject &params);
 	QJsonObject handleGetResizeHandlePos(SketchWidget *view, const QJsonObject &params);
 	QJsonObject handleSceneToScreen(SketchWidget *view, const QJsonObject &params);
+	QJsonObject handleGetGridSize(SketchWidget *view, const QJsonObject &params);
 
 	MainWindow *m_mainWindow;
 	QVariant m_lastResult;

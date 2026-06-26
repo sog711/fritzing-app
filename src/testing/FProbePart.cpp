@@ -62,6 +62,8 @@ FProbePart::FProbePart(MainWindow *mainWindow)
 			result = handleGetResizeHandlePos(view, params);
 		} else if (cmd == "sceneToScreen") {
 			result = handleSceneToScreen(view, params);
+		} else if (cmd == "getGridSize") {
+			result = handleGetGridSize(view, params);
 		} else {
 			result["ok"] = false;
 			result["error"] = QString("unknown command '%1'").arg(cmd);
@@ -266,5 +268,18 @@ QJsonObject FProbePart::handleSceneToScreen(SketchWidget *view, const QJsonObjec
 	result["ok"] = true;
 	result["x"] = screenPoint.x();
 	result["y"] = screenPoint.y();
+	return result;
+}
+
+QJsonObject FProbePart::handleGetGridSize(SketchWidget *view, const QJsonObject &params)
+{
+	Q_UNUSED(params);
+	QJsonObject result;
+	// gridSizeInches()/shouldAlignToGrid() are public on the InfoGraphicsView
+	// interface (protected on SketchWidget itself), so query them through it.
+	InfoGraphicsView * igv = view;
+	result["ok"] = true;
+	result["gridSizeInches"] = igv->gridSizeInches();
+	result["alignToGrid"] = igv->shouldAlignToGrid();
 	return result;
 }
