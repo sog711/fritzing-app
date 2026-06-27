@@ -489,16 +489,10 @@ bool MainWindow::mainLoad(const QString & fileName, const QString & displayName,
 	}
 	disconnect(migratePartLabelOffsetConnection);
 
-	// TEMPORARY: do not auto-trigger migration after loading a sketch -- not even for
-	// forced (legacy) obsolete parts. Migration runs only when explicitly invoked ("Update
-	// selected parts" / the Inspector obsolete link). This deliberately suppresses the on-load
-	// prompt while we focus on the swap-back corruption bug; revisit whether it should return
-	// (and whether to keep gating it under -ftesting for the test harness).
-	const bool migrateOnLoad = false;
-	if (migrateOnLoad && !m_useOldSchematic && checkObsolete) {
-		// On load, route every obsolete part through the Part Migration dialog (or silent
-		// auto-swap). Classic (forced) parts prompt on every load; soft (ask) parts only when
-		// mixed with their replacement. Parts with no resolvable replacement are left as-is.
+	// On load, route every obsolete part through the Part Migration dialog (or silent
+	// auto-swap). Classic (forced) parts prompt on every load; soft (ask) parts only when
+	// mixed with their replacement. Parts with no resolvable replacement are left as-is.
+	if (!m_useOldSchematic && checkObsolete) {
 		QList<ItemBase *> items = collectObsoleteAcrossViews();
 		DebugDialog::debug(QString("[migration] (load) obsolete parts in sketch: %1").arg(items.count()));
 		if (!items.isEmpty()) {
