@@ -26,6 +26,7 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QHBoxLayout>
 #include <QKeyEvent>
 #include <QLabel>
+#include <QMouseEvent>
 #include <QPainter>
 #include <QStandardItem>
 #include <QStandardItemModel>
@@ -171,7 +172,13 @@ int FlowLayout::doLayout(const QRect & rect, bool testOnly) const
 		}
 
 		if (!testOnly) {
-			item->setGeometry(QRect(QPoint(x, y), item->sizeHint()));
+			QSize sz = item->sizeHint();
+			if (item == m_itemList.last()) {
+				// the trailing item (the inline input) grows to fill the rest of its row
+				const int fill = effectiveRect.right() - x + 1;
+				if (fill > sz.width()) sz.setWidth(fill);
+			}
+			item->setGeometry(QRect(QPoint(x, y), sz));
 		}
 
 		x = nextX;
@@ -297,13 +304,12 @@ void TagSuggestionDelegate::paint(QPainter * painter, const QStyleOptionViewItem
 
 	const bool isCreate = index.data(CreateRole).toBool();
 	const bool enabled = opt.state & QStyle::State_Enabled;
+	const bool added = !enabled && !isCreate;            // a pool tag already on this part
 	const QString value = index.data(Qt::DisplayRole).toString();
 
 	QString plain;
 	if (isCreate) {
-		plain = tr("Create new tag '%1'").arg(value);
-	} else if (!enabled) {
-		plain = QStringLiteral("#") + value + QStringLiteral("   ✓ ") + tr("added");
+		plain = QStringLiteral("+  ") + tr("Create new tag “%1”").arg(value);
 	} else {
 		plain = QStringLiteral("#") + value;
 	}
@@ -323,27 +329,37 @@ void TagSuggestionDelegate::paint(QPainter * painter, const QStyleOptionViewItem
 			       + QStringLiteral("</span></b>") + after;
 		}
 	}
-	if (!enabled) {
+	if (added) {
 		html = QStringLiteral("<span style='color:#9a9a9a;'>") + html + QStringLiteral("</span>");
+	} else if (isCreate) {
+		html = QStringLiteral("<span style='color:#5b6470;'>") + html + QStringLiteral("</span>");
 	}
+
+	const QRect textRect = style->subElementRect(QStyle::SE_ItemViewItemText, &opt, opt.widget);
 
 	QTextDocument doc;
 	doc.setHtml(html);
 	doc.setDefaultFont(opt.font);
 	doc.setDocumentMargin(0);
 
+	// Selection uses a light-blue background (see the popup stylesheet), so keep the dark text
+	// rather than switching to the palette's highlighted-text colour.
 	painter->save();
-	const QRect textRect = style->subElementRect(QStyle::SE_ItemViewItemText, &opt, opt.widget);
 	painter->translate(textRect.topLeft());
 	const double dy = (textRect.height() - doc.size().height()) / 2.0;
 	painter->translate(0, dy > 0 ? dy : 0);
-
 	QAbstractTextDocumentLayout::PaintContext ctx;
-	if (enabled && (opt.state & QStyle::State_Selected)) {
-		ctx.palette.setColor(QPalette::Text, opt.palette.color(QPalette::Active, QPalette::HighlightedText));
-	}
 	doc.documentLayout()->draw(painter, ctx);
 	painter->restore();
+
+	// "✓ added" marker, right-aligned and dimmed, for tags already on the part.
+	if (added) {
+		painter->save();
+		painter->setPen(QColor(0x9a, 0x9a, 0x9a));
+		painter->drawText(textRect.adjusted(0, 0, -2, 0), Qt::AlignRight | Qt::AlignVCenter,
+		                  QStringLiteral("✓ ") + tr("added"));
+		painter->restore();
+	}
 }
 
 QSize TagSuggestionDelegate::sizeHint(const QStyleOptionViewItem & option, const QModelIndex & index) const
@@ -364,31 +380,33 @@ TagEditorWidget::TagEditorWidget(const QStringList & tags, const QStringList & p
 	setStyleSheet(QStringLiteral(
 	    "#TagEditorWidget {"
 	    "  background: #ffffff;"
-	    "  border: 1px solid #c4c4c4;"
+	    "  border: 1px solid #b9c0cc;"
 	    "  border-radius: 4px;"
+	    "  min-height: 30px;"
 	    "}"
 	    "#TagEditorWidget[tagFocus=\"true\"] {"
 	    "  border: 1px solid #1f5fb5;"
 	    "}"
 	    "TagChip {"
-	    "  background: #e7eefb;"
-	    "  border: 1px solid #c4d6f5;"
+	    "  background: #eff4fd;"
+	    "  border: 1px solid #cdddf5;"
 	    "  border-radius: 5px;"
 	    "}"
 	    "TagChip QLabel { background: transparent; border: none; }"
 	    "#TagChipRemove {"
-	    "  border: none; background: transparent; color: #8aa6d6;"
+	    "  border: none; background: transparent; color: #9aa6b8;"
 	    "  font-weight: bold; padding: 0px 2px;"
 	    "}"
 	    "#TagChipRemove:hover { color: #1f5fb5; }"
 	    "#TagLineEdit { border: none; background: transparent; }"
 	));
 	setProperty("tagFocus", false);
+	setCursor(Qt::IBeamCursor);
 
 	m_flow = new FlowLayout(this, 5, 5, 5);
 
 	m_input = new TagLineEdit(this);
-	m_input->setMinimumWidth(90);
+	m_input->setMinimumWidth(120);
 	m_flow->addWidget(m_input);
 
 	// Autocomplete: a QCompleter drives the popup (positioning, navigation, dismissal); a
@@ -403,6 +421,16 @@ TagEditorWidget::TagEditorWidget(const QStringList & tags, const QStringList & p
 	m_completer->setCompletionRole(Qt::DisplayRole);   // match against the visible tag text
 	m_completer->setMaxVisibleItems(8);
 	m_completer->popup()->setItemDelegate(m_delegate);
+	m_completer->popup()->setStyleSheet(QStringLiteral(
+	    "QAbstractItemView {"
+	    "  background: #ffffff;"
+	    "  border: 1px solid #9aa7bd;"
+	    "  outline: 0px;"
+	    "  padding: 2px;"
+	    "}"
+	    "QAbstractItemView::item { padding: 4px 8px; border: 0px; }"
+	    "QAbstractItemView::item:selected { background: #dce7fb; }"
+	));
 
 	connect(m_input, &QLineEdit::textEdited, this, &TagEditorWidget::onTextEdited);
 	connect(m_input, &TagLineEdit::commitRequested, this, &TagEditorWidget::commitCurrent);
@@ -573,4 +601,12 @@ void TagEditorWidget::onInputFocusChanged(bool focused)
 	setProperty("tagFocus", focused);
 	style()->unpolish(this);
 	style()->polish(this);
+}
+
+void TagEditorWidget::mousePressEvent(QMouseEvent * event)
+{
+	// Clicking anywhere in the field (the gaps around the chips) focuses the input, so the whole
+	// bordered container behaves like one text field.
+	if (m_input) m_input->setFocus();
+	QFrame::mousePressEvent(event);
 }

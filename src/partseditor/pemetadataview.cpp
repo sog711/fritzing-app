@@ -34,6 +34,8 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #include <QColor>
 #include <QBrush>
 #include <QTimer>
+#include <QFontMetrics>
+#include <QHeaderView>
 #include <algorithm>
 
 #include "pemetadataview.h"
@@ -104,6 +106,36 @@ PEMetadataView::PEMetadataView(ReferenceModel * referenceModel, QWidget * parent
 	m_referenceModel = referenceModel;
 	this->setWidgetResizable(true);
 	this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+	// Cohesive look for the whole view: a light form background so the white input fields read as
+	// inputs, consistent input borders + focus ring, tidy buttons, and a styled history table.
+	// Set on the view (not the rebuilt main frame) so it survives every initMetadata().
+	this->setStyleSheet(QStringLiteral(
+	    "#metadataMainFrame { background: #eceef1; }"
+	    "#metadataMainFrame QLabel { color: #3a3f47; background: transparent; }"
+	    "#metadataIntro { color: #6b7280; font-style: italic; }"
+
+	    "#PartsEditorLineEdit, #PartsEditorTextEdit {"
+	    "  background: #ffffff; border: 1px solid #b9c0cc; border-radius: 4px; padding: 4px 6px;"
+	    "  selection-background-color: #1f5fb5; selection-color: #ffffff; }"
+	    "#PartsEditorLineEdit:focus, #PartsEditorTextEdit:focus { border: 1px solid #1f5fb5; }"
+
+	    "#PartsEditorPropertiesEdit { background: transparent; border: 0px; }"
+	    "#PartsEditorPropertiesEdit HashLineEdit {"
+	    "  background: #ffffff; border: 1px solid #c4c9d2; border-radius: 4px; padding: 3px 6px; }"
+
+	    "#PartsEditorHistoryTable {"
+	    "  background: #ffffff; border: 1px solid #b9c0cc; border-radius: 4px; gridline-color: #e6e9ed; }"
+	    "#PartsEditorHistoryTable QHeaderView::section {"
+	    "  background: #e7eaef; border: 0px; border-bottom: 1px solid #cdd2da; padding: 4px 6px;"
+	    "  color: #3a3f47; }"
+
+	    "#PartsEditorHistoryAdd, #PartsEditorHistoryEdit, #PartsEditorHistoryDelete {"
+	    "  background: #f4f5f7; border: 1px solid #b9c0cc; border-radius: 4px; padding: 3px 12px;"
+	    "  color: #2b2f36; }"
+	    "#PartsEditorHistoryAdd:hover, #PartsEditorHistoryEdit:hover, #PartsEditorHistoryDelete:hover {"
+	    "  background: #e7eefb; border-color: #1f5fb5; color: #1f5fb5; }"
+	));
 }
 
 PEMetadataView::~PEMetadataView() {
@@ -230,12 +262,16 @@ void PEMetadataView::initMetadata(const QDomDocument & doc)
 	m_mainFrame = new QFrame(this);
 	m_mainFrame->setObjectName("metadataMainFrame");
 	auto *mainLayout = new QVBoxLayout(m_mainFrame);
-	mainLayout->setSizeConstraint( QLayout::SetMinAndMaxSize );
+	// SetMinimumSize (not SetMinAndMaxSize): let the frame grow to fill a tall viewport so the
+	// trailing stretch added below can keep the fields top-aligned instead of clinging to the bottom.
+	mainLayout->setSizeConstraint( QLayout::SetMinimumSize );
 
-	auto *explanation = new QLabel(tr("This is where you edit the metadata for the part ..."));
+	auto *explanation = new QLabel(tr("Edit the part's metadata, revision history, properties and tags."));
+	explanation->setObjectName("metadataIntro");
 	mainLayout->addWidget(explanation);
 
 	auto * formLayout = new QFormLayout();
+	formLayout->setVerticalSpacing(8);   // breathing room between rows (incl. Properties / Tags)
 	auto * formFrame = new QFrame;
 	mainLayout->addWidget(formFrame);
 
@@ -287,6 +323,22 @@ void PEMetadataView::initMetadata(const QDomDocument & doc)
 	connect(m_descriptionEdit, SIGNAL(focusOut()), this, SLOT(descriptionEntry()));
 	m_descriptionEdit->setObjectName("PartsEditorTextEdit");
 	m_descriptionEdit->setStatusTip(tr("Set the part's description--you can use simple html (as defined by Qt's Rich Text)"));
+	// Size the box to (an estimate of) its content rather than a large fixed default: count the
+	// wrapped lines at an assumed field width, clamped to a sensible range.
+	{
+		const QString plain = m_descriptionEdit->toPlainText();
+		const QFontMetrics fm(m_descriptionEdit->font());
+		const int lineH = qMax(fm.lineSpacing(), 14);
+		const int avgW = qMax(fm.averageCharWidth(), 6);
+		const int perLine = qMax(20, 520 / avgW);                 // ~field column width / char width
+		int displayLines = 0;
+		const QStringList paragraphs = plain.split('\n');
+		for (const QString & para : paragraphs) {
+			displayLines += qMax(1, (int(para.length()) + perLine - 1) / perLine);
+		}
+		const int lines = qBound(3, displayLines, 14);
+		m_descriptionEdit->setFixedHeight(lines * lineH + 12);
+	}
 	formLayout->addRow(tr("Description"), m_descriptionEdit);
 
 	m_labelEdit = new QLineEdit();
@@ -330,6 +382,12 @@ void PEMetadataView::initMetadata(const QDomDocument & doc)
 	formLayout->addRow(tr("Tags"), m_tagsEdit);
 
 	formFrame->setLayout(formLayout);
+
+	// Trailing flex: a small fixed gap plus a stretch below the form, so the fields stay
+	// top-aligned and the slack collects at the bottom -- Properties/Tags no longer cling to the
+	// bottom edge of a tall window.
+	mainLayout->addSpacing(10);
+	mainLayout->addStretch(1);
 	m_mainFrame->setLayout(mainLayout);
 
 	this->setWidget(m_mainFrame);
@@ -401,6 +459,26 @@ void PEMetadataView::populateHistoryTable() {
 			m_historyTable->setCellWidget(i, 4, actions);
 		}
 	}
+
+	// Fit the table to its rows so a part with one or two entries doesn't reserve a tall, mostly
+	// empty area. Pin each row's height explicitly (so rows carrying the Edit/× action widgets
+	// aren't taller than rowHeight() reports and get clipped) and sum the same values back. It
+	// grows with the entries and only starts scrolling past a handful of rows.
+	const int rows = m_historyTable->rowCount();
+	const int rowsShown = qMin(rows, 8);
+	int height = m_historyTable->horizontalHeader()->height() + 2 * m_historyTable->frameWidth() + 2;
+	for (int i = 0; i < rows; ++i) {
+		int rowH = m_historyTable->rowHeight(i);
+		if (QWidget * actions = m_historyTable->cellWidget(i, 4)) {
+			rowH = qMax(rowH, actions->sizeHint().height() + 6);
+		}
+		rowH = qMax(rowH, 30);
+		m_historyTable->setRowHeight(i, rowH);
+		if (i < rowsShown) height += rowH;
+	}
+	if (rows == 0) height += 30;   // keep an empty table from collapsing to a sliver
+	m_historyTable->setVerticalScrollBarPolicy(rows > rowsShown ? Qt::ScrollBarAsNeeded : Qt::ScrollBarAlwaysOff);
+	m_historyTable->setFixedHeight(height);
 }
 
 void PEMetadataView::addHistoryEntry() {

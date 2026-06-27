@@ -94,6 +94,7 @@ HashPopulateWidget::HashPopulateWidget(const QString & title, const QHash<QStrin
 
 	for(int i=0; i < keys.count(); i++) {
 		auto *name = new HashLineEdit(keys[i],false,this);
+		name->setMinimumWidth(160);   // wide enough for names like "maximum resistance"
 		auto *value = new HashLineEdit(initValues[keys[i]],false,this);
 		if (m_keysOnly) value->hide();
 
@@ -167,6 +168,7 @@ void HashPopulateWidget::addRow(QGridLayout *layout) {
 	int ix = layout->rowCount();
 
 	m_lastLabel = new HashLineEdit(QObject::tr("a label"),true,this);
+	m_lastLabel->setMinimumWidth(160);   // keep the name column aligned with the rows above
 	layout->addWidget(m_lastLabel,ix,0);
 	connect(m_lastLabel,SIGNAL(editingFinished()),this,SLOT(lastRowEditionCompleted()));
 

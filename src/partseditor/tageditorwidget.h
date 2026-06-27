@@ -138,6 +138,9 @@ public:
 Q_SIGNALS:
 	void changed();
 
+protected:
+	void mousePressEvent(QMouseEvent * event) override;   // click anywhere in the field focuses the input
+
 private Q_SLOTS:
 	void onTextEdited(const QString & text);
 	void commitCurrent();
