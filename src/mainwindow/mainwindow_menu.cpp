@@ -489,10 +489,8 @@ bool MainWindow::mainLoad(const QString & fileName, const QString & displayName,
 	}
 	disconnect(migratePartLabelOffsetConnection);
 
-	// On load, route every obsolete part through the Part Migration dialog (or silent
-	// auto-swap). Classic (forced) parts prompt on every load; soft (ask) parts only when
-	// mixed with their replacement. Parts with no resolvable replacement are left as-is.
-	if (!m_useOldSchematic && checkObsolete) {
+	// On load, route every obsolete part through the Part Migration dialog (or silent auto-swap).
+	if (!FMessageBox::BlockMessages && !m_useOldSchematic && checkObsolete) {
 		QList<ItemBase *> items = collectObsoleteAcrossViews();
 		DebugDialog::debug(QString("[migration] (load) obsolete parts in sketch: %1").arg(items.count()));
 		if (!items.isEmpty()) {
@@ -4039,7 +4037,7 @@ QList<ItemBase *> MainWindow::routeHistoryMigrations(const QList<ItemBase *> & o
 	// Every obsolete part is routed to the "Part Migration" dialog (or auto-swapped), keyed on
 	// the replacement's effective history mode:
 	//   recommended (classic, incl. parts with no history) → prompt on Load + ManualUpdate always; on Drop when mixed + unseen
-	//   optional    (soft, silenceable)                    → prompt on ManualUpdate always; on Load when unseen (until silenced); on Drop when mixed + unseen
+	//   optional    (soft, silenceable)                    → prompt on ManualUpdate; on Drop when mixed + unseen; on Load only to join a dialog a recommended part is already opening
 	//   required    (auto)                                  → queued and auto-applied with no dialog
 	// Only parts with no resolvable replacement are returned to the caller (to report/ignore).
 	QList<ItemBase *> rest;
@@ -4060,6 +4058,21 @@ QList<ItemBase *> MainWindow::routeHistoryMigrations(const QList<ItemBase *> & o
 	}
 
 	MigrationHandler * migrationHandler = views.first()->migrationHandler();
+
+	// On load the dialog is opened by "recommended" parts; "optional" parts then join it but never
+	// pop it on their own. So note up front whether a recommended part is opening the load dialog.
+	bool loadDialogOpening = false;
+	if (context == TriggerContext::Load) {
+		Q_FOREACH (ItemBase * item, obsoleteItems) {
+			ModelPart * newPart = findReplacedby(item->modelPart());
+			if (newPart == nullptr) continue;
+			if (!newPart->hasHistory()) newPart->loadHistoryFromFile();
+			if (MigrationHandler::computeEffectiveMode(newPart->history()) == "recommended") {
+				loadDialogOpening = true;
+				break;
+			}
+		}
+	}
 
 	Q_FOREACH (ItemBase * item, obsoleteItems) {
 		ModelPart * oldPart = item->modelPart();
@@ -4089,10 +4102,10 @@ QList<ItemBase *> MainWindow::routeHistoryMigrations(const QList<ItemBase *> & o
 			queue = (context != TriggerContext::Drop) || (mixed && unseen);
 		}
 		else {                                              // "optional"
-			// silenceable: prompt on manual; on load whenever there's an unseen change (so it nudges
-			// like recommended, but stops once silenced); on drop only when mixed + unseen.
+			// silenceable: prompt on manual update; on a mixed drop; and on load only to join a
+			// dialog a recommended part is already opening (never on its own).
 			queue = (context == TriggerContext::ManualUpdate)
-			     || (context == TriggerContext::Load && unseen)
+			     || (context == TriggerContext::Load && loadDialogOpening)
 			     || (context == TriggerContext::Drop && mixed && unseen);
 		}
 
@@ -4102,6 +4115,8 @@ QList<ItemBase *> MainWindow::routeHistoryMigrations(const QList<ItemBase *> & o
 				reason = tr("You chose to update this outdated part.");
 			else if (mode == "recommended")
 				reason = tr("This part is outdated. We recommend updating it to the latest version.");
+			else if (context == TriggerContext::Load)
+				reason = tr("This part has an optional update available.");
 			else
 				reason = tr("This sketch contains both this part and a newer revision of it. Choose which one to use.");
 
