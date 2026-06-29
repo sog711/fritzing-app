@@ -526,7 +526,13 @@ void MainWindow::init(ReferenceModel *referenceModel, bool lockFiles) {
 	connect(fProbe, &FProbeDropByModuleID::putItemByModuleID, this, &MainWindow::putItemByModuleID);
 
 	new FProbeKeyPressEvents();
-	new FProbeCurrentSketchXml(m_sketchModel);
+	// CurrentSketchXml is stateless (it resolves the current window at read time),
+	// so a single instance serves every window; don't leak an identical one per window.
+	static bool currentSketchXmlProbeCreated = false;
+	if (!currentSketchXmlProbeCreated) {
+		new FProbeCurrentSketchXml();
+		currentSketchXmlProbeCreated = true;
+	}
 
 	FProbeFocusWidget *focusWidgetProbe = new FProbeFocusWidget();
 
@@ -576,6 +582,10 @@ MainWindow::~MainWindow()
 		FolderUtils::rmdir(m_fzzFolder);
 	}
 	delete m_undoShortcut;
+}
+
+SketchModel * MainWindow::sketchModel() const {
+	return m_sketchModel;
 }
 
 void MainWindow::initLockedFiles(bool lockFiles) {

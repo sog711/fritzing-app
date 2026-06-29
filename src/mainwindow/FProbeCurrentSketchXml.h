@@ -22,21 +22,16 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 #define FPROBECURRENTSKETCHXML_H
 
 #include "testing/FProbe.h"
-#include "model/sketchmodel.h"
 
-#include <QString>
 #include <QVariant>
 
 class FProbeCurrentSketchXml : public FProbe {
 public:
-	FProbeCurrentSketchXml(SketchModel * sketchModel);
+	FProbeCurrentSketchXml();
 	~FProbeCurrentSketchXml();
 
 	QVariant read();
 	void write(QVariant) {}
-
-private:
-	SketchModel * m_sketchModel;
 };
 
 #endif

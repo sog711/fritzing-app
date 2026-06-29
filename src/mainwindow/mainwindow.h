@@ -256,6 +256,11 @@ public:
 	QAction *undoAction() const { return m_undoAct; }
 	QAction *redoAction() const { return m_redoAct; }
 
+	// The sketch model backing this window. Used by the FTesting CurrentSketchXml
+	// probe to read the current window's sketch; null if it has been torn down.
+	// Defined in the .cpp: QPointer's conversion needs the complete SketchModel type.
+	class SketchModel * sketchModel() const;
+
 Q_SIGNALS:
 	void alienPartsDismissed();
 	void mainWindowMoved(QWidget *);

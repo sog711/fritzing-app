@@ -20,17 +20,34 @@ along with Fritzing.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "FProbeCurrentSketchXml.h"
 
+#include "fapplication.h"
+#include "mainwindow.h"
+#include "model/sketchmodel.h"
+
 #include <QByteArray>
+#include <QString>
 #include <QXmlStreamWriter>
 
-FProbeCurrentSketchXml::FProbeCurrentSketchXml(SketchModel * sketchModel) : FProbe("CurrentSketchXml"), m_sketchModel(sketchModel) {
+FProbeCurrentSketchXml::FProbeCurrentSketchXml() : FProbe("CurrentSketchXml") {
 }
 
 FProbeCurrentSketchXml::~FProbeCurrentSketchXml() {
 }
 
 QVariant FProbeCurrentSketchXml::read() {
-	if (m_sketchModel == nullptr) {
+	// Resolve the current sketch window at read time instead of binding to one
+	// SketchModel at construction. Probes are leaked and registered by name
+	// (last window wins); after a failed Revert the replacement window is
+	// destroyed while its probe stays in the map, so reading a captured model
+	// was a use-after-free (issue #1158). Resolving the current window each read
+	// targets a live window for the harness's normal (main-thread-idle) reads.
+	MainWindow * current = static_cast<FApplication *>(qApp)->currentMainWindow();
+	if (current == nullptr) {
+		return QVariant("Error: no current sketch window");
+	}
+
+	SketchModel * sketchModel = current->sketchModel();
+	if (sketchModel == nullptr) {
 		return QVariant("Error: SketchModel is null");
 	}
 
@@ -38,14 +55,14 @@ QVariant FProbeCurrentSketchXml::read() {
 		// Create a QByteArray to capture the XML output
 		QByteArray xmlData;
 		QXmlStreamWriter streamWriter(&xmlData);
-		
+
 		// Use the same method as ModelBase::save() to generate XML
-		m_sketchModel->save("", streamWriter, false);
-		
+		sketchModel->save("", streamWriter, false);
+
 		// Convert to string and return
 		QString xmlString = QString::fromUtf8(xmlData);
 		return QVariant(xmlString);
-		
+
 	} catch (...) {
 		return QVariant("Error: Failed to generate sketch XML");
 	}

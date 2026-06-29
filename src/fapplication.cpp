@@ -2077,6 +2077,22 @@ QList<MainWindow *> FApplication::orderedTopLevelMainWindows() {
 	return mainWindows;
 }
 
+MainWindow * FApplication::currentMainWindow() {
+	// Prefer the most-recently-activated sketch window (front of the list).
+	Q_FOREACH (QWidget * widget, m_orderedTopLevelWidgets) {
+		auto * mainWindow = qobject_cast<MainWindow *>(widget);
+		if (mainWindow != nullptr) return mainWindow;
+	}
+	// Fallback: m_orderedTopLevelWidgets is populated only on QEvent::WindowActivate,
+	// which may never fire under an offscreen/headless platform. Scan all top-level
+	// widgets so the probe still resolves a window (issue #1158).
+	Q_FOREACH (QWidget * widget, QApplication::topLevelWidgets()) {
+		auto * mainWindow = qobject_cast<MainWindow *>(widget);
+		if (mainWindow != nullptr) return mainWindow;
+	}
+	return nullptr;
+}
+
 void FApplication::runExampleService()
 {
 	m_started = true;

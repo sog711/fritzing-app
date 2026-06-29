@@ -126,6 +126,10 @@ public:
 	bool loadReferenceModel(const QString & databaseName, bool fullLoad, ReferenceModel * referenceModel);
 	void registerFonts();
 	class MainWindow * openWindowForService(bool lockFiles, int initialTab);
+	// The most-recently-activated (topmost) sketch window, or nullptr if there is
+	// none. Used by the FTesting CurrentSketchXml probe to read the live current
+	// sketch rather than a possibly-destroyed captured one (issue #1158).
+	class MainWindow * currentMainWindow();
 	bool runAsService();
 
 public:
