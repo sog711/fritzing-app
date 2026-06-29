@@ -334,14 +334,16 @@ bool MainWindow::loadWhich(const QString & fileName, bool setAsLastOpened, bool 
 	if (fileName.endsWith(FritzingSketchExtension)) {
 		QFileInfo info(fileName);
 
-		QString bundledFileName;
-		mainLoad(fileName, displayName, checkObsolete);
-		result = true;
-
-		QFile file(fileName);
-		QDir dest(m_fzzFolder);
-		FolderUtils::slamCopy(file, dest.absoluteFilePath(info.fileName()));			// copy the .fz file directly
-		setCurrentFile(fileName, false, false);
+		// Use the real load result: a damaged .fz must report failure so callers
+		// (e.g. revertAux) keep the working window open instead of replacing it
+		// with an empty one (issue #1158).
+		result = mainLoad(fileName, displayName, checkObsolete);
+		if (result) {
+			QFile file(fileName);
+			QDir dest(m_fzzFolder);
+			FolderUtils::slamCopy(file, dest.absoluteFilePath(info.fileName()));			// copy the .fz file directly
+			setCurrentFile(fileName, false, false);
+		}
 	}
 	else if(fileName.endsWith(FritzingBundleExtension)) {
 		QString error = loadBundledSketch(fileName, addToRecent, setAsLastOpened, checkObsolete);

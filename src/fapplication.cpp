@@ -2011,13 +2011,22 @@ QList<MainWindow *> FApplication::recoverBackups()
 			QString bundledFileName = FolderUtils::getSaveFileName(nullptr, tr("Please specify an .fzz file name to save to (cancel will delete the backup)"), originalPath, tr("Fritzing (*%1)").arg(FritzingBundleExtension), &fileExt);
 			if (!bundledFileName.isEmpty()) {
 				MainWindow *currentRecoveredSketch = MainWindow::newMainWindow(m_referenceModel, originalBaseName, true, true, -1);
-				currentRecoveredSketch->mainLoad(backupName, bundledFileName, true);
-				bool saved = currentRecoveredSketch->saveAsShareable(bundledFileName, true);
-				currentRecoveredSketch->setCurrentFile(bundledFileName, true, true);
+				bool loaded = currentRecoveredSketch->mainLoad(backupName, bundledFileName, true);
+				// Only save when the backup actually loaded. Saving an unloaded (empty)
+				// window would write a valid-but-empty .fzz over the user's chosen path
+				// and then let us delete the backup -- the data-loss path of issue #1158.
+				bool saved = loaded && currentRecoveredSketch->saveAsShareable(bundledFileName, true);
+				// Only record the file as current/recent when it was actually written.
+				// On a failed load nothing is saved, so pointing lastOpenSketch and the
+				// recent-files list at this (nonexistent) path would be wrong (issue #1158).
+				if (loaded) {
+					currentRecoveredSketch->setCurrentFile(bundledFileName, true, true);
+				}
 				recoveredSketches << currentRecoveredSketch;
 				// Keep the backup unless the recovery produced a real file on disk.
-				// A failed or empty save must not destroy the last copy (issue #1158).
-				keepBackup = !saved
+				// A failed load, or a failed/empty save, must not destroy the last copy (issue #1158).
+				keepBackup = !loaded
+				             || !saved
 				             || !QFileInfo(bundledFileName).exists()
 				             || QFileInfo(bundledFileName).size() <= 22;  // 22 bytes = empty zip
 			}
