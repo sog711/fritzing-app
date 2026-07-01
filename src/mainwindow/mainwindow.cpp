@@ -3660,11 +3660,6 @@ void MainWindow::initStyleSheet()
 	QStringList availableStyles = QStyleFactory::keys();
 	DebugDialog::DebugStream() << "Available styles:" << availableStyles.join(",");
 
-#ifdef Q_OS_WIN
-	// TODO: Replace this with windows11 style in Qt6.7? Also check qpa_platform setting in main.cpp (Qt < 6.5 setting)
-	// QApplication::setStyle("windowsvista");
-#endif
-
 	QString suffix = getStyleSheetSuffix();
 	QFile styleSheet(QString(":/resources/styles/%1.qss").arg(suffix));
 	if (!styleSheet.open(QIODevice::ReadOnly)) {
