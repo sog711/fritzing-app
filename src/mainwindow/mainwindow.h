@@ -273,6 +273,7 @@ public Q_SLOTS:
 	QList<ModelPart *> loadPart(const QString &fileName, bool addToBin);
 	void acceptAlienFiles();
 	void statusMessage(QString message, int timeout);
+	void statusHint(QString message);
 	void showPCBView();
 	void groundFill();
 	void removeGroundFill();
@@ -982,6 +983,7 @@ protected:
 	QPointer<QLabel> m_locationLabel;
 	QString m_locationLabelUnits;
 	QString m_timedStatusMessage;
+	QPointer<QLabel> m_statusHintLabel;
 
 	QByteArray m_externalProcessOutput;
 

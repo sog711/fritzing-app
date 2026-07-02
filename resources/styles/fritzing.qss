@@ -396,6 +396,14 @@ QStatusBar::item {
 	color: #fff;
 }
 
+/* hover hints; styled like the status bar messages they used to be */
+#StatusHintLabel {
+	color: #fff;
+	font-weight: bold;
+	font-size: 11px;
+	font-family: Droid Sans;
+}
+
 /* ################### Mainmenubar window #################### */
 
 QMenuBar {

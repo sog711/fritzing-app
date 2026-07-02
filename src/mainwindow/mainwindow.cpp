@@ -315,6 +315,13 @@ MainWindow::MainWindow(ReferenceModel *referenceModel, QWidget * parent) :
 	setStatusBar(m_statusBar);
 	m_statusBar->setSizeGripEnabled(false);
 
+	// hover hints live in a normal (non-permanent) widget: QStatusBar hides
+	// those while a temporary message is displayed, so hints never displace
+	// notifications and reappear once the message times out
+	m_statusHintLabel = new QLabel("", this);
+	m_statusHintLabel->setObjectName("StatusHintLabel");
+	m_statusBar->addWidget(m_statusHintLabel, 1);
+
 	QSettings settings;
 	m_locationLabelUnits = settings.value("LocationInches", "in").toString();
 
@@ -3149,6 +3156,12 @@ void MainWindow::statusMessage(QString message, int timeout) {
 
 	m_timedStatusMessage = (timeout > 0) ? message : QString();
 	sb->showMessage(message, timeout);
+}
+
+void MainWindow::statusHint(QString message) {
+	if (m_statusHintLabel) {
+		m_statusHintLabel->setText(message);
+	}
 }
 
 void MainWindow::dropPaste(SketchWidget * sketchWidget) {

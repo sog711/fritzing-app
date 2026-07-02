@@ -6303,9 +6303,9 @@ void SketchWidget::hoverEnterItem(QGraphicsSceneHoverEvent * event, ItemBase * i
 		if (canChainWire(wire)) {
 			bool segment = wire->connector0()->chained() && wire->connector1()->chained();
 			bool disconnected = wire->connector0()->connectionsCount() == 0 &&  wire->connector1()->connectionsCount() == 0;
-			statusMessage(QString("%1 to add a bendpoint %2")
-			              .arg(disconnected ? tr("Double-click") : tr("Drag or double-click"))
-			              .arg(segment ? tr("or alt-drag to move the segment") : tr("")));
+			statusHint(QString("%1 to add a bendpoint %2")
+			           .arg(disconnected ? tr("Double-click") : tr("Drag or double-click"))
+			           .arg(segment ? tr("or alt-drag to move the segment") : tr("")));
 			m_lastHoverEnterItem = item;
 		}
 	}
@@ -6334,6 +6334,24 @@ void SketchWidget::statusMessage(QString message, int timeout)
 	}
 }
 
+void SketchWidget::statusHint(QString message)
+{
+	auto * mainWindow = qobject_cast<QMainWindow *>(window());
+	if (!mainWindow) return;
+
+	if (m_hintConnectState == StatusConnectNotTried) {
+		bool result = connect(this, SIGNAL(statusHintSignal(QString)),
+		                      mainWindow, SLOT(statusHint(QString)));
+		m_hintConnectState = (result) ? StatusConnectSucceeded : StatusConnectFailed;
+	}
+
+	// no status bar fallback: a window without the hint channel
+	// (e.g. the parts editor) simply shows no hover hints
+	if (m_hintConnectState == StatusConnectSucceeded) {
+		Q_EMIT statusHintSignal(message);
+	}
+}
+
 void SketchWidget::hoverLeaveItem(QGraphicsSceneHoverEvent * event, ItemBase * item) {
 	m_lastHoverEnterItem = nullptr;
 
@@ -6342,7 +6360,7 @@ void SketchWidget::hoverLeaveItem(QGraphicsSceneHoverEvent * event, ItemBase * i
 	}
 
 	if (canChainWire(qobject_cast<Wire *>(item))) {
-		statusMessage(QString());
+		statusHint(QString());
 	}
 }
 
@@ -6357,12 +6375,11 @@ void SketchWidget::hoverEnterConnectorItem(QGraphicsSceneHoverEvent * event, Con
 
 		m_lastHoverEnterConnectorItem = item;
 		QString msg = hoverEnterWireConnectorMessage(event, item);
-		statusMessage(msg);
+		statusHint(msg);
 	}
 	else {
 		QString msg = hoverEnterPartConnectorMessage(event, item);
-		// an empty hint must not wipe whatever message is currently displayed
-		if (!msg.isEmpty()) statusMessage(msg);
+		statusHint(msg);
 	}
 
 }
@@ -6402,10 +6419,10 @@ void SketchWidget::hoverLeaveConnectorItem(QGraphicsSceneHoverEvent * event, Con
 		if (!this->m_chainDrag) return;
 		if (!item->chained()) return;
 
-		statusMessage(QString());
+		statusHint(QString());
 	}
 	else {
-		statusMessage(QString());
+		statusHint(QString());
 	}
 }
 

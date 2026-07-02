@@ -563,6 +563,7 @@ Q_SIGNALS:
 	void setPropSignal(long itemID, const QString & prop, const QString & value, bool doRedraw, bool doEmit);
 	void setInstanceTitleSignal(long id, const QString & oldTitle, const QString & newTitle, bool isUndoable, bool doEmit);
 	void statusMessageSignal(QString, int timeout);
+	void statusHintSignal(QString);
 	void showLabelFirstTimeSignal(long itemID, bool show, bool doEmit);
 	void dropPasteSignal(SketchWidget *);
 	void changeBoardLayersSignal(int, bool doEmit);
@@ -613,6 +614,7 @@ protected Q_SLOTS:
 	void restartPasteCount();
 	void dragIsDoneSlot(class ItemDrag *);
 	void statusMessage(QString message, int timeout = 0);
+	void statusHint(QString message);
 	void cleanUpWiresSlot(CleanUpWiresCommand *);
 	void updateInfoViewSlot();
 	void spaceBarIsPressedSlot(bool);
@@ -745,6 +747,7 @@ protected:
 	bool m_dragCurve = false;
 	QPoint m_dragBendpointPos;
 	StatusConnectStatus m_statusConnectState = StatusConnectNotTried;
+	StatusConnectStatus m_hintConnectState = StatusConnectNotTried;
 	QList<QGraphicsItem *> m_inFocus;
 	QString m_viewName;
 	bool m_movingByArrow = false;
