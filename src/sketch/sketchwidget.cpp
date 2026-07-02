@@ -724,11 +724,9 @@ ItemBase * SketchWidget::addItemForCommand(const QString & moduleID, ViewLayer::
 	if (modelPart) {
 		if (!m_blockUI) {
 			QApplication::setOverrideCursor(Qt::WaitCursor);
-			statusMessage(tr("loading part"));
 		}
 		itemBase = addItem(modelPart, viewLayerPlacement, crossViewType, viewGeometry, id, modelIndex, originatingCommand);
 		if (!m_blockUI) {
-			statusMessage(tr("done loading"), 2000);
 			QApplication::restoreOverrideCursor();
 		}
 	}
