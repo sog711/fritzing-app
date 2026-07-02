@@ -3134,9 +3134,21 @@ void MainWindow::redrawSketch() {
 
 void MainWindow::statusMessage(QString message, int timeout) {
 	QStatusBar * sb = realStatusBar();
-	if (sb != nullptr) {
-		sb->showMessage(message, timeout);
+	if (sb == nullptr) return;
+
+	if (message.isEmpty()) {
+		// hover handlers clear the bar with an empty message; a timed
+		// notification owns the bar until its timeout expires
+		if (!m_timedStatusMessage.isEmpty() && sb->currentMessage() == m_timedStatusMessage) {
+			return;
+		}
+		m_timedStatusMessage.clear();
+		sb->clearMessage();
+		return;
 	}
+
+	m_timedStatusMessage = (timeout > 0) ? message : QString();
+	sb->showMessage(message, timeout);
 }
 
 void MainWindow::dropPaste(SketchWidget * sketchWidget) {
@@ -3737,6 +3749,18 @@ void MainWindow::showStatusMessage(const QString & message)
 
 	if (message == m_statusBar->currentMessage()) {
 		return;
+	}
+
+	if (message.isEmpty()
+	    && !m_timedStatusMessage.isEmpty()
+	    && m_statusBar->currentMessage() == m_timedStatusMessage) {
+		// leaving a menu clears its status tip; a timed notification
+		// owns the bar until its timeout expires
+		return;
+	}
+
+	if (!message.isEmpty()) {
+		m_timedStatusMessage.clear();
 	}
 
 	//DebugDialog::debug("show message " + message);

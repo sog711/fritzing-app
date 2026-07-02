@@ -6361,7 +6361,8 @@ void SketchWidget::hoverEnterConnectorItem(QGraphicsSceneHoverEvent * event, Con
 	}
 	else {
 		QString msg = hoverEnterPartConnectorMessage(event, item);
-		statusMessage(msg);
+		// an empty hint must not wipe whatever message is currently displayed
+		if (!msg.isEmpty()) statusMessage(msg);
 	}
 
 }

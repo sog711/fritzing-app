@@ -981,6 +981,7 @@ protected:
 	QPointer<class ZoomSlider> m_zoomSlider;
 	QPointer<QLabel> m_locationLabel;
 	QString m_locationLabelUnits;
+	QString m_timedStatusMessage;
 
 	QByteArray m_externalProcessOutput;
 
