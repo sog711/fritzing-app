@@ -1351,7 +1351,7 @@ void MainWindow::createStatusBar()
 	// arbitrated against the hover hint label (QStatusBar only hides normal
 	// widgets that are visible when a message arrives), so "Ready" would
 	// overlap hints and suppress the bar until something else cleared it
-	statusMessage(tr("Ready"), 2000);
+	statusMessage(tr("Ready"), StatusMessageTimeout);
 }
 
 void MainWindow::tabWidget_currentChanged(int index) {
@@ -3300,7 +3300,7 @@ void  MainWindow::backupSketch() {
 		m_autosaveNeeded = false;			// clear this now in case the save takes a really long time
 
 		DebugDialog::debug(QString("%1 autosaved as %2").arg(m_fwFilename).arg(m_backupFileNameAndPath));
-		statusBar()->showMessage(tr("Backing up '%1'").arg(m_fwFilename), 2000);
+		statusMessage(tr("Backing up '%1'").arg(m_fwFilename), StatusMessageTimeout);
 		ProcessEventBlocker::processEvents();
 		m_backingUp = true;
 		connectStartSave(true);

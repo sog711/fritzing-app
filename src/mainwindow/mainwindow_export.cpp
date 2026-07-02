@@ -162,9 +162,9 @@ void MainWindow::print() {
 
 	auto *printDialog = new QPrintDialog(&printer, this);
 	if (printDialog->exec() == QDialog::Accepted) {
-		m_statusBar->showMessage(tr("Printing..."));
+		statusMessage(tr("Printing..."), 0);
 		printAux(printer, true, true);
-		m_statusBar->showMessage(tr("Ready"), 2000);
+		statusMessage(tr("Ready"), StatusMessageTimeout);
 	} else {
 		return;
 	}
@@ -356,7 +356,7 @@ void MainWindow::exportEtchable(bool wantPDF, bool wantSVG)
 
 	}
 
-	m_statusBar->showMessage(tr("Sketch exported"), 2000);
+	statusMessage(tr("Sketch exported"), StatusMessageTimeout);
 	delete fileProgressDialog;
 
 	/*
@@ -573,9 +573,9 @@ void MainWindow::doExport() {
 			QPrinter printer(QPrinter::HighResolution);
 			printer.setOutputFormat(filePrintFormats[actionType]);
 			printer.setOutputFileName(fileName);
-			m_statusBar->showMessage(tr("Exporting..."));
+			statusMessage(tr("Exporting..."), 0);
 			printAux(printer, true, false);
-			m_statusBar->showMessage(tr("Sketch exported"), 2000);
+			statusMessage(tr("Sketch exported"), StatusMessageTimeout);
 		} else { // PNG...
 			DebugDialog::debug(QString("format: %1 %2").arg(fileExt).arg(fileExportFormats[actionType]));
 			int quality = (actionType == pngActionType ? 1 : 100);
@@ -848,7 +848,7 @@ bool MainWindow::saveAsAux(const QString & fileName) {
 	m_autosaveNeeded = false;
 	undoStackCleanChanged(true);
 
-	m_statusBar->showMessage(tr("Saved '%1'").arg(fileName), 2000);
+	statusMessage(tr("Saved '%1'").arg(fileName), StatusMessageTimeout);
 	setCurrentFile(fileName, true, true);
 
 	if(m_restarting && !m_fwFilename.isEmpty()) {
@@ -1925,7 +1925,7 @@ void MainWindow::exportToGerber() {
 	}
 	GerberGenerator::exportToGerber(prefix, exportDir, board, m_pcbGraphicsView, true);
 
-	m_statusBar->showMessage(tr("Sketch exported to Gerber"), 2000);
+	statusMessage(tr("Sketch exported to Gerber"), StatusMessageTimeout);
 
 	delete fileProgressDialog;
 }

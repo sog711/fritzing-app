@@ -167,6 +167,9 @@ class MainWindow : public FritzingWindow
 	void save_text_file(QString text, QString actionType, QString dialogTitle, QString differentiator, QString errorMessage);
 
 public:
+	// standard duration for timed status bar messages ("Saved ...", "Sketch exported", ...)
+	static constexpr int StatusMessageTimeout = 4000;
+
 	MainWindow(class ReferenceModel *referenceModel, QWidget * parent);
 	MainWindow(QFile & fileToLoad);
 	~MainWindow();
