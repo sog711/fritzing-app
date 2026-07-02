@@ -1785,10 +1785,9 @@ QString MainWindow::loadBundledSketch(const QString &fileName, bool addToRecent,
 
 	// the bundled itself
 	bool result = this->mainLoad(sketchName, "", checkObsolete);
-
+	if (!result) return QString("Unable to load sketch: '%1' filename: %2").arg(sketchName).arg(fileName);
 
 	setCurrentFile(fileName, addToRecent, setAsLastOpened);
-	if (!result) return QString("Unable to load sketch: '%1' filename: %2").arg(sketchName).arg(fileName);
 	return "";
 }
 
