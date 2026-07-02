@@ -1347,7 +1347,11 @@ void MainWindow::updateViewZoom(double newZoom) {
 
 void MainWindow::createStatusBar()
 {
-	m_statusBar->showMessage(tr("Ready"));
+	// timed: an untimed message posted before the window is shown never gets
+	// arbitrated against the hover hint label (QStatusBar only hides normal
+	// widgets that are visible when a message arrives), so "Ready" would
+	// overlap hints and suppress the bar until something else cleared it
+	statusMessage(tr("Ready"), 2000);
 }
 
 void MainWindow::tabWidget_currentChanged(int index) {
