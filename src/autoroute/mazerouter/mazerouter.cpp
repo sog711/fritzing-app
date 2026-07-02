@@ -871,8 +871,6 @@ void MazeRouter::start()
 	m_sketchWidget->pushCommand(parentCommand, this);
 	m_sketchWidget->blockUI(false);
 	m_sketchWidget->repaint();
-	DebugDialog::debug("\n\n\nautorouting complete\n\n\n");
-
 }
 
 int MazeRouter::findPinsWithin(QList<ConnectorItem *> * net) {
@@ -2246,8 +2244,6 @@ void MazeRouter::createTraces(NetList & netList, Score & bestScore, QUndoCommand
 		modelPart->setParent(nullptr);
 		delete modelPart;
 	}
-
-	DebugDialog::debug("create traces complete");
 }
 
 void MazeRouter::createTrace(Trace & trace, QList<GridPoint> & gridPoints, TraceThing & traceThing, ConnectionThing & connectionThing, Net * net)
