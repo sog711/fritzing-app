@@ -1655,7 +1655,10 @@ QString MainWindow::loadBundledSketch(const QString &fileName, bool addToRecent,
 		    tr("No Sketch found in '%1'").arg(fileName)
 		);
 
-		return "";
+		// A non-empty return signals failure to loadWhich(): a valid zip with no
+		// .fz is not a loadable sketch, so a File > Revert to it must keep the
+		// working window open instead of replacing it with an empty one (#1158).
+		return QString("No Sketch found in '%1'").arg(fileName);
 	}
 
 	QFileInfo sketchInfo = entryInfoList[0];
