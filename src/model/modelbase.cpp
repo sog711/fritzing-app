@@ -528,7 +528,17 @@ bool ModelBase::save(const QString & fileName, bool asPart) {
 		);
 		return false;
 	}
-	file1.rename(fileName);
+	if (!file1.rename(fileName)) {
+		FMessageBox::warning(
+		    nullptr,
+		    tr("File save failed!"),
+		    tr("Couldn't move the saved content into place at '%1'.\nReason: %2 (errcode %3)")
+		    .arg(fileName)
+		    .arg(file1.errorString())
+		    .arg(file1.error())
+		);
+		return false;
+	}
 	return true;
 }
 
