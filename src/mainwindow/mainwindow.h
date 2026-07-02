@@ -397,9 +397,9 @@ protected Q_SLOTS:
 
 	void newAutoroute();
 	void orderFab();
-	void activeLayerTop();
-	void activeLayerBottom();
-	void activeLayerBoth();
+	void activeLayerTop(bool showMessage = true);
+	void activeLayerBottom(bool showMessage = true);
+	void activeLayerBoth(bool showMessage = true);
 	void toggleActiveLayer();
 	void createTrace();
 	void excludeFromAutoroute();

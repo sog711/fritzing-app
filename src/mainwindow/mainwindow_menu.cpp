@@ -2979,7 +2979,7 @@ void MainWindow::createActiveLayerActions() {
 	connect(m_activeLayerBottomAct, SIGNAL(triggered()), this, SLOT(activeLayerBottom()));
 }
 
-void MainWindow::activeLayerBoth() {
+void MainWindow::activeLayerBoth(bool showMessage) {
 	auto * pcbSketchWidget = qobject_cast<PCBSketchWidget *>(m_currentGraphicsView);
 	if (pcbSketchWidget == nullptr) return;
 
@@ -2987,11 +2987,13 @@ void MainWindow::activeLayerBoth() {
 	pcbSketchWidget->setLayerActive(ViewLayer::Copper0, true);
 	pcbSketchWidget->setLayerActive(ViewLayer::Silkscreen0, true);
 	pcbSketchWidget->setLayerActive(ViewLayer::Silkscreen1, true);
-	AutoCloseMessageBox::showMessage(this, tr("Copper Top and Copper Bottom layers are both active"));
+	if (showMessage) {
+		AutoCloseMessageBox::showMessage(this, tr("Copper Top and Copper Bottom layers are both active"));
+	}
 	updateActiveLayerButtons();
 }
 
-void MainWindow::activeLayerTop() {
+void MainWindow::activeLayerTop(bool showMessage) {
 	auto * pcbSketchWidget = qobject_cast<PCBSketchWidget *>(m_currentGraphicsView);
 	if (pcbSketchWidget == nullptr) return;
 
@@ -2999,11 +3001,13 @@ void MainWindow::activeLayerTop() {
 	pcbSketchWidget->setLayerActive(ViewLayer::Silkscreen1, true);
 	pcbSketchWidget->setLayerActive(ViewLayer::Copper0, false);
 	pcbSketchWidget->setLayerActive(ViewLayer::Silkscreen0, false);
-	AutoCloseMessageBox::showMessage(this, tr("Copper Top layer is active"));
+	if (showMessage) {
+		AutoCloseMessageBox::showMessage(this, tr("Copper Top layer is active"));
+	}
 	updateActiveLayerButtons();
 }
 
-void MainWindow::activeLayerBottom() {
+void MainWindow::activeLayerBottom(bool showMessage) {
 	auto * pcbSketchWidget = qobject_cast<PCBSketchWidget *>(m_currentGraphicsView);
 	if (pcbSketchWidget == nullptr) return;
 
@@ -3011,7 +3015,9 @@ void MainWindow::activeLayerBottom() {
 	pcbSketchWidget->setLayerActive(ViewLayer::Silkscreen1, false);
 	pcbSketchWidget->setLayerActive(ViewLayer::Copper0, true);
 	pcbSketchWidget->setLayerActive(ViewLayer::Silkscreen0, true);
-	AutoCloseMessageBox::showMessage(this, tr("Copper Bottom layer is active"));
+	if (showMessage) {
+		AutoCloseMessageBox::showMessage(this, tr("Copper Bottom layer is active"));
+	}
 	updateActiveLayerButtons();
 }
 
@@ -3084,9 +3090,10 @@ void MainWindow::newAutoroute() {
 	Autorouter * autorouter = nullptr;
 	autorouter = new MazeRouter(pcbSketchWidget, board, true);
 
-	connect(autorouter, SIGNAL(wantTopVisible()), this, SLOT(activeLayerTop()), Qt::DirectConnection);
-	connect(autorouter, SIGNAL(wantBottomVisible()), this, SLOT(activeLayerBottom()), Qt::DirectConnection);
-	connect(autorouter, SIGNAL(wantBothVisible()), this, SLOT(activeLayerBoth()), Qt::DirectConnection);
+	// the autorouter's layer switches are transient (restored below), so no layer message
+	connect(autorouter, &Autorouter::wantTopVisible, this, [this]() { activeLayerTop(false); }, Qt::DirectConnection);
+	connect(autorouter, &Autorouter::wantBottomVisible, this, [this]() { activeLayerBottom(false); }, Qt::DirectConnection);
+	connect(autorouter, &Autorouter::wantBothVisible, this, [this]() { activeLayerBoth(false); }, Qt::DirectConnection);
 
 	connect(&progress, SIGNAL(cancel()), autorouter, SLOT(cancel()), Qt::DirectConnection);
 	connect(&progress, SIGNAL(skip()), autorouter, SLOT(cancelTrace()), Qt::DirectConnection);
