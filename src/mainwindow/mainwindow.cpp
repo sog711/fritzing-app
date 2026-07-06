@@ -3304,9 +3304,18 @@ void  MainWindow::backupSketch() {
 		ProcessEventBlocker::processEvents();
 		m_backingUp = true;
 		connectStartSave(true);
-		m_sketchModel->save(m_backupFileNameAndPath, false);
+		bool backedUp = m_sketchModel->save(m_backupFileNameAndPath, false);
 		connectStartSave(false);
 		m_backingUp = false;
+
+		if (!backedUp) {
+			// The safety-net backup silently didn't happen (e.g. disk full).
+			// Tell the user now, while the cause is still knowable, and retry
+			// on the next autosave tick instead of pretending this one worked.
+			DebugDialog::debug(QString("backup of %1 to %2 failed").arg(m_fwFilename, m_backupFileNameAndPath));
+			statusMessage(tr("Backup of '%1' failed").arg(m_fwFilename), StatusMessageTimeout);
+			m_autosaveNeeded = true;
+		}
 	}
 }
 
