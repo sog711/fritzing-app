@@ -161,7 +161,7 @@
     <message>
         <location filename="../src/help/aboutbox.cpp" line="112"/>
         <source>Peter Van Epp, Michaela Vieser and Julia Werner.</source>
-        <translation type="unfinished"></translation>
+        <translation>Peter Van Epp, Michaela Vieser et Julia Werner.</translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="119"/>
@@ -678,7 +678,12 @@ A custom board svg typically has one or two silkscreen layers and one board laye
 Have a look at the circle_pcb.svg file in your Fritzing installation folder at parts/svg/core/pcb/.
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+Un SVG de plaque personnalisée comporte généralement une ou deux couches de sérigraphie et une couche de plaque.
+Jetez un œil au fichier circle_pcb.svg dans le dossier d&apos;installation de Fritzing, sous parts/svg/core/pcb/.
+
+</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="230"/>
@@ -789,7 +794,7 @@ Utiliser le fichier ?</translation>
         <location filename="../src/svg/bompdfgenerator.cpp" line="121"/>
         <location filename="../src/svg/bompdfgenerator.cpp" line="122"/>
         <source>%1 - Bill of Materials</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Liste des composants</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="178"/>
@@ -800,19 +805,19 @@ Utiliser le fichier ?</translation>
         <location filename="../src/svg/bompdfgenerator.cpp" line="178"/>
         <location filename="../src/svg/bompdfgenerator.cpp" line="207"/>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valeur</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="178"/>
         <location filename="../src/svg/bompdfgenerator.cpp" line="207"/>
         <source>Part Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type de composant</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="178"/>
         <location filename="../src/svg/bompdfgenerator.cpp" line="207"/>
         <source>Package</source>
-        <translation type="unfinished"></translation>
+        <translation>Boîtier</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="178"/>
@@ -823,32 +828,32 @@ Utiliser le fichier ?</translation>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="188"/>
         <source>Assembly List</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste d&apos;assemblage</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="207"/>
         <source>Qty</source>
-        <translation type="unfinished"></translation>
+        <translation>Qté</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="217"/>
         <source>Shopping List</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste d&apos;achats</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="357"/>
         <source>Project: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Projet : %1</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="363"/>
         <source>File: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier : %1</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="367"/>
         <source>Date: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Date : %1</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="370"/>
@@ -858,17 +863,17 @@ Utiliser le fichier ?</translation>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="391"/>
         <source>Bill of Materials</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste des composants</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="504"/>
         <source>%1 (continued)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 (suite)</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="617"/>
         <source>Page %1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Page %1/%2</translation>
     </message>
 </context>
 <context>
@@ -912,18 +917,18 @@ Fond d&apos;écran : Vert = ok, Rouge = valeur incorrecte, Gris = valeur actuell
         <location filename="../src/items/capacitor.cpp" line="271"/>
         <source>Capacitance</source>
         <comment>dialog title</comment>
-        <translation type="unfinished"></translation>
+        <translation>Capacité</translation>
     </message>
     <message>
         <location filename="../src/items/capacitor.cpp" line="256"/>
         <location filename="../src/items/capacitor.cpp" line="272"/>
         <source>%1 will be displayed as %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 sera affiché comme %2.</translation>
     </message>
     <message>
         <location filename="../src/items/capacitor.cpp" line="263"/>
         <source>Replace %1 with the nearest standard value %2?</source>
-        <translation type="unfinished"></translation>
+        <translation>Remplacer %1 par la valeur standard la plus proche %2 ?</translation>
     </message>
 </context>
 <context>
@@ -1295,7 +1300,7 @@ Fond d&apos;écran : Vert = ok, Rouge = valeur incorrecte, Gris = valeur actuell
     <message>
         <location filename="../src/connectors/debugconnectors.cpp" line="443"/>
         <source>Routing error: connector mismatch between views.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur de routage : incohérence de connecteur entre les vues.</translation>
     </message>
 </context>
 <context>
@@ -1404,7 +1409,10 @@ Fond d&apos;écran : Vert = ok, Rouge = valeur incorrecte, Gris = valeur actuell
 
 Would you like to regenerate the parts database?
 </source>
-        <translation type="unfinished"></translation>
+        <translation>La régénération de la base de données des composants prendra quelques minutes et vous devrez redémarrer Fritzing
+
+Souhaitez-vous régénérer la base de données des composants ?
+</translation>
     </message>
     <message>
         <location filename="../src/fapplication.cpp" line="2332"/>
@@ -1670,7 +1678,8 @@ Le composant pourrait ne pas fonctionner correctement.</translation>
         <location filename="../src/model/fzpinfo.cpp" line="158"/>
         <source>The part is missing a fritzing version.
 All parts must have a fritzingVersion attribute: fritzingVersion=&quot;x.y.z&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Il manque une version fritzing à ce composant.
+Tous les composants doivent avoir un attribut fritzingVersion : fritzingVersion=&quot;x.y.z&quot;.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="170"/>
@@ -1850,7 +1859,7 @@ Il est également possible de choisir un connecteur comme une graine de rempliss
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="274"/>
         <source>Revisions</source>
-        <translation type="unfinished"></translation>
+        <translation>Révisions</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="313"/>
@@ -1877,25 +1886,25 @@ Il est également possible de choisir un connecteur comme une graine de rempliss
     <message numerus="yes">
         <location filename="../src/infoview/htmlinfoview.cpp" line="580"/>
         <source>%n wires</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n fil</numerusform>
+            <numerusform>%n fils</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/infoview/htmlinfoview.cpp" line="663"/>
         <source>%n net labels</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n label de réseau</numerusform>
+            <numerusform>%n labels de réseau</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/infoview/htmlinfoview.cpp" line="668"/>
         <source>%n holes</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n trou</numerusform>
+            <numerusform>%n trous</numerusform>
         </translation>
     </message>
     <message>
@@ -1906,12 +1915,12 @@ Il est également possible de choisir un connecteur comme une graine de rempliss
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="1081"/>
         <source>recommended</source>
-        <translation type="unfinished"></translation>
+        <translation>recommandé</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="1082"/>
         <source>automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>automatique</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="1505"/>
@@ -2101,7 +2110,7 @@ Il est également possible de choisir un connecteur comme une graine de rempliss
         <location filename="../src/items/itembase.cpp" line="269"/>
         <source>style</source>
         <comment>net label rendering style</comment>
-        <translation type="unfinished"></translation>
+        <translation>style</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="275"/>
@@ -2117,7 +2126,7 @@ Il est également possible de choisir un connecteur comme une graine de rempliss
     <message>
         <location filename="../src/items/itembase.cpp" line="1657"/>
         <source>This part is outdated. Click to update it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce composant n&apos;est plus à jour. Cliquez pour le mettre à jour.</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="235"/>
@@ -2205,12 +2214,12 @@ Il est également possible de choisir un connecteur comme une graine de rempliss
     <message>
         <location filename="../src/items/itemdecorations.cpp" line="193"/>
         <source>Locked. The part cannot be moved or selected. Double-click to unlock.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verrouillé. Le composant ne peut pas être déplacé ni sélectionné. Double-cliquez pour déverrouiller.</translation>
     </message>
     <message>
         <location filename="../src/items/itemdecorations.cpp" line="194"/>
         <source>Double-click to lock the board in place.</source>
-        <translation type="unfinished"></translation>
+        <translation>Double-cliquez pour verrouiller la plaque en place.</translation>
     </message>
 </context>
 <context>
@@ -3038,7 +3047,7 @@ Continuer ou annuler?</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1025"/>
         <source>Saving failed. Please check if home and destination directory are writeable and not full.</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de l&apos;enregistrement. Vérifiez que le dossier personnel et le dossier de destination sont accessibles en écriture et non pleins.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1094"/>
@@ -3357,7 +3366,10 @@ Voulez-vous mettre à jour maintenant ?</translation>
 
 Would you like to convert &apos;%1&apos; to the new standard now or open the file read-only?
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Il existe une nouvelle norme graphique pour les images de composants en vue schématique, depuis la version 0.8.6.
+
+Souhaitez-vous convertir &apos;%1&apos; vers la nouvelle norme maintenant, ou ouvrir le fichier en lecture seule ?
+</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3739"/>
@@ -4395,7 +4407,7 @@ Nous travaillons à éliminer ce message afin de ne vous laisser choisir que des
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2254"/>
         <source>Could not save &apos;%1&apos; because the file would be empty. Please try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;enregistrer &apos;%1&apos; car le fichier serait vide. Veuillez réessayer.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2300"/>
@@ -4783,17 +4795,17 @@ Nous travaillons à éliminer ce message afin de ne vous laisser choisir que des
     <message numerus="yes">
         <location filename="../src/mainwindow/mainwindow.cpp" line="2814"/>
         <source>Change %1 of %n part(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Modifier %1 de %n composant</numerusform>
+            <numerusform>Modifier %1 de %n composants</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/mainwindow/mainwindow.cpp" line="2868"/>
         <source>Change style of %n net label(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Modifier le style de %n label de réseau</numerusform>
+            <numerusform>Modifier le style de %n labels de réseau</numerusform>
         </translation>
     </message>
     <message>
@@ -4804,7 +4816,7 @@ Nous travaillons à éliminer ce message afin de ne vous laisser choisir que des
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3315"/>
         <source>Backup of &apos;%1&apos; failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de la sauvegarde de &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3406"/>
@@ -4876,12 +4888,12 @@ Nous travaillons à éliminer ce message afin de ne vous laisser choisir que des
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1082"/>
         <source>Bill of Materials as &amp;PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste des composants au format &amp;PDF</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1084"/>
         <source>Save a Bill of Materials with checkboxes as PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer une liste des composants avec cases à cocher au format PDF</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1087"/>
@@ -4916,12 +4928,12 @@ Nous travaillons à éliminer ce message afin de ne vous laisser choisir que des
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1330"/>
         <source>Export Bill of Materials as PDF</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter la liste des composants au format PDF</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1350"/>
         <source>Unable to write PDF to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;écrire le PDF vers %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1748"/>
@@ -4941,12 +4953,12 @@ Nous travaillons à éliminer ce message afin de ne vous laisser choisir que des
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1763"/>
         <source>Unable to save IPC file. But the content was copied to the clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;enregistrer le fichier IPC. Le contenu a toutefois été copié dans le presse-papiers.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1846"/>
         <source>Unable to save netlist file. But the content was copied to the clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;enregistrer le fichier netlist. Le contenu a toutefois été copié dans le presse-papiers.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="672"/>
@@ -5087,37 +5099,37 @@ Nous travaillons à éliminer ce message afin de ne vous laisser choisir que des
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4134"/>
         <source>You chose to update this outdated part.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous avez choisi de mettre à jour ce composant obsolète.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4136"/>
         <source>This part is outdated. We recommend updating it to the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce composant est obsolète. Nous vous recommandons de le mettre à jour vers la dernière version.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4138"/>
         <source>This part has an optional update available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Une mise à jour facultative est disponible pour ce composant.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4140"/>
         <source>This sketch contains both this part and a newer revision of it. Choose which one to use.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette esquisse contient à la fois ce composant et une révision plus récente de celui-ci. Choisissez celui à utiliser.</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4637"/>
         <source>Lock %n part(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Verrouiller %n composant</numerusform>
+            <numerusform>Verrouiller %n composants</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4637"/>
         <source>Unlock %n part(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Déverrouiller %n composant</numerusform>
+            <numerusform>Déverrouiller %n composants</numerusform>
         </translation>
     </message>
     <message>
@@ -5441,30 +5453,30 @@ Continuer le téléversement ?</translation>
     <message numerus="yes">
         <location filename="../src/sketch/migrationhandler.cpp" line="172"/>
         <source>%n part(s) were automatically updated to a newer version</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>%n composant a été automatiquement mis à jour vers une version plus récente</numerusform>
+            <numerusform>%n composants ont été automatiquement mis à jour vers une version plus récente</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="362"/>
         <source>Part Migration</source>
-        <translation type="unfinished"></translation>
+        <translation>Migration de composant</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="434"/>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Version</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="442"/>
         <source>Keep the old version and don&apos;t ask about these changes again</source>
-        <translation type="unfinished"></translation>
+        <translation>Conserver l&apos;ancienne version et ne plus poser la question pour ces changements</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="454"/>
         <source>The part can still be migrated via the Inspector later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le composant pourra toujours être migré plus tard via l&apos;Inspecteur.</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="473"/>
@@ -5474,132 +5486,132 @@ Continuer le téléversement ?</translation>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="475"/>
         <source>Close this dialog; your choices are kept</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermer cette boîte de dialogue ; vos choix sont conservés</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="479"/>
         <source>Update all</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout mettre à jour</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="481"/>
         <source>Update every outdated part in this list to its newest version</source>
-        <translation type="unfinished"></translation>
+        <translation>Mettre à jour tous les composants obsolètes de cette liste vers leur dernière version</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="486"/>
         <source>Previous</source>
-        <translation type="unfinished"></translation>
+        <translation>Précédent</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="487"/>
         <source>Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Suivant</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="490"/>
         <source>Go back to the previous part</source>
-        <translation type="unfinished"></translation>
+        <translation>Revenir au composant précédent</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="491"/>
         <source>Go to the next part</source>
-        <translation type="unfinished"></translation>
+        <translation>Aller au composant suivant</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="538"/>
         <source>Part %1 of %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Composant %1 sur %2</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="546"/>
         <source>keeping old version — won&apos;t ask again</source>
-        <translation type="unfinished"></translation>
+        <translation>ancienne version conservée — ne redemandera plus</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="547"/>
         <source>updated to new version</source>
-        <translation type="unfinished"></translation>
+        <translation>mis à jour vers la nouvelle version</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="548"/>
         <source>keeping old version</source>
-        <translation type="unfinished"></translation>
+        <translation>ancienne version conservée</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="551"/>
         <source>showing new version</source>
-        <translation type="unfinished"></translation>
+        <translation>nouvelle version affichée</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="553"/>
         <source>showing old version</source>
-        <translation type="unfinished"></translation>
+        <translation>ancienne version affichée</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="573"/>
         <source>Changes since your version:</source>
-        <translation type="unfinished"></translation>
+        <translation>Changements depuis votre version :</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="577"/>
         <source>RECOMMENDED</source>
-        <translation type="unfinished"></translation>
+        <translation>RECOMMANDÉ</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="579"/>
         <source>AUTOMATIC</source>
-        <translation type="unfinished"></translation>
+        <translation>AUTOMATIQUE</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="594"/>
         <source>No change notes are available. Compare the old and new version visually in the Breadboard, Schematic and PCB views before deciding.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucune note de changement n&apos;est disponible. Comparez visuellement l&apos;ancienne et la nouvelle version dans les vues Platine d&apos;essai, Schématique et Circuit imprimé avant de décider.</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="601"/>
         <source>A further revision is available; it will be offered after you update to this one.</source>
-        <translation type="unfinished"></translation>
+        <translation>Une révision supplémentaire est disponible ; elle sera proposée après la mise à jour vers celle-ci.</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="612"/>
         <source>Old: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ancienne : %1</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="613"/>
         <source>Old: %1 (v. %2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ancienne : %1 (v. %2)</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="615"/>
         <source>Keep this version and don&apos;t ask again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Conserver cette version et ne plus demander.</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="616"/>
         <source>Keep v. %1 and don&apos;t ask again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Conserver la v. %1 et ne plus demander.</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="618"/>
         <source>New: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouvelle : %1</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="619"/>
         <source>New: %1 (v. %2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouvelle : %1 (v. %2)</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="853"/>
         <source>Silence update reminder for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignorer le rappel de mise à jour pour %1</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="877"/>
         <source>Re-enable update reminder for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Réactiver le rappel de mise à jour pour %1</translation>
     </message>
 </context>
 <context>
@@ -5651,7 +5663,8 @@ Raison :%2 ( errcode%3)</translation>
         <location filename="../src/model/modelbase.cpp" line="535"/>
         <source>Couldn&apos;t move the saved content into place at &apos;%1&apos;.
 Reason: %2 (errcode %3)</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de déplacer le contenu enregistré à l&apos;emplacement &apos;%1&apos;.
+Raison : %2 (code d&apos;erreur %3)</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="523"/>
@@ -5667,12 +5680,14 @@ Reason: %2 (errcode %3)</source>
         <source>Part FZP uses the unsupported migration mode “%1”.
 Re-tag its &lt;history&gt; with required / recommended / optional.
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Le FZP du composant utilise le mode de migration non pris en charge « %1 ».
+Re-balisez son &lt;history&gt; avec required / recommended / optional.
+%2</translation>
     </message>
     <message>
         <location filename="../src/model/modelpartshared.cpp" line="592"/>
         <source>Unsupported migration mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode de migration non pris en charge</translation>
     </message>
 </context>
 <context>
@@ -5911,12 +5926,12 @@ Re-tag its &lt;history&gt; with required / recommended / optional.
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2910"/>
         <source>You need to select one board if you have multiple PCBs in your sketch.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous devez sélectionner une plaque si votre esquisse contient plusieurs circuits imprimés.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2921"/>
         <source>Sorry, fab.fritzing.org is not responding to the quote request. Please check your network connection and/or try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé, fab.fritzing.org ne répond pas à la demande de devis. Veuillez vérifier votre connexion réseau et/ou réessayer plus tard.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="3060"/>
@@ -5934,7 +5949,14 @@ so you may want to increase the keepout value by that much.
 10 mils is a good default choice.
 
 Enter keepout value:</source>
-        <translation type="unfinished"></translation>
+        <translation>La marge de sécurité est en mils (0,001 pouce).
+
+Notez qu&apos;en raison du crénelage, les distances peuvent être trop courtes de jusqu&apos;à 2 mils,
+vous pouvez donc vouloir augmenter la valeur de la marge de sécurité d&apos;autant.
+
+10 mils est un bon choix par défaut.
+
+Entrez la valeur de la marge de sécurité :</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1778"/>
@@ -6032,7 +6054,7 @@ Enter keepout value:</source>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2920"/>
         <source>Fritzing Fab Quote</source>
         <comment>dialog title</comment>
-        <translation type="unfinished"></translation>
+        <translation>Devis Fritzing Fab</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2905"/>
@@ -6083,12 +6105,12 @@ Enter keepout value:</source>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="44"/>
         <source>Revision</source>
-        <translation type="unfinished"></translation>
+        <translation>Révision</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="62"/>
         <source>Date of this revision</source>
-        <translation type="unfinished"></translation>
+        <translation>Date de cette révision</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="63"/>
@@ -6098,7 +6120,7 @@ Enter keepout value:</source>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="66"/>
         <source>Who made this revision</source>
-        <translation type="unfinished"></translation>
+        <translation>Qui a fait cette révision</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="67"/>
@@ -6108,57 +6130,57 @@ Enter keepout value:</source>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="72"/>
         <source>required</source>
-        <translation type="unfinished"></translation>
+        <translation>requis</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="73"/>
         <source>recommended</source>
-        <translation type="unfinished"></translation>
+        <translation>recommandé</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="74"/>
         <source>optional</source>
-        <translation type="unfinished"></translation>
+        <translation>optionnel</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="79"/>
         <source>How insistently this revision is offered when an older part is loaded</source>
-        <translation type="unfinished"></translation>
+        <translation>Avec quelle insistance cette révision est proposée lors du chargement d&apos;un composant plus ancien</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="80"/>
         <source>Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="85"/>
         <source>Describe what changed in this revision</source>
-        <translation type="unfinished"></translation>
+        <translation>Décrivez ce qui a changé dans cette révision</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="86"/>
         <source>Changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Changements</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="91"/>
         <source>Bump version to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Faire passer la version à %1</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="93"/>
         <source>Raise the part&apos;s version number when saving</source>
-        <translation type="unfinished"></translation>
+        <translation>Augmenter le numéro de version du composant lors de l&apos;enregistrement</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="117"/>
         <source>Add entry &amp;&amp; save</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter l&apos;entrée &amp;&amp; enregistrer</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="119"/>
         <source>Save without an entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer sans entrée</translation>
     </message>
 </context>
 <context>
@@ -6283,17 +6305,17 @@ Enter keepout value:</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2327"/>
         <source>%1 and %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 et %2</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2330"/>
         <source>, and %1</source>
-        <translation type="unfinished"></translation>
+        <translation>, et %1</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2332"/>
         <source>The open sketches %1 use the part you are editing. Saving this part will make a change to these sketches that cannot be undone.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les esquisses ouvertes %1 utilisent le composant que vous éditez. Enregistrer ce composant apportera à ces esquisses une modification qui ne pourra pas être annulée.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2522"/>
@@ -6700,7 +6722,9 @@ Poursuivre et sauvegarder?</translation>
         <source>This part has bendable legs. This version of the Parts Editor does not yet support editing bendable legs, and the legs may not be displayed correctly in breadboard view. If you make changes to breadboard view, or change connector metadata, the legs may no longer work. You can safely make changes to Schematic or PCB view.
 
 This warning will not be repeated in this session of Fritzing</source>
-        <translation type="unfinished"></translation>
+        <translation>Ce composant a des pattes pliables. Cette version de l&apos;éditeur de composants ne prend pas encore en charge l&apos;édition des pattes pliables, et celles-ci pourraient ne pas s&apos;afficher correctement en vue platine d&apos;essai. Si vous modifiez la vue platine d&apos;essai, ou les métadonnées des connecteurs, les pattes pourraient ne plus fonctionner. Vous pouvez modifier sans risque les vues Schématique ou Circuit imprimé.
+
+Cet avertissement ne sera plus répété au cours de cette session de Fritzing</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="967"/>
@@ -6732,7 +6756,7 @@ This warning will not be repeated in this session of Fritzing</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1155"/>
         <source>Change revision history</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier l&apos;historique des révisions</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1259"/>
@@ -6772,7 +6796,7 @@ This warning will not be repeated in this session of Fritzing</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1664"/>
         <source>You may use a PNG or JPG image to construct your part, but it is better to use an SVG. PNG and JPG images retain their nature as bitmaps and do not look good when scaled--so for Fritzing parts it is best to use PNG and JPG only as placeholders.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous pouvez utiliser une image PNG ou JPG pour construire votre composant, mais il est préférable d&apos;utiliser un SVG. Les images PNG et JPG restent des images matricielles et ne s&apos;affichent pas bien une fois mises à l&apos;échelle--il est donc préférable, pour les composants Fritzing, de n&apos;utiliser les PNG et JPG que comme espaces réservés.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1668"/>
@@ -6794,12 +6818,12 @@ This warning will not be repeated in this session of Fritzing</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2256"/>
         <source>Save part</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer le composant</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2257"/>
         <source>You haven&apos;t recorded what changed in this revision.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous n&apos;avez pas indiqué ce qui a changé dans cette révision.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2284"/>
@@ -6809,23 +6833,23 @@ This warning will not be repeated in this session of Fritzing</source>
     <message numerus="yes">
         <location filename="../src/partseditor/pemainwindow.cpp" line="3992"/>
         <source>This part has %n unassigned connector(s). </source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Ce composant a %n connecteur non assigné. </numerusform>
+            <numerusform>Ce composant a %n connecteurs non assignés. </numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/partseditor/pemainwindow.cpp" line="3993"/>
         <source>This affects %n view(s). </source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Cela affecte %n vue. </numerusform>
+            <numerusform>Cela affecte %n vues. </numerusform>
         </translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="3994"/>
         <source>Until all connectors are assigned to SVG elements, the part will not work correctly. Exiting the Parts Editor now is fine, as long as you remember to finish the assignments later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tant que tous les connecteurs ne sont pas assignés à des éléments SVG, le composant ne fonctionnera pas correctement. Il n&apos;y a pas de problème à quitter l&apos;éditeur de composants maintenant, tant que vous pensez à terminer les assignations plus tard.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2522"/>
@@ -6877,38 +6901,38 @@ This warning will not be repeated in this session of Fritzing</source>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="269"/>
         <source>Edit the part&apos;s metadata, revision history, properties and tags.</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier les métadonnées, l&apos;historique des révisions, les propriétés et les mots-clés du composant.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="294"/>
         <source>Changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Changements</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="294"/>
         <source>Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="300"/>
         <source>The part&apos;s revision history. Entries from the last three months can be edited or deleted (double-click / ×); older ones are read-only.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;historique des révisions du composant. Les entrées des trois derniers mois peuvent être modifiées ou supprimées (double-clic / ×) ; les plus anciennes sont en lecture seule.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="307"/>
         <source>+</source>
-        <translation type="unfinished"></translation>
+        <translation>+</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="309"/>
         <location filename="../src/partseditor/pemetadataview.cpp" line="310"/>
         <source>Add a revision entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter une entrée de révision</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="316"/>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>Historique</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="363"/>
@@ -6923,17 +6947,17 @@ This warning will not be repeated in this session of Fritzing</source>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="425"/>
         <source>required</source>
-        <translation type="unfinished"></translation>
+        <translation>requis</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="426"/>
         <source>recommended</source>
-        <translation type="unfinished"></translation>
+        <translation>recommandé</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="427"/>
         <source>optional</source>
-        <translation type="unfinished"></translation>
+        <translation>optionnel</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="443"/>
@@ -6943,22 +6967,22 @@ This warning will not be repeated in this session of Fritzing</source>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="445"/>
         <source>Edit this revision</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier cette révision</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="450"/>
         <source>Delete this revision</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer cette révision</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="490"/>
         <source>Add revision</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter une révision</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="506"/>
         <source>Edit revision</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier la révision</translation>
     </message>
     <message>
         <source>Set the part&apos;s author</source>
@@ -7578,7 +7602,7 @@ Remarque : cet avertissement ne sera pas répété au cours de cette session.</t
     <message>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="81"/>
         <source>&lt;p&gt;Click on a label next to a pin number to rename that pin. You can use the tab key to move through the labels in order.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Cliquez sur un label à côté d&apos;un numéro de broche pour renommer cette broche. Vous pouvez utiliser la touche tabulation pour parcourir les labels dans l&apos;ordre.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="109"/>
@@ -7653,27 +7677,27 @@ Remarque : cet avertissement ne sera pas répété au cours de cette session.</t
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="533"/>
         <source>Specific options for the SPICE simulator: </source>
-        <translation type="unfinished"></translation>
+        <translation>Options spécifiques au simulateur SPICE : </translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="648"/>
         <source>&lt;b&gt;Scroll priority&lt;/b&gt;&lt;br/&gt;no keys down = scroll&lt;br/&gt;&lt;kbd&gt;Shift&lt;/kbd&gt; key swaps scroll axis&lt;br/&gt;&lt;kbd&gt;Alt&lt;/kbd&gt; or &lt;kbd&gt;%1&lt;/kbd&gt; = zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Priorité au défilement&lt;/b&gt;&lt;br/&gt;aucune touche enfoncée = défilement&lt;br/&gt;la touche &lt;kbd&gt;Maj&lt;/kbd&gt; permute l&apos;axe de défilement&lt;br/&gt;&lt;kbd&gt;Alt&lt;/kbd&gt; ou &lt;kbd&gt;%1&lt;/kbd&gt; = zoom</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="652"/>
         <source>&lt;b&gt;Zoom priority&lt;/b&gt;&lt;br/&gt;no keys down = zoom&lt;br/&gt;&lt;kbd&gt;Alt&lt;/kbd&gt; or &lt;kbd&gt;%1&lt;/kbd&gt; = scroll&lt;br/&gt;&lt;kbd&gt;Shift&lt;/kbd&gt; key swaps scroll axis</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Priorité au zoom&lt;/b&gt;&lt;br/&gt;aucune touche enfoncée = zoom&lt;br/&gt;&lt;kbd&gt;Alt&lt;/kbd&gt; ou &lt;kbd&gt;%1&lt;/kbd&gt; = défilement&lt;br/&gt;la touche &lt;kbd&gt;Maj&lt;/kbd&gt; permute l&apos;axe de défilement</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="656"/>
         <source>&lt;b&gt;Guess&lt;/b&gt;&lt;br/&gt;Let Fritzing guess if the input is from a wheel or a touchpad. &lt;kbd&gt;Alt&lt;/kbd&gt; or &lt;kbd&gt;%1&lt;/kbd&gt; modify scrolling. &lt;kbd&gt;Shift&lt;/kbd&gt; can modify the axis or the speed.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Deviner&lt;/b&gt;&lt;br/&gt;Laisser Fritzing deviner si l&apos;entrée provient d&apos;une molette ou d&apos;un pavé tactile. &lt;kbd&gt;Alt&lt;/kbd&gt; ou &lt;kbd&gt;%1&lt;/kbd&gt; modifient le défilement. &lt;kbd&gt;Maj&lt;/kbd&gt; peut modifier l&apos;axe ou la vitesse.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="660"/>
         <source>&lt;b&gt;Pure&lt;/b&gt;&lt;br/&gt;Use system defaults to interpret the wheel input. Don&apos;t try anything fancy. Recommended when using a touchpad with pinch gestures.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Pur&lt;/b&gt;&lt;br/&gt;Utiliser les réglages système par défaut pour interpréter l&apos;entrée de la molette. Ne rien tenter de sophistiqué. Recommandé lors de l&apos;utilisation d&apos;un pavé tactile avec des gestes de pincement.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="704"/>
@@ -7782,22 +7806,22 @@ Cette fonctionnalité est activée par défaut. Si vous devez maintenir la compa
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="724"/>
         <source>Net label style</source>
-        <translation type="unfinished"></translation>
+        <translation>Style de label de réseau</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="727"/>
         <source>The default text alignment for new net labels. &quot;Connector aligned&quot; keeps the text next to the connector; &quot;Outside aligned&quot; pushes it to the far edge. The two symbols show the result for both label orientations. You can override the alignment per net label in the Inspector.</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;alignement de texte par défaut pour les nouveaux labels de réseau. &quot;Aligné sur le connecteur&quot; garde le texte à côté du connecteur ; &quot;Aligné à l&apos;extérieur&quot; le pousse vers le bord opposé. Les deux symboles montrent le résultat pour les deux orientations de label. Vous pouvez modifier l&apos;alignement pour chaque label de réseau dans l&apos;Inspecteur.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="743"/>
         <source>Outside aligned</source>
-        <translation type="unfinished"></translation>
+        <translation>Aligné à l&apos;extérieur</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="743"/>
         <source>Connector aligned</source>
-        <translation type="unfinished"></translation>
+        <translation>Aligné sur le connecteur</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="89"/>
@@ -9427,44 +9451,44 @@ Fritzing va continuer à fonctionner, mais vous n&apos;aurez pas la possibilité
         <location filename="../src/program/syntaxer.cpp" line="86"/>
         <source>%1 files (</source>
         <comment>file type filter, e.g. &apos;Arduino files (&apos;</comment>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers %1 (</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="491"/>
         <source>%1 mil</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 mil</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="493"/>
         <source>%1 – %2 mil</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 – %2 mil</translation>
     </message>
     <message>
         <location filename="../src/testing/FProbePart.cpp" line="166"/>
         <location filename="../src/testing/FProbePart.cpp" line="191"/>
         <source>Move part</source>
-        <translation type="unfinished"></translation>
+        <translation>Déplacer le composant</translation>
     </message>
     <message>
         <location filename="../src/testing/FProbeWire.cpp" line="449"/>
         <location filename="../src/testing/FProbeWire.cpp" line="520"/>
         <source>Move wire endpoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Déplacer l&apos;extrémité du câble</translation>
     </message>
     <message>
         <location filename="../src/testing/FProbeWire.cpp" line="606"/>
         <source>Split and move wire</source>
-        <translation type="unfinished"></translation>
+        <translation>Scinder et déplacer le câble</translation>
     </message>
     <message>
         <location filename="../src/testing/FProbeWire.cpp" line="711"/>
         <source>Delete wire</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer le câble</translation>
     </message>
     <message>
         <location filename="../src/testing/FProbeWire.cpp" line="744"/>
         <source>Delete wire segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer le segment de câble</translation>
     </message>
 </context>
 <context>
@@ -9540,12 +9564,12 @@ Fritzing va continuer à fonctionner, mais vous n&apos;aurez pas la possibilité
         <location filename="../src/dialogs/quotedialog.cpp" line="171"/>
         <source>Fritzing Fab Quote</source>
         <comment>dialog title</comment>
-        <translation type="unfinished"></translation>
+        <translation>Devis Fritzing Fab</translation>
     </message>
     <message>
         <location filename="../src/dialogs/quotedialog.cpp" line="179"/>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/dialogs/quotedialog.cpp" line="210"/>
@@ -9611,13 +9635,14 @@ Fritzing va continuer à fonctionner, mais vous n&apos;aurez pas la possibilité
     <message>
         <location filename="../src/fapplication.cpp" line="335"/>
         <source>Unable to open temporary file (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;ouvrir le fichier temporaire (%1)</translation>
     </message>
     <message>
         <location filename="../src/fapplication.cpp" line="341"/>
         <source>Database failure
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Échec de la base de données
+%1</translation>
     </message>
     <message>
         <location filename="../src/fapplication.cpp" line="348"/>
@@ -9635,7 +9660,7 @@ Fritzing va continuer à fonctionner, mais vous n&apos;aurez pas la possibilité
     <message>
         <location filename="../src/items/resistor.cpp" line="121"/>
         <source>%1 %2 Resistor</source>
-        <translation type="unfinished"></translation>
+        <translation>Résistance %1 %2</translation>
     </message>
     <message>
         <location filename="../src/items/resistor.cpp" line="249"/>
@@ -9963,12 +9988,12 @@ Fond d&apos;écran : Vert = ok, Rouge = valeur incorrecte, Gris = valeur actuell
     <message>
         <location filename="../src/simulation/simulator.cpp" line="209"/>
         <source>Unable to load the NgSpice library</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de charger la bibliothèque NgSpice</translation>
     </message>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="209"/>
         <source>Fritzing could not load the ngspice library (not found or wrong version). This is usually a problem found in third party binaries. Please, use the official binary or notify the mantainers of the packaging.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fritzing n&apos;a pas pu charger la bibliothèque ngspice (introuvable ou mauvaise version). C&apos;est généralement un problème rencontré avec les binaires tiers. Veuillez utiliser le binaire officiel ou avertir les mainteneurs du paquet.</translation>
     </message>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="361"/>
@@ -9984,17 +10009,21 @@ Si les composants proviennent du bac de simulation, signalez le bug sur GitHub.<
 
 Netlist:
 %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreurs :
+%1%2
+
+Netlist :
+%3</translation>
     </message>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="506"/>
         <source>The simulator gave an error when running the simulation of this circuit. Please, check the error. This could be caused by big modifications of the circuit during the simulation or inestability issues. You may try to decrease the timestep of the simulation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le simulateur a produit une erreur lors de l&apos;exécution de la simulation de ce circuit. Veuillez vérifier l&apos;erreur. Cela peut être causé par d&apos;importantes modifications du circuit pendant la simulation ou des problèmes d&apos;instabilité. Vous pouvez essayer de réduire le pas de temps de la simulation.</translation>
     </message>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="512"/>
         <source>The simulator gave an error when running the simulation of this circuit. Please, check the error. This probably has been caused by big modifications of the circuit during the simulation. Please, try again without deleting big parts of your circuit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Le simulateur a produit une erreur lors de l&apos;exécution de la simulation de ce circuit. Veuillez vérifier l&apos;erreur. Cela a probablement été causé par d&apos;importantes modifications du circuit pendant la simulation. Veuillez réessayer sans supprimer de grandes parties de votre circuit.</translation>
     </message>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="437"/>
@@ -10128,7 +10157,7 @@ Netlist:
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="6306"/>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="7903"/>
@@ -10148,25 +10177,25 @@ Netlist:
     <message numerus="yes">
         <location filename="../src/sketch/sketchwidget.cpp" line="8433"/>
         <source>Change resistance of %n part(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Modifier la résistance de %n composant</numerusform>
+            <numerusform>Modifier la résistance de %n composants</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/sketch/sketchwidget.cpp" line="8502"/>
         <source>Change %1 of %n part(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Modifier %1 de %n composant</numerusform>
+            <numerusform>Modifier %1 de %n composants</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/sketch/sketchwidget.cpp" line="8596"/>
         <source>Change hole size of %n hole(s)</source>
-        <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+        <translation>
+            <numerusform>Modifier la taille de %n trou</numerusform>
+            <numerusform>Modifier la taille de %n trous</numerusform>
         </translation>
     </message>
     <message>
@@ -10186,12 +10215,12 @@ Les composants seront déplacés automatiquement. Vous pouvez utiliser l&apos;hi
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="10062"/>
         <source>Lock part</source>
-        <translation type="unfinished"></translation>
+        <translation>Verrouiller le composant</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="10062"/>
         <source>Unlock part</source>
-        <translation type="unfinished"></translation>
+        <translation>Déverrouiller le composant</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="10471"/>
@@ -10402,13 +10431,15 @@ Remarque : vous pouvez également déclencher cet affichage en positionnant la s
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="147"/>
         <source>
 and %1 other parts</source>
-        <translation type="unfinished"></translation>
+        <translation>
+et %1 autres composants</translation>
     </message>
     <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="164"/>
         <source>
 and %1 other properties</source>
-        <translation type="unfinished"></translation>
+        <translation>
+et %1 autres propriétés</translation>
     </message>
     <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="1050"/>
@@ -10476,32 +10507,32 @@ and %1 other properties</source>
     <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="583"/>
         <source>style</source>
-        <translation type="unfinished"></translation>
+        <translation>style</translation>
     </message>
     <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="587"/>
         <source>Outside aligned</source>
-        <translation type="unfinished"></translation>
+        <translation>Aligné à l&apos;extérieur</translation>
     </message>
     <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="588"/>
         <source>Connector aligned</source>
-        <translation type="unfinished"></translation>
+        <translation>Aligné sur le connecteur</translation>
     </message>
     <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="612"/>
         <source>Left aligned</source>
-        <translation type="unfinished"></translation>
+        <translation>Aligné à gauche</translation>
     </message>
     <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="613"/>
         <source>Right aligned</source>
-        <translation type="unfinished"></translation>
+        <translation>Aligné à droite</translation>
     </message>
     <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="614"/>
         <source>Legacy</source>
-        <translation type="unfinished"></translation>
+        <translation>Historique</translation>
     </message>
     <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="654"/>
@@ -10525,7 +10556,7 @@ and %1 other properties</source>
     <message>
         <location filename="../src/partseditor/tageditorwidget.cpp" line="226"/>
         <source>Remove this tag</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer ce mot-clé</translation>
     </message>
 </context>
 <context>
@@ -10533,7 +10564,7 @@ and %1 other properties</source>
     <message>
         <location filename="../src/partseditor/tageditorwidget.cpp" line="241"/>
         <source>add a tag…</source>
-        <translation type="unfinished"></translation>
+        <translation>ajouter un mot-clé…</translation>
     </message>
 </context>
 <context>
@@ -10541,12 +10572,12 @@ and %1 other properties</source>
     <message>
         <location filename="../src/partseditor/tageditorwidget.cpp" line="312"/>
         <source>Create new tag “%1”</source>
-        <translation type="unfinished"></translation>
+        <translation>Créer le nouveau mot-clé « %1 »</translation>
     </message>
     <message>
         <location filename="../src/partseditor/tageditorwidget.cpp" line="360"/>
         <source>added</source>
-        <translation type="unfinished"></translation>
+        <translation>ajouté</translation>
     </message>
 </context>
 <context>
