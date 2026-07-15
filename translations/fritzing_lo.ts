@@ -4991,12 +4991,13 @@ We're working to avoid this message, and only let you choose between properties 
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="506"></location>
-        <source>Couldn't overwrite file '%1'.
+        <source>Could not overwrite file '%1'.
 Reason: %2 (errcode %3)</source>
         <translation>ບໍ່ສາມາດຂຽນທັບໄຟລ໌ '%1' ໄດ້.
 ສາເຫດ: %2 (ລະຫັດຂໍ້ຜິດພາດ %3)</translation>
     </message>
 </context>
+<context>
     <name>MysteryPart</name>
     <message>
         <location filename="../src/items/mysterypart.cpp" line="218"></location>
@@ -5008,6 +5009,7 @@ Reason: %2 (errcode %3)</source>
         <source>chip label</source>
         <translation>ປ້າຍຊື່ຊິບ</translation>
     </message>
+</context>
 <context>
     <name>NetLabel</name>
     <message>
@@ -7491,14 +7493,14 @@ File: %3</source>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="478"></location>
-        <source>Cannot write temp file. Save aborted. 
+        <source>Cannot write temp file. Save aborted.
 
 error: %1
 
 temp file: %2
 
 target file: %3.</source>
-        <translation>ບໍ່ສາມາດຂຽນໄຟລ໌ຊົ່ວຄາວ. ຍົກເລີກການບັນທຶກ. 
+        <translation>ບໍ່ສາມາດຂຽນໄຟລ໌ຊົ່ວຄາວ. ຍົກເລີກການບັນທຶກ.
 
 ຂໍ້ຜິດພາດ: %1
 
@@ -7508,14 +7510,14 @@ target file: %3.</source>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="491"></location>
-        <source>Error while writing temp file. Save aborted. 
+        <source>Error while writing temp file. Save aborted.
 
 error: %1
 
 temp file: %2
 
 target file: %3.</source>
-        <translation>ເກີດຂໍ້ຜິດພາດໃນຂະນະຂຽນໄຟລ໌ຊົ່ວຄາວ. ຍົກເລີກການບັນທຶກ. 
+        <translation>ເກີດຂໍ້ຜິດພາດໃນຂະນະຂຽນໄຟລ໌ຊົ່ວຄາວ. ຍົກເລີກການບັນທຶກ.
 
 ຂໍ້ຜິດພາດ: %1
 
