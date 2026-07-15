@@ -220,7 +220,7 @@
     <message>
         <location filename="../src/help/aboutbox.cpp" line="112"/>
         <source>Peter Van Epp, Michaela Vieser and Julia Werner.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Peter Van Epp, Michaela Vieser ແລະ Julia Werner.</translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="120"/>
@@ -255,7 +255,7 @@
     <message>
         <location filename="../src/help/aboutbox.cpp" line="117"/>
         <source>Bulgarian: </source>
-        <translation>ພາສາບູນກາຣີ: </translation>
+        <translation>ພາສາບູນກາລີ:</translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="68"/>
@@ -517,7 +517,7 @@
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1093"/>
         <source>Display parts as a list</source>
-        <translation>ສະແດງອຸປະກອນເປັນລາຍການ</translation>
+        <translation>ສະແດງຊິ້ນສ່ວນເປັນລາຍການ</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1096"/>
@@ -527,27 +527,27 @@
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1098"/>
         <source>Display parts as icons</source>
-        <translation>ສະແດງອຸປະກອນເປັນໄອຄອນ</translation>
+        <translation>ສະແດງຊິ້ນສ່ວນເປັນໄອຄອນ</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1119"/>
         <source>Edit Part (new parts editor)...</source>
-        <translation>ແກ້ໄຂອຸປະກອນ (ໂປຣແກຣມແກ້ໄຂອຸປະກອນໃໝ່)...</translation>
+        <translation>ແກ້ໄຂຊິ້ນສ່ວນ (ໂປຣແກຣມແກ້ໄຂຊິ້ນສ່ວນໃໝ່)...</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1120"/>
         <source>Export Part...</source>
-        <translation>ສົ່ງອອກອຸປະກອນ...</translation>
+        <translation>ສົ່ງອອກຊິ້ນສ່ວນ...</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1121"/>
         <source>Remove Part</source>
-        <translation>ລຶບອຸປະກອນອອກ</translation>
+        <translation>ລຶບຊິ້ນສ່ວນອອກ</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1122"/>
         <source>Find Part in Sketch</source>
-        <translation>ຄົ້ນຫາອຸປະກອນໃນແຜນຜັງ</translation>
+        <translation>ຄົ້ນຫາຊິ້ນສ່ວນໃນແຜນຜັງ</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1165"/>
@@ -596,7 +596,7 @@
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1296"/>
         <source>Unable to remove part &apos;%1&apos;--it is in use in a sketch</source>
-        <translation>ບໍ່ສາມາດລຶບອຸປະກອນ &apos;%1&apos; ອອກໄດ້--ເນື່ອງຈາກກຳລັງຖືກນຳໃຊ້ຢູ່ໃນແຜນຜັງ</translation>
+        <translation>ບໍ່ສາມາດລຶບຊິ້ນສ່ວນ &apos;%1&apos; ອອກໄດ້--ເນື່ອງຈາກກຳລັງຖືກນຳໃຊ້ຢູ່ໃນແຜນຜັງ</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1296"/>
@@ -618,7 +618,7 @@
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1402"/>
         <source>Fritzing Files (*%1 *%2 *%3);;Fritzing Part (*%1);;Fritzing Bin (*%2);;Fritzing Shareable Bin (*%3)</source>
-        <translation>ໄຟລ໌ Fritzing (*%1 *%2 *%3);;ອຸປະກອນ Fritzing (*%1);;ກ່ອງເກັບມ້ຽນ Fritzing (*%2);;ກ່ອງເກັບມ້ຽນ Fritzing ທີ່ແບ່ງປັນໄດ້ (*%3)</translation>
+        <translation>ໄຟລ໌ Fritzing (*%1 *%2 *%3);;ຊິ້ນສ່ວນ Fritzing (*%1);;ກ່ອງເກັບມ້ຽນ Fritzing (*%2);;ກ່ອງເກັບມ້ຽນ Fritzing ທີ່ແບ່ງປັນໄດ້ (*%3)</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="421"/>
@@ -761,7 +761,12 @@ A custom board svg typically has one or two silkscreen layers and one board laye
 Have a look at the circle_pcb.svg file in your Fritzing installation folder at parts/svg/core/pcb/.
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">
+
+ໄຟລ໌ SVG ຂອງບອດແບບກຳນົດເອງ ໂດຍທົ່ວໄປຈະມີຊັ້ນຊິລສະກຣີນ (silkscreen) ໜຶ່ງ ຫຼື ສອງຊັ້ນ ແລະ ຊັ້ນບອດ ໜຶ່ງຊັ້ນ.
+ລອງເບິ່ງໄຟລ໌ circle_pcb.svg ໃນໂຟນເດີຕິດຕັ້ງ Fritzing ຂອງທ່ານ ທີ່ parts/svg/core/pcb/.
+
+</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="437"/>
@@ -787,7 +792,6 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
         <location filename="../src/items/resizableboard.cpp" line="454"/>
         <source>&lt;b&gt;The custom shape has %n cutouts.&lt;/b&gt;</source>
         <translation>
-            <numerusform>&lt;b&gt;ຮູບຊົງທີ່ກຳນົດເອງມີ %n ຮອຍຕັດ.&lt;/b&gt;</numerusform>
             <numerusform>&lt;b&gt;ຮູບຊົງທີ່ກຳນົດເອງມີ %n ຮອຍຕັດ.&lt;/b&gt;</numerusform>
         </translation>
     </message>
@@ -831,7 +835,7 @@ Use the file?</source>
         <location filename="../src/svg/bompdfgenerator.cpp" line="121"/>
         <location filename="../src/svg/bompdfgenerator.cpp" line="122"/>
         <source>%1 - Bill of Materials</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 - ບັນຊີລາຍການວັດສະດຸ</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="178"/>
@@ -842,19 +846,19 @@ Use the file?</source>
         <location filename="../src/svg/bompdfgenerator.cpp" line="178"/>
         <location filename="../src/svg/bompdfgenerator.cpp" line="207"/>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຄ່າ</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="178"/>
         <location filename="../src/svg/bompdfgenerator.cpp" line="207"/>
         <source>Part Type</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ປະເພດຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="178"/>
         <location filename="../src/svg/bompdfgenerator.cpp" line="207"/>
         <source>Package</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ແພັກເກດ (package)</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="178"/>
@@ -865,32 +869,32 @@ Use the file?</source>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="188"/>
         <source>Assembly List</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບັນຊີລາຍການປະກອບ</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="207"/>
         <source>Qty</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຈຳນວນ</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="217"/>
         <source>Shopping List</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບັນຊີລາຍການຊື້</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="357"/>
         <source>Project: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ໂຄງການ: %1</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="363"/>
         <source>File: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ໄຟລ໌: %1</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="367"/>
         <source>Date: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ວັນທີ: %1</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="370"/>
@@ -900,17 +904,17 @@ Use the file?</source>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="391"/>
         <source>Bill of Materials</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບັນຊີລາຍການວັດສະດຸ</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="504"/>
         <source>%1 (continued)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 (ຕໍ່)</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="617"/>
         <source>Page %1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ໜ້າ %1/%2</translation>
     </message>
 </context>
 <context>
@@ -954,18 +958,18 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
         <location filename="../src/items/capacitor.cpp" line="271"/>
         <source>Capacitance</source>
         <comment>dialog title</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຄວາມຈຸ (capacitance)</translation>
     </message>
     <message>
         <location filename="../src/items/capacitor.cpp" line="256"/>
         <location filename="../src/items/capacitor.cpp" line="272"/>
         <source>%1 will be displayed as %2.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 ຈະຖືກສະແດງເປັນ %2.</translation>
     </message>
     <message>
         <location filename="../src/items/capacitor.cpp" line="263"/>
         <source>Replace %1 with the nearest standard value %2?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ແທນທີ່ %1 ດ້ວຍຄ່າມາດຕະຖານທີ່ໃກ້ທີ່ສຸດ %2 ບໍ?</translation>
     </message>
 </context>
 <context>
@@ -1051,12 +1055,12 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
     <message>
         <location filename="../src/program/consolesettings.ui" line="116"/>
         <source>Vendor ID:</source>
-        <translation>Vendor ID:</translation>
+        <translation>ຕົວລະບຸຜູ້ຂາຍ (Vendor ID):</translation>
     </message>
     <message>
         <location filename="../src/program/consolesettings.ui" line="123"/>
         <source>Product ID:</source>
-        <translation>Product ID:</translation>
+        <translation>ຕົວລະບຸຜະລິດຕະພັນ (Product ID):</translation>
     </message>
     <message>
         <location filename="../src/program/consolesettings.ui" line="148"/>
@@ -1114,7 +1118,7 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
     <message>
         <location filename="../src/program/consolewindow.ui" line="30"/>
         <source>Monitor</source>
-        <translation>ຕິດຕາມ (Monitor)</translation>
+        <translation>ຈໍພາບ (Monitor)</translation>
     </message>
     <message>
         <location filename="../src/program/consolewindow.ui" line="39"/>
@@ -1239,7 +1243,7 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
     <message>
         <location filename="../src/program/consolewindow.cpp" line="181"/>
         <source>About Serial Monitor</source>
-        <translation>ກ່ຽວກັບ ຈໍມໍນິເຕີຊີຣຽວ</translation>
+        <translation>ກ່ຽວກັບ ມໍນິເຕີຊີຣຽວ</translation>
     </message>
     <message>
         <location filename="../src/program/consolewindow.cpp" line="182"/>
@@ -1353,7 +1357,7 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
     <message>
         <location filename="../src/connectors/debugconnectors.cpp" line="443"/>
         <source>Routing error: connector mismatch between views.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຂໍ້ຜິດພາດການລາງເສັ້ນທາງ (routing): ຕົວເຊື່ອມຕໍ່ບໍ່ກົງກັນລະຫວ່າງມຸມເບິ່ງ.</translation>
     </message>
 </context>
 <context>
@@ -1470,7 +1474,10 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
 
 Would you like to regenerate the parts database?
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ການສ້າງຖານຂໍ້ມູນຊິ້ນສ່ວນຄືນໃໝ່ຈະໃຊ້ເວລາຫຼາຍນາທີ ແລະ ທ່ານຈະຕ້ອງເປີດ Fritzing ຄືນໃໝ່
+
+ທ່ານຕ້ອງການສ້າງຖານຂໍ້ມູນຊິ້ນສ່ວນຄືນໃໝ່ບໍ?
+</translation>
     </message>
     <message>
         <source>Regenerate parts database?</source>
@@ -1618,22 +1625,22 @@ Would you like to regenerate the parts database?
         <location filename="../src/help/firsttimehelpdialog.cpp" line="37"/>
         <source>First Time Help</source>
         <comment>dialog title</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຊ່ວຍເຫຼືອສຳລັບການໃຊ້ຄັ້ງທຳອິດ</translation>
     </message>
     <message>
         <location filename="../src/help/firsttimehelpdialog.cpp" line="82"/>
         <source>&lt;br/&gt;The &lt;b&gt;Breadboard View&lt;/b&gt; is meant to look like a &lt;i&gt;real-life&lt;/i&gt; breadboard prototype.&lt;br/&gt;&lt;br/&gt;Begin by dragging a part from the Parts Bin, which is over at the top right. Then pull in more parts, connecting them by placing them on the breadboard or clicking on the connectors and dragging wires. The process is similar to how you would arrange things in the physical world. &lt;br/&gt;&lt;br/&gt;After you&apos;re finished creating your sketch in the breadboard view, try the other views. You can switch views by clicking the Tabs at the top of the window. Because different views have different purposes, parts will look different in the other views.</source>
-        <translation>&lt;br/&gt;&lt;b&gt;ມຸມມອງແຜ່ນທົດລອງ (Breadboard View)&lt;/b&gt; ຖືກອອກແບບມາໃຫ້ຄືກັບແຜ່ນທົດລອງຕົວກໍຈິງ.&lt;br/&gt;&lt;br/&gt;ເລີ່ມຕົ້ນໂດຍການລາກຊິ້ນສ່ວນຈາກຖັງຊິ້ນສ່ວນ (Parts Bin) ທີ່ຢູ່ທາງຂວາເທິງ. ຈາກນັ້ນລາກຊິ້ນສ່ວນອື່ນໆເຂົ້າມາ, ເຊື່ອມຕໍ່ພວກມັນໂດຍການວາງລົງໃນແຜ່ນທົດລອງ ຫຼື ຄລິກທີ່ຕົວເຊື່ອມຕໍ່ແລ້ວລາກສາຍໄຟ. ຂັ້ນຕອນນີ້ຄືກັນກັບການຈັດວາງສິ່ງຂອງໃນໂລກຕົວຈິງ. &lt;br/&gt;&lt;br/&gt;ຫຼັງຈາກສ້າງແບບຮ່າງໃນມຸມມອງແຜ່ນທົດລອງແລ້ວ, ໃຫ້ລອງໃຊ້ມຸມມອງອື່ນໆ. ທ່ານສາມາດສະຫຼັບມຸມມອງໄດ້ໂດຍການຄລິກທີ່ແທັບ (Tabs) ດ້ານເທິງຂອງວິນໂດ. ເນື່ອງຈາກມຸມມອງທີ່ຕ່າງກັນມີຈຸດປະສົງຕ່າງກັນ, ຊິ້ນສ່ວນຕ່າງໆຈະມີລັກສະນະແຕກຕ່າງກັນໃນມຸມມອງອື່ນ.</translation>
+        <translation>&lt;br/&gt;&lt;b&gt;ມຸມເບິ່ງເບຣດບອດ (Breadboard View)&lt;/b&gt; ຖືກອອກແບບມາໃຫ້ຄືກັບເບຣດບອດ&lt;i&gt;ຕົວຈິງ&lt;/i&gt;.&lt;br/&gt;&lt;br/&gt;ເລີ່ມຕົ້ນໂດຍການລາກຊິ້ນສ່ວນຈາກຖັງຊິ້ນສ່ວນ (Parts Bin) ທີ່ຢູ່ທາງຂວາເທິງ. ຈາກນັ້ນລາກຊິ້ນສ່ວນອື່ນໆເຂົ້າມາ, ເຊື່ອມຕໍ່ພວກມັນໂດຍການວາງລົງໃນເບຣດບອດ ຫຼື ຄລິກທີ່ຕົວເຊື່ອມຕໍ່ແລ້ວລາກສາຍໄຟ. ຂັ້ນຕອນນີ້ຄືກັນກັບການຈັດວາງສິ່ງຂອງໃນໂລກຕົວຈິງ. &lt;br/&gt;&lt;br/&gt;ຫຼັງຈາກສ້າງແບບຮ່າງໃນມຸມເບິ່ງເບຣດບອດແລ້ວ, ໃຫ້ລອງໃຊ້ມຸມເບິ່ງອື່ນໆ. ທ່ານສາມາດສະຫຼັບມຸມເບິ່ງໄດ້ໂດຍການຄລິກທີ່ແທັບ (Tabs) ດ້ານເທິງຂອງວິນໂດ. ເນື່ອງຈາກມຸມເບິ່ງທີ່ຕ່າງກັນມີຈຸດປະສົງຕ່າງກັນ, ຊິ້ນສ່ວນຕ່າງໆຈະມີລັກສະນະແຕກຕ່າງກັນໃນມຸມເບິ່ງອື່ນ.</translation>
     </message>
     <message>
         <location filename="../src/help/firsttimehelpdialog.cpp" line="95"/>
         <source>Welcome to the &lt;b&gt;Schematic View&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;This is a more abstract way to look at components and connections than the Breadboard View. You have the same elements as you have on your breadboard, they just look different. This representation is closer to the traditional diagrams used by engineers.&lt;br/&gt;&lt;br/&gt;After you have drawn wires between parts, you can press &amp;lt;Shift&amp;gt;-click with the mouse to create bend points and tidy up your connections. The Schematic View can help you check that you have made the right connections between components. You can also print out your schematic for documentation.</source>
-        <translation>ຍິນດີຕ້ອນຮັບສູ່ &lt;b&gt;ມຸມມອງແຜນຜັງວົງຈອນ (Schematic View)&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;ນີ້ແມ່ນວິທີທີ່ເປັນນາມມະທຳໃນການເບິ່ງອຸປະກອນ ແລະ ການເຊື່ອມຕໍ່ຫຼາຍກວ່າມຸມມອງແຜ່ນທົດລອງ. ທ່ານມີອຸປະກອນດຽວກັນກັບໃນແຜ່ນທົດລອງ, ພຽງແຕ່ພວກມັນເບິ່ງແຕກຕ່າງກັນ. ການສະແດງຜົນນີ້ໃກ້ຄຽງກັບແຜນຜັງທີ່ວິສະວະກອນໃຊ້.&lt;br/&gt;&lt;br/&gt;ຫຼັງຈາກທີ່ທ່ານແຕ້ມສາຍໄຟລະຫວ່າງຊິ້ນສ່ວນແລ້ວ, ທ່ານສາມາດກົດ &amp;lt;Shift&amp;gt;-ຄລິກ ເພື່ອສ້າງຈຸດໂຄ້ງ ແລະ ຈັດການການເຊື່ອມຕໍ່ໃຫ້ເປັນລະບຽບ. ມຸມມອງແຜນຜັງວົງຈອນຊ່ວຍໃຫ້ທ່ານກວດສອບການເຊື່ອມຕໍ່ລະຫວ່າງອຸປະກອນໄດ້ຢ່າງຖືກຕ້ອງ. ທ່ານຍັງສາມາດສັ່ງພິມແຜນຜັງເພື່ອເປັນເອກະສານໄດ້.</translation>
+        <translation>ຍິນດີຕ້ອນຮັບສູ່ &lt;b&gt;ມຸມເບິ່ງແຜນຜັງວົງຈອນ (Schematic View)&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;ນີ້ແມ່ນວິທີທີ່ເປັນນາມມະທຳໃນການເບິ່ງຊິ້ນສ່ວນ ແລະ ການເຊື່ອມຕໍ່ຫຼາຍກວ່າມຸມເບິ່ງເບຣດບອດ. ທ່ານມີຊິ້ນສ່ວນດຽວກັນກັບໃນເບຣດບອດ, ພຽງແຕ່ພວກມັນເບິ່ງແຕກຕ່າງກັນ. ການສະແດງຜົນນີ້ໃກ້ຄຽງກັບແຜນຜັງທີ່ວິສະວະກອນໃຊ້.&lt;br/&gt;&lt;br/&gt;ຫຼັງຈາກທີ່ທ່ານແຕ້ມສາຍໄຟລະຫວ່າງຊິ້ນສ່ວນແລ້ວ, ທ່ານສາມາດກົດ &amp;lt;Shift&amp;gt;-ຄລິກ ເພື່ອສ້າງຈຸດໂຄ້ງ ແລະ ຈັດການການເຊື່ອມຕໍ່ໃຫ້ເປັນລະບຽບ. ມຸມເບິ່ງແຜນຜັງວົງຈອນຊ່ວຍໃຫ້ທ່ານກວດສອບການເຊື່ອມຕໍ່ລະຫວ່າງຊິ້ນສ່ວນໄດ້ຢ່າງຖືກຕ້ອງ. ທ່ານຍັງສາມາດສັ່ງພິມແຜນຜັງເພື່ອເປັນເອກະສານໄດ້.</translation>
     </message>
     <message>
         <location filename="../src/help/firsttimehelpdialog.cpp" line="107"/>
         <source>The &lt;b&gt;PCB View&lt;/b&gt; is where you layout the components on a physical PCB (Printed Circuit Board).&lt;br/&gt;&lt;br/&gt;PCBs can be made at home or in a small lab using DIY etching processes. They also can be sent to professional PCB manufacturing services for more precise fabrication. &lt;br/&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;The first thing you will need is a board to place your parts on. There should already be one in your sketch, but if not, drag in the board icon from the Parts Bin. The icon matches the image to the right: &lt;/td&gt;&lt;td&gt;&lt;img src=&quot;:resources/parts/svg/core/icon/rectangle_pcb.svg&quot; /&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;br/&gt;&lt;br/&gt;To lay out your PCB, arrange all the components so they fit nicely on the board. Then try to shift them around to minimize the length and confusion of connections. You can also resize rectangular boards. &lt;br/&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;Once the parts are sorted out, you connect them with copper traces. You can drag out a trace from individual connections or use the autorouter to generate them. The Autoroute button is at the bottom of the window. The button matches the image to the right:&lt;/td&gt;&lt;td&gt;&lt;img src=&quot;:resources/images/icons/toolbarAutorouteEnabled_icon.png&quot; /&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</source>
-        <translation>&lt;b&gt;ມຸມມອງ PCB&lt;/b&gt; ແມ່ນບ່ອນທີ່ທ່ານຈັດວາງອຸປະກອນລົງໃນແຜ່ນ PCB (Printed Circuit Board) ຕົວຈິງ.&lt;br/&gt;&lt;br/&gt;ແຜ່ນ PCB ສາມາດເຮັດໄດ້ເອງຢູ່ເຮືອນ ຫຼື ໃນຫ້ອງແລັບຂະໜາດນ້ອຍໂດຍໃຊ້ຂະບວນການກັດແຜ່ນວົງຈອນແບບ DIY. ຫຼື ສົ່ງໄປໃຫ້ບໍລິການຜະລິດ PCB ມືອາຊີບເພື່ອຄວາມແມ່ນຍຳທີ່ສູງກວ່າ. &lt;br/&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;ສິ່ງທຳອິດທີ່ທ່ານຕ້ອງການຄືແຜ່ນວົງຈອນເພື່ອວາງຊິ້ນສ່ວນລົງໄປ. ປົກກະຕິແລ້ວຈະມີຢູ່ໃນແບບຮ່າງຂອງທ່ານຢູ່ແລ້ວ, ແຕ່ຖ້າບໍ່ມີ, ໃຫ້ລາກໄອຄອນແຜ່ນວົງຈອນຈາກຖັງຊິ້ນສ່ວນ. ໄອຄອນຈະຄືກັບຮູບທາງຂວາ: &lt;/td&gt;&lt;td&gt;&lt;img src=&quot;:resources/parts/svg/core/icon/rectangle_pcb.svg&quot; /&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;br/&gt;&lt;br/&gt;ເພື່ອຈັດວາງ PCB, ໃຫ້ຈັດລຽງອຸປະກອນທັງໝົດໃຫ້ພໍດີກັບແຜ່ນ. ຈາກນັ້ນລອງປ່ຽນຕຳແໜ່ງພວກມັນເພື່ອໃຫ້ສາຍເຊື່ອມຕໍ່ສັ້ນທີ່ສຸດ ແລະ ບໍ່ສັບສົນ. ທ່ານຍັງສາມາດປັບຂະໜາດຂອງແຜ່ນວົງຈອນສີ່ລ່ຽມໄດ້. &lt;br/&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;ເມື່ອຈັດວາງຊິ້ນສ່ວນແລ້ວ, ໃຫ້ເຊື່ອມຕໍ່ພວກມັນດ້ວຍເສັ້ນທາງທອງແດງ. ທ່ານສາມາດລາກເສັ້ນທາງຈາກການເຊື່ອມຕໍ່ແຕ່ລະອັນ ຫຼື ໃຊ້ລະບົບ Autoroute ເພື່ອສ້າງເສັ້ນທາງອັດຕະໂນມັດ. ປຸ່ມ Autoroute ຢູ່ທາງລຸ່ມຂອງວິນໂດ. ປຸ່ມຈະຄືກັບຮູບທາງຂວາ:&lt;/td&gt;&lt;td&gt;&lt;img src=&quot;:resources/images/icons/toolbarAutorouteEnabled_icon.png&quot; /&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</translation>
+        <translation>&lt;b&gt;ມຸມເບິ່ງ PCB&lt;/b&gt; ແມ່ນບ່ອນທີ່ທ່ານຈັດວາງຊິ້ນສ່ວນລົງໃນແຜ່ນ PCB (Printed Circuit Board) ຕົວຈິງ.&lt;br/&gt;&lt;br/&gt;ແຜ່ນ PCB ສາມາດເຮັດໄດ້ເອງຢູ່ເຮືອນ ຫຼື ໃນຫ້ອງແລັບຂະໜາດນ້ອຍໂດຍໃຊ້ຂະບວນການກັດແຜ່ນວົງຈອນແບບ DIY. ຫຼື ສົ່ງໄປໃຫ້ບໍລິການຜະລິດ PCB ມືອາຊີບເພື່ອຄວາມແມ່ນຍຳທີ່ສູງກວ່າ. &lt;br/&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;ສິ່ງທຳອິດທີ່ທ່ານຕ້ອງການຄືແຜ່ນວົງຈອນເພື່ອວາງຊິ້ນສ່ວນລົງໄປ. ປົກກະຕິແລ້ວຈະມີຢູ່ໃນແບບຮ່າງຂອງທ່ານຢູ່ແລ້ວ, ແຕ່ຖ້າບໍ່ມີ, ໃຫ້ລາກໄອຄອນແຜ່ນວົງຈອນຈາກຖັງຊິ້ນສ່ວນ. ໄອຄອນຈະຄືກັບຮູບທາງຂວາ: &lt;/td&gt;&lt;td&gt;&lt;img src=&quot;:resources/parts/svg/core/icon/rectangle_pcb.svg&quot; /&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;br/&gt;&lt;br/&gt;ເພື່ອຈັດວາງ PCB, ໃຫ້ຈັດລຽງຊິ້ນສ່ວນທັງໝົດໃຫ້ພໍດີກັບແຜ່ນ. ຈາກນັ້ນລອງປ່ຽນຕຳແໜ່ງພວກມັນເພື່ອໃຫ້ສາຍເຊື່ອມຕໍ່ສັ້ນທີ່ສຸດ ແລະ ບໍ່ສັບສົນ. ທ່ານຍັງສາມາດປັບຂະໜາດຂອງແຜ່ນວົງຈອນສີ່ລ່ຽມໄດ້. &lt;br/&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;ເມື່ອຈັດວາງຊິ້ນສ່ວນແລ້ວ, ໃຫ້ເຊື່ອມຕໍ່ພວກມັນດ້ວຍເສັ້ນທາງທອງແດງ. ທ່ານສາມາດລາກເສັ້ນທາງຈາກການເຊື່ອມຕໍ່ແຕ່ລະອັນ ຫຼື ໃຊ້ລະບົບ Autoroute ເພື່ອສ້າງເສັ້ນທາງອັດຕະໂນມັດ. ປຸ່ມ Autoroute ຢູ່ທາງລຸ່ມຂອງວິນໂດ. ປຸ່ມຈະຄືກັບຮູບທາງຂວາ:&lt;/td&gt;&lt;td&gt;&lt;img src=&quot;:resources/images/icons/toolbarAutorouteEnabled_icon.png&quot; /&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</translation>
     </message>
 </context>
 <context>
@@ -1717,66 +1724,70 @@ Would you like to regenerate the parts database?
         <location filename="../src/model/fzpinfo.cpp" line="63"/>
         <source>Cannot open file</source>
         <comment>error title</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບໍ່ສາມາດເປີດໄຟລ໌ໄດ້</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="64"/>
         <source>Cannot open file &apos;%1&apos;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບໍ່ສາມາດເປີດໄຟລ໌ '%1' ໄດ້.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="71"/>
         <source>File is empty</source>
         <comment>error title</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ໄຟລ໌ຫວ່າງເປົ່າ</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="72"/>
         <source>File &apos;%1&apos; is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ໄຟລ໌ '%1' ຫວ່າງເປົ່າ.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="128"/>
         <source>XML Error</source>
         <comment>error title</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຂໍ້ຜິດພາດ XML</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="146"/>
         <source>Title is missing.</source>
         <comment>warning title</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຂາດຫົວຂໍ້.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="147"/>
         <source>The part is missing a title.
 
 All parts must have a title tag.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຊິ້ນສ່ວນນີ້ຂາດຫົວຂໍ້.
+
+ຊິ້ນສ່ວນທຸກອັນຕ້ອງມີແທັກຫົວຂໍ້ (title tag).</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="157"/>
         <source>Version number missing.</source>
         <comment>warning title</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຂາດເລກເວີຊັ່ນ.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="158"/>
         <source>The part is missing a fritzing version.
 All parts must have a fritzingVersion attribute: fritzingVersion=&quot;x.y.z&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຊິ້ນສ່ວນນີ້ຂາດເວີຊັ່ນ Fritzing.
+ຊິ້ນສ່ວນທຸກອັນຕ້ອງມີແອັດທຣິບິວ fritzingVersion: fritzingVersion="x.y.z".</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="170"/>
         <source>Invalid Version</source>
         <comment>warning title</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ເວີຊັ່ນບໍ່ຖືກຕ້ອງ</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="171"/>
         <source>The fritzing version &apos;%1&apos; is invalid.
 The part might not work properly.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ເວີຊັ່ນ Fritzing '%1' ບໍ່ຖືກຕ້ອງ.
+ຊິ້ນສ່ວນນີ້ອາດຈະເຮັດວຽກບໍ່ຖືກຕ້ອງ.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="183"/>
@@ -1790,13 +1801,17 @@ The part might not work properly.</source>
 Current version is &apos;%2&apos; which might not support it properly.Please consider updating your Fritzing.
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຊິ້ນສ່ວນນີ້ຖືກສ້າງຂຶ້ນດ້ວຍ Fritzing ເວີຊັ່ນ '%1'.
+ເວີຊັ່ນປັດຈຸບັນແມ່ນ '%2' ເຊິ່ງອາດຈະຮອງຮັບໄດ້ບໍ່ຄົບຖ້ວນ. ກະລຸນາພິຈາລະນາອັບເດດ Fritzing ຂອງທ່ານ.
+
+</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="212"/>
         <source>Location: Line %1, Column %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຕຳແໜ່ງ: ແຖວ %1, ຖັນ %2
+</translation>
     </message>
 </context>
 <context>
@@ -1810,13 +1825,13 @@ This dialog collects only connectors labeled &apos;GND&apos; or &apos;ground&apo
 Click an item to highlight its connections in the sketch.
 
 It is also possible to choose a connector as a ground fill seed by right-clicking a connector and choosing the &apos;Set Ground Fill Seed&apos; context menu option.</source>
-        <translation>ຄວາມແຕກຕ່າງລະຫວ່າງ &apos;ground fill&apos; ແລະ &apos;copper fill&apos; ທົ່ວໄປແມ່ນ ໃນ ground fill, ພື້ນທີ່ທອງແດງຈະລວມເອົາເສັ້ນວົງຈອນ ແລະ ຕົວເຊື່ອມຕໍ່ທີ່ເຊື່ອມຕໍ່ກັບ &apos;ground&apos;. ປົກກະຕິແລ້ວຕົວເຊື່ອມຕໍ່ກຣາວຈະຖືກຕິດປ້າຍວ່າ &apos;GND&apos; ຫຼື &apos;ground&apos; ແຕ່ບາງຄັ້ງອາດຈະບໍ່ເປັນແບບນັ້ນ. ນອກຈາກນີ້ອາດຈະມີຫຼາຍເນັດ (net) ທີ່ມີຕົວເຊື່ອມຕໍ່ກຣາວ, ແລະ ທ່ານອາດຈະຕ້ອງການໃຫ້ພຽງເນັດດຽວຖືກເທທອງແດງ.
+        <translation>ຄວາມແຕກຕ່າງລະຫວ່າງ &apos;ການຖົມກຣາວ (ground fill)&apos; ແລະ &apos;ການຖົມທອງແດງ (copper fill)&apos; ທົ່ວໄປແມ່ນ ໃນການຖົມກຣາວ, ພື້ນທີ່ທອງແດງຈະລວມເອົາເສັ້ນວົງຈອນ ແລະ ຕົວເຊື່ອມຕໍ່ທີ່ເຊື່ອມຕໍ່ກັບ &apos;ground&apos;. ປົກກະຕິແລ້ວຕົວເຊື່ອມຕໍ່ກຣາວຈະຖືກຕິດປ້າຍວ່າ &apos;GND&apos; ຫຼື &apos;ground&apos; ແຕ່ບາງຄັ້ງອາດຈະບໍ່ເປັນແບບນັ້ນ. ນອກຈາກນີ້ອາດຈະມີຫຼາຍເນັດ (net) ທີ່ມີຕົວເຊື່ອມຕໍ່ກຣາວ, ແລະ ທ່ານອາດຈະຕ້ອງການໃຫ້ພຽງເນັດດຽວຖືກເທທອງແດງ.
 
 ກ່ອງຂໍ້ຄວາມນີ້ຈະລວບລວມສະເພາະຕົວເຊື່ອມຕໍ່ທີ່ຕິດປ້າຍວ່າ &apos;GND&apos; ຫຼື &apos;ground&apos;, ລວມທັງຕົວເຊື່ອມຕໍ່ທີ່ຖືກເລືອກເປັນຈຸດເລີ່ມຕົ້ນ (seed) ຢູ່ແລ້ວ.
 
 ຄລິກທີ່ລາຍການເພື່ອເນັ້ນການເຊື່ອມຕໍ່ຂອງມັນໃນແບບຮ່າງ.
 
-ທ່ານຍັງສາມາດເລືອກຕົວເຊື່ອມຕໍ່ເປັນ ground fill seed ໄດ້ໂດຍການຄລິກຂວາທີ່ຕົວເຊື່ອມຕໍ່ ແລະ ເລືອກຕົວເລືອກ &apos;Set Ground Fill Seed&apos;.</translation>
+ທ່ານຍັງສາມາດເລືອກຕົວເຊື່ອມຕໍ່ເປັນຈຸດເລີ່ມຕົ້ນການຖົມກຣາວ (ground fill seed) ໄດ້ໂດຍການຄລິກຂວາທີ່ຕົວເຊື່ອມຕໍ່ ແລະ ເລືອກຕົວເລືອກ &apos;Set Ground Fill Seed&apos;.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/groundfillseeddialog.cpp" line="84"/>
@@ -1902,7 +1917,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="274"/>
         <source>Revisions</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ສະບັບຕ່າງໆ</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="558"/>
@@ -1920,35 +1935,32 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/infoview/htmlinfoview.cpp" line="580"/>
         <source>%n wires</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n ສາຍໄຟ</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/infoview/htmlinfoview.cpp" line="663"/>
         <source>%n net labels</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n ປ້າຍຊື່ເຄືອຂ່າຍ (net label)</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/infoview/htmlinfoview.cpp" line="668"/>
         <source>%n holes</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>%n ຮູ</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="1081"/>
         <source>recommended</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ແນະນຳ</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="1082"/>
         <source>automatic</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ອັດຕະໂນມັດ</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="1435"/>
@@ -1974,7 +1986,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/infoview/htmlinfoview.cpp" line="413"/>
         <source>connected to %n item(s)</source>
         <translation>
-            <numerusform>ເຊື່ອມຕໍ່ກັບ %n ລາຍການ</numerusform>
             <numerusform>ເຊື່ອມຕໍ່ກັບ %n ລາຍການ</numerusform>
         </translation>
     </message>
@@ -2006,7 +2017,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="1437"/>
         <source>Change the locked state of the part in this view. A locked part can&apos;t be moved.</source>
-        <translation>ປ່ຽນສະຖານະການລັອກຂອງຊິ້ນສ່ວນໃນມຸມມອງນີ້. ຊິ້ນສ່ວນທີ່ຖືກລັອກຈະບໍ່ສາມາດຍ້າຍໄດ້.</translation>
+        <translation>ປ່ຽນສະຖານະການລັອກຂອງຊິ້ນສ່ວນໃນມຸມເບິ່ງນີ້. ຊິ້ນສ່ວນທີ່ຖືກລັອກຈະບໍ່ສາມາດຍ້າຍໄດ້.</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="1443"/>
@@ -2016,7 +2027,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="1445"/>
         <source>Change the &quot;sticky&quot; state of the part in this view. When a sticky part is moved, objects on top of it also move.</source>
-        <translation>ປ່ຽນສະຖານະ &quot;ຕິດແໜ້ນ&quot; ຂອງຊິ້ນສ່ວນໃນມຸມມອງນີ້. ເມື່ອຊິ້ນສ່ວນທີ່ຕິດແໜ້ນຖືກຍ້າຍ, ວັດຖຸທີ່ວາງຢູ່ເທິງມັນຈະຍ້າຍຕາມໄປນຳ.</translation>
+        <translation>ປ່ຽນສະຖານະ &quot;ຕິດແໜ້ນ&quot; ຂອງຊິ້ນສ່ວນໃນມຸມເບິ່ງນີ້. ເມື່ອຊິ້ນສ່ວນທີ່ຕິດແໜ້ນຖືກຍ້າຍ, ວັດຖຸທີ່ວາງຢູ່ເທິງມັນຈະຍ້າຍຕາມໄປນຳ.</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="249"/>
@@ -2256,7 +2267,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/items/itembase.cpp" line="269"/>
         <source>style</source>
         <comment>net label rendering style</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຮູບແບບ</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="275"/>
@@ -2267,7 +2278,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/items/itembase.cpp" line="1657"/>
         <source>This part is outdated. Click to update it.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຊິ້ນສ່ວນນີ້ລ້າສະໄໝແລ້ວ. ຄລິກເພື່ອອັບເດດ.</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="265"/>
@@ -2300,12 +2311,12 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/items/itemdecorations.cpp" line="193"/>
         <source>Locked. The part cannot be moved or selected. Double-click to unlock.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ລັອກໄວ້ແລ້ວ. ຊິ້ນສ່ວນນີ້ບໍ່ສາມາດຍ້າຍ ຫຼືເລືອກໄດ້. ຄລິກສອງເທື່ອເພື່ອປົດລັອກ.</translation>
     </message>
     <message>
         <location filename="../src/items/itemdecorations.cpp" line="194"/>
         <source>Double-click to lock the board in place.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຄລິກສອງເທື່ອເພື່ອລັອກບອດໄວ້ກັບທີ່.</translation>
     </message>
 </context>
 <context>
@@ -2411,7 +2422,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/items/logoitem.cpp" line="473"/>
         <source>for unknown reasons--possibly the image file is corrupted</source>
-        <translation>ເນື່ອງຈາກເຫດຜົນທີ່ບໍ່ຮູ້ສາເຫດ--ອາດເປັນໄປໄດ້ວ່າໄຟລ໌ຮູບພາບເສຍຫາຍ</translation>
+        <translation>ເນື່ອງຈາກສາເຫດທີ່ບໍ່ຮູ້--ອາດເປັນໄປໄດ້ວ່າໄຟລ໌ຮູບພາບເສຍຫາຍ</translation>
     </message>
     <message>
         <location filename="../src/items/logoitem.cpp" line="491"/>
@@ -2425,7 +2436,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/mainwindow/mainwindow.cpp" line="2549"/>
         <source>%1 of %2 nets routed - %n connector(s) still to be routed</source>
         <translation>
-            <numerusform>ຈັດເສັ້ນທາງແລ້ວ %1 ຈາກທັງໝົດ %2 ເນັດ - ຍັງເຫຼືອ %n ຕົວເຊື່ອມຕໍ່ທີ່ຍັງບໍ່ໄດ້ຈັດເສັ້ນທາງ</numerusform>
             <numerusform>ຈັດເສັ້ນທາງແລ້ວ %1 ຈາກທັງໝົດ %2 ເນັດ - ຍັງເຫຼືອ %n ຕົວເຊື່ອມຕໍ່ທີ່ຍັງບໍ່ໄດ້ຈັດເສັ້ນທາງ</numerusform>
         </translation>
     </message>
@@ -2465,12 +2475,12 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2403"/>
         <source>Unable to load part &apos;%1&apos;: the part definition has an empty or missing module ID (moduleId attribute).</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບໍ່ສາມາດໂຫຼດຊິ້ນສ່ວນ '%1' ໄດ້: ນິຍາມຂອງຊິ້ນສ່ວນມີລະຫັດໂມດູນ (moduleId) ຫວ່າງເປົ່າ ຫຼືຂາດຫາຍໄປ.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3315"/>
         <source>Backup of &apos;%1&apos; failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ການສຳຮອງ '%1' ລົ້ມເຫລວ</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3406"/>
@@ -2654,8 +2664,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/mainwindow/mainwindow.cpp" line="1773"/>
         <source>The sketch &apos;%1&apos; is missing %n SVG file(s): %2. The sketch will still load, but some parts may not display correctly. If the sketch is very old, try loading it with an older version of Fritzing (0.9.x) and re-saving it.</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>ແຜນວາດ '%1' ຂາດໄຟລ໌ SVG ຈຳນວນ %n ໄຟລ໌: %2. ແຜນວາດຈະຍັງໂຫຼດໄດ້ຢູ່ ແຕ່ຊິ້ນສ່ວນບາງອັນອາດຈະສະແດງຜົນບໍ່ຖືກຕ້ອງ. ຖ້າແຜນວາດເກົ່າຫຼາຍ, ໃຫ້ລອງເປີດມັນດ້ວຍ Fritzing ເວີຊັນເກົ່າ (0.9.x) ແລ້ວບັນທຶກໃໝ່.</numerusform>
         </translation>
     </message>
     <message>
@@ -2671,7 +2680,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1892"/>
         <source>View &apos;%1&apos; should be prefixed with &apos;%2/&apos;. Trying to continue.</source>
-        <translation>ມຸມມອງ &apos;%1&apos; ຄວນເລີ່ມຕົ້ນດ້ວຍ &apos;%2/&apos;. ກຳລັງພະຍາຍາມດຳເນີນການຕໍ່.</translation>
+        <translation>ມຸມເບິ່ງ &apos;%1&apos; ຄວນເລີ່ມຕົ້ນດ້ວຍ &apos;%2/&apos;. ກຳລັງພະຍາຍາມດຳເນີນການຕໍ່.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1912"/>
@@ -2696,54 +2705,66 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2004"/>
         <source>No part files with the required prefix &apos;%1&apos; where found inside in the shareable part &apos;%2&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບໍ່ພົບໄຟລ໌ຊິ້ນສ່ວນທີ່ມີຄຳນຳໜ້າ (prefix) '%1' ທີ່ຈຳເປັນ ຢູ່ພາຍໃນຊິ້ນສ່ວນທີ່ແບ່ງປັນໄດ້ '%2'</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2177"/>
         <source>Cannot open file &apos;%1&apos; for writing.
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບໍ່ສາມາດເປີດໄຟລ໌ '%1' ເພື່ອຂຽນໄດ້.
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2188"/>
         <source>Cannot create ZIP archive for &apos;%1&apos;.
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບໍ່ສາມາດສ້າງໄຟລ໌ ZIP ສຳລັບ '%1' ໄດ້.
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2201"/>
         <source>Failed to write sketch data to &apos;%1&apos;.
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຂຽນຂໍ້ມູນແຜນວາດໄປຫາ '%1' ລົ້ມເຫລວ.
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2242"/>
         <source>Failed to write part &apos;%1&apos; to &apos;%2&apos;.
 
 %3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຂຽນຊິ້ນສ່ວນ '%1' ໄປຫາ '%2' ລົ້ມເຫລວ.
+
+%3</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2254"/>
         <source>Could not save &apos;%1&apos; because the file would be empty. Please try again.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບໍ່ສາມາດບັນທຶກ '%1' ໄດ້ ເນື່ອງຈາກໄຟລ໌ຈະຫວ່າງເປົ່າ. ກະລຸນາລອງໃໝ່ອີກຄັ້ງ.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2268"/>
         <source>Error finalizing ZIP archive for &apos;%1&apos;.
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ເກີດຂໍ້ຜິດພາດໃນການສະຫລຸບໄຟລ໌ ZIP ສຳລັບ '%1'.
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2281"/>
         <source>Failed to commit file &apos;%1&apos;. The original file is untouched.
 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຢືນຢັນການບັນທຶກໄຟລ໌ '%1' ລົ້ມເຫລວ. ໄຟລ໌ຕົ້ນສະບັບບໍ່ຖືກແກ້ໄຂ.
+
+%2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2301"/>
@@ -2764,7 +2785,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/mainwindow/mainwindow.cpp" line="3462"/>
         <source>Unrouted connections</source>
         <comment>dialog title</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຈຸດເຊື່ອມຕໍ່ທີ່ຍັງບໍ່ໄດ້ເດີນສາຍ</translation>
     </message>
     <message>
         <source>Critical Issues</source>
@@ -2789,7 +2810,6 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <source>Routing completed using %n jumper part(s)</source>
         <translation>
             <numerusform>ຈັດເສັ້ນທາງສຳເລັດໂດຍໃຊ້ຊິ້ນສ່ວນຈຳເປີ %n ອັນ</numerusform>
-            <numerusform>ຈັດເສັ້ນທາງສຳເລັດໂດຍໃຊ້ຊິ້ນສ່ວນຈຳເປີ %n ອັນ</numerusform>
         </translation>
     </message>
     <message>
@@ -2808,16 +2828,14 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
         <location filename="../src/mainwindow/mainwindow.cpp" line="2814"/>
         <source>Change %1 of %n part(s)</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>ປ່ຽນ %1 ຂອງຊິ້ນສ່ວນ %n ອັນ</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/mainwindow/mainwindow.cpp" line="2868"/>
         <source>Change style of %n net label(s)</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>ປ່ຽນຮູບແບບຂອງປ້າຍຊື່ເນັດ %n ອັນ</numerusform>
         </translation>
     </message>
     <message>
@@ -2856,7 +2874,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3463"/>
         <source>There are no unrouted connections in this view.</source>
-        <translation>ບໍ່ມີການເຊື່ອມຕໍ່ທີ່ຍັງບໍ່ໄດ້ຈັດເສັ້ນທາງໃນມຸມມອງນີ້.</translation>
+        <translation>ບໍ່ມີການເຊື່ອມຕໍ່ທີ່ຍັງບໍ່ໄດ້ຈັດເສັ້ນທາງໃນມຸມເບິ່ງນີ້.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3518"/>
@@ -2871,7 +2889,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3823"/>
         <source>Code</source>
-        <translation>ລະຫັດ (Code)</translation>
+        <translation>ໂຄ້ດ</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3899"/>
@@ -3135,7 +3153,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="434"/>
         <source>loading %1 (breadboard)</source>
-        <translation>ກຳລັງໂຫຼດ %1 (ແຜ່ນທົດລອງ)</translation>
+        <translation>ກຳລັງໂຫຼດ %1 (ເບຣດບອດ)</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="443"/>
@@ -3236,7 +3254,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1025"/>
         <source>Saving failed. Please check if home and destination directory are writeable and not full.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ການບັນທຶກລົ້ມເຫລວ. ກະລຸນາກວດເບິ່ງວ່າໂຟນເດີ home ແລະ ໂຟນເດີປາຍທາງສາມາດຂຽນໄດ້ ແລະ ບໍ່ເຕັມ.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1038"/>
@@ -3292,12 +3310,12 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1082"/>
         <source>Bill of Materials as &amp;PDF</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບັນຊີລາຍການວັດສະດຸເປັນ &amp;PDF</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1084"/>
         <source>Save a Bill of Materials with checkboxes as PDF</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບັນທຶກບັນຊີລາຍການວັດສະດຸພ້ອມຊ່ອງກາເຄື່ອງໝາຍເປັນ PDF</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1087"/>
@@ -3367,7 +3385,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1129"/>
         <source>Print the current view</source>
-        <translation>ພິມມຸມມອງປັດຈຸບັນ</translation>
+        <translation>ພິມມຸມເບິ່ງປັດຈຸບັນ</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1320"/>
@@ -3377,12 +3395,12 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1330"/>
         <source>Export Bill of Materials as PDF</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ສົ່ງອອກບັນຊີລາຍການວັດສະດຸເປັນ PDF</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1350"/>
         <source>Unable to write PDF to %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບໍ່ສາມາດຂຽນ PDF ໄປຫາ %1 ໄດ້</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1503"/>
@@ -3407,7 +3425,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1846"/>
         <source>Unable to save netlist file. But the content was copied to the clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບໍ່ສາມາດບັນທຶກໄຟລ໌ netlist ໄດ້. ແຕ່ເນື້ອຫາຖືກສຳເນົາໄປໃສ່ຄລິບບອດແລ້ວ.</translation>
     </message>
     <message>
         <source>Unable to save IPC file.</source>
@@ -3776,12 +3794,12 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1204"/>
         <source>Color Breadboard Wires By Length</source>
-        <translation>ໃສ່ສີສາຍໄຟໂຟໂຕບອດຕາມຄວາມຍາວ</translation>
+        <translation>ໃສ່ສີສາຍໄຟເບຣດບອດຕາມຄວາມຍາວ</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1205"/>
         <source>Display breadboard wires using standard color coding by length</source>
-        <translation>ສະແດງສາຍໄຟໂຟໂຕບອດໂດຍໃຊ້ລະຫັດສີມາດຕະຖານຕາມຄວາມຍາວ</translation>
+        <translation>ສະແດງສາຍໄຟເບຣດບອດໂດຍໃຊ້ລະຫັດສີມາດຕະຖານຕາມຄວາມຍາວ</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1210"/>
@@ -3962,7 +3980,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2931"/>
         <source>Highlights any parts that are too close together for safe board production</source>
-        <translation>ເນັ້ນສ່ວນຕ່າງໆທີ່ຢູ່ໃກ້ກັນເກີນໄປ ເພື່ອຄວາມປອດໄພໃນການຜະລິດແຜ່ນວົງຈອນ</translation>
+        <translation>ເນັ້ນຊິ້ນສ່ວນຕ່າງໆທີ່ຢູ່ໃກ້ກັນເກີນໄປ ເພື່ອຄວາມປອດໄພໃນການຜະລິດແຜ່ນວົງຈອນ</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2939"/>
@@ -4029,22 +4047,22 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4134"/>
         <source>You chose to update this outdated part.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ທ່ານໄດ້ເລືອກທີ່ຈະອັບເດດຊິ້ນສ່ວນທີ່ລ້າສະໄໝນີ້.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4136"/>
         <source>This part is outdated. We recommend updating it to the latest version.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຊິ້ນສ່ວນນີ້ລ້າສະໄໝແລ້ວ. ພວກເຮົາແນະນຳໃຫ້ອັບເດດເປັນເວີຊັນລ່າສຸດ.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4138"/>
         <source>This part has an optional update available.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຊິ້ນສ່ວນນີ້ມີການອັບເດດແບບເລືອກໄດ້.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4140"/>
         <source>This sketch contains both this part and a newer revision of it. Choose which one to use.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ແຜນວາດນີ້ມີທັງຊິ້ນສ່ວນນີ້ ແລະ ສະບັບປັບປຸງໃໝ່ກວ່າຂອງມັນ. ເລືອກອັນທີ່ຕ້ອງການໃຊ້.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4673"/>
@@ -4095,7 +4113,7 @@ It is also possible to choose a connector as a ground fill seed by right-clickin
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3734"/>
         <source>Note that any custom parts will not be converted. A tool for converting &apos;rectangular&apos; schematic images is available in the Parts Editor.</source>
-        <translation>ໝາຍເຫດ: ຊິ້ນສ່ວນທີ່ສ້າງຂຶ້ນເອງຈະບໍ່ຖືກແປງ. ມີເຄື່ອງມືສຳລັບແປງຮູບຜັງວົງຈອນແບບ &apos;ສີ່ລ່ຽມ&apos; ຢູ່ໃນ Parts Editor.</translation>
+        <translation>ໝາຍເຫດ: ຊິ້ນສ່ວນທີ່ສ້າງຂຶ້ນເອງຈະບໍ່ຖືກແປງ. ມີເຄື່ອງມືສຳລັບແປງຮູບຜັງວົງຈອນແບບ &apos;ສີ່ຫຼ່ຽມ&apos; ຢູ່ໃນ Parts Editor.</translation>
     </message>
     <message>
         <source>
@@ -4134,16 +4152,14 @@ Note: if you want to update later, there are options under the &apos;Part&apos; 
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4637"/>
         <source>Lock %n part(s)</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>ລັອກຊິ້ນສ່ວນ %n ອັນ</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4637"/>
         <source>Unlock %n part(s)</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>ປົດລັອກຊິ້ນສ່ວນ %n ອັນ</numerusform>
         </translation>
     </message>
     <message>
@@ -4520,7 +4536,7 @@ Go ahead and revert?</source>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2336"/>
         <source>It doesn&apos;t seem to be possible to automatically determine the actual physical size of the monitor, so &apos;actual size&apos; as currently implemented is only a guess. Your best bet would be to drag out a ruler part, then place a real (physical) ruler on top and zoom until they match up.</source>
-        <translation>ເບິ່ງຄືວ່າຈະບໍ່ສາມາດກວດສອບຂະໜາດທາງກາຍະພາບຕົວຈິງຂອງຈໍພາບໄດ້ໂດຍອັດຕະໂນມັດ, ດັ່ງນັ້ນ &apos;ຂະໜາດຕົວຈິງ&apos; ທີ່ໃຊ້ຢູ່ນີ້ແມ່ນພຽງແຕ່ການຄາດເດົາ. ວິທີທີ່ດີທີ່ສຸດແມ່ນລາກຊິ້ນສ່ວນໄມ້ບັນທັດອອກມາ, ແລ້ວວາງໄມ້ບັນທັດແທ້ໆທັບໃສ່ ແລະ ຊູມຈົນກວ່າມັນຈະທໍ່ກັນ.</translation>
+        <translation>ເບິ່ງຄືວ່າຈະບໍ່ສາມາດກວດສອບຂະໜາດທາງກາຍະພາບຕົວຈິງຂອງຈໍພາບໄດ້ໂດຍອັດຕະໂນມັດ, ດັ່ງນັ້ນ &apos;ຂະໜາດຕົວຈິງ&apos; ທີ່ໃຊ້ຢູ່ນີ້ແມ່ນພຽງແຕ່ການຄາດເດົາ. ວິທີທີ່ດີທີ່ສຸດແມ່ນລາກຊິ້ນສ່ວນໄມ້ບັນທັດອອກມາ, ແລ້ວວາງໄມ້ບັນທັດແທ້ໆທັບໃສ່ ແລະ ຊູມຈົນກວ່າມັນຈະເທົ່າກັນ.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2833"/>
@@ -4878,7 +4894,7 @@ Do you want to update now?</source>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4706"/>
         <source>Fritzing Fab Upload</source>
         <comment>dialog title</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ການອັບໂຫລດ Fritzing Fab</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4715"/>
@@ -4913,7 +4929,10 @@ Do you want to update now?</source>
 
 Would you like to convert &apos;%1&apos; to the new standard now or open the file read-only?
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ມີມາດຕະຖານກຣາຟິກໃໝ່ສຳລັບຮູບພາບຊິ້ນສ່ວນໃນມຸມເບິ່ງຜັງວົງຈອນ, ເລີ່ມແຕ່ເວີຊັນ 0.8.6.
+
+ທ່ານຕ້ອງການແປງ '%1' ໄປເປັນມາດຕະຖານໃໝ່ຕອນນີ້ ຫຼືເປີດໄຟລ໌ແບບອ່ານຢ່າງດຽວບໍ?
+</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3739"/>
@@ -5042,7 +5061,7 @@ Please check all views for potential side-effects.</source>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1241"/>
         <source>&amp;Show Breadboard</source>
-        <translation>&amp;ສະແດງໂຟໂຕບອດ</translation>
+        <translation>&amp;ສະແດງເບຣດບອດ</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1231"/>
@@ -5052,7 +5071,7 @@ Please check all views for potential side-effects.</source>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1243"/>
         <source>Show the breadboard view</source>
-        <translation>ສະແດງມຸມເບິ່ງໂຟໂຕບອດ</translation>
+        <translation>ສະແດງມຸມເບິ່ງເບຣດບອດ</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1247"/>
@@ -5182,7 +5201,7 @@ Please check all views for potential side-effects.</source>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1763"/>
         <source>Unable to save IPC file. But the content was copied to the clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບໍ່ສາມາດບັນທຶກໄຟລ໌ IPC ໄດ້. ແຕ່ເນື້ອຫາໄດ້ຖືກສຳເນົາໄປໃສ່ຄລິບບອດແລ້ວ.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1844"/>
@@ -5484,7 +5503,7 @@ We&apos;re working to avoid this message, and only let you choose between proper
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="614"/>
         <source>Breadboard</source>
-        <translation>ໂຟໂຕບອດ</translation>
+        <translation>ເບຣດບອດ</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="623"/>
@@ -5508,7 +5527,7 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="64"/>
         <source>Inspector</source>
         <comment>dock widget title</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຕົວກວດສອບ</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="66"/>
@@ -5520,31 +5539,31 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="69"/>
         <source>Layers</source>
         <comment>dock widget title</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຊັ້ນ</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="132"/>
         <source>Hidden → Docked → Floating</source>
         <comment>dock widget state cycle sequence starting from hidden</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ເຊື່ອງໄວ້ → ຝັງໄວ້ → ລອຍ</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="137"/>
         <source>Docked → Floating → Hidden</source>
         <comment>dock widget state cycle sequence starting from docked</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຝັງໄວ້ → ລອຍ → ເຊື່ອງໄວ້</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="142"/>
         <source>Floating → Hidden → Docked</source>
         <comment>dock widget state cycle sequence starting from floating</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ລອຍ → ເຊື່ອງໄວ້ → ຝັງໄວ້</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="146"/>
         <source>%1 - Click to cycle: %2</source>
         <comment>dock widget status tip: %1=dock name, %2=cycle sequence</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 - ຄລິກເພື່ອໝູນວຽນ: %2</translation>
     </message>
 </context>
 <context>
@@ -5563,8 +5582,7 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <location filename="../src/autoroute/mazerouter/mazerouter.cpp" line="765"/>
         <source> with %n vias</source>
         <translation>
-            <numerusform> ໂດຍມີ %n ເວຍ</numerusform>
-            <numerusform> ໂດຍມີ %n ເວຍ</numerusform>
+            <numerusform> ໂດຍມີ %n via</numerusform>
         </translation>
     </message>
     <message>
@@ -5621,164 +5639,163 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <location filename="../src/sketch/migrationhandler.cpp" line="172"/>
         <source>%n part(s) were automatically updated to a newer version</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>ຊິ້ນສ່ວນ %n ອັນຖືກອັບເດດອັດຕະໂນມັດເປັນເວີຊັນໃໝ່ກວ່າ</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="362"/>
         <source>Part Migration</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ການຍົກຍ້າຍຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="434"/>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ເວີຊັນ</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="442"/>
         <source>Keep the old version and don&apos;t ask about these changes again</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຮັກສາເວີຊັນເກົ່າໄວ້ ແລະ ບໍ່ຕ້ອງຖາມກ່ຽວກັບການປ່ຽນແປງເຫຼົ່ານີ້ອີກ</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="454"/>
         <source>The part can still be migrated via the Inspector later.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຊິ້ນສ່ວນນີ້ຍັງສາມາດຍົກຍ້າຍໄດ້ຜ່ານ Inspector ໃນພາຍຫຼັງ.</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="473"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ປິດ</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="475"/>
         <source>Close this dialog; your choices are kept</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ປິດກ່ອງໂຕ້ຕອບນີ້; ທາງເລືອກຂອງທ່ານຈະຖືກຮັກສາໄວ້</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="479"/>
         <source>Update all</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ອັບເດດທັງໝົດ</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="481"/>
         <source>Update every outdated part in this list to its newest version</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ອັບເດດຊິ້ນສ່ວນທຸກອັນທີ່ລ້າສະໄໝໃນລາຍການນີ້ໄປເປັນເວີຊັນລ່າສຸດ</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="486"/>
         <source>Previous</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ກ່ອນໜ້າ</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="487"/>
         <source>Next</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຕໍ່ໄປ</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="490"/>
         <source>Go back to the previous part</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ກັບໄປຫາຊິ້ນສ່ວນກ່ອນໜ້າ</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="491"/>
         <source>Go to the next part</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ໄປຫາຊິ້ນສ່ວນຕໍ່ໄປ</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="538"/>
         <source>Part %1 of %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຊິ້ນສ່ວນ %1 ຈາກ %2</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="546"/>
         <source>keeping old version — won&apos;t ask again</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຮັກສາເວີຊັນເກົ່າໄວ້ — ຈະບໍ່ຖາມອີກ</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="547"/>
         <source>updated to new version</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ອັບເດດເປັນເວີຊັນໃໝ່ແລ້ວ</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="548"/>
         <source>keeping old version</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຮັກສາເວີຊັນເກົ່າໄວ້</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="551"/>
         <source>showing new version</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ກຳລັງສະແດງເວີຊັນໃໝ່</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="553"/>
         <source>showing old version</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ກຳລັງສະແດງເວີຊັນເກົ່າ</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="573"/>
         <source>Changes since your version:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ການປ່ຽນແປງນັບຈາກເວີຊັນຂອງທ່ານ:</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="577"/>
         <source>RECOMMENDED</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ແນະນຳ</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="579"/>
         <source>AUTOMATIC</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ອັດຕະໂນມັດ</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="594"/>
         <source>No change notes are available. Compare the old and new version visually in the Breadboard, Schematic and PCB views before deciding.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບໍ່ມີບັນທຶກການປ່ຽນແປງ. ກະລຸນາປຽບທຽບເວີຊັນເກົ່າ ແລະ ໃໝ່ດ້ວຍສາຍຕາໃນມຸມເບິ່ງເບຣດບອດ, ຜັງວົງຈອນ ແລະ PCB ກ່ອນຕັດສິນໃຈ.</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="601"/>
         <source>A further revision is available; it will be offered after you update to this one.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ມີການປັບປຸງເພີ່ມເຕີມອີກ; ຈະຖືກສະເໜີໃຫ້ຫຼັງຈາກທ່ານອັບເດດເປັນເວີຊັນນີ້ແລ້ວ.</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="612"/>
         <source>Old: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ເກົ່າ: %1</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="613"/>
         <source>Old: %1 (v. %2)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ເກົ່າ: %1 (ເວີຊັນ %2)</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="615"/>
         <source>Keep this version and don&apos;t ask again.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຮັກສາເວີຊັນນີ້ໄວ້ ແລະ ບໍ່ຕ້ອງຖາມອີກ.</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="616"/>
         <source>Keep v. %1 and don&apos;t ask again.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຮັກສາເວີຊັນ %1 ໄວ້ ແລະ ບໍ່ຕ້ອງຖາມອີກ.</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="618"/>
         <source>New: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ໃໝ່: %1</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="619"/>
         <source>New: %1 (v. %2)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ໃໝ່: %1 (ເວີຊັນ %2)</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="853"/>
         <source>Silence update reminder for %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ປິດການແຈ້ງເຕືອນອັບເດດສຳລັບ %1</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="877"/>
         <source>Re-enable update reminder for %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ເປີດການແຈ້ງເຕືອນອັບເດດສຳລັບ %1 ຄືນໃໝ່</translation>
     </message>
 </context>
 <context>
@@ -5796,7 +5813,7 @@ We&apos;re working to avoid this message, and only let you choose between proper
     <message>
         <location filename="../src/version/modfiledialog.cpp" line="11"/>
         <source>Fritzing can proceed with the update, but the set of files listed below must first be cleaned (removed or reset). It may take a few minutes. &lt;p&gt;Do you want to proceed with cleaning these files?&lt;/p&gt;</source>
-        <translation>Fritzing ສາມາດດຳເນີນການອັບເດດຕໍ່ໄດ້, ແຕ່ລາຍການໄຟລ໌ລຸ່ມນີ້ຕ້ອງຖືກລຶບລ້າງ (ລຶບອອກ ຫຼື ຄືນຄ່າໃໝ່) ກ່ອນ. ອາດຈະໃຊ້ເວລາສອງສາມນາທີ. &lt;p&gt;ເຈົ້າຕ້ອງການດຳເນີນການລຶບລ້າງໄຟລ໌ເຫຼົ່ານີ້ຫຼືບໍ່?&lt;/p&gt;</translation>
+        <translation>Fritzing ສາມາດດຳເນີນການອັບເດດຕໍ່ໄດ້, ແຕ່ລາຍການໄຟລ໌ລຸ່ມນີ້ຕ້ອງຖືກລຶບລ້າງ (ລຶບອອກ ຫຼື ຄືນຄ່າໃໝ່) ກ່ອນ. ອາດຈະໃຊ້ເວລາສອງສາມນາທີ. &lt;p&gt;ທ່ານຕ້ອງການດຳເນີນການລຶບລ້າງໄຟລ໌ເຫຼົ່ານີ້ຫຼືບໍ່?&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/version/modfiledialog.cpp" line="15"/>
@@ -5826,8 +5843,7 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <location filename="../src/model/modelbase.cpp" line="421"/>
         <source>Unable to find %n part(s). Click &apos;Show Details&apos; for a list of missing parts.</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>ບໍ່ພົບຊິ້ນສ່ວນ %n ອັນ. ຄລິກ 'ສະແດງລາຍລະອຽດ' ເພື່ອເບິ່ງລາຍຊື່ຊິ້ນສ່ວນທີ່ຂາດຫາຍໄປ.</numerusform>
         </translation>
     </message>
     <message>
@@ -5840,13 +5856,15 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <location filename="../src/model/modelbase.cpp" line="524"/>
         <source>Couldn&apos;t overwrite file &apos;%1&apos;.
 Reason: %2 (errcode %3)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບໍ່ສາມາດຂຽນທັບໄຟລ໌ '%1' ໄດ້.
+ສາເຫດ: %2 (ລະຫັດຂໍ້ຜິດພາດ %3)</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="535"/>
         <source>Couldn&apos;t move the saved content into place at &apos;%1&apos;.
 Reason: %2 (errcode %3)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບໍ່ສາມາດຍ້າຍເນື້ອຫາທີ່ບັນທຶກໄວ້ໄປໄວ້ບ່ອນ '%1' ໄດ້.
+ສາເຫດ: %2 (ລະຫັດຂໍ້ຜິດພາດ %3)</translation>
     </message>
     <message>
         <source>Could not overwrite file &apos;%1&apos;.
@@ -5862,12 +5880,14 @@ Reason: %2 (errcode %3)</source>
         <source>Part FZP uses the unsupported migration mode “%1”.
 Re-tag its &lt;history&gt; with required / recommended / optional.
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ໄຟລ໌ FZP ຂອງຊິ້ນສ່ວນນີ້ໃຊ້ໂໝດການຍົກຍ້າຍທີ່ບໍ່ຮອງຮັບ “%1”.
+ກະລຸນາແກ້ tag &lt;history&gt; ໃຫ້ເປັນ required / recommended / optional.
+%2</translation>
     </message>
     <message>
         <location filename="../src/model/modelpartshared.cpp" line="592"/>
         <source>Unsupported migration mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ໂໝດການຍົກຍ້າຍທີ່ບໍ່ຮອງຮັບ</translation>
     </message>
 </context>
 <context>
@@ -5905,113 +5925,113 @@ Re-tag its &lt;history&gt; with required / recommended / optional.
         <location filename="../src/sketch/outlierhandler.cpp" line="149"/>
         <source>Outlier Components Navigator</source>
         <comment>dialog title</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຕົວນຳທາງຊິ້ນສ່ວນທີ່ຜິດປົກກະຕິ</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="175"/>
         <source>◀ Previous</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">◀ ກ່ອນໜ້າ</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="176"/>
         <source>Next ▶</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຕໍ່ໄປ ▶</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="188"/>
         <source>Fix This Item</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ແກ້ໄຂລາຍການນີ້</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="190"/>
         <source>Fix All Items</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ແກ້ໄຂລາຍການທັງໝົດ</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="193"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ປິດ</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="264"/>
         <source>Reposition Outlier Components</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຈັດຕໍາແໜ່ງໃໝ່ໃຫ້ຊິ້ນສ່ວນທີ່ຢູ່ນອກຂອບເຂດ</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="388"/>
         <source>Problematic Item</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ລາຍການທີ່ມີບັນຫາ</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="390"/>
         <source>Item %1 of %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ລາຍການທີ %1 ຈາກ %2</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="395"/>
         <source>&lt;b&gt;Problem:&lt;/b&gt; Label positioned far from its component&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;ບັນຫາ:&lt;/b&gt; ປ້າຍຊື່ຖືກຈັດຕໍາແໜ່ງຢູ່ຫ່າງຈາກຊິ້ນສ່ວນຂອງມັນ&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="396"/>
         <location filename="../src/sketch/outlierhandler.cpp" line="408"/>
         <source>&lt;b&gt;Component:&lt;/b&gt; %1&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;ຊິ້ນສ່ວນ:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="397"/>
         <source>&lt;b&gt;Label Position:&lt;/b&gt; (%1, %2)&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;ຕໍາແໜ່ງປ້າຍຊື່:&lt;/b&gt; (%1, %2)&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="400"/>
         <source>&lt;b&gt;Component Position:&lt;/b&gt; (%1, %2)&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;ຕໍາແໜ່ງຊິ້ນສ່ວນ:&lt;/b&gt; (%1, %2)&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="402"/>
         <source>&lt;b&gt;Distance:&lt;/b&gt; %1 units&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;ໄລຍະຫ່າງ:&lt;/b&gt; %1 ໜ່ວຍ&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="404"/>
         <source>&lt;b&gt;Impact:&lt;/b&gt; This label&apos;s distant position causes &apos;Fit in Window&apos; to zoom out excessively.&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;ຜົນກະທົບ:&lt;/b&gt; ຕໍາແໜ່ງທີ່ຢູ່ຫ່າງໄກຂອງປ້າຍຊື່ນີ້ເຮັດໃຫ້ຄໍາສັ່ງ 'ພໍດີກັບໜ້າຕ່າງ' ຊູມອອກຫຼາຍເກີນໄປ.&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="405"/>
         <source>&lt;b&gt;Solution:&lt;/b&gt; The label will be repositioned to the top-right of its component.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;ວິທີແກ້ໄຂ:&lt;/b&gt; ປ້າຍຊື່ຈະຖືກຈັດຕໍາແໜ່ງໃໝ່ໄປທາງມຸມເທິງຂວາຂອງຊິ້ນສ່ວນຂອງມັນ.</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="407"/>
         <source>&lt;b&gt;Problem:&lt;/b&gt; Component positioned far outside the circuit area&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;ບັນຫາ:&lt;/b&gt; ຊິ້ນສ່ວນຖືກຈັດວາງຢູ່ນອກພື້ນທີ່ວົງຈອນຫຼາຍ&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="409"/>
         <source>&lt;b&gt;Type:&lt;/b&gt; %1&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;ປະເພດ:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="410"/>
         <source>&lt;b&gt;Position:&lt;/b&gt; (%1, %2)&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;ຕໍາແໜ່ງ:&lt;/b&gt; (%1, %2)&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="411"/>
         <source>&lt;b&gt;Size:&lt;/b&gt; %1 × %2&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;ຂະໜາດ:&lt;/b&gt; %1 × %2&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="412"/>
         <source>&lt;b&gt;Impact:&lt;/b&gt; This component&apos;s position causes &apos;Fit in Window&apos; to zoom out excessively.&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;ຜົນກະທົບ:&lt;/b&gt; ຕໍາແໜ່ງຂອງຊິ້ນສ່ວນນີ້ເຮັດໃຫ້ຄໍາສັ່ງ 'ພໍດີກັບໜ້າຕ່າງ' ຊູມອອກຫຼາຍເກີນໄປ.&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="413"/>
         <source>&lt;b&gt;Solution:&lt;/b&gt; The component will be moved to a reasonable location near the main circuit.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;ວິທີແກ້ໄຂ:&lt;/b&gt; ຊິ້ນສ່ວນຈະຖືກຍ້າຍໄປຫາຕໍາແໜ່ງທີ່ເໝາະສົມໃກ້ກັບວົງຈອນຫຼັກ.</translation>
     </message>
 </context>
 <context>
@@ -6051,7 +6071,7 @@ Re-tag its &lt;history&gt; with required / recommended / optional.
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1444"/>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1626"/>
         <source>%1 Fill: please select the board you want to apply fill to.</source>
-        <translation>%1 ຖົມ: ກະລຸນາເລືອກແຜ່ນວົງຈອນທີ່ທ່ານຕ້ອງການຖົມ.</translation>
+        <translation>ການຖົມ%1: ກະລຸນາເລືອກແຜ່ນວົງຈອນທີ່ທ່ານຕ້ອງການຖົມ.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1444"/>
@@ -6137,7 +6157,7 @@ Re-tag its &lt;history&gt; with required / recommended / optional.
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1532"/>
         <source>Fritzing error: unable to render copper svg (2).</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຂໍ້ຜິດພາດ Fritzing: ບໍ່ສາມາດສະແດງຜົນ SVG ທອງແດງໄດ້ (2).</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1552"/>
@@ -6154,17 +6174,17 @@ Re-tag its &lt;history&gt; with required / recommended / optional.
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1600"/>
         <source>The bottom ground fill is split into %1 sections. </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ການຖົມກຣາວດ້ານລ່າງຖືກແບ່ງອອກເປັນ %1 ພາກສ່ວນ. </translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1603"/>
         <source>The top ground fill is split into %1 sections. </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ການຖົມກຣາວດ້ານເທິງຖືກແບ່ງອອກເປັນ %1 ພາກສ່ວນ. </translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1605"/>
         <source>Please manually ensure connectivity, especially for ground seeds.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ກະລຸນາກວດສອບການເຊື່ອມຕໍ່ດ້ວຍຕົນເອງ, ໂດຍສະເພາະສໍາລັບຈຸດເລີ່ມຕົ້ນຂອງກຣາວ (ground seeds).</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1606"/>
@@ -6175,12 +6195,12 @@ Re-tag its &lt;history&gt; with required / recommended / optional.
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1784"/>
         <source>Unable to create copper fill--probably the part wasn&apos;t dropped onto the PCB.</source>
-        <translation>ບໍ່ສາມາດສ້າງການຖົມທອງແດງໄດ້--ອາດຈະເປັນຍ້ອນອຸປະກອນບໍ່ໄດ້ຖືກວາງລົງເທິງ PCB.</translation>
+        <translation>ບໍ່ສາມາດສ້າງການຖົມທອງແດງໄດ້--ອາດຈະເປັນຍ້ອນຊິ້ນສ່ວນບໍ່ໄດ້ຖືກວາງລົງເທິງ PCB.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1841"/>
         <source>Unable to create copper fill--possibly the part was dropped onto another part or wire rather than the actual PCB.</source>
-        <translation>ບໍ່ສາມາດສ້າງການຖົມທອງແດງໄດ້--ອາດຈະເປັນຍ້ອນອຸປະກອນຖືກວາງລົງເທິງອຸປະກອນອື່ນ ຫຼື ເສັ້ນລວດ ແທນທີ່ຈະເປັນແຜ່ນ PCB.</translation>
+        <translation>ບໍ່ສາມາດສ້າງການຖົມທອງແດງໄດ້--ອາດຈະເປັນຍ້ອນຊິ້ນສ່ວນຖືກວາງລົງເທິງຊິ້ນສ່ວນອື່ນ ຫຼື ເສັ້ນລວດ ແທນທີ່ຈະເປັນແຜ່ນ PCB.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2228"/>
@@ -6200,17 +6220,17 @@ Re-tag its &lt;history&gt; with required / recommended / optional.
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2603"/>
         <source>Unable to convert this via to a bendpoint because it is connected to a part that is only on the bottom layer and another part that is only on the top layer.</source>
-        <translation>ບໍ່ສາມາດແປງ via ນີ້ໃຫ້ເປັນຈຸດດັດໂຄ້ງໄດ້ ເພາະມັນເຊື່ອມຕໍ່ກັບອຸປະກອນທີ່ຢູ່ຊັ້ນລຸ່ມເທົ່ານັ້ນ ແລະ ອຸປະກອນອື່ນທີ່ຢູ່ຊັ້ນເທິງເທົ່ານັ້ນ.</translation>
+        <translation>ບໍ່ສາມາດແປງ via ນີ້ໃຫ້ເປັນຈຸດດັດໂຄ້ງໄດ້ ເພາະມັນເຊື່ອມຕໍ່ກັບຊິ້ນສ່ວນທີ່ຢູ່ຊັ້ນລຸ່ມເທົ່ານັ້ນ ແລະ ຊິ້ນສ່ວນອື່ນທີ່ຢູ່ຊັ້ນເທິງເທົ່ານັ້ນ.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2887"/>
         <source>Show part silkscreen</source>
-        <translation>ສະແດງຊັ້ນພິມຕົວອັກສອນຂອງອຸປະກອນ</translation>
+        <translation>ສະແດງຊັ້ນພິມຕົວອັກສອນຂອງຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2887"/>
         <source>Hide part silkscreen</source>
-        <translation>ເຊື່ອງຊັ້ນພິມຕົວອັກສອນຂອງອຸປະກອນ</translation>
+        <translation>ເຊື່ອງຊັ້ນພິມຕົວອັກສອນຂອງຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2904"/>
@@ -6218,17 +6238,17 @@ Re-tag its &lt;history&gt; with required / recommended / optional.
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2920"/>
         <source>Fritzing Fab Quote</source>
         <comment>dialog title</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ໃບສະເໜີລາຄາ Fritzing Fab</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2910"/>
         <source>You need to select one board if you have multiple PCBs in your sketch.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ທ່ານຕ້ອງເລືອກແຜ່ນ PCB ໜຶ່ງແຜ່ນ ຖ້າແຜນວາດຂອງທ່ານມີ PCB ຫຼາຍແຜ່ນ.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2921"/>
         <source>Sorry, fab.fritzing.org is not responding to the quote request. Please check your network connection and/or try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຂໍອະໄພ, fab.fritzing.org ບໍ່ຕອບສະໜອງຕໍ່ຄໍາຮ້ອງຂໍໃບສະເໜີລາຄາ. ກະລຸນາກວດສອບການເຊື່ອມຕໍ່ເຄືອຂ່າຍຂອງທ່ານ ແລະ/ຫຼື ລອງໃໝ່ພາຍຫຼັງ.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="3060"/>
@@ -6246,7 +6266,14 @@ so you may want to increase the keepout value by that much.
 10 mils is a good default choice.
 
 Enter keepout value:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ໄລຍະປອດໄພ (keepout) ແມ່ນເປັນ mils (.001 ນິ້ວ).
+
+ໃຫ້ສັງເກດວ່າ ເນື່ອງຈາກການສະທ້ອນຂອບ (aliasing), ໄລຍະຫ່າງອາດຈະສັ້ນເກີນໄປໄດ້ເຖິງ 2 mils
+ດັ່ງນັ້ນທ່ານອາດຕ້ອງການເພີ່ມຄ່າ keepout ຂຶ້ນອີກເທົ່ານັ້ນ.
+
+10 mils ເປັນຄ່າເລີ່ມຕົ້ນທີ່ດີ.
+
+ປ້ອນຄ່າ keepout:</translation>
     </message>
     <message>
         <source>Fritzing Fab Quote</source>
@@ -6255,7 +6282,7 @@ Enter keepout value:</source>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2905"/>
         <source>Your sketch does not have a board yet. You cannot fabricate this sketch without a PCB part.</source>
-        <translation>ແຜນວາດຂອງທ່ານຍັງບໍ່ມີແຜ່ນວົງຈອນ. ທ່ານບໍ່ສາມາດຜະລິດແຜນວາດນີ້ໄດ້ໂດຍບໍ່ມີອຸປະກອນ PCB.</translation>
+        <translation>ແຜນວາດຂອງທ່ານຍັງບໍ່ມີແຜ່ນວົງຈອນ. ທ່ານບໍ່ສາມາດຜະລິດແຜນວາດນີ້ໄດ້ໂດຍບໍ່ມີຊິ້ນສ່ວນ PCB.</translation>
     </message>
     <message>
         <source>You need to select one board if you have multiple PCB boards.</source>
@@ -6309,7 +6336,7 @@ Enter keepout value:</source>
     <message>
         <location filename="../src/partseditor/peconnectorsview.cpp" line="54"/>
         <source>This is where you edit the connector metadata for the part</source>
-        <translation>ນີ້ແມ່ນບ່ອນທີ່ທ່ານແກ້ໄຂຂໍ້ມູນກຳກັບຂອງຕົວເຊື່ອມຕໍ່ສຳລັບອຸປະກອນ</translation>
+        <translation>ນີ້ແມ່ນບ່ອນທີ່ທ່ານແກ້ໄຂຂໍ້ມູນກຳກັບຂອງຕົວເຊື່ອມຕໍ່ສຳລັບຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/peconnectorsview.cpp" line="60"/>
@@ -6332,12 +6359,12 @@ Enter keepout value:</source>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="44"/>
         <source>Revision</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ສະບັບປັບປຸງ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="62"/>
         <source>Date of this revision</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ວັນທີຂອງສະບັບປັບປຸງນີ້</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="63"/>
@@ -6347,7 +6374,7 @@ Enter keepout value:</source>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="66"/>
         <source>Who made this revision</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ໃຜເປັນຜູ້ເຮັດສະບັບປັບປຸງນີ້</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="67"/>
@@ -6357,57 +6384,57 @@ Enter keepout value:</source>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="72"/>
         <source>required</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຈຳເປັນ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="73"/>
         <source>recommended</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ແນະນຳ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="74"/>
         <source>optional</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ທາງເລືອກ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="79"/>
         <source>How insistently this revision is offered when an older part is loaded</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ລະດັບຄວາມສຳຄັນຂອງການສະເໜີສະບັບປັບປຸງນີ້ ເມື່ອມີການໂຫຼດຊິ້ນສ່ວນລຸ້ນເກົ່າ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="80"/>
         <source>Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຮູບແບບ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="85"/>
         <source>Describe what changed in this revision</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ອະທິບາຍການປ່ຽນແປງໃນສະບັບປັບປຸງນີ້</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="86"/>
         <source>Changes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ການປ່ຽນແປງ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="91"/>
         <source>Bump version to %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ເພີ່ມເລກເວີຊັນເປັນ %1</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="93"/>
         <source>Raise the part&apos;s version number when saving</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ເພີ່ມເລກເວີຊັນຂອງຊິ້ນສ່ວນເມື່ອບັນທຶກ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="117"/>
         <source>Add entry &amp;&amp; save</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ເພີ່ມລາຍການ &amp;&amp; ບັນທຶກ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pehistoryentrydialog.cpp" line="119"/>
         <source>Save without an entry</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບັນທຶກໂດຍບໍ່ມີລາຍການ</translation>
     </message>
 </context>
 <context>
@@ -6464,7 +6491,7 @@ Enter keepout value:</source>
         <source>This part cannot be saved as-is:
 
 </source>
-        <translation>ອຸປະກອນນີ້ບໍ່ສາມາດບັນທຶກຕາມສະພາບນີ້ໄດ້:
+        <translation>ຊິ້ນສ່ວນນີ້ບໍ່ສາມາດບັນທຶກຕາມສະພາບນີ້ໄດ້:
 
 </translation>
     </message>
@@ -6511,39 +6538,41 @@ Enter keepout value:</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="3991"/>
         <source>Parts Editor</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">ຕົວແກ້ໄຂອຸປະກອນ</translation>
+        <translation type="unfinished">ຕົວແກ້ໄຂຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="805"/>
         <source>This part has bendable legs. This version of the Parts Editor does not yet support editing bendable legs, and the legs may not be displayed correctly in breadboard view. If you make changes to breadboard view, or change connector metadata, the legs may no longer work. You can safely make changes to Schematic or PCB view.
 
 This warning will not be repeated in this session of Fritzing</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຊິ້ນສ່ວນນີ້ມີຂາທີ່ສາມາດງໍໄດ້. ຕົວແກ້ໄຂຊິ້ນສ່ວນ (Parts Editor) ເວີຊັນນີ້ຍັງບໍ່ຮອງຮັບການແກ້ໄຂຂາທີ່ງໍໄດ້, ແລະຂາອາດຈະສະແດງບໍ່ຖືກຕ້ອງໃນມຸມເບິ່ງເບຣດບອດ. ຖ້າທ່ານແກ້ໄຂມຸມເບິ່ງເບຣດບອດ ຫຼືປ່ຽນແປງຂໍ້ມູນຕົວເຊື່ອມຕໍ່ (connector metadata), ຂາອາດຈະໃຊ້ການບໍ່ໄດ້ອີກຕໍ່ໄປ. ທ່ານສາມາດແກ້ໄຂມຸມເບິ່ງຜັງວົງຈອນ ຫຼື PCB ໄດ້ຢ່າງປອດໄພ.
+
+ຄຳເຕືອນນີ້ຈະບໍ່ຖືກສະແດງຊ້ຳອີກໃນເຊດຊັນນີ້ຂອງ Fritzing</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="907"/>
         <source>Unable to write svg to  %1</source>
-        <translation>ບໍ່ສາມາດຂຽນ svg ລົງໃນ %1</translation>
+        <translation>ບໍ່ສາມາດຂຽນ svg ລົງໃນ %1 ໄດ້</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="914"/>
         <source>Unable to parse fzp file  %1</source>
-        <translation>ບໍ່ສາມາດອ່ານໄຟລ໌ fzp %1</translation>
+        <translation>ບໍ່ສາມາດອ່ານໄຟລ໌ fzp %1 ໄດ້</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="956"/>
         <source>Icon View</source>
-        <translation>ມຸມມອງໄອຄອນ</translation>
+        <translation>ມຸມເບິ່ງໄອຄອນ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="957"/>
         <source>Metadata View</source>
-        <translation>ມຸມມອງຂໍ້ມູນກຳກັບ</translation>
+        <translation>ມຸມເບິ່ງຂໍ້ມູນກຳກັບ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="958"/>
         <source>Connectors View</source>
-        <translation>ມຸມມອງຕົວເຊື່ອມຕໍ່</translation>
+        <translation>ມຸມເບິ່ງຕົວເຊື່ອມຕໍ່</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="966"/>
@@ -6558,7 +6587,7 @@ This warning will not be repeated in this session of Fritzing</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="968"/>
         <source>Show the icon view</source>
-        <translation>ສະແດງມຸມມອງໄອຄອນ</translation>
+        <translation>ສະແດງມຸມເບິ່ງໄອຄອນ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="972"/>
@@ -6568,7 +6597,7 @@ This warning will not be repeated in this session of Fritzing</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="973"/>
         <source>Show the metadata view</source>
-        <translation>ສະແດງມຸມມອງຂໍ້ມູນກຳກັບ</translation>
+        <translation>ສະແດງມຸມເບິ່ງຂໍ້ມູນກຳກັບ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="976"/>
@@ -6610,7 +6639,7 @@ This warning will not be repeated in this session of Fritzing</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1155"/>
         <source>Change revision history</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ປ່ຽນແປງປະຫວັດສະບັບ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1259"/>
@@ -6670,7 +6699,7 @@ This warning will not be repeated in this session of Fritzing</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1664"/>
         <source>You may use a PNG or JPG image to construct your part, but it is better to use an SVG. PNG and JPG images retain their nature as bitmaps and do not look good when scaled--so for Fritzing parts it is best to use PNG and JPG only as placeholders.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ທ່ານສາມາດໃຊ້ຮູບພາບ PNG ຫຼື JPG ເພື່ອສ້າງຊິ້ນສ່ວນຂອງທ່ານໄດ້ ແຕ່ວ່າການໃຊ້ SVG ຈະດີກວ່າ. ຮູບພາບ PNG ແລະ JPG ຍັງຄົງເປັນແບບບິດແມັບ (bitmap) ແລະຈະເບິ່ງບໍ່ສວຍງາມເມື່ອຖືກຂະຫຍາຍຂະໜາດ—ດັ່ງນັ້ນສຳລັບຊິ້ນສ່ວນ Fritzing ຄວນໃຊ້ PNG ແລະ JPG ເປັນພຽງຕົວແທນຊົ່ວຄາວ (placeholder) ເທົ່ານັ້ນ.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1668"/>
@@ -6691,22 +6720,20 @@ This warning will not be repeated in this session of Fritzing</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="3992"/>
         <source>This part has %n unassigned connector(s). </source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>ຊິ້ນສ່ວນນີ້ມີຕົວເຊື່ອມຕໍ່ທີ່ຍັງບໍ່ໄດ້ກຳນົດ %n ຈຸດ. </numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/partseditor/pemainwindow.cpp" line="3993"/>
         <source>This affects %n view(s). </source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>ນີ້ມີຜົນຕໍ່ %n ມຸມເບິ່ງ. </numerusform>
         </translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="3994"/>
         <source>Until all connectors are assigned to SVG elements, the part will not work correctly. Exiting the Parts Editor now is fine, as long as you remember to finish the assignments later.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຈົນກວ່າຕົວເຊື່ອມຕໍ່ທັງໝົດຈະຖືກກຳນົດໃຫ້ກັບອົງປະກອບ SVG, ຊິ້ນສ່ວນຈະຍັງເຮັດວຽກບໍ່ຖືກຕ້ອງ. ການອອກຈາກຕົວແກ້ໄຂຊິ້ນສ່ວນດຽວນີ້ແມ່ນບໍ່ເປັນຫຍັງ, ຕາບໃດທີ່ທ່ານຈື່ໄວ້ວ່າຈະຕ້ອງກັບມາກຳນົດໃຫ້ຄົບຖ້ວນພາຍຫຼັງ.</translation>
     </message>
     <message>
         <source>Copy problem</source>
@@ -6741,7 +6768,7 @@ This warning will not be repeated in this session of Fritzing</source>
         <location filename="../src/partseditor/pemainwindow.cpp" line="951"/>
         <location filename="../src/partseditor/pemainwindow.cpp" line="3129"/>
         <source>Fritzing (New) Parts Editor</source>
-        <translation>ຕົວແກ້ໄຂອຸປະກອນ Fritzing (ແບບໃໝ່)</translation>
+        <translation>ຕົວແກ້ໄຂຊິ້ນສ່ວນ Fritzing (ແບບໃໝ່)</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="971"/>
@@ -6831,7 +6858,7 @@ This warning will not be repeated in this session of Fritzing</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1700"/>
         <source>There are no copper layers defined in: %1. See &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;this explanation&lt;/a&gt;.&lt;br/&gt;&lt;br/&gt;This will not be a problem in the next release of the Parts Editor, but for now please modify the file according to the instructions in the link.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບໍ່ມີຊັ້ນທອງແດງຖືກກຳນົດໄວ້ໃນ: %1. ເບິ່ງ &lt;a href="http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/"&gt;ຄຳອະທິບາຍນີ້&lt;/a&gt;.&lt;br/&gt;&lt;br/&gt;ນີ້ຈະບໍ່ເປັນບັນຫາອີກຕໍ່ໄປໃນເວີຊັນຕໍ່ໄປຂອງຕົວແກ້ໄຂຊິ້ນສ່ວນ, ແຕ່ຕອນນີ້ກະລຸນາແກ້ໄຂໄຟລ໌ຕາມຄຳແນະນຳໃນລິ້ງດັ່ງກ່າວ.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1716"/>
@@ -6842,17 +6869,17 @@ This warning will not be repeated in this session of Fritzing</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2256"/>
         <source>Save part</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບັນທຶກຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2257"/>
         <source>You haven&apos;t recorded what changed in this revision.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ທ່ານຍັງບໍ່ໄດ້ບັນທຶກສິ່ງທີ່ປ່ຽນແປງໃນສະບັບນີ້.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2284"/>
         <source>&lt;p&gt;Please enter a prefix to help you identify the part files.&lt;br/&gt;The file names will have the form &apos;PREFIX_%1&apos;.&lt;br/&gt;(It is not necessary to change the proposed prefix, since a unique suffix is always added.)&lt;/p&gt;</source>
-        <translation>&lt;p&gt;ກະລຸນາໃສ່ຄຳນຳໜ້າ (prefix) ເພື່ອຊ່ວຍໃນການລະບຸໄຟລ໌ອຸປະກອນ.&lt;br/&gt;ຊື່ໄຟລ໌ຈະຢູ່ໃນຮູບແບບ &apos;PREFIX_%1&apos;.&lt;br/&gt;(ບໍ່ຈຳເປັນຕ້ອງປ່ຽນຄຳນຳໜ້າທີ່ແນະນຳ ເພາະຈະມີການຕື່ມສ່ວນທ້າຍທີ່ບໍ່ຊ້ຳກັນໃຫ້ສະເໝີ.)&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;ກະລຸນາໃສ່ຄຳນຳໜ້າ (prefix) ເພື່ອຊ່ວຍໃນການລະບຸໄຟລ໌ຊິ້ນສ່ວນ.&lt;br/&gt;ຊື່ໄຟລ໌ຈະຢູ່ໃນຮູບແບບ &apos;PREFIX_%1&apos;.&lt;br/&gt;(ບໍ່ຈຳເປັນຕ້ອງປ່ຽນຄຳນຳໜ້າທີ່ແນະນຳ ເພາະຈະມີການຕື່ມສ່ວນທ້າຍທີ່ບໍ່ຊ້ຳກັນໃຫ້ສະເໝີ.)&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Parts Editor Error</source>
@@ -6889,12 +6916,12 @@ This warning will not be repeated in this session of Fritzing</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="549"/>
         <source>Reuse breadboard image</source>
-        <translation>ໃຊ້ຮູບແຜ່ນທົດລອງຄືນໃໝ່</translation>
+        <translation>ໃຊ້ຮູບເບຣດບອດຄືນໃໝ່</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="550"/>
         <source>Reuse the breadboard image in this view</source>
-        <translation>ໃຊ້ຮູບແຜ່ນທົດລອງຄືນໃໝ່ໃນມຸມມອງນີ້</translation>
+        <translation>ໃຊ້ຮູບເບຣດບອດຄືນໃໝ່ໃນມຸມເບິ່ງນີ້</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="553"/>
@@ -6904,7 +6931,7 @@ This warning will not be repeated in this session of Fritzing</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="554"/>
         <source>Reuse the schematic image in this view</source>
-        <translation>ໃຊ້ຮູບຜັງວົງຈອນຄືນໃໝ່ໃນມຸມມອງນີ້</translation>
+        <translation>ໃຊ້ຮູບຜັງວົງຈອນຄືນໃໝ່ໃນມຸມເບິ່ງນີ້</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="557"/>
@@ -6914,27 +6941,27 @@ This warning will not be repeated in this session of Fritzing</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="558"/>
         <source>Reuse the PCB image in this view</source>
-        <translation>ໃຊ້ຮູບ PCB ຄືນໃໝ່ໃນມຸມມອງນີ້</translation>
+        <translation>ໃຊ້ຮູບ PCB ຄືນໃໝ່ໃນມຸມເບິ່ງນີ້</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="981"/>
         <source>Make only this view visible</source>
-        <translation>ເຮັດໃຫ້ເຫັນສະເພາະມຸມມອງນີ້</translation>
+        <translation>ເຮັດໃຫ້ເຫັນສະເພາະມຸມເບິ່ງນີ້</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="982"/>
         <source>The part will only be visible in this view and icon view</source>
-        <translation>ອຸປະກອນຈະສະແດງໃຫ້ເຫັນສະເພາະໃນມຸມມອງນີ້ ແລະ ມຸມມອງໄອຄອນເທົ່ານັ້ນ</translation>
+        <translation>ຊິ້ນສ່ວນຈະສະແດງໃຫ້ເຫັນສະເພາະໃນມຸມເບິ່ງນີ້ ແລະ ມຸມເບິ່ງໄອຄອນເທົ່ານັ້ນ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1418"/>
         <source>This version of the new Parts Editor can not deal with separate copper0 and copper1 layers in &apos;%1&apos;. </source>
-        <translation>ຕົວແກ້ໄຂອຸປະກອນເວີຊັນໃໝ່ນີ້ ບໍ່ສາມາດຈັດການກັບຊັ້ນ copper0 ແລະ copper1 ທີ່ແຍກກັນໃນ &apos;%1&apos; ໄດ້. </translation>
+        <translation>ຕົວແກ້ໄຂຊິ້ນສ່ວນເວີຊັນໃໝ່ນີ້ ບໍ່ສາມາດຈັດການກັບຊັ້ນ copper0 ແລະ copper1 ທີ່ແຍກກັນໃນ &apos;%1&apos; ໄດ້. </translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1419"/>
         <source>So editing may produce an invalid PCB view image</source>
-        <translation>ດັ່ງນັ້ນ ການແກ້ໄຂອາດເຮັດໃຫ້ຮູບມຸມມອງ PCB ບໍ່ຖືກຕ້ອງ</translation>
+        <translation>ດັ່ງນັ້ນ ການແກ້ໄຂອາດເຮັດໃຫ້ຮູບມຸມເບິ່ງ PCB ບໍ່ຖືກຕ້ອງ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1689"/>
@@ -6965,12 +6992,12 @@ This warning will not be repeated in this session of Fritzing</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1748"/>
         <source>schematic part</source>
-        <translation>ສ່ວນຂອງຜັງວົງຈອນ</translation>
+        <translation>ອຸປະກອນຜັງວົງຈອນ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1769"/>
         <source>no footprints found in %1</source>
-        <translation>ບໍ່ພົບ footprints ໃນ %1</translation>
+        <translation>ບໍ່ພົບຟຸດປຣິນ (footprint) ໃນ %1</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2110"/>
@@ -6985,17 +7012,17 @@ This warning will not be repeated in this session of Fritzing</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="535"/>
         <source>Inspector</source>
-        <translation>ຕົວນວດສອບ</translation>
+        <translation>ຕົວກວດສອບ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="567"/>
         <source>Load image for view...</source>
-        <translation>ໂຫຼດຮູບພາບສຳລັບມຸມມອງ...</translation>
+        <translation>ໂຫຼດຮູບພາບສຳລັບມຸມເບິ່ງ...</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="568"/>
         <source>Open a file to use as the image for this view of the part.</source>
-        <translation>ເປີດໄຟລ໌ເພື່ອໃຊ້ເປັນຮູບພາບສຳລັບມຸມມອງນີ້ຂອງອຸປະກອນ.</translation>
+        <translation>ເປີດໄຟລ໌ເພື່ອໃຊ້ເປັນຮູບພາບສຳລັບມຸມເບິ່ງນີ້ຂອງຊິ້ນສ່ວນ.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="578"/>
@@ -7010,12 +7037,12 @@ This warning will not be repeated in this session of Fritzing</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="614"/>
         <source>Save as new part</source>
-        <translation>ບັນທຶກເປັນອຸປະກອນໃໝ່</translation>
+        <translation>ບັນທຶກເປັນຊິ້ນສ່ວນໃໝ່</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="615"/>
         <source>Make a copy of the part and save it in the &apos;My Parts&apos; Bin</source>
-        <translation>ສ້າງສຳເນົາຂອງອຸປະກອນ ແລະ ບັນທຶກລົງໃນກ່ອງ &apos;My Parts&apos;</translation>
+        <translation>ສ້າງສຳເນົາຂອງຊິ້ນສ່ວນ ແລະ ບັນທຶກລົງໃນກ່ອງ &apos;My Parts&apos;</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="618"/>
@@ -7072,12 +7099,12 @@ This warning will not be repeated in this session of Fritzing</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2317"/>
         <source>The open sketch &apos;%1&apos; uses the part you are editing. </source>
-        <translation>ແຜນວາດ &apos;%1&apos; ທີ່ເປີດຢູ່ ມີການໃຊ້ວຽກອຸປະກອນທີ່ທ່ານກຳລັງແກ້ໄຂ. </translation>
+        <translation>ແຜນວາດ &apos;%1&apos; ທີ່ເປີດຢູ່ ມີການໃຊ້ຊິ້ນສ່ວນທີ່ທ່ານກຳລັງແກ້ໄຂ.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2318"/>
         <source>Saving this part will make a change to the sketch that cannot be undone.</source>
-        <translation>ການບັນທຶກອຸປະກອນນີ້ ຈະເຮັດໃຫ້ເກີດການປ່ຽນແປງໃນແຜນວາດທີ່ບໍ່ສາມາດຍົກເລີກຄືນໄດ້.</translation>
+        <translation>ການບັນທຶກຊິ້ນສ່ວນນີ້ ຈະເຮັດໃຫ້ເກີດການປ່ຽນແປງໃນແຜນວາດທີ່ບໍ່ສາມາດຍົກເລີກຄືນໄດ້.</translation>
     </message>
     <message>
         <source>The open sketches </source>
@@ -7126,7 +7153,7 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2923"/>
         <source>Do you want to save the changes you made in the part &quot;%1&quot;?</source>
-        <translation>ທ່ານຕ້ອງການບັນທຶກການປ່ຽນແປງທີ່ທ່ານໄດ້ເຮັດໃນອຸປະກອນ &quot;%1&quot; ບໍ?</translation>
+        <translation>ທ່ານຕ້ອງການບັນທຶກການປ່ຽນແປງທີ່ທ່ານໄດ້ເຮັດໃນຊິ້ນສ່ວນ &quot;%1&quot; ບໍ?</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2924"/>
@@ -7136,7 +7163,7 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2928"/>
         <source>untitled part</source>
-        <translation>ອຸປະກອນທີ່ບໍ່ມີຊື່</translation>
+        <translation>ຊິ້ນສ່ວນທີ່ບໍ່ມີຊື່</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2963"/>
@@ -7181,7 +7208,7 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="3929"/>
         <source>Make only %1 view visible</source>
-        <translation>ເຮັດໃຫ້ເຫັນສະເພາະມຸມມອງ %1</translation>
+        <translation>ເຮັດໃຫ້ເຫັນສະເພາະມຸມເບິ່ງ %1</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="3226"/>
@@ -7197,23 +7224,23 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2327"/>
         <source>%1 and %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 ແລະ %2</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2330"/>
         <source>, and %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">, ແລະ %1</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2332"/>
         <source>The open sketches %1 use the part you are editing. Saving this part will make a change to these sketches that cannot be undone.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ແຜນວາດທີ່ເປີດຢູ່ %1 ໃຊ້ຊິ້ນສ່ວນທີ່ທ່ານກຳລັງແກ້ໄຂຢູ່. ການບັນທຶກຊິ້ນສ່ວນນີ້ຈະສ້າງການປ່ຽນແປງໃຫ້ກັບແຜນວາດເຫຼົ່ານີ້ ເຊິ່ງບໍ່ສາມາດຍ້ອນກັບຄືນໄດ້.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2522"/>
         <source>Parts Editor Error</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">ຂໍ້ຜິດພາດຂອງຕົວແກ້ໄຂອຸປະກອນ</translation>
+        <translation type="unfinished">ຂໍ້ຜິດພາດຂອງຕົວແກ້ໄຂຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2922"/>
@@ -7236,7 +7263,7 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="282"/>
         <source>Set the part&apos;s title</source>
-        <translation>ກຳນົດຊື່ຂອງອຸປະກອນ</translation>
+        <translation>ກຳນົດຊື່ຂອງຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="283"/>
@@ -7259,7 +7286,7 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="269"/>
         <source>Edit the part&apos;s metadata, revision history, properties and tags.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ແກ້ໄຂຂໍ້ມູນອະທິບາຍ (metadata), ປະຫວັດສະບັບ, ຄຸນສົມບັດ ແລະແທັກຂອງຊິ້ນສ່ວນ.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="294"/>
@@ -7269,38 +7296,38 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="294"/>
         <source>Changes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ການປ່ຽນແປງ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="294"/>
         <source>Mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຮູບແບບ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="300"/>
         <source>The part&apos;s revision history. Entries from the last three months can be edited or deleted (double-click / ×); older ones are read-only.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ປະຫວັດສະບັບຂອງຊິ້ນສ່ວນ. ລາຍການທີ່ບັນທຶກໃນສາມເດືອນຫຼ້າສຸດສາມາດແກ້ໄຂ ຫຼືລຶບໄດ້ (ດັບເບິນຄລິກ / ×); ລາຍການທີ່ເກົ່າກວ່ານັ້ນອ່ານໄດ້ຢ່າງດຽວ.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="307"/>
         <source>+</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">+</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="309"/>
         <location filename="../src/partseditor/pemetadataview.cpp" line="310"/>
         <source>Add a revision entry</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ເພີ່ມລາຍການສະບັບ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="316"/>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ປະຫວັດ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="325"/>
         <source>Set the part&apos;s description--you can use simple html (as defined by Qt&apos;s Rich Text)</source>
-        <translation>ກຳນົດຄຳອະທິບາຍຂອງອຸປະກອນ--ທ່ານສາມາດໃຊ້ html ແບບງ່າຍໆໄດ້</translation>
+        <translation>ກຳນົດຄຳອະທິບາຍຂອງຊິ້ນສ່ວນ--ທ່ານສາມາດໃຊ້ html ແບບງ່າຍໆໄດ້</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="342"/>
@@ -7310,7 +7337,7 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="348"/>
         <source>Set the default part label prefix</source>
-        <translation>ກຳນົດຄຳນຳໜ້າປ້າຍຊື່ເລີ່ມຕົ້ນຂອງອຸປະກອນ</translation>
+        <translation>ກຳນົດຄຳນຳໜ້າປ້າຍຊື່ເລີ່ມຕົ້ນຂອງຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="349"/>
@@ -7320,7 +7347,7 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="355"/>
         <source>Set the part&apos;s url if it is described on a web page</source>
-        <translation>ກຳນົດ url ຂອງອຸປະກອນ ຖ້າມີລາຍລະອຽດຢູ່ໃນເວັບໄຊ</translation>
+        <translation>ກຳນົດ url ຂອງຊິ້ນສ່ວນ ຖ້າມີລາຍລະອຽດຢູ່ໃນເວັບໄຊ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="356"/>
@@ -7330,7 +7357,7 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="362"/>
         <source>Set the part&apos;s family--what other parts is this part related to</source>
-        <translation>ກຳນົດຕະກູນຂອງອຸປະກອນ--ອຸປະກອນນີ້ກ່ຽວຂ້ອງກັບອຸປະກອນອື່ນໆໃດແດ່</translation>
+        <translation>ກຳນົດຕະກູນຂອງຊິ້ນສ່ວນ--ຊິ້ນສ່ວນນີ້ກ່ຽວຂ້ອງກັບຊິ້ນສ່ວນອື່ນໆໃດແດ່</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="363"/>
@@ -7340,7 +7367,7 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="369"/>
         <source>Set the part&apos;s variant--this makes it unique from all other parts in the same family</source>
-        <translation>ກຳນົດຮູບແບບຍ່ອຍຂອງອຸປະກອນ--ເພື່ອໃຫ້ມັນແຕກຕ່າງຈາກອຸປະກອນອື່ນໃນຕະກູນດຽວກັນ</translation>
+        <translation>ກຳນົດຮູບແບບຍ່ອຍຂອງຊິ້ນສ່ວນ--ເພື່ອໃຫ້ມັນແຕກຕ່າງຈາກຊິ້ນສ່ວນອື່ນໃນຕະກູນດຽວກັນ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="370"/>
@@ -7350,7 +7377,7 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="374"/>
         <source>Set the part&apos;s properties</source>
-        <translation>ກຳນົດຄຸນສົມບັດຂອງອຸປະກອນ</translation>
+        <translation>ກຳນົດຄຸນສົມບັດຂອງຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="376"/>
@@ -7360,7 +7387,7 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="380"/>
         <source>Set the part&apos;s tags</source>
-        <translation>ກຳນົດແທັກຂອງອຸປະກອນ</translation>
+        <translation>ກຳນົດແທັກຂອງຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="382"/>
@@ -7370,17 +7397,17 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="425"/>
         <source>required</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຈຳເປັນ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="426"/>
         <source>recommended</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ແນະນຳ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="427"/>
         <source>optional</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ທາງເລືອກ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="443"/>
@@ -7390,22 +7417,22 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="445"/>
         <source>Edit this revision</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ແກ້ໄຂສະບັບນີ້</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="450"/>
         <source>Delete this revision</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ລຶບສະບັບນີ້</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="490"/>
         <source>Add revision</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ເພີ່ມສະບັບ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemetadataview.cpp" line="506"/>
         <source>Edit revision</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ແກ້ໄຂສະບັບ</translation>
     </message>
 </context>
 <context>
@@ -7436,7 +7463,7 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partseditor/petoolview.cpp" line="85"/>
         <source>Connector List (a checkmark means the graphic was selected)</source>
-        <translation>ລາຍການຕົວເຊື່ອມຕໍ່ (ເຄື່ອງໝາຍຖືກໝາຍເຖິງກຣາບຟິກຖືກເລືອກແລ້ວ)</translation>
+        <translation>ລາຍການຕົວເຊື່ອມຕໍ່ (ເຄື່ອງໝາຍຖືກໝາຍເຖິງກຣາຟິກຖືກເລືອກແລ້ວ)</translation>
     </message>
     <message>
         <location filename="../src/partseditor/petoolview.cpp" line="110"/>
@@ -7531,7 +7558,7 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partseditor/petoolview.cpp" line="441"/>
         <source>Select graphic</source>
-        <translation>ເລືອກກຣາບຟິກ</translation>
+        <translation>ເລືອກກຣາຟິກ</translation>
     </message>
     <message>
         <location filename="../src/partseditor/petoolview.cpp" line="444"/>
@@ -7600,12 +7627,12 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/items/paletteitem.cpp" line="624"/>
         <source>Unable to proceed; unable to find top level view.</source>
-        <translation>ບໍ່ສາມາດດຳເນີນການຕໍ່ໄດ້; ບໍ່ພົບມຸມມອງລະດັບສູງສຸດ.</translation>
+        <translation>ບໍ່ສາມາດດຳເນີນການຕໍ່ໄດ້; ບໍ່ພົບມຸມເບິ່ງລະດັບສູງສຸດ.</translation>
     </message>
     <message>
         <location filename="../src/items/paletteitem.cpp" line="635"/>
         <source>Unable to proceed; part connectors do no have standard IDs.</source>
-        <translation>ບໍ່ສາມາດດຳເນີນການຕໍ່ໄດ້; ຕົວເຊື່ອມຕໍ່ອຸປະກອນບໍ່ມີ ID ມາດຕະຖານ.</translation>
+        <translation>ບໍ່ສາມາດດຳເນີນການຕໍ່ໄດ້; ຕົວເຊື່ອມຕໍ່ຊິ້ນສ່ວນບໍ່ມີ ID ມາດຕະຖານ.</translation>
     </message>
     <message>
         <location filename="../src/items/paletteitem.cpp" line="659"/>
@@ -7906,7 +7933,7 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="697"/>
         <source>Do you really want to add the selected part to the bin?</source>
-        <translation>ທ່ານຕ້ອງການເພີ່ມອຸປະກອນທີ່ເລືອກລົງໃນກ່ອງເກັບແທ້ບໍ?</translation>
+        <translation>ທ່ານຕ້ອງການເພີ່ມຊິ້ນສ່ວນທີ່ເລືອກລົງໃນກ່ອງເກັບແທ້ບໍ?</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="874"/>
@@ -7999,7 +8026,7 @@ Note: this warning will not be repeated during this session.</source>
     <message>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="81"/>
         <source>&lt;p&gt;Click on a label next to a pin number to rename that pin. You can use the tab key to move through the labels in order.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;p&gt;ຄລິກໃສ່ປ້າຍຊື່ທີ່ຢູ່ຂ້າງໝາຍເລກຂາ (pin) ເພື່ອປ່ຽນຊື່ຂານັ້ນ. ທ່ານສາມາດໃຊ້ປຸ່ມ Tab ເພື່ອເລື່ອນຜ່ານປ້າຍຊື່ຕາມລຳດັບ.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="101"/>
@@ -8048,12 +8075,12 @@ Note: this warning will not be repeated during this session.</source>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="640"/>
         <source>Command</source>
-        <translation>Command</translation>
+        <translation>ຄຳສັ່ງ</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="642"/>
         <source>Control</source>
-        <translation>Control</translation>
+        <translation>ຄວບຄຸມ</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="202"/>
@@ -8073,7 +8100,7 @@ Note: this warning will not be repeated during this session.</source>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="89"/>
         <source>Code View</source>
-        <translation>ມຸມມອງໂຄ້ດ</translation>
+        <translation>ມຸມເບິ່ງໂຄ້ດ</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="108"/>
@@ -8110,7 +8137,9 @@ Note: this warning will not be repeated during this session.</source>
         <source>The gerber file generator will use six decimals precision instead of three.
 Some deprecated gerber commands are removed or replaced.
 This feature is enabled by default. If you need to maintain compatibility with older processes designed for earlier Fritzing versions, you can disable this feature.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຕົວສ້າງໄຟລ໌ Gerber ຈະໃຊ້ຄວາມລະອຽດ 6 ຫຼັກທົດສະນິຍົມແທນທີ 3 ຫຼັກ.
+ຄຳສັ່ງ Gerber ບາງອັນທີ່ເລີກໃຊ້ແລ້ວຈະຖືກລຶບອອກ ຫຼືປ່ຽນແທນ.
+ຄຸນສົມບັດນີ້ຖືກເປີດໃຊ້ເປັນຄ່າເລີ່ມຕົ້ນ. ຖ້າທ່ານຕ້ອງການຄວາມເຂົ້າກັນໄດ້ກັບຂະບວນການເກົ່າທີ່ອອກແບບມາສຳລັບ Fritzing ເວີຊັນກ່ອນໜ້າ, ທ່ານສາມາດປິດການໃຊ້ຄຸນສົມບັດນີ້ໄດ້.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="476"/>
@@ -8125,7 +8154,7 @@ This feature is enabled by default. If you need to maintain compatibility with o
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="487"/>
         <source>Select the way to define the time step: (1) Number of points (max simulation time divided by the number of points) or (2) fixed time step.</source>
-        <translation>ເລືອກວິທີກຳນົດຂັ້ນຕອນເວລາ (time step): (1) ຈຳນວນຈຸດ ຫຼື (2) ຂັ້ນຕອນເວລາຄົງທີ່.</translation>
+        <translation>ເລືອກວິທີກຳນົດຂັ້ນຕອນເວລາ (time step): (1) ຈຳນວນຈຸດ (ເວລາຈຳລອງສູງສຸດ ຫານດ້ວຍຈຳນວນຈຸດ) ຫຼື (2) ຂັ້ນຕອນເວລາຄົງທີ່.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="497"/>
@@ -8145,22 +8174,22 @@ This feature is enabled by default. If you need to maintain compatibility with o
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="724"/>
         <source>Net label style</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຮູບແບບປ້າຍຊື່ເນັດ (net label)</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="727"/>
         <source>The default text alignment for new net labels. &quot;Connector aligned&quot; keeps the text next to the connector; &quot;Outside aligned&quot; pushes it to the far edge. The two symbols show the result for both label orientations. You can override the alignment per net label in the Inspector.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ການຈັດແນວຂໍ້ຄວາມມາດຕະຖານສຳລັບປ້າຍຊື່ເນັດ (net label) ອັນໃໝ່. "ຈັດຕິດຕົວເຊື່ອມຕໍ່" ຈະຮັກສາຂໍ້ຄວາມໄວ້ຂ້າງຕົວເຊື່ອມຕໍ່; "ຈັດຊິດຂອບນອກ" ຈະດັນຂໍ້ຄວາມໄປຫາຂອບທີ່ໄກທີ່ສຸດ. ສັນຍາລັກທັງສອງສະແດງຜົນລັບສຳລັບທິດທາງປ້າຍຊື່ທັງສອງແບບ. ທ່ານສາມາດປ່ຽນແປງການຈັດແນວສະເພາະປ້າຍຊື່ເນັດແຕ່ລະອັນໄດ້ໃນ Inspector.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="743"/>
         <source>Outside aligned</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຈັດຊິດຂອບນອກ</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="743"/>
         <source>Connector aligned</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຈັດຕິດຕົວເຊື່ອມຕໍ່</translation>
     </message>
     <message>
         <source>&lt;b&gt;Scroll priority&lt;/b&gt;&lt;br/&gt;</source>
@@ -8208,7 +8237,7 @@ This feature is enabled by default. If you need to maintain compatibility with o
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="324"/>
         <source>Clear Settings</source>
-        <translation>ລຶບການຕັ້ງຄ່າ</translation>
+        <translation>ລ້າງການຕັ້ງຄ່າ</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="358"/>
@@ -8250,42 +8279,42 @@ We recommend enabling this. Only to avoid surprises with processes that are opti
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="460"/>
         <source>Enable gerber export improvements</source>
-        <translation>ເປີດໃຊ້ວຽກການປັບປຸງການສົ່ງອອກ Gerber</translation>
+        <translation>ເປີດໃຊ້ການປັບປຸງການສົ່ງອອກ Gerber</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="533"/>
         <source>Specific options for the SPICE simulator: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຕົວເລືອກສະເພາະສຳລັບຕົວຈຳລອງ SPICE: </translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="592"/>
         <source>Connected Highlight</source>
-        <translation>ໄຮໄລ້ການເຊື່ອມຕໍ່</translation>
+        <translation>ເນັ້ນການເຊື່ອມຕໍ່</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="608"/>
         <source>Unconnected Highlight</source>
-        <translation>ໄຮໄລ້ທີ່ຍັງບໍ່ໄດ້ເຊື່ອມຕໍ່</translation>
+        <translation>ເນັ້ນທີ່ຍັງບໍ່ໄດ້ເຊື່ອມຕໍ່</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="648"/>
         <source>&lt;b&gt;Scroll priority&lt;/b&gt;&lt;br/&gt;no keys down = scroll&lt;br/&gt;&lt;kbd&gt;Shift&lt;/kbd&gt; key swaps scroll axis&lt;br/&gt;&lt;kbd&gt;Alt&lt;/kbd&gt; or &lt;kbd&gt;%1&lt;/kbd&gt; = zoom</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;ບຸລິມະສິດການເລື່ອນ&lt;/b&gt;&lt;br/&gt;ບໍ່ກົດປຸ່ມໃດ = ເລື່ອນ&lt;br/&gt;ປຸ່ມ &lt;kbd&gt;Shift&lt;/kbd&gt; ສະຫຼັບແກນການເລື່ອນ&lt;br/&gt;&lt;kbd&gt;Alt&lt;/kbd&gt; ຫຼື &lt;kbd&gt;%1&lt;/kbd&gt; = ຊູມ</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="652"/>
         <source>&lt;b&gt;Zoom priority&lt;/b&gt;&lt;br/&gt;no keys down = zoom&lt;br/&gt;&lt;kbd&gt;Alt&lt;/kbd&gt; or &lt;kbd&gt;%1&lt;/kbd&gt; = scroll&lt;br/&gt;&lt;kbd&gt;Shift&lt;/kbd&gt; key swaps scroll axis</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;ບຸລິມະສິດການຊູມ&lt;/b&gt;&lt;br/&gt;ບໍ່ກົດປຸ່ມໃດ = ຊູມ&lt;br/&gt;&lt;kbd&gt;Alt&lt;/kbd&gt; ຫຼື &lt;kbd&gt;%1&lt;/kbd&gt; = ເລື່ອນ&lt;br/&gt;ປຸ່ມ &lt;kbd&gt;Shift&lt;/kbd&gt; ສະຫຼັບແກນການເລື່ອນ</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="656"/>
         <source>&lt;b&gt;Guess&lt;/b&gt;&lt;br/&gt;Let Fritzing guess if the input is from a wheel or a touchpad. &lt;kbd&gt;Alt&lt;/kbd&gt; or &lt;kbd&gt;%1&lt;/kbd&gt; modify scrolling. &lt;kbd&gt;Shift&lt;/kbd&gt; can modify the axis or the speed.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;ຄາດເດົາ&lt;/b&gt;&lt;br/&gt;ໃຫ້ Fritzing ຄາດເດົາເອງວ່າການປ້ອນຂໍ້ມູນມາຈາກລໍ້ເລື່ອນ ຫຼືທັດແພັດ (touchpad). &lt;kbd&gt;Alt&lt;/kbd&gt; ຫຼື &lt;kbd&gt;%1&lt;/kbd&gt; ປັບປ່ຽນການເລື່ອນ. &lt;kbd&gt;Shift&lt;/kbd&gt; ສາມາດປັບປ່ຽນແກນ ຫຼືຄວາມໄວໄດ້.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="660"/>
         <source>&lt;b&gt;Pure&lt;/b&gt;&lt;br/&gt;Use system defaults to interpret the wheel input. Don&apos;t try anything fancy. Recommended when using a touchpad with pinch gestures.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;ບໍລິສຸດ&lt;/b&gt;&lt;br/&gt;ໃຊ້ຄ່າເລີ່ມຕົ້ນຂອງລະບົບໃນການແປຄວາມໝາຍການປ້ອນຂໍ້ມູນຈາກລໍ້ເລື່ອນ. ບໍ່ຕ້ອງເຮັດຫຍັງພິເສດ. ແນະນຳໃຫ້ໃຊ້ເມື່ອໃຊ້ທັດແພັດ (touchpad) ພ້ອມທ່າທາງບີບນິ້ວ (pinch gesture).</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="689"/>
@@ -8295,7 +8324,7 @@ We recommend enabling this. Only to avoid surprises with processes that are opti
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="692"/>
         <source>When you mouse-down and drag on a wire or the leg of a part (as opposed to a connector or a bendpoint) do you want to change the curvature of the wire (or leg) or drag out a new bendpoint?</source>
-        <translation>ເມື່ອທ່ານຄລິກເມົາສ໌ຄ້າງແລ້ວລາກເທິງເສັ້ນລວດ ຫຼື ຂາຂອງອຸປະກອນ ທ່ານຕ້ອງການປ່ຽນຄວາມໂຄ້ງຂອງເສັ້ນລວດ ຫຼື ລາກຈຸດດັດໂຄ້ງໃໝ່ອອກມາ?</translation>
+        <translation>ເມື່ອທ່ານຄລິກເມົາສ໌ຄ້າງແລ້ວລາກເທິງເສັ້ນລວດ ຫຼື ຂາຂອງຊິ້ນສ່ວນ (ບໍ່ແມ່ນຈຸດເຊື່ອມຕໍ່ ຫຼື ຈຸດດັດໂຄ້ງ) ທ່ານຕ້ອງການປ່ຽນຄວາມໂຄ້ງຂອງເສັ້ນລວດ (ຫຼືຂາ) ຫຼື ລາກຈຸດດັດໂຄ້ງໃໝ່ອອກມາບໍ?</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="697"/>
@@ -8353,7 +8382,7 @@ We recommend enabling this. Only to avoid surprises with processes that are opti
     <message>
         <location filename="../src/program/programtab.cpp" line="338"/>
         <source>Serial Monitor</source>
-        <translation>ຈໍພາບຊີລຽວ</translation>
+        <translation>ຈໍພາບຊີລີອລ</translation>
     </message>
     <message>
         <location filename="../src/program/programtab.cpp" line="344"/>
@@ -8383,7 +8412,7 @@ We recommend enabling this. Only to avoid surprises with processes that are opti
     <message>
         <location filename="../src/program/programtab.cpp" line="751"/>
         <source>No uploader for %1 specified. Go to Preferences &gt; Code View to configure it.</source>
-        <translation>ບໍ່ໄດ້ລະບຸຕົວອັບໂຫຼດສຳລັບ %1. ໄປທີ່ Preferences &gt; Code View ເພື່ອຕັ້ງຄ່າ.</translation>
+        <translation>ບໍ່ໄດ້ລະບຸຕົວອັບໂຫຼດສຳລັບ %1. ໄປທີ່ ການຕັ້ງຄ່າ &gt; ມຸມເບິ່ງລະຫັດ ເພື່ອຕັ້ງຄ່າ.</translation>
     </message>
     <message>
         <location filename="../src/program/programtab.cpp" line="755"/>
@@ -8542,7 +8571,7 @@ We recommend enabling this. Only to avoid surprises with processes that are opti
     <message>
         <location filename="../src/program/programwindow.cpp" line="258"/>
         <source>Remove the current program tab from the sketch</source>
-        <translation>ລົບແຖບໂປຣແກຣມປັດຈຸບັນອອກຈາກແບບຮ່າງ</translation>
+        <translation>ລົບແຖບໂປຣແກຣມປັດຈຸບັນອອກຈາກແຜນວາດ</translation>
     </message>
     <message>
         <location filename="../src/program/programwindow.cpp" line="264"/>
@@ -8587,7 +8616,7 @@ We recommend enabling this. Only to avoid surprises with processes that are opti
     <message>
         <location filename="../src/program/programwindow.cpp" line="302"/>
         <source>Upload the current program onto a microcontroller</source>
-        <translation>ອັບໂຫຼດໂປຣແກຣມປັດຈຸບັນລົງໃນໄມໂຄຄອນໂທຣລເລີ</translation>
+        <translation>ອັບໂຫຼດໂປຣແກຣມປັດຈຸບັນລົງໃນໄມໂຄຄອນໂທຣເລີ</translation>
     </message>
     <message>
         <location filename="../src/program/programwindow.cpp" line="328"/>
@@ -8676,7 +8705,7 @@ We recommend enabling this. Only to avoid surprises with processes that are opti
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="88"/>
         <source>pcb</source>
-        <translation>pcb</translation>
+        <translation>ແຜ່ນວົງຈອນ</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="240"/>
@@ -8772,7 +8801,7 @@ We recommend enabling this. Only to avoid surprises with processes that are opti
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3462"/>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3473"/>
         <source>Part</source>
-        <translation>ອຸປະກອນ</translation>
+        <translation>ຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3487"/>
@@ -8884,7 +8913,13 @@ error: %1
 temp file: %2
 
 target file: %3.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບໍ່ສາມາດຂຽນໄຟລ໌ຊົ່ວຄາວໄດ້. ຍົກເລີກການບັນທຶກ. 
+
+ຂໍ້ຜິດພາດ: %1
+
+ໄຟລ໌ຊົ່ວຄາວ: %2
+
+ໄຟລ໌ເປົ້າໝາຍ: %3.</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="509"/>
@@ -8895,7 +8930,13 @@ error: %1
 temp file: %2
 
 target file: %3.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ເກີດຂໍ້ຜິດພາດຂະນະຂຽນໄຟລ໌ຊົ່ວຄາວ. ຍົກເລີກການບັນທຶກ. 
+
+ຂໍ້ຜິດພາດ: %1
+
+ໄຟລ໌ຊົ່ວຄາວ: %2
+
+ໄຟລ໌ເປົ້າໝາຍ: %3.</translation>
     </message>
     <message>
         <source>Cannot write temp file. Save aborted.
@@ -8932,7 +8973,7 @@ target file: %3.</source>
     <message>
         <location filename="../src/model/palettemodel.cpp" line="85"/>
         <source>No parts found.</source>
-        <translation>ບໍ່ພົບອຸປະກອນ.</translation>
+        <translation>ບໍ່ພົບຊິ້ນສ່ວນ.</translation>
     </message>
     <message>
         <location filename="../src/model/palettemodel.cpp" line="212"/>
@@ -8946,7 +8987,7 @@ target file: %3.</source>
     <message>
         <location filename="../src/model/palettemodel.cpp" line="340"/>
         <source>The part &apos;%1&apos; at &apos;%2&apos; does not have a unique module id &apos;%3&apos;.</source>
-        <translation>ອຸປະກອນ &apos;%1&apos; ຢູ່ &apos;%2&apos; ບໍ່ມີລະຫັດໂມດູນ (module id) &apos;%3&apos; ທີ່ບໍ່ຊ້ຳໃຜ.</translation>
+        <translation>ຊິ້ນສ່ວນ &apos;%1&apos; ຢູ່ &apos;%2&apos; ບໍ່ມີລະຫັດໂມດູນ (module id) &apos;%3&apos; ທີ່ບໍ່ຊ້ຳໃຜ.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/hashpopulatewidget.cpp" line="170"/>
@@ -8980,8 +9021,8 @@ target file: %3.</source>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="98"/>
         <source>Sorry, we have a problem with the swapping mechanism.
 Fritzing still works, but you won&apos;t be able to change parts properties.</source>
-        <translation>ຂໍອະໄພ, ເກີດບັນຫາກັບລະບົບການປ່ຽນອຸປະກອນ.
-Fritzing ຍັງໃຊ້ງານໄດ້ຢູ່, ແຕ່ທ່ານຈະບໍ່ສາມາດປ່ຽນຄຸນສົມບັດຂອງອຸປະກອນໄດ້.</translation>
+        <translation>ຂໍອະໄພ, ເກີດບັນຫາກັບລະບົບການປ່ຽນຊິ້ນສ່ວນ.
+Fritzing ຍັງໃຊ້ງານໄດ້ຢູ່, ແຕ່ທ່ານຈະບໍ່ສາມາດປ່ຽນຄຸນສົມບັດຂອງຊິ້ນສ່ວນໄດ້.</translation>
     </message>
     <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="99"/>
@@ -8993,7 +9034,7 @@ Fritzing ຍັງໃຊ້ງານໄດ້ຢູ່, ແຕ່ທ່ານຈ
     <message>
         <location filename="../src/sketch/schematicsketchwidget.cpp" line="57"/>
         <source>schem</source>
-        <translation>schem</translation>
+        <translation>ຜັງວົງຈອນ</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinview.cpp" line="50"/>
@@ -9050,7 +9091,7 @@ Fritzing ຍັງໃຊ້ງານໄດ້ຢູ່, ແຕ່ທ່ານຈ
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="9198"/>
         <source>Select locked parts</source>
-        <translation>ເລືອກອຸປະກອນທີ່ຖືກລັອກໄວ້</translation>
+        <translation>ເລືອກຊິ້ນສ່ວນທີ່ຖືກລັອກໄວ້</translation>
     </message>
     <message>
         <location filename="../src/viewlayer.cpp" line="120"/>
@@ -9066,7 +9107,7 @@ Fritzing ຍັງໃຊ້ງານໄດ້ຢູ່, ແຕ່ທ່ານຈ
         <location filename="../src/viewlayer.cpp" line="122"/>
         <location filename="../src/viewlayer.cpp" line="130"/>
         <source>Parts</source>
-        <translation>ອຸປະກອນ</translation>
+        <translation>ຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/viewlayer.cpp" line="123"/>
@@ -9111,7 +9152,7 @@ Fritzing ຍັງໃຊ້ງານໄດ້ຢູ່, ແຕ່ທ່ານຈ
     <message>
         <location filename="../src/viewlayer.cpp" line="140"/>
         <source>Silkscreen Top (Part Labels)</source>
-        <translation>ຊັ້ນພິມດ້ານເທິງ (ປ້າຍຊື່ມີອຸປະກອນ)</translation>
+        <translation>ຊັ້ນພິມດ້ານເທິງ (ປ້າຍຊື່ຊິ້ນສ່ວນ)</translation>
     </message>
     <message>
         <location filename="../src/viewlayer.cpp" line="141"/>
@@ -9151,12 +9192,12 @@ Fritzing ຍັງໃຊ້ງານໄດ້ຢູ່, ແຕ່ທ່ານຈ
     <message>
         <location filename="../src/viewlayer.cpp" line="149"/>
         <source>Silkscreen Bottom (Part Labels)</source>
-        <translation>ຊັ້ນພິມດ້ານລຸ່ມ (ປ້າຍຊື່ມີອຸປະກອນ)</translation>
+        <translation>ຊັ້ນພິມດ້ານລຸ່ມ (ປ້າຍຊື່ຊິ້ນສ່ວນ)</translation>
     </message>
     <message>
         <location filename="../src/viewlayer.cpp" line="153"/>
         <source>Part Image</source>
-        <translation>ຮູບອຸປະກອນ</translation>
+        <translation>ຮູບຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/viewlayer.cpp" line="161"/>
@@ -9172,7 +9213,7 @@ Fritzing ຍັງໃຊ້ງານໄດ້ຢູ່, ແຕ່ທ່ານຈ
         <location filename="../src/viewlayer.cpp" line="124"/>
         <location filename="../src/viewlayer.cpp" line="134"/>
         <source>Part Labels</source>
-        <translation>ປ້າຍຊື່ອຸປະກອນ</translation>
+        <translation>ປ້າຍຊື່ຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/viewlayer.cpp" line="126"/>
@@ -9195,7 +9236,7 @@ Fritzing ຍັງໃຊ້ງານໄດ້ຢູ່, ແຕ່ທ່ານຈ
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2414"/>
         <location filename="../src/sketch/sketchwidget.cpp" line="8906"/>
         <source>Select all %1</source>
-        <translation>ເລືອກທັງໝົດ %1</translation>
+        <translation>ເລືອກ %1 ທັງໝົດ</translation>
     </message>
     <message>
         <location filename="../src/version/updatedialog.cpp" line="52"/>
@@ -9285,13 +9326,13 @@ Fritzing ຍັງໃຊ້ງານໄດ້ຢູ່, ແຕ່ທ່ານຈ
     <message>
         <location filename="../src/partsbinpalette/partsbinview.cpp" line="238"/>
         <source>Part already in bin</source>
-        <translation>ມີອຸປະກອນນີ້ຢູ່ໃນຄັງແລ້ວ</translation>
+        <translation>ມີຊິ້ນສ່ວນນີ້ຢູ່ໃນຄັງແລ້ວ</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinview.cpp" line="238"/>
         <source>The part that you have just added,
 is already there, we won&apos;t add it again, right?</source>
-        <translation>ອຸປະກອນທີ່ທ່ານຫາກໍ່ເພີ່ມເຂົ້າໄປນັ້ນມີຢູ່ແລ້ວ, ພວກເຮົາຈະບໍ່ເພີ່ມມັນຊ້ຳອີກ, ຕົກລົງບໍ່?</translation>
+        <translation>ຊິ້ນສ່ວນທີ່ທ່ານຫາກໍ່ເພີ່ມເຂົ້າໄປນັ້ນມີຢູ່ແລ້ວ, ພວກເຮົາຈະບໍ່ເພີ່ມມັນຊ້ຳອີກ, ຕົກລົງບໍ່?</translation>
     </message>
     <message>
         <location filename="../src/utils/fileprogressdialog.cpp" line="68"/>
@@ -9301,7 +9342,7 @@ is already there, we won&apos;t add it again, right?</source>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="9183"/>
         <source>Select outdated parts</source>
-        <translation>ເລືອກອຸປະກອນທີ່ເກົ່າແລ້ວ (ມີເວີຊັນໃໝ່)</translation>
+        <translation>ເລືອກຊິ້ນສ່ວນທີ່ເກົ່າແລ້ວ (ມີເວີຊັນໃໝ່)</translation>
     </message>
     <message>
         <source>files</source>
@@ -9440,12 +9481,12 @@ is already there, we won&apos;t add it again, right?</source>
     <message>
         <location filename="../src/svg/kicadmodule2svg.cpp" line="559"/>
         <source>shape delta not implemented</source>
-        <translation>ຍັງບໍ່ຮອງຮັບ shape delta</translation>
+        <translation>ຍັງບໍ່ຮອງຮັບຄ່າສ່ວນຕ່າງຂອງຮູບຊົງ (shape delta)</translation>
     </message>
     <message>
         <location filename="../src/svg/kicadmodule2svg.cpp" line="553"/>
         <source>trapezoidal pads not implemented</source>
-        <translation>ຍັງບໍ່ຮອງຮັບແຜ່ນວົງຈອນຮູບສີ່ແຈພາງ</translation>
+        <translation>ຍັງບໍ່ຮອງຮັບແຜ່ນວົງຈອນຮູບສີ່ຫລ່ຽມຄາງໝູ</translation>
     </message>
     <message>
         <location filename="../src/svg/kicadmodule2svg.cpp" line="564"/>
@@ -9470,7 +9511,7 @@ is already there, we won&apos;t add it again, right?</source>
     <message>
         <location filename="../src/svg/x2svg.cpp" line="71"/>
         <source>failure in svg conversion 2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ການແປງ SVG ລົ້ມເຫຼວ 2</translation>
     </message>
     <message>
         <source>failure in svg conversion 2: %1 %2 %3</source>
@@ -9490,52 +9531,52 @@ is already there, we won&apos;t add it again, right?</source>
         <location filename="../src/utils/folderutils.cpp" line="838"/>
         <source>Fritzing sketch</source>
         <comment>This is a file type used for an error message.</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ແຜນວາດ Fritzing</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="839"/>
         <source>Fritzing bundle</source>
         <comment>This is a file type used for an error message.</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຊຸດລວມ Fritzing</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="840"/>
         <source>Fritzing bin</source>
         <comment>This is a file type used for an error message.</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຄັງ Fritzing</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="841"/>
         <source>Fritzing bundled bin</source>
         <comment>This is a file type used for an error message.</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຄັງລວມ Fritzing</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="842"/>
         <source>Fritzing part</source>
         <comment>This is a file type used for an error message.</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຊິ້ນສ່ວນ Fritzing</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="843"/>
         <source>Fritzing bundled part</source>
         <comment>This is a file type used for an error message.</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຊິ້ນສ່ວນລວມ Fritzing</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="857"/>
         <source>A symbolic link exists but points to missing file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ມີລິງສັນຍາລັກ (symbolic link) ຢູ່ ແຕ່ຊີ້ໄປຫາໄຟລ໌ທີ່ບໍ່ພົບ: %1</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="863"/>
         <source>The parent directory does not exist: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ໂຟນເດີແມ່ (parent directory) ບໍ່ມີຢູ່: %1</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="872"/>
         <source>Found similar filename with different case: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ພົບຊື່ໄຟລ໌ທີ່ຄ້າຍກັນ ແຕ່ຕົວອັກສອນນ້ອຍ-ໃຫຍ່ຕ່າງກັນ: %1</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="883"/>
@@ -9544,7 +9585,11 @@ is already there, we won&apos;t add it again, right?</source>
 File type: %2
 
 Please check if the file exists.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບໍ່ພົບໄຟລ໌ '%1'.
+
+ປະເພດໄຟລ໌: %2
+
+ກະລຸນາກວດສອບວ່າໄຟລ໌ນີ້ມີຢູ່ຫຼືບໍ່.</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="895"/>
@@ -9553,7 +9598,11 @@ Please check if the file exists.</source>
 File type: %2
 
 Please ensure you have permission to read the file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບໍ່ສາມາດອ່ານໄຟລ໌ '%1' ໄດ້.
+
+ປະເພດໄຟລ໌: %2
+
+ກະລຸນາກວດສອບວ່າທ່ານມີສິດອະນຸຍາດໃນການອ່ານໄຟລ໌ນີ້.</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="907"/>
@@ -9562,7 +9611,11 @@ Please ensure you have permission to read the file.</source>
 File type: %2
 
 This could be due to a cloud storage or network drive issue. Please ensure the file has been properly synchronized and saved.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ໄຟລ໌ '%1' ຫວ່າງເປົ່າ.
+
+ປະເພດໄຟລ໌: %2
+
+ອາດເກີດຈາກບັນຫາການເກັບຂໍ້ມູນເທິງຄລາວ (cloud storage) ຫຼືໄດຣຟ໌ເຄືອຂ່າຍ (network drive). ກະລຸນາກວດສອບໃຫ້ແນ່ໃຈວ່າໄຟລ໌ໄດ້ຖືກຊິງຄ໌ (sync) ແລະບັນທຶກຢ່າງຖືກຕ້ອງແລ້ວ.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/kicadmoduledialog.cpp" line="36"/>
@@ -9577,7 +9630,7 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
     <message>
         <location filename="../src/svg/kicadschematic2svg.cpp" line="103"/>
         <source>schematic part %1 not found in %2</source>
-        <translation>ບໍ່ພົບອຸປະກອນຜັງວົງຈອນ %1 ໃນ %2</translation>
+        <translation>ບໍ່ພົບຊິ້ນສ່ວນຜັງວົງຈອນ %1 ໃນ %2</translation>
     </message>
     <message>
         <location filename="../src/svg/kicadschematic2svg.cpp" line="111"/>
@@ -9606,7 +9659,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
         <source>%n path(s) in board outline layer</source>
         <translation>
             <numerusform>ພົບ %n ເສັ້ນທາງໃນຊັ້ນຂອບຂອງບອດ</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -9614,7 +9666,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
         <source>%n path(s) in silkscreen layers</source>
         <translation>
             <numerusform>ພົບ %n ເສັ້ນທາງໃນຊັ້ນພິມ (silkscreen)</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -9622,7 +9673,6 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
         <source>%n path(s) in copper layers</source>
         <translation>
             <numerusform>ພົບ %n ເສັ້ນທາງໃນຊັ້ນທອງແດງ</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -9630,15 +9680,13 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
         <source>%n path(s) in mask layers</source>
         <translation>
             <numerusform>ພົບ %n ເສັ້ນທາງໃນຊັ້ນມາດ (mask)</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/svg/gerbergenerator.cpp" line="156"/>
         <source>%n path(s) in paste mask layers</source>
         <translation>
-            <numerusform>ພົບ %n ເສັ້ນທາງໃນຊັ້ນມາດວາງຕັກກົ່ວ (paste mask)</numerusform>
-            <numerusform></numerusform>
+            <numerusform>ພົບ %n ເສັ້ນທາງໃນຊັ້ນມາດວາງຕะກົ່ວ (paste mask)</numerusform>
         </translation>
     </message>
     <message>
@@ -9700,7 +9748,7 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="313"/>
         <source>exported paste mask layer is empty</source>
-        <translation>ຊັ້ນມາດວາງຕັກກົ່ວທີ່ສົ່ງອອກວ່າງເປົ່າ</translation>
+        <translation>ຊັ້ນມາດວາງຕะກົ່ວທີ່ສົ່ງອອກວ່າງເປົ່າ</translation>
     </message>
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="349"/>
@@ -9750,7 +9798,7 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
     <message>
         <location filename="../src/commands.cpp" line="2675"/>
         <source>Rotate %1 %2° (%3)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ໝູນ %1 %2° (%3)</translation>
     </message>
     <message>
         <location filename="../src/dialogs/groundfillseeddialog.cpp" line="39"/>
@@ -9780,7 +9828,7 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
     <message>
         <location filename="../src/partseditor/peutils.cpp" line="139"/>
         <source>&lt;b&gt;id:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;id:&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;ລະຫັດ:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../src/partseditor/peutils.cpp" line="87"/>
@@ -9810,7 +9858,7 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="531"/>
         <source>Fritzing cannot load the parts bin</source>
-        <translation>Fritzing ບໍ່ສາມາດໂຫຼດຄັງອຸປະກອນໄດ້</translation>
+        <translation>Fritzing ບໍ່ສາມາດໂຫຼດຄັງຊິ້ນສ່ວນໄດ້</translation>
     </message>
     <message>
         <location filename="../src/partseditor/peconnectorsview.cpp" line="76"/>
@@ -9826,7 +9874,7 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
     <message>
         <location filename="../src/autoroute/drc.cpp" line="105"/>
         <source>Part %1 &apos;%2&apos;</source>
-        <translation>ອຸປະກອນ %1 &apos;%2&apos;</translation>
+        <translation>ຊິ້ນສ່ວນ %1 &apos;%2&apos;</translation>
     </message>
     <message>
         <location filename="../src/autoroute/autoroutersettingsdialog.cpp" line="62"/>
@@ -9841,37 +9889,37 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
     <message>
         <location filename="../src/version/partschecker.cpp" line="73"/>
         <source>The parts folder &apos;%1&apos; has been changed--it is not in a supported branch (%2). %3</source>
-        <translation>ໂຟນເດີອຸປະກອນ &apos;%1&apos; ຖືກປ່ຽນແປງ--ມັນບໍ່ໄດ້ຢູ່ໃນສາຂາ (branch) ທີ່ຮອງຮັບ (%2). %3</translation>
+        <translation>ໂຟນເດີຊິ້ນສ່ວນ &apos;%1&apos; ຖືກປ່ຽນແປງ--ມັນບໍ່ໄດ້ຢູ່ໃນສາຂາ (branch) ທີ່ຮອງຮັບ (%2). %3</translation>
     </message>
     <message>
         <location filename="../src/version/partschecker.cpp" line="74"/>
         <source>The parts folder &apos;%1&apos; may have been damaged (%2). %3</source>
-        <translation>ໂຟນເດີອຸປະກອນ &apos;%1&apos; ອາດຈະເສຍຫາຍ (%2). %3</translation>
+        <translation>ໂຟນເດີຊິ້ນສ່ວນ &apos;%1&apos; ອາດຈະເສຍຫາຍ (%2). %3</translation>
     </message>
     <message>
         <location filename="../src/version/partschecker.cpp" line="75"/>
         <source>The parts folder &apos;%1&apos; has been changed (%2). %3</source>
-        <translation>ໂຟນເດີອຸປະກອນ &apos;%1&apos; ຖືກປ່ຽນແປງ (%2). %3</translation>
+        <translation>ໂຟນເດີຊິ້ນສ່ວນ &apos;%1&apos; ຖືກປ່ຽນແປງ (%2). %3</translation>
     </message>
     <message>
         <location filename="../src/version/partschecker.cpp" line="76"/>
         <source>There are new or modified files in the parts folder &apos;%1&apos;. These changes will be discarded by the update.</source>
-        <translation>ມີໄຟລ໌ໃໝ່ຫຼືໄຟລ໌ທີ່ຖືກແກ້ໄຂໃນໂຟນເດີອຸປະກອນ &apos;%1&apos;. ການປ່ຽນແປງເຫຼົ່ານີ້ຈະຖືກຍົກເລີກເມື່ອມີການອັບເດດ.</translation>
+        <translation>ມີໄຟລ໌ໃໝ່ຫຼືໄຟລ໌ທີ່ຖືກແກ້ໄຂໃນໂຟນເດີຊິ້ນສ່ວນ &apos;%1&apos;. ການປ່ຽນແປງເຫຼົ່ານີ້ຈະຖືກຍົກເລີກເມື່ອມີການອັບເດດ.</translation>
     </message>
     <message>
         <location filename="../src/version/partschecker.cpp" line="77"/>
         <source>There are unreadable files in the parts folder &apos;%1&apos;. %2</source>
-        <translation>ມີໄຟລ໌ທີ່ບໍ່ສາມາດອ່ານໄດ້ໃນໂຟນເດີອຸປະກອນ &apos;%1&apos;. %2</translation>
+        <translation>ມີໄຟລ໌ທີ່ບໍ່ສາມາດອ່ານໄດ້ໃນໂຟນເດີຊິ້ນສ່ວນ &apos;%1&apos;. %2</translation>
     </message>
     <message>
         <location filename="../src/version/partschecker.cpp" line="99"/>
         <source>Unable to open parts folder &apos;%1&apos; for update. %2</source>
-        <translation>ບໍ່ສາມາດເປີດໂຟນເດີອຸປະກອນ &apos;%1&apos; ເພື່ອອັບເດດໄດ້. %2</translation>
+        <translation>ບໍ່ສາມາດເປີດໂຟນເດີຊິ້ນສ່ວນ &apos;%1&apos; ເພື່ອອັບເດດໄດ້. %2</translation>
     </message>
     <message>
         <location filename="../src/version/partschecker.cpp" line="105"/>
         <source>Parts folder repo &apos;%1&apos; is empty. %2</source>
-        <translation>ຄັງໂຟນເດີອຸປະກອນ &apos;%1&apos; ວ່າງເປົ່າ. %2</translation>
+        <translation>ຄັງໂຟນເດີຊິ້ນສ່ວນ &apos;%1&apos; ວ່າງເປົ່າ. %2</translation>
     </message>
     <message>
         <location filename="../src/version/partschecker.cpp" line="113"/>
@@ -9897,60 +9945,60 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
         <location filename="../src/version/partschecker.cpp" line="470"/>
         <location filename="../src/version/partschecker.cpp" line="478"/>
         <source>Regenerating parts database</source>
-        <translation>ກຳລັງສ້າງຖານຂໍ້ມູນອຸປະກອນໃໝ່</translation>
+        <translation>ກຳລັງສ້າງຖານຂໍ້ມູນຊິ້ນສ່ວນໃໝ່</translation>
     </message>
     <message>
         <location filename="../src/version/partschecker.cpp" line="470"/>
         <source>Unable to find parts git repository</source>
-        <translation>ບໍ່ພົບຄັງ Git ຂອງອຸປະກອນ</translation>
+        <translation>ບໍ່ພົບຄັງ Git ຂອງຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/version/partschecker.cpp" line="478"/>
         <source>Unable to find parts git repository HEAD</source>
-        <translation>ບໍ່ພົບ HEAD ຂອງຄັງ Git ອຸປະກອນ</translation>
+        <translation>ບໍ່ພົບ HEAD ຂອງຄັງ Git ຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="491"/>
         <source>%1 mil</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 mil</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="493"/>
         <source>%1 – %2 mil</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 – %2 mil</translation>
     </message>
     <message>
         <location filename="../src/program/syntaxer.cpp" line="86"/>
         <source>%1 files (</source>
         <comment>file type filter, e.g. &apos;Arduino files (&apos;</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 ໄຟລ໌ (</translation>
     </message>
     <message>
         <location filename="../src/testing/FProbePart.cpp" line="166"/>
         <location filename="../src/testing/FProbePart.cpp" line="191"/>
         <source>Move part</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຍ້າຍຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/testing/FProbeWire.cpp" line="449"/>
         <location filename="../src/testing/FProbeWire.cpp" line="520"/>
         <source>Move wire endpoint</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຍ້າຍປາຍສາຍໄຟ</translation>
     </message>
     <message>
         <location filename="../src/testing/FProbeWire.cpp" line="606"/>
         <source>Split and move wire</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ແຍກ ແລະ ຍ້າຍສາຍໄຟ</translation>
     </message>
     <message>
         <location filename="../src/testing/FProbeWire.cpp" line="711"/>
         <source>Delete wire</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ລຶບສາຍໄຟ</translation>
     </message>
     <message>
         <location filename="../src/testing/FProbeWire.cpp" line="744"/>
         <source>Delete wire segment</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ລຶບສ່ວນສາຍໄຟ</translation>
     </message>
 </context>
 <context>
@@ -10016,7 +10064,7 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
         <location filename="../src/dialogs/quotedialog.cpp" line="171"/>
         <source>Fritzing Fab Quote</source>
         <comment>dialog title</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ໃບສະເໜີລາຄາການຜະລິດ Fritzing</translation>
     </message>
     <message>
         <location filename="../src/dialogs/quotedialog.cpp" line="179"/>
@@ -10109,13 +10157,14 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
     <message>
         <location filename="../src/fapplication.cpp" line="335"/>
         <source>Unable to open temporary file (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບໍ່ສາມາດເປີດໄຟລ໌ຊົ່ວຄາວໄດ້ (%1)</translation>
     </message>
     <message>
         <location filename="../src/fapplication.cpp" line="341"/>
         <source>Database failure
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຖານຂໍ້ມູນລົ້ມເຫລວ
+%1</translation>
     </message>
     <message>
         <location filename="../src/fapplication.cpp" line="348"/>
@@ -10137,7 +10186,7 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
     <message>
         <location filename="../src/items/resistor.cpp" line="121"/>
         <source>%1 %2 Resistor</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຕົວຕ້ານທານ %1 %2</translation>
     </message>
     <message>
         <location filename="../src/items/resistor.cpp" line="249"/>
@@ -10320,17 +10369,17 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
     <message>
         <location filename="../src/infoview/scalediconframe.cpp" line="61"/>
         <source>Part breadboard view image</source>
-        <translation>ຮູບອຸປະກອນໃນມຸມເບິ່ງເບຣດບອດ</translation>
+        <translation>ຮູບຊິ້ນສ່ວນໃນມຸມເບິ່ງເບຣດບອດ</translation>
     </message>
     <message>
         <location filename="../src/infoview/scalediconframe.cpp" line="62"/>
         <source>Part schematic view image</source>
-        <translation>ຮູບອຸປະກອນໃນມຸມເບິ່ງວົງຈອນ</translation>
+        <translation>ຮູບຊິ້ນສ່ວນໃນມຸມເບິ່ງວົງຈອນ</translation>
     </message>
     <message>
         <location filename="../src/infoview/scalediconframe.cpp" line="63"/>
         <source>Part pcb view image</source>
-        <translation>ຮູບອຸປະກອນໃນມຸມເບິ່ງ pcb</translation>
+        <translation>ຮູບຊິ້ນສ່ວນໃນມຸມເບິ່ງ pcb</translation>
     </message>
 </context>
 <context>
@@ -10473,19 +10522,19 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="209"/>
         <source>Unable to load the NgSpice library</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ບໍ່ສາມາດໂຫຼດໄລບຣາຣີ (library) NgSpice ໄດ້</translation>
     </message>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="209"/>
         <source>Fritzing could not load the ngspice library (not found or wrong version). This is usually a problem found in third party binaries. Please, use the official binary or notify the mantainers of the packaging.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fritzing ບໍ່ສາມາດໂຫຼດໄລບຣາຣີ (library) ngspice ໄດ້ (ບໍ່ພົບ ຫຼືເປັນເວີຊັນທີ່ບໍ່ຖືກຕ້ອງ). ໂດຍປົກກະຕິແລ້ວນີ້ແມ່ນບັນຫາທີ່ພົບໃນໄຟລ໌ໄບນາຣີ (binary) ຂອງບຸກຄົນທີສາມ. ກະລຸນາໃຊ້ໄຟລ໌ໄບນາຣີສະບັບທາງການ ຫຼືແຈ້ງໃຫ້ຜູ້ດູແລຮັກສາການແພັກເກດຊາບ.</translation>
     </message>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="361"/>
         <source>The simulator gave an error when loading the netlist. Probably some SPICE field is wrong, please, check them.
 If the parts are from the simulation bin, report the bug in GitHub.</source>
         <translation>ເຄື່ອງຈຳລອງເກີດຂໍ້ຜິດພາດໃນຂະນະໂຫຼດ netlist. ອາດຈະມີບາງຈຸດໃນ SPICE ບໍ່ຖືກຕ້ອງ, ກະລຸນາກວດສອບຄືນ.
-ຫາກອຸປະກອນມາຈາກຄັງສຳລັບການຈຳລອງ, ກະລຸນາແຈ້ງບັກ (bug) ໃນ GitHub.</translation>
+ຫາກຊິ້ນສ່ວນມາຈາກຄັງສຳລັບການຈຳລອງ, ກະລຸນາແຈ້ງບັກ (bug) ໃນ GitHub.</translation>
     </message>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="437"/>
@@ -10505,17 +10554,21 @@ If the parts are from the simulation bin, report the bug in GitHub.</source>
 
 Netlist:
 %3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຂໍ້ຜິດພາດ:
+%1%2
+
+ເນັດລິສ (netlist):
+%3</translation>
     </message>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="506"/>
         <source>The simulator gave an error when running the simulation of this circuit. Please, check the error. This could be caused by big modifications of the circuit during the simulation or inestability issues. You may try to decrease the timestep of the simulation.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ໂປຣແກຣມຈຳລອງ (simulator) ໄດ້ສົ່ງຄືນຂໍ້ຜິດພາດເມື່ອແລ່ນການຈຳລອງວົງຈອນນີ້. ກະລຸນາກວດເບິ່ງຂໍ້ຜິດພາດ. ອາດເກີດຈາກການແກ້ໄຂວົງຈອນຢ່າງໃຫຍ່ໃນລະຫວ່າງການຈຳລອງ ຫຼືບັນຫາຄວາມບໍ່ຄົງທີ່ (instability). ທ່ານອາດລອງຫຼຸດຊ່ວງເວລາ (timestep) ຂອງການຈຳລອງລົງ.</translation>
     </message>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="512"/>
         <source>The simulator gave an error when running the simulation of this circuit. Please, check the error. This probably has been caused by big modifications of the circuit during the simulation. Please, try again without deleting big parts of your circuit.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ໂປຣແກຣມຈຳລອງ (simulator) ໄດ້ສົ່ງຄືນຂໍ້ຜິດພາດເມື່ອແລ່ນການຈຳລອງວົງຈອນນີ້. ກະລຸນາກວດເບິ່ງຂໍ້ຜິດພາດ. ອາດເກີດຈາກການແກ້ໄຂວົງຈອນຢ່າງໃຫຍ່ໃນລະຫວ່າງການຈຳລອງ. ກະລຸນາລອງໃໝ່ໂດຍບໍ່ລຶບຊິ້ນສ່ວນຫຼັກຂອງວົງຈອນຂອງທ່ານ.</translation>
     </message>
     <message>
         <source>Errors:
@@ -10530,7 +10583,7 @@ Netlist:
     <message>
         <location filename="../src/simulation/simulator.cpp" line="437"/>
         <source>The spice simulator did not finish after %1 ms. Aborting simulation.</source>
-        <translation>ເຄື່ອງຈຳລອງ spice ບໍ່ສຳເລັດຫຼັງຈາກຜ່ານໄປ %1 ມລ. ກຳລັງຍົກເລີກການຈຳລອງ.</translation>
+        <translation>ເຄື່ອງຈຳລອງ spice ບໍ່ສຳເລັດຫຼັງຈາກຜ່ານໄປ %1 ມິນລິວິນາທີ. ກຳລັງຍົກເລີກການຈຳລອງ.</translation>
     </message>
 </context>
 <context>
@@ -10633,7 +10686,7 @@ Netlist:
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="6305"/>
         <source>Double-click</source>
-        <translation>ກົດສອງບາດ</translation>
+        <translation>ກົດສອງຄັ້ງ</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="1136"/>
@@ -10698,7 +10751,7 @@ Netlist:
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="6305"/>
         <source>Drag or double-click</source>
-        <translation>ລາກ ຫຼື ກົດສອງບາດ</translation>
+        <translation>ລາກ ຫຼື ກົດສອງຄັ້ງ</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="6306"/>
@@ -10728,40 +10781,37 @@ Netlist:
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="7903"/>
         <source>Rotate label &apos;%1&apos; (%2°)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ໝູນປ້າຍຊື່ '%1' (%2°)</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="7907"/>
         <source>Flip label &apos;%1&apos; (horizontal)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ພິກປ້າຍຊື່ '%1' (ຕາມແນວນອນ)</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="7909"/>
         <source>Flip label &apos;%1&apos; (vertical)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ພິກປ້າຍຊື່ '%1' (ຕາມແນວຕັ້ງ)</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/sketch/sketchwidget.cpp" line="8433"/>
         <source>Change resistance of %n part(s)</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>ປ່ຽນຄວາມຕ້ານທານ (resistance) ຂອງຊິ້ນສ່ວນ %n ອັນ</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/sketch/sketchwidget.cpp" line="8502"/>
         <source>Change %1 of %n part(s)</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>ປ່ຽນ %1 ຂອງຊິ້ນສ່ວນ %n ອັນ</numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location filename="../src/sketch/sketchwidget.cpp" line="8596"/>
         <source>Change hole size of %n hole(s)</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
-            <numerusform></numerusform>
+            <numerusform>ປ່ຽນຂະໜາດຮູ %n ຮູ</numerusform>
         </translation>
     </message>
     <message>
@@ -10772,18 +10822,18 @@ Netlist:
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="10062"/>
         <source>Lock part</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ລັອກຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="10062"/>
         <source>Unlock part</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ປົດລັອກຊິ້ນສ່ວນ</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="10473"/>
         <source>Unrouted connections</source>
         <comment>dialog title</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ການເຊື່ອມຕໍ່ທີ່ຍັງບໍ່ໄດ້ລາຍວົງຈອນ</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="11151"/>
@@ -10913,7 +10963,6 @@ Note: you can also trigger this display by mousing down on the routing status te
         <source>show %n part label(s)</source>
         <translation>
             <numerusform>ສະແດງປ້າຍຊື່ຊິ້ນສ່ວນ %n ອັນ</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -10921,7 +10970,6 @@ Note: you can also trigger this display by mousing down on the routing status te
         <source>hide %n part label(s)</source>
         <translation>
             <numerusform>ເຊື່ອງປ້າຍຊື່ຊິ້ນສ່ວນ %n ອັນ</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -10964,13 +11012,15 @@ Note: you can also trigger this display by mousing down on the routing status te
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="147"/>
         <source>
 and %1 other parts</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">
+ແລະ %1 ຊິ້ນສ່ວນອື່ນໆ</translation>
     </message>
     <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="164"/>
         <source>
 and %1 other properties</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">
+ແລະ %1 ຄຸນສົມບັດອື່ນໆ</translation>
     </message>
     <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="1050"/>
@@ -11000,7 +11050,6 @@ and %1 other properties</source>
         <source>%1 %n strip(s)</source>
         <translation>
             <numerusform>%1 %n ແຖບ</numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -11029,32 +11078,32 @@ and %1 other properties</source>
     <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="583"/>
         <source>style</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຮູບແບບ</translation>
     </message>
     <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="587"/>
         <source>Outside aligned</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຈັດແນວດ້ານນອກ</translation>
     </message>
     <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="588"/>
         <source>Connector aligned</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຈັດແນວຕາມຕົວເຊື່ອມຕໍ່</translation>
     </message>
     <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="612"/>
         <source>Left aligned</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຈັດແນວຊ້າຍ</translation>
     </message>
     <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="613"/>
         <source>Right aligned</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ຈັດແນວຂວາ</translation>
     </message>
     <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="614"/>
         <source>Legacy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ແບບເກົ່າ</translation>
     </message>
     <message>
         <location filename="../src/items/symbolpaletteitem.cpp" line="654"/>
@@ -11081,7 +11130,7 @@ and %1 other properties</source>
     <message>
         <location filename="../src/partseditor/tageditorwidget.cpp" line="226"/>
         <source>Remove this tag</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ລຶບແທັກ (tag) ນີ້</translation>
     </message>
 </context>
 <context>
@@ -11089,7 +11138,7 @@ and %1 other properties</source>
     <message>
         <location filename="../src/partseditor/tageditorwidget.cpp" line="241"/>
         <source>add a tag…</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ເພີ່ມແທັກ…</translation>
     </message>
 </context>
 <context>
@@ -11097,12 +11146,12 @@ and %1 other properties</source>
     <message>
         <location filename="../src/partseditor/tageditorwidget.cpp" line="312"/>
         <source>Create new tag “%1”</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ສ້າງແທັກໃໝ່ “%1”</translation>
     </message>
     <message>
         <location filename="../src/partseditor/tageditorwidget.cpp" line="360"/>
         <source>added</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ເພີ່ມແລ້ວ</translation>
     </message>
 </context>
 <context>
@@ -11164,12 +11213,12 @@ and %1 other properties</source>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="106"/>
         <source>To free-rotate a logo text or image item in PCB view hold down the Alt (Linux: meta) key and free-rotate as usual.</source>
-        <translation>ເພື່ອໝູນຂໍ້ຄວາມໂລໂກ້ ຫຼື ຮູບພາບໃນມຸມມອງ PCB ໄດ້ຢ່າງອິດສະຫຼະ, ໃຫ້ກົດປຸ່ມ Alt ຄ້າງໄວ້ແລ້ວໝູນ.</translation>
+        <translation>ເພື່ອໝູນຂໍ້ຄວາມໂລໂກ້ ຫຼື ຮູບພາບໃນມຸມເບິ່ງ PCB ໄດ້ຢ່າງອິດສະຫຼະ, ໃຫ້ກົດປຸ່ມ Alt ຄ້າງໄວ້ແລ້ວໝູນ.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="110"/>
         <source>layers and views</source>
-        <translation>ຊັ້ນ ແລະ ມຸມມອງ</translation>
+        <translation>ຊັ້ນ ແລະ ມຸມເບິ່ງ</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="111"/>
@@ -11179,12 +11228,12 @@ and %1 other properties</source>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="112"/>
         <source>To toggle the visibility of layer in a view, go to the view menu and choose one of the view layer items.  Or open up the &lt;b&gt;Layers&lt;/b&gt; palette from the &lt;b&gt;Window&lt;/b&gt; menu.</source>
-        <translation>ເພື່ອເປີດ-ປິດການເບິ່ງເຫັນຂອງຊັ້ນ, ໃຫ້ໄປທີ່ເມນູມຸມມອງ (View) ຫຼື ເປີດແຖບຊັ້ນ (Layers) ຈາກເມນູໜ້າຕ່າງ.</translation>
+        <translation>ເພື່ອເປີດ-ປິດການເບິ່ງເຫັນຂອງຊັ້ນ, ໃຫ້ໄປທີ່ເມນູມຸມເບິ່ງ (View) ຫຼື ເປີດແຖບຊັ້ນ (Layers) ຈາກເມນູໜ້າຕ່າງ.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="113"/>
         <source>When you export images from Fritzing, you can choose which layers are exported. Before you choose &apos;Export...&apos;, go into the &apos;View&apos; menu and hide the layers you don&apos;t want to be visible.</source>
-        <translation>ເມື່ອທ່ານສົ່ງອອກຮູບພາບ, ທ່ານສາມາດເລືອກຊັ້ນທີ່ຈະສົ່ງອອກໄດ້ໂດຍການເຊື່ອງຊັ້ນທີ່ບໍ່ຕ້ອງການໃນເມນູ ມຸມມອງ (View).</translation>
+        <translation>ເມື່ອທ່ານສົ່ງອອກຮູບພາບ, ທ່ານສາມາດເລືອກຊັ້ນທີ່ຈະສົ່ງອອກໄດ້ໂດຍການເຊື່ອງຊັ້ນທີ່ບໍ່ຕ້ອງການໃນເມນູ ມຸມເບິ່ງ (View).</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="117"/>
@@ -11219,7 +11268,7 @@ and %1 other properties</source>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="127"/>
         <source>In Schematic or PCB view, if you drag from a bendpoint with the Alt (Linux: Meta) key down, you will drag out a new wire from that bendpoint.</source>
-        <translation>ໃນມຸມມອງວົງຈອນ ຫຼື PCB, ຖ້າລາກຈາກຈຸດງໍໂດຍກົດ Alt ຄ້າງໄວ້, ທ່ານຈະໄດ້ສາຍໄຟໃໝ່ອອກມາ.</translation>
+        <translation>ໃນມຸມເບິ່ງວົງຈອນ ຫຼື PCB, ຖ້າລາກຈາກຈຸດງໍໂດຍກົດ Alt ຄ້າງໄວ້, ທ່ານຈະໄດ້ສາຍໄຟໃໝ່ອອກມາ.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="128"/>
@@ -11259,7 +11308,7 @@ and %1 other properties</source>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="145"/>
         <source>In the Parts Editor, to select a graphic underneath another graphic, use the mouse wheel while holding down the shift key.</source>
-        <translation>ໃນຕົວແກ້ໄຂຊິ້ນສ່ວນ, ໃຊ້ລູກກິ້ງເມົ້າພ້ອມກົດ Shift ເພື່ອເລືອກກຣາບຟິກທີ່ຢູ່ດ້ານລຸ່ມ.</translation>
+        <translation>ໃນຕົວແກ້ໄຂຊິ້ນສ່ວນ, ໃຊ້ລູກກິ້ງເມົ້າພ້ອມກົດ Shift ເພື່ອເລືອກກຣາຟິກທີ່ຢູ່ດ້ານລຸ່ມ.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="148"/>
@@ -11340,7 +11389,7 @@ and %1 other properties</source>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="93"/>
         <source>Click on the mouse position indicator in the status bar (below) to switch the units between inch, mm and px.</source>
-        <translation>ກົດທີ່ຕົວຊີ້ບອກຕຳແໜ່ງເມົ້າເພື່ອປ່ຽນຫົວໜ່ວຍລະຫວ່າງ ນິ້ວ, ມມ ແລະ ພິກເຊວ.</translation>
+        <translation>ກົດທີ່ຕົວຊີ້ບອກຕຳແໜ່ງເມົ້າເພື່ອປ່ຽນຫົວໜ່ວຍລະຫວ່າງ ນິ້ວ, ມມ ແລະ ພິກເຊລ.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="97"/>
@@ -11350,7 +11399,7 @@ and %1 other properties</source>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="98"/>
         <source>In Breadboard view, to drag a part with bendable legs while keeping it connected to the breadboard, hold the Alt (Linux: Meta) key down when you start dragging.</source>
-        <translation>ໃນມຸມມອງໂຟໂທບອດ, ກົດ Alt ຄ້າງໄວ້ເພື່ອລາກຊິ້ນສ່ວນທີ່ມີຂາງໍໄດ້.</translation>
+        <translation>ໃນມຸມເບິ່ງເບຣດບອດ, ກົດ Alt ຄ້າງໄວ້ເພື່ອລາກຊິ້ນສ່ວນທີ່ມີຂາງໍໄດ້.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="99"/>
@@ -11375,7 +11424,7 @@ and %1 other properties</source>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="135"/>
         <source>A virtual wire between connections in one view indicates that there is already a corresponding connection in another view.</source>
-        <translation>ສາຍໄຟສະເໝືອນບົ່ງບອກວ່າມີການເຊື່ອມຕໍ່ທີ່ກົງກັນຢູ່ແລ້ວໃນອີກມຸມມອງໜຶ່ງ.</translation>
+        <translation>ສາຍໄຟສະເໝືອນບົ່ງບອກວ່າມີການເຊື່ອມຕໍ່ທີ່ກົງກັນຢູ່ແລ້ວໃນອີກມຸມເບິ່ງໜຶ່ງ.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="136"/>
@@ -11415,7 +11464,7 @@ and %1 other properties</source>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="161"/>
         <source>To create a custom shape for your PCB, import an SVG file.</source>
-        <translation>ບໍລິມາດໄຟລ໌ SVG ເພື່ອສ້າງຮູບຮ່າງ PCB ຕາມຕ້ອງການ.</translation>
+        <translation>ນຳເຂົ້າໄຟລ໌ SVG ເພື່ອສ້າງຮູບຮ່າງ PCB ຕາມຕ້ອງການ.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="166"/>
@@ -11516,7 +11565,7 @@ and %1 other properties</source>
     <message>
         <location filename="../src/dialogs/translatorlistmodel.cpp" line="114"/>
         <source>Ukrainian - %1</source>
-        <translation>ອູແກຣນ - %1</translation>
+        <translation>ຢູເຄຣນ - %1</translation>
     </message>
     <message>
         <location filename="../src/dialogs/translatorlistmodel.cpp" line="132"/>
@@ -11631,7 +11680,7 @@ and %1 other properties</source>
     <message>
         <location filename="../src/dialogs/translatorlistmodel.cpp" line="72"/>
         <source>Hindi - %1</source>
-        <translation>ຮິນດູ - %1</translation>
+        <translation>ຮິນດີ - %1</translation>
     </message>
     <message>
         <location filename="../src/dialogs/translatorlistmodel.cpp" line="123"/>
@@ -11649,7 +11698,7 @@ and %1 other properties</source>
     <message>
         <location filename="../src/version/updatedialog.cpp" line="54"/>
         <source>&lt;p&gt;&lt;b&gt;There is a parts library update available!&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Would you like Fritzing to download and install the update now?&lt;br/&gt;See the &lt;a href=&apos;https://github.com/fritzing/fritzing-parts/compare/%1...master&apos;&gt;list of changes here.&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Note: the update may take some minutes and you will have to restart Fritzing.&lt;br/&gt;You can also update later via the &lt;i&gt;Help &amp;rarr; Check for Updates&lt;/i&gt; menu.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;&lt;b&gt;ມີການອັບເດດຄັງອຸປະກອນແລ້ວ!&lt;/b&gt;&lt;/p&gt;&lt;p&gt;ເຈົ້າຕ້ອງການໃຫ້ Fritzing ດາວໂຫຼດ ແລະ ຕິດຕັ້ງການອັບເດດຕອນນີ້ເລີຍບໍ່?&lt;br/&gt;ເບິ່ງ &lt;a href=&apos;https://github.com/fritzing/fritzing-parts/compare/%1...master&apos;&gt;ລາຍການການປ່ຽນແປງຢູ່ນີ້.&lt;/a&gt;&lt;/p&gt;&lt;p&gt;ໝາຍເຫດ: ການອັບເດດອາດໃຊ້ເວລາຫຼາຍນາທີ ແລະ ເຈົ້າຈະຕ້ອງໄດ້ເລີ່ມ Fritzing ໃໝ່.&lt;br/&gt;ເຈົ້າສາມາດອັບເດດໃນພາຍຫຼັງໄດ້ຜ່ານເມນູ &lt;i&gt;ຊ່ວຍເຫຼືອ &amp;rarr; ກວດສອບການອັບເດດ&lt;/i&gt;.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;b&gt;ມີການອັບເດດຄັງຊິ້ນສ່ວນແລ້ວ!&lt;/b&gt;&lt;/p&gt;&lt;p&gt;ເຈົ້າຕ້ອງການໃຫ້ Fritzing ດາວໂຫຼດ ແລະ ຕິດຕັ້ງການອັບເດດຕອນນີ້ເລີຍບໍ່?&lt;br/&gt;ເບິ່ງ &lt;a href=&apos;https://github.com/fritzing/fritzing-parts/compare/%1...master&apos;&gt;ລາຍການການປ່ຽນແປງຢູ່ນີ້.&lt;/a&gt;&lt;/p&gt;&lt;p&gt;ໝາຍເຫດ: ການອັບເດດອາດໃຊ້ເວລາຫຼາຍນາທີ ແລະ ເຈົ້າຈະຕ້ອງໄດ້ເລີ່ມ Fritzing ໃໝ່.&lt;br/&gt;ເຈົ້າສາມາດອັບເດດໃນພາຍຫຼັງໄດ້ຜ່ານເມນູ &lt;i&gt;ຊ່ວຍເຫຼືອ &amp;rarr; ກວດສອບການອັບເດດ&lt;/i&gt;.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/version/updatedialog.cpp" line="251"/>
@@ -11684,7 +11733,7 @@ and %1 other properties</source>
     <message>
         <location filename="../src/version/updatedialog.cpp" line="213"/>
         <source>&lt;p&gt;Fritzing is unable to check for--and update--new parts.&lt;br/&gt;If you want this functionality, please enable write permission on this folder:&lt;br/&gt; &apos;%1&apos;.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Fritzing ບໍ່ສາມາດກວດສອບ ແລະ ອັບເດດອຸປະກອນໃໝ່ໄດ້.&lt;br/&gt;ຫາກເຈົ້າຕ້ອງການໃຊ້ງານສ່ວນນີ້, ກະລຸນາອະນຸຍາດສິດການຂຽນໃຫ້ກັບໂຟນເດີນີ້:&lt;br/&gt; &apos;%1&apos;.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Fritzing ບໍ່ສາມາດກວດສອບ ແລະ ອັບເດດຊິ້ນສ່ວນໃໝ່ໄດ້.&lt;br/&gt;ຫາກເຈົ້າຕ້ອງການໃຊ້ງານສ່ວນນີ້, ກະລຸນາອະນຸຍາດສິດການຂຽນໃຫ້ກັບໂຟນເດີນີ້:&lt;br/&gt; &apos;%1&apos;.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/version/updatedialog.cpp" line="226"/>
@@ -11709,12 +11758,12 @@ and %1 other properties</source>
     <message>
         <location filename="../src/version/updatedialog.cpp" line="295"/>
         <source>Fritzing was unable to clean the files, so the update cannot proceed.&lt;br/&gt;You may have to reinstall Fritzing.</source>
-        <translation>Fritzing ບໍ່ສາມາດຈັດການໄຟລ໌ໄດ້, ການອັບເດດຈຶ່ງບໍ່ສາມາດດຳເນີນການຕໍ່ໄດ້.</translation>
+        <translation>Fritzing ບໍ່ສາມາດຈັດການໄຟລ໌ໄດ້, ການອັບເດດຈຶ່ງບໍ່ສາມາດດຳເນີນການຕໍ່ໄດ້.&lt;br/&gt;ທ່ານອາດຈຳເປັນຕ້ອງຕິດຕັ້ງ Fritzing ໃໝ່.</translation>
     </message>
     <message>
         <location filename="../src/version/updatedialog.cpp" line="421"/>
         <source>&lt;p&gt;Installing new parts. This may take a few minutes.&lt;br/&gt;Please do not interrupt the process, as your parts folder could be damaged.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;ກຳລັງຕິດຕັ້ງຊິ້ນສ່ວນໃໝ່. ອາດໃຊ້ເວລາຄາວໜຶ່ງ.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;ກຳລັງຕິດຕັ້ງຊິ້ນສ່ວນໃໝ່. ອາດໃຊ້ເວລາຄາວໜຶ່ງ.&lt;br/&gt;ກະລຸນາຢ່າຢຸດຂະບວນການນີ້, ເພາະໂຟນເດີຊິ້ນສ່ວນຂອງທ່ານອາດຈະເສຍຫາຍໄດ້.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/version/updatedialog.cpp" line="322"/>
@@ -11739,12 +11788,12 @@ and %1 other properties</source>
     <message>
         <location filename="../src/version/updatedialog.cpp" line="437"/>
         <source>&lt;p&gt;New parts successfully installed!&lt;/p&gt;&lt;p&gt;Fritzing must be restarted, so the &apos;Close&apos; button will close Fritzing.&lt;br/&gt;The new parts will be available when you run Fritzing again.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;ຕິດຕັ້ງຊິ້ນສ່ວນໃໝ່ສຳເລັດແລ້ວ!&lt;/p&gt;&lt;p&gt;ທ່ານຕ້ອງເລີ່ມຕົ້ນ Fritzing ໃໝ່.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;ຕິດຕັ້ງຊິ້ນສ່ວນໃໝ່ສຳເລັດແລ້ວ!&lt;/p&gt;&lt;p&gt;ທ່ານຕ້ອງເລີ່ມຕົ້ນ Fritzing ໃໝ່, ດັ່ງນັ້ນປຸ່ມ &apos;ປິດ&apos; ຈະປິດ Fritzing.&lt;br/&gt;ຊິ້ນສ່ວນໃໝ່ຈະສາມາດໃຊ້ໄດ້ເມື່ອທ່ານເປີດ Fritzing ຄືນໃໝ່.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/version/updatedialog.cpp" line="442"/>
         <source>&lt;p&gt;Sorry, unable to install new parts: %1&lt;br/&gt;Fritzing must nevertheless be restarted, so the &apos;Close&apos; button will close Fritzing.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;ຂໍອະໄພ, ບໍ່ສາມາດຕິດຕັ້ງຊິ້ນສ່ວນໃໝ່ໄດ້: %1&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;ຂໍອະໄພ, ບໍ່ສາມາດຕິດຕັ້ງຊິ້ນສ່ວນໃໝ່ໄດ້: %1&lt;br/&gt;ເຖິງຢ່າງໃດກໍຕາມ Fritzing ຕ້ອງເລີ່ມຕົ້ນໃໝ່, ດັ່ງນັ້ນປຸ່ມ &apos;ປິດ&apos; ຈະປິດ Fritzing.&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -11886,7 +11935,7 @@ and %1 other properties</source>
         <location filename="../src/items/wire.cpp" line="1335"/>
         <location filename="../src/items/wire.cpp" line="1350"/>
         <source>blue</source>
-        <translation>ສີຟ້າ</translation>
+        <translation>ສີນ້ຳເງິນ</translation>
     </message>
     <message>
         <location filename="../src/items/wire.cpp" line="1336"/>
@@ -11934,7 +11983,7 @@ and %1 other properties</source>
         <location filename="../src/items/wire.cpp" line="1343"/>
         <location filename="../src/items/wire.cpp" line="1358"/>
         <source>ochre</source>
-        <translation>ສີເຫຼືອງໝາກເງາະ</translation>
+        <translation>ສີເຫຼືອງນ້ຳຕານ</translation>
     </message>
     <message>
         <location filename="../src/items/wire.cpp" line="1344"/>
