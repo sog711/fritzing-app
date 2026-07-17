@@ -4337,6 +4337,8 @@ void SketchWidget::addViewLayer(ViewLayer * viewLayer) {
 	}
 
 	m_viewLayers.insert(viewLayer->viewLayerID(), viewLayer);
+	//: Menu entry toggling one display layer; %1 = translated layer name (e.g. "Copper Bottom").
+	//: Phrase it so the name can stand apart, e.g. layer "%1" — do not build a compound word with %1.
 	auto* action = new QAction(QObject::tr("%1 Layer").arg(viewLayer->displayName()), this);
 	action->setData(QVariant::fromValue<ViewLayer *>(viewLayer));
 	action->setCheckable(true);
@@ -10470,6 +10472,7 @@ void SketchWidget::showUnrouted() {
 
 	QString message = tr("Unrouted connections are highlighted in yellow.");
 	if (toShow.count() == 0) message = tr("There are no unrouted connections");
+	//: Shown for whichever view is active (breadboard/schematic/pcb) — keep the translation view-neutral.
 	FMessageBox::information(this, tr("Unrouted connections", "dialog title"),
 	                         tr("%1\n\n"
 	                            "Note: you can also trigger this display by mousing down on the routing status text in the status bar.").arg(message));

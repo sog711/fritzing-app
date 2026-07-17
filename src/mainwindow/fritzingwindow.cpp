@@ -40,7 +40,6 @@ QStringList FritzingWindow::OtherKnownExtensions;
 FritzingWindow::FritzingWindow(QWidget * parent, Qt::WindowFlags f)
 	: QMainWindow(parent, f)
 {
-	// Let's set the icon
 	this->setWindowIcon(QIcon(QPixmap(":resources/images/fritzing_icon.png")));
 
 	m_undoStack = new WaitPushUndoStack(this);
@@ -75,6 +74,8 @@ void FritzingWindow::createCloseAction() {
 }
 
 void FritzingWindow::setTitle() {
+	//: Window title. %1 is the document name and %2 is the application name.
+	//: The placeholders may be reordered and the punctuation adapted for the locale.
 	setWindowTitle(tr("%1 - %2", "dialog title")
 					   .arg(QFileInfo(m_fwFilename).fileName()+(m_readOnly?ReadOnlyPlaceholder:"")+QtFunkyPlaceholder,
 					   fritzingTitle()));

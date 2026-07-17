@@ -436,6 +436,9 @@ bool DRC::startAux(QString & message, QStringList & messages, QList<CollidingThi
 		QList<QPointF> atPixels;
 		if (pixelsCollide(m_plusImage, m_minusImage, m_displayImage, 0, 0, imgSize.width(), imgSize.height(), 1 /* 0x80ff0000 */, atPixels)) {
 			CollidingThing * collidingThing = findItemsAt(atPixels, m_board, viewLayerIDs, keepoutMils, dpi, true, nullptr);
+			//: %1 is the translated word for "top"/"bottom" (an adverb-like value).
+			//: Append it rather than building a compound word, e.g. "copper layer %1".
+			// TODO: split into two distinct source strings (top/bottom) so locales can use declined forms.
 			QString msg = tr("Too close to a border (%1 layer)")
 						  .arg(viewLayerPlacement == ViewLayer::NewTop ? ItemBase::TranslatedPropertyNames.value("top") : ItemBase::TranslatedPropertyNames.value("bottom"))
 						  ;
@@ -546,6 +549,9 @@ bool DRC::startAux(QString & message, QStringList & messages, QList<CollidingThi
 					CollidingThing * collidingThing = findItemsAt(atPixels, m_board, viewLayerIDs, keepoutMils, dpi, false, equ);
 					QStringList names = getNames(collidingThing);
 					QString name0 = names.at(0);
+					//: %1 = part name; %2 = translated word for "top"/"bottom" (adverb-like).
+					//: Append %2 rather than building a compound word, e.g. "copper layer %2".
+					// TODO: split into two distinct source strings (top/bottom) so locales can use declined forms.
 					QString msg = tr("%1 is overlapping (%2 layer)")
 								  .arg(name0)
 								  .arg(viewLayerPlacement == ViewLayer::NewTop ? ItemBase::TranslatedPropertyNames.value("top") : ItemBase::TranslatedPropertyNames.value("bottom"))

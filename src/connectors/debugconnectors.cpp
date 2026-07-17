@@ -439,6 +439,8 @@ void DebugConnectors::reportErrors(QSet<ItemBase *> errors)
 
 	for (ItemBase * item : errors) {
 		if (item) {
+			//: Bug marker attached to one part whose connectors differ between views.
+			//: "connector" = connection point (pin/pad); "views" = breadboard/schematic/pcb.
 			item->showBug(QStringLiteral("routing"),
 				QStringList() << tr("Routing error: connector mismatch between views."));
 			m_displayedBugs << QPointer<ItemBase>(item);

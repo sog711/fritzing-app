@@ -2,6 +2,7 @@
 
 Part of the Fritzing project - http://fritzing.org
 Copyright (c) 2007-2019 Fritzing
+Copyright (c) 2020-2026 Fritzing GmbH
 
 Fritzing is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -130,12 +131,11 @@ public:
 DebugDialog::DebugDialog(QWidget *parent)
 	: QDialog(parent)
 {
-	// Let's set the icon
 	this->setWindowIcon(QIcon(QPixmap(":resources/images/fritzing_icon.png")));
 
 	singleton = this;
 	m_debugLevel = DebugDialog::Debug;
-	setWindowTitle(tr("for debugging", "dialog title"));
+	setWindowTitle(tr("Debug Output", "dialog title"));
 	resize(400, 300);
 	m_textEdit = new QTextEdit(this);
 	m_textEdit->setGeometry(QRect(10, 10, 381, 281));

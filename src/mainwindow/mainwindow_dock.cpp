@@ -66,6 +66,8 @@ void MainWindow::createDockWindows()
 	makeDock(tr("Undo History", "dock widget title"), m_undoView, UndoHistoryMinHeight, UndoHistoryDefaultHeight)->hide();
 	m_undoView->setMinimumSize(DockMinWidth, UndoHistoryMinHeight);
 
+	//: Title of the view-layers visibility palette (show/hide display layers).
+	//: "Layers" in the graphics sense — not the copper stackup.
 	makeDock(tr("Layers", "dock widget title"), m_layerPalette, DockMinWidth, DockMinHeight)->hide();
 	m_layerPalette->setMinimumSize(DockMinWidth, DockMinHeight);
 	m_layerPalette->setShowAllLayersAction(m_showAllLayersAct);

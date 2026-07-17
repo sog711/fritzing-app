@@ -258,7 +258,10 @@ void ItemBase::initNames() {
 		TranslatedPropertyNames.insert("sheet", tr("sheet"));
 		TranslatedPropertyNames.insert("project", tr("project"));
 		TranslatedPropertyNames.insert("banded", tr("banded", "wire color bands, for example red/white or green/white"));
+		//: Standalone side designator; also substituted into DRC messages
+		//: ("Too close to a border (%1 layer)"). Keep it a bare word, no article.
 		TranslatedPropertyNames.insert("top", tr("top", "placed on the top side of the board"));
+		//: Standalone side designator; also substituted into DRC messages. Keep it a bare word, no article.
 		TranslatedPropertyNames.insert("bottom", tr("bottom", "placed on the bottom side of the board"));
 		TranslatedPropertyNames.insert("copper bottom", tr("copper bottom", "bottom copper PCB layer"));
 		TranslatedPropertyNames.insert("copper top", tr("copper top", "top copper PCB layer"));

@@ -325,22 +325,22 @@
     <message>
         <location filename="../src/autoroute/autoroutersettingsdialog.cpp" line="258"/>
         <source>Keepout</source>
-        <translation>Abstand</translation>
+        <translation>Mindestabstand (Keepout)</translation>
     </message>
     <message>
         <location filename="../src/autoroute/autoroutersettingsdialog.cpp" line="261"/>
         <source>&lt;b&gt;Keepout&lt;/b&gt; is the minimum distance between copper elements on different nets.</source>
-        <translation>Der minimale &lt;b&gt;Abstand&lt;/b&gt; zwischen Kupferelementen verschiedener Netze.</translation>
+        <translation>Der &lt;b&gt;Mindestabstand&lt;/b&gt; (englisch Keepout) ist der kleinste zulässige Abstand zwischen Kupferelementen verschiedener Netze.</translation>
     </message>
     <message>
         <location filename="../src/autoroute/autoroutersettingsdialog.cpp" line="265"/>
         <source>A keepout of 0.01 inch (0.254 mm) is a good default.</source>
-        <translation>Ein Abstand von 0,01 Zoll (0,254 mm) ist ein guter Standardwert.</translation>
+        <translation>Ein Mindestabstand von 0,01 Zoll (0,254 mm) ist ein guter Standardwert.</translation>
     </message>
     <message>
         <location filename="../src/autoroute/autoroutersettingsdialog.cpp" line="268"/>
         <source>Note: the smaller the keepout, the slower the DRC and Autorouter will run.</source>
-        <translation>Beachte: Je kleiner der Abstand, desto mehr Zeit benötigen Autorouter und DRC.</translation>
+        <translation>Beachte: Je kleiner der Mindestabstand, desto mehr Zeit benötigen Autorouter und DRC.</translation>
     </message>
     <message>
         <location filename="../src/autoroute/autoroutersettingsdialog.cpp" line="307"/>
@@ -388,12 +388,12 @@
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="744"/>
         <source>The &apos;Contributed Parts&apos; bin has been replaced with &apos;My Parts&apos; since Fritzing 0.7.12.</source>
-        <translation>Der &apos;Contributed Parts&apos;-Behälter wurde seit Fritzing 0.7.12 durch &apos;Meine Teile&apos; ersetzt.</translation>
+        <translation>Das Sortiment „Contributed Parts“ wurde seit Fritzing 0.7.12 durch „My Parts“ ersetzt.</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="745"/>
         <source>Would you like Fritzing to move the parts over?</source>
-        <translation>Möchtest du, dass Fritzing die Bauteile verschiebt?</translation>
+        <translation>Möchtest Du, dass Fritzing die Bauteile verschiebt?</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="963"/>
@@ -554,7 +554,7 @@
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1166"/>
         <source>Do you really want to delete bin &apos;%1&apos;?  This action cannot be undone.</source>
-        <translation>Willst Du das Sortiment &apos;%1&apos; wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.</translation>
+        <translation>Willst Du das Sortiment „%1“ wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1218"/>
@@ -580,7 +580,7 @@
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1296"/>
         <source>Unable to remove part &apos;%1&apos;--it is in use in a sketch</source>
-        <translation>Das Bauteil &apos;%1&apos; konnte nicht entfernt werden - es wird in einem Entwurf verwendet</translation>
+        <translation>Das Bauteil „%1“ konnte nicht entfernt werden - es wird in einem Entwurf verwendet</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1296"/>
@@ -592,7 +592,7 @@
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1303"/>
         <source>Do you really want to remove &apos;%1&apos; from the bin? This operation cannot be undone.</source>
-        <translation>Willst Du &apos;%1&apos; wirklich aus dem Sortiment entfernen? Dies kann nicht rückgängig gemacht werden.</translation>
+        <translation>Willst Du „%1“ wirklich aus dem Sortiment entfernen? Dies kann nicht rückgängig gemacht werden.</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1400"/>
@@ -622,7 +622,7 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
 </source>
         <translation>
 
-Ein benutzerdefiniertes Board-SVG hat normalerweise eine oder zwei Siebdruck-Ebenen und eine Board-Ebene.
+Ein eigenes Platinen-SVG hat normalerweise eine oder zwei „silkscreen“-Ebenen und eine „board“-Ebene.
 Wirf einen Blick auf die Datei circle_pcb.svg in Deinem Fritzing-Installationsordner unter parts/svg/core/pcb/.
 
 </translation>
@@ -630,12 +630,12 @@ Wirf einen Blick auf die Datei circle_pcb.svg in Deinem Fritzing-Installationsor
     <message>
         <location filename="../src/items/resizableboard.cpp" line="121"/>
         <source>one layer (single-sided)</source>
-        <translation>eine Ebene (einseitig)</translation>
+        <translation>einseitig (eine Kupferlage)</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="124"/>
         <source>two layers (double-sided)</source>
-        <translation>zwei Ebenen (zweiseitig)</translation>
+        <translation>doppelseitig (zwei Kupferlagen)</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="211"/>
@@ -700,12 +700,12 @@ Wirf einen Blick auf die Datei circle_pcb.svg in Deinem Fritzing-Installationsor
     <message>
         <location filename="../src/items/resizableboard.cpp" line="401"/>
         <source>but the pcb itself will have no silkscreen layer</source>
-        <translation>aber diese Leiterplatte wird keine Siebdruck-Ebene (&apos;silkscreen&apos;) enthalten</translation>
+        <translation>aber die Platine selbst wird keine Siebdruckschicht enthalten</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="406"/>
         <source>the svg doesn&apos;t fit the custom board format</source>
-        <translation>dieses SVG enstpricht nicht dem Format für benutzderefinierte Leiterplatten</translation>
+        <translation>dieses SVG enstpricht nicht dem Format für benutzderefinierte Platinen</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="435"/>
@@ -715,12 +715,12 @@ Wirf einen Blick auf die Datei circle_pcb.svg in Deinem Fritzing-Installationsor
     <message>
         <location filename="../src/items/resizableboard.cpp" line="437"/>
         <source>Before ordering PCB manufacturing, we recommend validating your design by exporting it as Gerber files (File → Export → for Production → Extended Gerber).</source>
-        <translation>Bevor du die PCB-Herstellung bestellst, empfehlen wir, dein Design zu validieren, indem du es als Gerber-Dateien exportierst (Datei → Exportieren → für die Produktion → Erweiterte Gerber).</translation>
+        <translation>Bevor Du die Platinenfertigung bestellst, empfehlen wir, Deinen Entwurf zu prüfen, indem Du ihn als Gerber-Dateien exportierst (Datei → Exportieren → für die Produktion → Erweiterte Gerber).</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="459"/>
         <source>&lt;br/&gt;&lt;br/&gt;If you intended your custom shape to have cutouts and you did not get the expected result, it is likely because Fritzing requires that you make cutouts using a shape &apos;subtraction&apos; or &apos;difference&apos; operation in your vector graphics editor.</source>
-        <translation>&lt;br/&gt;&lt;br/&gt;Wenn du beabsichtigt hast, dass deine benutzerdefinierte Form Öffnungen hat und du nicht das erwartete Ergebnis erhalten hast, liegt es wahrscheinlich daran, dass Fritzing erfordert, dass du Ausschnitte mit einer &apos;Subtraktions&apos;- oder &apos;Differenz&apos;-Operation in deinem Vektorgrafik-Editor erstellst.</translation>
+        <translation>&lt;br/&gt;&lt;br/&gt;Wenn Du beabsichtigt hast, dass Deine eigene Form Ausschnitte hat, und Du nicht das erwartete Ergebnis erhalten hast, liegt es wahrscheinlich daran, dass Fritzing erfordert, dass Du Ausschnitte mit einer „Subtraktions“- oder „Differenz“-Operation in Deinem Vektorgrafik-Editor erstellst.</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="526"/>
@@ -742,7 +742,7 @@ Wirf einen Blick auf die Datei circle_pcb.svg in Deinem Fritzing-Installationsor
     <message>
         <location filename="../src/items/resizableboard.cpp" line="445"/>
         <source>The rest of this message concerns &apos;cutouts&apos;. </source>
-        <translation>Der folgende Hinweis betrifft &quot;Ausschnitte&quot; in der Platine. </translation>
+        <translation>Der folgende Hinweis betrifft „Ausschnitte“ in der Platine. </translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="446"/>
@@ -900,16 +900,18 @@ Trotzdem diese Datei benutzen?</translation>
     <message>
         <location filename="../src/items/capacitor.cpp" line="123"/>
         <source>Select from the dropdown, or type in a %1 value</source>
-        <translation>Aus der Liste wählen oder %1-Wert eintippen</translation>
+        <translation>Wähle aus der Dropdown-Liste oder gib einen %1-Wert ein
+Bereich: [%2 - %3] %4
+Hintergrund: Grün = ok, Rot = ungültiger Wert, Grau = aktueller Wert</translation>
     </message>
     <message>
         <location filename="../src/items/capacitor.cpp" line="127"/>
         <source>Select from the dropdown, or type in a %1 value
 Range: [%2 - %3] %4
 Background: Green = ok, Red = incorrect value, Grey = current value</source>
-        <translation>Wählen Sie aus der Dropdown-Liste oder geben Sie einen %1-Wert ein
+        <translation>Wähle aus der Dropdown-Liste oder gib einen %1-Wert ein
 Bereich: [%2 - %3] %4
-Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation>
+Hintergrund: Grün = ok, Rot = ungültiger Wert, Grau = aktueller Wert</translation>
     </message>
     <message>
         <location filename="../src/items/capacitor.cpp" line="255"/>
@@ -1217,12 +1219,12 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
     <message>
         <location filename="../src/autoroute/drc.cpp" line="235"/>
         <source>DRC was cancelled.</source>
-        <translation>Designregelprüfung wurde abgebrochen.</translation>
+        <translation>Der DRC wurde abgebrochen.</translation>
     </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="265"/>
         <source>Your sketch is ready for production: there are no connectors or traces that overlap or are too close together.</source>
-        <translation>Dein Entwurf ist bereit für die Produktion! Es konnten keine Verbinder oder Leiterbahnen gefunden werden, die zu nah sind oder sich überlappen.</translation>
+        <translation>Dein Entwurf ist bereit für die Produktion: Es gibt keine Anschlüsse oder Leiterbahnen, die sich überlappen oder zu nah beieinander liegen.</translation>
     </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="268"/>
@@ -1232,7 +1234,7 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
     <message>
         <location filename="../src/autoroute/drc.cpp" line="269"/>
         <source>Reposition them and run the DRC again to find more problems</source>
-        <translation>Positioniere sie neu und führe dann die Designregelprüfung (DRC) erneut aus, um weitere Probleme ausfindig zu machen</translation>
+        <translation>Positioniere sie neu und führe den DRC erneut aus, um weitere Probleme zu finden</translation>
     </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="284"/>
@@ -1248,7 +1250,7 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
     <message>
         <location filename="../src/autoroute/drc.cpp" line="402"/>
         <source>No traces or connectors to check</source>
-        <translation>Keine Leiterbahnen oder Verbinder zum Überprüfen</translation>
+        <translation>Keine Leiterbahnen oder Anschlüsse zum Prüfen</translation>
     </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="415"/>
@@ -1258,7 +1260,7 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
     <message>
         <location filename="../src/autoroute/drc.cpp" line="549"/>
         <source>%1 is overlapping (%2 layer)</source>
-        <translation>%1 überlappt (%2-Ebene)</translation>
+        <translation>%1 überlappt (Kupferlage %2)</translation>
     </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="1023"/>
@@ -1282,7 +1284,7 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
         <location filename="../src/autoroute/drc.cpp" line="138"/>
         <source>DRC Results</source>
         <comment>dialog title</comment>
-        <translation>Ergebnisse der Prüfung (DRC)</translation>
+        <translation>DRC-Ergebnisse</translation>
     </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="146"/>
@@ -1292,7 +1294,7 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
     <message>
         <location filename="../src/autoroute/drc.cpp" line="150"/>
         <source>Note: the list items and the red highlighting will not update as you edit your sketch--you must rerun the DRC. The highlighting will disappear when you close this dialog.</source>
-        <translation>Beachte: Die Listenelemente und die rote Hervorhebung werden nicht aktualisiert, wenn Du deinen Entwurf bearbeitest - Du musst den DRC erneut ausführen. Die Hervorhebung wird verschwinden, wenn Du diesen Dialog schließt.</translation>
+        <translation>Beachte: Die Listeneinträge und die rote Hervorhebung werden nicht aktualisiert, während Du Deinen Entwurf bearbeitest – Du musst den DRC erneut ausführen. Die Hervorhebung verschwindet, wenn Du diesen Dialog schließt.</translation>
     </message>
 </context>
 <context>
@@ -1300,7 +1302,7 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
     <message>
         <location filename="../src/connectors/debugconnectors.cpp" line="443"/>
         <source>Routing error: connector mismatch between views.</source>
-        <translation>Routing-Fehler: Verbinder stimmen zwischen den Ansichten nicht überein.</translation>
+        <translation>Routing-Fehler: Die Anschlüsse dieses Bauteils stimmen zwischen den Ansichten nicht überein.</translation>
     </message>
 </context>
 <context>
@@ -1348,7 +1350,7 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
     <message>
         <location filename="../src/dialogs/exportparametersdialog.ui" line="65"/>
         <source>Export parameters</source>
-        <translation>Parameter exportieren</translation>
+        <translation>Exporteinstellungen</translation>
     </message>
     <message>
         <location filename="../src/dialogs/exportparametersdialog.ui" line="131"/>
@@ -1359,7 +1361,7 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
         <location filename="../src/dialogs/exportparametersdialog.cpp" line="13"/>
         <source>Export parameters</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Parameter exportieren</translation>
+        <translation>Exporteinstellungen</translation>
     </message>
 </context>
 <context>
@@ -1417,7 +1419,7 @@ Möchtest Du die Bauteildatenbank neu erstellen?
     <message>
         <location filename="../src/fapplication.cpp" line="2326"/>
         <source>This option is usefull if you modify the parts database on your own. If you want to recover from an error, you may be better off downloading the latest Fritzing release.</source>
-        <translation>Diese Option ist nützlich, wenn Sie die Teiledatenbank selbst ändern. Wenn Sie einen Fehler beheben wollen, ist es möglicherweise besser, die neueste Fritzing-Version herunterzuladen.</translation>
+        <translation>Diese Option ist nützlich, wenn Du die Bauteil-Datenbank selbst änderst. Wenn Du einen Fehler beheben willst, ist es möglicherweise besser, die neueste Fritzing-Version herunterzuladen.</translation>
     </message>
     <message>
         <location filename="../src/fapplication.cpp" line="2332"/>
@@ -1448,12 +1450,12 @@ Möchtest Du die Bauteildatenbank neu erstellen?
     <message>
         <location filename="../src/dialogs/fabuploaddialog.ui" line="60"/>
         <source>Get your board fabricated effortlessly!</source>
-        <translation>Lassen Sie Ihre Platine fertigen!</translation>
+        <translation>Lass Deine Platine mühelos fertigen!</translation>
     </message>
     <message>
         <location filename="../src/dialogs/fabuploaddialog.ui" line="96"/>
         <source>Upload your design now to see a preview. Review it, and once satisfied, proceed to order for manufacturing.</source>
-        <translation>Lade dein Design jetzt hoch, um eine Vorschau zu sehen. Überprüfe es, und wenn du zufrieden bist, fahre mit der Bestellung zur Herstellung fort.</translation>
+        <translation>Lade Deinen Entwurf jetzt hoch, um eine Vorschau zu sehen. Prüfe sie, und wenn Du zufrieden bist, fahre mit der Bestellung fort.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/fabuploaddialog.ui" line="137"/>
@@ -1495,7 +1497,7 @@ Möchtest Du die Bauteildatenbank neu erstellen?
         <location filename="../src/dialogs/fabuploaddialog.cpp" line="172"/>
         <source>Fritzing</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Fritzing</translation>
+        <translation>Fritzing</translation>
     </message>
     <message>
         <location filename="../src/dialogs/fabuploaddialog.cpp" line="172"/>
@@ -1512,7 +1514,7 @@ Möchtest Du die Bauteildatenbank neu erstellen?
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="274"/>
         <source>Fritzing</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Fritzing</translation>
+        <translation>Fritzing</translation>
     </message>
     <message>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="182"/>
@@ -1531,22 +1533,22 @@ Möchtest Du die Bauteildatenbank neu erstellen?
         <location filename="../src/help/firsttimehelpdialog.cpp" line="37"/>
         <source>First Time Help</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Hilfe für Erstbenutzer</translation>
+        <translation>Erste Schritte</translation>
     </message>
     <message>
         <location filename="../src/help/firsttimehelpdialog.cpp" line="82"/>
         <source>&lt;br/&gt;The &lt;b&gt;Breadboard View&lt;/b&gt; is meant to look like a &lt;i&gt;real-life&lt;/i&gt; breadboard prototype.&lt;br/&gt;&lt;br/&gt;Begin by dragging a part from the Parts Bin, which is over at the top right. Then pull in more parts, connecting them by placing them on the breadboard or clicking on the connectors and dragging wires. The process is similar to how you would arrange things in the physical world. &lt;br/&gt;&lt;br/&gt;After you&apos;re finished creating your sketch in the breadboard view, try the other views. You can switch views by clicking the Tabs at the top of the window. Because different views have different purposes, parts will look different in the other views.</source>
-        <translation>&lt;br/&gt;Die &lt;b&gt;Breadboard-Ansicht&lt;/b&gt; soll wie ein &lt;i&gt; realer&lt;/i&gt; Breadboard-Prototyp aussehen.&lt;br/&gt;&lt;br/&gt;Ziehen Sie zunächst ein Teil aus dem Teilefach (oben rechts) hinein. Ziehen Sie dann weitere Teile hinein und verbinden Sie diese, indem Sie diese auf das Steckbrett legen oder auf die Anschlüsse klicken und Drähte ziehen. Der Vorgang ähnelt der Anordnung der Dinge in der realen Welt. &lt;br/&gt;&lt;br/&gt;Probieren Sie auch die anderen Ansichten aus, nachdem Sie Ihre Skizze in der Steckbrettansicht erstellt haben. Sie können die Ansicht wechseln, indem Sie auf die Registerkarten oben im Fenster klicken. Da unterschiedliche Ansichten andere Zwecke erfüllen, sehen Teile in den anderen Ansichten unterschiedlich aus.</translation>
+        <translation>&lt;br/&gt;Die &lt;b&gt;Steckbrettansicht&lt;/b&gt; soll wie ein &lt;i&gt;echter&lt;/i&gt; Steckbrett-Aufbau aussehen.&lt;br/&gt;&lt;br/&gt;Ziehe zunächst ein Bauteil aus dem Sortiment (oben rechts) hinein. Ziehe dann weitere Bauteile hinein und verbinde sie, indem Du sie auf das Steckbrett steckst oder auf die Anschlüsse klickst und Drähte ziehst. Das Vorgehen ähnelt dem Aufbau in der realen Welt. &lt;br/&gt;&lt;br/&gt;Wenn Dein Entwurf in der Steckbrettansicht fertig ist, probiere auch die anderen Ansichten aus. Du wechselst die Ansicht über die Registerkarten am oberen Fensterrand. Da die Ansichten unterschiedliche Zwecke erfüllen, sehen Bauteile dort jeweils anders aus.</translation>
     </message>
     <message>
         <location filename="../src/help/firsttimehelpdialog.cpp" line="95"/>
         <source>Welcome to the &lt;b&gt;Schematic View&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;This is a more abstract way to look at components and connections than the Breadboard View. You have the same elements as you have on your breadboard, they just look different. This representation is closer to the traditional diagrams used by engineers.&lt;br/&gt;&lt;br/&gt;After you have drawn wires between parts, you can press &amp;lt;Shift&amp;gt;-click with the mouse to create bend points and tidy up your connections. The Schematic View can help you check that you have made the right connections between components. You can also print out your schematic for documentation.</source>
-        <translation>Willkommen in der &lt;b&gt; schematischen Ansicht &lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Dies ist eine abstraktere Art, Komponenten und Verbindungen zu betrachten, als die Breadboard-Ansicht. Sie haben die gleichen Elemente wie auf Ihrem Steckbrett, sie sehen einfach anders aus. Diese Darstellung ähnelt eher den traditionellen Diagrammen, die von Ingenieuren verwendet werden. &lt;br/&gt; &lt;br/&gt; Nachdem Sie Drähte zwischen Teilen gezogen haben, können Sie mit gedrückter Umschalttaste auf die Maus klicken, um Biegepunkte zu erstellen und Ihre Verbindungen zu ordnen. Mithilfe der schematischen Ansicht können Sie überprüfen, ob Sie die richtigen Verbindungen zwischen Komponenten hergestellt haben. Sie können Ihren Schaltplan auch zur Dokumentation ausdrucken.</translation>
+        <translation>Willkommen in der &lt;b&gt;Schaltplanansicht&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Dies ist eine abstraktere Sicht auf Bauteile und Verbindungen als die Steckbrettansicht. Es sind dieselben Elemente wie auf Deinem Steckbrett, sie sehen nur anders aus. Diese Darstellung entspricht eher den traditionellen Diagrammen, wie Ingenieure sie verwenden.&lt;br/&gt;&lt;br/&gt;Nachdem Du Drähte zwischen Bauteilen gezogen hast, kannst Du mit &lt;Umschalt&gt;-Klick Biegepunkte erzeugen und Deine Verbindungen aufräumen. Mit der Schaltplanansicht kannst Du prüfen, ob Du die richtigen Verbindungen zwischen den Bauteilen hergestellt hast. Deinen Schaltplan kannst Du auch zur Dokumentation ausdrucken.</translation>
     </message>
     <message>
         <location filename="../src/help/firsttimehelpdialog.cpp" line="107"/>
         <source>The &lt;b&gt;PCB View&lt;/b&gt; is where you layout the components on a physical PCB (Printed Circuit Board).&lt;br/&gt;&lt;br/&gt;PCBs can be made at home or in a small lab using DIY etching processes. They also can be sent to professional PCB manufacturing services for more precise fabrication. &lt;br/&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;The first thing you will need is a board to place your parts on. There should already be one in your sketch, but if not, drag in the board icon from the Parts Bin. The icon matches the image to the right: &lt;/td&gt;&lt;td&gt;&lt;img src=&quot;:resources/parts/svg/core/icon/rectangle_pcb.svg&quot; /&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;br/&gt;&lt;br/&gt;To lay out your PCB, arrange all the components so they fit nicely on the board. Then try to shift them around to minimize the length and confusion of connections. You can also resize rectangular boards. &lt;br/&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;Once the parts are sorted out, you connect them with copper traces. You can drag out a trace from individual connections or use the autorouter to generate them. The Autoroute button is at the bottom of the window. The button matches the image to the right:&lt;/td&gt;&lt;td&gt;&lt;img src=&quot;:resources/images/icons/toolbarAutorouteEnabled_icon.png&quot; /&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</source>
-        <translation>In der &lt;b&gt;PCB-Ansicht&lt;/b&gt; layouten Sie die Komponenten auf einer physischen Leiterplatte (Printed Circuit Board).&lt;br/&gt;&lt;br/&gt;Leiterplatten können zu Hause oder in einem kleinen Labor mit DIY-Ätzverfahren hergestellt werden. Für eine präzisere Fertigung können sie auch an professionelle PCB-Hersteller geschickt werden. &lt;br/&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;Als erstes benötigen Sie eine Platine, auf der Sie Ihre Bauteile platzieren können. Es sollte bereits eine in Ihrer Skizze vorhanden sein, aber wenn nicht, ziehen Sie das Platinen-Symbol aus der Teileablage hinein. Das Symbol entspricht dem Bild auf der rechten Seite: &lt;/td&gt;&lt;td&gt;&lt;img src=&quot;:resources/parts/svg/core/icon/rectangle_pcb.svg&quot; /&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;br/&gt;&lt;br/&gt;Um Ihre Platine auszulegen, ordnen Sie alle Bauteile so an, dass sie gut auf die Platine passen. Versuchen Sie dann, sie zu verschieben, um die Länge und das Durcheinander der Anschlüsse zu minimieren. Sie können auch die Größe von rechteckigen Platinen ändern. &lt;br/&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;Sobald die Bauteile sortiert sind, verbinden Sie sie mit Kupferbahnen. Sie können eine Leiterbahn aus einzelnen Anschlüssen herausziehen oder mit dem Autorouter erzeugen. Die Schaltfläche Autoroute befindet sich am unteren Rand des Fensters. Die Schaltfläche entspricht dem Bild rechts:&lt;/td&gt;&lt;td&gt;&lt;img src=&quot;:resources/images/icons/toolbarAutorouteEnabled_icon.png&quot; /&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</translation>
+        <translation>In der &lt;b&gt;Platinenansicht&lt;/b&gt; platzierst Du die Bauteile auf einer Platine (auch Leiterplatte genannt, englisch PCB – Printed Circuit Board).&lt;br/&gt;&lt;br/&gt;Platinen können zu Hause oder in einem kleinen Labor im DIY-Ätzverfahren hergestellt werden. Für eine präzisere Fertigung kannst Du sie auch an einen professionellen Platinenhersteller schicken. &lt;br/&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;Als Erstes brauchst Du eine Platine, auf der Du Deine Bauteile platzierst. In Deinem Entwurf sollte bereits eine vorhanden sein – falls nicht, ziehe das Platinen-Symbol aus dem Sortiment hinein. Das Symbol entspricht dem Bild rechts: &lt;/td&gt;&lt;td&gt;&lt;img src=&quot;:resources/parts/svg/core/icon/rectangle_pcb.svg&quot; /&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;br/&gt;&lt;br/&gt;Für das Layout ordnest Du alle Bauteile so an, dass sie gut auf die Platine passen. Verschiebe sie dann so, dass die Verbindungen möglichst kurz und übersichtlich bleiben. Rechteckige Platinen kannst Du auch in der Größe ändern. &lt;br/&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;Sobald die Bauteile angeordnet sind, verbindest Du sie mit Leiterbahnen. Du kannst eine Leiterbahn von einzelnen Anschlüssen aus ziehen oder sie vom Autorouter erzeugen lassen. Die Schaltfläche „Autoroute“ befindet sich am unteren Fensterrand und entspricht dem Bild rechts:&lt;/td&gt;&lt;td&gt;&lt;img src=&quot;:resources/images/icons/toolbarAutorouteEnabled_icon.png&quot; /&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</translation>
     </message>
 </context>
 <context>
@@ -1574,7 +1576,7 @@ Möchtest Du die Bauteildatenbank neu erstellen?
     <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="238"/>
         <source>Do you want to save the changes you made in the document &quot;%1&quot;?</source>
-        <translation>Möchtest Du die Änderungen am Entwurf &quot;%1&quot; speichern?</translation>
+        <translation>Möchtest Du die Änderungen am Entwurf „%1“ speichern?</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="223"/>
@@ -1596,7 +1598,7 @@ Möchtest Du die Bauteildatenbank neu erstellen?
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="237"/>
         <source>Save &quot;%1&quot;</source>
         <comment>dialog title</comment>
-        <translation>&quot;%1&quot; speichern</translation>
+        <translation>„%1“ speichern</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="239"/>
@@ -1699,9 +1701,9 @@ Alle Bauteile benötigen ein fritzingVersion-Attribut: fritzingVersion=&quot;x.y
 Current version is &apos;%2&apos; which might not support it properly.Please consider updating your Fritzing.
 
 </source>
-        <translation type="unfinished">Dieses Bauteil wurde mit Fritzing-Version «%1» erstellt.
-Die aktuelle Version ist «%2», die es möglicherweise nicht korrekt unterstützt.
-Bitte erwägen Sie, Ihr Fritzing zu aktualisieren.
+        <translation>Dieses Bauteil wurde mit Fritzing-Version „%1“ erstellt.
+Die aktuelle Version ist „%2“, die es möglicherweise nicht korrekt unterstützt.
+Bitte erwäge, Dein Fritzing zu aktualisieren.
 
 </translation>
     </message>
@@ -1724,13 +1726,13 @@ This dialog collects only connectors labeled &apos;GND&apos; or &apos;ground&apo
 Click an item to highlight its connections in the sketch.
 
 It is also possible to choose a connector as a ground fill seed by right-clicking a connector and choosing the &apos;Set Ground Fill Seed&apos; context menu option.</source>
-        <translation>Der Unterschied zwischen einer &quot;Massefüllung&quot; und einer einfachen &quot;Kupferfüllung&quot; besteht darin, dass bei einer Massefüllung die gefüllte Fläche Leiterbahnen und Verbinder beinhaltet, welche mit Masse verbunden sind. Masseverbinder sind in der Regel mit &quot;GND&quot; oder &quot;ground&quot; gekennzeichnet, aber manchmal ist dies nicht der Fall. Es kann auch sein, dass es mehrere Netze mit Masseverbindern gibt und Du nur eines der Netze gefüllt haben willst.
+        <translation>Der Unterschied zwischen einer „Massefläche“ und einer einfachen „Kupferfläche“ besteht darin, dass die Massefläche auch die Leiterbahnen und Anschlüsse umfasst, die mit Masse verbunden sind. Masse-Anschlüsse sind in der Regel mit „GND“ oder „ground“ beschriftet, aber nicht immer. Es kann auch mehrere Netze mit Masse-Anschlüssen geben, von denen nur eines gefüllt werden soll.
 
-Dieser Dialog sammelt nur Verbinder mit der Bezeichnung &quot;GND&quot; oder &quot;ground&quot;, sowie bereits als &quot;Saat&quot; ausgewählte Verbinder.
+Dieser Dialog sammelt nur Anschlüsse mit der Beschriftung „GND“ oder „ground“ sowie Anschlüsse, die bereits als Startpunkte ausgewählt wurden.
 
-Klicke auf ein Element, um seine Verbindungen im Entwurf hervorzuheben.
+Klicke auf einen Eintrag, um seine Verbindungen im Entwurf hervorzuheben.
 
-Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für die Massefüllung setzen.</translation>
+Du kannst einen Anschluss auch als Startpunkt für die Massefläche festlegen: Rechtsklick auf den Anschluss, dann „Als Startpunkt für Massefläche setzen“ wählen.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/groundfillseeddialog.cpp" line="84"/>
@@ -1745,12 +1747,12 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/dialogs/groundfillseeddialog.cpp" line="123"/>
         <source>OK and ground fill</source>
-        <translation>OK und Massefüllung</translation>
+        <translation>OK und Massefläche erzeugen</translation>
     </message>
     <message>
         <location filename="../src/dialogs/groundfillseeddialog.cpp" line="123"/>
         <source>OK and copper fill</source>
-        <translation>OK und Kupferfüllung</translation>
+        <translation>OK und Kupferfläche erzeugen</translation>
     </message>
 </context>
 <context>
@@ -1811,7 +1813,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="198"/>
         <source>pcb layer</source>
-        <translation>Platinen-Ebene</translation>
+        <translation>Lage</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="274"/>
@@ -1930,7 +1932,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="1445"/>
         <source>Change the &quot;sticky&quot; state of the part in this view. When a sticky part is moved, objects on top of it also move.</source>
-        <translation>&quot;Haftung&quot; für dieses Bauteil ändern. Wenn ein &quot;haftendes&quot; Bauteil bewegt wird, werden auch alle Bauteile die darauf liegen mitbewegt.</translation>
+        <translation>„Haftung“ für dieses Bauteil ändern. Wenn ein „haftendes“ Bauteil bewegt wird, werden auch alle Bauteile die darauf liegen mitbewegt.</translation>
     </message>
     <message>
         <location filename="../src/infoview/htmlinfoview.cpp" line="249"/>
@@ -2201,7 +2203,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/items/itembase.cpp" line="1352"/>
         <source>file &apos;%1&apos; for title:&apos;%2&apos; and moduleID:&apos;%3&apos; not found</source>
-        <translation>Datei &apos;%1&apos; für Titel:&apos;%2&apos; und ModulID:&apos;%3&apos; nicht gefunden</translation>
+        <translation>Datei „%1“ für Titel:„%2“ und ModulID:„%3“ nicht gefunden</translation>
     </message>
     <message>
         <location filename="../src/items/itembase.cpp" line="1455"/>
@@ -2248,12 +2250,12 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/utils/folderutils.cpp" line="804"/>
         <source>Move Your Custom Parts</source>
-        <translation>Verschiebe deine benutzerdefinierten Bauteile</translation>
+        <translation>Verschiebe Deine eigenen Bauteile</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="805"/>
         <source>&lt;p&gt;Please move your custom-made parts and bins from the old location:&lt;br/&gt;&lt;br/&gt;&lt;em&gt;%1&lt;/em&gt;&lt;br/&gt;&lt;br/&gt;to the new Fritzing documents folder at:&lt;br/&gt;&lt;br/&gt;&lt;em&gt;%2&lt;/em&gt;&lt;br/&gt;&lt;br/&gt;</source>
-        <translation>Bitte verschiebe deine selbst erstellten Bauteile und Behälter vom alten Speicherort:&lt;br/&gt;&lt;br/&gt;&lt;em&gt;%1&lt;/em&gt;&lt;br/&gt;&lt;br/&gt;in den neuen Fritzing-Dokumenten-Ordner unter:&lt;br/&gt;&lt;br/&gt;&lt;em&gt;%2&lt;/em&gt;&lt;br/&gt;&lt;br/&gt;</translation>
+        <translation>&lt;p&gt;Bitte verschiebe Deine selbst erstellten Bauteile und Sortimente vom alten Speicherort:&lt;br/&gt;&lt;br/&gt;&lt;em&gt;%1&lt;/em&gt;&lt;br/&gt;&lt;br/&gt;in den neuen Fritzing-Dokumentenordner unter:&lt;br/&gt;&lt;br/&gt;&lt;em&gt;%2&lt;/em&gt;&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -2305,7 +2307,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/items/logoitem.cpp" line="414"/>
         <source>because this appears to be a SVG file exported from CorelDRAW without choosing the &apos;presentation attributes&apos; setting</source>
-        <translation>da diese SVG-Datei vermutlich aus CorelDRAW ohne die Einstellung &quot;presentation attributes&quot; exportiert wurde</translation>
+        <translation>da diese SVG-Datei vermutlich aus CorelDRAW ohne die Einstellung „presentation attributes“ exportiert wurde</translation>
     </message>
     <message>
         <location filename="../src/items/logoitem.cpp" line="425"/>
@@ -2386,12 +2388,12 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1649"/>
         <source>Unable to open &apos;%1&apos;: %2</source>
-        <translation>&quot;%1&quot; konnte nicht geöffnet werden: %2</translation>
+        <translation>„%1“ konnte nicht geöffnet werden: %2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2004"/>
         <source>No part files with the required prefix &apos;%1&apos; where found inside in the shareable part &apos;%2&apos;</source>
-        <translation type="unfinished">Es wurden keine Bauteil-Dateien mit dem erforderlichen Präfix «%1» im teilbaren Bauteil «%2» gefunden</translation>
+        <translation>Es wurden keine Bauteil-Dateien mit dem erforderlichen Präfix „%1“ im Bauteil-Paket „%2“ gefunden</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2040"/>
@@ -2404,7 +2406,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <source>Cannot open file &apos;%1&apos; for writing.
 
 %2</source>
-        <translation type="unfinished">Datei «%1» kann nicht zum Schreiben geöffnet werden.
+        <translation>Datei „%1“ kann nicht zum Schreiben geöffnet werden.
 
 %2</translation>
     </message>
@@ -2413,7 +2415,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <source>Cannot create ZIP archive for &apos;%1&apos;.
 
 %2</source>
-        <translation type="unfinished">ZIP-Archiv für «%1» kann nicht erstellt werden.
+        <translation>ZIP-Archiv für „%1“ kann nicht erstellt werden.
 
 %2</translation>
     </message>
@@ -2422,7 +2424,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <source>Failed to write sketch data to &apos;%1&apos;.
 
 %2</source>
-        <translation type="unfinished">Skizzendaten konnten nicht in «%1» geschrieben werden.
+        <translation type="unfinished">Skizzendaten konnten nicht in „%1“ geschrieben werden.
 
 %2</translation>
     </message>
@@ -2431,7 +2433,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <source>Failed to write part &apos;%1&apos; to &apos;%2&apos;.
 
 %3</source>
-        <translation type="unfinished">Bauteil «%1» konnte nicht in «%2» geschrieben werden.
+        <translation type="unfinished">Bauteil „%1“ konnte nicht in „%2“ geschrieben werden.
 
 %3</translation>
     </message>
@@ -2440,7 +2442,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <source>Error finalizing ZIP archive for &apos;%1&apos;.
 
 %2</source>
-        <translation type="unfinished">Fehler beim Abschließen des ZIP-Archivs für «%1».
+        <translation type="unfinished">Fehler beim Abschließen des ZIP-Archivs für „%1“.
 
 %2</translation>
     </message>
@@ -2449,7 +2451,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <source>Failed to commit file &apos;%1&apos;. The original file is untouched.
 
 %2</source>
-        <translation type="unfinished">Datei «%1» konnte nicht gespeichert werden. Die Originaldatei ist unverändert.
+        <translation type="unfinished">Datei „%1“ konnte nicht gespeichert werden. Die Originaldatei ist unverändert.
 
 %2</translation>
     </message>
@@ -2469,7 +2471,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <source>Part &apos;%1&apos; has critical issues that prevent it from loading:
 
 %2</source>
-        <translation>Bauteil &apos;%1&apos; hat kritische Probleme, die das Laden verhindern:
+        <translation>Bauteil „%1“ hat kritische Probleme, die das Laden verhindern:
 
 %2</translation>
     </message>
@@ -2484,14 +2486,14 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <source>Part &apos;%1&apos; was loaded with warnings:
 
 %2</source>
-        <translation>Bauteil &apos;%1&apos; wurde mit Warnungen geladen:
+        <translation>Bauteil „%1“ wurde mit Warnungen geladen:
 
 %2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2403"/>
         <source>Unable to load part &apos;%1&apos;: the part definition has an empty or missing module ID (moduleId attribute).</source>
-        <translation type="unfinished">Teil «%1» kann nicht geladen werden: Die Teildefinition hat eine leere oder fehlende Modul-ID (moduleId-Attribut).</translation>
+        <translation type="unfinished">Teil „%1“ kann nicht geladen werden: Die Teildefinition hat eine leere oder fehlende Modul-ID (moduleId-Attribut).</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2685"/>
@@ -2569,7 +2571,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3315"/>
         <source>Backup of &apos;%1&apos; failed</source>
-        <translation>Sicherung von &apos;%1&apos; fehlgeschlagen</translation>
+        <translation>Sicherung von „%1“ fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3406"/>
@@ -2738,7 +2740,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1667"/>
         <source>No Sketch found in &apos;%1&apos;</source>
-        <translation>In &apos;%1&apos; konnte kein Entwurf gefunden werden</translation>
+        <translation>In „%1“ konnte kein Entwurf gefunden werden</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1734"/>
@@ -2748,61 +2750,61 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message numerus="yes">
         <location filename="../src/mainwindow/mainwindow.cpp" line="1773"/>
         <source>The sketch &apos;%1&apos; is missing %n SVG file(s): %2. The sketch will still load, but some parts may not display correctly. If the sketch is very old, try loading it with an older version of Fritzing (0.9.x) and re-saving it.</source>
-        <translation type="unfinished">
-            <numerusform>Der Skizze «%1» fehlt %n SVG-Datei: %2. Die Skizze wird trotzdem geladen, aber einige Teile werden möglicherweise nicht korrekt angezeigt. Wenn die Skizze sehr alt ist, versuchen Sie, sie mit einer älteren Version von Fritzing (0.9.x) zu öffnen und erneut zu speichern.</numerusform>
-            <numerusform>Der Skizze «%1» fehlen %n SVG-Dateien: %2. Die Skizze wird trotzdem geladen, aber einige Teile werden möglicherweise nicht korrekt angezeigt. Wenn die Skizze sehr alt ist, versuchen Sie, sie mit einer älteren Version von Fritzing (0.9.x) zu öffnen und erneut zu speichern.</numerusform>
+        <translation>
+            <numerusform>Dem Entwurf „%1“ fehlt %n SVG-Datei: %2. Der Entwurf wird trotzdem geladen, aber einige Bauteile werden möglicherweise nicht korrekt angezeigt. Wenn der Entwurf sehr alt ist, versuche, ihn mit einer älteren Fritzing-Version (0.9.x) zu öffnen und erneut zu speichern.</numerusform>
+            <numerusform>Dem Entwurf „%1“ fehlen %n SVG-Dateien: %2. Der Entwurf wird trotzdem geladen, aber einige Bauteile werden möglicherweise nicht korrekt angezeigt. Wenn der Entwurf sehr alt ist, versuche, ihn mit einer älteren Fritzing-Version (0.9.x) zu öffnen und erneut zu speichern.</numerusform>
         </translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1827"/>
         <source>Unable to open shareable &apos;%1&apos;: %2</source>
-        <translation>&quot;%1&quot; (shareable) konnte nicht geöffnet werden: %2</translation>
+        <translation>Paket „%1“ konnte nicht geöffnet werden: %2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1978"/>
         <source>Unable to open shareable part &apos;%1&apos;: %2</source>
-        <translation>Bauteil &quot;%1&quot; konnte nicht geöffnet werden: %2</translation>
+        <translation>Bauteil-Paket „%1“ konnte nicht geöffnet werden: %2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1957"/>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2010"/>
         <source>Unable to load part from &apos;%1&apos;</source>
-        <translation>Bauteil aus &quot;%1&quot; konnte nicht geladen werden</translation>
+        <translation>Bauteil aus „%1“ konnte nicht geladen werden</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1876"/>
         <source>Local part &apos;%1&apos; incomplete, only &apos;%2&apos; layers.</source>
-        <translation>Lokalteil &apos;%1&apos; unvollständig, nur &apos;%2&apos; Schichten.</translation>
+        <translation>Lokalteil „%1“ unvollständig, nur „%2“ Schichten.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1892"/>
         <source>View &apos;%1&apos; should be prefixed with &apos;%2/&apos;. Trying to continue.</source>
-        <translation>Ansicht &apos;%1&apos; sollte mit &apos;%2/&apos; beginnen. Versuche, fortzufahren.</translation>
+        <translation>Ansicht „%1“ sollte mit „%2/“ beginnen. Versuche, fortzufahren.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1912"/>
         <source>Could not copy subfile &apos;%1&apos; to &apos;%2&apos;</source>
-        <translation>Konnte Unterdatei &apos;%1&apos; nicht nach &apos;%2&apos; kopieren</translation>
+        <translation>Konnte Unterdatei „%1“ nicht nach „%2“ kopieren</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1920"/>
         <source>Local part &apos;%1&apos; incomplete, subfile not found &apos;%2&apos;</source>
-        <translation>Teil &apos;%1&apos; unvollständig, Unterdatei nicht gefunden &apos;%2&apos;</translation>
+        <translation>Teil „%1“ unvollständig, Unterdatei nicht gefunden „%2“</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1934"/>
         <source>Unable to open local part &apos;%1&apos;</source>
-        <translation>Lokales Teil &apos;%1&apos; kann nicht geöffnet werden</translation>
+        <translation>Lokales Teil „%1“ kann nicht geöffnet werden</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2254"/>
         <source>Could not save &apos;%1&apos; because the file would be empty. Please try again.</source>
-        <translation>&apos;%1&apos; konnte nicht gespeichert werden, da die Datei leer wäre. Bitte versuche es erneut.</translation>
+        <translation>„%1“ konnte nicht gespeichert werden, da die Datei leer wäre. Bitte versuche es erneut.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2301"/>
         <source>There is already a part with id &apos;%1&apos; loaded into Fritzing.</source>
-        <translation>Es gibt bereits ein Bauteil mit der ID &apos;%1&apos;.</translation>
+        <translation>Es gibt bereits ein Bauteil mit der ID „%1“.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2309"/>
@@ -2817,7 +2819,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2686"/>
         <source>The copper top (copper 1) layer is not available on a one-sided board.  Please switch the board to double-sided or choose the copper bottom (copper 0) layer.</source>
-        <translation>Die obere Kupferebene (copper 1) ist auf einer einseitigen Leiterplatte nicht verfügbar. Bitte ändere die Leiterplatte auf eine beidseitige, oder wähle die untere Kupferebene (copper 0).</translation>
+        <translation>Die obere Kupferlage (copper 1) ist auf einer einseitigen Platine nicht verfügbar. Bitte stelle die Platine auf doppelseitig um, oder wähle die untere Kupferlage (copper 0).</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2794"/>
@@ -2827,12 +2829,12 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2937"/>
         <source>Change to single layer pcb</source>
-        <translation>Zu einseitiger Leiterplatte ändern</translation>
+        <translation>Zu einseitiger Platine ändern</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2937"/>
         <source>Change to two layer pcb</source>
-        <translation>Zu beidseitiger Leiterplatte ändern</translation>
+        <translation>Auf doppelseitige Platine ändern</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3003"/>
@@ -2842,7 +2844,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3068"/>
         <source>Svg %1 is missing a &apos;%2&apos; layer. For more information on how to create a custom board shape, see the tutorial at &lt;a href=&apos;http://fritzing.org/learning/tutorials/designing-pcb/pcb-custom-shape/&apos;&gt;http://fritzing.org/learning/tutorials/designing-pcb/pcb-custom-shape/&lt;/a&gt;.</source>
-        <translation>Der SVG-Datei %1 fehlt eine &apos;%2&apos;-Ebene. Um mehr darüber zu lernen, wie man eine eigene Leiterplattenform erstellt, schau Dir die &lt;a href=&apos;http://fritzing.org/learning/tutorials/designing-pcb/pcb-custom-shape/&apos;&gt;Anleitung&lt;/a&gt; an.</translation>
+        <translation>Der SVG-Datei %1 fehlt eine „%2“-Ebene. Um mehr darüber zu lernen, wie man eine eigene Platinenform erstellt, schau Dir die &lt;a href=&apos;http://fritzing.org/learning/tutorials/designing-pcb/pcb-custom-shape/&apos;&gt;Anleitung&lt;/a&gt; an.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3106"/>
@@ -2867,7 +2869,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3302"/>
         <source>Backing up &apos;%1&apos;</source>
-        <translation>&apos;%1&apos; wird gesichert</translation>
+        <translation>„%1“ wird gesichert</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3407"/>
@@ -2939,12 +2941,12 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="188"/>
         <source>Your sketch does not have a board yet! Please add a PCB in order to export etchable.</source>
-        <translation>Dein Entwurf enthält noch keine Leiterplatte! Bitte füge eine Leiterplatte hinzu, um den Export zu ermöglichen.</translation>
+        <translation>Dein Entwurf enthält noch keine Platine! Bitte füge eine Platine hinzu, um den Export zu ermöglichen.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="193"/>
         <source>Etchable export can only handle one board at a time--please select the board you want to export.</source>
-        <translation>Es kann nur eine Leiterplatte gleichzeitig exportiert werden - bitte wähle die Leiterplatte aus, die Du exportieren möchtest.</translation>
+        <translation>Es kann nur eine Platine gleichzeitig exportiert werden - bitte wähle die Platine aus, die Du exportieren möchtest.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="222"/>
@@ -2990,7 +2992,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="851"/>
         <source>Saved &apos;%1&apos;</source>
-        <translation>&apos;%1&apos; gespeichert</translation>
+        <translation>„%1“ gespeichert</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="249"/>
@@ -3074,7 +3076,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="329"/>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2744"/>
         <source>File &apos;%1&apos; not found</source>
-        <translation>Datei &apos;%1&apos; konnte nicht gefunden werden</translation>
+        <translation>Datei „%1“ konnte nicht gefunden werden</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="666"/>
@@ -3099,7 +3101,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1024"/>
         <source>Unable to export %1 as shareable.</source>
-        <translation>%1 konnte nicht zum Teilen exportiert werden.</translation>
+        <translation>%1 konnte nicht als Paket exportiert werden.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1025"/>
@@ -3245,12 +3247,12 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1113"/>
         <source>Export the current sketch to PDF for DIY PCB production (photoresist)</source>
-        <translation>Aktuellen Entwurf als PDF für Selbstbau-Leiterplatten exportieren (Fotoresist-Methode)</translation>
+        <translation>Aktuellen Entwurf als PDF für Selbstbau-Platinen exportieren (Fotoresist-Methode)</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1118"/>
         <source>Export the current sketch to SVG for DIY PCB production (photoresist)</source>
-        <translation>Aktuellen Entwurf als SVG für Selbstbau-Leiterplatten exportieren (Fotoresist-Methode)</translation>
+        <translation>Aktuellen Entwurf als SVG für Selbstbau-Platinen exportieren (Fotoresist-Methode)</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1127"/>
@@ -3290,12 +3292,12 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1748"/>
         <source>Your sketch does not have a board yet!  Please add a PCB in order to export to IPC netlist.</source>
-        <translation>Deinem Entwurf fehlt die Leiterplatte! Um eine IPC Datei zu exportieren, müssen die Bauteile auf einer Leiterplatte (PCB) angeordnet sein.</translation>
+        <translation>Deinem Entwurf fehlt die Platine! Um eine IPC Datei zu exportieren, müssen die Bauteile auf einer Platine (PCB) angeordnet sein.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1753"/>
         <source>IPC netlist export can only handle one board at a time--please select the board you want to export.</source>
-        <translation>Der IPC-Netzlistenexport kann jeweils nur eine Platine verarbeiten - bitte wählen Sie die Platine aus, die Sie exportieren möchten.</translation>
+        <translation>Der IPC-Netzlisten-Export kann nur eine Platine auf einmal verarbeiten – bitte wähle die Platine aus, die Du exportieren möchtest.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1761"/>
@@ -3310,7 +3312,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1906"/>
         <source>Gerber export can only handle one board at a time--please select the board you want to export.</source>
-        <translation>Es kann nur eine Leiterplatte gleichzeitig exportiert werden - bitte wähle die Leiterplatte aus, die Du exportieren möchtest.</translation>
+        <translation>Es kann nur eine Platine gleichzeitig exportiert werden - bitte wähle die Platine aus, die Du exportieren möchtest.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1928"/>
@@ -3476,12 +3478,12 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="985"/>
         <source>Edit the application&apos;s preferences</source>
-        <translation>Bearbeiten Sie die Einstellungen der Anwendung</translation>
+        <translation>Die Einstellungen der Anwendung bearbeiten</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="996"/>
         <source>Disconnect all wires connected to this connector</source>
-        <translation>Alle Drähte, welche mit diesem Verbinder verbunden sind, lösen</translation>
+        <translation>Alle Drähte lösen, die mit diesem Anschluss verbunden sind</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1000"/>
@@ -3496,7 +3498,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1008"/>
         <source>Export 1000 dpi SVG of this part in this view</source>
-        <translation>Aktuellen Ausschnitt als SVG mit 1000 dpi exportieren</translation>
+        <translation>Dieses Bauteil in dieser Ansicht als SVG (1000 dpi) exportieren</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1011"/>
@@ -3506,7 +3508,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1012"/>
         <source>Export 1000 dpi Flattened SVG of this part in this view</source>
-        <translation>Aktuellen Ausschnitt als reduziertes SVG mit 1000 dpi exportieren</translation>
+        <translation>Dieses Bauteil in dieser Ansicht als reduziertes SVG (1000 dpi) exportieren</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1015"/>
@@ -3521,12 +3523,12 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1019"/>
         <source>Test Connectors</source>
-        <translation>Verbinder prüfen</translation>
+        <translation>Anschlüsse prüfen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1020"/>
         <source>Connect all connectors to a single test part</source>
-        <translation>Alle Verbinder mit einem einzigen Testteil verbinden</translation>
+        <translation>Alle Anschlüsse mit einem einzigen Testbauteil verbinden</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1082"/>
@@ -3643,7 +3645,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1158"/>
         <source>Hide/show the silkscreen layer for only this part</source>
-        <translation>Siebdruckebene für dieses Bauteil ein-/ausblenden</translation>
+        <translation>Siebdruck für dieses Bauteil ein-/ausblenden</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1161"/>
@@ -3658,12 +3660,12 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1204"/>
         <source>Color Breadboard Wires By Length</source>
-        <translation>Kabellänge farbig kodieren</translation>
+        <translation>Steckbrett-Drähte nach Länge einfärben</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1205"/>
         <source>Display breadboard wires using standard color coding by length</source>
-        <translation>Braeadboard-Kabel entsprechend ihrer Länge farbcodiert anzeigen</translation>
+        <translation>Steckbrett-Drähte entsprechend ihrer Länge farbcodiert anzeigen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1210"/>
@@ -3723,7 +3725,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1347"/>
         <source>Display First Time Help</source>
-        <translation>Erstbenutzerhilfe anzeigen</translation>
+        <translation>Erste Schritte anzeigen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1416"/>
@@ -3778,12 +3780,12 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2250"/>
         <source>Ground Fill (%1)</source>
-        <translation>Massefüllung (%1)</translation>
+        <translation>Massefläche (%1)</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2251"/>
         <source>Copper Fill (%1)</source>
-        <translation>Kupferfüllung (%1)</translation>
+        <translation>Kupferfläche (%1)</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2335"/>
@@ -3804,42 +3806,42 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2913"/>
         <source>Choose Ground Fill Seed(s)...</source>
-        <translation>Starter für Massefüllung wählen...</translation>
+        <translation>Startpunkte für Massefläche wählen...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2917"/>
         <source>Set Ground Fill Seed</source>
-        <translation>Als Start für Massefüllung setzen</translation>
+        <translation>Als Startpunkt für Massefläche setzen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2918"/>
         <source>Treat this connector and its connections as a &apos;ground&apos; during ground fill.</source>
-        <translation>Diesen Stecker und seine Verbindungen bei der Massefüllung als &quot;Masse&quot; behandeln.</translation>
+        <translation>Diesen Anschluss und seine Verbindungen beim Erzeugen der Massefläche als Masse behandeln.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2922"/>
         <source>Clear Ground Fill Seeds</source>
-        <translation>Startpunkte der Massefüllung zurücksetzen</translation>
+        <translation>Startpunkte der Massefläche zurücksetzen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2923"/>
         <source>Clear ground fill seeds--enable copper fill only.</source>
-        <translation>Startpunkte für Massefüllung zurücksetzen und normale Kupferfüllung aktivieren.</translation>
+        <translation>Startpunkte der Massefläche zurücksetzen – nur einfache Kupferfläche.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2926"/>
         <source>Set Ground Fill Keepout...</source>
-        <translation>Abstand der Massefüllung einstellen...</translation>
+        <translation>Mindestabstand der Massefläche einstellen...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2927"/>
         <source>Set the minimum distance between ground fill and traces or connectors</source>
-        <translation>Minimaler Abstand zwischen Massefüllung und benachbarten Leiterbahnen und Verbindern</translation>
+        <translation>Mindestabstand zwischen Massefläche und Leiterbahnen oder Anschlüssen festlegen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2930"/>
         <source>Design Rules Check (DRC)</source>
-        <translation>Prüfung der Designregeln (DRC)</translation>
+        <translation>DRC</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2931"/>
@@ -3854,7 +3856,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2940"/>
         <source>How much would it cost to produce a PCB from this sketch with Fritzing Fab</source>
-        <translation>Ermittelt einen Kostenvoranschlag für die Produktion mit &quot;Fritzing Fab&quot;</translation>
+        <translation>Ermittelt einen Kostenvoranschlag für die Produktion mit „Fritzing Fab“</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2947"/>
@@ -3866,7 +3868,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2948"/>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2954"/>
         <source>View the PCB from the bottom layers upwards</source>
-        <translation>Leiterplatte von unten betrachten</translation>
+        <translation>Platine von unten betrachten</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2958"/>
@@ -3876,7 +3878,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2959"/>
         <source>View the PCB from the top layers downwards</source>
-        <translation>Leiterplatte von oben betrachten</translation>
+        <translation>Platine von oben betrachten</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3169"/>
@@ -3896,7 +3898,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3360"/>
         <source>Generating %1 fill...</source>
-        <translation>%1-Füllung wird erzeugt...</translation>
+        <translation>%1-Fläche wird erzeugt...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3360"/>
@@ -3965,7 +3967,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3729"/>
         <source>The conversion process will not modify &apos;%1&apos;, until you save the file. </source>
-        <translation>Der Konvertierungsprozess wird &apos;%1&apos; nicht verändern, bis Du die Datei speicherst. </translation>
+        <translation>Der Konvertierungsprozess wird „%1“ nicht verändern, bis Du die Datei speicherst. </translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3731"/>
@@ -3983,7 +3985,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
 Note: if you want to update later, there are options under the &apos;Part&apos; menu for dealing with outdated parts individually. </source>
         <translation type="vanished">
 
-Hinweis: Wenn Du die Aktualisierung später durchführen möchtest, gibt es im &apos;Bauteile&apos;-Menü spezielle Funktionen, um mit veralteten Bauteilen umzugehen. </translation>
+Hinweis: Wenn Du die Aktualisierung später durchführen möchtest, gibt es im „Bauteile“-Menü spezielle Funktionen, um mit veralteten Bauteilen umzugehen. </translation>
     </message>
     <message numerus="yes">
         <source>There are %n outdated part(s) in this sketch. </source>
@@ -4001,7 +4003,7 @@ Hinweis: Wenn Du die Aktualisierung später durchführen möchtest, gibt es im &
     </message>
     <message>
         <source>This may result in changes to your sketch, as parts or connectors may be shifted. </source>
-        <translation type="vanished">Dies kann zu Änderungen am Entwurf führen, Bauteile oder Verbinder können verschoben sein. </translation>
+        <translation type="vanished">Dies kann zu Änderungen am Entwurf führen, da Bauteile oder Anschlüsse verschoben sein können. </translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4253"/>
@@ -4020,7 +4022,7 @@ Hinweis: Wenn Du die Aktualisierung später durchführen möchtest, gibt es im &
         <source>It is recommended to add copper/ground fill to your circuit to reduce acid usage during production.
 
 Continue upload?</source>
-        <translation>Es wird empfohlen, Ihrem Schaltkreis eine Kupfer-/Massefüllung hinzuzufügen, um den Säureverbrauch während der Produktion zu reduzieren.
+        <translation>Es wird empfohlen, Deinem Schaltkreis eine Kupfer- oder Massefläche hinzuzufügen, um den Säureverbrauch bei der Produktion zu reduzieren.
 
 Upload fortsetzen?</translation>
     </message>
@@ -4037,7 +4039,7 @@ Upload fortsetzen?</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4884"/>
         <source>No parts matched search term &apos;%1&apos;.</source>
-        <translation>Es konnten keine Bauteile für &apos;%1&apos; gefunden werden.</translation>
+        <translation>Es konnten keine Bauteile für „%1“ gefunden werden.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1028"/>
@@ -4136,7 +4138,7 @@ Zurücksetzen?</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1056"/>
         <source>Bring selected object(s) to front of their layer</source>
-        <translation>Auswahl innerhalb deiner Ebene in den Vordergrund bringen</translation>
+        <translation>Auswahl innerhalb ihrer Ebene ganz in den Vordergrund bringen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1061"/>
@@ -4151,7 +4153,7 @@ Zurücksetzen?</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1063"/>
         <source>Bring selected object(s) forward in their layer</source>
-        <translation>Auswahl innerhalb deiner Ebene schrittweise in den Vordergrund bringen</translation>
+        <translation>Auswahl innerhalb ihrer Ebene schrittweise in den Vordergrund bringen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1068"/>
@@ -4191,7 +4193,7 @@ Zurücksetzen?</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1112"/>
         <source>If a &quot;sticky&quot; part is moved, parts on top of it are also moved</source>
-        <translation>Wenn ein &quot;haftendes&quot; Bauteil bewegt wird, werden auch alle darauf liegenden Bauteile mitbewegt</translation>
+        <translation>Wenn ein „haftendes“ Bauteil bewegt wird, werden auch alle darauf liegenden Bauteile mitbewegt</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1281"/>
@@ -4349,12 +4351,12 @@ Zurücksetzen?</translation>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2901"/>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3362"/>
         <source>Ground Fill</source>
-        <translation>Massefüllung</translation>
+        <translation>Massefläche</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2336"/>
         <source>It doesn&apos;t seem to be possible to automatically determine the actual physical size of the monitor, so &apos;actual size&apos; as currently implemented is only a guess. Your best bet would be to drag out a ruler part, then place a real (physical) ruler on top and zoom until they match up.</source>
-        <translation>Es ist leider nicht möglich, die tatsächliche physische Größe dieses Displays zu berechnen, sodass die &quot;Originalgröße&quot; nur eine Annäherung ist.</translation>
+        <translation>Es ist leider nicht möglich, die tatsächliche physische Größe dieses Displays zu berechnen, sodass die „Originalgröße“ nur eine Annäherung ist.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2833"/>
@@ -4369,7 +4371,7 @@ Zurücksetzen?</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2936"/>
         <source>Set autorouting parameters including keepout...</source>
-        <translation>Autorouter und Entwurfsregeln einstellen…</translation>
+        <translation>Autorouter- und DRC-Einstellungen einschließlich Mindestabstand (Keepout) festlegen…</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2963"/>
@@ -4386,7 +4388,7 @@ Zurücksetzen?</translation>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2969"/>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2970"/>
         <source>Set copper top layer clickable</source>
-        <translation>Obere Kupferebene anklickbar machen</translation>
+        <translation>Obere Kupferlage anklickbar machen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2971"/>
@@ -4397,7 +4399,7 @@ Zurücksetzen?</translation>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2975"/>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2976"/>
         <source>Set copper bottom layer clickable</source>
-        <translation>Untere Kupferebene anklickbar machen</translation>
+        <translation>Untere Kupferlage anklickbar machen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2977"/>
@@ -4447,7 +4449,7 @@ Zurücksetzen?</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1329"/>
         <source>Visit fritzing.org</source>
-        <translation>Besuchen Sie fritzing.org</translation>
+        <translation>Besuche fritzing.org</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1330"/>
@@ -4504,7 +4506,7 @@ Zurücksetzen?</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2862"/>
         <source>Highlight all unrouted connectors</source>
-        <translation>Alle nicht gerouteten Verbinder hervorheben</translation>
+        <translation>Alle ungerouteten Anschlüsse hervorheben</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2869"/>
@@ -4519,22 +4521,22 @@ Zurücksetzen?</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2873"/>
         <source>Select All CopperFill</source>
-        <translation>Alle Kupferfüllungen auswählen</translation>
+        <translation>Alle Kupferflächen auswählen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2874"/>
         <source>Select all copper fill items</source>
-        <translation>Alle Elemente mit Kupferfüllung auswählen</translation>
+        <translation>Alle Kupferflächen-Elemente auswählen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2881"/>
         <source>Select All &quot;Don&apos;t Autoroute&quot; Traces</source>
-        <translation>Alle &quot;Nicht Autorouten&quot;-Leiterbahnen auswählen</translation>
+        <translation>Alle „Nicht Autorouten“-Leiterbahnen auswählen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2885"/>
         <source>Select All Autoroutable Traces</source>
-        <translation>Alle &quot;Autoroute-baren&quot;-Leiterbahnen auswählen</translation>
+        <translation>Alle „Autoroute-baren“-Leiterbahnen auswählen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2886"/>
@@ -4549,17 +4551,17 @@ Zurücksetzen?</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2902"/>
         <source>Fill empty regions of the copper layer--fill will include all traces connected to a GROUND</source>
-        <translation>Leere Bereiche der Kupferebene auffüllen - Füllung wird alle mit MASSE verbundenen Leiterbahnen beinhalten</translation>
+        <translation>Leere Bereiche der Kupferlage füllen – die Massefläche umfasst alle mit Masse (GND) verbundenen Leiterbahnen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2906"/>
         <source>Fill empty regions of the copper layer--not including traces connected to a GROUND</source>
-        <translation>Leere Bereiche der Kupferebene auffüllen - ausgenommen mit MASSE verbundene Leiterbahnen</translation>
+        <translation>Leere Bereiche der Kupferlage füllen – ohne die mit Masse (GND) verbundenen Leiterbahnen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2914"/>
         <source>Fill empty regions of the copper layer--fill will include all traces connected to the seeds</source>
-        <translation>Leere Bereiche der Kupferebene auffüllen - Füllung wird alle mit der &quot;Saat&quot; verbundenen Leiterbahnen einschließen</translation>
+        <translation>Leere Bereiche der Kupferlage füllen – die Massefläche umfasst alle mit den Startpunkten verbundenen Leiterbahnen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2932"/>
@@ -4574,42 +4576,42 @@ Zurücksetzen?</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3049"/>
         <source>Order a PCB...</source>
-        <translation>Leiterplatte bestellen...</translation>
+        <translation>Platine bestellen...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3050"/>
         <source>Order a PCB created from your sketch--from fabulous Fritzing Fab</source>
-        <translation>Eine Leiterplatte bestellen, welche aus deinem Entwurf erstellt wurde--von dem fabelhaften Fritzing Fab</translation>
+        <translation>Eine Platine aus Deinem Entwurf bestellen – beim fabelhaften Fritzing Fab</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3065"/>
         <source>Your sketch does not have a board yet!  Please add a PCB in order to use the autorouter.</source>
-        <translation>Dein Entwurf enthält noch keine Leiterplatte! Bitte füge eine hinzu, um den Autorouter zu starten.</translation>
+        <translation>Dein Entwurf enthält noch keine Platine! Bitte füge eine hinzu, um den Autorouter zu starten.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3070"/>
         <source>Please select the board you want to autoroute. The autorouter can only handle one board at a time.</source>
-        <translation>Es kann nur eine Leiterplatte gleichzeitig geroutet werden. Bitte wähle die Leiterplatte aus, die Du autorouten möchtest.</translation>
+        <translation>Es kann nur eine Platine gleichzeitig geroutet werden. Bitte wähle die Platine aus, die Du autorouten möchtest.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3350"/>
         <source>Your sketch does not have a board yet!  Please add a PCB in order to use ground or copper fill.</source>
-        <translation>Dein Entwurf enthält noch keine Leiterplatte! Bitte füge eine hinzu, um eine Kupferfüllung zu erzeugen.</translation>
+        <translation>Dein Entwurf enthält noch keine Platine! Bitte füge eine hinzu, um eine Masse- oder Kupferfläche zu erzeugen.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3355"/>
         <source>Please select a PCB--copper fill only works for one board at a time.</source>
-        <translation>Bitte wähle erst eine Leiterplatte aus. Die Kupferfüllung kann nur auf einer Leiterplatte gleichzeitig ausgeführt werden.</translation>
+        <translation>Bitte wähle zuerst eine Platine aus. Kupferflächen können nur auf einer Platine auf einmal erzeugt werden.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3394"/>
         <source>Your sketch does not have a board yet!  Please add a PCB in order to remove copper fill.</source>
-        <translation>Dein Entwurf enthält noch keine Leiterplatte! Bitte füge eine hinzu, um die Kupferfüllung entfernen zu können.</translation>
+        <translation>Dein Entwurf enthält noch keine Platine! Bitte füge eine hinzu, um die Kupferfläche entfernen zu können.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3399"/>
         <source>Please select a PCB--ground fill operations only work on a one board at a time.</source>
-        <translation>Bitte wähle erst eine Leiterplatte aus. Änderungen an der Kupferfüllung können nur auf einer Leiterplatte gleichzeitig ausgeführt werden.</translation>
+        <translation>Bitte wähle zuerst eine Platine aus. Masseflächen-Operationen können nur auf einer Platine auf einmal ausgeführt werden.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3725"/>
@@ -4619,7 +4621,7 @@ Would you like to convert &apos;%1&apos; to the new standard now or open the fil
 </source>
         <translation>Es gibt einen neuen Grafikstandard für Bauteilbilder in der Schaltplan-Ansicht, beginnend mit Version 0.8.6.
 
-Möchtest Du &apos;%1&apos; jetzt in den neuen Standard umwandeln oder die Datei schreibgeschützt öffnen?
+Möchtest Du „%1“ jetzt in den neuen Standard umwandeln oder die Datei schreibgeschützt öffnen?
 </translation>
     </message>
     <message>
@@ -4669,22 +4671,22 @@ Willst Du jetzt aktualisieren?</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4519"/>
         <source>Your sketch does not have a board yet! DRC only works with a PCB.</source>
-        <translation>Dein Entwurf enthält noch keine Leiterplatte! Bitte füge eine hinzu, um den die Entwurfsregelprüfung zu starten.</translation>
+        <translation>Dein Entwurf enthält noch keine Platine! Bitte füge eine hinzu, um den DRC (Designprüfer) zu starten.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4525"/>
         <source>Please select a PCB. DRC only works on one board at a time.</source>
-        <translation>Bitte wähle erst eine Leiterplatte aus. Die Entwurfsregelprüfung kann nur auf einer Leiterplatte gleichzeitig ausgeführt werden.</translation>
+        <translation>Bitte wähle zuerst eine Platine aus. Der DRC kann nur eine Platine auf einmal prüfen.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4535"/>
         <source>DRC Progress...</source>
-        <translation>Fortschritt der Prüfung...</translation>
+        <translation>DRC-Fortschritt...</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4706"/>
         <source>Please first save your project in order to upload it.</source>
-        <translation>Bitte speichern Sie zunächst Ihr Projekt, bevor es hochgeladen wird.</translation>
+        <translation>Bitte speichere zuerst Dein Projekt, um es hochzuladen.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4706"/>
@@ -4696,13 +4698,13 @@ Willst Du jetzt aktualisieren?</translation>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4715"/>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4732"/>
         <source>Your sketch does not have a board yet! Please add a PCB in order to use copper fill operations.</source>
-        <translation>Deinem Entwurf fehlt noch die Leiterplatte! Für die Kupferfüllung musst Du erst eine Leiterplatte (PCB) einfügen.</translation>
+        <translation>Dein Entwurf enthält noch keine Platine! Bitte füge eine hinzu, um Kupferflächen-Operationen zu nutzen.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4720"/>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4737"/>
         <source>Please select a PCB. Copper fill operations only work on one board at a time.</source>
-        <translation>Bitte wähle erst eine Leiterplatte aus. Die Kupferfüllung kann nur auf einer Leiterplatte gleichzeitig ausgeführt werden.</translation>
+        <translation>Bitte wähle zuerst eine Platine aus. Kupferflächen-Operationen können nur auf einer Platine auf einmal ausgeführt werden.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3005"/>
@@ -4855,7 +4857,7 @@ Bitte überprüfe alle Ansichten auf eventuelle Nebenwirkungen.</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1241"/>
         <source>&amp;Show Breadboard</source>
-        <translation>&amp;Steckplatine anzeigen</translation>
+        <translation>&amp;Steckbrett anzeigen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1231"/>
@@ -4865,7 +4867,7 @@ Bitte überprüfe alle Ansichten auf eventuelle Nebenwirkungen.</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1243"/>
         <source>Show the breadboard view</source>
-        <translation>Steckplatinenansicht anzeigen</translation>
+        <translation>Steckbrettansicht anzeigen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1247"/>
@@ -4885,7 +4887,7 @@ Bitte überprüfe alle Ansichten auf eventuelle Nebenwirkungen.</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1253"/>
         <source>&amp;Show PCB</source>
-        <translation>&amp;Leiterplatte anzeigen</translation>
+        <translation>&amp;Platine anzeigen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1231"/>
@@ -4895,7 +4897,7 @@ Bitte überprüfe alle Ansichten auf eventuelle Nebenwirkungen.</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1255"/>
         <source>Show the PCB view</source>
-        <translation>Leiterplattenansicht anzeigen</translation>
+        <translation>Platinenansicht anzeigen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1260"/>
@@ -5051,7 +5053,7 @@ Bitte überprüfe alle Ansichten auf eventuelle Nebenwirkungen.</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3422"/>
         <source>Remove copper fill</source>
-        <translation>Kupferfüllung entfernen</translation>
+        <translation>Kupferfläche entfernen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3251"/>
@@ -5121,28 +5123,28 @@ Bitte überprüfe alle Ansichten auf eventuelle Nebenwirkungen.</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2567"/>
         <source>Sorry, &quot;%1&quot; has not been implemented yet</source>
-        <translation>Sorry, &quot;%1&quot; wurde noch nicht implementiert</translation>
+        <translation>Sorry, „%1“ wurde noch nicht implementiert</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1901"/>
         <source>Your sketch does not have a board yet!  Please add a PCB in order to export to Gerber.</source>
-        <translation>Deinem Entwurf fehlt die Leiterplatte! Um nach Gerber zu exportieren, müssen die Bauteile auf einer Leiterplatte (PCB) angeordnet sein.</translation>
+        <translation>Deinem Entwurf fehlt die Platine! Um nach Gerber zu exportieren, müssen die Bauteile auf einer Platine (PCB) angeordnet sein.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2905"/>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3362"/>
         <source>Copper Fill</source>
-        <translation>Kupferfüllung</translation>
+        <translation>Kupferfläche</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2909"/>
         <source>Remove Copper Fill</source>
-        <translation>Kupferfüllung entfernen</translation>
+        <translation>Kupferfläche entfernen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2910"/>
         <source>Remove the copper fill</source>
-        <translation>Kupferfüllung wieder entfernen</translation>
+        <translation>Die Kupferfläche entfernen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3075"/>
@@ -5152,7 +5154,7 @@ Bitte überprüfe alle Ansichten auf eventuelle Nebenwirkungen.</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="1346"/>
         <source>First Time Help</source>
-        <translation>Hilfe für Erstbenutzer</translation>
+        <translation>Erste Schritte</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="391"/>
@@ -5162,12 +5164,12 @@ Bitte überprüfe alle Ansichten auf eventuelle Nebenwirkungen.</translation>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="434"/>
         <source>loading %1 (breadboard)</source>
-        <translation>Lade %1 (Steckplatine)</translation>
+        <translation>Lade %1 (Steckbrett)</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="443"/>
         <source>loading %1 (pcb)</source>
-        <translation>Lade %1 (Leiterplatte)</translation>
+        <translation>Lade %1 (Platine)</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="453"/>
@@ -5191,8 +5193,8 @@ Bitte überprüfe alle Ansichten auf eventuelle Nebenwirkungen.</translation>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2549"/>
         <source>%1 of %2 nets routed - %n connector(s) still to be routed</source>
         <translation>
-            <numerusform>%1 von %2 Netzen geroutet - eine Verbindung noch zu routen</numerusform>
-            <numerusform>%1 von %2 Netzen geroutet - %n Verbinder noch zu routen</numerusform>
+            <numerusform>%1 von %2 Netzen geroutet – %n Anschluss noch zu routen</numerusform>
+            <numerusform>%1 von %2 Netzen geroutet – %n Anschlüsse noch zu routen</numerusform>
         </translation>
     </message>
     <message>
@@ -5326,7 +5328,7 @@ We&apos;re working to avoid this message, and only let you choose between proper
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="614"/>
         <source>Breadboard</source>
-        <translation>Steckplatine</translation>
+        <translation>Steckbrett</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="623"/>
@@ -5336,7 +5338,7 @@ We&apos;re working to avoid this message, and only let you choose between proper
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="632"/>
         <source>PCB</source>
-        <translation>Leiterplatte</translation>
+        <translation>Platine</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="64"/>
@@ -5348,37 +5350,37 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="66"/>
         <source>Undo History</source>
         <comment>dock widget title</comment>
-        <translation type="unfinished">Verlauf</translation>
+        <translation>Verlauf</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="69"/>
         <source>Layers</source>
         <comment>dock widget title</comment>
-        <translation type="unfinished">Ebenen</translation>
+        <translation>Ebenen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="132"/>
         <source>Hidden → Docked → Floating</source>
         <comment>dock widget state cycle sequence starting from hidden</comment>
-        <translation type="unfinished">Ausgeblendet → Angedockt → Schwebend</translation>
+        <translation>Ausgeblendet → Angedockt → Schwebend</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="137"/>
         <source>Docked → Floating → Hidden</source>
         <comment>dock widget state cycle sequence starting from docked</comment>
-        <translation type="unfinished">Angedockt → Schwebend → Ausgeblendet</translation>
+        <translation>Angedockt → Schwebend → Ausgeblendet</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="142"/>
         <source>Floating → Hidden → Docked</source>
         <comment>dock widget state cycle sequence starting from floating</comment>
-        <translation type="unfinished">Schwebend → Ausgeblendet → Angedockt</translation>
+        <translation>Schwebend → Ausgeblendet → Angedockt</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="146"/>
         <source>%1 - Click to cycle: %2</source>
         <comment>dock widget status tip: %1=dock name, %2=cycle sequence</comment>
-        <translation type="unfinished">%1 – Klicken zum Wechseln: %2</translation>
+        <translation>%1 - Klicken zum Wechseln: %2</translation>
     </message>
 </context>
 <context>
@@ -5482,7 +5484,7 @@ We&apos;re working to avoid this message, and only let you choose between proper
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="473"/>
         <source>Close</source>
-        <translation type="unfinished">Schließen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="475"/>
@@ -5567,7 +5569,7 @@ We&apos;re working to avoid this message, and only let you choose between proper
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="594"/>
         <source>No change notes are available. Compare the old and new version visually in the Breadboard, Schematic and PCB views before deciding.</source>
-        <translation>Es sind keine Änderungshinweise verfügbar. Vergleiche die alte und die neue Version visuell in der Steckplatinen-, Schaltplan- und Leiterplatten-Ansicht, bevor Du Dich entscheidest.</translation>
+        <translation>Es sind keine Änderungshinweise verfügbar. Vergleiche die alte und die neue Version visuell in der Steckbrett-, Schaltplan- und Platinenansicht, bevor Du Dich entscheidest.</translation>
     </message>
     <message>
         <location filename="../src/sketch/migrationhandler.cpp" line="601"/>
@@ -5648,9 +5650,9 @@ We&apos;re working to avoid this message, and only let you choose between proper
     <message numerus="yes">
         <location filename="../src/model/modelbase.cpp" line="421"/>
         <source>Unable to find %n part(s). Click &apos;Show Details&apos; for a list of missing parts.</source>
-        <translation type="unfinished">
-            <numerusform>%n Teil kann nicht gefunden werden. Klicken Sie auf «Details anzeigen» für eine Liste der fehlenden Teile.</numerusform>
-            <numerusform>%n Teile können nicht gefunden werden. Klicken Sie auf «Details anzeigen» für eine Liste der fehlenden Teile.</numerusform>
+        <translation>
+            <numerusform>%n Bauteil wurde nicht gefunden. Klicke auf „Details anzeigen“ für eine Liste der fehlenden Bauteile.</numerusform>
+            <numerusform>%n Bauteile wurden nicht gefunden. Klicke auf „Details anzeigen“ für eine Liste der fehlenden Bauteile.</numerusform>
         </translation>
     </message>
     <message>
@@ -5663,14 +5665,14 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <location filename="../src/model/modelbase.cpp" line="524"/>
         <source>Couldn&apos;t overwrite file &apos;%1&apos;.
 Reason: %2 (errcode %3)</source>
-        <translation>Konnte die Datei &apos;%1&apos; nicht überschreiben.
+        <translation>Konnte die Datei „%1“ nicht überschreiben.
 Ursache: %2 (Fehlercode %3)</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="535"/>
         <source>Couldn&apos;t move the saved content into place at &apos;%1&apos;.
 Reason: %2 (errcode %3)</source>
-        <translation>Der gespeicherte Inhalt konnte nicht an die Stelle &apos;%1&apos; verschoben werden.
+        <translation>Der gespeicherte Inhalt konnte nicht an die Stelle „%1“ verschoben werden.
 Grund: %2 (Fehlercode %3)</translation>
     </message>
 </context>
@@ -5726,47 +5728,47 @@ Markiere den &lt;history&gt;-Eintrag neu mit required / recommended / optional.
         <location filename="../src/sketch/outlierhandler.cpp" line="149"/>
         <source>Outlier Components Navigator</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Navigator für Ausreißer-Bauteile</translation>
+        <translation>Weit entfernte Bauteile</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="175"/>
         <source>◀ Previous</source>
-        <translation type="unfinished">◀ Zurück</translation>
+        <translation>◀ Zurück</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="176"/>
         <source>Next ▶</source>
-        <translation type="unfinished">Weiter ▶</translation>
+        <translation>Weiter ▶</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="188"/>
         <source>Fix This Item</source>
-        <translation type="unfinished">Dieses Element korrigieren</translation>
+        <translation>Dieses Element zurückholen</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="190"/>
         <source>Fix All Items</source>
-        <translation type="unfinished">Alle Elemente korrigieren</translation>
+        <translation>Alle Elemente zurückholen</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="193"/>
         <source>Close</source>
-        <translation type="unfinished">Schließen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="264"/>
         <source>Reposition Outlier Components</source>
-        <translation type="unfinished">Ausreißer-Bauteile neu positionieren</translation>
+        <translation>Weit entfernte Bauteile zurückholen</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="388"/>
         <source>Problematic Item</source>
-        <translation type="unfinished">Problematisches Element</translation>
+        <translation>Problematisches Element</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="390"/>
         <source>Item %1 of %2</source>
-        <translation type="unfinished">Element %1 von %2</translation>
+        <translation>Element %1 von %2</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="395"/>
@@ -5777,7 +5779,7 @@ Markiere den &lt;history&gt;-Eintrag neu mit required / recommended / optional.
         <location filename="../src/sketch/outlierhandler.cpp" line="396"/>
         <location filename="../src/sketch/outlierhandler.cpp" line="408"/>
         <source>&lt;b&gt;Component:&lt;/b&gt; %1&lt;br&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Bauteil:&lt;/b&gt; %1&lt;br&gt;</translation>
+        <translation>&lt;b&gt;Bauteil:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="397"/>
@@ -5797,7 +5799,7 @@ Markiere den &lt;history&gt;-Eintrag neu mit required / recommended / optional.
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="404"/>
         <source>&lt;b&gt;Impact:&lt;/b&gt; This label&apos;s distant position causes &apos;Fit in Window&apos; to zoom out excessively.&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Auswirkung:&lt;/b&gt; Die weit entfernte Position dieser Beschriftung führt dazu, dass «Ins Fenster einpassen» übermäßig herauszoomt.&lt;br&gt;&lt;br&gt;</translation>
+        <translation>&lt;b&gt;Auswirkung:&lt;/b&gt; Die weit entfernte Position dieser Beschriftung führt dazu, dass „Ins Fenster einpassen“ übermäßig herauszoomt.&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="405"/>
@@ -5807,32 +5809,32 @@ Markiere den &lt;history&gt;-Eintrag neu mit required / recommended / optional.
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="407"/>
         <source>&lt;b&gt;Problem:&lt;/b&gt; Component positioned far outside the circuit area&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Problem:&lt;/b&gt; Bauteil weit außerhalb des Schaltungsbereichs positioniert&lt;br&gt;&lt;br&gt;</translation>
+        <translation>&lt;b&gt;Problem:&lt;/b&gt; Bauteil weit außerhalb des Schaltungsbereichs positioniert&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="409"/>
         <source>&lt;b&gt;Type:&lt;/b&gt; %1&lt;br&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Typ:&lt;/b&gt; %1&lt;br&gt;</translation>
+        <translation>&lt;b&gt;Typ:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="410"/>
         <source>&lt;b&gt;Position:&lt;/b&gt; (%1, %2)&lt;br&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Position:&lt;/b&gt; (%1, %2)&lt;br&gt;</translation>
+        <translation>&lt;b&gt;Position:&lt;/b&gt; (%1, %2)&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="411"/>
         <source>&lt;b&gt;Size:&lt;/b&gt; %1 × %2&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Größe:&lt;/b&gt; %1 × %2&lt;br&gt;&lt;br&gt;</translation>
+        <translation>&lt;b&gt;Größe:&lt;/b&gt; %1 × %2&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="412"/>
         <source>&lt;b&gt;Impact:&lt;/b&gt; This component&apos;s position causes &apos;Fit in Window&apos; to zoom out excessively.&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Auswirkung:&lt;/b&gt; Die Position dieses Bauteils führt dazu, dass «Ins Fenster einpassen» übermäßig herauszoomt.&lt;br&gt;&lt;br&gt;</translation>
+        <translation>&lt;b&gt;Auswirkung:&lt;/b&gt; Die Position dieses Bauteils führt dazu, dass „Ins Fenster einpassen“ übermäßig herauszoomt.&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="413"/>
         <source>&lt;b&gt;Solution:&lt;/b&gt; The component will be moved to a reasonable location near the main circuit.</source>
-        <translation type="unfinished">&lt;b&gt;Lösung:&lt;/b&gt; Das Bauteil wird an eine sinnvolle Position in der Nähe der Hauptschaltung verschoben.</translation>
+        <translation>&lt;b&gt;Lösung:&lt;/b&gt; Das Bauteil wird an eine sinnvolle Position in der Nähe der Hauptschaltung verschoben.</translation>
     </message>
 </context>
 <context>
@@ -5845,7 +5847,7 @@ Markiere den &lt;history&gt;-Eintrag neu mit required / recommended / optional.
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="301"/>
         <source>Click this connector to drag out a new trace.</source>
-        <translation>Diesen Verbinder klicken und ziehen, um eine neue Leiterbahn zu erstellen.</translation>
+        <translation>Klicke auf diesen Anschluss und ziehe, um eine neue Leiterbahn zu erstellen.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="966"/>
@@ -5855,20 +5857,20 @@ Markiere den &lt;history&gt;-Eintrag neu mit required / recommended / optional.
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="257"/>
         <source>Your sketch does not have a board yet! Please add a PCB to use this selection operation.</source>
-        <translation>Dein Entwurf enthält noch keine Leiterplatte! Bitte füge eine hinzu, um diese Funktion auszuführen.</translation>
+        <translation>Dein Entwurf enthält noch keine Platine! Bitte füge eine hinzu, um diese Funktion auszuführen.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1439"/>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1621"/>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1773"/>
         <source>Your sketch does not have a board yet!  Please add a PCB in order to use copper fill.</source>
-        <translation>Deinem Entwurf fehlt noch die Leiterplatte! Für die Kupferfüllung musst Du erst eine Leiterplatte (PCB) einfügen.</translation>
+        <translation>Dein Entwurf enthält noch keine Platine! Bitte füge eine hinzu, um eine Kupferfläche zu erzeugen.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1444"/>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1626"/>
         <source>%1 Fill: please select the board you want to apply fill to.</source>
-        <translation>%1-Füllung: Bitte wähle eine Leiterplatte aus.</translation>
+        <translation>%1-Fläche: Bitte wähle die Platine aus, die gefüllt werden soll.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1444"/>
@@ -5886,12 +5888,12 @@ Markiere den &lt;history&gt;-Eintrag neu mit required / recommended / optional.
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1606"/>
         <source>Ground Fill</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Massefüllung</translation>
+        <translation>Massefläche</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1778"/>
         <source>Copper fill: please select only the board you want to fill.</source>
-        <translation>Kupferfüllung: Bitte wähle eine Leiterplatte aus.</translation>
+        <translation>Kupferfläche: Bitte wähle nur die Platine aus, die gefüllt werden soll.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1456"/>
@@ -5899,7 +5901,7 @@ Markiere den &lt;history&gt;-Eintrag neu mit required / recommended / optional.
         <source>Please designate one or more ground fill seeds before doing a ground fill.
 
 </source>
-        <translation>Wähle zunächst ein oder mehrere Verbinder als &quot;Saat&quot; für die Massefüllung aus.
+        <translation>Wähle zunächst einen oder mehrere Anschlüsse als Startpunkte für die Massefläche aus.
 
 </translation>
     </message>
@@ -5940,14 +5942,14 @@ Markiere den &lt;history&gt;-Eintrag neu mit required / recommended / optional.
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2401"/>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2429"/>
         <source>Please click on a PCB first--this selection operation only works for one board at a time.</source>
-        <translation>Bitte wähle erst eine Leiterplatte aus. Diese Funktion kann nur auf einer Leiterplatte gleichzeitig ausgeführt werden.</translation>
+        <translation>Bitte wähle erst eine Platine aus. Diese Funktion kann nur auf einer Platine gleichzeitig ausgeführt werden.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1499"/>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1660"/>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1801"/>
         <source>Fritzing error: unable to render board svg (1).</source>
-        <translation>Fehler: Das Leiterplatten-SVG konnte nicht gerendert werden (1).</translation>
+        <translation>Fehler: Das Platinen-SVG konnte nicht gerendert werden (1).</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1517"/>
@@ -5966,28 +5968,28 @@ Markiere den &lt;history&gt;-Eintrag neu mit required / recommended / optional.
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1552"/>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1715"/>
         <source>Fritzing error: unable to write copper fill (1).</source>
-        <translation>Fehler: Konnte Kupferfüllung nicht erstellen (1).</translation>
+        <translation>Fritzing-Fehler: Kupferfläche konnte nicht geschrieben werden (1).</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1567"/>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1733"/>
         <source>Fritzing error: unable to write copper fill (2).</source>
-        <translation>Fehler: Konnte Kupferfüllung nicht erstellen (2).</translation>
+        <translation>Fritzing-Fehler: Kupferfläche konnte nicht geschrieben werden (2).</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1600"/>
         <source>The bottom ground fill is split into %1 sections. </source>
-        <translation type="unfinished">Die untere Massefüllung ist in %1 Abschnitte aufgeteilt. </translation>
+        <translation>Die untere Massefläche ist in %1 Abschnitte aufgeteilt. </translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1603"/>
         <source>The top ground fill is split into %1 sections. </source>
-        <translation type="unfinished">Die obere Massefüllung ist in %1 Abschnitte aufgeteilt. </translation>
+        <translation>Die obere Massefläche ist in %1 Abschnitte aufgeteilt. </translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1605"/>
         <source>Please manually ensure connectivity, especially for ground seeds.</source>
-        <translation type="unfinished">Bitte stellen Sie die Konnektivität manuell sicher, insbesondere für Masse-Startpunkte.</translation>
+        <translation>Bitte stelle die Verbindungen manuell sicher, insbesondere für Masse-Startpunkte.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2904"/>
@@ -6000,7 +6002,7 @@ Markiere den &lt;history&gt;-Eintrag neu mit required / recommended / optional.
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2910"/>
         <source>You need to select one board if you have multiple PCBs in your sketch.</source>
-        <translation>Du musst eine Platine auswählen, wenn sich mehrere Leiterplatten in Deinem Entwurf befinden.</translation>
+        <translation>Du musst eine Platine auswählen, wenn sich mehrere Platinen in Deinem Entwurf befinden.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2921"/>
@@ -6011,7 +6013,7 @@ Markiere den &lt;history&gt;-Eintrag neu mit required / recommended / optional.
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="3060"/>
         <source>Enter Keepout</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Abstand eingeben</translation>
+        <translation>Mindestabstand eingeben</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="3061"/>
@@ -6023,39 +6025,39 @@ so you may want to increase the keepout value by that much.
 10 mils is a good default choice.
 
 Enter keepout value:</source>
-        <translation>Der Abstand wird in Mil (0,001 Zoll) angegeben.
+        <translation>Der Mindestabstand wird in Mil (0,001 Zoll) angegeben.
 
 Beachte, dass Abstände durch Aliasing um bis zu 2 Mil zu kurz ausfallen können,
-Du solltest den Abstandswert also eventuell entsprechend erhöhen.
+Du solltest den Wert also eventuell entsprechend erhöhen.
 
 10 Mil ist eine gute Standardwahl.
 
-Abstandswert eingeben:</translation>
+Mindestabstand eingeben:</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1784"/>
         <source>Unable to create copper fill--probably the part wasn&apos;t dropped onto the PCB.</source>
-        <translation>Kupferfüllung konnte nicht erzeugt werden--wahrscheinlich wurde das Bauteil nicht auf der Leiterplatte abgelegt.</translation>
+        <translation>Kupferfläche konnte nicht erzeugt werden – wahrscheinlich wurde das Bauteil nicht auf der Platine abgelegt.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="1841"/>
         <source>Unable to create copper fill--possibly the part was dropped onto another part or wire rather than the actual PCB.</source>
-        <translation>Kupferfüllung konnte nicht erzeugt werden--möglicherweise wurde das Bauteil nicht auf die eigentliche Leiterplatte, sondern auf ein anderes Bauteil oder einen Draht abgelegt.</translation>
+        <translation>Kupferfläche konnte nicht erzeugt werden – möglicherweise wurde das Bauteil nicht auf die Platine selbst, sondern auf ein anderes Bauteil oder einen Draht abgelegt.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2228"/>
         <source>Clear ground fill seeds</source>
-        <translation>Massefüllung-Saat zurücksetzen</translation>
+        <translation>Startpunkte der Massefläche zurücksetzen</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2396"/>
         <source>Your sketch does not have a board yet!  Please add a PCB to use this selection operation.</source>
-        <translation>Dein Entwurf enthält noch keine Leiterplatte! Bitte füge eine hinzu, um diese Funktion auszuführen.</translation>
+        <translation>Dein Entwurf enthält noch keine Platine! Bitte füge eine hinzu, um diese Funktion auszuführen.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2424"/>
         <source>Your sketch does not have a board yet!  Please add a PCB in order to use this selection operation.</source>
-        <translation>Dein Entwurf enthält noch keine Leiterplatte! Bitte füge eine hinzu, um diese Funktion auszuführen.</translation>
+        <translation>Dein Entwurf enthält noch keine Platine! Bitte füge eine hinzu, um diese Funktion auszuführen.</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2603"/>
@@ -6083,12 +6085,12 @@ Abstandswert eingeben:</translation>
     <message>
         <location filename="../src/partseditor/peconnectorsview.cpp" line="54"/>
         <source>This is where you edit the connector metadata for the part</source>
-        <translation>Hier kannst Du die Verbindermetadaten für das Bauteil bearbeiten</translation>
+        <translation>Hier bearbeitest Du die Anschluss-Metadaten des Bauteils</translation>
     </message>
     <message>
         <location filename="../src/partseditor/peconnectorsview.cpp" line="60"/>
         <source>number of connectors:</source>
-        <translation>Anzahl der Verbinder:</translation>
+        <translation>Anzahl der Anschlüsse:</translation>
     </message>
     <message>
         <location filename="../src/partseditor/peconnectorsview.cpp" line="109"/>
@@ -6199,12 +6201,12 @@ Abstandswert eingeben:</translation>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1259"/>
         <source>Duplicate &apos;family&apos; property not allowed</source>
-        <translation>Duplizieren der &quot;Familien&quot;-Eigenschaft ist nicht erlaubt</translation>
+        <translation>Duplizieren der „Familien“-Eigenschaft ist nicht erlaubt</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1264"/>
         <source>Duplicate &apos;variant&apos; property not allowed</source>
-        <translation>Duplizieren der &quot;Varianten&quot;-Eigenschaft ist nicht erlaubt</translation>
+        <translation>Duplizieren der „Varianten“-Eigenschaft ist nicht erlaubt</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="397"/>
@@ -6245,7 +6247,7 @@ Abstandswert eingeben:</translation>
         <location filename="../src/partseditor/pemainwindow.cpp" line="482"/>
         <location filename="../src/partseditor/pemainwindow.cpp" line="522"/>
         <source>Connectors</source>
-        <translation>Verbinder</translation>
+        <translation>Anschlüsse</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="572"/>
@@ -6280,7 +6282,7 @@ Abstandswert eingeben:</translation>
         <source>This part has bendable legs. This version of the Parts Editor does not yet support editing bendable legs, and the legs may not be displayed correctly in breadboard view. If you make changes to breadboard view, or change connector metadata, the legs may no longer work. You can safely make changes to Schematic or PCB view.
 
 This warning will not be repeated in this session of Fritzing</source>
-        <translation>Dieses Bauteil hat biegsame Beinchen. Diese Version des Bauteil-Editors unterstützt das Bearbeiten biegsamer Beinchen noch nicht, und sie werden in der Steckplatinen-Ansicht möglicherweise nicht korrekt angezeigt. Wenn Du Änderungen an der Steckplatinen-Ansicht vornimmst oder die Verbinder-Metadaten änderst, funktionieren die Beinchen unter Umständen nicht mehr. Änderungen an der Schaltplan- oder Leiterplatten-Ansicht kannst Du gefahrlos vornehmen.
+        <translation>Dieses Bauteil hat biegsame Beinchen. Diese Version des Bauteil-Editors unterstützt das Bearbeiten biegsamer Beinchen noch nicht, und sie werden in der Steckbrettansicht möglicherweise nicht korrekt angezeigt. Wenn Du Änderungen an der Steckbrettansicht vornimmst oder die Anschluss-Metadaten änderst, funktionieren die Beinchen unter Umständen nicht mehr. Änderungen an der Schaltplan- oder Platinenansicht kannst Du gefahrlos vornehmen.
 
 Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translation>
     </message>
@@ -6307,7 +6309,7 @@ Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translatio
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="958"/>
         <source>Connectors View</source>
-        <translation>Verbinderansicht</translation>
+        <translation>Anschlussansicht</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="966"/>
@@ -6337,7 +6339,7 @@ Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translatio
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="976"/>
         <source>Show Connectors</source>
-        <translation>Verbinder anzeigen</translation>
+        <translation>Anschlüsse anzeigen</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="977"/>
@@ -6359,7 +6361,7 @@ Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translatio
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1079"/>
         <source>Change %1 to &apos;%2&apos;</source>
-        <translation>Ändere %1 zu &apos;%2&apos;</translation>
+        <translation>Ändere %1 zu „%2“</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1079"/>
@@ -6391,7 +6393,7 @@ Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translatio
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1336"/>
         <source>Change connector %1</source>
-        <translation>Verbinder %1 ändern</translation>
+        <translation>Anschluss %1 ändern</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1417"/>
@@ -6430,8 +6432,8 @@ Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translatio
         <location filename="../src/partseditor/pemainwindow.cpp" line="3992"/>
         <source>This part has %n unassigned connector(s). </source>
         <translation>
-            <numerusform>Dieses Bauteil hat %n nicht zugewiesenen Verbinder. </numerusform>
-            <numerusform>Dieses Bauteil hat %n nicht zugewiesene Verbinder. </numerusform>
+            <numerusform>Dieses Bauteil hat %n nicht zugewiesenen Anschluss. </numerusform>
+            <numerusform>Dieses Bauteil hat %n nicht zugewiesene Anschlüsse. </numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -6445,12 +6447,12 @@ Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translatio
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="3994"/>
         <source>Until all connectors are assigned to SVG elements, the part will not work correctly. Exiting the Parts Editor now is fine, as long as you remember to finish the assignments later.</source>
-        <translation>Solange nicht alle Verbinder SVG-Elementen zugewiesen sind, funktioniert das Bauteil nicht richtig. Du kannst den Bauteil-Editor jetzt bedenkenlos verlassen, solange Du daran denkst, die Zuweisungen später abzuschließen.</translation>
+        <translation>Solange nicht alle Anschlüsse SVG-Elementen zugewiesen sind, funktioniert das Bauteil nicht richtig. Du kannst den Bauteil-Editor jetzt bedenkenlos verlassen, solange Du daran denkst, die Zuweisungen später abzuschließen.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1716"/>
         <source>Unable to make a local copy of: &apos;%1&apos;</source>
-        <translation>Eine lokale Kopie von &apos;%1&apos; konnte nicht erstellt werden</translation>
+        <translation>Eine lokale Kopie von „%1“ konnte nicht erstellt werden</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="951"/>
@@ -6466,12 +6468,12 @@ Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translatio
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="978"/>
         <source>Show the connector metadata in a list view</source>
-        <translation>Verbindermetadaten in einer Listenansicht anzeigen</translation>
+        <translation>Anschluss-Metadaten in einer Listenansicht anzeigen</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1034"/>
         <source>The value of &apos;%1&apos; can not be blank.</source>
-        <translation>Der Wert von &apos;%1&apos; darf nicht leer sein.</translation>
+        <translation>Der Wert von „%1“ darf nicht leer sein.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1047"/>
@@ -6481,17 +6483,17 @@ Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translatio
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1071"/>
         <source>Variant &apos;%1&apos; is in use. The variant name must be unique.</source>
-        <translation>Variante &apos;%1&apos; ist in Gebrauch. Der Variantenname muss eindeutig sein.</translation>
+        <translation>Variante „%1“ ist in Gebrauch. Der Variantenname muss eindeutig sein.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1630"/>
         <source>Unable to load &apos;%1&apos;</source>
-        <translation>Konnte &apos;%1&apos; nicht laden</translation>
+        <translation>Konnte „%1“ nicht laden</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1638"/>
         <source>The SVG file &apos;%1&apos; appears to have been exported from CorelDRAW without the &apos;presentation attributes&apos; setting. </source>
-        <translation>Die SVG-Datei &apos;%1&apos; wurde anscheinend aus CorelDRAW ohne die &apos;Präsentationsattribute&apos;-Einstellung exportiert. </translation>
+        <translation>Die SVG-Datei „%1“ wurde anscheinend aus CorelDRAW ohne die „Präsentationsattribute“-Einstellung exportiert. </translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1639"/>
@@ -6501,31 +6503,31 @@ Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translatio
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1657"/>
         <source>Fritzing currently only supports OCRA and Droid fonts--these have been substituted in for the fonts in &apos;%1&apos;</source>
-        <translation>Fritzing unterstützt derzeit nur OCRA und Droid-Schriftarten--diese haben die Schriftarten in &apos;%1&apos; ersetzt</translation>
+        <translation>Fritzing unterstützt derzeit nur OCRA und Droid-Schriftarten--diese haben die Schriftarten in „%1“ ersetzt</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1676"/>
         <source>Unable to load image file &apos;%1&apos;:
 
 %2</source>
-        <translation>Bilddatei &apos;%1&apos; konnte nicht geladen werden:
+        <translation>Bilddatei „%1“ konnte nicht geladen werden:
 
 %2</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="366"/>
         <source>The &apos;family&apos; property can not be blank.</source>
-        <translation>Die &quot;Familien&quot;-Eigenschaft darf nicht leer sein.</translation>
+        <translation>Die „Familien“-Eigenschaft darf nicht leer sein.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="372"/>
         <source>A duplicate &apos;family&apos; property is not allowed</source>
-        <translation>Eine doppelte &quot;Familien&quot;-Eigenschaft ist nicht erlaubt</translation>
+        <translation>Eine doppelte „Familien“-Eigenschaft ist nicht erlaubt</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="376"/>
         <source>A duplicate &apos;variant&apos; property is not allowed</source>
-        <translation>Eine doppelte &quot;Varianten&quot;-Eigenschaft ist nicht erlaubt</translation>
+        <translation>Eine doppelte „Varianten“-Eigenschaft ist nicht erlaubt</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="391"/>
@@ -6535,7 +6537,7 @@ Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translatio
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1700"/>
         <source>There are no copper layers defined in: %1. See &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;this explanation&lt;/a&gt;.&lt;br/&gt;&lt;br/&gt;This will not be a problem in the next release of the Parts Editor, but for now please modify the file according to the instructions in the link.</source>
-        <translation>In %1 sind keine Kupferebenen definiert. Siehe &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;diese Erklärung&lt;/a&gt;.&lt;br/&gt;&lt;br/&gt;Dies wird im nächsten Release des Bauteil-Editors kein Problem mehr sein, aber bitte ändere die Datei vorerst gemäß den Anweisungen im Link.</translation>
+        <translation>In %1 sind keine Kupferlagen definiert. Siehe &lt;a href=&quot;http://fritzing.org/learning/tutorials/creating-custom-parts/providing-part-graphics/&quot;&gt;diese Erklärung&lt;/a&gt;.&lt;br/&gt;&lt;br/&gt;Dies wird im nächsten Release des Bauteil-Editors kein Problem mehr sein, aber bitte ändere die Datei vorerst gemäß den Anweisungen im Link.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1716"/>
@@ -6546,7 +6548,7 @@ Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translatio
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2284"/>
         <source>&lt;p&gt;Please enter a prefix to help you identify the part files.&lt;br/&gt;The file names will have the form &apos;PREFIX_%1&apos;.&lt;br/&gt;(It is not necessary to change the proposed prefix, since a unique suffix is always added.)&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Geben Sie ein Präfix ein, um die Teiledateien leichter identifizieren zu können.&lt;br/&gt;Die Dateinamen haben die Form &apos;PREFIX_%1&apos;.&lt;br/&gt;(Das vorgeschlagene Präfix muss nicht geändert werden, da immer ein eindeutiger Suffix hinzugefügt wird.)&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Gib ein Präfix ein, um die Bauteil-Dateien leichter zu erkennen.&lt;br/&gt;Die Dateinamen haben die Form „PREFIX_%1“.&lt;br/&gt;(Das vorgeschlagene Präfix muss nicht geändert werden, da immer ein eindeutiges Suffix angehängt wird.)&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2522"/>
@@ -6561,12 +6563,12 @@ Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translatio
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="549"/>
         <source>Reuse breadboard image</source>
-        <translation>Steckplatinenbild wiederverwenden</translation>
+        <translation>Steckbrettbild wiederverwenden</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="550"/>
         <source>Reuse the breadboard image in this view</source>
-        <translation>Steckplatinenbild in dieser Ansicht wiederverwenden</translation>
+        <translation>Steckbrettbild in dieser Ansicht wiederverwenden</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="553"/>
@@ -6581,12 +6583,12 @@ Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translatio
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="557"/>
         <source>Reuse PCB image</source>
-        <translation>Leiterplattenbild wiederverwenden</translation>
+        <translation>Platinenbild wiederverwenden</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="558"/>
         <source>Reuse the PCB image in this view</source>
-        <translation>Das Leiterplattenbild in dieser Ansicht wiederverwenden</translation>
+        <translation>Das Platinenbild in dieser Ansicht wiederverwenden</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="981"/>
@@ -6601,12 +6603,12 @@ Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translatio
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1418"/>
         <source>This version of the new Parts Editor can not deal with separate copper0 and copper1 layers in &apos;%1&apos;. </source>
-        <translation>Diese Version des neuen Bauteile-Editors kann mit separaten Kupfer0 und Kupfer1-Ebenen in &apos;%1&apos; nicht umgehen. </translation>
+        <translation>Diese Version des neuen Bauteile-Editors kann mit separaten Kupfer0 und Kupfer1-Ebenen in „%1“ nicht umgehen. </translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1419"/>
         <source>So editing may produce an invalid PCB view image</source>
-        <translation>So könnte die Bearbeitung ein ungültiges Bild von der Leiterplattenansicht erzeugen</translation>
+        <translation>So könnte die Bearbeitung ein ungültiges Bild von der Platinenansicht erzeugen</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1630"/>
@@ -6637,7 +6639,7 @@ Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translatio
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1689"/>
         <source>Unable to parse &apos;%1&apos;: %2 line:%3 column:%4</source>
-        <translation>&apos;%1&apos;: %2 Zeile:%3 Spalte:%4 konnte nicht geparst werden</translation>
+        <translation>„%1“: %2 Zeile:%3 Spalte:%4 konnte nicht geparst werden</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1743"/>
@@ -6657,7 +6659,7 @@ Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translatio
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2110"/>
         <source>Relocate connector %1</source>
-        <translation>Verbinder %1 umsetzen</translation>
+        <translation>Anschluss %1 umsetzen</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="602"/>
@@ -6687,7 +6689,7 @@ Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translatio
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="579"/>
         <source>Convert pre-0.8.6 schematic image to new 0.1 inch standard</source>
-        <translation>Symbolbild mit altem Standard zum neuen 0.1&quot;-Standard kovertieren</translation>
+        <translation>Symbolbild vom alten Standard auf den neuen 0,1-Zoll-Standard konvertieren</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="614"/>
@@ -6697,7 +6699,7 @@ Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translatio
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="615"/>
         <source>Make a copy of the part and save it in the &apos;My Parts&apos; Bin</source>
-        <translation>Machen Sie eine Kopie des Bauteils und speichern sie es im &apos;Mein Bauteile&apos;-Sortiment</translation>
+        <translation>Eine Kopie des Bauteils erstellen und im Sortiment „My Parts“ speichern</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="618"/>
@@ -6712,7 +6714,7 @@ Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translatio
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1682"/>
         <source>Unable to load image file &apos;%1&apos;</source>
-        <translation>Bilddatei &apos;%1&apos; konnte nicht geladen werden</translation>
+        <translation>Bilddatei „%1“ konnte nicht geladen werden</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2283"/>
@@ -6722,7 +6724,7 @@ Diese Warnung wird in dieser Fritzing-Sitzung nicht erneut angezeigt</translatio
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2317"/>
         <source>The open sketch &apos;%1&apos; uses the part you are editing. </source>
-        <translation>Der geöffnete Entworf &apos;%1&apos; verwendet das Teil, das Sie bearbeiten. </translation>
+        <translation>Der geöffnete Entwurf „%1“ verwendet das Bauteil, das Du bearbeitest. </translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2318"/>
@@ -6746,17 +6748,17 @@ Fortsetzen und speichern?</translation>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2901"/>
         <source>Remove connector</source>
-        <translation>Verbinder entfernen</translation>
+        <translation>Anschluss entfernen</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2904"/>
         <source>Remove %1 connectors</source>
-        <translation>%1 Verbinder entfernen</translation>
+        <translation>%1 Anschlüsse entfernen</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2923"/>
         <source>Do you want to save the changes you made in the part &quot;%1&quot;?</source>
-        <translation>Willst du die vorgenommenen Änderungen im Bauteil &quot;%1&quot; speichern?</translation>
+        <translation>Willst Du die Änderungen am Bauteil „%1“ speichern?</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2924"/>
@@ -6776,32 +6778,32 @@ Fortsetzen und speichern?</translation>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="3020"/>
         <source>Unable to create new connector--you may have to start over.</source>
-        <translation>Neuer Verbinder konnte nicht erstellt werden--möglicherweise müssen Sie von vorne beginnen.</translation>
+        <translation>Neuer Anschluss konnte nicht erstellt werden – möglicherweise musst Du von vorn beginnen.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="3053"/>
         <source>Add connector</source>
-        <translation>Verbinder hinzufügen</translation>
+        <translation>Anschluss hinzufügen</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="3056"/>
         <source>Add %1 connectors</source>
-        <translation>%1 Verbinder hinzufügen</translation>
+        <translation>%1 Anschlüsse hinzufügen</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="3245"/>
         <source>Remove internal connection from &apos;%1&apos;</source>
-        <translation>Interne Verbindung aus &apos;%1&apos; entfernen</translation>
+        <translation>Interne Verbindung aus „%1“ entfernen</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="3590"/>
         <source>Change all connectors to %1</source>
-        <translation>Alle Verbinder zu %1 ändern</translation>
+        <translation>Alle Anschlüsse zu %1 ändern</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="3636"/>
         <source>Unable to parse &apos;%1&apos;</source>
-        <translation>&apos;%1&apos; konnte nicht geparst werden</translation>
+        <translation>„%1“ konnte nicht geparst werden</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="3688"/>
@@ -6849,12 +6851,12 @@ Fortsetzen und speichern?</translation>
         <location filename="../src/partseditor/pemainwindow.cpp" line="2922"/>
         <source>Save &quot;%1&quot;</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">&quot;%1&quot; speichern</translation>
+        <translation type="unfinished">„%1“ speichern</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="3291"/>
         <source>Add internal connection from &apos;%1&apos; to &apos;%2&apos;</source>
-        <translation>Interne Verbindung von &apos;%1&apos; nach &apos;%2&apos; hinzufügen</translation>
+        <translation>Interne Verbindung von „%1“ nach „%2“ hinzufügen</translation>
     </message>
 </context>
 <context>
@@ -7061,17 +7063,17 @@ Fortsetzen und speichern?</translation>
     <message>
         <location filename="../src/partseditor/petoolview.cpp" line="96"/>
         <source>Set this checkbox to edit internal connections by drawing wires</source>
-        <translation>Aktivieren Sie dieses Kontrollkästchen, um interne Verbindungen durch Zeichnen von Drähten zu bearbeiten</translation>
+        <translation>Aktiviere dieses Kontrollkästchen, um interne Verbindungen durch das Zeichnen von Drähten zu bearbeiten</translation>
     </message>
     <message>
         <location filename="../src/partseditor/petoolview.cpp" line="85"/>
         <source>Connector List (a checkmark means the graphic was selected)</source>
-        <translation>Verbinderliste (ein Häkchen bedeutet, dass die Grafik ausgewählt wurde)</translation>
+        <translation>Anschlussliste (ein Häkchen bedeutet, dass die Grafik ausgewählt wurde)</translation>
     </message>
     <message>
         <location filename="../src/partseditor/petoolview.cpp" line="110"/>
         <source>Controls for setting the terminal point for a connector. The terminal point is where a wire will attach to the connector. You can also drag the crosshair of the current connector</source>
-        <translation>Steuerelemente zum Einstellen der Klemmstelle für einen Steckverbinder. Die Klemmstelle ist die Stelle, an der ein Draht an den Verbinder angeschlossen wird. Sie können auch das Fadenkreuz des aktuellen Verbinders ziehen</translation>
+        <translation>Steuerelemente zum Festlegen des Ankerpunkts für einen Anschluss. Der Ankerpunkt ist die Stelle, an der ein Draht am Anschluss andockt. Du kannst auch das Fadenkreuz des aktuellen Anschlusses ziehen</translation>
     </message>
     <message>
         <location filename="../src/partseditor/petoolview.cpp" line="119"/>
@@ -7126,7 +7128,7 @@ Fortsetzen und speichern?</translation>
     <message>
         <location filename="../src/partseditor/petoolview.cpp" line="125"/>
         <source>Sets the connector&apos;s terminal point to %1.</source>
-        <translation>Legt den Anschlusspunkt des Verbinders auf %1 fest.</translation>
+        <translation>Legt den Ankerpunkt des Anschlusses auf %1 fest.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/petoolview.cpp" line="144"/>
@@ -7156,7 +7158,7 @@ Fortsetzen und speichern?</translation>
     <message>
         <location filename="../src/partseditor/petoolview.cpp" line="308"/>
         <source>Connector %1</source>
-        <translation>Verbinder %1</translation>
+        <translation>Anschluss %1</translation>
     </message>
     <message>
         <location filename="../src/partseditor/petoolview.cpp" line="441"/>
@@ -7166,7 +7168,7 @@ Fortsetzen und speichern?</translation>
     <message>
         <location filename="../src/partseditor/petoolview.cpp" line="444"/>
         <source>Use the cursor location and mouse wheel to navigate to the SVG element which you want to assign to the current connector, then mouse down to select it.</source>
-        <translation>Verwenden Sie die Cursorposition und das Mausrad, um zu dem SVG-Element zu navigieren, das Sie dem aktuellen Anschluss zuweisen möchten, und wählen Sie es dann mit der Maus aus.</translation>
+        <translation>Navigiere mit Cursorposition und Mausrad zu dem SVG-Element, das Du dem aktuellen Anschluss zuweisen möchtest, und wähle es per Mausklick aus.</translation>
     </message>
 </context>
 <context>
@@ -7467,7 +7469,7 @@ Fortsetzen und speichern?</translation>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="516"/>
         <source>loading bin &apos;%1&apos;</source>
-        <translation>Lade Sortiment &apos;%1&apos;</translation>
+        <translation>Lade Sortiment „%1“</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="415"/>
@@ -7495,7 +7497,7 @@ Fortsetzen und speichern?</translation>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="583"/>
         <source>Save bin &quot;%1&quot;</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Sortiment &quot;%1&quot; speichern</translation>
+        <translation type="unfinished">Sortiment „%1“ speichern</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="696"/>
@@ -7506,7 +7508,7 @@ Fortsetzen und speichern?</translation>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="584"/>
         <source>Do you want to save the changes you made in the bin &quot;%1&quot;?</source>
-        <translation>Möchtest Du die Änderungen am Sortiment &quot;%1&quot; speichern?</translation>
+        <translation>Möchtest Du die Änderungen am Sortiment „%1“ speichern?</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="590"/>
@@ -7584,7 +7586,7 @@ Hinweis: Diese Warnung wird nur einmal angezeigt.</translation>
     <message>
         <location filename="../src/items/perfboard.cpp" line="253"/>
         <source>set board size</source>
-        <translation>Leiterplattengröße</translation>
+        <translation>Platinengröße</translation>
     </message>
 </context>
 <context>
@@ -7708,9 +7710,9 @@ Hinweis: Diese Warnung wird nur einmal angezeigt.</translation>
         <source>The gerber file generator will use six decimals precision instead of three.
 Some deprecated gerber commands are removed or replaced.
 This feature is enabled by default. If you need to maintain compatibility with older processes designed for earlier Fritzing versions, you can disable this feature.</source>
-        <translation type="unfinished">Der Gerber-Dateigenerator verwendet sechs Dezimalstellen Genauigkeit anstatt drei.
+        <translation>Der Gerber-Generator verwendet sechs statt drei Dezimalstellen Genauigkeit.
 Einige veraltete Gerber-Befehle werden entfernt oder ersetzt.
-Diese Funktion ist standardmäßig aktiviert. Wenn Sie die Kompatibilität mit älteren Prozessen beibehalten müssen, die für frühere Fritzing-Versionen entwickelt wurden, können Sie diese Funktion deaktivieren.</translation>
+Diese Funktion ist standardmäßig aktiviert. Wenn Du die Kompatibilität mit älteren Prozessen für frühere Fritzing-Versionen erhalten musst, kannst Du sie deaktivieren.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="476"/>
@@ -7720,12 +7722,12 @@ Diese Funktion ist standardmäßig aktiviert. Wenn Sie die Kompatibilität mit �
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="481"/>
         <source>Here you can set some settings that will be saved with the project</source>
-        <translation>Hier können Sie einige Einstellungen vornehmen, die mit dem Projekt gespeichert werden</translation>
+        <translation>Hier kannst Du Einstellungen vornehmen, die mit dem Projekt gespeichert werden</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="487"/>
         <source>Select the way to define the time step: (1) Number of points (max simulation time divided by the number of points) or (2) fixed time step.</source>
-        <translation>Wählen Sie die Methode zur Definition des Zeitschritts: (1) Anzahl der Punkte (maximale Simulationszeit geteilt durch die Anzahl der Punkte) oder (2) fester Zeitschritt.</translation>
+        <translation>Wähle, wie der Zeitschritt bestimmt wird: (1) Anzahl der Punkte (maximale Simulationszeit geteilt durch die Anzahl der Punkte) oder (2) fester Zeitschritt.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="497"/>
@@ -7841,7 +7843,7 @@ Diese Funktion ist standardmäßig aktiviert. Wenn Sie die Kompatibilität mit �
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="697"/>
         <source>This checkbox sets the default behavior. You can switch back to the non-default behavior by holding down the Control key (Mac: Command key) when you drag.</source>
-        <translation>Dies ist die Standardeinstellung. Du kannst immer das jeweils andere Verhalten erzielen, wenn Du beim Ziehen die &quot;Strg&quot;-Taste (Mac: Cmd) gedrückt hältst.</translation>
+        <translation>Dies ist die Standardeinstellung. Du kannst immer das jeweils andere Verhalten erzielen, wenn Du beim Ziehen die „Strg“-Taste (Mac: Cmd) gedrückt hältst.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="704"/>
@@ -7856,7 +7858,7 @@ Diese Funktion ist standardmäßig aktiviert. Wenn Sie die Kompatibilität mit �
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="727"/>
         <source>The default text alignment for new net labels. &quot;Connector aligned&quot; keeps the text next to the connector; &quot;Outside aligned&quot; pushes it to the far edge. The two symbols show the result for both label orientations. You can override the alignment per net label in the Inspector.</source>
-        <translation>Die Standard-Textausrichtung für neue Netzbezeichnungen. „Am Anschluss ausgerichtet“ hält den Text neben dem Verbinder; „Außen ausgerichtet“ schiebt ihn an den äußeren Rand. Die beiden Symbole zeigen das Ergebnis für beide Beschriftungsausrichtungen. Du kannst die Ausrichtung pro Netzbezeichnung im Inspektor überschreiben.</translation>
+        <translation>Die Standard-Textausrichtung für neue Netzbezeichnungen. „Am Anschluss ausgerichtet“ hält den Text neben dem Anschluss; „Außen ausgerichtet“ schiebt ihn an den äußeren Rand. Die beiden Symbole zeigen das Ergebnis für beide Beschriftungsausrichtungen. Du kannst die Ausrichtung pro Netzbezeichnung im Inspektor überschreiben.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="743"/>
@@ -7924,7 +7926,7 @@ Diese Funktion ist standardmäßig aktiviert. Wenn Sie die Kompatibilität mit �
     <message>
         <location filename="../src/program/programtab.cpp" line="501"/>
         <source>Fritzing is unable to find &apos;%1&apos;, please locate it</source>
-        <translation>Fritzing kann &apos;%1&apos; nicht finden, bitte mache es ausfindig</translation>
+        <translation>Fritzing kann „%1“ nicht finden, bitte mache es ausfindig</translation>
     </message>
     <message>
         <location filename="../src/program/programtab.cpp" line="503"/>
@@ -7934,17 +7936,17 @@ Diese Funktion ist standardmäßig aktiviert. Wenn Sie die Kompatibilität mit �
     <message>
         <location filename="../src/program/programtab.cpp" line="622"/>
         <source>Remove &quot;%1&quot;?</source>
-        <translation>&quot;%1&quot; entfernen?</translation>
+        <translation>„%1“ entfernen?</translation>
     </message>
     <message>
         <location filename="../src/program/programtab.cpp" line="623"/>
         <source>Are you sure you want to remove &quot;%1&quot; from the sketch?</source>
-        <translation>Möchtest Du wirklich &quot;%1&quot; aus dem Entwurf entfernen?</translation>
+        <translation>Möchtest Du wirklich „%1“ aus dem Entwurf entfernen?</translation>
     </message>
     <message>
         <location filename="../src/program/programtab.cpp" line="751"/>
         <source>No uploader for %1 specified. Go to Preferences &gt; Code View to configure it.</source>
-        <translation>Es wurde noch kein Programmierer für %1 angegeben. Gehen Sie zu Einstellungen &gt; Code-Ansicht, um diesen zu konfigurieren.</translation>
+        <translation>Es wurde noch kein Programmierer für %1 angegeben. Gehe zu Einstellungen &gt; Code-Ansicht, um ihn zu konfigurieren.</translation>
     </message>
     <message>
         <location filename="../src/program/programtab.cpp" line="755"/>
@@ -8186,12 +8188,12 @@ Diese Funktion ist standardmäßig aktiviert. Wenn Sie die Kompatibilität mit �
     <message>
         <location filename="../src/program/programwindow.cpp" line="368"/>
         <source>File &apos;%1&apos; was restored from the .fzz file; the local copy was not found.</source>
-        <translation>Die Datei &apos;%1&apos; wurde aus der .fzz-Datei wiederhergestellt. Die lokale Kopie konnte nicht gefunden werden.</translation>
+        <translation>Die Datei „%1“ wurde aus der .fzz-Datei wiederhergestellt. Die lokale Kopie konnte nicht gefunden werden.</translation>
     </message>
     <message>
         <location filename="../src/program/programwindow.cpp" line="371"/>
         <source>File &apos;%1&apos; was restored from the .fzz file; save a local copy to work with an external editor.</source>
-        <translation>Die Datei &apos;%1&apos; wurde aus der .fzz-Datei wiederhergestellt. Speicher eine lokale Kopie, um sie mit einem externen Editor zu bearbeiten.</translation>
+        <translation>Die Datei „%1“ wurde aus der .fzz-Datei wiederhergestellt. Speicher eine lokale Kopie, um sie mit einem externen Editor zu bearbeiten.</translation>
     </message>
 </context>
 <context>
@@ -8199,12 +8201,12 @@ Diese Funktion ist standardmäßig aktiviert. Wenn Sie die Kompatibilität mit �
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="278"/>
         <source>Connected highlight color</source>
-        <translation>Hervorhebungsfarbe für &quot;Verbunden&quot;</translation>
+        <translation>Hervorhebungsfarbe für „Verbunden“</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="300"/>
         <source>Unconnected highlight color</source>
-        <translation>Hervorhebungsfarbe für &quot;Nicht verbunden&quot;</translation>
+        <translation>Hervorhebungsfarbe für „Nicht verbunden“</translation>
     </message>
     <message>
         <location filename="../src/dialogs/prefsdialog.cpp" line="329"/>
@@ -8229,17 +8231,17 @@ Diese Funktion ist standardmäßig aktiviert. Wenn Sie die Kompatibilität mit �
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="88"/>
         <source>pcb</source>
-        <translation>Leiterplatte</translation>
+        <translation>Platine</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="240"/>
         <source>Select all &apos;Don&apos;t autoroute&apos; traces</source>
-        <translation>Alle &quot;Nicht Autorouten&quot;-Leiterbahnen auswählen</translation>
+        <translation>Alle „Nicht Autorouten“-Leiterbahnen auswählen</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="245"/>
         <source>Select all autorouteable traces</source>
-        <translation>Alle &quot;Autorutebaren&quot; Leiterbahnen auswählen</translation>
+        <translation>Alle „Autorutebaren“ Leiterbahnen auswählen</translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2479"/>
@@ -8254,13 +8256,13 @@ Diese Funktion ist standardmäßig aktiviert. Wenn Sie die Kompatibilität mit �
     <message>
         <location filename="../src/sketch/breadboardsketchwidget.cpp" line="36"/>
         <source>bb</source>
-        <translation>Steckplatine</translation>
+        <translation>Steckbrett</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinview.cpp" line="49"/>
         <location filename="../src/sketch/breadboardsketchwidget.cpp" line="37"/>
         <source>Breadboard View</source>
-        <translation>Steckplatinenansicht</translation>
+        <translation>Steckbrettansicht</translation>
     </message>
     <message>
         <location filename="../src/autoroute/mazerouter/mazerouter.cpp" line="606"/>
@@ -8283,12 +8285,12 @@ Diese Funktion ist standardmäßig aktiviert. Wenn Sie die Kompatibilität mit �
     <message>
         <location filename="../src/autoroute/mazerouter/mazerouter.cpp" line="606"/>
         <source>Cannot autoroute: no board (or multiple boards) found</source>
-        <translation>Autorouten kann nicht durchgeführt werden: Keine oder mehrere Leiterplatten gefunden</translation>
+        <translation>Autorouten kann nicht durchgeführt werden: Keine oder mehrere Platinen gefunden</translation>
     </message>
     <message>
         <location filename="../src/autoroute/mazerouter/mazerouter.cpp" line="648"/>
         <source>No connections (on the PCB) to route.</source>
-        <translation>Keine Verbindungen (auf der Leiterplatte) zum Routen.</translation>
+        <translation>Keine Verbindungen (auf der Platine) zum Routen.</translation>
     </message>
     <message>
         <location filename="../src/autoroute/mazerouter/mazerouter.cpp" line="648"/>
@@ -8303,7 +8305,7 @@ Diese Funktion ist standardmäßig aktiviert. Wenn Sie die Kompatibilität mit �
     <message>
         <location filename="../src/viewlayer.cpp" line="179"/>
         <source>breadboard view</source>
-        <translation>Steckplatinenansicht</translation>
+        <translation>Steckbrettansicht</translation>
     </message>
     <message>
         <location filename="../src/viewlayer.cpp" line="180"/>
@@ -8313,7 +8315,7 @@ Diese Funktion ist standardmäßig aktiviert. Wenn Sie die Kompatibilität mit �
     <message>
         <location filename="../src/viewlayer.cpp" line="181"/>
         <source>pcb view</source>
-        <translation>Leiterplattenansicht</translation>
+        <translation>Platinenansicht</translation>
     </message>
     <message>
         <location filename="../src/fapplication.cpp" line="2374"/>
@@ -8385,7 +8387,7 @@ enthält einen Fehler (1) bei Zeile %1, Spalte %2:
         <source>The loaded sketch is missing its &apos;fritzingVersion&apos; attribute.
 
 File: %1</source>
-        <translation>Der geladenen Skizze fehlt das Attribut &quot;fritzingVersion&quot;.
+        <translation>Der geladenen Skizze fehlt das Attribut „fritzingVersion“.
 
 Datei: %1</translation>
     </message>
@@ -8399,7 +8401,7 @@ Datei: %1</translation>
         <source>The loaded sketch&apos;s &apos;fritzingVersion&apos; attribute &apos;%1&apos; is not formatted correctly.
 
 File: %2</source>
-        <translation>Das Attribut &apos;fritzingVersion&apos; des geladenen Sketches &apos;%1&apos; ist nicht korrekt formatiert.
+        <translation>Das Attribut „fritzingVersion“ des geladenen Sketches „%1“ ist nicht korrekt formatiert.
 
 Datei: %2</translation>
     </message>
@@ -8416,10 +8418,10 @@ Your current version is %2.
 Please update Fritzing to ensure proper functionality.
 
 File: %3</source>
-        <translation>Dieser Sketch wurde mit einer neueren Version von Fritzing (%1) erstellt.
-Ihre aktuelle Version ist %2.
+        <translation>Dieser Entwurf wurde mit einer neueren Fritzing-Version (%1) erstellt.
+Deine aktuelle Version ist %2.
 
-Bitte aktualisieren Sie Fritzing, um die korrekte Funktionalität zu gewährleisten.
+Bitte aktualisiere Fritzing, um die korrekte Funktion sicherzustellen.
 
 Datei: %3</translation>
     </message>
@@ -8479,13 +8481,13 @@ Zieldatei: %3.</translation>
     <message>
         <location filename="../src/model/palettemodel.cpp" line="340"/>
         <source>The part &apos;%1&apos; at &apos;%2&apos; does not have a unique module id &apos;%3&apos;.</source>
-        <translation>Bauteil &apos;%1&apos; bei &apos;%2&apos; hat keine eindeutige Modulkennung &apos;%3&apos;.</translation>
+        <translation>Bauteil „%1“ bei „%2“ hat keine eindeutige Modulkennung „%3“.</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinview.cpp" line="51"/>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="87"/>
         <source>PCB View</source>
-        <translation>Leiterplattenansicht</translation>
+        <translation>Platinenansicht</translation>
     </message>
     <message>
         <location filename="../src/sketch/schematicsketchwidget.cpp" line="57"/>
@@ -8516,7 +8518,7 @@ Zieldatei: %3.</translation>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="4340"/>
         <source>%1 Layer</source>
-        <translation>%1-Ebene</translation>
+        <translation>Ebene „%1“</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="4564"/>
@@ -8557,7 +8559,7 @@ Zieldatei: %3.</translation>
     <message>
         <location filename="../src/viewlayer.cpp" line="121"/>
         <source>Breadboard</source>
-        <translation>Steckplatinen</translation>
+        <translation>Steckbrett</translation>
     </message>
     <message>
         <location filename="../src/viewlayer.cpp" line="122"/>
@@ -8598,7 +8600,7 @@ Zieldatei: %3.</translation>
     <message>
         <location filename="../src/viewlayer.cpp" line="138"/>
         <source>Board</source>
-        <translation>Leiterplatten</translation>
+        <translation>Platinen</translation>
     </message>
     <message>
         <location filename="../src/viewlayer.cpp" line="139"/>
@@ -8613,12 +8615,12 @@ Zieldatei: %3.</translation>
     <message>
         <location filename="../src/viewlayer.cpp" line="141"/>
         <source>Copper Fill Bottom</source>
-        <translation>Kupferfüllung Unterseite</translation>
+        <translation>Kupferfläche unten</translation>
     </message>
     <message>
         <location filename="../src/viewlayer.cpp" line="144"/>
         <source>Copper Fill Top</source>
-        <translation>Kuperfüllung Oberseite</translation>
+        <translation>Kupferfläche oben</translation>
     </message>
     <message>
         <location filename="../src/viewlayer.cpp" line="142"/>
@@ -8738,7 +8740,7 @@ Versuche, Fritzing neu zu starten. Falls das Problem bestehen bleibt, wende Dich
     <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="142"/>
         <source>The file &apos;%1&apos; is read-only; please use a different filename.</source>
-        <translation>Die Datei &apos;%1&apos; ist schreibgeschützt; bitte benutze einen anderen Dateinamen.</translation>
+        <translation>Die Datei „%1“ ist schreibgeschützt; bitte benutze einen anderen Dateinamen.</translation>
     </message>
     <message>
         <location filename="../src/items/note.cpp" line="249"/>
@@ -8970,12 +8972,12 @@ im Sortiment. Nicht erneut hinzufügen?</translation>
     <message>
         <location filename="../src/svg/kicadmodule2svg.cpp" line="559"/>
         <source>shape delta not implemented</source>
-        <translation>Form: Sorry, kann noch nicht mit &quot;Delta&quot; umgehen</translation>
+        <translation>Form: Sorry, kann noch nicht mit „Delta“ umgehen</translation>
     </message>
     <message>
         <location filename="../src/svg/kicadmodule2svg.cpp" line="553"/>
         <source>trapezoidal pads not implemented</source>
-        <translation>Form: Sorry, kann noch nicht mit &quot;Trapez&quot; umgehen</translation>
+        <translation>Form: Sorry, kann noch nicht mit „Trapez“ umgehen</translation>
     </message>
     <message>
         <location filename="../src/svg/kicadmodule2svg.cpp" line="564"/>
@@ -9010,7 +9012,7 @@ im Sortiment. Nicht erneut hinzufügen?</translation>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="382"/>
         <source>File %1 already exists: it won&apos;t be overwritten</source>
-        <translation>Datei %1 ist bereits vorhanden: Sie kann nicht überschrieben werden</translation>
+        <translation>Datei %1 existiert bereits: Sie wird nicht überschrieben</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="838"/>
@@ -9070,11 +9072,11 @@ im Sortiment. Nicht erneut hinzufügen?</translation>
 File type: %2
 
 Please check if the file exists.</source>
-        <translation type="unfinished">Datei „%1&quot; kann nicht gefunden werden.
+        <translation>Datei „%1“ kann nicht gefunden werden.
 
 Dateityp: %2
 
-Bitte überprüfen Sie, ob die Datei existiert.</translation>
+Bitte prüfe, ob die Datei existiert.</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="895"/>
@@ -9083,11 +9085,11 @@ Bitte überprüfen Sie, ob die Datei existiert.</translation>
 File type: %2
 
 Please ensure you have permission to read the file.</source>
-        <translation type="unfinished">Datei „%1&quot; kann nicht gelesen werden.
+        <translation>Datei „%1“ kann nicht gelesen werden.
 
 Dateityp: %2
 
-Bitte stellen Sie sicher, dass Sie Leserechte für die Datei haben.</translation>
+Bitte stelle sicher, dass Du Leserechte für die Datei hast.</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="907"/>
@@ -9096,11 +9098,11 @@ Bitte stellen Sie sicher, dass Sie Leserechte für die Datei haben.</translation
 File type: %2
 
 This could be due to a cloud storage or network drive issue. Please ensure the file has been properly synchronized and saved.</source>
-        <translation type="unfinished">Datei „%1&quot; ist leer.
+        <translation>Datei „%1“ ist leer.
 
 Dateityp: %2
 
-Dies könnte an einem Cloud-Speicher- oder Netzlaufwerk-Problem liegen. Bitte stellen Sie sicher, dass die Datei ordnungsgemäß synchronisiert und gespeichert wurde.</translation>
+Dies könnte an einem Problem mit Cloud-Speicher oder Netzlaufwerk liegen. Bitte stelle sicher, dass die Datei vollständig synchronisiert und gespeichert wurde.</translation>
     </message>
     <message>
         <location filename="../src/partseditor/kicadmoduledialog.cpp" line="36"/>
@@ -9159,8 +9161,8 @@ Dies könnte an einem Cloud-Speicher- oder Netzlaufwerk-Problem liegen. Bitte st
         <location filename="../src/svg/gerbergenerator.cpp" line="154"/>
         <source>%n path(s) in copper layers</source>
         <translation>
-            <numerusform>%n Pfad in Kupferschichten</numerusform>
-            <numerusform>%n Pfade in Kupferschichten</numerusform>
+            <numerusform>%n Pfad in Kupferlagen</numerusform>
+            <numerusform>%n Pfade in Kupferlagen</numerusform>
         </translation>
     </message>
     <message numerus="yes">
@@ -9243,22 +9245,22 @@ Dies könnte an einem Cloud-Speicher- oder Netzlaufwerk-Problem liegen. Bitte st
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="349"/>
         <source>%1 layer: unable to save to &apos;%2&apos;</source>
-        <translation>%1 Ebene: Kann nicht unter &apos;%2&apos; gespeichert werden</translation>
+        <translation>%1 Ebene: Kann nicht unter „%2“ gespeichert werden</translation>
     </message>
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="919"/>
         <source>Fritzing is unable to process the cutouts in this custom PCB shape. </source>
-        <translation>Fritzing ist nicht in der Lage, die Ausschnitte in dieser benutzerdefinierten PCB-Form zu verarbeiten. </translation>
+        <translation>Fritzing kann die Ausschnitte in dieser Platinenform nicht verarbeiten. </translation>
     </message>
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="920"/>
         <source>You may need to reload the shape SVG. </source>
-        <translation>Möglicherweise müssen Sie die SVG-Form neu laden. </translation>
+        <translation>Möglicherweise musst Du das Form-SVG neu laden. </translation>
     </message>
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="921"/>
         <source>Fritzing requires that you make cutouts using a shape &apos;subtraction&apos; or &apos;difference&apos; operation in your vector graphics editor.</source>
-        <translation>Fritzing erfordert, dass Sie Ausschnitte mit einer Form-„Subtraktions“- oder „Differenz“-Operation in Ihrem Vektorgrafik-Editor erstellen.</translation>
+        <translation>Fritzing erfordert, dass Du Ausschnitte mit einer „Subtraktions“- oder „Differenz“-Operation in Deinem Vektorgrafik-Editor erstellst.</translation>
     </message>
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="1015"/>
@@ -9283,7 +9285,7 @@ Dies könnte an einem Cloud-Speicher- oder Netzlaufwerk-Problem liegen. Bitte st
     <message>
         <location filename="../src/commands.cpp" line="2266"/>
         <source>Set Ground Fill Seed</source>
-        <translation>Saat für Massefüllung setzen</translation>
+        <translation>Als Startpunkt für Massefläche setzen</translation>
     </message>
     <message>
         <location filename="../src/commands.cpp" line="2675"/>
@@ -9293,7 +9295,7 @@ Dies könnte an einem Cloud-Speicher- oder Netzlaufwerk-Problem liegen. Bitte st
     <message>
         <location filename="../src/dialogs/groundfillseeddialog.cpp" line="39"/>
         <source>Ground Fill Seed Editor</source>
-        <translation>Auswahl der Massefüllung-Saat</translation>
+        <translation>Startpunkte für Massefläche</translation>
     </message>
     <message>
         <location filename="../src/fapplication.cpp" line="1303"/>
@@ -9328,7 +9330,7 @@ Dies könnte an einem Cloud-Speicher- oder Netzlaufwerk-Problem liegen. Bitte st
     <message>
         <location filename="../src/partseditor/peutils.cpp" line="95"/>
         <source>Set the connectors&apos;s title</source>
-        <translation>Bezeichnung des Verbinders festlegen</translation>
+        <translation>Bezeichnung des Anschlusses festlegen</translation>
     </message>
     <message>
         <location filename="../src/partseditor/peutils.cpp" line="150"/>
@@ -9364,7 +9366,7 @@ Dies könnte an einem Cloud-Speicher- oder Netzlaufwerk-Problem liegen. Bitte st
     <message>
         <location filename="../src/autoroute/drc.cpp" line="105"/>
         <source>Part %1 &apos;%2&apos;</source>
-        <translation>Bauteil %1 &apos;%2&apos;</translation>
+        <translation>Bauteil %1 „%2“</translation>
     </message>
     <message>
         <location filename="../src/autoroute/autoroutersettingsdialog.cpp" line="62"/>
@@ -9379,57 +9381,57 @@ Dies könnte an einem Cloud-Speicher- oder Netzlaufwerk-Problem liegen. Bitte st
     <message>
         <location filename="../src/version/partschecker.cpp" line="73"/>
         <source>The parts folder &apos;%1&apos; has been changed--it is not in a supported branch (%2). %3</source>
-        <translation>Der Bauteil-Ordner &apos;%1&apos; wurde geändert - er befindet sich nicht im Zweig &apos;master&apos; (%2). %3</translation>
+        <translation>Der Bauteil-Ordner „%1“ wurde geändert - er befindet sich nicht im Zweig „master“ (%2). %3</translation>
     </message>
     <message>
         <location filename="../src/version/partschecker.cpp" line="74"/>
         <source>The parts folder &apos;%1&apos; may have been damaged (%2). %3</source>
-        <translation>Der Bauteil-Ordner &apos;%1&apos; könnte beschädigt worden sein (%2). %3</translation>
+        <translation>Der Bauteil-Ordner „%1“ könnte beschädigt worden sein (%2). %3</translation>
     </message>
     <message>
         <location filename="../src/version/partschecker.cpp" line="75"/>
         <source>The parts folder &apos;%1&apos; has been changed (%2). %3</source>
-        <translation>Der Bauteil-Ordner &apos;%1&apos; wurde bearbeitet (%2). %3</translation>
+        <translation>Der Bauteil-Ordner „%1“ wurde bearbeitet (%2). %3</translation>
     </message>
     <message>
         <location filename="../src/version/partschecker.cpp" line="76"/>
         <source>There are new or modified files in the parts folder &apos;%1&apos;. These changes will be discarded by the update.</source>
-        <translation>Es befinden sich neue oder geänderte Dateien im Bauteil-Ordner &apos;%1&apos;. Diese Änderungen werden durch die Aktualisierung zurückgesetzt.</translation>
+        <translation>Es befinden sich neue oder geänderte Dateien im Bauteil-Ordner „%1“. Diese Änderungen werden durch die Aktualisierung zurückgesetzt.</translation>
     </message>
     <message>
         <location filename="../src/version/partschecker.cpp" line="77"/>
         <source>There are unreadable files in the parts folder &apos;%1&apos;. %2</source>
-        <translation>Es befinden sich nicht lesbare Dateien im Bauteil-Ordner &apos;%1&apos;. %2</translation>
+        <translation>Es befinden sich nicht lesbare Dateien im Bauteil-Ordner „%1“. %2</translation>
     </message>
     <message>
         <location filename="../src/version/partschecker.cpp" line="99"/>
         <source>Unable to open parts folder &apos;%1&apos; for update. %2</source>
-        <translation>Der Bauteil-Ordner &apos;%1&apos; konnte für die Aktualisierung nicht geöffnet werden. %2</translation>
+        <translation>Der Bauteil-Ordner „%1“ konnte für die Aktualisierung nicht geöffnet werden. %2</translation>
     </message>
     <message>
         <location filename="../src/version/partschecker.cpp" line="105"/>
         <source>Parts folder repo &apos;%1&apos; is empty. %2</source>
-        <translation>Das Bauteil-Ordner repository &apos;%1&apos; ist leer. %2</translation>
+        <translation>Das Bauteil-Ordner repository „%1“ ist leer. %2</translation>
     </message>
     <message>
         <location filename="../src/version/partschecker.cpp" line="113"/>
         <source>Unable to determine network site for &apos;%1&apos;. %2</source>
-        <translation>Der Netzwerkort für &apos;%1&apos; konnte nicht gefunden werden. %2</translation>
+        <translation>Der Netzwerkort für „%1“ konnte nicht gefunden werden. %2</translation>
     </message>
     <message>
         <location filename="../src/version/partschecker.cpp" line="130"/>
         <source>Unable to access network site for &apos;%1&apos;. %2</source>
-        <translation>Es konnte keine Verbindung zum Netzwerkort für &apos;%1&apos; hergestellt werden. %2</translation>
+        <translation>Es konnte keine Verbindung zum Netzwerkort für „%1“ hergestellt werden. %2</translation>
     </message>
     <message>
         <location filename="../src/version/partschecker.cpp" line="140"/>
         <source>Unable to retrieve network references for &apos;%1&apos;. %2</source>
-        <translation>Es konnten keine Netzwerk-Referenzen für &apos;%1&apos; gefunden werden. %2</translation>
+        <translation>Es konnten keine Netzwerk-Referenzen für „%1“ gefunden werden. %2</translation>
     </message>
     <message>
         <location filename="../src/version/partschecker.cpp" line="199"/>
         <source>Unable to retrieve the network reference for &apos;%1&apos;#%2. %3</source>
-        <translation>Die Netzwerkreferenz für &apos;%1&apos;#%2 konnte nicht abgerufen werden. %3</translation>
+        <translation>Die Netzwerkreferenz für „%1“#%2 konnte nicht abgerufen werden. %3</translation>
     </message>
     <message>
         <location filename="../src/version/partschecker.cpp" line="470"/>
@@ -9523,7 +9525,7 @@ Dies könnte an einem Cloud-Speicher- oder Netzlaufwerk-Problem liegen. Bitte st
     <message>
         <location filename="../src/dialogs/quotedialog.cpp" line="175"/>
         <source>Order your PCB from Fritzing Fab</source>
-        <translation>Bestelle Deine Leiterplatte bei Fritzing Fab</translation>
+        <translation>Bestelle Deine Platine bei Fritzing Fab</translation>
     </message>
     <message>
         <location filename="../src/dialogs/quotedialog.cpp" line="198"/>
@@ -9533,12 +9535,12 @@ Dies könnte an einem Cloud-Speicher- oder Netzlaufwerk-Problem liegen. Bitte st
     <message>
         <location filename="../src/dialogs/quotedialog.cpp" line="212"/>
         <source>For more pricing information, see &lt;a href=&apos;https://fab.fritzing.org/pricing&apos;&gt;https://fab.fritzing.org/pricing&lt;/a&gt;.</source>
-        <translation>Weitere Informationen zur Preisgestaltung finden Sie unter &lt;a href=&apos;https://fab.fritzing.org/pricing&apos;&gt;https://fab.fritzing.org/pricing&lt;/a&gt;.</translation>
+        <translation>Weitere Preisinformationen findest Du unter &lt;a href=&apos;https://fab.fritzing.org/pricing&apos;&gt;https://fab.fritzing.org/pricing&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/quotedialog.cpp" line="280"/>
         <source>Use Fritzing Fab to produce a PCB from your sketch.&lt;br /&gt;</source>
-        <translation>Produziere eine Leiterplatte aus Deinem Entwurf mit Hilfe von Fritzing Fab.&lt;br/&gt;</translation>
+        <translation>Produziere eine Platine aus Deinem Entwurf mit Hilfe von Fritzing Fab.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../src/dialogs/quotedialog.cpp" line="281"/>
@@ -9579,7 +9581,7 @@ Dies könnte an einem Cloud-Speicher- oder Netzlaufwerk-Problem liegen. Bitte st
     <message>
         <location filename="../src/dialogs/quotedialog.cpp" line="273"/>
         <source>The dimensions of the selected PCB (title: %1) are %2 cm x %3 cm (%4 in x %5 in).&lt;br /&gt;</source>
-        <translation>Die Abmessungen der ausgewählten Leiterplatte (Titel: %1) betragen %2 cm x %3 cm (%4 Zoll x %5 Zoll). &lt;br /&gt;</translation>
+        <translation>Die Abmessungen der ausgewählten Platine (Titel: %1) betragen %2 cm x %3 cm (%4 Zoll x %5 Zoll). &lt;br /&gt;</translation>
     </message>
     <message>
         <location filename="../src/dialogs/quotedialog.cpp" line="198"/>
@@ -9672,9 +9674,9 @@ Dies könnte an einem Cloud-Speicher- oder Netzlaufwerk-Problem liegen. Bitte st
         <source>Select from the dropdown, or type in a %1 value
 Range: [%2 - %3] %4
 Background: Green = ok, Red = incorrect value, Grey = current value</source>
-        <translation>Wählen Sie aus der Dropdown-Liste oder geben Sie einen %1-Wert ein
+        <translation>Wähle aus der Dropdown-Liste oder gib einen %1-Wert ein
 Bereich: [%2 - %3] %4
-Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation>
+Hintergrund: Grün = ok, Rot = ungültiger Wert, Grau = aktueller Wert</translation>
     </message>
 </context>
 <context>
@@ -9809,33 +9811,33 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
     <message>
         <location filename="../src/utils/s2s.cpp" line="264"/>
         <source>Failed loading &apos;%1&apos;, %2 line:%3 col:%4</source>
-        <translation>Laden von &apos;%1&apos;, %2 Zeile:%3 Sp.:%4 fehlgeschlagen</translation>
+        <translation>Laden von „%1“, %2 Zeile:%3 Sp.:%4 fehlgeschlagen</translation>
     </message>
     <message>
         <location filename="../src/utils/s2s.cpp" line="290"/>
         <source>Schematic not found for &apos;%1&apos;</source>
-        <translation>Schaltplan für &apos;%1&apos; nicht gefunden</translation>
+        <translation>Schaltplan für „%1“ nicht gefunden</translation>
     </message>
     <message>
         <location filename="../src/utils/s2s.cpp" line="312"/>
         <location filename="../src/utils/s2s.cpp" line="789"/>
         <source>Unable to load schematic &apos;%1&apos; for &apos;%2&apos;</source>
-        <translation>Schaltplan &apos;%1&apos; für &apos;%2&apos; konnte nicht geladen werden</translation>
+        <translation>Schaltplan „%1“ für „%2“ konnte nicht geladen werden</translation>
     </message>
     <message>
         <location filename="../src/utils/s2s.cpp" line="325"/>
         <source>Schematic &apos;%1&apos; is already using the 0.1inch standard.</source>
-        <translation>Schaltplan &apos;%1&apos; verwendet bereits den 0,1-Zoll-Standard.</translation>
+        <translation>Schaltplan „%1“ verwendet bereits den 0,1-Zoll-Standard.</translation>
     </message>
     <message>
         <location filename="../src/utils/s2s.cpp" line="577"/>
         <source>Missing connector %1 in &apos;%2&apos; schematic of &apos;%3&apos;</source>
-        <translation>Fehlender Verbinder %1 in &apos;%2&apos; Schaltplan von &apos;%3&apos;</translation>
+        <translation>Fehlender Anschluss %1 in „%2“-Schaltplan von „%3“</translation>
     </message>
     <message>
         <location filename="../src/utils/s2s.cpp" line="798"/>
         <source>Failed loading schematic &apos;%1&apos;, %2 line:%3 col:%4</source>
-        <translation>Schaltplan &apos;%1&apos;, %2 Zeile:%3 Sp.:%4 konnte nicht geladen werden</translation>
+        <translation>Schaltplan „%1“, %2 Zeile:%3 Sp.:%4 konnte nicht geladen werden</translation>
     </message>
 </context>
 <context>
@@ -9843,7 +9845,7 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
     <message>
         <location filename="../src/infoview/scalediconframe.cpp" line="61"/>
         <source>Part breadboard view image</source>
-        <translation>Steckplatinenansicht des Bauteils</translation>
+        <translation>Steckbrettansicht des Bauteils</translation>
     </message>
     <message>
         <location filename="../src/infoview/scalediconframe.cpp" line="62"/>
@@ -9853,7 +9855,7 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
     <message>
         <location filename="../src/infoview/scalediconframe.cpp" line="63"/>
         <source>Part pcb view image</source>
-        <translation>Leiterplattenansicht des Bauteils</translation>
+        <translation>Platinenansicht des Bauteils</translation>
     </message>
 </context>
 <context>
@@ -9909,7 +9911,7 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
     <message>
         <location filename="../src/sketch/schematicsketchwidget.cpp" line="261"/>
         <source>Change label from %1 to %2</source>
-        <translation>Beschriftung von &apos;%1&apos; nach &apos;%2&apos; ändern</translation>
+        <translation>Beschriftung von „%1“ nach „%2“ ändern</translation>
     </message>
     <message>
         <location filename="../src/sketch/schematicsketchwidget.cpp" line="298"/>
@@ -9999,8 +10001,8 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
         <location filename="../src/simulation/simulator.cpp" line="361"/>
         <source>The simulator gave an error when loading the netlist. Probably some SPICE field is wrong, please, check them.
 If the parts are from the simulation bin, report the bug in GitHub.</source>
-        <translation>Der Simulator gab beim Laden der Netzliste einen Fehler aus. Wahrscheinlich sind einige SPICE-Felder falsch, bitte überprüfen Sie diese.
-Wenn die Teile aus dem Simulations-Bin stammen, melden Sie den Fehler in GitHub.</translation>
+        <translation>Der Simulator hat beim Laden der Netzliste einen Fehler gemeldet. Wahrscheinlich ist ein SPICE-Feld falsch – bitte prüfe die Felder.
+Wenn die Bauteile aus dem Simulations-Sortiment stammen, melde den Fehler auf GitHub.</translation>
     </message>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="437"/>
@@ -10011,7 +10013,7 @@ Wenn die Teile aus dem Simulations-Bin stammen, melden Sie den Fehler in GitHub.
     <message>
         <location filename="../src/simulation/simulator.cpp" line="449"/>
         <source>The simulator gave an error when trying to simulate this circuit. Please, check the wiring and try again.</source>
-        <translation>Beim Versuch, diesen Schaltkreis zu simulieren, hat der Simulator einen Fehler ausgegeben. Bitte überprüfen Sie die Verkabelung und versuchen Sie es erneut.</translation>
+        <translation>Beim Simulieren dieses Schaltkreises hat der Simulator einen Fehler gemeldet. Bitte prüfe die Verdrahtung und versuche es erneut.</translation>
     </message>
     <message>
         <location filename="../src/simulation/simulator.cpp" line="488"/>
@@ -10221,17 +10223,17 @@ Netzliste:
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="7903"/>
         <source>Rotate label &apos;%1&apos; (%2°)</source>
-        <translation type="unfinished">Beschriftung «%1» drehen (%2°)</translation>
+        <translation type="unfinished">Beschriftung „%1“ drehen (%2°)</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="7907"/>
         <source>Flip label &apos;%1&apos; (horizontal)</source>
-        <translation type="unfinished">Beschriftung «%1» spiegeln (horizontal)</translation>
+        <translation type="unfinished">Beschriftung „%1“ spiegeln (horizontal)</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="7909"/>
         <source>Flip label &apos;%1&apos; (vertical)</source>
-        <translation type="unfinished">Beschriftung «%1» spiegeln (vertikal)</translation>
+        <translation type="unfinished">Beschriftung „%1“ spiegeln (vertikal)</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/sketch/sketchwidget.cpp" line="8433"/>
@@ -10281,7 +10283,7 @@ Netzliste:
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="11151"/>
         <source>test connectors</source>
-        <translation>Verbinder prüfen</translation>
+        <translation>Anschlüsse prüfen</translation>
     </message>
     <message>
         <source>Change Resistance from %1 to %2</source>
@@ -10361,7 +10363,7 @@ Beachte: Du kannst diese Anzeige auch aufrufen, indem Du den Routing-Status in d
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="10538"/>
         <source>Part &apos;%1&apos; not found in sketch</source>
-        <translation>Bauteil &apos;%1&apos; konnte in diesem Entwurf nicht gefunden werden</translation>
+        <translation>Bauteil „%1“ konnte in diesem Entwurf nicht gefunden werden</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="10550"/>
@@ -10376,7 +10378,7 @@ Beachte: Du kannst diese Anzeige auch aufrufen, indem Du den Routing-Status in d
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="6477"/>
         <source>Change %1 label to &apos;%2&apos;</source>
-        <translation>Beschriftung von &apos;%1&apos; nach &apos;%2&apos; ändern</translation>
+        <translation>Beschriftung von „%1“ nach „%2“ ändern</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="6389"/>
@@ -10386,7 +10388,7 @@ Beachte: Du kannst diese Anzeige auch aufrufen, indem Du den Routing-Status in d
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="7893"/>
         <source>Move label &apos;%1&apos;</source>
-        <translation>Bezeichnung &apos;%1&apos; verschieben</translation>
+        <translation>Bezeichnung „%1“ verschieben</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="2249"/>
@@ -10454,7 +10456,7 @@ und %1 weitere Eigenschaften</translation>
     <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="1050"/>
         <source>property &apos;%1&apos; in part &apos;%2&apos; with id &apos;%3&apos;.</source>
-        <translation>Eigenschaft &apos;%1&apos; in Bauteil &apos;%2&apos; mit ID &apos;%3&apos;.</translation>
+        <translation>Eigenschaft „%1“ in Bauteil „%2“ mit ID „%3“.</translation>
     </message>
     <message>
         <location filename="../src/referencemodel/sqlitereferencemodel.cpp" line="1081"/>
@@ -10595,7 +10597,7 @@ und %1 weitere Eigenschaften</translation>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="77"/>
         <source>Get a jump start by looking at the example circuits under File &gt; Examples.</source>
-        <translation>Starte mit einem Vorsprung, indem du dir die Beispiel-Schaltkreise unter Datei &gt; Beispiele ansiehst.</translation>
+        <translation>Verschaffe Dir einen Vorsprung und sieh Dir die Beispiel-Schaltkreise unter Datei &gt; Beispiele an.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="81"/>
@@ -10605,7 +10607,7 @@ und %1 weitere Eigenschaften</translation>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="85"/>
         <source>The Inspector Window--which lets you change the properties of parts--is only enabled for parts that are in a sketch (not for parts still in a Parts Bin).</source>
-        <translation>Das Inspektorfenster, in dem Sie die Eigenschaften von Teilen ändern können, ist nur für Teile aktiviert, die sich in einer Skizze befinden. In der Bauteilebibliothek selbst können keine Teile konfiguriert werden.</translation>
+        <translation>Das Inspektor-Fenster – dort änderst Du die Eigenschaften von Bauteilen – ist nur für Bauteile aktiv, die sich in einem Entwurf befinden (nicht für Bauteile, die noch im Sortiment liegen).</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="89"/>
@@ -10615,17 +10617,17 @@ und %1 weitere Eigenschaften</translation>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="90"/>
         <source>To constrain the motion of a part to horizontal or vertical, hold down the shift key as you drag it.</source>
-        <translation>Um die Bewegung eines Teils auf die Horizontale oder Vertikale zu beschränken, halten Sie die Umschalttaste gedrückt, während Sie es ziehen.</translation>
+        <translation>Um die Bewegung eines Bauteils auf die Horizontale oder Vertikale zu beschränken, halte beim Ziehen die Umschalttaste gedrückt.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="91"/>
         <source>If you&apos;re having trouble selecting a part or a wire (segment), try selecting the part that&apos;s in the way and send it to the back: use the Raise and Lower functions on the Part menu or the context menu (right-click menu).</source>
-        <translation>Wenn Sie Schwierigkeiten haben, ein Teil oder einen Draht (Segment) auszuwählen, versuchen Sie, das Teil, das im Weg ist, auszuwählen und es nach hinten zu schicken: Verwenden Sie die Funktionen &quot;Nach vorne bringen&quot; und &quot;Nach hinten senden&quot; im Menü Teil oder im Kontextmenü (Rechtsklickmenü).</translation>
+        <translation>Wenn Du ein Bauteil oder einen Draht (bzw. ein Segment) schlecht auswählen kannst, wähle das Bauteil aus, das im Weg ist, und schicke es nach hinten: Verwende „Nach vorne bringen“ und „Nach hinten senden“ im Menü „Bauteil“ oder im Kontextmenü (Rechtsklick).</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="92"/>
         <source>To more precisely move a selection of parts, use the arrow keys.  Shift-arrow moves by 10 units.</source>
-        <translation>Um eine Auswahl von Teilen präziser zu verschieben, verwenden Sie die Pfeiltasten. Shift-Pfeil bewegt um 10 Einheiten.</translation>
+        <translation>Um eine Auswahl von Bauteilen präziser zu verschieben, verwende die Pfeiltasten. Umschalt+Pfeil bewegt um 10 Einheiten.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="104"/>
@@ -10635,7 +10637,7 @@ und %1 weitere Eigenschaften</translation>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="106"/>
         <source>To free-rotate a logo text or image item in PCB view hold down the Alt (Linux: meta) key and free-rotate as usual.</source>
-        <translation>Um ein Logo-Text- oder Bildelement in der PCB-Ansicht frei zu drehen, halten Sie die Alt-Taste (Linux: meta) gedrückt und drehen Sie es wie gewohnt.</translation>
+        <translation>Um ein Text- oder Bildelement in der Platinenansicht frei zu drehen, halte die Alt-Taste (Linux: Meta) gedrückt und drehe wie gewohnt.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="110"/>
@@ -10645,17 +10647,17 @@ und %1 weitere Eigenschaften</translation>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="111"/>
         <source>To drag the canvas, hold down the space bar and drag with the mouse.</source>
-        <translation>Um die Leinwand zu ziehen, halten Sie die Leertaste gedrückt und ziehen Sie mit der Maus.</translation>
+        <translation>Um die Arbeitsfläche zu verschieben, halte die Leertaste gedrückt und ziehe mit der Maus.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="112"/>
         <source>To toggle the visibility of layer in a view, go to the view menu and choose one of the view layer items.  Or open up the &lt;b&gt;Layers&lt;/b&gt; palette from the &lt;b&gt;Window&lt;/b&gt; menu.</source>
-        <translation>Um die Sichtbarkeit einer Ebene in einer Ansicht umzuschalten, gehen Sie in das Menü &quot;Ansicht&quot; und wählen Sie eine der Ebenen.  Oder öffnen Sie die Palette &lt;b&gt;Ebenen&lt;/b&gt; aus dem Menü &lt;b&gt;Fenster&lt;/b&gt;.</translation>
+        <translation>Um die Sichtbarkeit einer Ebene in einer Ansicht umzuschalten, wähle im Menü „Ansicht“ einen der Ebenen-Einträge. Oder öffne die Palette &lt;b&gt;Ebenen&lt;/b&gt; über das Menü &lt;b&gt;Fenster&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="113"/>
         <source>When you export images from Fritzing, you can choose which layers are exported. Before you choose &apos;Export...&apos;, go into the &apos;View&apos; menu and hide the layers you don&apos;t want to be visible.</source>
-        <translation>Wenn Sie Bilder aus Fritzing exportieren, können Sie auswählen, welche Ebenen exportiert werden sollen. Bevor Sie &apos;Exportieren...&apos; wählen, gehen Sie in das Menü &apos;Ansicht&apos; und blenden Sie die Ebenen aus, die nicht sichtbar sein sollen.</translation>
+        <translation>Wenn Du Bilder aus Fritzing exportierst, kannst Du wählen, welche Ebenen exportiert werden. Bevor Du „Exportieren...“ wählst, blende im Menü „Ansicht“ die Ebenen aus, die nicht sichtbar sein sollen.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="117"/>
@@ -10665,12 +10667,12 @@ und %1 weitere Eigenschaften</translation>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="118"/>
         <source>To edit a part label, double-click it, or use the text input widget in the inspector window.</source>
-        <translation>Um eine Bauteilbeschriftung zu bearbeiten, doppelklicken Sie darauf, oder verwenden Sie das Texteingabe-Widget im Inspektorfenster.</translation>
+        <translation>Um eine Bauteil-Beschriftung zu bearbeiten, doppelklicke darauf oder verwende das Texteingabefeld im Inspektor-Fenster.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="120"/>
         <source>To move a part label independently from its part, select the part first--both the part and the label will be highlighted. Once the label is selected you can drag it.</source>
-        <translation>Um eine Teilebeschriftung unabhängig von ihrem Teil zu verschieben, wählen Sie zuerst das Teil aus - sowohl das Teil als auch die Beschriftung werden hervorgehoben. Sobald das Etikett ausgewählt ist, können Sie es ziehen.</translation>
+        <translation>Um eine Bauteil-Beschriftung unabhängig vom Bauteil zu verschieben, wähle zuerst das Bauteil aus – Bauteil und Beschriftung werden hervorgehoben. Sobald die Beschriftung ausgewählt ist, kannst Du sie ziehen.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="124"/>
@@ -10680,27 +10682,27 @@ und %1 weitere Eigenschaften</translation>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="125"/>
         <source>To add a bendpoint to a wire, double-click where you want the bendpoint.</source>
-        <translation>Um einen Biegepunkt zu einem Draht hinzuzufügen, doppelklicken Sie auf die Stelle, an der Sie den Biegepunkt haben möchten.</translation>
+        <translation>Um einem Draht einen Biegepunkt hinzuzufügen, doppelklicke auf die gewünschte Stelle.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="126"/>
         <source>To delete a bendpoint from a wire, double-click it.</source>
-        <translation>Um einen Biegepunkt aus einem Draht zu löschen, doppelklicken Sie darauf.</translation>
+        <translation>Um einen Biegepunkt aus einem Draht zu löschen, doppelklicke darauf.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="127"/>
         <source>In Schematic or PCB view, if you drag from a bendpoint with the Alt (Linux: Meta) key down, you will drag out a new wire from that bendpoint.</source>
-        <translation>Wenn Sie in der Schaltplan- oder Leiterplattenansicht mit gedrückter Alt- (Linux: Meta-) Taste von einem Biegepunkt aus ziehen, ziehen Sie einen neuen Draht von diesem Biegepunkt aus.</translation>
+        <translation>Wenn Du in der Schaltplan- oder Platinenansicht mit gedrückter Alt-Taste (Linux: Meta) von einem Biegepunkt aus ziehst, ziehst Du einen neuen Draht aus diesem Biegepunkt heraus.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="128"/>
         <source>To drag a wire segment (a section of a wire between two bendpoints), drag it with the Alt (Linux: Meta) key down.  If you also hold down the shift key, the wire segment will be constrained to horizontal or vertical motion.</source>
-        <translation>Um ein Kabelsegment (einen Abschnitt eines Kabels zwischen zwei Biegepunkten) zu ziehen, ziehen Sie es mit gedrückter Alt-Taste (Linux: Meta). Wenn Sie auch die Umschalttaste gedrückt halten, wird das Drahtsegment auf horizontale oder vertikale Bewegung beschränkt.</translation>
+        <translation>Um ein Drahtsegment (einen Abschnitt eines Drahtes zwischen zwei Biegepunkten) zu ziehen, ziehe es mit gedrückter Alt-Taste (Linux: Meta). Hältst Du zusätzlich die Umschalttaste gedrückt, wird das Drahtsegment auf horizontale oder vertikale Bewegung beschränkt.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="129"/>
         <source>Use shift-drag on a wire end or bendpoint to constrain its wire segment to an angle of 45 degrees (or some multiple of 45 degrees).  If the wire segment is connected to other wire segments, the segment you&apos;re dragging will snap to make 90 degree angles with the neighboring wire segment.</source>
-        <translation>Ziehen Sie bei gedrückter Umschalttaste auf ein Drahtende oder einen Biegepunkt, um das zugehörige Drahtsegment auf einen Winkel von 45 Grad (oder ein Vielfaches von 45 Grad) zu beschränken.  Wenn das Drahtsegment mit anderen Drahtsegmenten verbunden ist, rastet das Segment, das Sie ziehen, so ein, dass es einen 90-Grad-Winkel mit dem benachbarten Drahtsegment bildet.</translation>
+        <translation>Ziehe ein Drahtende oder einen Biegepunkt mit gedrückter Umschalttaste, um das Drahtsegment auf 45-Grad-Winkel (oder Vielfache davon) zu beschränken. Ist das Segment mit anderen Drahtsegmenten verbunden, rastet es beim Ziehen im 90-Grad-Winkel zum Nachbarsegment ein.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="133"/>
@@ -10710,57 +10712,57 @@ und %1 weitere Eigenschaften</translation>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="134"/>
         <source>To see all the connectors connected to a given connector, hold the mouse down on the connector--all the connections will be highlighted.</source>
-        <translation>Um alle Punkte zu sehen, die mit einem bestimmten Anschluss verbunden sind, halten Sie die Maus auf dem Anschluss gedrückt - alle Anschlüsse werden hervorgehoben.</translation>
+        <translation>Um alle Anschlüsse zu sehen, die mit einem Anschluss verbunden sind, halte die Maustaste auf dem Anschluss gedrückt – alle Verbindungen werden hervorgehoben.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="137"/>
         <source>Therefore, virtual wires are sometimes also called &apos;Ratsnest lines&apos;.</source>
-        <translation>Daher werden virtuelle Drähte manchmal auch als &quot;Ratsnest-Linien&quot; bezeichnet.</translation>
+        <translation>Daher werden virtuelle Drähte manchmal auch als „Ratsnest-Linien“ bezeichnet.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="143"/>
         <source>Check out Parts Editor Help under the &lt;b&gt;Help&lt;/b&gt; Menu.</source>
-        <translation>Die Hilfe zum Teile-Editor finden Sie im Menü &lt;b&gt;Hilfe&lt;/b&gt;.</translation>
+        <translation>Die Hilfe zum Bauteil-Editor findest Du im Menü &lt;b&gt;Hilfe&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="144"/>
         <source>Before using the Parts Editor, see whether a Generic IC, Mystery Part, or Pin Header will do the job. Once you drop one of these into your sketch, you can change the number of pins, pin spacing, and other properties.</source>
-        <translation>Bevor Sie den Teile-Editor verwenden, sollten Sie prüfen, ob ein allgemeines IC, ein Mystery-Teil oder eine Stiftleiste für die Aufgabe geeignet ist. Sobald Sie eines dieser Bauteile in Ihre Skizze eingefügt haben, können Sie die Anzahl der Pins, den Pin-Abstand und andere Eigenschaften ändern.</translation>
+        <translation>Bevor Du den Bauteil-Editor verwendest, prüfe, ob ein Generic IC, ein Mystery-Bauteil oder eine Stiftleiste die Aufgabe erfüllt. Sobald Du eines davon in Deinen Entwurf ziehst, kannst Du die Anzahl der Pins, den Pin-Abstand und andere Eigenschaften ändern.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="145"/>
         <source>In the Parts Editor, to select a graphic underneath another graphic, use the mouse wheel while holding down the shift key.</source>
-        <translation>Um im Teile-Editor eine Grafik unterhalb einer anderen Grafik auszuwählen, verwenden Sie das Mausrad, während Sie die Umschalttaste gedrückt halten.</translation>
+        <translation>Um im Bauteil-Editor eine Grafik unterhalb einer anderen auszuwählen, benutze das Mausrad bei gedrückter Umschalttaste.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="148"/>
         <source>Do not store your custom part files in the Fritzing installation folder. If you upgrade Fritzing, these files will probably be deleted. Also, files in the Fritzing installation folder will not be saved in sketch (.fzz) files, so you won&apos;t be able to share them.</source>
-        <translation>Speichern Sie Ihre benutzerdefinierten Teildateien nicht im Fritzing-Installationsordner. Wenn Sie Fritzing aktualisieren, werden diese Dateien wahrscheinlich gelöscht. Außerdem werden die Dateien im Fritzing-Installationsordner nicht in Skizzen-Dateien (.fzz) gespeichert, so dass Sie sie nicht weitergeben können.</translation>
+        <translation>Speichere Deine eigenen Bauteil-Dateien nicht im Fritzing-Installationsordner. Bei einem Fritzing-Update werden diese Dateien wahrscheinlich gelöscht. Außerdem werden Dateien aus dem Installationsordner nicht in Entwurfs-Dateien (.fzz) gespeichert, sodass Du sie nicht weitergeben kannst.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="156"/>
         <source>Route traces in 45-degree angles instead of 90-degrees to reduce noise.</source>
-        <translation>Verlegen Sie Leiterbahnen in 45-Grad-Winkeln statt in 90-Grad-Winkeln, um Störungen zu reduzieren.</translation>
+        <translation>Verlege Leiterbahnen in 45-Grad- statt 90-Grad-Winkeln, um Störungen zu reduzieren.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="162"/>
         <source>To make a stylish Arduino shield in no time, switch the shape of the PCB from a rectangle to the Arduino.</source>
-        <translation>Um im Handumdrehen ein schickes Arduino-Schild zu bauen, ändern Sie die Form der Platine von einem Rechteck zum Arduino.</translation>
+        <translation>Für ein schickes Arduino-Shield im Handumdrehen: Ändere die Form der Platine von Rechteck auf Arduino.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="167"/>
         <source>Smaller PCBs are more affordable than larger ones. Save space and money.</source>
-        <translation>Kleinere Leiterplatten sind günstiger als größere. Sparen Sie Platz und Geld.</translation>
+        <translation>Kleinere Platinen sind günstiger als größere. Spare Platz und Geld.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="168"/>
         <source>Have your PCB quickly and easily produced with Fritzing Fab. Hover over the &apos;Fabricate&apos; button to get a quote.</source>
-        <translation>Lassen Sie Ihre Leiterplatte schnell und einfach vom Fritzing Fab fertigen. Bewegen Sie den Mauszeiger über die Schaltfläche &apos;Herstellen&apos;, um ein Angebot zu erhalten.</translation>
+        <translation>Lass Deine Platine schnell und einfach von Fritzing Fab fertigen. Bewege den Mauszeiger über die Schaltfläche „Herstellen“, um ein Angebot zu erhalten.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="169"/>
         <source>When using the Fritzing Fab Service, if there are empty areas of the PCB that you do not want filled with copper, use the copper-blocker part. This resizable part will mask out copper fill in the rectangle it covers.</source>
-        <translation>Wenn Sie den Fritzing Fab Service nutzen und leere Bereiche auf der Leiterplatte haben, die nicht mit Kupfer gefüllt werden sollen, verwenden Sie das Kupferblocker-Teil. Dieses in der Größe veränderbare Teil maskiert die Kupferfüllung in dem von ihm abgedeckten Rechteck.</translation>
+        <translation>Wenn Du den Fritzing-Fab-Service nutzt und leere Bereiche auf der Platine hast, die nicht mit Kupfer gefüllt werden sollen, verwende das Kupferblocker-Bauteil. Dieses größenveränderbare Bauteil verhindert die Kupferfläche in dem Rechteck, das es abdeckt.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="173"/>
@@ -10770,7 +10772,7 @@ und %1 weitere Eigenschaften</translation>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="174"/>
         <source>To insert a clickable URL into a note, select some text in the note and type ctrl-l (Mac: command-l). (That&apos;s &apos;l&apos; as in the first letter of &apos;link&apos;.) To modify an existing link select the linked text and use ctrl-l (command-l) again.</source>
-        <translation>Um eine anklickbare URL in eine Notiz einzufügen, markieren Sie einen Text in der Notiz und tippen Sie ctrl-l (Mac: command-l). (Das ist &apos;l&apos; wie der erste Buchstabe von &apos;link&apos;.) Um einen bestehenden Link zu ändern, markieren Sie den verlinkten Text und verwenden Sie erneut ctrl-l (command-l).</translation>
+        <translation>Um eine anklickbare URL in eine Notiz einzufügen, markiere Text in der Notiz und tippe Strg+L (Mac: Cmd+L). (Das „L“ steht für „Link“.) Um einen bestehenden Link zu ändern, markiere den verlinkten Text und verwende erneut Strg+L (Cmd+L).</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="178"/>
@@ -10780,7 +10782,7 @@ und %1 weitere Eigenschaften</translation>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="152"/>
         <source>pcb layout</source>
-        <translation>Leiterplattenbelegungsplan</translation>
+        <translation>Platinenbelegungsplan</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="53"/>
@@ -10796,22 +10798,22 @@ und %1 weitere Eigenschaften</translation>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="82"/>
         <source>Can&apos;t find your part? Search for it by clicking the magnifier icon in the Parts Bin and type in some keywords.</source>
-        <translation>Kannst du das gesuchte Teil nicht finden? Klick auf das Lupensymbol unter &apos;Bauteile&apos; und gib ein paar Stichwörter ein, um es schnell zu finden.</translation>
+        <translation>Du findest ein Bauteil nicht? Klicke auf das Lupensymbol im Sortiment und gib ein paar Stichwörter ein.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="83"/>
         <source>If you can&apos;t find a part in the Parts Bin, the Generic IC is your friend.  Drag it onto your sketch, then use the widgets in the Inspector to: choose from among 25 different through-hole and SMD packages; change the pin label; and--for DIPs and SIPs--change the number of pins.  You can also change the pin names with the Pin Label editor.</source>
-        <translation>Wenn du ein Bauteil nicht im Bauteil-Bin findest, ist das Generic IC dein Freund. Ziehe es auf deine Skizze, und nutze dann die Widgets im Inspektor, um: aus 25 verschiedenen Durchsteck- und SMD-Gehäusen zu wählen; die Kontaktbezeichnung zu ändern; und--für DIPs und SIPs--die Anzahl der Kontakte zu ändern. Du kannst die Kontaktnamen auch mit dem Pin-Label-Editor ändern.</translation>
+        <translation>Wenn Du ein Bauteil nicht im Sortiment findest, ist das Generic IC Dein Freund. Ziehe es in Deinen Entwurf und nutze die Widgets im Inspektor, um aus 25 verschiedenen Durchsteck- und SMD-Gehäusen zu wählen, die Pin-Beschriftung zu ändern und – bei DIPs und SIPs – die Anzahl der Pins zu ändern. Mit dem Pin-Label-Editor kannst Du auch die Pin-Namen ändern.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="84"/>
         <source>An icon in the parts bin may actually represent multiple related parts.  So when you drag an icon from the parts bin into a sketch, make sure you look at the inspector.  The inspector will display the range of choices available for you to modify a part, or swap it for a related part.</source>
-        <translation>Ein Symbol im Bauteil-Bin kann tatsächlich mehrere verwandte Bauteile darstellen. Wenn du ein Symbol aus dem Bauteil-Bin in eine Skizze ziehst, schau dir unbedingt den Inspektor an. Der Inspektor zeigt dir die Auswahlmöglichkeiten, um ein Bauteil zu ändern oder es gegen ein verwandtes Bauteil auszutauschen.</translation>
+        <translation>Ein Symbol im Sortiment kann mehrere verwandte Bauteile darstellen. Wenn Du ein Symbol aus dem Sortiment in einen Entwurf ziehst, wirf unbedingt einen Blick in den Inspektor. Er zeigt Dir die Auswahlmöglichkeiten, um das Bauteil anzupassen oder gegen ein verwandtes zu tauschen.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="93"/>
         <source>Click on the mouse position indicator in the status bar (below) to switch the units between inch, mm and px.</source>
-        <translation>Klicken Sie auf die Mauspositionsanzeige in der Statusleiste (unten), um die Einheiten von mm auf px umzuschalten.</translation>
+        <translation>Klicke auf die Mauspositions-Anzeige in der Statusleiste (unten), um die Einheit zwischen Zoll, mm und px umzuschalten.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="97"/>
@@ -10821,27 +10823,27 @@ und %1 weitere Eigenschaften</translation>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="98"/>
         <source>In Breadboard view, to drag a part with bendable legs while keeping it connected to the breadboard, hold the Alt (Linux: Meta) key down when you start dragging.</source>
-        <translation>Wenn Sie in der Breadboard-Ansicht ein Teil mit biegsamen Beinen ziehen möchten, während es mit dem Breadboard verbunden bleibt, halten Sie die Alt-Taste (Linux: Meta) gedrückt, wenn Sie mit dem Ziehen beginnen.</translation>
+        <translation>Wenn Du in der Steckbrettansicht ein Bauteil mit biegsamen Beinchen ziehen möchtest, ohne die Verbindungen zum Steckbrett zu lösen, halte beim Ziehen die Alt-Taste (Linux: Meta) gedrückt.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="99"/>
         <source>In Breadboard view, to drag out a wire from the end of a bendable leg, drag with the Alt (Linux: Meta) key down.</source>
-        <translation>Um in der Steckbrettansicht einen Draht aus dem Ende eines biegbaren Beins herauszuziehen, ziehen Sie bei gedrückter Alt-Taste (Linux: Meta).</translation>
+        <translation>Um in der Steckbrettansicht einen Draht aus dem Ende eines biegsamen Beinchens zu ziehen, ziehe mit gedrückter Alt-Taste (Linux: Meta).</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="100"/>
         <source>In Breadboard or PCB view, to add a curve to a wire or bendable leg, drag with the Control (Mac: Command) key down.  You can set whether curvy wires are the default in Preferences.</source>
-        <translation>Um einem Draht oder einem biegbaren Bein in der Steckbrett- oder PCB-Ansicht eine Krümmung hinzuzufügen, ziehen Sie bei gedrückter Strg-Taste (Mac: Befehlstaste). Sie können in den Einstellungen festlegen, ob kurvige Drähte die Standardeinstellung ist.</translation>
+        <translation>Um einem Draht oder einem biegsamen Beinchen in der Steckbrett- oder Platinenansicht eine Krümmung zu geben, ziehe mit gedrückter Strg-Taste (Mac: Cmd). In den Einstellungen kannst Du festlegen, ob geschwungene Drähte der Standard sind.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="105"/>
         <source>To free-rotate a part in Breadboard or PCB view, select it, then hover your mouse near one of the corners until you see the rotate cursor. Mouse down, and that corner will follow your mouse as you drag.</source>
-        <translation>Um ein Teil in der Leiterplatten- oder PCB-Ansicht frei zu drehen, wähle es aus und bewege die Maus in die Nähe einer der Ecken, bis du den Drehcursor siehst. Bewege die Maus nach unten, und die Ecke folgt deiner Maus.</translation>
+        <translation>Um ein Bauteil in der Steckbrett- oder Platinenansicht frei zu drehen, wähle es aus und bewege die Maus in die Nähe einer Ecke, bis der Dreh-Cursor erscheint. Drücke die Maustaste – beim Ziehen folgt die Ecke Deiner Maus.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="119"/>
         <source>To display different properties in a part label, rotate it, or change the font, right-click the label.</source>
-        <translation>Um verschiedene Eigenschaften in einer Teilebeschriftung anzuzeigen, sie zu drehen oder die Schriftart zu ändern, klicken Sie mit der rechten Maustaste auf die Beschriftung.</translation>
+        <translation>Um andere Eigenschaften in einer Bauteil-Beschriftung anzuzeigen, sie zu drehen oder die Schriftart zu ändern, klicke mit rechts auf die Beschriftung.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="135"/>
@@ -10851,57 +10853,57 @@ und %1 weitere Eigenschaften</translation>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="136"/>
         <source>They are displayed as dotted lines. When wires haven&apos;t been routed yet and all connections are virtual, the sketch can look quite chaotic.</source>
-        <translation>Sie werden als gepunktete Linien dargestellt. Wenn die Drähte noch nicht verlegt wurden und alle Verbindungen virtuell sind, kann die Skizze ziemlich chaotisch aussehen.</translation>
+        <translation>Sie werden als gepunktete Linien dargestellt. Solange Drähte noch nicht verlegt sind und alle Verbindungen virtuell sind, kann der Entwurf ziemlich chaotisch aussehen.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="146"/>
         <source>You can use the Parts Editor to find the SVG file for a part&apos;s image for a given view. In the Parts Editor, click on the tab for that view, then use &lt;b&gt;Show in Folder&lt;/b&gt; under the &lt;b&gt;File&lt;/b&gt; Menu.</source>
-        <translation>You can use the Parts Editor to find the SVG file for a part&apos;s image for a given view. In the Parts Editor, click on the tab for that view, then use &lt;b&gt;Show in Folder&lt;/b&gt; under the &lt;b&gt;File&lt;/b&gt; Menu</translation>
+        <translation>Mit dem Bauteil-Editor findest Du die SVG-Datei für die Grafik eines Bauteils in einer bestimmten Ansicht. Klicke im Bauteil-Editor auf die Registerkarte der Ansicht und wähle dann &lt;b&gt;Im Ordner anzeigen&lt;/b&gt; im Menü &lt;b&gt;Datei&lt;/b&gt;.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="153"/>
         <source>Always lead a trace straight out of a pin. This helps to prevent short circuits.</source>
-        <translation>Führen Sie eine Leiterbahn immer gerade aus einem Stift heraus. Dies hilft, Kurzschlüsse zu vermeiden.</translation>
+        <translation>Führe eine Leiterbahn immer gerade aus einem Pin heraus. Das hilft, Kurzschlüsse zu vermeiden.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="154"/>
         <source>Through-hole parts can be traced from either side of a PCB.</source>
-        <translation>Durchkontaktierte Teile können von beiden Seiten einer Leiterplatte aus verfolgt werden.</translation>
+        <translation>Durchkontaktierte Teile können von beiden Seiten einer Platine aus verfolgt werden.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="155"/>
         <source>It makes life easier to route traces horizontally on one side of a PCB and vertically on the other side.</source>
-        <translation>Es erleichtert das Leben, Leiterbahnen horizontal auf einer Seite einer Leiterplatte und vertikal auf der anderen Seite zu führen.</translation>
+        <translation>Es erleichtert das Leben, Leiterbahnen horizontal auf einer Seite einer Platine und vertikal auf der anderen Seite zu führen.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="157"/>
         <source>If Fritzing is missing a particular part and you don&apos;t want to build one yourself, then use pin headers as connectors and the grid to align them.</source>
-        <translation>Wenn Ihnen in Fritzing ein Teil fehlt und Sie es nicht selbst erstellen wollen, dann verwenden Sie Stiftleisten als Verbinder und das Raster, um sie auszurichten.</translation>
+        <translation>Wenn Dir in Fritzing ein Bauteil fehlt und Du es nicht selbst erstellen willst, verwende Stiftleisten als Anschlüsse und das Raster, um sie auszurichten.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="158"/>
         <source>You can put your own Logo in the silkscreen of your PCB. Just use the Logo part of the core library and select your own file. SVG is the best format.</source>
-        <translation>Sie können Ihr eigenes Logo in den Siebdruck Ihrer Leiterplatte einfügen. Verwenden Sie einfach den Logo-Teil der Kernbibliothek und wählen Sie Ihre eigene Datei. SVG ist das beste Format.</translation>
+        <translation>Du kannst Dein eigenes Logo in den Siebdruck Deiner Platine einfügen. Verwende einfach das Logo-Bauteil aus der Kernbibliothek und wähle Deine eigene Datei aus. SVG ist das beste Format.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="161"/>
         <source>To create a custom shape for your PCB, import an SVG file.</source>
-        <translation>Importieren Sie eine SVG-Datei, um eine eigene Form für Ihre Leiterplatte zu erstellen.</translation>
+        <translation>Importiere eine SVG-Datei, um Deiner Platine eine eigene Form zu geben.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="166"/>
         <source>pcb production</source>
-        <translation>Leiterplattenproduktion</translation>
+        <translation>Platinenproduktion</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="159"/>
         <source>Use copper-blocker parts to mask out areas that you want free of copper fill.</source>
-        <translation>Verwenden Sie Kupferblocker-Teile, um die Bereiche abzudecken, die nicht mit Kupfer gefüllt werden sollen.</translation>
+        <translation>Verwende Kupferblocker-Bauteile, um Bereiche abzudecken, die frei von Kupferflächen bleiben sollen.</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="160"/>
         <source>To change trace width, select a trace then use the &lt;b&gt;width&lt;/b&gt; combo box in the Inspector. You can use the drop-down or just type in a number (from 8 to 128).</source>
-        <translation>Um die Leiterbahnbreite zu ändern, wählen Sie eine Leiterbahn aus und verwenden dann das Kombinationsfeld &lt;b&gt;Breite&lt;/b&gt; im Inspektor. Sie können die Dropdown-Liste verwenden oder einfach eine Zahl eingeben (von 8 bis 128).</translation>
+        <translation>Um die Leiterbahnbreite zu ändern, wähle eine Leiterbahn aus und verwende das Feld &lt;b&gt;Breite&lt;/b&gt; im Inspektor. Nutze die Dropdown-Liste oder gib direkt eine Zahl ein (8 bis 128).</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="142"/>
@@ -11155,7 +11157,7 @@ und %1 weitere Eigenschaften</translation>
     <message>
         <location filename="../src/version/updatedialog.cpp" line="213"/>
         <source>&lt;p&gt;Fritzing is unable to check for--and update--new parts.&lt;br/&gt;If you want this functionality, please enable write permission on this folder:&lt;br/&gt; &apos;%1&apos;.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Fritzing konnte nicht aktualisiert werden.&lt;br/&gt;Hierfür benötigt Fritzing Schreibzugriff auf diesen Ordner:&lt;br/&gt; &apos;%1&apos;.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Fritzing konnte nicht aktualisiert werden.&lt;br/&gt;Hierfür benötigt Fritzing Schreibzugriff auf diesen Ordner:&lt;br/&gt; „%1“.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/version/updatedialog.cpp" line="226"/>
@@ -11248,17 +11250,17 @@ und %1 weitere Eigenschaften</translation>
     <message>
         <location filename="../src/sketch/welcomeview.cpp" line="556"/>
         <source>Fritzing Fab is an easy and affordable service for producing professional PCBs from your Fritzing sketches.</source>
-        <translation>Fritzing Fab ist ein einfacher und kostengünstiger Dienst für die Herstellung von professionellen Leiterplatten aus Deinen Fritzing-Entwürfen.</translation>
+        <translation>Fritzing Fab ist ein einfacher und kostengünstiger Dienst für die Herstellung von professionellen Platinen aus Deinen Fritzing-Entwürfen.</translation>
     </message>
     <message>
         <location filename="../src/sketch/welcomeview.cpp" line="558"/>
         <source>produce your first pcb now &gt;&gt;</source>
-        <translation>stelle Deine erste Leiterplatte jetzt her &gt;&gt;</translation>
+        <translation>stelle Deine erste Platine jetzt her &gt;&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/welcomeview.cpp" line="559"/>
         <source>Order your PCB now.</source>
-        <translation>Bestelle jetzt Deine Leiterplatte.</translation>
+        <translation>Bestelle jetzt Deine Platine.</translation>
     </message>
     <message>
         <location filename="../src/sketch/welcomeview.cpp" line="635"/>

@@ -3459,6 +3459,7 @@ void MainWindow::routingStatusLabelMouse(QMouseEvent*, bool show) {
 	}
 
 	if (!show && toShow.count() == 0) {
+		//: Shown for whichever view is active (breadboard/schematic/pcb) — keep the translation view-neutral.
 		QMessageBox::information(this, tr("Unrouted connections", "dialog title"),
 		                         tr("There are no unrouted connections in this view."));
 	}

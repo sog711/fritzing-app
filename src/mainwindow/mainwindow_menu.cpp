@@ -4670,6 +4670,7 @@ void MainWindow::orderFab()
 			QCheckBox *notAgain = new QCheckBox(tr("Don't show this again."));
 
 			QMessageBox box(this);
+			//: Noun phrase: the copper fill (poured copper area on the board) is missing. Not a command.
 			box.setWindowTitle(tr("Missing copper fill", "dialog title"));
 			box.setText(tr("It is recommended to add copper/ground fill to your circuit to reduce acid usage during production.\n\nContinue upload?"));
 			box.setIcon(QMessageBox::Icon::Question);
