@@ -549,7 +549,7 @@
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1165"/>
         <source>Delete bin</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Sortiment löschen</translation>
+        <translation>Sortiment löschen</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1166"/>
@@ -565,7 +565,7 @@
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1218"/>
         <source>Read-only bin</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Schreibgeschütztes Sortiment</translation>
+        <translation>Schreibgeschütztes Sortiment</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1225"/>
@@ -587,7 +587,7 @@
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1302"/>
         <source>Remove from Bin</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Aus Sortiment entfernen</translation>
+        <translation>Aus Sortiment entfernen</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1303"/>
@@ -726,13 +726,13 @@ Wirf einen Blick auf die Datei circle_pcb.svg in Deinem Fritzing-Installationsor
         <location filename="../src/items/resizableboard.cpp" line="526"/>
         <source>Unable to load</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Die Datei konnte nicht geladen werden</translation>
+        <translation>Die Datei konnte nicht geladen werden</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="534"/>
         <source>Can load, but</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Die Datei konnte geladen werden, aber</translation>
+        <translation>Datei kann geladen werden, aber</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="441"/>
@@ -799,7 +799,7 @@ Trotzdem diese Datei benutzen?</translation>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="178"/>
         <source>Label</source>
-        <translation type="unfinished">Bezeichnung</translation>
+        <translation>Bezeichnung</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="178"/>
@@ -823,7 +823,7 @@ Trotzdem diese Datei benutzen?</translation>
         <location filename="../src/svg/bompdfgenerator.cpp" line="178"/>
         <location filename="../src/svg/bompdfgenerator.cpp" line="207"/>
         <source>Properties</source>
-        <translation type="unfinished">Eigenschaften</translation>
+        <translation>Eigenschaften</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="188"/>
@@ -858,7 +858,7 @@ Trotzdem diese Datei benutzen?</translation>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="370"/>
         <source>Description: %1</source>
-        <translation type="unfinished">Beschreibung: %1</translation>
+        <translation>Beschreibung: %1</translation>
     </message>
     <message>
         <location filename="../src/svg/bompdfgenerator.cpp" line="391"/>
@@ -1183,7 +1183,7 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
         <location filename="../src/program/consolewindow.cpp" line="153"/>
         <source>Error</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <location filename="../src/program/consolewindow.cpp" line="155"/>
@@ -1209,7 +1209,7 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
         <location filename="../src/program/consolewindow.cpp" line="201"/>
         <source>Critical Error</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Kritischer Fehler</translation>
+        <translation>Kritischer Fehler</translation>
     </message>
 </context>
 <context>
@@ -1217,7 +1217,7 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
     <message>
         <location filename="../src/autoroute/drc.cpp" line="235"/>
         <source>DRC was cancelled.</source>
-        <translation>Entwurfsregelprüfung wurde abgebrochen.</translation>
+        <translation>Designregelprüfung wurde abgebrochen.</translation>
     </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="265"/>
@@ -1232,18 +1232,18 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
     <message>
         <location filename="../src/autoroute/drc.cpp" line="269"/>
         <source>Reposition them and run the DRC again to find more problems</source>
-        <translation>Positioniere sie neu und führe dann die Entwurfsregelprüfung erneut aus, um weitere Probleme ausfindig zu machen</translation>
+        <translation>Positioniere sie neu und führe dann die Designregelprüfung (DRC) erneut aus, um weitere Probleme ausfindig zu machen</translation>
     </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="284"/>
         <source>Fritzing</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Fritzing</translation>
+        <translation>Fritzing</translation>
     </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="373"/>
         <source>Fritzing error: unable to render board svg.</source>
-        <translation>Fehler: Das Leiterplatten-SVG konnte nicht gerendert werden.</translation>
+        <translation>Fehler: Das SVG der Platine konnte nicht gerendert werden.</translation>
     </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="402"/>
@@ -1253,7 +1253,7 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
     <message>
         <location filename="../src/autoroute/drc.cpp" line="415"/>
         <source>Unexpected SVG rendering failure--contact fritzing.org</source>
-        <translation>Unerwarteter SVG-Rendering-Fehler--bitte kontaktiere fritzing.org</translation>
+        <translation>Unerwarteter Fehler beim Rendern des SVG--bitte kontaktiere fritzing.org</translation>
     </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="549"/>
@@ -1268,12 +1268,12 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
     <message>
         <location filename="../src/autoroute/drc.cpp" line="1122"/>
         <source>Connector %1 on %2 should have both copper top and bottom layers, but the svg only specifies one layer.</source>
-        <translation>Verbinder %1 auf %2 sollte sowohl oben als auch unten eine Kupferebene haben, aber das SVG bestimmt nur eine Ebene.</translation>
+        <translation>Anschluss %1 auf %2 sollte sowohl oben als auch unten eine Kupferlage haben, aber das SVG definiert nur eine einzige Ebene.</translation>
     </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="439"/>
         <source>Too close to a border (%1 layer)</source>
-        <translation>Zu nah an einer Kante (%1-Ebene)</translation>
+        <translation>Zu nah am Platinenrand (Kupferlage %1)</translation>
     </message>
 </context>
 <context>
@@ -1282,7 +1282,7 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
         <location filename="../src/autoroute/drc.cpp" line="138"/>
         <source>DRC Results</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Ergebnisse der Entwurfsregelprüfung</translation>
+        <translation>Ergebnisse der Prüfung (DRC)</translation>
     </message>
     <message>
         <location filename="../src/autoroute/drc.cpp" line="146"/>
@@ -1309,7 +1309,7 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
         <location filename="../src/debugdialog.cpp" line="138"/>
         <source>for debugging</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">fürs Debuggen</translation>
+        <translation>zum Debuggen</translation>
     </message>
 </context>
 <context>
@@ -1370,7 +1370,7 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
         <location filename="../src/fapplication.cpp" line="1885"/>
         <source>Fritzing failure</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Fehler in Fritzing</translation>
+        <translation>Fehler in Fritzing</translation>
     </message>
     <message>
         <location filename="../src/fapplication.cpp" line="1875"/>
@@ -1401,7 +1401,7 @@ Hintergrund: Grün = ok, Rot = falscher Wert, Grau = aktueller Wert</translation
         <location filename="../src/fapplication.cpp" line="2322"/>
         <source>Regenerate parts database?</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Neuerstellung der Bauteil-Datenbank?</translation>
+        <translation>Bauteil-Datenbank neu generieren?</translation>
     </message>
     <message>
         <location filename="../src/fapplication.cpp" line="2323"/>
@@ -1585,7 +1585,7 @@ Möchtest Du die Bauteildatenbank neu erstellen?
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="78"/>
         <source>%1 - %2</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">%1 - %2</translation>
+        <translation>%1 - %2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="229"/>
@@ -1596,7 +1596,7 @@ Möchtest Du die Bauteildatenbank neu erstellen?
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="237"/>
         <source>Save &quot;%1&quot;</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">&quot;%1&quot; speichern</translation>
+        <translation>&quot;%1&quot; speichern</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="239"/>
@@ -1609,19 +1609,19 @@ Möchtest Du die Bauteildatenbank neu erstellen?
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="64"/>
         <source>Cannot open file &apos;%1&apos;.</source>
-        <translation type="unfinished">Datei «%1» kann nicht geöffnet werden.</translation>
+        <translation>Datei „%1“ kann nicht geöffnet werden.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="72"/>
         <source>File &apos;%1&apos; is empty.</source>
-        <translation type="unfinished">Datei «%1» ist leer.</translation>
+        <translation>Datei „%1“ ist leer.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="147"/>
         <source>The part is missing a title.
 
 All parts must have a title tag.</source>
-        <translation type="unfinished">Dem Bauteil fehlt ein Titel.
+        <translation>Dem Bauteil fehlt ein Titel.
 
 Alle Bauteile müssen ein Titel-Tag haben.</translation>
     </message>
@@ -1629,50 +1629,50 @@ Alle Bauteile müssen ein Titel-Tag haben.</translation>
         <location filename="../src/model/fzpinfo.cpp" line="171"/>
         <source>The fritzing version &apos;%1&apos; is invalid.
 The part might not work properly.</source>
-        <translation type="unfinished">Die Fritzing-Version «%1» ist ungültig.
+        <translation>Die Fritzing-Version „%1“ ist ungültig.
 Das Bauteil funktioniert möglicherweise nicht korrekt.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="17"/>
         <source>Error</source>
         <comment>error title</comment>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="31"/>
         <source>Warning</source>
         <comment>warning title</comment>
-        <translation type="unfinished">Warnung</translation>
+        <translation>Warnung</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="63"/>
         <source>Cannot open file</source>
         <comment>error title</comment>
-        <translation type="unfinished">Datei kann nicht geöffnet werden</translation>
+        <translation>Datei kann nicht geöffnet werden</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="71"/>
         <source>File is empty</source>
         <comment>error title</comment>
-        <translation type="unfinished">Datei ist leer</translation>
+        <translation>Datei ist leer</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="128"/>
         <source>XML Error</source>
         <comment>error title</comment>
-        <translation type="unfinished">XML-Fehler</translation>
+        <translation>XML-Fehler</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="146"/>
         <source>Title is missing.</source>
         <comment>warning title</comment>
-        <translation type="unfinished">Titel fehlt.</translation>
+        <translation>Titel fehlt.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="157"/>
         <source>Version number missing.</source>
         <comment>warning title</comment>
-        <translation type="unfinished">Versionsnummer fehlt.</translation>
+        <translation>Versionsnummer fehlt.</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="158"/>
@@ -1685,13 +1685,13 @@ Alle Bauteile benötigen ein fritzingVersion-Attribut: fritzingVersion=&quot;x.y
         <location filename="../src/model/fzpinfo.cpp" line="170"/>
         <source>Invalid Version</source>
         <comment>warning title</comment>
-        <translation type="unfinished">Ungültige Version</translation>
+        <translation>Ungültige Version</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="183"/>
         <source>Version Mismatch</source>
         <comment>warning title</comment>
-        <translation type="unfinished">Versionskonflikt</translation>
+        <translation>Versionskonflikt</translation>
     </message>
     <message>
         <location filename="../src/model/fzpinfo.cpp" line="184"/>
@@ -1709,7 +1709,7 @@ Bitte erwägen Sie, Ihr Fritzing zu aktualisieren.
         <location filename="../src/model/fzpinfo.cpp" line="212"/>
         <source>Location: Line %1, Column %2
 </source>
-        <translation type="unfinished">Position: Zeile %1, Spalte %2
+        <translation>Position: Zeile %1, Spalte %2
 </translation>
     </message>
 </context>
@@ -2462,7 +2462,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <location filename="../src/mainwindow/mainwindow.cpp" line="2319"/>
         <source>Critical Issues</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Kritische Probleme</translation>
+        <translation>Kritische Probleme</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2320"/>
@@ -2477,7 +2477,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <location filename="../src/mainwindow/mainwindow.cpp" line="2330"/>
         <source>Warning</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Warnung</translation>
+        <translation>Warnung</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2331"/>
@@ -2497,13 +2497,13 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <location filename="../src/mainwindow/mainwindow.cpp" line="2685"/>
         <source>No copper top layer</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Fehlende obere Kupferebene</translation>
+        <translation>Obere Kupferlage fehlt</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="2781"/>
         <source>Sorry!</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Sorry!</translation>
+        <translation>Sorry!</translation>
     </message>
     <message numerus="yes">
         <location filename="../src/mainwindow/mainwindow.cpp" line="2814"/>
@@ -2558,13 +2558,13 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4736"/>
         <source>Fritzing</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Fritzing</translation>
+        <translation>Fritzing</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3191"/>
         <source>Schematic conversion</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Schaltplankonvertierung</translation>
+        <translation>Schaltplankonvertierung</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3315"/>
@@ -2733,7 +2733,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <location filename="../src/mainwindow/mainwindow.cpp" line="1545"/>
         <source>Save %1</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">%1 speichern</translation>
+        <translation>%1 speichern</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="1667"/>
@@ -2878,7 +2878,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <location filename="../src/mainwindow/mainwindow.cpp" line="3462"/>
         <source>Unrouted connections</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Ungeroutete Verbindungen</translation>
+        <translation>Ungeroutete Verbindungen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3518"/>
@@ -2951,7 +2951,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="1910"/>
         <source>Choose a folder for exporting</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Wähle einen Ordner für den Export</translation>
+        <translation>Wähle einen Ordner für den Export</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_export.cpp" line="359"/>
@@ -3471,7 +3471,7 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="276"/>
         <source>Revert?</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Zurücksetzen?</translation>
+        <translation>Zurücksetzen?</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="985"/>
@@ -3948,19 +3948,19 @@ Du kannst auch per rechten Mausklick einen Verbinder als &quot;Saat&quot; für d
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4673"/>
         <source>Missing copper fill</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Fehlende Kupferfüllung</translation>
+        <translation>Fehlende Kupferfläche</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4837"/>
         <source>Enter Text</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Text eingeben</translation>
+        <translation>Text eingeben</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4884"/>
         <source>Search</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Suche</translation>
+        <translation>Suche</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3729"/>
@@ -4626,7 +4626,7 @@ Möchtest Du &apos;%1&apos; jetzt in den neuen Standard umwandeln oder die Datei
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3739"/>
         <source>Schematic view update</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Schaltplanansicht aktualisieren</translation>
+        <translation>Schaltplanansicht aktualisieren</translation>
     </message>
     <message>
         <source>
@@ -4690,7 +4690,7 @@ Willst Du jetzt aktualisieren?</translation>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4706"/>
         <source>Fritzing Fab Upload</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Fritzing Fab Upload</translation>
+        <translation>Fritzing Fab Upload</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4715"/>
@@ -5342,7 +5342,7 @@ We&apos;re working to avoid this message, and only let you choose between proper
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="64"/>
         <source>Inspector</source>
         <comment>dock widget title</comment>
-        <translation type="unfinished">Inspektor</translation>
+        <translation>Inspektor</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_dock.cpp" line="66"/>
@@ -5771,7 +5771,7 @@ Markiere den &lt;history&gt;-Eintrag neu mit required / recommended / optional.
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="395"/>
         <source>&lt;b&gt;Problem:&lt;/b&gt; Label positioned far from its component&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Problem:&lt;/b&gt; Beschriftung weit vom Bauteil entfernt positioniert&lt;br&gt;&lt;br&gt;</translation>
+        <translation>&lt;b&gt;Problem:&lt;/b&gt; Beschriftung weit vom Bauteil entfernt positioniert&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="396"/>
@@ -5782,17 +5782,17 @@ Markiere den &lt;history&gt;-Eintrag neu mit required / recommended / optional.
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="397"/>
         <source>&lt;b&gt;Label Position:&lt;/b&gt; (%1, %2)&lt;br&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Beschriftungsposition:&lt;/b&gt; (%1, %2)&lt;br&gt;</translation>
+        <translation>&lt;b&gt;Beschriftungsposition:&lt;/b&gt; (%1, %2)&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="400"/>
         <source>&lt;b&gt;Component Position:&lt;/b&gt; (%1, %2)&lt;br&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Bauteilposition:&lt;/b&gt; (%1, %2)&lt;br&gt;</translation>
+        <translation>&lt;b&gt;Bauteilposition:&lt;/b&gt; (%1, %2)&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="402"/>
         <source>&lt;b&gt;Distance:&lt;/b&gt; %1 units&lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Abstand:&lt;/b&gt; %1 Einheiten&lt;br&gt;&lt;br&gt;</translation>
+        <translation>&lt;b&gt;Abstand:&lt;/b&gt; %1 Einheiten&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="404"/>
@@ -5802,7 +5802,7 @@ Markiere den &lt;history&gt;-Eintrag neu mit required / recommended / optional.
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="405"/>
         <source>&lt;b&gt;Solution:&lt;/b&gt; The label will be repositioned to the top-right of its component.</source>
-        <translation type="unfinished">&lt;b&gt;Lösung:&lt;/b&gt; Die Beschriftung wird rechts oberhalb des Bauteils neu positioniert.</translation>
+        <translation>&lt;b&gt;Lösung:&lt;/b&gt; Die Beschriftung wird rechts oberhalb des Bauteils neu positioniert.</translation>
     </message>
     <message>
         <location filename="../src/sketch/outlierhandler.cpp" line="407"/>
@@ -10166,7 +10166,7 @@ Netzliste:
         <location filename="../src/sketch/sketchwidget.cpp" line="4247"/>
         <source>Fritzing</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Fritzing</translation>
+        <translation>Fritzing</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="4254"/>
@@ -10276,7 +10276,7 @@ Netzliste:
         <location filename="../src/sketch/sketchwidget.cpp" line="10473"/>
         <source>Unrouted connections</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Ungeroutete Verbindungen</translation>
+        <translation>Ungeroutete Verbindungen</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="11151"/>
@@ -10786,7 +10786,7 @@ und %1 weitere Eigenschaften</translation>
         <location filename="../src/help/tipsandtricks.cpp" line="53"/>
         <source>Tips and Tricks</source>
         <comment>dialog title</comment>
-        <translation type="unfinished">Tipps und Tricks</translation>
+        <translation>Tipps und Tricks</translation>
     </message>
     <message>
         <location filename="../src/help/tipsandtricks.cpp" line="68"/>
