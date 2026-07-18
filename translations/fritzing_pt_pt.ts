@@ -2405,8 +2405,8 @@ Também é possível escolher um conector como uma semente de aterramento clican
         <location filename="../src/mainwindow/mainwindow.cpp" line="1773"/>
         <source>The sketch &apos;%1&apos; is missing %n SVG file(s): %2. The sketch will still load, but some parts may not display correctly. If the sketch is very old, try loading it with an older version of Fritzing (0.9.x) and re-saving it.</source>
         <translation>
-            <numerusform>O esboço &apos;%1&apos; falta o ficheiro SVG %n. O esboço irá ainda carregar, mas algumas peças podem não aparecer corretamente. Se o esboço é muito antigo, tente carregá-lo com uma antiga versão do Fritzing (0.9.x) e re-guardá-lo.</numerusform>
-            <numerusform>Os esboços &apos;%1&apos; faltam o ficheiro SVG %n. Os esboços irão ainda carregar, mas algumas peças podem não aparecer corretamente. Se os esboços são muito antigos, tente carregá-los com uma antiga versão do Fritzing (0.9.x) e re-guardá-los.</numerusform>
+            <numerusform>O esboço &apos;%1&apos; falta o ficheiro SVG %n: %2. O esboço irá ainda carregar, mas algumas peças podem não aparecer corretamente. Se o esboço é muito antigo, tente carregá-lo com uma antiga versão do Fritzing (0.9.x) e re-guardá-lo.</numerusform>
+            <numerusform>Os esboços &apos;%1&apos; faltam o ficheiro SVG %n: %2. Os esboços irão ainda carregar, mas algumas peças podem não aparecer corretamente. Se os esboços são muito antigos, tente carregá-los com uma antiga versão do Fritzing (0.9.x) e re-guardá-los.</numerusform>
         </translation>
     </message>
     <message>
@@ -9393,7 +9393,7 @@ Isto pode dever-se a um problema com o armazenamento na nuvem ou com a unidade d
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="1015"/>
         <source>Unable to save pick and place file: %2</source>
-        <translation>Incapaz de guardar ficheiro de escolha e colocação</translation>
+        <translation>Incapaz de guardar ficheiro de escolha e colocação: %2</translation>
     </message>
     <message>
         <location filename="../src/viewlayer.cpp" line="131"/>
@@ -10394,7 +10394,7 @@ Netlist:
         <source>%1
 
 Note: you can also trigger this display by mousing down on the routing status text in the status bar.</source>
-        <translation>$1
+        <translation>%1
 
 Nota: você também pode acionar essa exibição, pressionando o texto de estado de roteamento na barra de estado.</translation>
     </message>

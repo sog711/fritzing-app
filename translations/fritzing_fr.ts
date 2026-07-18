@@ -166,7 +166,7 @@
     <message>
         <location filename="../src/help/aboutbox.cpp" line="119"/>
         <source>Chinese (Traditional): </source>
-        <translation>Chinois (Traditionnel) - %1 </translation>
+        <translation>Chinois (Traditionnel) : </translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="119"/>
@@ -11145,7 +11145,7 @@ et %1 autres propriétés</translation>
     <message>
         <location filename="../src/version/updatedialog.cpp" line="213"/>
         <source>&lt;p&gt;Fritzing is unable to check for--and update--new parts.&lt;br/&gt;If you want this functionality, please enable write permission on this folder:&lt;br/&gt; &apos;%1&apos;.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Fritzing ne peut pas vérifier et mettre à jour les nouvelles pièces. &lt;br/&gt;Si vous voulez cette fonctionnalité, veuillez activer l&apos;autorisation d&apos;écriture sur ce dossier:&lt;br/&gt;&apos;%1&apos;. &lt;/P&gt;</translation>
+        <translation>&lt;p&gt;Fritzing ne peut pas vérifier et mettre à jour les nouvelles pièces. &lt;br/&gt;Si vous voulez cette fonctionnalité, veuillez activer l&apos;autorisation d&apos;écriture sur ce dossier:&lt;br/&gt;&apos;%1&apos;. &lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/version/updatedialog.cpp" line="226"/>
@@ -11304,7 +11304,7 @@ et %1 autres propriétés</translation>
     <message>
         <location filename="../src/sketch/welcomeview.cpp" line="635"/>
         <source>&lt;a href=&apos;%1&apos;&gt;&lt;img src=&apos;%2&apos;/&gt;&lt;/a&gt;</source>
-        <translation>&lt;a hre=&apos;%1&apos;&gt;&lt;img src=&apos;%2&apos;/&gt;&lt;/a&gt;</translation>
+        <translation>&lt;a href=&apos;%1&apos;&gt;&lt;img src=&apos;%2&apos;/&gt;&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/welcomeview.cpp" line="654"/>
@@ -11314,7 +11314,7 @@ et %1 autres propriétés</translation>
     <message>
         <location filename="../src/sketch/welcomeview.cpp" line="729"/>
         <source>&lt;a href=&apos;%1&apos;&gt;&lt;img src=&apos;%2&apos; /&gt;&lt;/a&gt;</source>
-        <translation>&lt;a hre=&apos;%1&apos;&gt;&lt;img src=&apos;%2&apos;/&gt;&lt;/a&gt;</translation>
+        <translation>&lt;a href=&apos;%1&apos;&gt;&lt;img src=&apos;%2&apos;/&gt;&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../src/sketch/welcomeview.cpp" line="845"/>

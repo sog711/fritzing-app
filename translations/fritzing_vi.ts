@@ -256,7 +256,7 @@
     <message>
         <location filename="../src/help/aboutbox.cpp" line="68"/>
         <source>Version %1.%2.%3 &lt;br&gt;&lt;small&gt;(%4%5 %6) %7 [Qt %8]&lt;/small&gt;</source>
-        <translation>Phiên bản% 1.% 2.% 3&lt;br&gt; &lt;small&gt;(% 4% 5% 6)% 7 [Qt% 8]&lt;/small&gt;</translation>
+        <translation>Phiên bản %1.%2.%3&lt;br&gt; &lt;small&gt;(%4%5 %6) %7 [Qt %8]&lt;/small&gt;</translation>
     </message>
     <message>
         <location filename="../src/help/aboutbox.cpp" line="133"/>
@@ -1513,7 +1513,7 @@ Would you like to regenerate the parts database?
     <message>
         <location filename="../src/dialogs/fabuploadprogress.cpp" line="221"/>
         <source>Error processing the project. The factory says: %1</source>
-        <translation>Lỗi khi xử lý dự án. Nhà máy cho biết:% 1</translation>
+        <translation>Lỗi khi xử lý dự án. Nhà máy cho biết: %1</translation>
     </message>
 </context>
 <context>
@@ -2288,7 +2288,7 @@ Cũng có thể chọn một kết nối như là một đổ mát bằng cách 
     <message>
         <location filename="../src/items/logoitem.cpp" line="425"/>
         <source>due to an xml problem: %1 line:%2 column:%3</source>
-        <translation>do một vấn đề xml: %1 dòng: %2 cột: % 3</translation>
+        <translation>do một vấn đề xml: %1 dòng: %2 cột: %3</translation>
     </message>
     <message>
         <location filename="../src/items/logoitem.cpp" line="431"/>
@@ -2720,7 +2720,7 @@ Cũng có thể chọn một kết nối như là một đổ mát bằng cách 
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3407"/>
         <source>Fritzing uncompressed (*%1)</source>
-        <translation>Fritzing không nén (*% 1)</translation>
+        <translation>Fritzing không nén (*%1)</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow.cpp" line="3463"/>
@@ -6784,7 +6784,7 @@ Tiếp tục và lưu lại?</translation>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="3291"/>
         <source>Add internal connection from &apos;%1&apos; to &apos;%2&apos;</source>
-        <translation>Thêm kết nối nội bộ từ &apos;% 1&apos; đến &apos;%2&apos;</translation>
+        <translation>Thêm kết nối nội bộ từ &apos;%1&apos; đến &apos;%2&apos;</translation>
     </message>
 </context>
 <context>
@@ -7807,7 +7807,7 @@ This feature is enabled by default. If you need to maintain compatibility with o
     <message>
         <location filename="../src/program/programtab.cpp" line="126"/>
         <source>While it is possible to read and edit %1 programming files, it is not yet possible to use Fritzing to compile or upload these programs to a microcontroller.</source>
-        <translation>Mặc dù có thể đọc và chỉnh sửa các tập tin% 1 lập trình, chưa thể sử dụng Fritzing để biên dịch hoặc tải lên các chương trình cho một vi điều khiển.</translation>
+        <translation>Mặc dù có thể đọc và chỉnh sửa các tập tin %1 lập trình, chưa thể sử dụng Fritzing để biên dịch hoặc tải lên các chương trình cho một vi điều khiển.</translation>
     </message>
     <message>
         <location filename="../src/program/programtab.cpp" line="250"/>
@@ -7857,7 +7857,7 @@ This feature is enabled by default. If you need to maintain compatibility with o
     <message>
         <location filename="../src/program/programtab.cpp" line="503"/>
         <source>Code (*.%1)</source>
-        <translation>Cổng</translation>
+        <translation>Mã (*.%1)</translation>
     </message>
     <message>
         <location filename="../src/program/programtab.cpp" line="622"/>
@@ -8286,22 +8286,22 @@ This feature is enabled by default. If you need to maintain compatibility with o
         <location filename="../src/model/palettemodel.cpp" line="195"/>
         <source>Cannot read file %1:
 %2.</source>
-        <translation>Không thể đọc tập tin% 1:
-2%.</translation>
+        <translation>Không thể đọc tập tin %1:
+%2.</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="94"/>
         <source>Parse error (1) at line %1, column %2:
 %3
 %4</source>
-        <translation>Phân tích lỗi (1) tại dòng% 1,% 2 cột:
-3%
-4%</translation>
+        <translation>Phân tích lỗi (1) tại dòng %1, cột %2:
+%3
+%4</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="103"/>
         <source>The file %1 is not a Fritzing file (2).</source>
-        <translation>Tập tin% 1 không phải là một tập tin Fritzing (2).</translation>
+        <translation>Tập tin %1 không phải là một tập tin Fritzing (2).</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="168"/>
@@ -8345,7 +8345,7 @@ File: %3</source>
     <message>
         <location filename="../src/model/modelbase.cpp" line="226"/>
         <source>The file %1 is not a Fritzing file (3).</source>
-        <translation>Tập tin% 1 không phải là một tập tin Fritzing (3).</translation>
+        <translation>Tập tin %1 không phải là một tập tin Fritzing (3).</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="496"/>
@@ -8379,7 +8379,7 @@ target file: %3.</source>
         <source>Parse error (2) at line %1, column %2:
 %3
 %4</source>
-        <translation>Phân tích lỗi (2) tại dòng% 1, cột % 2 :
+        <translation>Phân tích lỗi (2) tại dòng %1, cột %2:
 %3
 %4</translation>
     </message>
@@ -8917,7 +8917,7 @@ is already there, we won&apos;t add it again, right?</source>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="382"/>
         <source>File %1 already exists: it won&apos;t be overwritten</source>
-        <translation>Tập tin% 1 đã tồn tại: sẽ không ghi đè lên nó được</translation>
+        <translation>Tập tin %1 đã tồn tại: sẽ không ghi đè lên nó được</translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="838"/>
@@ -9005,29 +9005,29 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
     <message>
         <location filename="../src/svg/kicadschematic2svg.cpp" line="91"/>
         <source>bad schematic definition %1</source>
-        <translation>Định nghĩa sơ đồ nguyên lý tồi 1%</translation>
+        <translation>Định nghĩa sơ đồ nguyên lý tồi %1</translation>
     </message>
     <message>
         <location filename="../src/svg/kicadschematic2svg.cpp" line="103"/>
         <source>schematic part %1 not found in %2</source>
-        <translation>sơ đồ nguyên lý linh kiện % 1 không được tìm thấy trong% 2</translation>
+        <translation>sơ đồ nguyên lý linh kiện %1 không được tìm thấy trong %2</translation>
     </message>
     <message>
         <location filename="../src/svg/kicadschematic2svg.cpp" line="111"/>
         <location filename="../src/svg/kicadschematic2svg.cpp" line="138"/>
         <source>schematic %1 unexpectedly ends (1) in %2</source>
-        <translation>sơ đồ 1% kết thúc ngoài ý muốn (1) trong 2%</translation>
+        <translation>sơ đồ %1 kết thúc ngoài ý muốn (1) trong %2</translation>
     </message>
     <message>
         <location filename="../src/svg/kicadschematic2svg.cpp" line="115"/>
         <location filename="../src/svg/kicadschematic2svg.cpp" line="146"/>
         <source>schematic %1 unexpectedly ends (2) in %2</source>
-        <translation>sơ đồ 1% kết thúc ngoài ý muốn (2) trong 2%</translation>
+        <translation>sơ đồ %1 kết thúc ngoài ý muốn (2) trong %2</translation>
     </message>
     <message>
         <location filename="../src/svg/kicadschematic2svg.cpp" line="154"/>
         <source>schematic %1 unexpectedly ends (3) in %2</source>
-        <translation>sơ đồ 1% kết thúc ngoài ý muốn (3) trong 2%</translation>
+        <translation>sơ đồ %1 kết thúc ngoài ý muốn (3) trong %2</translation>
     </message>
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="132"/>
@@ -9082,7 +9082,7 @@ This could be due to a cloud storage or network drive issue. Please ensure the f
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="169"/>
         <source>%1 layer export is empty.</source>
-        <translation>Xuất% 1 lớp trống.</translation>
+        <translation>Xuất %1 lớp trống.</translation>
     </message>
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="187"/>
@@ -9698,7 +9698,7 @@ Nền: Màu xanh lá cây = ok, Màu đỏ = giá trị không chính xác, Màu
     <message>
         <location filename="../src/utils/s2s.cpp" line="264"/>
         <source>Failed loading &apos;%1&apos;, %2 line:%3 col:%4</source>
-        <translation>Tải không thành công &apos;%1&apos;, %2 dòng: % 3 cộtl: % 4</translation>
+        <translation>Tải không thành công &apos;%1&apos;, %2 dòng: %3 cột: %4</translation>
     </message>
     <message>
         <location filename="../src/utils/s2s.cpp" line="290"/>
@@ -9719,12 +9719,12 @@ Nền: Màu xanh lá cây = ok, Màu đỏ = giá trị không chính xác, Màu
     <message>
         <location filename="../src/utils/s2s.cpp" line="577"/>
         <source>Missing connector %1 in &apos;%2&apos; schematic of &apos;%3&apos;</source>
-        <translation>Thiếu kết nối %1 trong &apos;%2&apos; sơ đồ nguyên lý &apos;% 3&apos;</translation>
+        <translation>Thiếu kết nối %1 trong &apos;%2&apos; sơ đồ nguyên lý &apos;%3&apos;</translation>
     </message>
     <message>
         <location filename="../src/utils/s2s.cpp" line="798"/>
         <source>Failed loading schematic &apos;%1&apos;, %2 line:%3 col:%4</source>
-        <translation>Không thể tải sơ đồ nguyên lý &apos;%1&apos;, %2 dòng: % 3 cột: % 4</translation>
+        <translation>Không thể tải sơ đồ nguyên lý &apos;%1&apos;, %2 dòng: %3 cột: %4</translation>
     </message>
 </context>
 <context>
@@ -10179,7 +10179,7 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="8740"/>
         <location filename="../src/sketch/sketchwidget.cpp" line="9652"/>
         <source>Resize board to %1 %2</source>
-        <translation>Thay đổi kích thước board đến% 1% 2</translation>
+        <translation>Thay đổi kích thước board đến %1 %2</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="8797"/>
@@ -10189,12 +10189,12 @@ Netlist:
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="8991"/>
         <source>Disconnect all wires from %1</source>
-        <translation>Ngắt kết nối tất cả các dây từ 1%</translation>
+        <translation>Ngắt kết nối tất cả các dây từ %1</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="8994"/>
         <source>Disconnect all wires from %1 items</source>
-        <translation>Ngắt kết nối tất cả các dây từ mục 1%</translation>
+        <translation>Ngắt kết nối tất cả các dây từ mục %1</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="9278"/>
@@ -10881,7 +10881,7 @@ and %1 other properties</source>
     <message>
         <location filename="../src/dialogs/translatorlistmodel.cpp" line="52"/>
         <source>Italian - %1</source>
-        <translation>Tiếng ý- %</translation>
+        <translation>Tiếng Ý - %1</translation>
     </message>
     <message>
         <location filename="../src/dialogs/translatorlistmodel.cpp" line="75"/>

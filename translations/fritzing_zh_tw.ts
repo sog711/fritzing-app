@@ -3332,7 +3332,7 @@ We&apos;re working to avoid this message, and only let you choose between proper
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="691"/>
         <source>Shell launch %1</source>
-        <translation>啟動 Shell</translation>
+        <translation>啟動 Shell %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="696"/>

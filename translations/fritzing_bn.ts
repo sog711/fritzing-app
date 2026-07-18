@@ -395,7 +395,7 @@
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="421"/>
         <source>Fritzing Bin Files (*%1 *%2);;Fritzing Bin (*%1);;Fritzing Shareable Bin (*%2)</source>
         <translatorcomment>Fritzing নেওয়ার যোগ্য বক্স </translatorcomment>
-        <translation>Fritzing ফাইল বক্স(*%1&apos;*%2);;Fritzing বক্স (*%1);;Fritzing সেয়ারেবল বক্স</translation>
+        <translation>Fritzing ফাইল বক্স (*%1 *%2);;Fritzing বক্স (*%1);;Fritzing সেয়ারেবল বক্স (*%2)</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="743"/>
@@ -814,7 +814,7 @@ Have a look at the circle_pcb.svg file in your Fritzing installation folder at p
         <location filename="../src/items/resizableboard.cpp" line="527"/>
         <source>Unable to load image from %1 %2</source>
         <translatorcomment>এবং চিত্র পুনঃধারন %১ %২ করতে অক্ষম</translatorcomment>
-        <translation>এবং% 1%2 থেকে চিত্র লোড করতে অক্ষম </translation>
+        <translation>%1 %2 থেকে চিত্র লোড করতে অক্ষম </translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="535"/>
@@ -3556,7 +3556,7 @@ Go ahead and revert?</source>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="691"/>
         <source>Shell launch %1</source>
-        <translation>শেল প্রবর্তন 1%</translation>
+        <translation>শেল প্রবর্তন %1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="696"/>
@@ -4738,7 +4738,7 @@ Would you like to convert &apos;%1&apos; to the new standard now or open the fil
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2567"/>
         <source>Sorry, &quot;%1&quot; has not been implemented yet</source>
-        <translation>দুঃখিত, &quot;% 1&quot; এখনো বাস্তবায়িত হয়নি</translation>
+        <translation>দুঃখিত, &quot;%1&quot; এখনো বাস্তবায়িত হয়নি</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="2833"/>
@@ -5284,7 +5284,8 @@ All your parts are up-to-date.</source>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4253"/>
         <source>unable to find replacement for %1.
 </source>
-        <translation>খুঁজে পেতে অসমর্থ হলে বদল করার জন্য খোজ করুন </translation>
+        <translation>%1 এর বিকল্প খুঁজে পাওয়া যায়নি।
+</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4267"/>
@@ -5306,7 +5307,7 @@ Please check all views for potential side-effects.</source>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4360"/>
         <source>Set the grid size for %1.</source>
-        <translation>% 1 গ্রিডের মাপ নির্ধারণ করার জন্য </translation>
+        <translation>%1 গ্রিডের মাপ নির্ধারণ করার জন্য </translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="4367"/>
@@ -5699,7 +5700,8 @@ Continue upload?</source>
         <location filename="../src/model/modelbase.cpp" line="524"/>
         <source>Couldn&apos;t overwrite file &apos;%1&apos;.
 Reason: %2 (errcode %3)</source>
-        <translation>ফাইল মুছে ফেলা জা</translation>
+        <translation>ফাইল &apos;%1&apos; ওভাররাইট করা যায়নি।
+কারণ: %2 (ত্রুটি কোড %3)</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="535"/>
@@ -6321,7 +6323,7 @@ Enter keepout value:</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1079"/>
         <source>Change description</source>
-        <translation>বর্ণনা পরিবর্তন%1</translation>
+        <translation>বর্ণনা পরিবর্তন</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1079"/>
@@ -7538,7 +7540,7 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="584"/>
         <source>Do you want to save the changes you made in the bin &quot;%1&quot;?</source>
-        <translation>আপনি কি পরিবর্তন বিন তৈরি &quot;% 1&quot; সংরক্ষণ করতে চান?</translation>
+        <translation>আপনি কি পরিবর্তন বিন তৈরি &quot;%1&quot; সংরক্ষণ করতে চান?</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinpalettewidget.cpp" line="585"/>
@@ -7619,7 +7621,7 @@ Note: this warning will not be repeated during this session.</source>
     <message>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="80"/>
         <source>&lt;p&gt;&lt;h2&gt;Pin Label Editor&lt;/h2&gt;&lt;/p&gt;</source>
-        <translation>&lt;P&gt;&lt;H2&gt;পিন লাবেল সম্পাদক &lt;/h2&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;&lt;h2&gt;পিন লাবেল সম্পাদক&lt;/h2&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../src/dialogs/pinlabeldialog.cpp" line="81"/>
@@ -8213,12 +8215,12 @@ This feature is enabled by default. If you need to maintain compatibility with o
     <message>
         <location filename="../src/program/programwindow.cpp" line="368"/>
         <source>File &apos;%1&apos; was restored from the .fzz file; the local copy was not found.</source>
-        <translation>ফাইল &apos;% 1&apos; fzz ফাইল থেকে পুনরুদ্ধার করা হয়েছিল;লোকাল কপি পাওয়া যায়নি</translation>
+        <translation>ফাইল &apos;%1&apos; fzz ফাইল থেকে পুনরুদ্ধার করা হয়েছিল;লোকাল কপি পাওয়া যায়নি</translation>
     </message>
     <message>
         <location filename="../src/program/programwindow.cpp" line="371"/>
         <source>File &apos;%1&apos; was restored from the .fzz file; save a local copy to work with an external editor.</source>
-        <translation>ফাইল &apos;% 1&apos; fzz ফাইল থেকে পুনরুদ্ধার করা হয়েছিল; কোন বহিস্থিত এডিটার দিয়ে কাজ করতে লোকাল কপি করে সেভ করুন.</translation>
+        <translation>ফাইল &apos;%1&apos; fzz ফাইল থেকে পুনরুদ্ধার করা হয়েছিল; কোন বহিস্থিত এডিটার দিয়ে কাজ করতে লোকাল কপি করে সেভ করুন.</translation>
     </message>
 </context>
 <context>
@@ -8259,7 +8261,7 @@ This feature is enabled by default. If you need to maintain compatibility with o
     <message>
         <location filename="../src/fapplication.cpp" line="1303"/>
         <source>%1 wires moved from their saved position in %2.</source>
-        <translation>% 1% 2 তারগুলিকে তাদের মধ্যে সংরক্ষিত স্থান থেকে সরানো হয়েছে.</translation>
+        <translation>%1 টি তার %2 এ তাদের সংরক্ষিত অবস্থান থেকে সরানো হয়েছে।</translation>
     </message>
     <message>
         <location filename="../src/fapplication.cpp" line="2374"/>
@@ -8346,7 +8348,7 @@ This feature is enabled by default. If you need to maintain compatibility with o
     <message>
         <location filename="../src/mainwindow/fritzingwindow.cpp" line="142"/>
         <source>The file &apos;%1&apos; is read-only; please use a different filename.</source>
-        <translation>ফাইল &apos;% 1&apos; হল শুধুমাত্র পাঠযোগ্য; একটি ভিন্ন ফাইলের ব্যবহার করুন.</translation>
+        <translation>ফাইল &apos;%1&apos; হল শুধুমাত্র পাঠযোগ্য; একটি ভিন্ন ফাইলের ব্যবহার করুন.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow/mainwindow_menu.cpp" line="3454"/>
@@ -8394,9 +8396,9 @@ This feature is enabled by default. If you need to maintain compatibility with o
         <source>Parse error (1) at line %1, column %2:
 %3
 %4</source>
-        <translation>ত্রুটি বিশ্লেষণ করতে (1) লাইন %1, কলাম% 2:
-% 3
-4%</translation>
+        <translation>ত্রুটি বিশ্লেষণ করতে (1) লাইন %1, কলাম %2:
+%3
+%4</translation>
     </message>
     <message>
         <location filename="../src/model/modelbase.cpp" line="103"/>
@@ -8484,14 +8486,14 @@ target file: %3.</source>
         <source>Parse error (2) at line %1, column %2:
 %3
 %4</source>
-        <translation>এ ত্রুটির বিশ্লেষণ করতে (2) লাইন %1, কলাম %2 2:
-% 3
-4%</translation>
+        <translation>এ ত্রুটির বিশ্লেষণ করতে (2) লাইন %1, কলাম %2:
+%3
+%4</translation>
     </message>
     <message>
         <location filename="../src/model/palettemodel.cpp" line="340"/>
         <source>The part &apos;%1&apos; at &apos;%2&apos; does not have a unique module id &apos;%3&apos;.</source>
-        <translation>এ অংশে &apos;% 1&apos; &apos;% 2&apos; একটি অনন্য মডিউল আইডি &apos;% 3&apos; নেই.</translation>
+        <translation>এ অংশে &apos;%1&apos; &apos;%2&apos; একটি অনন্য মডিউল আইডি &apos;%3&apos; নেই.</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/partsbinview.cpp" line="42"/>
@@ -8691,7 +8693,7 @@ Fritzing এখনও কাজ করছে, কিন্তু আপনি �
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2414"/>
         <location filename="../src/sketch/sketchwidget.cpp" line="8906"/>
         <source>Select all %1</source>
-        <translation>সব নির্বাচন করুন </translation>
+        <translation>সব %1 নির্বাচন করুন </translation>
     </message>
     <message>
         <location filename="../src/sketch/pcbsketchwidget.cpp" line="2479"/>
@@ -8794,7 +8796,7 @@ Fritzing এখনও কাজ করছে, কিন্তু আপনি �
     <message>
         <location filename="../src/svg/gedaelement2svg.cpp" line="147"/>
         <source>Sorry, Fritzing can&apos;t yet handle both pins and pads together (in %1)</source>
-        <translation>দুঃখিত, এখনো Fritzing উভয় পিনের এবং প্যাড হ্যান্ডেল (এর মধ্যে% 1) করতে পারছে না </translation>
+        <translation>দুঃখিত, এখনো Fritzing উভয় পিনের এবং প্যাড হ্যান্ডেল (এর মধ্যে %1) করতে পারছে না </translation>
     </message>
     <message>
         <location filename="../src/svg/gedaelement2svg.cpp" line="228"/>
@@ -8809,7 +8811,7 @@ Fritzing এখনও কাজ করছে, কিন্তু আপনি �
     <message>
         <location filename="../src/svg/gedaelement2svg.cpp" line="533"/>
         <source>Unable to parse copper: %1 %2 %3</source>
-        <translation>% 1% 2% 3: তামা বিশ্লেষণ করতে অক্ষম</translation>
+        <translation>%1 %2 %3: তামা বিশ্লেষণ করতে অক্ষম</translation>
     </message>
     <message>
         <location filename="../src/svg/gerbergenerator.cpp" line="132"/>
@@ -9105,7 +9107,7 @@ Fritzing এখনও কাজ করছে, কিন্তু আপনি �
     <message>
         <location filename="../src/utils/folderutils.cpp" line="372"/>
         <source>Copying file %1</source>
-        <translation>ফাইল কপি হচ্ছে </translation>
+        <translation>ফাইল %1 কপি হচ্ছে </translation>
     </message>
     <message>
         <location filename="../src/utils/folderutils.cpp" line="382"/>
@@ -9678,12 +9680,12 @@ Background: Green = ok, Red = incorrect value, Grey = current value</source>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="1040"/>
         <source>width: %1mm</source>
-        <translation>প্রস্থঃ%১ মিলি মিটার</translation>
+        <translation>প্রস্থঃ %1 মিলি মিটার</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="1044"/>
         <source>height: %1mm</source>
-        <translation>উচ্চতাঃ%১মিলি মিটার</translation>
+        <translation>উচ্চতাঃ %1 মিলি মিটার</translation>
     </message>
     <message>
         <location filename="../src/items/resizableboard.cpp" line="1327"/>
@@ -10421,8 +10423,9 @@ The parts will be moved automatically. You can use the Undo History to review th
         <source>%1
 
 Note: you can also trigger this display by mousing down on the routing status text in the status bar.</source>
-        <translation>%
-নোটঃএছাড়া এই ডিসপ্লে দ্বারা mousingঅবস্থায় বারের নিচে আপনি ststus বারে রাউটিং ststus লেখা আরম্ভ  করতে পারেন</translation>
+        <translation>%1
+
+নোটঃ এছাড়া এই ডিসপ্লে দ্বারা mousingঅবস্থায় বারের নিচে আপনি ststus বারে রাউটিং ststus লেখা আরম্ভ  করতে পারেন</translation>
     </message>
 </context>
 <context>
@@ -10474,7 +10477,7 @@ and %1 other properties</source>
         <location filename="../src/items/stripboard.cpp" line="516"/>
         <source>%1 %n strip(s)</source>
         <translation>
-            <numerusform>%১%n কাঠী (s)</numerusform>
+            <numerusform>%1 %n কাঠী</numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -11068,17 +11071,17 @@ and %1 other properties</source>
     <message>
         <location filename="../src/dialogs/translatorlistmodel.cpp" line="84"/>
         <source>Romanian - %1</source>
-        <translation>রোমানিয়ান - %</translation>
+        <translation>রোমানিয়ান - %1</translation>
     </message>
     <message>
         <location filename="../src/dialogs/translatorlistmodel.cpp" line="87"/>
         <source>Thai - %1</source>
-        <translation>থাই - %</translation>
+        <translation>থাই - %1</translation>
     </message>
     <message>
         <location filename="../src/dialogs/translatorlistmodel.cpp" line="90"/>
         <source>Greek - %1</source>
-        <translation>গ্রীক - %</translation>
+        <translation>গ্রীক - %1</translation>
     </message>
     <message>
         <location filename="../src/dialogs/translatorlistmodel.cpp" line="93"/>

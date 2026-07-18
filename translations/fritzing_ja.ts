@@ -583,7 +583,7 @@
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1296"/>
         <source>Unable to remove part &apos;%1&apos;--it is in use in a sketch</source>
-        <translation>パーツ &apos;%1&apos;を取り外し不可能－スケッチで使用されていますツ &apos;%1&apos;を取り外し不可能－スケッチで使用されています</translation>
+        <translation>パーツ &apos;%1&apos;を取り外し不可能－スケッチで使用されています</translation>
     </message>
     <message>
         <location filename="../src/partsbinpalette/binmanager/binmanager.cpp" line="1303"/>
@@ -5362,7 +5362,7 @@ Note: if you want to update later, there are options under the &apos;Part&apos; 
         <location filename="../src/autoroute/mazerouter/mazerouter.cpp" line="768"/>
         <location filename="../src/autoroute/mazerouter/mazerouter.cpp" line="812"/>
         <source>round %1 of:</source>
-        <translation>＆1のラウンド：</translation>
+        <translation>%1のラウンド：</translation>
     </message>
     <message>
         <location filename="../src/autoroute/mazerouter/mazerouter.cpp" line="962"/>
@@ -6518,7 +6518,7 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1047"/>
         <source>Change %1 to %2</source>
-        <translation>1を%2に変更</translation>
+        <translation>%1を%2に変更</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="1071"/>
@@ -6558,7 +6558,7 @@ Go ahead and save?</source>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="3291"/>
         <source>Add internal connection from &apos;%1&apos; to &apos;%2&apos;</source>
-        <translation>1&apos; から &apos;%2&apos; への内部接続を追加します</translation>
+        <translation>&apos;%1&apos; から &apos;%2&apos; への内部接続を追加します</translation>
     </message>
     <message>
         <location filename="../src/partseditor/pemainwindow.cpp" line="366"/>
@@ -8604,7 +8604,7 @@ is already there, we won&apos;t add it again, right?</source>
     <message>
         <location filename="../src/svg/kicadmodule2svg.cpp" line="149"/>
         <source>unexpected format (1) in %1 from %2</source>
-        <translation>2 から %1 の予想外フォーマット (1)</translation>
+        <translation>%2 から %1 の予想外フォーマット (1)</translation>
     </message>
     <message>
         <location filename="../src/svg/kicadmodule2svg.cpp" line="410"/>
@@ -10154,7 +10154,7 @@ Netlist:
         <location filename="../src/sketch/sketchwidget.cpp" line="8471"/>
         <location filename="../src/sketch/sketchwidget.cpp" line="8634"/>
         <source>Change %1 from %2 to %3</source>
-        <translation>1 を %2 から %3 に変更</translation>
+        <translation>%1 を %2 から %3 に変更</translation>
     </message>
     <message>
         <location filename="../src/sketch/sketchwidget.cpp" line="3852"/>
