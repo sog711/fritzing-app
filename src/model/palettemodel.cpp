@@ -228,12 +228,6 @@ ModelPart * PaletteModel::loadPart(const QString & path, bool update) {
 		return nullptr;
 	}
 
-#if FRITZING_DEV_REJECT_LEGACY_MODES
-	// DEV-ONLY: refuse to load a part whose <history> still uses a legacy/invalid migration
-	// mode token, so the whole parts library gets re-tagged (this also fires during a parts.db build).
-	if (!ModelPartShared::checkMigrationModesForDev(root, path)) return nullptr;
-#endif
-
 	moduleID = root.attribute("moduleId");
 	if (moduleID.isNull() || moduleID.isEmpty()) {
 		//QMessageBox::information(NULL, QObject::tr("Fritzing"), QObject::tr("The file is not a Fritzing file (10)."));
