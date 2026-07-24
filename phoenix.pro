@@ -27,7 +27,9 @@ CONFIG += debug_and_release
 CONFIG += c++20
 
 unix {
-    QMAKE_CXXFLAGS += -O3 -fno-omit-frame-pointer
+    QMAKE_CXXFLAGS += -fno-omit-frame-pointer
+    QMAKE_CXXFLAGS_RELEASE -= -O2
+    QMAKE_CXXFLAGS_RELEASE += -O3
 }
 
 unix:!macx {
