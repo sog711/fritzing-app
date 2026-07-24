@@ -98,7 +98,7 @@ macx {
 unix {
     !macx { # unix is defined on mac
         HARDWARE_PLATFORM = $$system(uname -m)
-        contains(HARDWARE_PLATFORM, x86_64) {
+        contains(HARDWARE_PLATFORM, x86_64)|contains(HARDWARE_PLATFORM, aarch64) {
             DEFINES += LINUX_64
         } else {
             DEFINES += LINUX_32
