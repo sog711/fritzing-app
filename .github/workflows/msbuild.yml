@@ -1,44 +1,373 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-name: MSBuild
+name: Build Fritzing on Windows
 
 on:
   push:
-    branches: [ "develop" ]
-  pull_request:
-    branches: [ "develop" ]
+    branches: [ master ]
+  workflow_dispatch:
 
 env:
-  # Path to the solution file relative to the root of the project.
-  SOLUTION_FILE_PATH: .
-
-  # Configuration type to build.
-  # You can convert this to a build matrix if you need coverage of multiple configuration types.
-  # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
-  BUILD_CONFIGURATION: Release
-
-permissions:
-  contents: read
+  QT_VERSION: '6.5.3'
+  QT_ARCH: 'win64_msvc2019_64'
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-2022
 
     steps:
-    - uses: actions/checkout@v4
+      # ── 0. Checkout repositories ──────────────────────────────────────────
+      - name: Checkout fritzing-build
+        uses: actions/checkout@v4
+        with:
+          path: fritzing-build
 
-    - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.2
+      - name: Checkout fritzing-app
+        uses: actions/checkout@v4
+        with:
+          repository: fritzing/fritzing-app
+          path: fritzing-app
 
-    - name: Restore NuGet packages
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: nuget restore ${{env.SOLUTION_FILE_PATH}}
+      - name: Checkout fritzing-parts
+        uses: actions/checkout@v4
+        with:
+          repository: fritzing/fritzing-parts
+          path: fritzing-parts
 
-    - name: Build
-      working-directory: ${{env.GITHUB_WORKSPACE}}
-      # Add additional options to the MSBuild command line here (like platform or verbosity level).
-      # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
-      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}
+      # ── 1. Setup MSVC 2022 environment ────────────────────────────────────
+      - name: Setup MSVC environment
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
+
+      # ── 2. Install Qt ────────────────────────────────────────────────────
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ env.QT_VERSION }}
+          host: 'windows'
+          target: 'desktop'
+          arch: ${{ env.QT_ARCH }}
+          modules: 'qtserialport qt5compat'
+          cache: true
+
+      # ── 3. Cache built dependencies ──────────────────────────────────────
+      - name: Cache dependencies
+        id: deps-cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            zlib
+            libgit2
+            quazip-1.4
+            quazip-${{ env.QT_VERSION }}-1.4intuisphere
+            Clipper1-6.4.2
+            boost_1_85_0
+            svgpp-1.3.1
+            ngspice-42
+          key: deps-manual-v1-${{ runner.os }}
+
+      # ── 4. Build ZLib ─────────────────────────────────────────────────────
+      - name: Download ZLib
+        if: steps.deps-cache.outputs.cache-hit != 'true'
+        run: |
+          Invoke-WebRequest -Uri "https://github.com/madler/zlib/releases/download/v1.3/zlib-1.3.tar.gz" `
+            -OutFile zlib.tar.gz
+          tar -xzf zlib.tar.gz
+          Rename-Item zlib-1.3 zlib
+          Remove-Item zlib.tar.gz
+        shell: pwsh
+
+      - name: Build ZLib
+        if: steps.deps-cache.outputs.cache-hit != 'true'
+        working-directory: zlib
+        run: |
+          mkdir build
+          cd build
+          cmake -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release ..
+          nmake
+          copy zconf.h ..
+        shell: cmd
+
+      # ── 5. Build libgit2 ──────────────────────────────────────────────────
+      - name: Clone libgit2
+        if: steps.deps-cache.outputs.cache-hit != 'true'
+        run: git clone --depth 1 https://github.com/libgit2/libgit2.git libgit2
+        shell: bash
+
+      - name: Build libgit2
+        if: steps.deps-cache.outputs.cache-hit != 'true'
+        working-directory: libgit2
+        run: |
+          set ZLIB_ROOT=%GITHUB_WORKSPACE%\zlib
+          mkdir build64
+          cd build64
+          cmake -G "NMake Makefiles" ^
+            -DCMAKE_BUILD_TYPE=Release ^
+            -DBUILD_SHARED_LIBS=OFF ^
+            -DBUILD_TESTS=OFF ^
+            -DUSE_BUNDLED_ZLIB=OFF ^
+            -DZLIB_LIBRARY="%ZLIB_ROOT%\build\zlibstatic.lib" ^
+            -DZLIB_INCLUDE_DIR="%ZLIB_ROOT%" ^
+            ..
+          nmake
+          mkdir Release
+          copy git2.lib Release\
+        shell: cmd
+
+      # ── 6. Build QuaZip ───────────────────────────────────────────────────
+      - name: Download QuaZip
+        if: steps.deps-cache.outputs.cache-hit != 'true'
+        run: |
+          Invoke-WebRequest -Uri "https://github.com/stachenov/quazip/archive/refs/tags/v1.4.tar.gz" `
+            -OutFile quazip.tar.gz
+          tar -xzf quazip.tar.gz
+          # GitHub archives extract as quazip-1.4 by default
+          Remove-Item quazip.tar.gz
+        shell: pwsh
+
+      - name: Build QuaZip
+        if: steps.deps-cache.outputs.cache-hit != 'true'
+        working-directory: quazip-1.4
+        run: |
+          $ZlibRoot = "$env:GITHUB_WORKSPACE\zlib"
+          New-Item -ItemType Directory -Force -Path build
+          Push-Location build
+          cmake -G "NMake Makefiles" `
+            -DZLIB_LIBRARY="$ZlibRoot\build\zlibstatic.lib" `
+            -DZLIB_INCLUDE_DIR="$ZlibRoot" `
+            -DCMAKE_BUILD_TYPE=Release ..
+          nmake
+          Pop-Location
+        shell: pwsh
+
+      - name: Setup QuaZip sibling directory
+        if: steps.deps-cache.outputs.cache-hit != 'true'
+        run: |
+          $QuazipSibling = "quazip-${{ env.QT_VERSION }}-1.4intuisphere"
+          New-Item -ItemType Directory -Force -Path "$QuazipSibling\lib"
+          New-Item -ItemType Directory -Force -Path "$QuazipSibling\include\QuaZip-Qt6-1.4\quazip"
+
+          # Copy built libraries
+          Copy-Item "quazip-1.4\build\quazip\quazip1-qt6.lib" "$QuazipSibling\lib\"
+          Copy-Item "quazip-1.4\build\quazip\quazip1-qt6.dll" "$QuazipSibling\lib\" -ErrorAction SilentlyContinue
+
+          # Copy header files
+          Copy-Item "quazip-1.4\quazip\*.h" "$QuazipSibling\include\QuaZip-Qt6-1.4\quazip\"
+        shell: pwsh
+
+      # ── 7. Setup Clipper ──────────────────────────────────────────────────
+      - name: Download and build Clipper
+        if: steps.deps-cache.outputs.cache-hit != 'true'
+        run: |
+          curl.exe -L -o clipper.zip "https://sourceforge.net/projects/polyclipping/files/clipper_ver6.4.2.zip/download"
+          Expand-Archive -Path clipper.zip -DestinationPath clipper-src
+          Remove-Item clipper.zip
+
+          # Create the expected directory structure
+          New-Item -ItemType Directory -Force -Path "Clipper1-6.4.2\include\polyclipping"
+          New-Item -ItemType Directory -Force -Path "Clipper1-6.4.2\lib"
+
+          # Find and copy source files
+          $cppDir = Get-ChildItem -Path "clipper-src" -Recurse -Filter "clipper.hpp" |
+                    Select-Object -First 1 -ExpandProperty DirectoryName
+          if ($cppDir) {
+            Copy-Item "$cppDir\clipper.hpp" "Clipper1-6.4.2\include\polyclipping\"
+            Copy-Item "$cppDir\clipper.cpp" "Clipper1-6.4.2\include\polyclipping\"
+          }
+
+          # Build clipper as a static library
+          Push-Location "Clipper1-6.4.2"
+          cl /c /O2 /EHsc /MD /Iinclude\polyclipping include\polyclipping\clipper.cpp
+          lib /OUT:polyclipping.lib clipper.obj
+          Move-Item polyclipping.lib lib\
+          Remove-Item clipper.obj -ErrorAction SilentlyContinue
+          Pop-Location
+
+          Remove-Item "clipper-src" -Recurse -Force -ErrorAction SilentlyContinue
+        shell: pwsh
+
+      # ── 8. Download header-only and pre-built dependencies ────────────────
+      - name: Download Boost
+        if: steps.deps-cache.outputs.cache-hit != 'true'
+        run: |
+          Invoke-WebRequest -Uri "https://archives.boost.io/release/1.85.0/source/boost_1_85_0.tar.gz" `
+            -OutFile boost.tar.gz
+          tar -xzf boost.tar.gz
+          Remove-Item boost.tar.gz
+        shell: pwsh
+
+      - name: Download SVG++
+        if: steps.deps-cache.outputs.cache-hit != 'true'
+        run: |
+          Invoke-WebRequest -Uri "https://github.com/svgpp/svgpp/archive/refs/tags/v1.3.1.tar.gz" `
+            -OutFile svgpp.tar.gz
+          tar -xzf svgpp.tar.gz
+          Remove-Item svgpp.tar.gz
+        shell: pwsh
+
+      - name: Download ngspice
+        if: steps.deps-cache.outputs.cache-hit != 'true'
+        run: |
+          curl.exe -L -o ngspice.7z "https://sourceforge.net/projects/ngspice/files/ng-spice-rework/old-releases/42/ngspice-42_dll_64.7z/download"
+          7z x ngspice.7z -ongspice-extract
+          # Move contents to expected location
+          if (Test-Path "ngspice-extract\Spice64_dll") {
+            Move-Item "ngspice-extract\Spice64_dll" "ngspice-42"
+          } elseif (Test-Path "ngspice-extract\ngspice-42") {
+            Move-Item "ngspice-extract\ngspice-42" .
+          } else {
+            Rename-Item "ngspice-extract" "ngspice-42"
+          }
+          Remove-Item ngspice.7z -ErrorAction SilentlyContinue
+          Remove-Item ngspice-extract -Recurse -Force -ErrorAction SilentlyContinue
+        shell: pwsh
+
+      # ── 9. Verify directory structure ─────────────────────────────────────
+      - name: Verify dependency layout
+        run: |
+          echo "=== Directory Structure ==="
+          echo "--- libgit2 ---"
+          Get-ChildItem "libgit2\include\git2.h" -ErrorAction SilentlyContinue
+          Get-ChildItem "libgit2\build64\Release\git2.lib" -ErrorAction SilentlyContinue
+          echo "--- QuaZip ---"
+          $qz = "quazip-${{ env.QT_VERSION }}-1.4intuisphere"
+          Get-ChildItem "$qz\lib\*" -ErrorAction SilentlyContinue
+          Get-ChildItem "$qz\include\QuaZip-Qt6-1.4\quazip\*.h" -ErrorAction SilentlyContinue | Select-Object -First 3
+          echo "--- Clipper ---"
+          Get-ChildItem "Clipper1-6.4.2\include\polyclipping\*" -ErrorAction SilentlyContinue
+          Get-ChildItem "Clipper1-6.4.2\lib\*" -ErrorAction SilentlyContinue
+          echo "--- Boost ---"
+          Test-Path "boost_1_85_0\boost\version.hpp"
+          echo "--- SVG++ ---"
+          Test-Path "svgpp-1.3.1\include"
+          echo "--- ngspice ---"
+          Test-Path "ngspice-42\include"
+        shell: pwsh
+
+      # ── 10. Configure Fritzing (qmake) ───────────────────────────────────
+      - name: Clean qmake cache
+        working-directory: fritzing-app
+        run: |
+          if (Test-Path .qmake.cache) { Remove-Item .qmake.cache }
+          if (Test-Path .qmake.stash) { Remove-Item .qmake.stash }
+        shell: pwsh
+
+      - name: Configure Fritzing (qmake)
+        working-directory: fritzing-app
+        run: |
+          $ZlibLib = "$env:GITHUB_WORKSPACE\zlib\build"
+          # Static libgit2 needs its transitive deps linked into the final executable:
+          #   zlibstatic  – zlib symbols (deflate, inflate, crc32 …)
+          #   advapi32    – registry, crypto, SID/token APIs
+          #   winhttp     – WinHTTP transport
+          #   crypt32     – certificate APIs
+          #   ole32       – COM (CoInitializeEx …)
+          #   rpcrt4      – UuidCreate
+          qmake phoenix.pro `
+            "LIBS+=-L$ZlibLib -lzlibstatic -ladvapi32 -lwinhttp -lcrypt32 -lole32 -lrpcrt4"
+        shell: pwsh
+
+      - name: Build Fritzing (nmake)
+        working-directory: fritzing-app
+        run: nmake release
+        shell: cmd
+
+      # ── 11. Deploy Qt runtime DLLs ───────────────────────────────────────
+      - name: Deploy Qt (windeployqt)
+        working-directory: release64
+        run: windeployqt Fritzing.exe
+        shell: cmd
+
+      # ── 12. Copy Third-Party DLLs & Runtime Data ──────────────────────────
+      - name: Copy third-party DLLs and data folders
+        run: |
+          # Copy extra DLLs
+          Copy-Item "quazip-${{ env.QT_VERSION }}-1.4intuisphere\lib\*.dll" "release64\" -ErrorAction SilentlyContinue
+          Copy-Item "ngspice-42\*.dll" "release64\" -ErrorAction SilentlyContinue
+          Copy-Item "$env:QT_ROOT_DIR\bin\Qt6Core5Compat.dll" "release64\" -ErrorAction SilentlyContinue
+
+          # Fritzing needs these folders alongside the .exe to run
+          # (Note: fritzing-parts is purposefully omitted to shave 300MB; it will be downloaded by the setup)
+          Copy-Item "fritzing-app\help" "release64\" -Recurse -Force
+          Copy-Item "fritzing-app\sketches" "release64\" -Recurse -Force
+          Copy-Item "fritzing-app\translations" "release64\" -Recurse -Force
+        shell: pwsh
+
+      # ── 13. Extract Version & Compress ───────────────────────────────────
+      - name: Extract Fritzing Version & Zip
+        run: |
+          $verFile = "fritzing-app\src\version\version.cpp"
+          $content = Get-Content -Raw -Path $verFile
+          $major = ([regex]'m_majorVersion\("(.*?)"\)').Match($content).Groups[1].Value
+          $minor = ([regex]'m_minorVersion\("(.*?)"\)').Match($content).Groups[1].Value
+          $patch = ([regex]'m_minorSubVersion\("(.*?)"\)').Match($content).Groups[1].Value
+          $mod = ([regex]'m_modifier\("(.*?)"\)').Match($content).Groups[1].Value
+          
+          $versionStr = "$major.$minor.$patch$mod"
+          echo "FRITZING_VER=$versionStr" >> $env:GITHUB_ENV
+          
+          $zipName = "Fritzing-$versionStr-Windows-x64.zip"
+          Compress-Archive -Path "release64\*" -DestinationPath $zipName
+          echo "ZIP_FILE=$zipName" >> $env:GITHUB_ENV
+        shell: pwsh
+
+      # ── 14. Compile Online Installer (Slim) ──────────────────────────────
+      - name: Zip fritzing-parts for Online Installer
+        run: |
+          # Clone from local checkout → guarantees a proper .git, no re-download
+          git clone --no-hardlinks fritzing-parts fritzing-parts-zip/fritzing-parts
+          # Fix remote URL: local clone points origin to CI-local path; must point to GitHub
+          git -C fritzing-parts-zip/fritzing-parts remote set-url origin https://github.com/fritzing/fritzing-parts.git
+          Push-Location fritzing-parts-zip
+          7z a -tzip ..\fritzing-parts.zip fritzing-parts
+          Pop-Location
+          Remove-Item fritzing-parts-zip -Recurse -Force
+        shell: pwsh
+
+      - name: Compile Online Setup (Downloads parts)
+        run: |
+          Copy-Item "fritzing-build\fritzing_setup.iss" ".\" -Force
+          $PartsUrl = "https://github.com/${{ github.repository }}/releases/download/$env:FRITZING_VER/fritzing-parts.zip"
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" /dMyAppVersion="$env:FRITZING_VER" /dOnlineInstaller=1 /dPartsDownloadUrl="$PartsUrl" "fritzing_setup.iss"
+          echo "ONLINE_SETUP_FILE=Fritzing-$env:FRITZING_VER-OnlineSetup-Windows-x64.exe" >> $env:GITHUB_ENV
+        shell: pwsh
+
+      # ── 15. Bundle fritzing-parts for Offline usage ──────────────────────
+      - name: Clone fritzing-parts into release64
+        run: |
+          # Clone from local checkout → guarantees a proper .git, no re-download
+          git clone --no-hardlinks fritzing-parts release64/fritzing-parts
+          # Fix remote URL: local clone points origin to CI-local path; must point to GitHub
+          git -C release64/fritzing-parts remote set-url origin https://github.com/fritzing/fritzing-parts.git
+        shell: bash
+
+      # ── 16. Compile Portable ZIP ─────────────────────────────────────────
+      - name: Compress Portable ZIP
+        run: |
+          $zipName = "Fritzing-$env:FRITZING_VER-Portable-Windows-x64.zip"
+          Push-Location release64
+          7z a -tzip "..\$zipName" *
+          Pop-Location
+          echo "ZIP_FILE=$zipName" >> $env:GITHUB_ENV
+        shell: pwsh
+
+      # ── 17. Compile Offline Installer (Fat) ──────────────────────────────
+      - name: Compile Offline Setup (Bundled parts)
+        run: |
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" /dMyAppVersion="$env:FRITZING_VER" /dOnlineInstaller=0 "fritzing_setup.iss"
+          echo "OFFLINE_SETUP_FILE=Fritzing-$env:FRITZING_VER-OfflineSetup-Windows-x64.exe" >> $env:GITHUB_ENV
+        shell: pwsh
+
+      # ── 19. Create GitHub Release ────────────────────────────────────────
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: github.ref == 'refs/heads/master'
+        with:
+          tag_name: ${{ env.FRITZING_VER }}
+          name: "Fritzing ${{ env.FRITZING_VER }}"
+          files: |
+            ${{ env.ZIP_FILE }}
+            ${{ env.ONLINE_SETUP_FILE }}
+            ${{ env.OFFLINE_SETUP_FILE }}
+            fritzing-parts.zip
+          draft: true
+          token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
